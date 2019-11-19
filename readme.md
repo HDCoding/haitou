@@ -1,6 +1,5 @@
-<p align="center"><img src="https://i.imgur.com/4wihrL1.png" alt="Tracker Logo"></p>
+<p align="center"><img src="https://i.imgur.com/4wihrL1.png" alt="Forum Logo"></p>
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/23ab693ee3014f7198e01f3769fe6ed6)](https://app.codacy.com/app/monil/haitou?utm_source=github.com&utm_medium=referral&utm_content=monill/haitou&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://poser.pugx.org/laravel/framework/v/stable.svg)]()
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]()
 <img alt="Website" src="https://img.shields.io/website/https/haitou.tk">
@@ -26,7 +25,7 @@
 ## Requirements
 
  - WebServer: Apache2 or Nginx (Nginx is recommended)
- - PHP 7.2+
+ - PHP 7.3+
  - PHP Dependencies:
 	 - php-openssl
 	 - php-pdo
@@ -51,9 +50,9 @@
 	TODO
 
 ## Manual Install
-Using [Laragon](https://laragon.org/download/). Already have all the necessary packages, with Composer, MySQL or MariaDB, PHP 7.2, among others.
+Using [Laragon](https://laragon.org/download/) (Windows). Already have all the necessary packages, with Composer, MySQL or MariaDB, PHP 7.2, among others.
 
-MacOS, Linux or Windows: Follow Laravel [Documentation](https://laravel.com/docs/5.8/installation)
+MacOS or Linux: Follow Laravel [Documentation](https://laravel.com/docs/5.8/installation)
 
 ## Packages
 
@@ -64,12 +63,10 @@ MacOS, Linux or Windows: Follow Laravel [Documentation](https://laravel.com/docs
 | [Intervention Image](https://github.com/Intervention/image) | Intervention Image |
 | [Laravel Achievements](https://github.com/gstt/laravel-achievements) | Laravel Achievements |
 | [Laravel Backup](https://github.com/spatie/laravel-backup) | Laravel Backup |
-| [Laravel BBCode](https://github.com/PheRum/laravel-bbcode) | Laravel BBCode |
 | [Laravel Collective](https://laravelcollective.com/docs/master/html) | Laravel Collective |
 | [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) | Laravel Debugbar |
-| [Laravel Toastr](https://github.com/brian2694/laravel-toastr) | Laravel Toastr |
 | [LogViewer](https://github.com/ARCANEDEV/LogViewer) | LogViewer |
-| [Reliese Laravel](https://github.com/reliese/laravel) | Reliese Laravel |
+| [Laravel Models](https://github.com/hdcoding/laravel-models) | HDCoding Laravel Models |
 | [Secure Headers](https://github.com/BePsvPT/secure-headers) | Secure Headers |
 
 ## Development
