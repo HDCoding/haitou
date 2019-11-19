@@ -2,31 +2,31 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class LotteryUser extends Model
 {
-	protected $table = 'lottery_users';
+    protected $table = 'lottery_users';
 
-	protected $casts = [
-		'lottery_id' => 'int',
-		'user_id' => 'int'
-	];
+    protected $casts = [
+        'lottery_id' => 'int',
+        'user_id' => 'int'
+    ];
 
-	protected $fillable = [
-		'lottery_id',
-		'user_id',
-		'numbers'
-	];
+    protected $fillable = [
+        'lottery_id',
+        'user_id',
+        'numbers'
+    ];
 
-	public function lottery()
-	{
-		return $this->belongsTo(Lottery::class);
-	}
+    public function lottery()
+    {
+        return $this->belongsTo(Lottery::class);
+    }
 
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

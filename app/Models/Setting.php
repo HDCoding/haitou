@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
-	protected $table = 'settings';
+    public $timestamps = false;
 
-	public $timestamps = false;
+    protected $table = 'settings';
 
-	protected $fillable = [
-		'display_name',
-		'key',
-		'value'
-	];
+    protected $fillable = [
+        'display_name',
+        'key',
+        'value'
+    ];
 }

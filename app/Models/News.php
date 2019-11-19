@@ -2,32 +2,44 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\User;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class News extends Model
 {
-	use SoftDeletes;
-	protected $table = 'news';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $casts = [
-		'user_id' => 'int',
-		'views' => 'int',
-		'is_published' => 'bool'
-	];
+    protected $table = 'news';
 
-	protected $fillable = [
-		'user_id',
-		'name',
-		'slug',
-		'description',
-		'views',
-		'is_published'
-	];
+    protected $casts = [
+        'user_id' => 'int',
+        'views' => 'int',
+        'is_published' => 'bool'
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    protected $fillable = [
+        'user_id',
+        'name',
+        'slug',
+        'description',
+        'views',
+        'is_published'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

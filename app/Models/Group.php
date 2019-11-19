@@ -2,19 +2,35 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
-	use SoftDeletes;
-	protected $table = 'groups';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $fillable = [
-		'name',
-		'slug',
-		'color',
-		'icon'
-	];
+    protected $table = 'groups';
+
+    protected $casts = [
+        'hnr' => 'int'
+    ];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'color',
+        'icon',
+        'hnr'
+    ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

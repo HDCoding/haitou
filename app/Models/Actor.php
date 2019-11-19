@@ -2,30 +2,41 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Actor extends Model
 {
-	use SoftDeletes;
-	protected $table = 'actors';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $casts = [
-		'views' => 'int'
-	];
+    protected $table = 'actors';
 
-	protected $dates = [
-		'birthday'
-	];
+    protected $casts = [
+        'views' => 'int'
+    ];
 
-	protected $fillable = [
-		'name',
-		'slug',
-		'image',
-		'website',
-		'description',
-		'birthday',
-		'views'
-	];
+    protected $dates = [
+        'birthday'
+    ];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'image',
+        'website',
+        'description',
+        'birthday',
+        'views'
+    ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

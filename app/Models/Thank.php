@@ -2,38 +2,37 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Thank extends Model
 {
-	protected $table = 'thanks';
+    public $timestamps = false;
+    protected $table = 'thanks';
+    protected $casts = [
+        'user_id' => 'int',
+        'calendar_id' => 'int',
+        'torrent_id' => 'int'
+    ];
 
-	public $timestamps = false;
+    protected $fillable = [
+        'user_id',
+        'calendar_id',
+        'torrent_id'
+    ];
 
-	protected $casts = [
-		'user_id' => 'int',
-		'calendar_id' => 'int',
-		'torrent_id' => 'int'
-	];
+    public function calendar()
+    {
+        return $this->belongsTo(Calendar::class);
+    }
 
-	protected $fillable = [
-		'user_id',
-		'calendar_id',
-		'torrent_id'
-	];
+    public function torrent()
+    {
+        return $this->belongsTo(Torrent::class);
+    }
 
-	public function calendar()
-	{
-		return $this->belongsTo(Calendar::class);
-	}
-
-	public function torrent()
-	{
-		return $this->belongsTo(Torrent::class);
-	}
-
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class State extends Model
 {
-	protected $table = 'states';
+    public $timestamps = false;
 
-	public $timestamps = false;
+    protected $table = 'states';
 
-	protected $fillable = [
-		'name',
-		'uf',
-		'flag'
-	];
+    protected $fillable = [
+        'name',
+        'uf',
+        'flag'
+    ];
 }

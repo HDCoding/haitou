@@ -6,21 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
-	protected $table = 'options';
+    public $timestamps = false;
+    protected $table = 'options';
+    protected $casts = [
+        'poll_id' => 'int'
+    ];
 
-	public $timestamps = false;
+    protected $fillable = [
+        'poll_id',
+        'name'
+    ];
 
-	protected $casts = [
-		'poll_id' => 'int'
-	];
-
-	protected $fillable = [
-		'poll_id',
-		'name'
-	];
-
-	public function poll()
-	{
-		return $this->belongsTo(Poll::class);
-	}
+    public function poll()
+    {
+        return $this->belongsTo(Poll::class);
+    }
 }

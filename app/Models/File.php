@@ -6,23 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-	protected $table = 'files';
+    public $timestamps = false;
+    protected $table = 'files';
+    protected $casts = [
+        'torrent_id' => 'int',
+        'size' => 'int'
+    ];
 
-	public $timestamps = false;
+    protected $fillable = [
+        'torrent_id',
+        'size',
+        'name'
+    ];
 
-	protected $casts = [
-		'torrent_id' => 'int',
-		'size' => 'int'
-	];
-
-	protected $fillable = [
-		'torrent_id',
-		'size',
-		'name'
-	];
-
-	public function torrent()
-	{
-		return $this->belongsTo(Torrent::class);
-	}
+    public function torrent()
+    {
+        return $this->belongsTo(Torrent::class);
+    }
 }

@@ -6,34 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class MediaCast extends Model
 {
-	protected $table = 'media_casts';
+    public $timestamps = false;
+    protected $table = 'media_casts';
+    protected $casts = [
+        'media_id' => 'int',
+        'character_id' => 'int',
+        'actor_id' => 'int'
+    ];
 
-	public $timestamps = false;
+    protected $fillable = [
+        'media_id',
+        'character_id',
+        'actor_id'
+    ];
 
-	protected $casts = [
-		'media_id' => 'int',
-		'character_id' => 'int',
-		'actor_id' => 'int'
-	];
+    public function actor()
+    {
+        return $this->belongsTo(Actor::class);
+    }
 
-	protected $fillable = [
-		'media_id',
-		'character_id',
-		'actor_id'
-	];
+    public function character()
+    {
+        return $this->belongsTo(Character::class);
+    }
 
-	public function actor()
-	{
-		return $this->belongsTo(Actor::class);
-	}
-
-	public function character()
-	{
-		return $this->belongsTo(Character::class);
-	}
-
-	public function media()
-	{
-		return $this->belongsTo(Media::class);
-	}
+    public function media()
+    {
+        return $this->belongsTo(Media::class);
+    }
 }

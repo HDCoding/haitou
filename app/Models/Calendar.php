@@ -2,40 +2,52 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\User;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Calendar extends Model
 {
-	use SoftDeletes;
-	protected $table = 'calendars';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $casts = [
-		'user_id' => 'int',
-		'is_enabled' => 'bool',
-		'views' => 'int'
-	];
+    protected $table = 'calendars';
 
-	protected $dates = [
-		'start_date',
-		'end_date'
-	];
+    protected $casts = [
+        'user_id' => 'int',
+        'is_enabled' => 'bool',
+        'views' => 'int'
+    ];
 
-	protected $fillable = [
-		'user_id',
-		'name',
-		'slug',
-		'description',
-		'color',
-		'is_enabled',
-		'views',
-		'start_date',
-		'end_date'
-	];
+    protected $dates = [
+        'start_date',
+        'end_date'
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    protected $fillable = [
+        'user_id',
+        'name',
+        'slug',
+        'description',
+        'color',
+        'is_enabled',
+        'views',
+        'start_date',
+        'end_date'
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

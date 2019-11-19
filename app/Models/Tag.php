@@ -2,15 +2,26 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-	protected $table = 'tags';
+    use Sluggable;
 
-	protected $fillable = [
-		'name',
-		'slug'
-	];
+    protected $table = 'tags';
+
+    protected $fillable = [
+        'name',
+        'slug'
+    ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

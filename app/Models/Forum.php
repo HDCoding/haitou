@@ -2,33 +2,44 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Forum extends Model
 {
-	use SoftDeletes;
-	protected $table = 'forums';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $casts = [
-		'category_id' => 'int',
-		'position' => 'int',
-		'views' => 'int'
-	];
+    protected $table = 'forums';
 
-	protected $fillable = [
-		'category_id',
-		'position',
-		'name',
-		'slug',
-		'description',
-		'icon',
-		'views'
-	];
+    protected $casts = [
+        'category_id' => 'int',
+        'position' => 'int',
+        'views' => 'int'
+    ];
 
-	public function category()
-	{
-		return $this->belongsTo(Category::class);
-	}
+    protected $fillable = [
+        'category_id',
+        'position',
+        'name',
+        'slug',
+        'description',
+        'icon',
+        'views'
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

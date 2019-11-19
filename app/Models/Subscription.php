@@ -2,35 +2,34 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-	protected $table = 'subscriptions';
+    public $timestamps = false;
+    protected $table = 'subscriptions';
+    protected $casts = [
+        'topic_id' => 'int',
+        'user_id' => 'int',
+        'email' => 'bool',
+        'notify' => 'bool'
+    ];
 
-	public $timestamps = false;
+    protected $fillable = [
+        'topic_id',
+        'user_id',
+        'email',
+        'notify'
+    ];
 
-	protected $casts = [
-		'topic_id' => 'int',
-		'user_id' => 'int',
-		'email' => 'bool',
-		'notify' => 'bool'
-	];
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
 
-	protected $fillable = [
-		'topic_id',
-		'user_id',
-		'email',
-		'notify'
-	];
-
-	public function topic()
-	{
-		return $this->belongsTo(Topic::class);
-	}
-
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Chatbox extends Model
@@ -18,4 +18,9 @@ class Chatbox extends Model
 		'message',
 		'mentions'
 	];
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }

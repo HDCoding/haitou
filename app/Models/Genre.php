@@ -2,22 +2,33 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Genre extends Model
 {
-	use SoftDeletes;
-	protected $table = 'genres';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $casts = [
-		'views' => 'int'
-	];
+    protected $table = 'genres';
 
-	protected $fillable = [
-		'name',
-		'slug',
-		'views'
-	];
+    protected $casts = [
+        'views' => 'int'
+    ];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'views'
+    ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

@@ -6,35 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-	protected $table = 'permissions';
+    public $timestamps = false;
+    protected $table = 'permissions';
+    protected $casts = [
+        'forum_id' => 'int',
+        'group_id' => 'int',
+        'view_forum' => 'bool',
+        'read_topic' => 'bool',
+        'reply_topic' => 'bool',
+        'start_topic' => 'bool'
+    ];
 
-	public $timestamps = false;
+    protected $fillable = [
+        'forum_id',
+        'group_id',
+        'view_forum',
+        'read_topic',
+        'reply_topic',
+        'start_topic'
+    ];
 
-	protected $casts = [
-		'forum_id' => 'int',
-		'group_id' => 'int',
-		'view_forum' => 'bool',
-		'read_topic' => 'bool',
-		'reply_topic' => 'bool',
-		'start_topic' => 'bool'
-	];
+    public function forum()
+    {
+        return $this->belongsTo(Forum::class);
+    }
 
-	protected $fillable = [
-		'forum_id',
-		'group_id',
-		'view_forum',
-		'read_topic',
-		'reply_topic',
-		'start_topic'
-	];
-
-	public function forum()
-	{
-		return $this->belongsTo(Forum::class);
-	}
-
-	public function group()
-	{
-		return $this->belongsTo(Group::class);
-	}
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

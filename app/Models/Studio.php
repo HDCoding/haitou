@@ -2,25 +2,36 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Studio extends Model
 {
-	use SoftDeletes;
-	protected $table = 'studios';
+    use SoftDeletes;
+    use Sluggable;
 
-	protected $casts = [
-		'views' => 'int'
-	];
+    protected $table = 'studios';
 
-	protected $fillable = [
-		'name',
-		'slug',
-		'logo',
-		'website',
-		'description',
-		'views'
-	];
+    protected $casts = [
+        'views' => 'int'
+    ];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'logo',
+        'website',
+        'description',
+        'views'
+    ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }
