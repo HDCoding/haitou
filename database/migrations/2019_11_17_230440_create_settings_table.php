@@ -17,7 +17,7 @@ class CreateSettingsTable extends Migration
             $table->bigIncrements('id');
             $table->string('display_name');
             $table->string('key')->unique();
-            $table->text('value');
+            $table->text('value')->nullable();
         });
     }
 

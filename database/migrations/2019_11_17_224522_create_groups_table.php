@@ -19,6 +19,7 @@ class CreateGroupsTable extends Migration
             $table->string('slug');
             $table->string('color')->nullable();
             $table->string('icon')->nullable();
+            $table->integer('hnr')->default(259200); // value in seconds
             $table->softDeletes();
             $table->timestamps();
         });

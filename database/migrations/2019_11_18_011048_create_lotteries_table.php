@@ -15,7 +15,7 @@ class CreateLotteriesTable extends Migration
     {
         Schema::create('lotteries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_if')->index();
+            $table->unsignedBigInteger('user_id')->index();
 
             $table->string('name');
             $table->string('slug');
@@ -46,7 +46,7 @@ class CreateLotteriesTable extends Migration
             $table->timestamp('end_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_if')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
