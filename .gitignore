@@ -13,3 +13,4 @@ yarn-error.log
 composer.lock
 .idea/*
 nbproject
+package-lock.json
