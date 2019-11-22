@@ -5,6 +5,8 @@ namespace App;
 use App\Models\Group;
 use App\Models\Mood;
 use App\Models\State;
+use App\Models\Log;
+use App\Traits\UsersOnline;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -15,6 +17,7 @@ class User extends Authenticatable
     use Notifiable;
     use Sluggable;
     use HasApiTokens;
+    use UsersOnline;
 
     protected $table = 'users';
 
@@ -147,6 +150,11 @@ class User extends Authenticatable
         return $this->belongsTo(State::class);
     }
 
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'user_id');
+    }
+
     public function sluggable()
     {
         return [
@@ -154,5 +162,81 @@ class User extends Authenticatable
                 'source' => 'username'
             ]
         ];
+    }
+
+    public function flag()
+    {
+        return asset('images/states/' . $this->state->flag);
+    }
+
+    public function downloaded()
+    {
+        return make_size($this->downloaded);
+    }
+
+    public function uploaded()
+    {
+        return make_size($this->uploaded);
+    }
+
+    public function ratio()
+    {
+        if ($this->uploaded == 0 && $this->downloaded == 0) {
+            return number_format(1, 2);
+        } elseif ($this->uploaded > 0 && $this->downloaded > 0) {
+            return (float) number_format($this->uploaded / $this->downloaded, 2);
+        } else {
+            return "Info";
+        }
+    }
+
+    public function status()
+    {
+        $status = $this->status;
+
+        if ($status == 0) {
+            return '<span class="badge badge-outline-warning">Pendente</span>';
+        } elseif ($status == 1) {
+            return '<span class="badge badge-outline-success">Confirmada(o)</span>';
+        } elseif ($status == 2) {
+            return '<span class="badge badge-outline-info">Suspensa(o)</span>';
+        } elseif ($status == 3) {
+            return '<span class="badge badge-outline-danger">Banida(o)</span>';
+        } else {
+            return "Bugou";
+        }
+    }
+
+    public function avatar()
+    {
+        return empty($this->avatar) ? secure_asset('images/avatar.jpg') : urlencode($this->avatar);
+    }
+
+    public function points()
+    {
+        return number_format($this->points);
+    }
+
+    public function levelImage()
+    {
+        $level = $this->getLevel();
+        return secure_asset("images/ranks/{$level}.png");
+    }
+
+    public function level()
+    {
+        //only works until level 999 = equal 999000 in integer
+        $experience = $this->experience;
+        return $experience < 1000 ? 0 : floor(number_format($experience));
+    }
+
+    public function updatePoints($points)
+    {
+        if (auth()->check()) {
+            $user = auth()->user();
+            $user->points += $points;
+            $user->experience += $points;
+            $user->save();
+        }
     }
 }
