@@ -213,12 +213,13 @@ Route::namespace('Site')->group(function () {
     //Search in all sites
     Route::post('search', 'HomeController@search')->name('search');
 });
+
 //Staff Folder
 Route::namespace('Staff')->group(function () {
     //Staff panel prefix
     Route::prefix('staff')->group(function () {
         //Staff panel
-        Route::get('/', 'IndexController@index')->name('staff');
+        Route::get('/', 'StaffController@index')->name('staff');
         //Achievements
         Route::get('achievements', 'AchievementController@index')->name('staff.achievements');
         //Actors
