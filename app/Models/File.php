@@ -23,4 +23,9 @@ class File extends Model
     {
         return $this->belongsTo(Torrent::class);
     }
+
+    public function fileSize()
+    {
+        return make_size($this->size);
+    }
 }

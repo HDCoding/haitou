@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,4 +19,9 @@ class Rule extends Model
         'icon',
         'groups'
     ];
+
+    public function descriptionHtml()
+    {
+        return (new BBCode())->parse($this->description, true);
+    }
 }

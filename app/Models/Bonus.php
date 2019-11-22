@@ -27,4 +27,47 @@ class Bonus extends Model
         'bytes',
         'is_enabled'
     ];
+
+    public function type()
+    {
+        switch ($this->bonus_type) {
+            case 0: return 'Download'; break;
+            case 1: return 'Upload'; break;
+            case 2: return 'Freeleech'; break;
+            case 3: return 'Advertencia'; break;
+            case 4: return 'Convite'; break;
+            case 5: return 'Slots'; break;
+            default: return 'Bug'; break;
+        }
+    }
+
+    public function bytes()
+    {
+        switch ($this->bytes) {
+            case 0: return 'MB'; break;
+            case 1: return 'GB'; break;
+            case 2: return 'TB'; break;
+            default: return 'Bug'; break;
+        }
+    }
+
+    public function enabled()
+    {
+        if ($this->is_enabled) {
+            return '<span class="badge badge-outline-success">Ativado</span>';
+        } else {
+            return '<span class="badge badge-outline-danger">Desativado</span>';
+        }
+    }
+
+    public function value($decimals = 2)
+    {
+        $bytes = $this->quantity;
+
+        if (!empty($bytes)) {
+            $floor = floor((strlen($bytes) - 1) / 3);
+            return sprintf("%.{$decimals}f", $bytes / pow(1024, $floor));
+        }
+        return $bytes;
+    }
 }

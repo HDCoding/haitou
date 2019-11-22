@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class MediaCast extends Model
 {
     public $timestamps = false;
+
     protected $table = 'media_casts';
+
     protected $casts = [
         'media_id' => 'int',
         'character_id' => 'int',

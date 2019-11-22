@@ -23,6 +23,12 @@ class Genre extends Model
         'views'
     ];
 
+    public function media()
+    {
+        return $this->belongsToMany(Media::class, 'media_genres')
+            ->withPivot('id');
+    }
+
     public function sluggable()
     {
         return [

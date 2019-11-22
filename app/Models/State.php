@@ -15,4 +15,9 @@ class State extends Model
         'uf',
         'flag'
     ];
+
+    public function flag()
+    {
+        return asset('images/states/' . $this->flag);
+    }
 }

@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Thank extends Model
 {
     public $timestamps = false;
+
     protected $table = 'thanks';
+
     protected $casts = [
         'user_id' => 'int',
         'calendar_id' => 'int',
@@ -33,6 +35,6 @@ class Thank extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

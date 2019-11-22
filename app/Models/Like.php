@@ -27,16 +27,16 @@ class Like extends Model
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
     public function torrent()
     {
-        return $this->belongsTo(Torrent::class);
+        return $this->belongsTo(Torrent::class, 'torrent_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

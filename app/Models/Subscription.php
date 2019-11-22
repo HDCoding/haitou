@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     public $timestamps = false;
+
     protected $table = 'subscriptions';
+
     protected $casts = [
         'topic_id' => 'int',
         'user_id' => 'int',
@@ -30,6 +32,6 @@ class Subscription extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -25,21 +25,21 @@ class Bookmark extends Model
 
     public function actor()
     {
-        return $this->belongsTo(Actor::class);
+        return $this->belongsTo(Actor::class, 'actor_id');
     }
 
     public function character()
     {
-        return $this->belongsTo(Character::class);
+        return $this->belongsTo(Character::class, 'character_id');
     }
 
     public function media()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

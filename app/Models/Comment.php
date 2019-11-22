@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,7 +37,7 @@ class Comment extends Model
 
     public function actor()
     {
-        return $this->belongsTo(Actor::class);
+        return $this->belongsTo(Actor::class, 'actor_id');
     }
 
     public function calendar()
@@ -46,26 +47,31 @@ class Comment extends Model
 
     public function fansub()
     {
-        return $this->belongsTo(Fansub::class);
+        return $this->belongsTo(Fansub::class, 'fansub_id');
     }
 
     public function media()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     public function studio()
     {
-        return $this->belongsTo(Studio::class);
+        return $this->belongsTo(Studio::class, 'studio_id');
     }
 
     public function torrent()
     {
-        return $this->belongsTo(Torrent::class);
+        return $this->belongsTo(Torrent::class, 'torrent_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function contentHtml()
+    {
+        return (new BBCode())->parse($this->content, true);
     }
 }

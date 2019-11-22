@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -39,7 +40,17 @@ class Calendar extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'calendar_id');
+    }
+
+    public function thanks()
+    {
+        return $this->hasMany(Thank::class, 'calendar_id');
     }
 
     public function sluggable()
@@ -49,5 +60,10 @@ class Calendar extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function descriptionHtml()
+    {
+        return (new BBCode())->parse($this->description, true);
     }
 }

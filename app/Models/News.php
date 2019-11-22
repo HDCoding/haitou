@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -31,7 +32,7 @@ class News extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function sluggable()
@@ -41,5 +42,10 @@ class News extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function descriptionHtml()
+    {
+        return (new BBCode())->parse($this->description, true);
     }
 }

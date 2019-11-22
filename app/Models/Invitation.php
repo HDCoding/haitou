@@ -32,6 +32,21 @@ class Invitation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class, 'accepted_by');
+    }
+
+    public function getExpireDate()
+    {
+        return $this->expires_on->format('d/m/Y');
+    }
+
+    public function getCreateDate()
+    {
+        return $this->created_at->format('d/m/Y');
     }
 }

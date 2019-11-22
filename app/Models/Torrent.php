@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -75,7 +76,7 @@ class Torrent extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function sluggable()
@@ -85,5 +86,39 @@ class Torrent extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function size()
+    {
+        return make_size($this->size);
+    }
+
+    public function freeleech()
+    {
+        return $this->is_freeleech ? '<span class="badge badge-warning mr-2"><i class="fas fa-arrow-down"></i> Freeleech</span>' : '';
+    }
+
+    public function silver()
+    {
+        return $this->is_silver ? '<span class="badge badge-default mr-2"><i class="fa fa-minus"></i> Silver</span>' : '';
+    }
+
+    public function doubleUp()
+    {
+        return $this->is_doubleup ? '<span class="badge badge-info mr-2"><i class="fa fa-arrow-up"></i> Double UP</span>' : '';
+    }
+
+    public function uploader()
+    {
+        if ($this->is_anonymous) {
+            return 'Anonymous';
+        } else {
+            return link_to_route('user.profile', $this->user->username, [$this->user->slug]);
+        }
+    }
+
+    public function descriptionHtml()
+    {
+        return (new BBCode())->parse($this->description, true);
     }
 }

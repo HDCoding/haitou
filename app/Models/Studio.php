@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -33,5 +34,10 @@ class Studio extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function descriptionHtml()
+    {
+        return (new BBCode())->parse($this->description, true);
     }
 }

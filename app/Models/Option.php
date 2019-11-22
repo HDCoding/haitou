@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Vote;
 use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
     public $timestamps = false;
+
     protected $table = 'options';
+
     protected $casts = [
         'poll_id' => 'int'
     ];
@@ -20,5 +23,26 @@ class Option extends Model
     public function poll()
     {
         return $this->belongsTo(Poll::class);
+    }
+
+    public function poll_votes()
+    {
+        return $this->hasMany(Vote::class, 'option_id');
+    }
+
+    public function votesCount()
+    {
+        return $this->hasOne(Vote::class, 'option_id')
+            ->selectRaw('option_id, count(*) as count')
+            ->groupBy('option_id');
+    }
+
+    public function votesPercent($totalVotes = 0)
+    {
+        $optionVotesCount = $this->votesCount['count'];
+        if ($optionVotesCount == 0 && $totalVotes == 0) {
+            return 0;
+        }
+        return round(($optionVotesCount / $totalVotes) * 100);
     }
 }

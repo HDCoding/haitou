@@ -38,7 +38,12 @@ class Topic extends Model
         'views'
     ];
 
-    public function user()
+    public function first_user()
+    {
+        return $this->belongsTo(User::class, 'first_post_user_id');
+    }
+
+    public function last_user()
     {
         return $this->belongsTo(User::class, 'last_post_user_id');
     }
@@ -53,6 +58,26 @@ class Topic extends Model
         return $this->belongsTo(Poll::class);
     }
 
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'topic_id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'topic_id');
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'topic_id');
+    }
+
+    public function polls()
+    {
+        return $this->hasMany(Poll::class, 'topic_id');
+    }
+
     public function sluggable()
     {
         return [
@@ -60,5 +85,17 @@ class Topic extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function postNumberFromId($search_id)
+    {
+        $count = 0;
+        foreach ($this->posts() as $forum_post) {
+            $count += 1;
+            if ($search_id == $forum_post->id) {
+                break;
+            }
+        }
+        return $count;
     }
 }

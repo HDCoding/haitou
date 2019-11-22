@@ -21,11 +21,11 @@ class Complete extends Model
 
     public function torrent()
     {
-        return $this->belongsTo(Torrent::class);
+        return $this->belongsTo(Torrent::class, 'torrent_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

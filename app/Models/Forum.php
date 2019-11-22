@@ -34,6 +34,36 @@ class Forum extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function attachments()
+    {
+        return $this->hasMany(Attachment::class);
+    }
+
+    public function moderators()
+    {
+        return $this->belongsToMany(Moderator::class, 'moderators', 'forum_id', 'staff_id');
+    }
+
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+
     public function sluggable()
     {
         return [
@@ -41,5 +71,13 @@ class Forum extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function getPermission()
+    {
+        if (auth()->check()) {
+            $group = auth()->user()->group;
+        }
+        return $group->permissions->where('forum_id', '=', $this->id)->first();
     }
 }

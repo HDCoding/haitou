@@ -29,4 +29,30 @@ class Freeslot extends Model
         'is_silver',
         'is_doubleup'
     ];
+
+    public function type()
+    {
+        $freeleech = $this->is_freeleech;
+        $silver = $this->is_silver;
+        $doubleup = $this->is_doubleup;
+        $type = '';
+
+        if ($freeleech and $doubleup) {
+            $type = ' Freeleech e o Double UP ';
+        } elseif ($silver and $doubleup) {
+            $type = ' Silver e o Double UP ';
+        } elseif ($silver) {
+            $type = ' Silver ';
+        } elseif ($doubleup) {
+            $type = ' Double UP ';
+        } elseif ($freeleech) {
+            $type  = ' Freeleech ';
+        }
+        return $type;
+    }
+
+    public function percent()
+    {
+        return $this->actual >= 1 ? number_format(($this->actual / $this->required) * 100, 2, '.', ',') : 0.0;
+    }
 }

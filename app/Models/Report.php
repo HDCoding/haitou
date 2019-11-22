@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\BBCode;
 use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use Sluggable;
+
+    protected $bbcode;
 
     protected $table = 'reports';
 
@@ -52,7 +55,7 @@ class Report extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function post()
@@ -72,5 +75,43 @@ class Report extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function __construct(BBCode $bbcode)
+    {
+        parent::__construct();
+        $this->bbcode = $bbcode;
+    }
+
+    public function type(): string
+    {
+        $report_type = $this->report_type;
+
+        if ($report_type == 0) {
+            return '<span class="badge badge-default">Torrent</span>';
+        } elseif ($report_type == 1) {
+            return '<span class="badge badge-primary">Fórum Post</span>';
+        } elseif ($report_type == 2) {
+            return '<span class="badge badge-success">Membro</span>';
+        } elseif ($report_type == 3) {
+            return '<span class="badge badge-info">Comentário</span>';
+        } else {
+            return '<span class="badge badge-warning">Calendário</span>';
+        }
+    }
+
+    public function solved()
+    {
+        return $this->is_solved ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>';
+    }
+
+    public function reasonHtml()
+    {
+        return $this->bbcode->parse($this->reason, true);
+    }
+
+    public function solutionHtml()
+    {
+        return $this->bbcode->parse($this->solution, true);
     }
 }

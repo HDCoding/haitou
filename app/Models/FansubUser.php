@@ -25,11 +25,11 @@ class FansubUser extends Model
 
     public function fansub()
     {
-        return $this->belongsTo(Fansub::class);
+        return $this->belongsTo(Fansub::class, 'fansub_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

@@ -28,11 +28,16 @@ class UserBonus extends Model
 
     public function bonus()
     {
-        return $this->belongsTo(Bonus::class);
+        return $this->belongsTo(Bonus::class, 'bonus_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class, 'member_id');
     }
 }

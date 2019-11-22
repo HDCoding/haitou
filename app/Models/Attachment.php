@@ -34,21 +34,21 @@ class Attachment extends Model
 
     public function forum()
     {
-        return $this->belongsTo(Forum::class);
+        return $this->belongsTo(Forum::class, 'forum_id');
     }
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
     public function topic()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(Topic::class, 'topic_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

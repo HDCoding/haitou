@@ -22,4 +22,15 @@ class Mood extends Model
         'size',
         'points'
     ];
+
+    public function image()
+    {
+        return asset('images/moods/' . $this->image);
+    }
+
+    public function name()
+    {
+        return $this->name;
+    }
+
 }
