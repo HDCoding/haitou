@@ -79,6 +79,46 @@ class Torrent extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'torrent_id');
+    }
+
+    public function historics()
+    {
+        return $this->hasMany(Historic::class, 'torrent_id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'torrent_id');
+    }
+
+    public function peers()
+    {
+        return $this->hasMany(Peer::class, 'torrent_id');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'torrent_id');
+    }
+
+    public function thanks()
+    {
+        return $this->hasMany(Thank::class, 'torrent_id');
+    }
+
+    public function completes()
+    {
+        return $this->hasMany(Complete::class, 'torrent_id');
+    }
+
+    public function files()
+    {
+        return $this->hasMany(File::class, 'torrent_id');
+    }
+
     public function sluggable()
     {
         return [
