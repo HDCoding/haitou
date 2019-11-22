@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "arcanedev/log-viewer": "^5.1",
         "bepsvpt/secure-headers": "^5.5",
         "cviebrock/eloquent-sluggable": "^6.0",
@@ -17,6 +18,7 @@
         "intervention/image": "^2.5",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^6.2",
+        "laravel/helpers": "^1.1",
         "laravel/passport": "^8.0",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0",
