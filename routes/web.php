@@ -37,6 +37,8 @@ Route::namespace('Auth')->group(function () {
     Route::post('unlockscreen', 'LockscreenController@unlock')->name('unlockscreen');
 });
 
+//Middleware
+//Route::middleware(['auth', 'lockscreen'])->group(function () {
 //Site Folder
 Route::namespace('Site')->group(function () {
     // Achievements
@@ -357,3 +359,4 @@ Route::namespace('Staff')->group(function () {
         Route::get('visitors', 'VisitorController@index')->name('staff.visitors');
     });
 });
+//});
