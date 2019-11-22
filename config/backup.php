@@ -43,17 +43,25 @@ return [
              *
              * The content of the database dump may be customized for each connection
              * by adding a 'dump' key to the connection settings in config/database.php.
-             * E.g.
-             * 'mysql' => [
-             *       ...
-             *      'dump' => [
-             *           'excludeTables' => [
-             *                'table_to_exclude_from_backup',
-             *                'another_table_to_exclude'
-             *            ]
-             *       ],
-             * ],
-             *
+             * E.g.*/
+             'mysql' => [
+                'dump' => [
+                    'excludeTables' => [
+                        'failed_jobs',
+                        'failed_logins',
+                        'jobs',
+                        'logins',
+                        'logs',
+                        'migrations',
+                        'notifications',
+                        'password_resets',
+                        'peers',
+                        'sessions',
+                        'visitors',
+                    ]
+                ]
+            ],
+            /**
              * If you are using only InnoDB tables on a MySQL server, you can
              * also supply the useSingleTransaction option to avoid table locking.
              *
@@ -90,13 +98,13 @@ return [
             /*
              * The filename prefix used for the backup zip file.
              */
-            'filename_prefix' => '',
+            'filename_prefix' => 'bkp-',
 
             /*
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local',
+                'backups',
             ],
         ],
 

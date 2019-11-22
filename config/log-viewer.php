@@ -51,9 +51,9 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'log-viewer',
-
-            'middleware' => env('ARCANEDEV_LOGVIEWER_MIDDLEWARE') ? explode(',', env('ARCANEDEV_LOGVIEWER_MIDDLEWARE')) : null,
+            'prefix'     => 'staff/logs',
+            'namespace'  => ['Staff'],
+            'middleware' => ['web', 'auth', 'logs_mod'],
         ],
     ],
 

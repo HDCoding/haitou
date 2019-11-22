@@ -10,7 +10,7 @@ return [
      * Note: when server is empty string, it will not add to response header
      */
 
-    'server' => '',
+    'server' => 'Unknown',
 
     /*
      * X-Content-Type-Options

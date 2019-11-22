@@ -173,6 +173,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Bepsvpt\SecureHeaders\SecureHeadersServiceProvider::class,
         HDCoding\Coders\CodersServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        App\Providers\EmailBlacklistServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -237,6 +239,10 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'BBCode' => App\Helpers\BBCode::class,
+        'Toastr'  => App\Facades\ToastrFacade::class,
     ],
 
 ];

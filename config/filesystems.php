@@ -64,6 +64,26 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'torrents' => [
+            'driver' => 'local',
+            'root'   => storage_path('torrents'),
+        ],
+
+        'backups' => [
+            'driver' => 'local',
+            'root'   => storage_path('backups'),
+        ],
+
+        'medias' => [
+            'driver' => 'local',
+            'root'   => storage_path('medias'),
+        ],
+        
+        'users' => [
+            'driver' => 'local',
+            'root'   => storage_path('users'),
+        ],
+
     ],
 
 ];
