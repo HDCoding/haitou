@@ -103,7 +103,7 @@ if (!function_exists('setting')) {
     {
         $time = \Carbon\Carbon::now()->addMinutes(10);
         $setting = \Illuminate\Support\Facades\Cache::remember('setting', $time, function () {
-            return \Haitou\Models\Setting::all()->where('id', '=', 1)->first();
+            return \App\Models\Setting::all()->where('id', '=', 1)->first();
         });
         return $setting;
     }
@@ -113,7 +113,7 @@ if (!function_exists('toastr')) {
     /**
      * Get the toastr instance
      *
-     * @return Haitou\Helpers\Toastr
+     * @return App\Helpers\Toastr
      */
     function toastr()
     {
@@ -125,7 +125,7 @@ if (!function_exists('mention')) {
     /**
      * @return \Illuminate\Foundation\Application|mixed
      */
-    function mention(): \Haitou\Helpers\Mention
+    function mention(): \App\Helpers\Mention
     {
         return app('mention');
     }
