@@ -24,8 +24,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('haitou:auto-ban')->daily(); //Ban User If Has More Than X Active Warnings.
+        $schedule->command('haitou:auto-birthday-gift')->daily(); //Automatically gives gift to user on they special day.
+        $schedule->command('haitou:auto-birthday-restore')->yearly(); //Automatically restore gifted users to false every new Year.
+        $schedule->command('haitou:auto-deactivate-suspended')->daily(); //Automatically Deactivates User Warnings If Expired.
+        $schedule->command('haitou:auto-deactivate-warning')->daily(); //Automatically Deactivates User Warnings If Expired.
+        $schedule->command('haitou:auto-recycle-accounts')->monthly(); //Recycle Non-Activated Account With More 30 Days Old.
+        $schedule->command('haitou:auto-recycle-cheaters')->monthly(); //Recycle Cheaters Table Once 30 Days Old.
+        $schedule->command('haitou:auto-recycle-failed-logins')->daily(); //Recycle Failed Logins Once 30 Days Old.
+        $schedule->command('haitou:auto-recycle-invites')->daily(); //Recycle Invites That Are Expired.
+        $schedule->command('haitou:auto-recycle-vips')->daily(); //Automatically Removes A Users Vips If It Has Expired.
+        $schedule->command('haitou:email-blacklist-update')->monthly(); //Update cache for email domains blacklist.
     }
 
     /**
