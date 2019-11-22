@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -20,12 +21,14 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+    // Where to redirect users after login.
     protected $redirectTo = '/home';
+    // Max Attempts Until Lockout
+    protected $maxAttempts = 5;
+    // Minutes Lockout
+    protected $decayMinutes = 60;
+    // Class Login
+    protected $login;
 
     /**
      * Create a new controller instance.
@@ -35,5 +38,29 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->status == 0) {
+            auth()->logout();
+            $request->session()->flush();
+            return view('auth.login')->with('warning', 'Conta pendente ativação!');
+        }
+        if ($user->status == 2) {
+            auth()->logout();
+            $request->session()->flush();
+            return view('auth.login')->with('info', 'Conta suspensa, tente novamente em outro dia!');
+        }
+        if ($user->status == 3) {
+            auth()->logout();
+            $request->session()->flush();
+            return view('auth.login')->with('danger', 'Conta banida!');
+        }
+        if ($user->read_rules == false) {
+            toastr()->warning('Não se esqueça de ler as Regras.', 'Lembrete!');
+        }
+
+        return redirect()->to($this->redirectTo);
     }
 }
