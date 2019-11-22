@@ -6,17 +6,20 @@ use App\Models\Group;
 use App\Models\Mood;
 use App\Models\State;
 use App\Models\Log;
+use App\Models\Vip;
 use App\Traits\UsersOnline;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Gstt\Achievements\Achiever;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
+    use Achiever;
+    use HasApiTokens;
     use Notifiable;
     use Sluggable;
-    use HasApiTokens;
     use UsersOnline;
 
     protected $table = 'users';
@@ -153,6 +156,11 @@ class User extends Authenticatable
     public function logs()
     {
         return $this->hasMany(Log::class, 'user_id');
+    }
+
+    public function vips()
+    {
+        return $this->hasMany(Vip::class, 'user_id');
     }
 
     public function sluggable()
