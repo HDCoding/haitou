@@ -21,9 +21,12 @@ use Illuminate\Http\Request;
 
 class CalendarsController extends Controller
 {
-    public function __construct()
+    protected $request;
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->request = $request;
     }
 
     public function index()
@@ -76,7 +79,7 @@ class CalendarsController extends Controller
     {
         $calendar = Calendar::findOrFail($calendar_id);
 
-        abort_unless(auth()->user()->id == $calendar->user_id, 403);
+        abort_unless($this->request->user()->id == $calendar->user_id, 403);
 
         return view('site.calendars.edit', compact('calendar'));
     }
@@ -85,7 +88,7 @@ class CalendarsController extends Controller
     {
         $calendar = Calendar::findOrFail($calendar_id);
 
-        abort_unless(auth()->user()->id == $calendar->user_id, 403);
+        abort_unless($this->request->user()->id == $calendar->user_id, 403);
 
         $calendar->update($request->except('_token'));
 
@@ -97,7 +100,7 @@ class CalendarsController extends Controller
     {
         $calendar = Calendar::findOrFail($calendar_id);
 
-        abort_unless(auth()->user()->id == $calendar->user_id, 403);
+        abort_unless($this->request->user()->id == $calendar->user_id, 403);
 
         $calendar->delete();
 
