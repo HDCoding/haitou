@@ -48,7 +48,7 @@
                 <div>Convites</div>
                 <div class="pl-1 ml-auto">
                     <div class="badge badge-primary">
-{{--                        {{ auth()->user()->invites }}--}}
+                        {{ auth()->user()->invites }}
                     </div>
                 </div>
             </a>
