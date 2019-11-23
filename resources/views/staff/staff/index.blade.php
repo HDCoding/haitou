@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Painel Staff')
+@section('subtitle', 'Painel Staff')
 
 @section('content')
 
@@ -65,7 +65,7 @@
                         </div>
                         <div class="d-flex align-items-center position-relative" style="height:60px;width: 60px;">
                             <div class="w-100 position-absolute" style="height:60px;top:0;">
-                                <canvas id="statistics-chart-2"></canvas>
+                                <canvas id="disk-chart"></canvas>
                             </div>
                             <div class="w-100 text-center font-weight-bold">{{ $system->disk()['percentage'] }}%</div>
                         </div>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="d-flex align-items-center position-relative" style="height:60px;width: 60px;">
                             <div class="w-100 position-absolute" style="height:60px;top:0;">
-                                <canvas id="statistics-chart-3"></canvas>
+                                <canvas id="memory-chart"></canvas>
                             </div>
                             <div class="w-100 text-center font-weight-bold">{{ $system->memory()['percentage'] }}%</div>
                         </div>
@@ -221,7 +221,7 @@
     <div class="card mb-4">
         <!-- Add `.with-elements` to the parent `.card-header` element -->
         <div class="card-header with-elements">
-            <span class="card-header-title mr-2">@lang('dashboard.options')</span>
+            <span class="card-header-subtitle mr-2">@lang('dashboard.options')</span>
         </div>
         <div class="card-body">
             <div class="row text-center">
@@ -337,12 +337,12 @@
                         <h5 class="mt-2">@lang('dashboard.genres')</h5>
                     </div>
 {{--                @endif--}}
-                <div class="col-md-3 col-lg-3">
-                    <a href="{{ url('staff/icons') }}">
-                        <img src="{{ asset('images/staff/icons.png') }}" alt="@lang('dashboard.icons')">
-                    </a>
-                    <h5 class="mt-2">@lang('dashboard.icons')</h5>
-                </div>
+                    <div class="col-md-3 col-lg-3">
+                        <a href="{{ url('staff/icons') }}">
+                            <img src="{{ asset('images/staff/icons.png') }}" alt="@lang('dashboard.icons')">
+                        </a>
+                        <h5 class="mt-2">@lang('dashboard.icons')</h5>
+                    </div>
 {{--                @if(auth()->user()->permission->logs_mod)--}}
                     <div class="col-md-3 col-lg-3">
                         <a href="{{ url('staff/logs') }}">
@@ -401,18 +401,18 @@
 {{--                @endif--}}
 {{--                @if(auth()->user()->permission->requests_mod)--}}
                     <div class="col-md-3 col-lg-3">
-                        <a href="{{ url('staff/requests') }}">
-                            <img src="{{ asset('images/staff/sitepoints.png') }}" alt="@lang('dashboard.requests')">
+                        <a href="{{ url('staff/freeslots') }}">
+                            <img src="{{ asset('images/staff/freeslots.png') }}" alt="@lang('dashboard.freeslots')">
                         </a>
-                        <h5 class="mt-2">@lang('dashboard.requests')</h5>
+                        <h5 class="mt-2">@lang('dashboard.freeslots')</h5>
                     </div>
 {{--                @endif--}}
 {{--                @if(auth()->user()->permission->roles_mod)--}}
                     <div class="col-md-3 col-lg-3">
-                        <a href="{{ url('staff/roles') }}">
-                            <img src="{{ asset('images/staff/roles.png') }}" alt="@lang('dashboard.roles')">
+                        <a href="{{ url('staff/groups') }}">
+                            <img src="{{ asset('images/staff/groups.png') }}" alt="@lang('dashboard.groups')">
                         </a>
-                        <h5 class="mt-2">@lang('dashboard.roles')</h5>
+                        <h5 class="mt-2">@lang('dashboard.groups')</h5>
                     </div>
 {{--                @endif--}}
 {{--                @if(auth()->user()->permission->rules_mod)--}}
@@ -475,12 +475,12 @@
 
 @endsection
 
-@section('scripts')
+@section('script')
 
     <script src="{{ asset('vendor/chartjs/chartjs.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $(function () {
-            var chart2 = new Chart(document.getElementById('statistics-chart-2').getContext("2d"), {
+        $(document).ready(function() {
+            let disk = new Chart(document.getElementById('disk-chart').getContext("2d"), {
                 type: 'doughnut',
                 data: {
                     datasets: [{
@@ -511,7 +511,7 @@
                 }
             });
 
-            var chart3 = new Chart(document.getElementById('statistics-chart-3').getContext("2d"), {
+            let memory = new Chart(document.getElementById('memory-chart').getContext("2d"), {
                 type: 'doughnut',
                 data: {
                     datasets: [{
@@ -544,16 +544,12 @@
 
             // Resizing charts
             function resizeCharts() {
-                chart2.resize();
-                chart3.resize();
+                disk.resize();
+                memory.resize();
             }
 
             // Initial resize
             resizeCharts();
-
-            // For performance reasons resize charts on delayed resize event
-            window.layoutHelpers.on('resize.dashboard-4', resizeCharts);
         });
-
     </script>
 @endsection
