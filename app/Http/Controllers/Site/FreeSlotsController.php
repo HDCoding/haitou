@@ -3,83 +3,41 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\FreeSlotRequest;
+use App\Models\Freeslot;
 use Illuminate\Http\Request;
 
-class \FreeSlotsController extends Controller
+class FreeSlotsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $points = Freeslot::find(1);
+        $percent = $points->getPercent();
+        return view('site.requests.index', compact('points', 'percent'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(FreeSlotRequest $request)
     {
-        //
-    }
+        $site_point = Freeslot::findOrFail(1);
+        $user = $request->user();
+        $value = $request->input('point');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($user->points >= $value) {
+            //remove points from user
+            $user->points -= $value;
+            $user->save();
+            //insert the points to request table
+            $site_point->actual += $value;
+            $site_point->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+            $site_point->request_points()->create(['user_id' => $user->id, 'donated' => $value]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        } else {
+            toastr()->warning('Infelizmente você não possui pontos suficientes para doar!');
+            return redirect()->to('requests');
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        toastr()->info('Doação realizada com sucesso! Agradecemos sua ajuda!');
+        return redirect()->to('requests');
     }
 }
