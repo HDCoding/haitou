@@ -29,7 +29,7 @@
                 <i class="ion ion-ios-search navbar-icon align-middle"></i>
                 <span class="navbar-search-input pl-2">
                     {!! Form::open(['url' => 'search']) !!}
-                    {!! Form::text('search', null, ['class' => 'form-control navbar-text mx-2', 'placeholder' => 'Pesquisar...', 'required', 'style' => 'width:300px']) !!}
+                    {!! Form::text('query', null, ['class' => 'form-control navbar-text mx-2', 'placeholder' => 'Pesquisar...', 'required', 'style' => 'width:300px']) !!}
                     {!! Form::close() !!}
                 </span>
             </label>
@@ -48,9 +48,9 @@
             <div class="demo-navbar-messages nav-item dropdown mr-lg-3" id="hover-dropdown-demo">
                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-toggle="dropdown" data-trigger="hover" aria-expanded="false">
                     <i class="ion ion-ios-person navbar-icon align-middle"></i>
-{{--                    @if(auth()->user()->is_warned)--}}
+                    @if(auth()->user()->is_warned)
                         <span class="badge badge-danger badge-dot indicator"></span>
-{{--                    @endif--}}
+                    @endif
                     <span class="d-lg-none align-middle">&nbsp; Perfil</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" style="width: 18rem">
@@ -63,7 +63,7 @@
                            class="list-group-item list-group-item-action media d-flex align-items-center">
                             <img src="{{ asset('images/status/uploaded.png') }}" class="d-block ui-w-40 rounded-circle" alt="Uploaded">
                             <div class="media-body ml-3">
-{{--                                <div class="text-body line-height-condenced">{{ auth()->user()->getUploaded() }}</div>--}}
+                                <div class="text-body line-height-condenced">{{ auth()->user()->uploaded() }}</div>
                                 <div class="text-light small mt-1">Upload</div>
                             </div>
                         </a>
@@ -72,7 +72,7 @@
                            class="list-group-item list-group-item-action media d-flex align-items-center">
                             <img src="{{ asset('images/status/downloaded.png') }}" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
-{{--                                <div class="text-body line-height-condenced">{{ auth()->user()->getDownloaded() }}</div>--}}
+                                <div class="text-body line-height-condenced">{{ auth()->user()->downloaded() }}</div>
                                 <div class="text-light small mt-1">Download</div>
                             </div>
                         </a>
@@ -81,38 +81,38 @@
                            class="list-group-item list-group-item-action media d-flex align-items-center">
                             <img src="{{ asset('images/status/ratio.png') }}" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
-{{--                                <div class="text-body line-height-condenced">{{ auth()->user()->getRatio() }}</div>--}}
+                                <div class="text-body line-height-condenced">{{ auth()->user()->ratio() }}</div>
                                 <div class="text-light small mt-1">Ratio</div>
                             </div>
                         </a>
 
-{{--                        @if(auth()->user()->is_warned)--}}
-{{--                            <a href="javascript:void(0)"--}}
-{{--                               class="list-group-item list-group-item-action media d-flex align-items-center">--}}
-{{--                                <img src="{{ asset('images/status/warned.png') }}" class="d-block ui-w-40" alt>--}}
-{{--                                <div class="media-body ml-3">--}}
-{{--                                    <div class="text-body line-height-condenced">--}}
-{{--                                        Regularize antes de uma uma suspensão ou banimento.--}}
-{{--                                    </div>--}}
-{{--                                    <div class="text-light small mt-1">Advertência</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                        @endif--}}
+                        @if(auth()->user()->is_warned)
+                            <a href="javascript:void(0)"
+                               class="list-group-item list-group-item-action media d-flex align-items-center">
+                                <img src="{{ asset('images/status/warned.png') }}" class="d-block ui-w-40" alt>
+                                <div class="media-body ml-3">
+                                    <div class="text-body line-height-condenced">
+                                        Regularize antes de uma uma suspensão ou banimento.
+                                    </div>
+                                    <div class="text-light small mt-1">Advertência</div>
+                                </div>
+                            </a>
+                        @endif
 
                         <a href="javascript:void(0)"
                            class="list-group-item list-group-item-action media d-flex align-items-center">
                             <img src="{{ asset('images/status/heart.png') }}" class="d-block ui-w-40 rounded-circle" alt>
                             <div class="media-body ml-3">
-{{--                                <div class="text-body line-height-condenced">{{ auth()->user()->getPoints() }}</div>--}}
+                                <div class="text-body line-height-condenced">{{ auth()->user()->points() }}</div>
                                 <div class="text-light small mt-1">Pontos</div>
                             </div>
                         </a>
 
                         <a href="javascript:void(0)"
                            class="list-group-item list-group-item-action media d-flex align-items-center">
-{{--                            <img src="{{ auth()->user()->getLevelImage() }}" class="d-block ui-w-40" alt>--}}
+                            <img src="{{ auth()->user()->levelImage() }}" class="d-block ui-w-40" alt>
                             <div class="media-body ml-3">
-{{--                                <div class="text-body line-height-condenced">{{ auth()->user()->getLevel() }}</div>--}}
+                                <div class="text-body line-height-condenced">{{ auth()->user()->level() }}</div>
                                 <div class="text-light small mt-1">Level</div>
                             </div>
                         </a>
@@ -121,7 +121,7 @@
                            class="list-group-item list-group-item-action media d-flex align-items-center">
                             <img src="{{ asset('images/avatar.jpg') }}" class="d-block ui-w-40 rounded-circle" alt="Grupo">
                             <div class="media-body ml-3">
-{{--                                <div class="text-body line-height-condenced">{{ auth()->user()->group->name }}</div>--}}
+                                <div class="text-body line-height-condenced">{{ auth()->user()->groupName() }}</div>
                                 <div class="text-light small mt-1">Grupo</div>
                             </div>
                         </a>
@@ -136,8 +136,8 @@
             <div class="demo-navbar-user nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                   <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-{{--                    <img src="{{ auth()->user()->getAvatar() }}" alt class="d-block ui-w-30 rounded-circle">--}}
-{{--                    <span class="px-1 mr-lg-2 ml-2 ml-lg-0">{{ auth()->user()->username }}</span>--}}
+                    <img src="{{ auth()->user()->avatar() }}" alt class="d-block ui-w-30 rounded-circle">
+                    <span class="px-1 mr-lg-2 ml-2 ml-lg-0">{{ auth()->user()->username }}</span>
                   </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -162,12 +162,10 @@
                             <a class="dropdown-item" href="{{ route('bookmark.medias') }}">Mídias</a>
                         </div>
                     </div>
-{{--                    @if(auth()->user()->torrents()->count() > 0)--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <a href="{{ route('torrent.uploads') }}" class="dropdown-item">--}}
-{{--                            <i class="fas fa-upload text-lightest"></i> &nbsp; Meus Uploads--}}
-{{--                        </a>--}}
-{{--                    @endif--}}
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ route('torrent.uploads') }}" class="dropdown-item">
+                        <i class="fas fa-upload text-lightest"></i> &nbsp; Meus Uploads
+                    </a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
