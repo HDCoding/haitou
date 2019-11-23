@@ -5,81 +5,80 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class \NotificationsController extends Controller
+class NotificationsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show All Notifications.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $notifications = $request->user()->notifications()->paginate(25);
+        return view('site.notifications.index', compact('notifications'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show A Notification And Mark As Read.
      */
-    public function create()
+    public function show(Request $request, $id)
     {
-        //
+        $notification = $request->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+
+        if ($notification->read_at == null) {
+            toastr()->success('Notificação marcada como lida!', 'Aviso!');
+        }
+        return redirect()->to($notification->data['url']);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Set A Notification To Read.
      */
     public function update(Request $request, $id)
     {
-        //
+        $notification = $request->user()->notifications()->where('id', '=', $id)->first();
+
+        if (!$notification) {
+            toastr()->error('A notificação não existe!', 'Erro');
+            return redirect()->to('notifications');
+        }
+        if ($notification->read_at != null) {
+            toastr()->info('Notificação já marcada como lida!', 'Aviso!');
+            return redirect()->to('notifications');
+        }
+
+        $notification->markAsRead();
+
+        toastr()->success('Notificação marcada como lida!', 'Aviso!');
+        return redirect()->to('notifications');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Mass Update All Notification's To Read.
      */
-    public function destroy($id)
+    public function updateAll(Request $request)
     {
-        //
+        $request->user()->unreadNotifications()->update(['read_at' => now()]);
+        toastr()->success('Todas as notificações marcadas como lidas!', 'Aviso!');
+        return redirect()->to('notifications');
+    }
+
+    /**
+     * Delete A Notification.
+     */
+    public function destroy(Request $request, $id)
+    {
+        $request->user()->notifications()->findOrFail($id)->delete();
+        toastr()->success('Notificação excluída!', 'Aviso!');
+        return redirect()->to('notifications');
+    }
+
+    /**
+     * Mass Delete All Notification's.
+     */
+    public function destroyAll(Request $request)
+    {
+        $request->user()->notifications()->delete();
+        toastr()->success('Todas as notificações excluídas!', 'Aviso!');
+        return redirect()->to('notifications');
     }
 }
