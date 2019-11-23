@@ -20,7 +20,7 @@ class InvitationsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $invites = $user->invitations()->where('user_id', '=', $user->id)->where('is_accepted', '=', false)->get();
+        $invites = $user->invitations()->where('is_accepted', '=', false)->get();
         return view('site.invites.index', compact('invites'));
     }
 
@@ -33,7 +33,7 @@ class InvitationsController extends Controller
         //codigo enviado para o(a) convidado(a)
         $code = sha1_gen();
 
-        $invitedays = $this->setting->setting('invitedays');
+        $invitedays = setting('invitedays');
 
         //insere os dados no banco
         $invite = new Invitation();
@@ -51,7 +51,7 @@ class InvitationsController extends Controller
         Mail::to($email)->send(new AccountInvitation($invite));
 
         // Activity Log
-        $this->log::novo("Membro {$user->name} enviou um convite para {$email} .");
+//        $this->log::novo("Membro {$user->name} enviou um convite para {$email} .");
 
         toastr()->success('Convite enviado com sucesso.', 'Sucesso');
         return redirect()->to('invites');
