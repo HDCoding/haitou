@@ -16,7 +16,8 @@ class Freeslot extends Model
         'days' => 'int',
         'is_freeleech' => 'bool',
         'is_silver' => 'bool',
-        'is_doubleup' => 'bool'
+        'is_doubleup' => 'bool',
+        'is_active' => 'bool'
     ];
 
     protected $fillable = [
@@ -27,7 +28,8 @@ class Freeslot extends Model
         'days',
         'is_freeleech',
         'is_silver',
-        'is_doubleup'
+        'is_doubleup',
+        'is_active',
     ];
 
     public function type()
