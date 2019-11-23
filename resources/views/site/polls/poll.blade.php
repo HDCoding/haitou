@@ -18,47 +18,34 @@
                     </div>
 
                     <div class="panel-body">
-                        @if($voted)
-                            @foreach ($poll->poll_options as $option)
-                                <strong>{{ $option->option }}</strong>
-                                <span class="pull-right">{{ $option->poll_votes()->count() }} Voto(s)</span>
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ $option->votesPercent($totalVotes) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $option->votesPercent($totalVotes) }}%;">
-                                        {{ $option->votesPercent($totalVotes) }}%
-                                    </div>
-                                </div>
-                            @endforeach
-                            <p>Total votos: {{ $totalVotes }}</p>
-                            <hr />
-                        @else
-                            {!! Form::open(['url' => 'poll/' . $poll->id, 'class' => 'form-horizontal']) !!}
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    @foreach ($poll->poll_options as $option)
-                                        @if($poll->multivote)
-                                            <div class="checkbox">
-                                                <label for="option-checkbox-{{ $option->id }}">
-                                                    <input type="checkbox" id="option-checkbox-{{ $option->id }}" name="option[]" value="{{ $option->id }}"> {{ $option->option }}
-                                                </label>
-                                            </div>
-                                        @else
-                                            <div class="radio">
-                                                <label for="option-radio-{{ $option->id }}">
-                                                    <input type="radio" id="option-radio-{{ $option->id }}" name="option" value="{{ $option->id }}"> {{ $option->option }}
-                                                </label>
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                </div>
+
+                        {!! Form::open(['url' => 'poll/' . $poll->id, 'class' => 'form-horizontal']) !!}
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                @foreach ($poll->poll_options as $option)
+                                    @if($poll->multivote)
+                                        <div class="checkbox">
+                                            <label for="option-checkbox-{{ $option->id }}">
+                                                <input type="checkbox" id="option-checkbox-{{ $option->id }}" name="option[]" value="{{ $option->id }}"> {{ $option->option }}
+                                            </label>
+                                        </div>
+                                    @else
+                                        <div class="radio">
+                                            <label for="option-radio-{{ $option->id }}">
+                                                <input type="radio" id="option-radio-{{ $option->id }}" name="option" value="{{ $option->id }}"> {{ $option->option }}
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
-                            <br>
-                            <div class="form-group">
-                                <div class="col-md-6">
-                                    {!! Form::submit('Votar', ['class' => 'btn  btn-primary btn-rounded btn-outline']) !!}
-                                </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                {!! Form::submit('Votar', ['class' => 'btn  btn-primary btn-rounded btn-outline']) !!}
                             </div>
-                            {!! Form::close() !!}
-                        @endif
+                        </div>
+                        {!! Form::close() !!}
 
                     </div>
 
