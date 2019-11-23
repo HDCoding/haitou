@@ -55,31 +55,31 @@
 
                     <div class="row mb-2">
                         <div class="col-md-3 text-muted">Download:</div>
-                        <div class="col-md-9">{{ $member->getDownloaded() }}</div>
+                        <div class="col-md-9">{{ $member->downloaded() }}</div>
                     </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3 text-muted">Ratio:</div>
-                        <div class="col-md-9">{{ $member->getRatio() }}</div>
+                        <div class="col-md-9">{{ $member->ratio() }}</div>
                     </div>
 
                     <h6 class="my-3">XP</h6>
 
                     <div class="row mb-2">
                         <div class="col-md-3 text-muted">Pontos:</div>
-                        <div class="col-md-9">{{ $member->getPoints() }}</div>
+                        <div class="col-md-9">{{ $member->points() }}</div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-3 text-muted">Level:</div>
-                        <div class="col-md-9">{{ $member->getLevel() }}</div>
+                        <div class="col-md-9">{{ $member->level() }}</div>
                     </div>
 
                 </div>
                 <div class="card-footer text-center p-0">
                     <div class="row no-gutters row-bordered row-border-light">
                         <a href="javascript:void(0)" class="d-flex col flex-column text-body py-3">
-                            <div class="font-weight-bold">{{ $member->forum_posts()->count() }}</div>
+                            <div class="font-weight-bold">{{ $member->posts()->count() }}</div>
                             <div class="text-muted small">Posts</div>
                         </a>
                         <a href="javascript:void(0)" class="d-flex col flex-column text-body py-3">
