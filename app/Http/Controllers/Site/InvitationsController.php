@@ -15,7 +15,7 @@ class InvitationsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $invites = $user->invited_users()->where('user_id', '=', $user->id)->where('is_accepted', '=', false)->get();
+        $invites = $user->invitations()->where('user_id', '=', $user->id)->where('is_accepted', '=', false)->get();
         return view('site.invites.index', compact('invites'));
     }
 
