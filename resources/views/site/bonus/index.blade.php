@@ -4,11 +4,7 @@
 
 @section('css')
     <!-- select2 -->
-    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}">
-    <!-- DatePicker -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-datepicker/bootstrap-datepicker.css') }}">
-    <!-- sceditor -->
-    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
+    <link href="{{ asset('vendor/select2/select2.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
