@@ -11,8 +11,6 @@ class Report extends Model
 {
     use Sluggable;
 
-    protected $bbcode;
-
     protected $table = 'reports';
 
     protected $casts = [
@@ -77,12 +75,6 @@ class Report extends Model
         ];
     }
 
-    public function __construct(BBCode $bbcode)
-    {
-        parent::__construct();
-        $this->bbcode = $bbcode;
-    }
-
     public function type(): string
     {
         $report_type = $this->report_type;
@@ -107,11 +99,11 @@ class Report extends Model
 
     public function reasonHtml()
     {
-        return $this->bbcode->parse($this->reason, true);
+        return (new BBCode())->parse($this->reason, true);
     }
 
     public function solutionHtml()
     {
-        return $this->bbcode->parse($this->solution, true);
+        return (new BBCode())->parse($this->solution, true);
     }
 }
