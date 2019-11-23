@@ -11,25 +11,29 @@ use Illuminate\Http\Request;
 
 class MediasController extends Controller
 {
-    public function __construct()
+    protected $request;
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->request = $request;
     }
 
     public function show($media_id, $slug)
     {
         $media = Media::where('id', '=', $media_id)->whereSlug($slug)->firstOrFail();
-        $media->increment('views');
+        $media->increment('views'); //increment views
+
+        $user = $this->request->user(); //logged user
 
         $comments = $media->comments()->latest()->paginate(5);
 
         if (request()->ajax()) {
-            return view('layouts.includes.comment_layout', compact('comments'));
+            return view('includes.comments', compact('comments'));
         }
 
-        $user_id = auth()->user()->id;
-        $voted = Rating::where('media_id', '=', $media->id)->where('user_id', '=', $user_id)->first();
-        $bookmarked = Bookmark::where('media_id', '=', $media->id)->where('user_id', '=', $user_id)->first();
+        $voted = $media->rating()->where('user_id', '=', $user->id)->first();
+        $bookmarked = $media->bookmarks()->where('user_id', '=', $user->id)->first();
 
         return view('site.medias.media', compact('media', 'comments', 'voted', 'bookmarked'));
     }
@@ -42,7 +46,7 @@ class MediasController extends Controller
 
         $vote = $request->input('vote');
 
-        $voted = Rating::where('media_id', '=', $media->id)->where('user_id', '=', $user->id)->first();
+        $voted = $media->rating()->where('user_id', '=', $user->id)->first();
 
         if ($voted) {
             $voted->vote = $vote;
