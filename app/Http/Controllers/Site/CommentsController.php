@@ -20,9 +20,12 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    public function __construct()
+    protected $request;
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->request = $request;
     }
 
     public function store(Request $request)
@@ -98,7 +101,7 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless(auth()->user()->id == $comment->user_id || auth()->user()->permission->staff_panel, 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->permission->staff_panel, 403);
 
         return view('site.comments.comment', compact('comment'));
     }
@@ -107,7 +110,7 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless(auth()->user()->id == $comment->user_id || auth()->user()->permission->staff_panel, 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->permission->staff_panel, 403);
 
         return view('site.comments.edit', compact('comment'));
     }
@@ -130,7 +133,7 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless(auth()->user()->id == $comment->user_id || auth()->user()->permission->staff_panel, 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->permission->staff_panel, 403);
 
         $comment->delete();
 
