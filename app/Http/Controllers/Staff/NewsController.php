@@ -12,7 +12,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::with('user:id,name')
-            ->select('id', 'staff_id', 'name', 'views')
+            ->select('id', 'user_id', 'name', 'views')
             ->orderBy('id', 'DESC')->get();
         return view('staff.news.index', compact('news'));
     }
