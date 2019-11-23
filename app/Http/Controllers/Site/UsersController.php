@@ -32,19 +32,7 @@ class UsersController extends Controller
         $member = User::whereSlug($slug)->firstOrFail();
         $member->increment('views');
 
-        $friends = $member->getAcceptedFriendships();
-        $friends_total = $member->getFriendsCount();
-
-        return view('site.users.profile', compact('member', 'friends', 'friends_total'));
-    }
-
-    public function friends($slug)
-    {
-        $member = User::whereSlug($slug)->firstOrFail();
-
-        $friends = $friends = $member->getAllFriendships();
-
-        return view('site.users.friends', compact('friends'));
+        return view('site.users.profile', compact('member'));
     }
 
     public function formAccount()
@@ -106,28 +94,27 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
-        $privacy = UserPrivacy::where('user_id', '=', $user->id)->first();
-        $privacy->show_achievements = $request->input('show_achievements') ? true : false;
-        $privacy->show_mood = $request->input('show_mood') ? true : false;
-        $privacy->show_state = $request->input('show_state') ? true : false;
-        $privacy->show_role = $request->input('show_role') ? true : false;
-        $privacy->show_downloaded = $request->input('show_downloaded') ? true : false;
-        $privacy->show_uploaded = $request->input('show_uploaded') ? true : false;
-        $privacy->show_profile = $request->input('show_profile') ? true : false;
-        $privacy->show_profile_points = $request->input('show_profile_points') ? true : false;
-        $privacy->show_profile_level = $request->input('show_profile_level') ? true : false;
-        $privacy->show_profile_avatar = $request->input('show_profile_avatar') ? true : false;
-        $privacy->show_profile_cover = $request->input('show_profile_cover') ? true : false;
-        $privacy->show_profile_info = $request->input('show_profile_info') ? true : false;
-        $privacy->show_profile_title = $request->input('show_profile_title') ? true : false;
-        $privacy->show_profile_signature = $request->input('show_profile_signature') ? true : false;
-        $privacy->show_profile_birthday = $request->input('show_profile_birthday') ? true : false;
-        $privacy->show_profile_social_links = $request->input('show_profile_social_links') ? true : false;
-        $privacy->show_profile_friends = $request->input('show_profile_friends') ? true : false;
-        $privacy->show_profile_warning = $request->input('show_profile_warning') ? true : false;
-        $privacy->show_forum_signatures = $request->input('show_forum_signatures') ? true : false;
-        $privacy->pm_from_all = $request->input('pm_from_all') ? true : false;
-        $privacy->save();
+        $user->show_achievements = $request->input('show_achievements') ? true : false;
+        $user->show_mood = $request->input('show_mood') ? true : false;
+        $user->show_state = $request->input('show_state') ? true : false;
+        $user->show_role = $request->input('show_role') ? true : false;
+        $user->show_downloaded = $request->input('show_downloaded') ? true : false;
+        $user->show_uploaded = $request->input('show_uploaded') ? true : false;
+        $user->show_profile = $request->input('show_profile') ? true : false;
+        $user->show_profile_points = $request->input('show_profile_points') ? true : false;
+        $user->show_profile_level = $request->input('show_profile_level') ? true : false;
+        $user->show_profile_avatar = $request->input('show_profile_avatar') ? true : false;
+        $user->show_profile_cover = $request->input('show_profile_cover') ? true : false;
+        $user->show_profile_info = $request->input('show_profile_info') ? true : false;
+        $user->show_profile_title = $request->input('show_profile_title') ? true : false;
+        $user->show_profile_signature = $request->input('show_profile_signature') ? true : false;
+        $user->show_profile_birthday = $request->input('show_profile_birthday') ? true : false;
+        $user->show_profile_social_links = $request->input('show_profile_social_links') ? true : false;
+        $user->show_profile_friends = $request->input('show_profile_friends') ? true : false;
+        $user->show_profile_warning = $request->input('show_profile_warning') ? true : false;
+        $user->show_forum_signatures = $request->input('show_forum_signatures') ? true : false;
+        $user->pm_from_all = $request->input('pm_from_all') ? true : false;
+        $user->save();
 
         // Achievement
         $user->unlock(new UserChangePrivacies());
@@ -144,20 +131,19 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
-        $social = UserSetting::where('user_id', '=', $user->id)->first();
-        $social->facebook = $request->input('facebook');
-        $social->twitter = $request->input('twitter');
-        $social->googleplus = $request->input('googleplus');
-        $social->linkedin = $request->input('linkedin');
-        $social->instagram = $request->input('instagram');
-        $social->pinterest = $request->input('pinterest');
-        $social->torrents_per_page = $request->input('torrents_per_page');
-        $social->topics_per_page = $request->input('topics_per_page');
-        $social->posts_per_page = $request->input('posts_per_page');
-        $social->receive_email = $request->input('receive_email') ? true : false;
-        $social->show_bon_gift = $request->input('show_bon_gift') ? true : false;
-        $social->show_mention_forum_post = $request->input('show_mention_forum_post') ? true : false;
-        $social->save();
+        $user->facebook = $request->input('facebook');
+        $user->twitter = $request->input('twitter');
+        $user->googleplus = $request->input('googleplus');
+        $user->linkedin = $request->input('linkedin');
+        $user->instagram = $request->input('instagram');
+        $user->pinterest = $request->input('pinterest');
+        $user->torrents_per_page = $request->input('torrents_per_page');
+        $user->topics_per_page = $request->input('topics_per_page');
+        $user->posts_per_page = $request->input('posts_per_page');
+        $user->receive_email = $request->input('receive_email') ? true : false;
+        $user->show_bon_gift = $request->input('show_bon_gift') ? true : false;
+        $user->show_mention_forum_post = $request->input('show_mention_forum_post') ? true : false;
+        $user->save();
 
         // Achievement
         $user->unlock(new UserChangeSettings());
@@ -188,10 +174,10 @@ class UsersController extends Controller
 
     public function postEmail(UpdateEmail $request)
     {
-        //Código para ativação da conta
-        $token = sha1_gen();
         //usuario autenticado
         $user = $request->user();
+        //Código para ativação da conta
+        $token = sha1_gen();
         //recebe o email novo
         $email = $request->input('email');
         //atualiza no banco
