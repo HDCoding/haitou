@@ -33,7 +33,7 @@
                             </a>
                             <div id="faq-{{ $faq->id }}" class="collapse text-muted">
                                 <div class="px-4 pb-3">
-                                    {!! $faq->getAnswerHtml() !!}
+                                    {!! $faq->answerHtml() !!}
                                 </div>
                             </div>
                         </div>
