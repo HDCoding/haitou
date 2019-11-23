@@ -17,12 +17,11 @@
 
     <!-- Core stylesheets -->
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}" class="theme-settings-bootstrap-css">
-    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="{{ asset('css/demo.css') }}">
     <link rel="stylesheet" href="{{ asset('css/appwork.css') }}" class="theme-settings-appwork-css">
     <link rel="stylesheet" href="{{ asset('css/theme-corporate.css') }}" class="theme-settings-theme-css">
     <link rel="stylesheet" href="{{ asset('css/colors.css') }}" class="theme-settings-colors-css">
     <link rel="stylesheet" href="{{ asset('css/uikit.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/demo.css') }}">
 
     @yield('styles')
 
