@@ -3,83 +3,122 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Like;
+use App\Models\Post;
+use App\Models\Torrent;
 use Illuminate\Http\Request;
 
-class \LikesController extends Controller
+class LikesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function likeTorrent(Request $request, $torrent_id)
     {
-        //
+        $torrent = Torrent::findOrFail($torrent_id);
+        $user = $request->user();
+
+        $postUrl = "torrent/{$torrent->id}.{$torrent->slug}";
+
+        $like = $user->likes()->where('torrent_id', '=', $torrent->id)->where('is_like', '=', true)->first();
+        $dislike = $user->likes()->where('torrent_id', '=', $torrent->id)->where('is_dislike', '=', true)->first();
+
+        if ($like || $dislike) {
+            toastr()->warning('Você já deu like deste torrent!', 'Aviso');
+            return redirect()->to($postUrl);
+        } elseif ($torrent->user_id == $user->id) {
+            toastr()->info('Você não pode dar like do seu próprio torrent!', 'Aviso');
+            return redirect()->to($postUrl);
+        } else {
+            $new = new Like();
+            $new->user_id = $user->id;
+            $new->torrent_id = $torrent->id;
+            $new->is_like = 1;
+            $new->save();
+
+            toastr()->success('Like aplicado com sucesso!', 'Like');
+            return redirect()->to($postUrl);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function dislikeTorrent(Request $request, $torrent_id)
     {
-        //
+        $torrent = Torrent::findOrFail($torrent_id);
+        $user = $request->user();
+
+        $postUrl = "torrent/{$torrent->id}.{$torrent->slug}";
+
+        $like = $user->likes()->where('torrent_id', '=', $torrent->id)->where('is_like', '=', true)->first();
+        $dislike = $user->likes()->where('torrent_id', '=', $torrent->id)->where('is_dislike', '=', true)->first();
+
+        if ($like || $dislike) {
+            toastr()->warning('Você já deu dislike deste torrent!', 'Aviso');
+            return redirect()->to($postUrl);
+        } elseif ($torrent->user_id == $user->id) {
+            toastr()->info('Você não pode dar dislike do seu próprio torrent!', 'Aviso');
+            return redirect()->to($postUrl);
+        } else {
+            $new = new Like();
+            $new->user_id = $user->id;
+            $new->torrent_id = $torrent->id;
+            $new->is_dislike = 1;
+            $new->save();
+
+            toastr()->success('Dislike aplicado com sucesso!', 'Dislike');
+            return redirect()->to($postUrl);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function likePost(Request $request, $post_id)
     {
-        //
+        $post = Post::findOrFail($post_id);
+        $user = $request->user();
+
+        $postUrl = "forum/topic/{$post->forum_topic->id}.{$post->forum_topic->slug}";//?page={$post->getPageNumber()}#post-{$post_id}";
+
+        $like = $user->likes()->where('post_id', '=', $post->id)->where('is_like', '=', true)->first();
+        $dislike = $user->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', true)->first();
+
+        if ($like || $dislike) {
+            toastr()->warning('Você já deu like deste post!', 'Aviso');
+            return redirect()->to($postUrl);
+        } elseif ($post->user_id == $user->id) {
+            toastr()->info('Você não pode dar like do seu próprio post!', 'Aviso');
+            return redirect()->to($postUrl);
+        } else {
+            $new = new Like();
+            $new->user_id = $user->id;
+            $new->post_id = $post->id;
+            $new->is_like = 1;
+            $new->save();
+
+            toastr()->success('Like aplicado com sucesso!', 'Like');
+            return redirect()->to($postUrl);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function dislikePost(Request $request, $post_id)
     {
-        //
-    }
+        $post = Post::findOrFail($post_id);
+        $user = $request->user();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $postUrl = "forum/topic/{$post->forum_topic->id}.{$post->forum_topic->slug}";//?page={$post->getPageNumber()}#post-{$post_id}";
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $like = $user->likes()->where('post_id', '=', $post->id)->where('is_like', '=', true)->first();
+        $dislike = $user->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', true)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($like || $dislike) {
+            toastr()->warning('Você já deu dislike deste post!', 'Aviso');
+            return redirect()->to($postUrl);
+        } elseif ($post->user_id == $user->id) {
+            toastr()->info('Você não pode dar dislike do seu próprio post!', 'Aviso');
+            return redirect()->to($postUrl);
+        } else {
+            $new = new Like();
+            $new->user_id = $user->id;
+            $new->post_id = $post->id;
+            $new->is_dislike = 1;
+            $new->save();
+
+            toastr()->success('Dislike aplicado com sucesso!', 'Dislike');
+            return redirect()->to($postUrl);
+        }
     }
 }
