@@ -22,7 +22,7 @@
             <div class="col-md-3">
                 <div class="container-p-x py-4">
                     <div class="text-muted small">Status</div>
-                    {!! $fansub->getStatus() !!}
+                    {!! $fansub->status() !!}
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
         $(window).on('hashchange', function () {
             if (window.location.hash) {
                 var page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
+                if (page === Number.NaN || page <= 0) {
                     return false;
                 } else {
                     getData(page);
@@ -181,7 +181,7 @@
                 $("#nav-comments").empty().html(data);
                 location.hash = page;
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
-                alert('No response from server');
+                alert('Nenhuma resposta do servidor');
             });
         }
     </script>
