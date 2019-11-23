@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class CharactersController extends Controller
 {
-    public function __construct()
+    protected $request;
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->request = $request;
     }
 
     public function show($character_id, $slug)
@@ -19,8 +22,8 @@ class CharactersController extends Controller
         $character = Character::where('id', '=', $character_id)->whereSlug($slug)->firstOrFail();
         $character->increment('views');
 
-        $user_id = auth()->user()->id;
-        $bookmarked = Bookmark::where('character_id', '=', $character->id)->where('user_id', '=', $user_id)->first();
+        $user = $this->request->user();
+        $bookmarked = $user->bookmarks()->where('character_id', '=', $character->id)->first();
 
         return view('site.characters.character', compact('character', 'bookmarked'));
     }
