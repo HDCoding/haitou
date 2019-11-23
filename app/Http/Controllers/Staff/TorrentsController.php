@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Storage;
 
 class TorrentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $torrents = Torrent::with(['category:id,name'])

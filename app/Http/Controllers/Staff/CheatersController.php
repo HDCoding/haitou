@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class CheatersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Possible Ghost Leech Cheaters.
      */

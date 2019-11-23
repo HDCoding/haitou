@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Show All Notifications.
      */

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class MoodsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $moods = Mood::select('id', 'name', 'image', 'points')->get();

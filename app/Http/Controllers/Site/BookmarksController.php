@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class BookmarksController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request)
     {
         $user = $request->user();

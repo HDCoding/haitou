@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class FansubsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $fansubs = Fansub::with('torrents:id')->select('id', 'name', 'logo', 'views')->get();

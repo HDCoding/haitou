@@ -25,6 +25,11 @@ use Illuminate\Support\Facades\DB;
 
 class BonusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $points = Bonus::where('is_enabled', '=', true)->get();

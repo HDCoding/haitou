@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Artisan;
 
 class CommandsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display All Commands.
      */

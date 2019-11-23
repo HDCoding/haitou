@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class CharactersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show($character_id, $slug)
     {
         $character = Character::where('id', '=', $character_id)->whereSlug($slug)->firstOrFail();

@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ActorsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $actors = Actor::select('id', 'name', 'image', 'views')->get();

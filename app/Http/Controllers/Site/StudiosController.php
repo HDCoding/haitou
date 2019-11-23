@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class StudiosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show($studio_id, $slug)
     {
         $studio = Studio::where('id', '=', $studio_id)->whereSlug($slug)->firstOrFail();

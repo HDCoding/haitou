@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 
 class IconsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function fontawesome()
     {
         return view('staff.icons.fontawesome');

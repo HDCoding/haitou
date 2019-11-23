@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class SearchesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function search(Request $request)
     {
         if ($request->isMethod('POST')) {

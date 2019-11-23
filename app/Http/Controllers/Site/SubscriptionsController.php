@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class SubscriptionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function subscribeTopic(Request $request, string $route, Topic $topic)
     {
         if ($route == 'subscriptions') {

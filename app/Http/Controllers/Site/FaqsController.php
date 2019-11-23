@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class FaqsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $categories = Category::where('is_faq', '=', true)->get();

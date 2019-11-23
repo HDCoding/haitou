@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function calendar($calendar_id)
     {
         $calendar = Calendar::findOrFail($calendar_id);

@@ -15,6 +15,11 @@ use Illuminate\Http\Request;
 
 class MediasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $medias = Media::with(['category:id,name', 'studio:id,name'])

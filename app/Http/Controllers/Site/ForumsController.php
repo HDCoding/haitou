@@ -43,7 +43,7 @@ class ForumsController extends Controller
 
     public function __construct()
     {
-        $this->log = new Log();
+        $this->middleware('auth');
     }
 
     public function search(Request $request)

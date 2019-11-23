@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class LikesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function likeTorrent(Request $request, $torrent_id)
     {
         $torrent = Torrent::findOrFail($torrent_id);

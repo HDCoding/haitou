@@ -12,6 +12,11 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BackupsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         if (!count(config('backup.backup.destination.disks'))) {

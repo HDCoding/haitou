@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $users = User::with('group:id,name')->select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();

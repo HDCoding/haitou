@@ -10,6 +10,11 @@ use Spatie\SslCertificate\SslCertificate;
 
 class StaffController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $pendent = User::where('status', '=', 0)->count();

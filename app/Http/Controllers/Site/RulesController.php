@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class RulesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request)
     {
         $rules = Rule::select('id', 'name', 'description')->get();

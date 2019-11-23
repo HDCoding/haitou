@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class BonusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $bonus = Bonus::select('id', 'name', 'description', 'cost', 'is_enabled')->get();

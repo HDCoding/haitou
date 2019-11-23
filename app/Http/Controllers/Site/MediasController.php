@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class MediasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show($media_id, $slug)
     {
         $media = Media::where('id', '=', $media_id)->whereSlug($slug)->firstOrFail();

@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class GenresController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $genres = Genre::select('id', 'name', 'views')->get();
