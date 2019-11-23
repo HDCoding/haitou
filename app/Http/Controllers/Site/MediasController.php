@@ -3,83 +3,56 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\RatingRequest;
+use App\Models\Bookmark;
+use App\Models\Media;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
-class \MediasController extends Controller
+class MediasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show($media_id, $slug)
     {
-        //
+        $media = Media::where('id', '=', $media_id)->whereSlug($slug)->firstOrFail();
+        $media->increment('views');
+
+        $comments = $media->comments()->latest()->paginate(5);
+
+        if (request()->ajax()) {
+            return view('layouts.includes.comment_layout', compact('comments'));
+        }
+
+        $user_id = auth()->user()->id;
+        $voted = Rating::where('media_id', '=', $media->id)->where('user_id', '=', $user_id)->first();
+        $bookmarked = Bookmark::where('media_id', '=', $media->id)->where('user_id', '=', $user_id)->first();
+
+        return view('site.medias.media', compact('media', 'comments', 'voted', 'bookmarked'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function vote(RatingRequest $request, $media_id)
     {
-        //
-    }
+        $media = Media::findOrFail($media_id);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $user = $request->user();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $vote = $request->input('vote');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $voted = Rating::where('media_id', '=', $media->id)->where('user_id', '=', $user->id)->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        if ($voted) {
+            $voted->vote = $vote;
+            $voted->update();
+        } else {
+            $newRating = new Rating();
+            $newRating->media_id = $media->id;
+            $newRating->user_id = $user->id;
+            $newRating->vote = $vote;
+            $newRating->save();
+        }
+        if ($vote == 0 && !$voted) {
+            return redirect()->route('media.show', [$media->id, $media->slug]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->route('media.show', [$media->id, $media->slug]);
     }
 }
