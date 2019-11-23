@@ -35,7 +35,7 @@
                             @if (Route::has('register'))
                                 <div class="nav-item py-2 py-lg-0 ml-lg-1">
                                     <a href="{{ route('register') }}" class="btn btn-primary rounded-pill">
-                                        Sign-up
+                                        Cadastre-se
                                     </a>
                                 </div>
                             @endif
