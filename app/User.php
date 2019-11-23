@@ -3,9 +3,10 @@
 namespace App;
 
 use App\Models\Group;
+use App\Models\Invitation;
+use App\Models\Log;
 use App\Models\Mood;
 use App\Models\State;
-use App\Models\Log;
 use App\Models\Vip;
 use App\Traits\UsersOnline;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -163,6 +164,11 @@ class User extends Authenticatable
         return $this->hasMany(Vip::class, 'user_id');
     }
 
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
     public function sluggable()
     {
         return [
@@ -192,7 +198,7 @@ class User extends Authenticatable
         if ($this->uploaded == 0 && $this->downloaded == 0) {
             return number_format(1, 2);
         } elseif ($this->uploaded > 0 && $this->downloaded > 0) {
-            return (float) number_format($this->uploaded / $this->downloaded, 2);
+            return (float)number_format($this->uploaded / $this->downloaded, 2);
         } else {
             return "Info";
         }
