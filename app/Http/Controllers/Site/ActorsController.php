@@ -14,13 +14,13 @@ class ActorsController extends Controller
         $this->middleware('auth');
     }
 
-    public function show($actor_id, $slug)
+    public function show($actor_id, $slug, Request $request)
     {
         $actor = Actor::where('id', '=', $actor_id)->whereSlug($slug)->firstOrFail();
         $actor->increment('views');
 
-        $user_id = auth()->user()->id;
-        $bookmarked = Bookmark::where('actor_id', '=', $actor->id)->where('user_id', '=', $user_id)->first();
+        $user = $request->user();
+        $bookmarked = $user->bookmarks()->where('actor_id', '=', $actor->id)->first();
 
         return view('site.actors.actor', compact('actor', 'bookmarked'));
     }
