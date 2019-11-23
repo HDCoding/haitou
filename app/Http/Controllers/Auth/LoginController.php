@@ -57,7 +57,7 @@ class LoginController extends Controller
             $request->session()->flush();
             return view('auth.login')->with('danger', 'Conta banida!');
         }
-        if ($user->read_rules == false) {
+        if ($user->readed_rules == false) {
             toastr()->warning('Não se esqueça de ler as Regras.', 'Lembrete!');
         }
 
