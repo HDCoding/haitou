@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($backups as $key => $backup)
+                @foreach($data['backups'] as $key => $backup)
                     <tr class="odd gradeX">
                         <td class="text-center">
                             {{ ++$key }}
