@@ -18,6 +18,7 @@ class LikesController extends Controller
     public function likeTorrent(Request $request, $torrent_id)
     {
         $torrent = Torrent::findOrFail($torrent_id);
+
         $user = $request->user();
 
         $postUrl = "torrent/{$torrent->id}.{$torrent->slug}";
@@ -46,6 +47,7 @@ class LikesController extends Controller
     public function dislikeTorrent(Request $request, $torrent_id)
     {
         $torrent = Torrent::findOrFail($torrent_id);
+
         $user = $request->user();
 
         $postUrl = "torrent/{$torrent->id}.{$torrent->slug}";
@@ -74,9 +76,10 @@ class LikesController extends Controller
     public function likePost(Request $request, $post_id)
     {
         $post = Post::findOrFail($post_id);
+
         $user = $request->user();
 
-        $postUrl = "forum/topic/{$post->forum_topic->id}.{$post->forum_topic->slug}";//?page={$post->getPageNumber()}#post-{$post_id}";
+        $postUrl = "forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->getPageNumber()}#post-{$post_id}";
 
         $like = $user->likes()->where('post_id', '=', $post->id)->where('is_like', '=', true)->first();
         $dislike = $user->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', true)->first();
@@ -102,9 +105,10 @@ class LikesController extends Controller
     public function dislikePost(Request $request, $post_id)
     {
         $post = Post::findOrFail($post_id);
+
         $user = $request->user();
 
-        $postUrl = "forum/topic/{$post->forum_topic->id}.{$post->forum_topic->slug}";//?page={$post->getPageNumber()}#post-{$post_id}";
+        $postUrl = "forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->getPageNumber()}#post-{$post_id}";
 
         $like = $user->likes()->where('post_id', '=', $post->id)->where('is_like', '=', true)->first();
         $dislike = $user->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', true)->first();
