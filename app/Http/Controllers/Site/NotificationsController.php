@@ -30,7 +30,7 @@ class NotificationsController extends Controller
         $notification->markAsRead();
 
         if ($notification->read_at == null) {
-            toastr()->success('Notificação marcada como lida!', 'Aviso!');
+            toastr()->info('Notificação marcada como lida!', 'Aviso!');
         }
         return redirect()->to($notification->data['url']);
     }
@@ -53,7 +53,7 @@ class NotificationsController extends Controller
 
         $notification->markAsRead();
 
-        toastr()->success('Notificação marcada como lida!', 'Aviso!');
+        toastr()->info('Notificação marcada como lida!', 'Aviso!');
         return redirect()->to('notifications');
     }
 
@@ -63,7 +63,7 @@ class NotificationsController extends Controller
     public function updateAll(Request $request)
     {
         $request->user()->unreadNotifications()->update(['read_at' => now()]);
-        toastr()->success('Todas as notificações marcadas como lidas!', 'Aviso!');
+        toastr()->info('Todas as notificações marcadas como lidas!', 'Aviso!');
         return redirect()->to('notifications');
     }
 
@@ -73,7 +73,7 @@ class NotificationsController extends Controller
     public function destroy(Request $request, $id)
     {
         $request->user()->notifications()->findOrFail($id)->delete();
-        toastr()->success('Notificação excluída!', 'Aviso!');
+        toastr()->warning('Notificação excluída!', 'Aviso!');
         return redirect()->to('notifications');
     }
 
@@ -83,7 +83,7 @@ class NotificationsController extends Controller
     public function destroyAll(Request $request)
     {
         $request->user()->notifications()->delete();
-        toastr()->success('Todas as notificações excluídas!', 'Aviso!');
+        toastr()->warning('Todas as notificações excluídas!', 'Aviso!');
         return redirect()->to('notifications');
     }
 }
