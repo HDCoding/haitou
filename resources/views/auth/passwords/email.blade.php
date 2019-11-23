@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- Page -->
-    <link href="{{ secure_asset('css/pages/authentication.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/pages/authentication.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -61,6 +61,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ secure_asset('vendor/validate/validate.js') }}"></script>
-    <script src="{{ secure_asset('js/pages/email.js') }}"></script>
+    <script src="{{ asset('vendor/validate/validate.js') }}"></script>
+    <script src="{{ asset('js/pages/email.js') }}"></script>
 @endsection
