@@ -16,7 +16,7 @@ class CreateSearchesTable extends Migration
         Schema::create('searches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('term')->unique();
+            $table->string('term');
             $table->unsignedInteger('results');
             $table->unsignedInteger('hits')->default(0);
             $table->timestamps();
