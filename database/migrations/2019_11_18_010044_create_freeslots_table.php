@@ -23,6 +23,7 @@ class CreateFreeslotsTable extends Migration
             $table->boolean('is_freeleech')->default(0);
             $table->boolean('is_silver')->default(0);
             $table->boolean('is_doubleup')->default(0);
+            $table->boolean('is_active')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
