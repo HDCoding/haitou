@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class BookmarksController extends Controller
 {
-    public function __construct()
+    protected $request;
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->request = $request;
     }
 
     public function store(Request $request)
@@ -29,9 +32,9 @@ class BookmarksController extends Controller
 
     public function destroy($bookmark_id)
     {
-        $user = auth()->user();
+        $user = $this->request->user();
 
-        $bookmark = Bookmark::findOrFail($bookmark_id);
+        $bookmark = $user->bookmarks()->findOrFail($bookmark_id);
 
         abort_unless($bookmark->user_id == $user->id, 401);
 
@@ -40,39 +43,36 @@ class BookmarksController extends Controller
         return redirect()->back();
     }
 
-    public function actors(Request $request)
+    public function actors()
     {
         //return all logged user bookmarks
-        $user = $request->user();
+        $user = $this->request->user();
 
-        $bookmarks = Bookmark::with('actor:id,name,slug,image')
-            ->where('user_id', '=', $user->id)
+        $bookmarks = $user->bookmarks()->with('actor:id,name,slug,image')
             ->where('actor_id', '!=', null)->paginate(30);
 
-        return view('site.users.bookmarks.actors', compact('bookmarks'));
+        return view('site.bookmarks.actors', compact('bookmarks'));
     }
 
     public function characters(Request $request)
     {
         //return all logged user bookmarks
-        $user = $request->user();
+        $user = $this->request->user();
 
-        $bookmarks = Bookmark::with('character:id,name,slug,image')
-            ->where('user_id', '=', $user->id)
+        $bookmarks = $user->bookmarks()->with('character:id,name,slug,image')
             ->where('character_id', '!=', null)->paginate(30);
 
-        return view('site.users.bookmarks.characters', compact('bookmarks'));
+        return view('site.bookmarks.characters', compact('bookmarks'));
     }
 
     public function medias(Request $request)
     {
         //return all logged user bookmarks
-        $user = $request->user();
+        $user = $this->request->user();
 
-        $bookmarks = Bookmark::with('media:id,name,slug,poster')
-            ->where('user_id', '=', $user->id)
+        $bookmarks = $user->bookmarks()->with('media:id,name,slug,poster')
             ->where('media_id', '!=', null)->paginate(30);
 
-        return view('site.users.bookmarks.medias', compact('bookmarks'));
+        return view('site.bookmarks.medias', compact('bookmarks'));
     }
 }
