@@ -217,7 +217,7 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return empty($this->avatar) ? secure_asset('images/avatar.jpg') : urlencode($this->avatar);
+        return empty($this->avatar) ? asset('images/avatar.jpg') : urlencode($this->avatar);
     }
 
     public function points()
@@ -228,7 +228,7 @@ class User extends Authenticatable
     public function levelImage()
     {
         $level = $this->getLevel();
-        return secure_asset("images/ranks/{$level}.png");
+        return asset("images/ranks/{$level}.png");
     }
 
     public function level()
