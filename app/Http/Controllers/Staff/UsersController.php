@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::with('group:id,name')->select('id', 'group_id', 'name', 'status')->orderBy('name', 'ASC')->get();
+        $users = User::with('group:id,name')->select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();
         $groups = Group::select('id', 'name')->get();
         return view('staff.users.index', compact('users', 'groups'));
     }
