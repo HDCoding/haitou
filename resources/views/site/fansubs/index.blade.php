@@ -6,7 +6,7 @@
 
     <div class="container-fluid flex-grow-1 container-p-y">
 
-        <div class="font-weight-bold py-3 h4">
+        <div class="font-weight-bold py-3 h3">
             <span class="text-muted font-weight-light">Fansubs</span>
         </div>
 
