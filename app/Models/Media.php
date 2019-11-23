@@ -65,6 +65,21 @@ class Media extends Model
         return $this->belongsTo(Studio::class);
     }
 
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function media_casts()
+    {
+        return $this->hasMany(MediaCast::class);
+    }
+
     public function genres()
     {
         return $this->belongsToMany(Genre::class, 'media_genres')->withPivot('id');
@@ -73,6 +88,11 @@ class Media extends Model
     public function ratings()
     {
         return $this->hasMany(Rating::class);
+    }
+
+    public function torrents()
+    {
+        return $this->hasMany(Torrent::class);
     }
 
     public function sluggable()
@@ -84,7 +104,7 @@ class Media extends Model
         ];
     }
 
-    public function getGenre()
+    public function genre()
     {
         $type = $this->media_type;
 
@@ -97,7 +117,7 @@ class Media extends Model
         }
     }
 
-    public function getStatus()
+    public function status()
     {
         $status = $this->status;
 
@@ -111,7 +131,7 @@ class Media extends Model
     }
 
 
-    public function getTrailer()
+    public function trailer()
     {
         $url = $this->yt_video;
 
