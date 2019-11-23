@@ -10,8 +10,8 @@ class CalendarsController extends Controller
 {
     public function index()
     {
-        $calendars = Calendar::with('user:id,name')
-            ->select('id', 'user_id', 'name', 'start_date', 'end_date', 'color', 'is_enabled', 'views', 'created_at')
+        $calendars = Calendar::with('user:id,username')
+            ->select('id', 'user_id', 'username', 'start_date', 'end_date', 'color', 'is_enabled', 'views', 'created_at')
             ->orderBy('id', 'DESC')->get();
         return view('staff.calendars.index', compact('calendars'));
     }
