@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Torrent\UpdateRequest;
 use App\Http\Requests\Torrent\UploadRequest;
 use App\Models\Category;
+use App\Models\Complete;
 use App\Models\Fansub;
 use App\Models\File;
 use App\Models\Log;
@@ -44,7 +45,7 @@ class TorrentsController extends Controller
 
     public function index()
     {
-        $torrents = Torrent::with('user:id,name,slug')
+        $torrents = Torrent::with('user:id,username,slug')
             ->with('fansub:id,name')
             ->with('media:id,name,poster')
             ->select('id', 'uploader_id', 'category_id', 'media_id', 'fansub_id', 'name',
@@ -96,7 +97,7 @@ class TorrentsController extends Controller
             }
 
             $torrent = new Torrent();
-            $torrent->uploader_id = $user->id;
+            $torrent->user_id = $user->id;
             $torrent->category_id = $request->input('category_id');
             $torrent->media_id = $request->input('media_id');
             $torrent->fansub_id = $request->input('fansub_id');
@@ -200,12 +201,12 @@ class TorrentsController extends Controller
         //
     }
 
-    public function download($torrent_id)
+    public function download($torrent_id, Request $request)
     {
-        $user = auth()->user();
+        $user = $request->user();
         $torrent = Torrent::where('id', '=', $torrent_id)->firstOrFail();
 
-        if ($user->getRatio() < $this->setting->setting('low_ratio')) {
+        if ($user->ratio() < setting('low_ratio')) {
             toastr()->warning('Seu ratio esta muito baixo para download!', 'Aviso');
             return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         }
@@ -227,18 +228,18 @@ class TorrentsController extends Controller
         $torrent->increment('downs');
 
         //give points to user
-        $points = $this->setting->setting('points_download');
+        $points = setting('points_download');
         $user->updatePoints($points);
 
         return $this->torrentTool->send($torrent_id, $torrent->name);
     }
 
-    public function thanks($torrent_id)
+    public function thanks($torrent_id, Request $request)
     {
-        $user = auth()->user();
+        $user = $request->user();
         $torrent = Torrent::findOrFail($torrent_id);
 
-        $thanks = $torrent->thanks()->where('torrent_id', '=', $torrent->id)->where('user_id', '=', $user->id)->first();
+        $thanks = $torrent->thanks()->where('user_id', '=', $user->id)->first();
 
         if ($thanks) {
             toastr()->info('Você já agradeceu esse torrent.', 'Info');
@@ -251,7 +252,7 @@ class TorrentsController extends Controller
         $thank->save();
 
         //give points to user
-        $points = $this->setting->setting('points_thanks');
+        $points = setting('points_thanks');
         $user->updatePoints($points);
 
         return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
@@ -262,7 +263,7 @@ class TorrentsController extends Controller
         $user = $request->user();
         $torrent = Torrent::findOrFail($torrent_id);
 
-        $completed = TorrentComplete::where('torrent_id', '=', $torrent->id)->get();
+        $completed = Complete::where('torrent_id', '=', $torrent->id)->get();
 
         if ($torrent->seeders <= 2) {
             // Send Notification
@@ -273,7 +274,7 @@ class TorrentsController extends Controller
             User::find($torrent->uploader_id)->notify(new NewReseedRequestNotification($torrent));
 
             // Activity Log
-            $this->log::novo("Membro {$user->name} solicitou uma solicitação de nova propagação no torrent, ID: {$torrent->id} NOME: {$torrent->name} .");
+            $this->log::record("Membro {$user->name} solicitou uma solicitação de nova propagação no torrent, ID: {$torrent->id} NOME: {$torrent->name}.");
 
             toastr()->success('Uma notificação foi enviada a todos os usuários que baixaram esse torrent junto com o uploader original!', 'Aviso');
             return redirect()->route('torrent', ['id' => $torrent->id, 'slug' => $torrent->slug]);
