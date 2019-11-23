@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('subtitle', 'Requests')
+@section('subtitle', 'Free Slots')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('vendor/c3/c3.css') }}">
@@ -15,13 +15,13 @@
                 Site Points
             </div>
             <div class="card-body">
-                @if($points->is_enabled)
+                @if($freeslot->is_enabled)
                     <h4 class="card-title">Uma vez que o Site Points tiverem
-                        <b class="text-danger">{{ number_format($points->required, 2) }}</b> pontos, o
-                        <b class="text-danger">{{ $points->type() }}</b> estará liberado para todos por
-                        <b class="text-danger">{{ $points->days }}</b> dias.</h4>
+                        <b class="text-danger">{{ number_format($freeslot->required, 2) }}</b> pontos, o
+                        <b class="text-danger">{{ $freeslot->type() }}</b> estará liberado para todos por
+                        <b class="text-danger">{{ $freeslot->days }}</b> dias.</h4>
 
-                    <p class="card-text">Pontos: {{ number_format($points->actual, 2) }} / {{ number_format($points->required, 2) }}</p>
+                    <p class="card-text">Pontos: {{ number_format($freeslot->actual, 2) }} / {{ number_format($freeslot->required, 2) }}</p>
 
                     <div class="demo-vertical-spacing-lg">
                         <div id="c3-gauge" style="height: 300px"></div>
@@ -30,7 +30,7 @@
                     <hr class="border-light container-m--x my-0">
                     @includeIf('errors.errors', [$errors])
                     @include('includes.messages')
-                    {!! Form::open(['url' => 'requests', 'class' => 'mt-4 container col-md-5 col-md-offset-4']) !!}
+                    {!! Form::open(['url' => 'freeslots', 'class' => 'mt-4 container col-md-5 col-md-offset-4']) !!}
                     <div class="form-group row ml-5">
                         {!! Form::label('point', 'Quantia:', ['class' => 'col-form-label col-sm-2 text-sm-right']) !!}
                         <div class="col-sm-4">
@@ -55,7 +55,6 @@
     </div>
 
 @endsection
-
 
 @section('script')
     <script src="{{ asset('vendor/d3/d3.js') }}"></script>
@@ -97,4 +96,3 @@
         });
     </script>
 @endsection
-
