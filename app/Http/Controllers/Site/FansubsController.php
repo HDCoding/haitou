@@ -3,83 +3,33 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fansub;
+use App\Models\FansubUser;
 use Illuminate\Http\Request;
 
-class \FansubsController extends Controller
+class FansubsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $fansubs = Fansub::orderBy('name', 'ASC')->get();
+        return view('site.fansubs.index', compact('fansubs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($fansub_id, $slug)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        //search or fail-404
+        $fansub = Fansub::where('id', '=', $fansub_id)->whereSlug($slug)->firstOrFail();
+        //increment views
+        $fansub->increment('views');
+        //get all members
+        $members = FansubUser::with('user:id,name,slug,avatar')->where('fansub_id', '=', $fansub->id)->get();
+        //get all comments
+        $comments = $fansub->comments()->latest()->paginate(5);
+        //paginate the comments
+        if (request()->ajax()) {
+            return view('includes.comments', compact('comments'));
+        }
+        //return view
+        return view('site.fansubs.fansub', compact('fansub', 'comments', 'members'));
     }
 }
