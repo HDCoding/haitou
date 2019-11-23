@@ -15,8 +15,8 @@ class SearchesController extends Controller
             $search = $request->input('search');
 
             $users = User::with('group:id,name')
-                ->where('name', 'like', '%'.$search.'%')
-                ->select('id', 'name', 'slug', 'avatar')
+                ->where('username', 'like', '%'.$search.'%')
+                ->select('id', 'username', 'slug', 'avatar')
                 ->where('status', '!=', 0)
                 ->paginate(30);
 
