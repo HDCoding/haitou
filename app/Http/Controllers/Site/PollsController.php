@@ -3,83 +3,76 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Poll;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 
-class \PollsController extends Controller
+class PollsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
-        //
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($poll_id, $slug)
     {
-        //
+        $user = auth()->user();
+
+        $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->firstOrFail();
+
+        $totalVotes = $poll->totalVotes();
+
+        $voted = $poll->hasVoted($user->id);
+
+        return view('site.polls.poll', compact('poll', 'totalVotes', 'voted'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function vote(Request $request)
     {
-        //
+        $poll_id = $request->input('poll_id');
+
+        $user = $request->user();
+
+        $poll = Poll::findOrFail($poll_id);
+
+        if ($poll->hasVoted($user->id)) {
+            return redirect()->route('poll.show', [$poll->id, $poll->slug])->withErrors(['Você já votou nessa pesquisa.']);
+        }
+
+        $options = $request->input('option');
+        if (is_array($options)) {
+            foreach ($options as $key => $option) {
+                Vote::create([
+                    'poll_id' => $poll->id,
+                    'option_id' => $option,
+                    'user_id' => $user->id
+                ]);
+            }
+        } else {
+            Vote::create([
+                'poll_id' => $poll->id,
+                'option_id' => $options,
+                'user_id' => $user->id
+            ]);
+        }
+
+        return redirect()->route('poll.results', [$poll->id, $poll->slug]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function result($poll_id, $slug)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $poll = Poll::findOrFail($poll_id)->whereSlug($slug);
+        $totalVotes = $poll->totalVotes();
+        return view('site.polls.result', compact('poll', 'totalVotes'));
     }
 }
