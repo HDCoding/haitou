@@ -13,7 +13,7 @@ class FreeSlotsController extends Controller
     public function index()
     {
         $freeslots = Freeslot::all();
-        return view('staff.requests.index', compact('freeslots'));
+        return view('staff.freeslots.index', compact('freeslots'));
     }
 
     public function update(FreeSlotsRequest $request, $request_id)
@@ -37,7 +37,7 @@ class FreeSlotsController extends Controller
         $sitepot->update();
 
         toastr()->info('Request atulizado.', 'Sucesso');
-        return redirect()->to('staff/requests');
+        return redirect()->to('staff/freeslots');
     }
 
     public function enableDisable()
@@ -55,6 +55,6 @@ class FreeSlotsController extends Controller
         DB::table('request_points')->truncate();
 
         toastr()->warning('Request Ativado/Desativado.', 'Aviso');
-        return redirect()->to('staff/requests');
+        return redirect()->to('staff/freeslots');
     }
 }
