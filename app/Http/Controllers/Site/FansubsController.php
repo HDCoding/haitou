@@ -11,7 +11,7 @@ class FansubsController extends Controller
 {
     public function index()
     {
-        $fansubs = Fansub::orderBy('name', 'ASC')->get();
+        $fansubs = Fansub::select('id', 'name', 'slug', 'logo')->orderBy('name', 'ASC')->get();
         return view('site.fansubs.index', compact('fansubs'));
     }
 
