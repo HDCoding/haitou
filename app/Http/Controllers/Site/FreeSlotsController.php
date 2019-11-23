@@ -14,12 +14,11 @@ class FreeSlotsController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
-        $points = Freeslot::find(1);
-        $percent = $points->percent();
-        return view('site.freeslots.index', compact('points', 'percent'));
+        $freeslot = Freeslot::all()->where('is_active', '=', true)->last();
+        $percent = $freeslot->percent();
+        return view('site.freeslots.index', compact('freeslot', 'percent'));
     }
 
     public function store(FreeSlotRequest $request)
