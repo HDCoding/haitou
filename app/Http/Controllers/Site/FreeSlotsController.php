@@ -12,8 +12,8 @@ class FreeSlotsController extends Controller
     public function index()
     {
         $points = Freeslot::find(1);
-        $percent = $points->getPercent();
-        return view('site.requests.index', compact('points', 'percent'));
+        $percent = $points->percent();
+        return view('site.freeslots.index', compact('points', 'percent'));
     }
 
     public function store(FreeSlotRequest $request)
@@ -34,10 +34,10 @@ class FreeSlotsController extends Controller
 
         } else {
             toastr()->warning('Infelizmente você não possui pontos suficientes para doar!');
-            return redirect()->to('requests');
+            return redirect()->to('freeslots');
         }
 
         toastr()->info('Doação realizada com sucesso! Agradecemos sua ajuda!');
-        return redirect()->to('requests');
+        return redirect()->to('freeslots');
     }
 }
