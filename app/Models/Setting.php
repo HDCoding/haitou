@@ -19,25 +19,9 @@ class Setting extends Model
         'value'
     ];
 
-    public function __construct(BBCode $bbcode)
+    public function contentHtml()
     {
-        parent::__construct();
-        $this->bbcode = $bbcode;
-    }
-
-    public function termsHtml()
-    {
-        return $this->bbcode->parse($this->terms, true);
-    }
-
-    public function privacyHtml()
-    {
-        return $this->bbcode->parse($this->privacy, true);
-    }
-
-    public function disclaimerHtml()
-    {
-        return $this->bbcode->parse($this->disclaimer, true);
+        return (new BBCode())->parse($this->value, true);
     }
 
     public function setting(string $value)
