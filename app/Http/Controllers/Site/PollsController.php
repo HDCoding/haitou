@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 
 class PollsController extends Controller
 {
-    public function __construct()
+    protected $request;
+
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
+        $this->request = $request;
     }
 
     public function index()
@@ -31,15 +34,16 @@ class PollsController extends Controller
 
     public function show($poll_id, $slug)
     {
-        $user = auth()->user();
-
         $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->firstOrFail();
 
-        $totalVotes = $poll->totalVotes();
+        $user = $this->request->user();
 
-        $voted = $poll->hasVoted($user->id);
+        if ($poll->hasVoted($user->id)) {
+            toastr()->info('Você já votou nesta enquete. Aqui estão os resultados.', 'Enquete');
+            return redirect()->route('poll.results', ['id' => $poll->id, 'slug' => $poll->slug]);
+        }
 
-        return view('site.polls.poll', compact('poll', 'totalVotes', 'voted'));
+        return view('site.polls.poll', compact('poll'));
     }
 
     public function vote(Request $request)
@@ -51,7 +55,8 @@ class PollsController extends Controller
         $poll = Poll::findOrFail($poll_id);
 
         if ($poll->hasVoted($user->id)) {
-            return redirect()->route('poll.show', [$poll->id, $poll->slug])->withErrors(['Você já votou nessa pesquisa.']);
+            toastr()->info('Você já votou nesta enquete. Aqui estão os resultados.', 'Enquete');
+            return redirect()->route('poll.results', ['id' => $poll->id, 'slug' => $poll->slug]);
         }
 
         $options = $request->input('option');
@@ -71,6 +76,7 @@ class PollsController extends Controller
             ]);
         }
 
+        toastr()->info('O seu voto foi contado.', 'Enquete');
         return redirect()->route('poll.results', [$poll->id, $poll->slug]);
     }
 
