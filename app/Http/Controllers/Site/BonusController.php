@@ -28,7 +28,7 @@ class BonusController extends Controller
     public function index()
     {
         $points = Bonus::where('is_enabled', '=', true)->get();
-        $members = User::select('id', 'name')->get()->pluck('name', 'id');
+        $members = User::select('id', 'username')->get()->pluck('username', 'id');
 
         return view('site.bonus.index', compact('points', 'members'));
     }
