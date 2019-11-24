@@ -40,9 +40,6 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('staff') }}">@lang('dashboard.title')</a>
             </li>
-            <li class="breadcrumb-item">
-                <a href="{{ url('staff/icons') }}">@lang('dashboard.icons')</a>
-            </li>
             <li class="breadcrumb-item active">Ionicons</li>
         </ol>
     </div>
