@@ -338,7 +338,7 @@
                     </div>
 {{--                @endif--}}
                     <div class="col-md-3 col-lg-3">
-                        <a href="{{ url('staff/icons') }}">
+                        <a href="{{ url('staff/icon/fontawesome') }}">
                             <img src="{{ asset('images/staff/icons.png') }}" alt="@lang('dashboard.icons')">
                         </a>
                         <h5 class="mt-2">@lang('dashboard.icons')</h5>
