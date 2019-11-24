@@ -268,7 +268,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Genres
             Route::resource('genres', 'GenresController')->except(['create', 'show', 'edit']);
             //Icons
-            Route::get('icons', 'IconsController@fontawesome')->name('staff.icons');
+            Route::get('icon/fontawesome', 'IconsController@fontawesome')->name('staff.icons.fontawesome');
             Route::get('icon/ionicons', 'IconsController@ionicons')->name('staff.icons.ionicons');
             Route::get('icon/linearicons', 'IconsController@linearicons')->name('staff.icons.linearicons');
             Route::get('icon/open-iconic', 'IconsController@openIconic')->name('staff.icons.open-iconic');
