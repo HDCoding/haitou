@@ -50,7 +50,7 @@
                         </td>
                         <td>{{ $media->category->name }}</td>
                         <td class="">{{ $media->name }}</td>
-                        <td>{!! $media->getGenre() !!}</td>
+                        <td>{!! $media->genre() !!}</td>
                         <td>
                             <span class="badge badge-info">{{ $media->views }}</span>
                         </td>
