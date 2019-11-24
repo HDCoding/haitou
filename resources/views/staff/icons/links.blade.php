@@ -1,6 +1,6 @@
 <ul class="nav container-m-nx bg-lighter container-p-x mb-4">
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('staff/icons') ? 'text-body font-weight-bold pl-0' : 'text-muted' }}" href="{{ url('staff/icons') }}">
+        <a class="nav-link {{ request()->is('staff/icon/fontawesome') ? 'text-body font-weight-bold pl-0' : 'text-muted' }}" href="{{ url('staff/icon/fontawesome') }}">
             <span class="fab fa-font-awesome-flag"></span>
             Font Awesome 5
         </a>
