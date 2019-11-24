@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('subtitle', trans('dashboard.requests'))
+@section('subtitle', trans('dashboard.freeslots'))
 
 @section('content')
 
@@ -10,7 +10,7 @@
             <li class="breadcrumb-item">
                 <a href="{{ url('staff') }}">@lang('dashboard.title')</a>
             </li>
-            <li class="breadcrumb-item active">@lang('dashboard.requests')</li>
+            <li class="breadcrumb-item active">@lang('dashboard.freeslots')</li>
         </ol>
     </div>
 
@@ -18,26 +18,26 @@
 
     <div class="card mb-4">
         <div class="card-header with-elements">
-            <span class="card-header-title mr-2">@lang('dashboard.requests')</span>
+            <span class="card-header-title mr-2">@lang('dashboard.freeslots')</span>
             <div class="card-header-elements ml-md-auto">
-                @if($freeslots->is_enabled)
-                    {!! Form::open(['url' => 'staff/request/enableDisable']) !!}
+{{--                @if($freeslots->is_enabled)--}}
+                    {!! Form::open(['url' => 'staff/freeslots/enableDisable']) !!}
                     <button type="submit" class="btn btn-xs btn-outline-danger">
                         <span class="ion ion-md-arrow-down"></span> Desativar
                     </button>
                     {!! Form::close() !!}
-                @else
-                    {!! Form::open(['url' => 'staff/request/enableDisable']) !!}
+{{--                @else--}}
+                    {!! Form::open(['url' => 'staff/freeslots/enableDisable']) !!}
                     <button type="submit" class="btn btn-xs btn-outline-primary">
                         <span class="ion ion-md-arrow-up"></span> Ativar
                     </button>
                     {!! Form::close() !!}
-                @endif
+{{--                @endif--}}
             </div>
         </div>
         <div class="card-body">
             @includeIf('errors.errors', [$errors])
-            @if($request->is_enabled)
+{{--            @if($request->is_enabled)--}}
                 <div class="col-xs-12 push-15">
                     <div class="push-5">
                         <div class="pull-right">2.000.000.000 &bullet;</div>
@@ -47,15 +47,15 @@
                         <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                     </div>
                 </div>
-                {!! Form::model($request, ['url' => ['staff/requests', $request->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['url' => ['staff/freeslots'], 'class' => 'form-horizontal']) !!}
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="form-label">Necessário</label>
-                        {!! Form::number('required', $request->required, ['class' => 'form-control', 'required', 'min' => 1000, 'max' => 2000000000]) !!}
+                        {!! Form::number('required', null, ['class' => 'form-control', 'required', 'min' => 1000, 'max' => 2000000000]) !!}
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label">Atual</label>
-                        {!! Form::number('actual', $request->actual, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                        {!! Form::number('actual', null, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                     </div>
                 </div>
                 <hr>
@@ -71,7 +71,7 @@
 
                 <div class="form-group">
                     <label class="form-label">Dias</label>
-                    {!! Form::number('days', $request->days, ['class' => 'form-control', 'required', 'min' => 1, 'max' => 125]) !!}
+                    {!! Form::number('days', null, ['class' => 'form-control', 'required', 'min' => 1, 'max' => 125]) !!}
                 </div>
 
                 <div class="col-xs-12 push-15">
@@ -85,15 +85,15 @@
                 <div class="form-group form-inline row mt-2">
                 {{--<div class="col-sm-2">--}}
                     <label class="custom-control custom-checkbox ml-3 mr-5">
-                        {!! Form::checkbox('is_freeleech', 1, $request->is_freeleech, ['class' => 'custom-control-input']) !!}
+                        {!! Form::checkbox('is_freeleech', 1, null, ['class' => 'custom-control-input']) !!}
                         <span class="custom-control-label">Freeleech?</span>
                     </label>
                     <label class="custom-control custom-checkbox mr-5">
-                        {!! Form::checkbox('is_silver', 1, $request->is_silver, ['class' => 'custom-control-input']) !!}
+                        {!! Form::checkbox('is_silver', 1, null, ['class' => 'custom-control-input']) !!}
                         <span class="custom-control-label">Silver?</span>
                     </label>
                     <label class="custom-control custom-checkbox">
-                        {!! Form::checkbox('is_doubleup', 1, $request->is_doubleup, ['class' => 'custom-control-input']) !!}
+                        {!! Form::checkbox('is_doubleup', 1, null, ['class' => 'custom-control-input']) !!}
                         <span class="custom-control-label">Double UP?</span>
                     </label>
                 {{--</div>--}}
@@ -101,9 +101,9 @@
 
                 {!! Form::submit('Atualizar', ['class' => 'btn btn-success btn-rounded btn-outline mt-4']) !!}
                 {!! Form::close() !!}
-            @else
+{{--            @else--}}
                 <p class="text-center"><b>Desativado no momento.</b></p>
-            @endif
+{{--            @endif--}}
         </div>
     </div>
 
