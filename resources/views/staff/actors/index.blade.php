@@ -19,16 +19,16 @@
 
     <hr class="container-m-nx border-light mt-0 mb-5">
 
+{{--    <div class="card-header-elements">--}}
+{{--        <a href="{{ url('staff/actors/create') }}">--}}
+{{--            <button type="button" class="btn btn-xs btn-outline-primary">--}}
+{{--                <span class="ion ion-md-add"></span> Adicionar--}}
+{{--            </button>--}}
+{{--        </a>--}}
+{{--    </div>--}}
+
     <div class="card">
-        <div class="card-header with-elements">
-            <div class="card-header-elements">
-                <a href="{{ url('staff/actors/create') }}">
-                    <button type="button" class="btn btn-xs btn-outline-primary">
-                        <span class="ion ion-md-add"></span> Adicionar
-                    </button>
-                </a>
-            </div>
-        </div>
+        <h6 class="card-header">@lang('dashboard.actors')</h6>
         <div class="card-datatable table-responsive">
             <table class="table table-striped table-bordered data-table">
                 <thead>

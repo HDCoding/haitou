@@ -21,7 +21,6 @@
 
 @endsection
 
-
 @section('script')
     <!-- VegasJS -->
     <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
