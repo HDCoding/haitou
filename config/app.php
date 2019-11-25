@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'installed' => env('APP_INSTALLED', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -175,6 +177,7 @@ return [
         HDCoding\Coders\CodersServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\EmailBlacklistServiceProvider::class,
+        Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -243,6 +246,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'BBCode' => App\Helpers\BBCode::class,
         'Toastr'  => App\Facades\ToastrFacade::class,
+        'DotenvEditor' => Jackiedo\DotenvEditor\Facades\DotenvEditor::class,
     ],
 
 ];
