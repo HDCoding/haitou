@@ -1,7 +1,5 @@
-@extends('layouts.indexes')
+index
 
-@section('content')
+<example-component></example-component>
 
-    <example-component></example-component>
-
-@endsection
+<div id="app"></div>
