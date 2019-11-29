@@ -15,6 +15,7 @@ class Chatbox extends Model
 
 	protected $fillable = [
 		'user_id',
+        'username',
 		'message',
 		'mentions'
 	];

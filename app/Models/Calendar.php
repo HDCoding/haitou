@@ -28,6 +28,7 @@ class Calendar extends Model
 
     protected $fillable = [
         'user_id',
+        'username',
         'name',
         'slug',
         'description',

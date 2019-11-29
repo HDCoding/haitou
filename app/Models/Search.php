@@ -17,6 +17,7 @@ class Search extends Model
 
     protected $fillable = [
         'user_id',
+        'username',
         'term',
         'results',
         'hits'

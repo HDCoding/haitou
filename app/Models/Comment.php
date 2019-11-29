@@ -31,6 +31,7 @@ class Comment extends Model
         'media_id',
         'studio_id',
         'torrent_id',
+        'username',
         'content',
         'is_spoiler'
     ];

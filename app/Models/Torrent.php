@@ -38,6 +38,7 @@ class Torrent extends Model
         'category_id',
         'media_id',
         'fansub_id',
+        'username',
         'info_hash',
         'name',
         'slug',
