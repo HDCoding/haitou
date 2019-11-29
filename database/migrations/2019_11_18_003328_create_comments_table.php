@@ -23,6 +23,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('media_id')->index()->nullable();
             $table->unsignedBigInteger('studio_id')->index()->nullable();
             $table->unsignedBigInteger('torrent_id')->index()->nullable();
+            $table->string('username', 25);
             $table->text('content');
             $table->boolean('is_spoiler')->default(0);
             $table->timestamps();

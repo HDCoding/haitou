@@ -16,6 +16,7 @@ class CreateChatboxTable extends Migration
         Schema::create('chatbox', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
+            $table->string('username', 25);
             $table->text('message');
             $table->text('mentions')->nullable();
             $table->timestamps();

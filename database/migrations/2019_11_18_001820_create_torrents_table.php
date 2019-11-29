@@ -19,6 +19,7 @@ class CreateTorrentsTable extends Migration
             $table->unsignedBigInteger('category_id')->index();
             $table->unsignedBigInteger('media_id')->index();
             $table->unsignedBigInteger('fansub_id')->index();
+            $table->string('username', 25);
             $table->string('info_hash', 45);
             $table->string('name');
             $table->string('slug');
