@@ -86,22 +86,6 @@
             <!-- ============================================================== -->
             <ul class="navbar-nav float-right">
                 <!-- ============================================================== -->
-                <!-- create new -->
-                <!-- ============================================================== -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="flag-icon flag-icon-us"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right  animated bounceInDown"
-                         aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>
-                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>
-                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a>
-                        <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> German</a>
-                    </div>
-                </li>
-                <!-- ============================================================== -->
                 <!-- Comment -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">

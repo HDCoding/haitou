@@ -11,6 +11,12 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
     <title>Site :: @yield('title')</title>
+    <!-- Icon fonts -->
+    <link rel="stylesheet" href="{{ secure_asset('fonts/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('fonts/ionicons.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('fonts/linearicons.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('fonts/open-iconic.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('fonts/pe-icon-7-stroke.css') }}">
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -38,7 +44,7 @@
 <div id="main-wrapper">
     @include('includes.dashboard-navbar')
 
-    @include('includes.dashboard-left-sidenav')
+    @include('includes.dashboard-left')
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
@@ -52,7 +58,7 @@
 
 </div>
 
-@include('includes.dashboard-right-sidenav')
+@include('includes.dashboard-right')
 
 <div class="chat-windows"></div>
 
