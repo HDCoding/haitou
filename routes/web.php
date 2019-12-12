@@ -71,7 +71,7 @@ Route::namespace('Site')->group(function () {
         Route::get('fansubs', 'FansubsController@index')->name('site.fansubs');
         Route::get('fansub/{id}.{slug}', 'FansubsController@show')->name('fansub.show');
         //Faqs
-        Route::get('faqs', 'FaqsController@index')->name('site.faqs');
+        Route::get('faq', 'FaqsController@index')->name('site.faq');
         //Forum
         Route::prefix('forum')->group(function () {
             //Forum main page
@@ -138,9 +138,9 @@ Route::namespace('Site')->group(function () {
         Route::get('notification/destroyall', 'NotificationsController@destroyAll')->name('notifications.destroyall');
         //Polls
         Route::prefix('poll')->group(function () {
-            Route::get('{id}.{slug}', 'PollsController@show')->name('poll.show');
-            Route::post('{id}.{slug}', 'PollsController@vote')->name('poll.vote');
-            Route::get('{id}.{slug}/result', 'PollsController@result')->name('poll.results');
+            Route::get('{id}.{slug}', 'PollsController@show')->name('site.poll.show');
+            Route::post('{id}.{slug}', 'PollsController@vote')->name('site.poll.vote');
+            Route::get('{id}.{slug}/result', 'PollsController@result')->name('site.poll.results');
         });
         //Reports
         Route::prefix('report')->group(function () {
@@ -255,9 +255,9 @@ Route::namespace('Site')->group(function () {
             //Fansubs
             Route::resource('fansubs', 'FansubsController')->except(['show']);
             //Fansub members
-            Route::get('fansub/{id}/members', 'FansubUsersController@members');
-            Route::post('fansub/addmembers', 'FansubUsersController@addMembers');
-            Route::delete('fansub/{member_id}/delmembers', 'FansubUsersController@delMembers');
+            Route::get('fansub/{id}/members', 'FansubsController@members');
+            Route::post('fansub/addmembers', 'FansubsController@addMembers');
+            Route::delete('fansub/{member_id}/delmembers', 'FansubsController@delMembers');
             //Faqs
             Route::resource('faqs', 'FaqsController');
             Route::put('faq/{id}/update', 'FaqsController@enableDisable');
@@ -272,12 +272,14 @@ Route::namespace('Site')->group(function () {
             Route::post('forum/{id}/editmod', 'ForumsController@postEditMod')->name('forum.editmod');
             //Genres
             Route::resource('genres', 'GenresController')->except(['create', 'show', 'edit']);
+            //Groups
+            Route::resource('groups', 'GroupsController')->except(['show']);
             //Icons
             Route::get('icon/fontawesome', 'IconsController@fontawesome')->name('staff.icons.fontawesome');
             Route::get('icon/ionicons', 'IconsController@ionicons')->name('staff.icons.ionicons');
             Route::get('icon/linearicons', 'IconsController@linearicons')->name('staff.icons.linearicons');
-            Route::get('icon/open-iconic', 'IconsController@openIconic')->name('staff.icons.open-iconic');
-            Route::get('icon/stroke-icons-7', 'IconsController@peIcon7Stroke')->name('staff.icons.stroke-icons-7');
+            Route::get('icon/openiconic', 'IconsController@openiconic')->name('staff.icons.open-iconic');
+            Route::get('icon/strokeicons', 'IconsController@strokeicons')->name('staff.icons.stroke-icons-7');
             //Logs
             //Route::get('logs', 'LogsController@index')->name('staff.logs');
             //Lotteries
@@ -302,11 +304,9 @@ Route::namespace('Site')->group(function () {
             Route::post('poll/options/remove', 'PollsController@postRemoveOptions');
             //Reports
             Route::resource('reports', 'ReportsController')->only(['index', 'show', 'update']);
-            //Requests
+            //Freeslots
             Route::resource('freeslots', 'FreeSlotsController')->only(['index', 'update']);
             Route::post('freeslots/enableDisable', 'FreeSlotsController@enableDisable');
-            //Roles
-            Route::resource('groups', 'GroupsController')->except(['show']);
             //Rules
             Route::resource('rules', 'RulesController')->except(['show']);
             //Settings
