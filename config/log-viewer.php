@@ -53,7 +53,7 @@ return [
         'attributes' => [
             'prefix'     => 'staff/logs',
             'namespace'  => ['Staff'],
-            'middleware' => ['web', 'auth', 'logs_mod'],
+            'middleware' => ['web'],
         ],
     ],
 
