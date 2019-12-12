@@ -31,11 +31,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-header">Suspender - {{ $user->name }}</h4>
+                        <h4 class="card-title">Suspender - {{ $user->username }}</h4>
                         <div class="block">
                             <div class="block-content">
                                 <div class="block-header">
-                                    <p class="text-center">Você tem certeza que deseja Suspender: <b>{{ $user->name }}</b>?</p>
+                                    <p class="text-center">Você tem certeza que deseja Suspender: <b>{{ $user->username }}</b>?</p>
                                     <p class="text-center">Depois da data de expiração o usuário poderá voltar a logar no site.</p>
                                 </div>
 
