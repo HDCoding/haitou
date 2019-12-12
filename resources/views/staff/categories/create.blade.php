@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- minicolors -->
-    <link href="{{ asset('vendor/minicolors/minicolors.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             {!! Form::label('color', 'Cor: (Opcional)') !!}
-                            {!! Form::text('color', null, ['class' => 'form-control', 'id' => 'minicolors']) !!}
+                            {!! Form::text('color', '#251cad', ['class' => 'form-control minicolors']) !!}
                         </div>
 
                         <div class="form-group">
@@ -59,7 +59,7 @@
                             ], null, ['class' => 'custom-select form-control', 'required']) !!}
                         </div>
                         <br>
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-success btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -71,13 +71,14 @@
 
 @section('scripts')
     <!-- minicolors -->
-    <script src="{{ asset('vendor/minicolors/minicolors.js') }}"></script>
+    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
 
     <!-- minicolors -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $('#minicolors').minicolors({
+        $('.minicolors').minicolors({
             control:  'saturation',
-            position: 'bottom right'
+            position: 'bottom right',
+            theme: 'bootstrap'
         });
     </script>
 @endsection
