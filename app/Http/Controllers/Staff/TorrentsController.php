@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Fansub;
 use App\Models\Media;
 use App\Models\Torrent;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TorrentsController extends Controller
