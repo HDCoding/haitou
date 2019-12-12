@@ -38,8 +38,7 @@
                             </button>
                         </a>
                         @includeIf('errors.errors', [$errors])
-                        <hr>
-                        <div class="table-responsive m-t-40">
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -57,7 +56,7 @@
                                         <td>{{ !empty($cast->character->name) ? $cast->character->name : '' }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('cast-del-{{ $cast->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover cast"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="javascript:;" onclick="document.getElementById('cast-del-{{ $cast->id }}').submit();" data-toggle="tooltip" title="Remover cast"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/media/cast/' . $cast->id .'/delete', 'method' => 'DELETE', 'id' => 'cast-del-' . $cast->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
