@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Conquistas')
+@section('title', 'Adicionar')
 
 @section('content')
 
@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Adicionar</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::open(['url' => 'staff/actors', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['url' => 'staff/actors', 'files' => true, 'class' => 'form-horizontal']) !!}
                         @include('staff.actors.form', ['submitButton' => 'Adicionar'])
                         {!! Form::close() !!}
                     </div>
