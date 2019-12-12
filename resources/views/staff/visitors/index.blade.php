@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Conquistas')
+@section('title', trans('dashboard.visitors'))
 
 @section('content')
 
