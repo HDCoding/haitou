@@ -17,13 +17,14 @@ class CreateFansubUsersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('fansub_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('username', 25);
+            $table->string('username', 25)->nullable();
             $table->string('job', 45);
             $table->boolean('is_admin')->default(0);
             $table->timestamps();
 
             $table->foreign('fansub_id')->references('id')->on('fansubs')
                 ->onUpdate('cascade')->onDelete('cascade');
+
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
