@@ -49,7 +49,7 @@
                 <div class="card">
                     <div class="card-header">
                         <a class="text-body" data-toggle="collapse" href="#note-{{ $note->id }}">
-                            {{ $note->created_at->format('d/m/Y') }} || Por {{ $note->staff->name }}
+                            {{ format_date($note->created_at) }} || Por {{ $note->staff->username }}
                         </a>
                     </div>
 
