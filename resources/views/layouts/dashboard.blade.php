@@ -12,11 +12,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
     <title>Site :: @yield('title')</title>
     <!-- Icon fonts -->
-    <link rel="stylesheet" href="{{ secure_asset('fonts/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('fonts/ionicons.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('fonts/linearicons.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('fonts/open-iconic.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('fonts/pe-icon-7-stroke.css') }}">
+    <link href="{{ asset('fonts/fontawesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('fonts/ionicons.css') }}" rel="stylesheet">
+    <link href="{{ asset('fonts/linearicons.css') }}" rel="stylesheet">
+    <link href="{{ asset('fonts/open-iconic.css') }}" rel="stylesheet">
+    <link href="{{ asset('fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
+    <!-- Icon fonts -->
+    <link href="{{ asset('vendor/toastr/build/toastr.min.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -80,9 +82,9 @@
 <script src="{{ asset('js/sidebarmenu.js') }}"></script>
 <!--Custom JavaScript -->
 <script src="{{ asset('js/custom.min.js') }}"></script>
-
+@yield('scripts')
 <!-- Toastr -->
-<script src="{{ asset('vendor/toastr/toastr.js') }}"></script>
+<script src="{{ asset('vendor/toastr/build/toastr.min.js') }}"></script>
 <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
     {!! toastr()->message() !!}
 </script>
@@ -91,8 +93,6 @@
 <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
     $('[data-toggle="tooltip"]').tooltip();
 </script>
-
-@yield('scripts')
 
 </body>
 </html>
