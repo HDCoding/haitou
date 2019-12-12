@@ -17,7 +17,7 @@ class ForumsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -35,32 +35,32 @@ class ForumsController extends Controller
             return redirect()->to('staff/forums');
         } else {
             $categories = Category::all()->where('is_forum', '=', true)->pluck('name', 'id');
-            $roles = Group::select('id', 'name')->get();
-            return view('staff.forums.create', compact('categories', 'roles'));
+            $groups = Group::select('id', 'name')->get();
+            return view('staff.forums.create', compact('categories', 'groups'));
         }
     }
 
     public function store(ForumsRequest $request)
     {
-        $roles = Group::all();
+        $groups = Group::all();
 
         $forum = new Forum($request->except('_token'));
         $forum->save();
 
         //Permissions
-        foreach ($roles as $key => $role) {
-            $perm = Permission::whereRaw('forum_id = ? AND role_id = ?', [$forum->id, $role->id])->first();
+        foreach ($groups as $key => $group) {
+            $perm = Permission::whereRaw('forum_id = ? AND group_id = ?', [$forum->id, $group->id])->first();
             if (!$perm) {
                 $perm = new Permission();
             }
             $perm->forum_id = $forum->id;
-            $perm->role_id = $role->id;
+            $perm->group_id = $group->id;
 
-            if (array_key_exists($role->id, $request->input('permissions'))) {
-                $perm->view_forum = (isset($request->input('permissions')[$role->id]['view_forum'])) ? true : false;
-                $perm->read_topic = (isset($request->input('permissions')[$role->id]['read_topic'])) ? true : false;
-                $perm->reply_topic = (isset($request->input('permissions')[$role->id]['reply_topic'])) ? true : false;
-                $perm->start_topic = (isset($request->input('permissions')[$role->id]['start_topic'])) ? true : false;
+            if (array_key_exists($group->id, $request->input('permissions'))) {
+                $perm->view_forum = (isset($request->input('permissions')[$group->id]['view_forum'])) ? true : false;
+                $perm->read_topic = (isset($request->input('permissions')[$group->id]['read_topic'])) ? true : false;
+                $perm->reply_topic = (isset($request->input('permissions')[$group->id]['reply_topic'])) ? true : false;
+                $perm->start_topic = (isset($request->input('permissions')[$group->id]['start_topic'])) ? true : false;
             } else {
                 $perm->view_forum = false;
                 $perm->read_topic = false;
@@ -78,31 +78,31 @@ class ForumsController extends Controller
     {
         $forum = Forum::findOrFail($forum_id);
         $categories = Category::all()->where('is_forum', '=', true)->pluck('name', 'id');
-        $roles = Group::select('id', 'name')->get();
-        return view('staff.forums.edit', compact('forum', 'categories', 'roles'));
+        $groups = Group::select('id', 'name')->get();
+        return view('staff.forums.edit', compact('forum', 'categories', 'groups'));
     }
 
     public function update(ForumsRequest $request, $forum_id)
     {
-        $roles = Group::all();
+        $groups = Group::all();
 
         $forum = Forum::findOrFail($forum_id);
         $forum->update($request->except('_token'));
 
         // Permissions
-        foreach ($roles as $key => $role) {
-            $perm = ForumPermission::whereRaw('forum_id = ? AND role_id = ?', [$forum->id, $role->id])->first();
+        foreach ($groups as $key => $group) {
+            $perm = Permission::whereRaw('forum_id = ? AND group_id = ?', [$forum->id, $group->id])->first();
             if ($perm == null) {
                 $perm = new Permission();
             }
             $perm->forum_id = $forum->id;
-            $perm->role_id = $role->id;
+            $perm->group_id = $group->id;
 
-            if (array_key_exists($role->id, $request->input('permissions'))) {
-                $perm->view_forum = (isset($request->input('permissions')[$role->id]['view_forum'])) ? true : false;
-                $perm->read_topic = (isset($request->input('permissions')[$role->id]['read_topic'])) ? true : false;
-                $perm->reply_topic = (isset($request->input('permissions')[$role->id]['reply_topic'])) ? true : false;
-                $perm->start_topic = (isset($request->input('permissions')[$role->id]['start_topic'])) ? true : false;
+            if (array_key_exists($group->id, $request->input('permissions'))) {
+                $perm->view_forum = (isset($request->input('permissions')[$group->id]['view_forum'])) ? true : false;
+                $perm->read_topic = (isset($request->input('permissions')[$group->id]['read_topic'])) ? true : false;
+                $perm->reply_topic = (isset($request->input('permissions')[$group->id]['reply_topic'])) ? true : false;
+                $perm->start_topic = (isset($request->input('permissions')[$group->id]['start_topic'])) ? true : false;
             } else {
                 $perm->view_forum = false;
                 $perm->read_topic = false;
@@ -137,14 +137,24 @@ class ForumsController extends Controller
     public function formAddMod($forum_id)
     {
         $forum = Forum::find($forum_id);
-        $members = User::where('status', '=', 1)->select('id', 'name')->pluck('name', 'id');
+        $members = User::where('status', '=', 1)->select('id', 'username')->pluck('username', 'id');
         return view('staff.forums.mod.create', compact('members', 'forum'));
     }
 
     public function postAddMod(Request $request, $forum_id)
     {
         $forum = Forum::find($forum_id);
-        $forum->moderators()->attach($request->input('staff_id'));
+
+        $userId = $request->input('user_id');
+
+        foreach ($userId as $user) {
+            $forum->moderators()->create([
+                'forum_id' => $forum_id,
+                'user_id' => $user,
+                'username' => User::where('id', '=', $user)->select('username')->pluck('username'),
+            ]);
+        }
+
         toastr()->info('Moderadores adicionado.', 'Aviso');
         return redirect()->to('staff/forums');
     }
@@ -152,9 +162,9 @@ class ForumsController extends Controller
     public function formEditMod($forum_id)
     {
         $forum = Forum::find($forum_id);
-        $members = User::where('status', '=', 1)->select('id', 'name')->pluck('name', 'id');
+        $members = User::where('status', '=', 1)->select('id', 'username')->pluck('username', 'id');
         $mod = Moderator::all()->where('forum_id', '=', $forum->id)->pluck('staff_id');
-        return view('staff.forums.mod.edit', compact('members', 'forum', 'mod'));
+        return view('staff.forums.mod.remove', compact('members', 'forum', 'mod'));
     }
 
     public function postEditMod(Request $request, $forum_id)
