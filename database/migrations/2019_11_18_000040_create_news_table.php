@@ -20,7 +20,6 @@ class CreateNewsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->integer('views')->default(0);
-            $table->boolean('is_published')->default(0);
             $table->softDeletes();
             $table->timestamps();
 
