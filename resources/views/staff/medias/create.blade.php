@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- select2 -->
-    <link href="{{ asset('vendor/select2/select2.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <!-- DatePicker -->
-    <link href="{{ asset('vendor/bootstrap-datepicker/bootstrap-datepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
     <!-- sceditor -->
     <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
 @endsection
@@ -155,10 +155,10 @@
 
 @section('scripts')
     <!-- Select2 -->
-    <script src="{{ asset('vendor/select2/select2.js') }}"></script>
+    <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
     <!-- DatePicker -->
-    <script src="{{ asset('vendor/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
