@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::model($character, ['url' => 'staff/characters/' . $character->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($character, ['url' => 'staff/characters/' . $character->id, 'method' => 'PUT', 'files' => true, 'class' => 'form-horizontal']) !!}
                         @include('staff.characters.form', ['submitButton' => 'Editar'])
                         {!! Form::close() !!}
                     </div>
