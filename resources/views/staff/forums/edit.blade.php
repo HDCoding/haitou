@@ -101,10 +101,9 @@
                             </tbody>
                         </table>
 
-                        <br>
                         <div class="form-group">
                             <div class="col-sm-5">
-                                {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                                {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}
