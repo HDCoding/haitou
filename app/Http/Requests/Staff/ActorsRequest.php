@@ -25,9 +25,9 @@ class ActorsRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:250',
-            'image' => 'url|string|max:250',
+            'image' => 'image|mimes:jpeg,png,jpg|max:3072',
             'website' => 'nullable|url|string|max:250',
-            'dob' => 'required|date',
+            'birthday' => 'required|date',
             'description' => 'required|string|max:65530'
         ];
     }
