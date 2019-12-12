@@ -74,8 +74,8 @@
                                         <div data-label="{{ $system->disk()['percentage'] }}%" class="css-bar m-b-0 css-bar-primary css-bar-50"></div>
                                     </div>
                                     <div class="media-body small">
-                                        <div class="mb-1">Total: {{ $system->disk()['total'] }}</div>
-                                        <div class="mb-1">Usando: {{ $system->disk()['used'] }}</div>
+                                        <div class="m-b-1">Total: {{ $system->disk()['total'] }}</div>
+                                        <div class="m-b-1">Usando: {{ $system->disk()['used'] }}</div>
                                         <div>Livre: {{ $system->disk()['free'] }}</div>
                                     </div>
                                     <div>
@@ -92,9 +92,9 @@
                                         <div data-label="{{ $system->memory()['percentage'] }}%" class="css-bar m-b-0 css-bar-danger css-bar-30"></div>
                                     </div>
                                     <div class="media-body small">
-                                        <div class="font-weight-semibold mb-3"></div>
-                                        <div class="mb-1">Total: {{ $system->memory()['total'] }}</div>
-                                        <div class="mb-1">Usando: {{ $system->memory()['used'] }}</div>
+                                        <div class="font-weight-semibold m-b-3"></div>
+                                        <div class="m-b-1">Total: {{ $system->memory()['total'] }}</div>
+                                        <div class="m-b-1">Usando: {{ $system->memory()['used'] }}</div>
                                         <div>Livre: {{ $system->memory()['free'] }}</div>
                                     </div>
                                     <div>
@@ -115,7 +115,7 @@
             <!-- Information -->
             <div class="col-sm-6 col-xl-3">
 
-                <div class="card bg-info border-0 text-white mb-4">
+                <div class="card bg-info border-0 text-white m-b-4">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <div class="text-xlarge">{{ $system->basic()['os'] }}</div>
@@ -128,7 +128,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
 
-                <div class="card bg-info border-0 text-white mb-4">
+                <div class="card bg-info border-0 text-white m-b-4">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <div class="text-xlarge">{{ $system->basic()['php'] }}</div>
@@ -141,7 +141,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
 
-                <div class="card bg-info border-0 text-white mb-4">
+                <div class="card bg-info border-0 text-white m-b-4">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <div class="text-xlarge">{{ $system->basic()['database'] }}</div>
@@ -154,7 +154,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
 
-                <div class="card bg-info border-0 text-white mb-4">
+                <div class="card bg-info border-0 text-white m-b-4">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <div class="text-xlarge">{{ $system->basic()['laravel'] }}</div>
@@ -166,61 +166,6 @@
 
             </div>
 
-        </div>
-
-        <div class="row">
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="fa fa-user-check fa-3x text-success"></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">@lang('dashboard.acc_activated')</div>
-                                <div class="text-large">{{ $activated }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="fa fa-user-alt-slash fa-3x text-danger"></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">@lang('dashboard.acc_banneds')</div>
-                                <div class="text-large">{{ $banned }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="fa fa-user-clock fa-3x text-info"></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">@lang('dashboard.pending_activation')</div>
-                                <div class="text-large">{{ $pendent }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xl-3">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="fa fa-user-lock fa-3x text-warning"></div>
-                            <div class="ml-3">
-                                <div class="text-muted small">@lang('dashboard.suspended_accounts')</div>
-                                <div class="text-large">{{ $suspended }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="row">
@@ -341,6 +286,14 @@
                                 <h5 class="mt-2">@lang('dashboard.genres')</h5>
                             </div>
                             {{--                @endif--}}
+                            {{--                @if(auth()->user()->permission->roles_mod)--}}
+                            <div class="col-md-3 col-lg-3">
+                                <a href="{{ url('staff/groups') }}">
+                                    <img src="{{ asset('images/staff/groups.png') }}" alt="@lang('dashboard.groups')">
+                                </a>
+                                <h5 class="mt-2">@lang('dashboard.groups')</h5>
+                            </div>
+                            {{--                @endif--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/icon/fontawesome') }}">
                                     <img src="{{ asset('images/staff/icons.png') }}" alt="@lang('dashboard.icons')">
@@ -411,14 +364,6 @@
                                 <h5 class="mt-2">@lang('dashboard.freeslots')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->roles_mod)--}}
-                            <div class="col-md-3 col-lg-3">
-                                <a href="{{ url('staff/groups') }}">
-                                    <img src="{{ asset('images/staff/groups.png') }}" alt="@lang('dashboard.groups')">
-                                </a>
-                                <h5 class="mt-2">@lang('dashboard.groups')</h5>
-                            </div>
-                            {{--                @endif--}}
                             {{--                @if(auth()->user()->permission->rules_mod)--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/rules') }}">
@@ -483,7 +428,7 @@
 
 @endsection
 
-@section('script')
+@section('scripts')
 
     <script src="{{ asset('vendor/chartjs/chartjs.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
