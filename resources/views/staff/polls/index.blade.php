@@ -44,7 +44,7 @@
                                     <th>Pergunta</th>
                                     <th>Multipla escolha</th>
                                     <th>Tópico</th>
-                                    <th>Fechado</th>
+                                    <th>Status</th>
                                     <th>Votos</th>
                                     <th>Criado em</th>
                                     <th class="text-center" style="width: 100px;">Opções</th>
