@@ -31,11 +31,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-header">Banir - {{ $user->name }}</h4>
+                        <h4 class="card-title">Banir - {{ $user->username }}</h4>
                         <div class="block">
                             <div class="block-content">
                                 <div class="block-header">
-                                    <p class="text-center">Você tem certeza que deseja banir: <b>{{ $user->name }}</b>?</p>
+                                    <p class="text-center">Você tem certeza que deseja banir: <b>{{ $user->username }}</b>?</p>
                                     <p class="text-center">Essa opção não poder ser desfeita.</p>
                                 </div>
 
@@ -74,7 +74,6 @@
     <!-- sceditor -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
-            //terms
             let textarea = document.getElementById('description');
             sceditor.create(textarea, {
                 format: 'bbcode',
