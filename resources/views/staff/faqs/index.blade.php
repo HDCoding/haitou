@@ -22,10 +22,10 @@
 
     <div class="container-fluid">
         <div class="row">
-            @includeIf('errors.errors', [$errors])
-            <a href="{{ url('staff/faqs/create') }}" class="btn btn-outline-primary mb-4">
+            <a href="{{ url('staff/faqs/create') }}" class="btn btn-outline-primary m-b-4 m-l-15">
                 <i class="fas fa-plus"></i>Adicionar Pergunta
             </a>
+            @includeIf('errors.errors', [$errors])
             @forelse($categories as $category)
             <div class="col-12">
                 <div class="card">
@@ -45,13 +45,13 @@
                         @forelse($faqs as $faq)
                             @if($faq->category_id == $category->id)
                                 <tr>
-                                    <td class="text-center" scope="row">{{ $faq->id }}</td>
+                                    <td class="text-center">{{ $faq->id }}</td>
                                     <td>{{ $faq->question }}</td>
                                     <td>{!! $faq->enabled() !!}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="javascript:;" onclick="document.getElementById('faq-disable-{{ $faq->id }}').submit();" class="btn btn-xs" type="button">
-                                                @if($faq->is_enabled)
+                                            <a href="javascript:;" onclick="document.getElementById('faq-disable-{{ $faq->id }}').submit();">
+                                                @if($faq->is_enable)
                                                     <i class="fa fa-pause text-warning" data-toggle="tooltip" title="Desativar Pergunta"></i>
                                                 @else
                                                     <i class="fa fa-play text-success" data-toggle="tooltip" title="Ativar Pergunta"></i>
@@ -59,8 +59,8 @@
                                             </a>
                                             {!! Form::open(['url' => 'faq/'.$faq->id.'/update/', 'method' => 'PUT', 'id' => 'faq-disable-' . $faq->id, 'style' => 'display: none']) !!}
                                             {!! Form::close() !!}
-                                            <a href="{{ url('staff/faqs/' . $faq->id . '/edit') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Editar Pergunta"><i class="fa fa-pencil-alt text-info"></i></a>
-                                            <a href="javascript:;" onclick="document.getElementById('faq-del-{{$faq->id}}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Pergunta"><i class="fa fa-times text-danger"></i></a>
+                                            <a class="m-l-15" href="{{ url('staff/faqs/' . $faq->id . '/edit') }}" data-toggle="tooltip" title="Editar Pergunta"><i class="fa fa-pencil-alt text-info"></i></a>
+                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('faq-del-{{$faq->id}}').submit();" data-toggle="tooltip" title="Remover Pergunta"><i class="fa fa-times text-danger"></i></a>
                                             {!! Form::open(['url' => 'staff/faqs/' . $faq->id, 'method' => 'DELETE', 'id' => 'faq-del-' . $faq->id, 'style' => 'display: none']) !!}
                                             {!! Form::close() !!}
                                         </div>
