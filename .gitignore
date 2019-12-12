@@ -14,3 +14,4 @@ composer.lock
 .idea/*
 nbproject
 package-lock.json
+.rnd
