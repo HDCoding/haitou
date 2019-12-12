@@ -2,6 +2,11 @@
 
 @section('title', trans('dashboard.news'))
 
+@section('css')
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -31,38 +36,28 @@
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th><i class="fa fa-suitcase text-gray"></i>#</th>
+                                    <th><i class="fa fa-suitcase text-gray"></i></th>
                                     <th>Título</th>
                                     <th>Por</th>
                                     <th>Views</th>
-                                    <th>Opções</th>
+                                    <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($news as $new)
                                     <tr class="odd gradeX">
-                                        <td>#{{ $new->id }}</td>
-                                        <td class="">{{ $new->name }}</td>
-                                        <td class="">{{ $new->staff->name }}</td>
-                                        <td>
-                                            <span class="badge badge-info">{{ $new->views }}</span>
-                                        </td>
+                                        <td>{{ $new->id }}</td>
+                                        <td>{{ $new->name }}</td>
+                                        <td>{{ $new->user->username }}</td>
+                                        <td><span class="badge badge-info">{{ $new->views }}</span></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/news/' . $new->id . '/edit') }}" data-toggle="tooltip" title="Editar News">
-                                                    <button type="button" class="btn btn-xs btn-outline-primary">
-                                                        <span class="fas fa-pencil-alt"></span> Editar
-                                                    </button>
-                                                </a>
-                                                <a href="javascript:;" onclick="document.getElementById('news-del-{{ $new->id }}').submit();"  data-toggle="tooltip" title="Remover News">
-                                                    <button type="button" class="btn btn-xs btn-outline-danger">
-                                                        <span class="fas fa-times"></span> Deletar
-                                                    </button>
-                                                </a>
+                                                <a href="{{ url('staff/news/' . $new->id . '/edit') }}" data-toggle="tooltip" title="Editar News"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('category-del-{{ $new->id }}').submit();" data-toggle="tooltip" title="Remover News"><i class="fas fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/news/' . $new->id, 'method' => 'DELETE', 'id' => 'news-del-' . $new->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -78,4 +73,21 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @endsection
