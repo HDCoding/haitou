@@ -2,6 +2,11 @@
 
 @section('title', trans('dashboard.medias'))
 
+@section('css')
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -31,38 +36,33 @@
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
-                        <hr>
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th class="text-center"><i class="si si-user"></i></th>
+                                    <th><i class="si si-user"></i></th>
                                     <th>Categoria</th>
                                     <th>Nome</th>
-                                    <th class="hidden-xs">Genero</th>
-                                    <th class="hidden-xs">Views</th>
-                                    <th class="hidden-xs">Estudio</th>
+                                    <th>Genero</th>
+                                    <th>Views</th>
+                                    <th>Estudio</th>
                                     <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($medias as $media)
                                     <tr>
-                                        <td class="text-center">
-                                            <img class="" src="{{ $media->poster }}" alt="{{ $media->name }}" width="70px">
-                                        </td>
+                                        <td><img class="" src="{{ $media->poster }}" alt="{{ $media->name }}" width="70px"></td>
                                         <td>{{ $media->category->name }}</td>
                                         <td class="">{{ $media->name }}</td>
                                         <td>{!! $media->genre() !!}</td>
-                                        <td>
-                                            <span class="badge badge-info">{{ $media->views }}</span>
-                                        </td>
+                                        <td><span class="badge badge-info">{{ $media->views }}</span></td>
                                         <td>{{ $media->studio->name }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/media/' . $media->id . '/casts') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Casts"><i class="fas fa-users text-warning"></i></a>
-                                                <a href="{{ url('staff/medias/' . $media->id . '/edit') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Editar Mídia"><i class="fas fa-pencil-alt text-info"></i></a>
-                                                <a href="javascript:;" onclick="document.getElementById('media-del-{{ $media->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Mídia"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="{{ url('staff/media/' . $media->id . '/casts') }}" data-toggle="tooltip" title="Casts"><i class="fas fa-users text-warning"></i></a>
+                                                <a class="m-l-15" href="{{ url('staff/medias/' . $media->id . '/edit') }}" data-toggle="tooltip" title="Editar Mídia"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('media-del-{{ $media->id }}').submit();" data-toggle="tooltip" title="Remover Mídia"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/medias/' . $media->id, 'method' => 'DELETE', 'id' => 'media-del-' . $media->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -78,4 +78,21 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @endsection
