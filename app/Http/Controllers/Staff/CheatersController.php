@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Cheater;
 use App\Models\Historic;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CheatersController extends Controller
@@ -21,7 +20,7 @@ class CheatersController extends Controller
     public function index()
     {
         //cheaters
-        $cheaters = Historic::with('user,id,name')
+        $cheaters = Historic::with('user,id,username')
             ->select(['*'])
             ->join(
                 DB::raw('(SELECT MAX(id) AS id FROM historics GROUP BY historics.user_id) AS unique_history'),
