@@ -76,12 +76,17 @@ return [
 
         'medias' => [
             'driver' => 'local',
-            'root'   => storage_path('medias'),
+            'root'   => storage_path('app/public/medias'),
         ],
-        
+
         'users' => [
             'driver' => 'local',
-            'root'   => storage_path('users'),
+            'root'   => storage_path('app/public/users'),
+        ],
+
+        'actors' => [
+            'driver' => 'local',
+            'root'   => storage_path('app/public/actors'),
         ],
 
     ],
