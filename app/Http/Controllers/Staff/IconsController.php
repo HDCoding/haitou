@@ -8,7 +8,7 @@ class IconsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function fontawesome()
@@ -26,13 +26,13 @@ class IconsController extends Controller
         return view('staff.icons.linearicons');
     }
 
-    public function openIconic()
+    public function openiconic()
     {
-        return view('staff.icons.open-iconic');
+        return view('staff.icons.openiconic');
     }
 
-    public function peIcon7Stroke()
+    public function strokeicons()
     {
-        return view('staff.icons.pe-icon-7-stroke');
+        return view('staff.icons.strokeicons');
     }
 }
