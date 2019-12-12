@@ -35,8 +35,8 @@ class PollsController extends Controller
         $poll = new Poll($data);
         $poll->save();
 
-        foreach ($data['option'] as $key => $value) {
-            Option::create(['poll_id' => $poll->id, 'option' => $value]);
+        foreach ($data['options'] as $key => $value) {
+            Option::create(['poll_id' => $poll->id, 'name' => $value]);
         }
 
         toastr()->success('Nova pesquisa cadastrada.', 'Sucesso');
@@ -84,13 +84,13 @@ class PollsController extends Controller
     public function formAddOptions($poll_id)
     {
         $poll = Poll::findOrFail($poll_id);
-        return view('staff.polls.options.create', compact('poll'));
+        return view('staff.polls.options.add', compact('poll'));
     }
 
     public function postAddOptions(Request $request)
     {
-        foreach ($request->input('option') as $key => $value) {
-            Option::create(['poll_id' => $request->input('poll_id'), 'option' => $value]);
+        foreach ($request->input('options') as $key => $value) {
+            Option::create(['poll_id' => $request->input('poll_id'), 'name' => $value]);
         }
         return redirect()->to('staff/polls');
     }
@@ -104,8 +104,8 @@ class PollsController extends Controller
 
     public function postRemoveOptions(Request $request)
     {
-        if ($request->has('option')) {
-            foreach ($request->input('option') as $key => $poll_id) {
+        if ($request->has('options')) {
+            foreach ($request->input('options') as $key => $poll_id) {
                 Option::findOrFail($poll_id)->delete();
             }
         }
