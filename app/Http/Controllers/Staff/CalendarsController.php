@@ -10,14 +10,14 @@ class CalendarsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        $calendars = Calendar::with('user:id,username')
-            ->select('id', 'user_id', 'name', 'start_date', 'end_date', 'color', 'is_enabled', 'views', 'created_at')
+        $calendars = Calendar::select('id', 'user_id', 'username', 'name', 'start_date', 'end_date', 'color', 'is_enabled', 'views', 'created_at')
             ->orderBy('id', 'DESC')->get();
+
         return view('staff.calendars.index', compact('calendars'));
     }
 
@@ -25,8 +25,8 @@ class CalendarsController extends Controller
     {
         $calendar = Calendar::findOrFail($calendar_id);
         $calendar->is_enabled = !$calendar->is_enabled;
-        $calendar->save();
-        toastr()->success('Calendario desativado', 'Sucesso');
+        $calendar->update();
+        toastr()->success('Calendario ativado/desativado', 'Sucesso');
         return redirect()->to('staff/calendars');
     }
 
