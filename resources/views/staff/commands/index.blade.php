@@ -22,9 +22,8 @@
 
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Ativar modo de manutenção
@@ -35,7 +34,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Desativar modo de manutenção
@@ -46,7 +45,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Limpar cache
@@ -56,12 +55,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row">
-
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Limpar cache de exibição
@@ -72,7 +69,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Limpar cache de rota
@@ -83,7 +80,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Limpar cache de configuração
@@ -93,12 +90,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row">
-
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Limpar todo o cache
@@ -109,7 +104,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Redefinir todo o cache
@@ -120,7 +115,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-4">
-                <div class="card text-center mb-3">
+                <div class="card text-center m-b-3">
                     <div class="card-body">
                         <h4 class="card-title text-success">
                             <i class="fa fa-terminal"></i> Enviar email de teste
@@ -130,7 +125,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
