@@ -26,24 +26,33 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.rules')</h4>
-                        <div class="table-responsive m-t-40">
+                        <a href="{{ url('staff/rules/create') }}">
+                            <button type="button" class="btn btn-xs btn-outline-primary">
+                                <span class="ion ion-md-add"></span> Adicionar
+                            </button>
+                        </a>
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Título</th>
-                                    <th>Opções</th>
+                                    <th>Cor</th>
+                                    <th>Ícone</th>
+                                    <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($rules as $rule)
                                     <tr>
-                                        <th scope="row">{{ $rule->id }}</th>
+                                        <th>{{ $rule->id }}</th>
                                         <td>{{ $rule->name }}</td>
+                                        <td style="color:{{ $rule->color }}"><b>{{ $rule->color }}</b></td>
+                                        <td>{{ $rule->icon }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/rules/' . $rule->id . '/edit') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Editar Regra"><i class="fas fa-pencil-alt text-info"></i></a>
-                                                <a href="javascript:;" onclick="document.getElementById('rule-del-{{$rule->id}}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Regra"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="{{ url('staff/rules/' . $rule->id . '/edit') }}" data-toggle="tooltip" title="Editar Regra"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                <a href="javascript:;" onclick="document.getElementById('rule-del-{{$rule->id}}').submit();" class="m-l-15" data-toggle="tooltip" title="Remover Regra"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/rules/' . $rule->id, 'method' => 'DELETE', 'id' => 'rule-del-' . $rule->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
