@@ -25,7 +25,7 @@ class CharactersRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:250',
-            'image' => 'required|string|max:250',
+            'image' => 'image|mimes:jpeg,png,jpg|max:3072',
             'description' => 'required|string|max:65530'
         ];
     }
