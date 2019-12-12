@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\StudiosRequest;
 use App\Models\Studio;
-use Illuminate\Http\Request;
 
 class StudiosController extends Controller
 {
