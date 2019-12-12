@@ -1,38 +1,36 @@
-@extends('layouts.auth')
+@extends('layouts.application')
 
-@section('title', 'Ativação')
+@section('subtitle', 'Ativação')
 
-@section('styles')
-    <!-- Page -->
-    <link href="{{ asset('css/pages/authentication.css') }}" rel="stylesheet">
-@endsection
-
-@section('content')
+@section('layout-content')
 
     <!-- Content -->
+    <div class="main-wrapper">
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
 
-    <div class="authentication-wrapper authentication-2 px-4">
-        <div class="authentication-inner py-5">
-
-            <!-- Card -->
-            <div class="card">
-                <div class="p-4 p-sm-5">
-
-                    <div class="display-1 lnr lnr-checkmark-circle text-center text-success mb-4"></div>
-
-                    <p class="text-center text-big mb-4">
-                        @include('includes.messages')
-                    </p>
-
-                    <a href="{{ url('login') }}" type="button" class="btn btn-primary btn-block">Prosseguir</a>
-
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ asset('images/login-register.jpg') }}) no-repeat center center;">
+            <div class="auth-box">
+                <div id="loginform">
+                    <div class="logo">
+                        <span class="db"><img src="{{ asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
+                        <h5 class="font-medium m-t-20 m-b-20">Ativação</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            @includeIf('errors.errors', [$errors])
+                            <p class="text-center text-big m-b-4">@include('includes.messages')</p>
+                            <a class="btn btn-primary btn-block m-t-25" href="{{ url('login') }}">Prosseguir</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- / Card -->
-
         </div>
     </div>
-
     <!-- / Content -->
 
 @endsection
