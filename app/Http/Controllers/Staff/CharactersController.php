@@ -6,7 +6,6 @@ use App\Helpers\ImageUploader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\CharactersRequest;
 use App\Models\Character;
-use Illuminate\Http\Request;
 
 class CharactersController extends Controller
 {
