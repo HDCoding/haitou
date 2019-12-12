@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.cheaters')</h4>
                         <p>Possíveis Cheaters (Fantasmas)</p>
-                        <div class="table-responsive m-t-40">
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -40,8 +40,8 @@
                                 <tbody>
                                 @foreach($cheaters as $cheater)
                                     <tr>
-                                        <td>{{ link_to_route('user.profile', $cheater->user->name, ['slug' => $cheater->user->slug]) }}</td>
-                                        <td>{{ $cheater->user->role->name }}</td>
+                                        <td>{{ link_to_route('user.profile', $cheater->user->username, ['slug' => $cheater->user->slug]) }}</td>
+                                        <td>{{ $cheater->user->group->name }}</td>
                                         <td>{{ $cheater->user->created_at->toDayDateTimeString() }}</td>
                                         @if($cheater->user->logins->created_at != null)
                                             <td>{{ $cheater->user->logins->created_at->toDayDateTimeString() }}</td>
@@ -63,9 +63,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">@lang('dashboard.cheaters')</h4>
+                        <h4 class="card-title">Programas</h4>
                         <p>Programas nao autorizados</p>
-                        <div class="table-responsive m-t-40">
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
