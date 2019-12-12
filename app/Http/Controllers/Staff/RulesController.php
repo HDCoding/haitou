@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\RulesRequest;
 use App\Models\Rule;
-use Illuminate\Http\Request;
 
 class RulesController extends Controller
 {
