@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Tráficos</h4>
                         <div class="row">
-                            <p class="text-center font-weight-light mb-3">Tráficos da placa de rede</p>
+                            <p class="text-center font-weight-light m-b-3 m-l-15">Tráficos da placa de rede</p>
                         </div>
                         <div class="row row-bordered my-4">
                             <div class="col-6 col-sm-4 col-md-3 col-lg-4 col-xl-3">
@@ -69,15 +69,15 @@
                             <h5 class="card-title py-4 px-5">vnStat</h5>
                             <div class="row no-gutters row-bordered">
                                 <div class="col-md-6 p-5">
-                                    <h6 class="mb-4">Versão:</h6>
-                                    <p class="d-block mb-3 text-info">
+                                    <h6 class="m-b-4">Versão:</h6>
+                                    <p class="d-block m-b-3 text-info">
                                         <i class="ion ion-ios-arrow-forward"></i>&nbsp;
                                         {{ $data['version'] }}
                                     </p>
                                 </div>
                                 <div class="col-md-6 p-5">
-                                    <h6 class="mb-4">JSON Versão:</h6>
-                                    <p class="d-block mb-3 text-info">
+                                    <h6 class="m-b-4">JSON Versão:</h6>
+                                    <p class="d-block m-b-3 text-info">
                                         <i class="ion ion-ios-arrow-forward"></i>&nbsp;
                                         {{ $data['json_version'] }}
                                     </p>
