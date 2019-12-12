@@ -2,6 +2,11 @@
 
 @section('title', trans('dashboard.calendars'))
 
+@section('css')
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -25,9 +30,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Conquistas</h4>
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <h4 class="card-title">@lang('dashboard.calendars')</h4>
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
                                     <th>Usuário</th>
@@ -37,33 +42,37 @@
                                     <th>Ativado</th>
                                     <th>Views</th>
                                     <th>Criado Em</th>
-                                    <th>Opções</th>
+                                    <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($calendars as $calendar)
-                                    <tr class="odd gradeX">
-                                        <td>{{ $calendar->user->username }}</td>
+                                    <tr>
+                                        <th>{{ $calendar->username }}</th>
                                         <td>{{ $calendar->name }}</td>
-                                        <td>{{ $calendar->startAt() }}</td>
-                                        <td>{{ $calendar->endAt() }}</td>
+                                        <td>{{ format_date_time($calendar->start_at) }}</td>
+                                        <td>{{ format_date_time($calendar->end_at) }}</td>
                                         <td>{{ $calendar->is_enabled ? 'Sim' : 'Não'}}</td>
                                         <td><span class="badge badge-info">{{ $calendar->views }}</span></td>
-                                        <td>{{ $calendar->createdAt() }}</td>
+                                        <td>{{ format_date_time($calendar->created_at) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('calendar-upd-{{ $calendar->id }}').submit();" class="btn btn-xs btn-outline" type="button">
+                                                <a href="javascript:;" onclick="document.getElementById('calendar-upd-{{ $calendar->id }}').submit();">
                                                     @if($calendar->is_enabled)
-                                                        <i class="fas fa-pause text-warning" data-toggle="tooltip" title="Desativar Evento"></i>
-                                                        Desativar Evento
+                                                        <button type="button" class="btn btn-xs btn-outline-info">
+                                                            <i class="fas fa-pause" data-toggle="tooltip" title="Desativar Evento"></i>
+                                                            Desativar Evento
+                                                        </button>
                                                     @else
-                                                        <i class="fas fa-play text-success" data-toggle="tooltip" title="Ativar Evento"></i>
-                                                        Ativar Evento
+                                                        <button type="button" class="btn btn-xs btn-outline-success">
+                                                            <i class="fas fa-play" data-toggle="tooltip" title="Ativar Evento"></i>
+                                                            Ativar Evento
+                                                        </button>
                                                     @endif
                                                 </a>
                                                 {!! Form::open(['url' => 'staff/calendars/' . $calendar->id, 'method' => 'PUT', 'id' => 'calendar-upd-' . $calendar->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
-                                                <a href="javascript:;" onclick="document.getElementById('calendar-del-{{ $calendar->id }}').submit();" data-toggle="tooltip" title="Remover Evento">
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('calendar-del-{{ $calendar->id }}').submit();" data-toggle="tooltip" title="Remover Evento">
                                                     <button type="button" class="btn btn-xs btn-outline-danger">
                                                         <span class="fas fa-times"></span> Deletar
                                                     </button>
@@ -83,4 +92,21 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @endsection
