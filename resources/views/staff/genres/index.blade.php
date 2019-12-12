@@ -5,6 +5,8 @@
 @section('css')
     <!-- X-Editable -->
     <link href="{{ asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -37,8 +39,8 @@
                             </button>
                         </a>
                         @includeIf('errors.errors', [$errors])
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -52,14 +54,12 @@
                                     <tr>
                                         <td>{{ $genre->id }}</td>
                                         <td>
-                                            <a href="#" class="genreEdit" id="name" data-type="text" data-column="name" data-title="Editar Gênero" data-name="name" data-value="{{ $genre->name }}" data-pk="{{ $genre->id }}" data-url="{{ route('genres.update', ['id' => $genre->id]) }}">{{ $genre->name }}</a>
+                                            <a href="#" class="genreEdit" id="name" data-type="text" data-column="name" data-title="Editar Gênero" data-name="name" data-value="{{ $genre->name }}" data-pk="{{ $genre->id }}" data-url="{{ route('genres.update', $genre->id) }}">{{ $genre->name }}</a>
                                         </td>
-                                        <td>
-                                            <span class="badge badge-success">{{ $genre->media->count() }}</span>
-                                        </td>
+                                        <td><span class="badge badge-success">{{ $genre->media->count() }}</span></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:" onclick="document.getElementById('genre-del-{{$genre->id}}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Gênero"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="javascript:" onclick="document.getElementById('genre-del-{{$genre->id}}').submit();" data-toggle="tooltip" title="Remover Gênero"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/genres/' . $genre->id, 'method' => 'DELETE', 'id' => 'genre-del-' . $genre->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -103,9 +103,21 @@
 @section('scripts')
     <!-- X-Editable -->
     <script src="{{ asset('vendor/x-editable/dist/js/bootstrap-editable.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready( function () {
+            //datatable
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+
             //update genre
             $.ajaxSetup({
                 headers: {
@@ -120,6 +132,12 @@
                 ajaxOptions: {
                     type: 'put',
                     dataType: 'json'
+                },
+                params: function(params) {
+                    // add additional params from data-attributes of trigger element
+                    params._token = $("#_token").data("token");
+                    params.name = $(this).editable().data('name');
+                    return params;
                 },
                 validate:function(string){
                     if ($.trim(string) === '') {
