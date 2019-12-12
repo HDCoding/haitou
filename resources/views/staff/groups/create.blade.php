@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- Page JS Plugins CSS -->
-    <link href="{{ asset('vendor/minicolors/minicolors.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -40,13 +40,8 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('description', 'Descrição: (Opcional)') !!}
-                            {!! Form::text('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
-                        </div>
-
-                        <div class="form-group">
                             {!! Form::label('color', 'Cor: (Opcional)') !!}
-                            {!! Form::text('color', null ? '' : '#5c90d2', ['class' => 'form-control', 'id' => 'minicolors']) !!}
+                            {!! Form::text('color', null ? '' : '#5c90d2', ['class' => 'form-control minicolors']) !!}
                         </div>
 
                         <div class="form-group">
@@ -59,8 +54,7 @@
                             {!! Form::text('hnr', null, ['class' => 'form-control', 'placeholder' => 'Valores em horas', 'required']) !!}
                         </div>
 
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
-                        <br>
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -72,13 +66,14 @@
 
 @section('scripts')
     <!-- Page JS Plugins -->
-    <script src="{{ asset('vendor/minicolors/minicolors.js') }}"></script>
+    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
 
     <!-- Page JS Code -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $('#minicolors').minicolors({
+        $('.minicolors').minicolors({
             control:  'saturation',
             position: 'bottom right',
+            theme: 'bootstrap'
         });
     </script>
 @endsection
