@@ -12,13 +12,13 @@ class PollsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
     {
         $polls = Poll::with('topic:id,name')
-            ->select('topic_id', 'name', 'multi_choice', 'is_main', 'is_closed', 'closed_at', 'created_at')->get();
+            ->select('id', 'topic_id', 'name', 'multi_choice', 'is_main', 'is_closed', 'closed_at', 'created_at')->get();
         return view('staff.polls.index', compact('polls'));
     }
 
@@ -30,7 +30,7 @@ class PollsController extends Controller
     public function store(PollsRequest $request)
     {
         $data = $request->except('_token');
-        $data['user_id'] = auth()->user()->id;
+        $data['user_id'] = $request->user()->id;
 
         $poll = new Poll($data);
         $poll->save();
@@ -58,10 +58,8 @@ class PollsController extends Controller
 
     public function update(PollsRequest $request, $poll_id)
     {
-        $data = $request->except('_token');
-        $data['user_id'] = auth()->user()->id;
         $poll = Poll::findOrFail($poll_id);
-        $poll->update($data);
+        $poll->update($request->except('_token'));
         toastr()->info('Pesquisa atualizada.', 'Sucesso');
         return redirect()->to('staff/polls');
     }
