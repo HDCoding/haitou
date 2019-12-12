@@ -15,6 +15,6 @@
 @if (!empty($danger))
     <div class="alert alert-danger alert-dismissible fade show">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        {{ $anger }}
+        {{ $danger }}
     </div>
 @endif
