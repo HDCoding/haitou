@@ -24,9 +24,9 @@ class UsersController extends Controller
     {
         $this->middleware('auth');
         $this->pendent = $user->where('status', '=', 0)->count();
-        $this->activated =  $user->where('status', '=', 1)->count();
-        $this->suspended =  $user->where('status', '=', 2)->count();
-        $this->banned =  $user->where('status', '=', 3)->count();
+        $this->activated = $user->where('status', '=', 1)->count();
+        $this->suspended = $user->where('status', '=', 2)->count();
+        $this->banned = $user->where('status', '=', 3)->count();
     }
 
     public function index()
@@ -200,7 +200,7 @@ class UsersController extends Controller
         $user = User::where('id', '=', $user_id)->first();
         $permission = Permission::where('user_id', '=', $user->id)->first();
 
-        return view('staff.users.permissions', compact('user','permission'));
+        return view('staff.users.permissions', compact('user', 'permission'));
     }
 
     public function updatePermission(Request $request, int $user_id)
