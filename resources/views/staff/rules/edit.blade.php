@@ -6,7 +6,7 @@
     <!-- SCEditor -->
     <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- Minicolors -->
-    <link href="{{ asset('vendor/minicolors/minicolors.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -36,30 +36,23 @@
                         <h4 class="card-title">Conquistas</h4>
                         @includeIf('errors.errors', [$errors])
                         {!! Form::model($rule, ['url' => 'staff/rules/' . $rule->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
-
                         <div class="form-group">
                             {!! Form::label('name', 'Nome: *') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::text('name', $rule->name, ['class' => 'form-control', 'required']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('color', 'Cor: (Opcional)') !!}
-                            {!! Form::text('color', $rule->color, ['class' => 'form-control', 'id' => 'minicolors']) !!}
+                            {!! Form::text('color', $rule->color ? $rule->color : '', ['class' => 'form-control minicolors']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('icon', 'Ìcone: (Opcional)') !!}
-                            {!! Form::text('icon', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('icon', $rule->icon, ['class' => 'form-control']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição: *') !!}
-                            {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
+                            {!! Form::textarea('description', $rule->description, ['class' => 'form-control', 'rows' => 8]) !!}
                         </div>
-
-                        <br>
-                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
-
+                        {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -69,31 +62,31 @@
 
 @endsection
 
-@section('script')
+@section('scripts')
     <!-- minicolors -->
-    <script src="{{ asset('vendor/minicolors/minicolors.js') }}"></script>
+    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
-    <!-- minicolors -->
-    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $('#minicolors').minicolors({
-            control:  'saturation',
-            position: 'bottom right'
-        });
-    </script>
-
-    <!-- sceditor -->
+    <!-- JS Code -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
+            //sceditor
             let textarea = document.getElementById('description');
             sceditor.create(textarea, {
                 format: 'bbcode',
                 locale: 'pt-BR',
                 emoticonsRoot: '/vendor/sceditor/',
                 style: '/vendor/sceditor/minified/themes/content/default.min.css'
+            });
+
+            //minicolors
+            $(".minicolors").minicolors({
+                control:  'saturation',
+                position: 'bottom right',
+                theme: 'bootstrap'
             });
         });
     </script>
