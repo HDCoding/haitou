@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- SCEditor -->
-    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
+    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- Page JS Plugins CSS -->
-    <link rel="stylesheet" href="{{ asset('vendor/minicolors/minicolors.css') }}">
+    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -36,30 +36,23 @@
                         <h4 class="card-title">Adicionar</h4>
                         @includeIf('errors.errors', [$errors])
                         {!! Form::open(['url' => 'staff/rules', 'class' => 'form-horizontal']) !!}
-
                         <div class="form-group">
                             {!! Form::label('name', 'Nome: *') !!}
                             {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('color', 'Cor: (Opcional)') !!}
-                            {!! Form::text('color', null ? '' : '#5c90d2', ['class' => 'form-control', 'id' => 'minicolors']) !!}
+                            {!! Form::text('color', null ? '' : '#5c90d2', ['class' => 'form-control minicolors']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('icon', 'Ìcone: (Opcional)') !!}
                             {!! Form::text('icon', null, ['class' => 'form-control']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição: *') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
                         </div>
-
-                        <br>
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
-
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -71,29 +64,29 @@
 
 @section('scripts')
     <!-- Minicolors -->
-    <script src="{{ asset('vendor/minicolors/minicolors.js') }}"></script>
+    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
     <!-- SCEditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
-    <!-- Page JS Code -->
-    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $('#minicolors').minicolors({
-            control:  'saturation',
-            position: 'bottom right'
-        });
-    </script>
-
-    <!-- Page JS Code -->
+    <!-- JS Code -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
+            //sceditor
             let textarea = document.getElementById('description');
             sceditor.create(textarea, {
                 format: 'bbcode',
                 locale: 'pt-BR',
                 emoticonsRoot: '/vendor/sceditor/',
                 style: '/vendor/sceditor/minified/themes/content/default.min.css'
+            });
+
+            //minicolors
+            $('.minicolors').minicolors({
+                control:  'saturation',
+                position: 'bottom right',
+                theme: 'bootstrap'
             });
         });
     </script>
