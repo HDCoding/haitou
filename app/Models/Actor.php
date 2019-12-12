@@ -32,6 +32,8 @@ class Actor extends Model
         'views'
     ];
 
+    const uploaderFolder = 'actors';
+
     public function sluggable()
     {
         return [
