@@ -17,8 +17,7 @@ class News extends Model
 
     protected $casts = [
         'user_id' => 'int',
-        'views' => 'int',
-        'is_published' => 'bool'
+        'views' => 'int'
     ];
 
     protected $fillable = [
@@ -26,8 +25,7 @@ class News extends Model
         'name',
         'slug',
         'description',
-        'views',
-        'is_published'
+        'views'
     ];
 
     public function user()
