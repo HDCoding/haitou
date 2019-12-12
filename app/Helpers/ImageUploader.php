@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 /**
@@ -19,12 +20,16 @@ class ImageUploader
      * It receives as a parameter the directory, ID, file name in MD5 and the image file
      * Check with the pathExist function
      * Saves the image in the place passed by parameter
+     * @param $path
+     * @param $folderId
+     * @param $filename
+     * @param $image
      */
-    public function uploadImage($path, $folderId, $filename, $image)
+    public function uploadImage($path, $filename, $image)
     {
-        $this->pathExist($path, $folderId);
+        $this->pathExist($path);
 
-        $local = $path . $folderId . '/';
+        $local = $path . '/';
 
         $imageMake = Image::make($image);
 
@@ -35,34 +40,24 @@ class ImageUploader
      * Delete only one image
      * Receive directory and filename as parameter
      */
-    public function removeImage($path, $folderId, $filename)
+    public function removeImage($path, $filename)
     {
-        if (File::exists($path . $folderId . '/' . $filename)) {
+        if (File::exists($path . '/' . $filename)) {
             //File::deleteDirectory($path . $folderId . '/' . $filename);
-            unlink($path . $folderId . '/' . $filename);
-        }
-    }
-
-    /**
-     * Delete directory and all contents within
-     */
-    public function removeDirectory($path, $folderId)
-    {
-        if (File::exists($path . $folderId)) {
-            File::deleteDirectory($path . $folderId);
-            //unlink($path . $folderId);
+            unlink($path . '/' . $filename);
         }
     }
 
     /**
      * Check if the directory exists, otherwise create it with ID name
+     * @param $path
      */
-    public function pathExist($path, $folderId)
+    public function pathExist($path)
     {
-        $path = $path . $folderId . '/';
+        $path = $path . '/';
 
         if (!file_exists($path) && !is_dir($path)) {
-            mkdir($path, 0777, true);
+            mkdir($path, 0644, true);
         }
     }
 }
