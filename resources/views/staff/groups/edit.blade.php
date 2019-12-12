@@ -3,8 +3,8 @@
 @section('title', 'Editar')
 
 @section('css')
-    <!-- Page JS Plugins CSS -->
-    <link href="{{ asset('vendor/minicolors/minicolors.css') }}" rel="stylesheet" />
+    <!-- minicolors -->
+    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -33,34 +33,28 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::model($role, ['url' => 'staff/groups/' . $role->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($group, ['url' => 'staff/groups/' . $group->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nome: *') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::label('description', 'Descrição: (Opcional)') !!}
-                            {!! Form::text('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
+                            {!! Form::text('name', $group->name, ['class' => 'form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('color', 'Cor: (Opcional)') !!}
-                            {!! Form::text('color', $role->color, ['class' => 'form-control', 'id' => 'minicolors']) !!}
+                            {!! Form::text('color', $group->color ? $group->color : '', ['class' => 'form-control minicolors']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('icon', 'Icone: (Opcional)') !!}
-                            {!! Form::text('icon', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('icon', $group->icon, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('hnr', 'H-N-R: *') !!}
-                            {!! Form::text('hnr', ($role->hnr / 3600), ['class' => 'form-control', 'required']) !!}
+                            {!! Form::text('hnr', ($group->hnr / 3600), ['class' => 'form-control', 'required']) !!}
                         </div>
 
-                        {!! Form::submit('Alterar', ['class' => 'btn btn-success btn-rounded btn-outline-success']) !!}
-                        <br>
+                        {!! Form::submit('Alterar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -71,14 +65,15 @@
 @endsection
 
 @section('scripts')
-    <!-- Page JS Plugins -->
-    <script src="{{ asset('vendor/minicolors/minicolors.js') }}"></script>
+    <!-- minicolors -->
+    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
 
-    <!-- Page JS Code -->
+    <!-- minicolors -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $('#minicolors').minicolors({
+        $('.minicolors').minicolors({
             control:  'saturation',
             position: 'bottom right',
+            theme: 'bootstrap'
         });
     </script>
 @endsection
