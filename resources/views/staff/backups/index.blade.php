@@ -3,7 +3,10 @@
 @section('title', trans('dashboard.backups'))
 
 @section('css')
+    <!-- Ladda -->
     <link rel="stylesheet" href="{{ asset('vendor/ladda/ladda.css') }}">
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -31,39 +34,34 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.backups')</h4>
                         <button id="create-full-backup-button" href="{{ url('staff/backup/create-full') }}" class="btn btn-primary ladda-button" data-style="zoom-in">
-                            <span class="ladda-label"><i class="fa fa-plus"></i> Create Full Backup</span>
+                            <span class="ladda-label"><i class="fa fa-plus"></i> Backup Completo</span>
                         </button>
-                        <button id="create-files-backup-button" href="{{ url('staff/backup/create-files') }}" class="btn btn-primary ladda-button" data-style="zoom-in">
-                            <span class="ladda-label"><i class="fa fa-plus"></i> Create Files Backup</span>
+                        <button id="create-files-backup-button" href="{{ url('staff/backup/create-files') }}" class="btn btn-success ladda-button" data-style="zoom-in">
+                            <span class="ladda-label"><i class="fa fa-plus"></i> Arquivos de Backup</span>
                         </button>
-                        <button id="create-db-backup-button" href="{{ url('staff/backup/create-db') }}" class="btn btn-primary ladda-button" data-style="zoom-in">
-                            <span class="ladda-label"><i class="fa fa-plus"></i> Create Database Backup</span>
+                        <button id="create-db-backup-button" href="{{ url('staff/backup/create-db') }}" class="btn btn-danger ladda-button" data-style="zoom-in">
+                            <span class="ladda-label"><i class="fa fa-plus"></i> Banco de Dados</span>
                         </button>
-                        <hr>
-                        <div class="table-responsive m-t-40">
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Location</th>
-                                    <th>Date</th>
-                                    <th>File size</th>
-                                    <th>Opções</th>
+                                    <th>Diretório</th>
+                                    <th>Data</th>
+                                    <th>Tamanho do arquivo</th>
+                                    <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($data['backups'] as $key => $backup)
                                     <tr class="odd gradeX">
-                                        <td class="text-center">
-                                            {{ ++$key }}
-                                        </td>
+                                        <td class="text-center">{{ ++$key }}</td>
                                         <td class="">{{ $backup['disk'] }}</td>
                                         <td>
-                                            {{ \Carbon\Carbon::createFromTimeStamp($backup['last_modified'])->formatLocalized('%d %B %Y, %H:%M') }}
+                                            {{ format_date_time($backup['last_modified'])}}
                                         </td>
-                                        <td>
-                                            {{ make_size($backup['file_size']) }}
-                                        </td>
+                                        <td>{{ make_size($backup['file_size']) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 @if($backup['download'])
@@ -77,7 +75,7 @@
                                                 <a data-disk="{{ $backup['disk'] }}" data-file="{{ $backup['file_name'] }}" data-button-type="delete"
                                                    href="{{ url('staff/backup/delete') }}" data-toggle="tooltip" title="Delete">
                                                     <button type="button" class="btn btn-xs btn-outline-danger">
-                                                        <span class="fas fa-trash"></span> Delete
+                                                        <span class="fas fa-trash"></span> Deletar
                                                     </button>
                                                 </a>
                                             </div>
@@ -98,9 +96,20 @@
 @section('scripts')
     <script src="{{ asset('vendor/spin/spin.js') }}"></script>
     <script src="{{ asset('vendor/ladda/ladda.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         jQuery(document).ready(function ($) {
+            //DataTables
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
             //capture the create full backup button
             $("#create-full-backup-button").click(function (e) {
                 e.preventDefault();
