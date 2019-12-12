@@ -31,36 +31,29 @@
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
-                        <hr>
-                        <div class="table-responsive m-t-40">
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th style="width: 30px;"></th>
+                                    <th></th>
                                     <th>Tipo</th>
-                                    <th style="width: 15%;">Tipo</th>
-                                    <th style="width: 15%;">Pontos</th>
-                                    <th style="width: 15%;">Ativado</th>
-                                    <th class="hidden-xs" style="width: 15%;">Opções</th>
+                                    <th>Tipo</th>
+                                    <th>Pontos</th>
+                                    <th>Ativado</th>
+                                    <th>Opções</th>
                                 </tr>
                                 </thead>
                                 @forelse($bonus as $b)
                                     <tbody class="js-table-sections-header">
                                     <tr>
-                                        <td class="text-center">
-                                            <i class="fa fa-angle-right"></i>
-                                        </td>
+                                        <td class="text-center"><i class="fa fa-angle-right"></i></td>
                                         <td class="">{{ $b->name }}</td>
-                                        <td>
-                                            <span class="badge badge-outline-primary">{{ $b->type() }}</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-outline-info">{{ $b->cost }}</span>
-                                        </td>
+                                        <td><span class="badge badge-outline-primary">{{ $b->type() }}</span></td>
+                                        <td><span class="badge badge-outline-info">{{ $b->cost }}</span></td>
                                         <td>{!! $b->enabled() !!}</td>
-                                        <td class="hidden-xs text-center">
+                                        <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('bonus-upd-{{ $b->id }}').submit();" class="btn btn-xs" type="button">
+                                                <a href="javascript:;" onclick="document.getElementById('bonus-upd-{{ $b->id }}').submit();">
                                                     @if($b->is_enabled)
                                                         <i class="fas fa-pause text-warning" data-toggle="tooltip" title="Desativar Bônus"></i>
                                                     @else
@@ -69,8 +62,8 @@
                                                 </a>
                                                 {!! Form::open(['url' => 'staff/bonus/' . $b->id . '/update', 'method' => 'PUT', 'id' => 'bonus-upd-' . $b->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
-                                                <a href="{{ url('staff/bonus/' . $b->id . '/edit') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Editar Bônus"><i class="fas fa-pencil-alt text-info"></i></a>
-                                                <a href="javascript:;" onclick="document.getElementById('bonus-del-{{ $b->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Bônus"><i class="fa fa-times text-danger"></i></a>
+                                                <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/edit') }}" data-toggle="tooltip" title="Editar Bônus"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('bonus-del-{{ $b->id }}').submit();" data-toggle="tooltip" title="Remover Bônus"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/bonus/' . $b->id, 'method' => 'DELETE', 'id' => 'bonus-del-' . $b->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
