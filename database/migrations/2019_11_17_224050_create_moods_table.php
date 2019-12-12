@@ -17,8 +17,6 @@ class CreateMoodsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 45);
             $table->string('image', 45);
-            $table->string('filename')->nullable();
-            $table->unsignedInteger('size')->default(0);
             $table->tinyInteger('points')->default(0); //min 1 - max 125
             $table->softDeletes();
             $table->timestamps();
