@@ -25,8 +25,6 @@ class GroupsRequest extends FormRequest
     {
         return [
             'name' => 'string|max:250',
-            'display_name' => 'required|string|max:250',
-            'description' => 'nullable|max:250',
             'color' => 'nullable|max:10',
             'icon' => 'nullable|max:20',
             'is_main' => 'boolean',
