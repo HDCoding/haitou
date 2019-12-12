@@ -11,12 +11,12 @@ class ReportsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
     {
-        $reports = Report::select('id', 'name', 'report_type', 'is_solved')->orderBy('id', 'DESC')->paginate(30);
+        $reports = Report::select('id', 'name', 'report_type', 'is_solved')->orderBy('id', 'DESC')->get();
         return view('staff.reports.index', compact('reports'));
     }
 
