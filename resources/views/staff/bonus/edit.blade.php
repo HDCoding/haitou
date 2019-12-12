@@ -63,7 +63,7 @@
 
                         <div class="form-group">
                             {!! Form::label('quantity', 'Quantidade:') !!}
-                            {!! Form::text('quantity', $bon->getValue(), ['class' => 'form-control']) !!}
+                            {!! Form::text('quantity', $bon->value(), ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
@@ -71,8 +71,7 @@
                             {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
                         </div>
 
-                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
-                        <br>
+                        {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
