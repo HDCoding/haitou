@@ -6,7 +6,7 @@
     <!-- sceditor -->
     <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
     <!-- select2 -->
-    <link rel="stylesheet" href="{{ asset('vendor/select2/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -65,45 +65,43 @@
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-row">
                             <div class="form-group col-sm-3">
                                 <div class="form-material">
                                     {!! Form::label('allow_comments', 'Habilita comentário:') !!}
-                                    {!! Form::select('allow_comments', [false => 'Não', true => 'Sim'], null, ['class' => 'form-control', 'required']) !!}
+                                    {!! Form::select('allow_comments', [false => 'Não', true => 'Sim'], $torrent->allow_comments, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
                             <div class="form-group col-sm-3">
                                 <div class="form-material">
                                     {!! Form::label('is_freeleech', 'Free Leech:') !!}
-                                    {!! Form::select('is_freeleech', [false => 'Não', true => 'Sim'], null, ['class' => 'form-control', 'required']) !!}
+                                    {!! Form::select('is_freeleech', [false => 'Não', true => 'Sim'], $torrent->is_freeleech, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
                             <div class="form-group col-sm-3">
                                 <div class="form-material">
                                     {!! Form::label('is_silver', 'Silver:') !!}
-                                    {!! Form::select('is_silver', [false => 'Não', true => 'Sim'], null, ['class' => 'form-control', 'required']) !!}
+                                    {!! Form::select('is_silver', [false => 'Não', true => 'Sim'], $torrent->is_silver, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
                             <div class="form-group col-sm-3">
                                 <div class="form-material">
                                     {!! Form::label('is_doubleup', 'Double UP:') !!}
-                                    {!! Form::select('is_doubleup', [false => 'Não', true => 'Sim'], null, ['class' => 'form-control', 'required']) !!}
+                                    {!! Form::select('is_doubleup', [false => 'Não', true => 'Sim'], $torrent->is_doubleup, ['class' => 'form-control', 'required']) !!}
                                 </div>
                             </div>
                         </div>
 
-                        <br>
                         <div class="form-group">
                             <div class="form-material">
                                 {!! Form::label('description', 'Descrição: *') !!}
-                                {!! Form::textarea('description', null, ['class' => 'form-control note', 'rows' => 8]) !!}
+                                {!! Form::textarea('description', $torrent->description, ['class' => 'form-control note', 'rows' => 8]) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-9">
-                                {!! Form::submit('Editar', ['class' => 'btn btn-success btn-rounded btn-outline-success']) !!}
+                                {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
                             </div>
                         </div>
 
@@ -118,7 +116,7 @@
 
 @section('scripts')
     <!-- Select2 -->
-    <script src="{{ asset('vendor/select2/select2.js') }}"></script>
+    <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
@@ -129,7 +127,7 @@
         $(document).ready(function () {
             $(".select2").select2();
 
-            var textarea = document.getElementById('description');
+            let textarea = document.getElementById('description');
             sceditor.create(textarea, {
                 format: 'bbcode',
                 locale: 'pt-BR',
