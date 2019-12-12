@@ -143,6 +143,16 @@ if (!function_exists('hideref')) {
 }
 
 
+if (!function_exists('format_date_time')) {
+    /**
+     * Formata data do timestamp
+     */
+    function format_date_time($date_time)
+    {
+        return \Carbon\Carbon::parse($date_time)->format('d/m/Y H:i');
+    }
+}
+
 if (!function_exists('format_date')) {
     /**
      * Formata data do timestamp
