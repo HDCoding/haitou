@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- select2 -->
-    <link href="{{ asset('vendor/select2/select2.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -31,26 +31,31 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Conquistas</h4>
-                        <div class="table-responsive m-t-40">
+                        <h4 class="card-title">Adicionar Membro</h4>
+                        <a href="#" data-toggle="modal" data-target="#modal-add-member">
+                            <button type="button" class="btn btn-xs btn-outline-primary">
+                                <span class="ion ion-md-add"></span> Adicionar
+                            </button>
+                        </a>
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th>Nick</th>
                                     <th>Função</th>
                                     <th>Admin?</th>
-                                    <th class="text-center">Opções</th>
+                                    <th>Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($fansub_members as $member)
+                                @foreach($members as $member)
                                     <tr>
-                                        <td>{{ $member->user->name }}</td>
+                                        <th>{{ $member->user->username }}</th>
                                         <td>{{ $member->job }}</td>
                                         <td>{{ $member->is_admin ? 'Sim' : 'Não' }}</td>
-                                        <td class="text-center">
+                                        <td>
                                             <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('member-del-{{ $member->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Membro"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="javascript:;" onclick="document.getElementById('member-del-{{ $member->id }}').submit();" data-toggle="tooltip" title="Remover Membro"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/fansub/' . $member->id .'/delmembers', 'method' => 'DELETE', 'id' => 'member-del-' . $member->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -75,23 +80,23 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-row">
+                    <div class="form-row col-md-12">
                         <div class="form-group col-md-6">
                             <label class="form-label" for="user_id">Nick</label>
-                            {!! Form::select('user_id', $users, null, ['class' => 'custom-select form-control nickname']) !!}
+                            {!! Form::select('user_id', $users, null, ['class' => 'nickname form-control custom-select', 'style' => 'width: 100%; height:40px']) !!}
                         </div>
                         <div class="form-group col-md-6">
                             <label class="form-label" for="job">Função</label>
                             {!! Form::text('job', null, ['class' => 'form-control', 'placeholder' => 'Ex: Encoder', 'maxlength' => 40]) !!}
                         </div>
-                        <div class="form-group col-md-6">
-                            <label class="form-label" for="is_admin">Admin?</label>
-                            <select class="custom-select form-control" name="is_admin" id="is_admin" data-style="form-control">
-                                <option value="null" disabled selected>Membro é Admin?</option>
-                                <option value="1">Sim</option>
-                                <option value="0">Não</option>
-                            </select>
-                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="form-label" for="is_admin">Admin?</label>
+                        <select class="form-control custom-select" name="is_admin" id="is_admin" data-style="form-control">
+                            <option value="null" disabled selected>Admin?</option>
+                            <option value="1">Sim</option>
+                            <option value="0">Não</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -106,13 +111,15 @@
 
 @endsection
 
-@section('script')
+@section('scripts')
     <!-- Select2 -->
-    <script src="{{ asset('vendor/select2/select2.js') }}"></script>
+    <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function() {
             $(".nickname").select2({
+                placeholder: 'Selecione',
+                allowClear: true,
                 dropdownParent: $("#modal-add-member")
             });
         });
