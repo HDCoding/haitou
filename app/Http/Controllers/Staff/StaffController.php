@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Staff;
 
 use App\Helpers\SystemInformation;
 use App\Http\Controllers\Controller;
-use App\User;
-use Illuminate\Http\Request;
 use Spatie\SslCertificate\SslCertificate;
 
 class StaffController extends Controller
