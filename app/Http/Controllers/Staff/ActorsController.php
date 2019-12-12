@@ -6,7 +6,6 @@ use App\Helpers\ImageUploader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\ActorsRequest;
 use App\Models\Actor;
-use Illuminate\Http\Request;
 
 class ActorsController extends Controller
 {
