@@ -1,6 +1,6 @@
 <div class="card-body">
     @forelse($comments as $comment)
-        <div class="media pb-1 mb-3">
+        <div class="media pb-1 m-b-3">
             <img src="{{ $comment->user->getAvatar() }}" class="d-block ui-w-40 rounded-circle" alt="avatar">
             <div class="media-body ml-3">
                 {{ link_to_route('user.profile', $comment->user->name, ['slug' => $comment->user->slug]) }}
