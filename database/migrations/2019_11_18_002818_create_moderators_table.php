@@ -17,7 +17,7 @@ class CreateModeratorsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('forum_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('username', 25);
+            $table->string('username', 25)->nullable();
             $table->timestamps();
 
             $table->foreign('forum_id')->references('id')->on('forums')
