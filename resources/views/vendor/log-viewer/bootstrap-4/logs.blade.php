@@ -3,7 +3,7 @@
 <?php /** @var  Illuminate\Pagination\LengthAwarePaginator  $rows */ ?>
 
 @section('content')
-    <div class="page-header mb-4">
+    <div class="page-header m-b-4">
         <h1>Logs</h1>
     </div>
 
