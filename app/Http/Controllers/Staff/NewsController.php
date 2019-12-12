@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\NewsRequest;
 use App\Models\News;
-use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
