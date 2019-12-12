@@ -3,22 +3,42 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\UserBannedRequest;
+use App\Http\Requests\Staff\UserNotesRequest;
+use App\Http\Requests\Staff\UserSuspendedRequest;
+use App\Http\Requests\Staff\UserUpdatesRequest;
+use App\Http\Requests\Staff\UserWarnedRequest;
 use App\Models\Group;
+use App\Models\Moderate;
+use App\Models\Note;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function __construct()
+    private $pendent, $activated, $suspended, $banned;
+
+    public function __construct(User $user)
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
+        $this->pendent = $user->where('status', '=', 0)->count();
+        $this->activated =  $user->where('status', '=', 1)->count();
+        $this->suspended =  $user->where('status', '=', 2)->count();
+        $this->banned =  $user->where('status', '=', 3)->count();
     }
 
     public function index()
     {
+        $pendent = $this->pendent;
+        $activated = $this->activated;
+        $suspended = $this->suspended;
+        $banned = $this->banned;
+
         $users = User::with('group:id,name')->select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();
         $groups = Group::select('id', 'name')->get();
-        return view('staff.users.index', compact('users', 'groups'));
+        return view('staff.users.index', compact('users', 'groups', 'pendent', 'activated', 'suspended', 'banned'));
     }
 
     public function edit($user_id)
@@ -28,7 +48,7 @@ class UsersController extends Controller
         return view('staff.users.edit', compact('user', 'groups'));
     }
 
-    public function update(UsersUpdateRequest $request, $user_id)
+    public function update(UserUpdatesRequest $request, $user_id)
     {
         $user = User::find($user_id);
         $user->update($request->except('_token'));
@@ -37,10 +57,10 @@ class UsersController extends Controller
         if ($user->group_id !== $group) {
             $user->group_id = $group;
             $user->save();
-            $this->log::novo('Staff atualizou classe do membro', true);
+            //$this->log::novo('Staff atualizou classe do membro', true);
         }
 
-        $this->log::novo('Staff atualizou conta do membro', true);
+        //$this->log::novo('Staff atualizou conta do membro', true);
 
         toastr()->info('Usuário atualizado.', 'Sucesso');
         return redirect()->to('staff/users');
@@ -48,13 +68,13 @@ class UsersController extends Controller
 
     public function formBan($user_id)
     {
-        $user = DB::table('users')->select('id', 'name')->where('id', '=', $user_id)->first();
-        return view('staff.users.ban', compact('user'));
+        $user = DB::table('users')->select('id', 'username')->where('id', '=', $user_id)->first();
+        return view('staff.users.banning', compact('user'));
     }
 
-    public function postBan(BannedUsersRequest $request)
+    public function postBan(UserBannedRequest $request)
     {
-        $modUser = new ModeratedUser();
+        $modUser = new Moderate();
         $user_id = $request->input('user_id');
         $modUser->user_id = $user_id;
         $modUser->staff_id = $request->user()->id;
@@ -65,7 +85,7 @@ class UsersController extends Controller
 
         DB::table('users')->where('id', '=', $user_id)->update(['status' => 3]);
 
-        $this->log::novo('Staff baniu um membro', true);
+        //$this->log::novo('Staff baniu um membro', true);
 
         toastr()->warning('Usuário Banido.', 'Aviso');
         return redirect()->to('staff/users');
@@ -73,16 +93,16 @@ class UsersController extends Controller
 
     public function formSuspend($user_id)
     {
-        $user = DB::table('users')->select('id', 'name')->where('id', '=', $user_id)->first();
-        return view('staff.users.suspend', compact('user'));
+        $user = DB::table('users')->select('id', 'username')->where('id', '=', $user_id)->first();
+        return view('staff.users.suspending', compact('user'));
     }
 
-    public function postSuspend(SuspendedUsersRequest $request)
+    public function postSuspend(UserSuspendedRequest $request)
     {
-        $modUser = new ModeratedUser();
+        $modUser = new Moderate();
         $user_id = $request->input('user_id');
         $modUser->user_id = $user_id;
-        $modUser->staff_id = auth()->user()->id;
+        $modUser->staff_id = $request->user()->id;
         $modUser->title = $request->input('title');
         $modUser->description = $request->input('description');
         $modUser->is_suspended = true;
@@ -91,7 +111,7 @@ class UsersController extends Controller
 
         DB::table('users')->where('id', '=', $user_id)->update(['status' => 2]);
 
-        $this->log::novo('Staff suspendeu conta de membro', true);
+        //$this->log::novo('Staff suspendeu conta de membro', true);
 
         toastr()->info('Usuário Suspenso.', 'Aviso');
         return redirect()->to('staff/users');
@@ -99,16 +119,16 @@ class UsersController extends Controller
 
     public function formWarn($user_id)
     {
-        $user = DB::table('users')->select('id', 'name')->where('id', '=', $user_id)->first();
-        return view('staff.users.warn', compact('user'));
+        $user = DB::table('users')->select('id', 'username')->where('id', '=', $user_id)->first();
+        return view('staff.users.warning', compact('user'));
     }
 
-    public function postWarn(WarnedUsersRequest $request)
+    public function postWarn(UserWarnedRequest $request)
     {
-        $modUser = new ModeratedUser();
+        $modUser = new Moderate();
         $user_id = $request->input('user_id');
         $modUser->user_id = $user_id;
-        $modUser->staff_id = auth()->user()->id;
+        $modUser->staff_id = $request->user()->id;
         $modUser->title = $request->input('title');
         $modUser->description = $request->input('description');
         $modUser->is_warned = true;
@@ -117,7 +137,7 @@ class UsersController extends Controller
 
         DB::table('users')->where('id', '=', $user_id)->update(['is_warned' => true]);
 
-        $this->log::novo('Staff advertiu membro', true);
+        //$this->log::novo('Staff advertiu membro', true);
 
         toastr()->info('Usuário Advertido.', 'Aviso');
         return redirect()->to('staff/users');
@@ -125,17 +145,17 @@ class UsersController extends Controller
 
     public function formNote($user_id)
     {
-        $user = User::select('id', 'name')->where('id', '=', $user_id)->first();
-        $notes = UserNote::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
+        $user = User::select('id', 'username')->where('id', '=', $user_id)->first();
+        $notes = Note::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
         return view('staff.users.notes', compact('user', 'notes'));
     }
 
     public function postNote(UserNotesRequest $request)
     {
-        $note = new UserNote();
+        $note = new Note();
         $user_id = $request->input('user_id');
         $note->user_id = $user_id;
-        $note->staff_id = auth()->user()->id;
+        $note->staff_id = $request->user()->id;
         $note->description = $request->input('description');
         $note->save();
 
@@ -147,21 +167,29 @@ class UsersController extends Controller
     {
         if ($request->isMethod('POST')) {
 
+            $pendent = $this->pendent;
+            $activated = $this->activated;
+            $suspended = $this->suspended;
+            $banned = $this->banned;
+
             $groups = Group::select('id', 'name')->get();
 
-            $group = $request->input('group');
-            $status = $request->input('status');
+            $group = $request->get('group');
+            $status = $request->get('status');
 
-            if ($request->has('group') && !empty($group)) {
-                $users = User::with('group:id,name')->select('id', 'name', 'status')->where('group_id', '=', $group)->get(); // Returns only users with the group
+            if ($request->has('group') && !empty($group) && $group != null && $group != '') {
+                $users = User::with('group:id,name')
+                    ->select('id', 'group_id', 'username', 'avatar', 'status')
+                    ->where('group_id', '=', $group)
+                    ->get(); // Returns only users with the group
             }
-            if ($request->has('status') && !empty($status)) {
-                $users = User::where('status', '=', $status)->select('id', 'name', 'status')->get();
+            if ($request->has('status') && !empty($status) && $status != null && $status != '') {
+                $users = User::where('status', '==', $status)->select('id', 'group_id', 'username', 'avatar', 'status')->get();
             }
             if (empty($group) && empty($status)) {
-                $users = User::select('id', 'name', 'status')->orderBy('name', 'ASC')->get();
+                $users = User::select('id', 'group_id', 'username', 'avatar', 'status')->orderBy('username', 'ASC')->get();
             }
-            return view('staff.users.index', compact('users', 'groups'));
+            return view('staff.users.index', compact('users', 'groups', 'pendent', 'activated', 'suspended', 'banned'));
         } else {
             return redirect()->to('staff/users');
         }
