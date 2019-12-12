@@ -29,9 +29,9 @@
                         <h4 class="card-title">Resultados</h4>
                         <div class="panel panel-chat">
                             <div class="panel-body">
-                                @foreach ($poll->poll_options as $option)
-                                    <strong>{{ $option->option }}</strong>
-                                    <span class="pull-right">{{ $option->poll_votes()->count() }} Voto(s)</span>
+                                @foreach ($poll->options as $option)
+                                    <strong>{{ $option->name }}</strong>
+                                    <span class="pull-right">{{ $option->votes()->count() }} Voto(s)</span>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ $option->votesPercent($totalVotes) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $option->votesPercent($totalVotes) }}%;">
                                             {{ $option->votesPercent($totalVotes) }}%
