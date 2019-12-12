@@ -10,7 +10,7 @@
 
 <div class="form-group">
     {!! Form::label('image', 'Imagem: *') !!}
-    {!! Form::text('image', null, ['class' => 'form-control']) !!}
+    {!! Form::file('image', ['accept' => 'image/*']) !!}
 </div>
 
 <div class="form-group">
@@ -18,10 +18,10 @@
     {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
 </div>
 
-{!! Form::submit($submitButton, ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+{!! Form::submit($submitButton, ['class' => 'btn btn-rounded btn-outline-primary']) !!}
 <br>
 
-@section('script')
+@section('scripts')
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
