@@ -36,8 +36,7 @@
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
-                        <hr>
-                        <div class="demo-vertical-spacing">
+                        <div class="demo-vertical-spacing m-t-15">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#faq">F.A.Q</a>
@@ -56,7 +55,6 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="faq">
                                 <div class="card">
-                                    <div class="card-header">F.A.Q</div>
                                     <table class="table card-table">
                                         <thead class="thead-light">
                                         <tr>
@@ -64,7 +62,7 @@
                                             <th>Icone</th>
                                             <th>Posição</th>
                                             <th>Views</th>
-                                            <th>Opções</th>
+                                            <th class="text-center">Opções</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -79,16 +77,8 @@
                                                     <td>{{ $category->views }}</td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
-                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}" data-toggle="tooltip" title="Editar Categoria">
-                                                                <button type="button" class="btn btn-xs btn-outline-primary">
-                                                                    <span class="fas fa-pencil-alt"></span> Editar
-                                                                </button>
-                                                            </a>
-                                                            <a href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();" data-toggle="tooltip" title="Remover Categoria">
-                                                                <button type="button" class="btn btn-xs btn-outline-danger">
-                                                                    <span class="fas fa-times"></span> Deletar
-                                                                </button>
-                                                            </a>
+                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}" data-toggle="tooltip" title="Editar Categoria"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();" data-toggle="tooltip" title="Remover Categoria"><i class="fas fa-times text-danger"></i></a>
                                                             {!! Form::open(['url' => 'staff/categories/' . $category->id, 'method' => 'DELETE', 'id' => 'category-del-' . $category->id , 'style' => 'display: none']) !!}
                                                             {!! Form::close() !!}
                                                         </div>
@@ -102,7 +92,6 @@
                             </div>
                             <div class="tab-pane" id="forum">
                                 <div class="card">
-                                    <div class="card-header">Fórum</div>
                                     <table class="table card-table">
                                         <thead class="thead-light">
                                         <tr>
@@ -111,7 +100,7 @@
                                             <th>Icone</th>
                                             <th>Posição</th>
                                             <th>Views</th>
-                                            <th>Opções</th>
+                                            <th class="text-center">Opções</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -127,16 +116,8 @@
                                                     <td>{{ $category->views }}</td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
-                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}">
-                                                                <button type="button" class="btn btn-xs btn-outline-primary">
-                                                                    <span class="fas fa-pencil-alt" data-toggle="tooltip" title="Editar Categoria"></span> Editar
-                                                                </button>
-                                                            </a>
-                                                            <a href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();">
-                                                                <button type="button" class="btn btn-xs btn-outline-danger">
-                                                                    <span class="fas fa-times" data-toggle="tooltip" title="Remover Categoria"></span> Deletar
-                                                                </button>
-                                                            </a>
+                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}" data-toggle="tooltip" title="Editar Categoria"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();" data-toggle="tooltip" title="Remover Categoria"><i class="fas fa-times text-danger"></i></a>
                                                             {!! Form::open(['url' => 'staff/categories/' . $category->id, 'method' => 'DELETE', 'id' => 'category-del-' . $category->id , 'style' => 'display: none']) !!}
                                                             {!! Form::close() !!}
                                                         </div>
@@ -150,14 +131,13 @@
                             </div>
                             <div class="tab-pane" id="media">
                                 <div class="card">
-                                    <div class="card-header">Mídia</div>
                                     <table class="table card-table">
                                         <thead class="thead-light">
                                         <tr>
                                             <th>Nome</th>
                                             <th>Icone</th>
                                             <th>Views</th>
-                                            <th>Opções</th>
+                                            <th class="text-center">Opções</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -169,16 +149,8 @@
                                                     <td>{{ $category->views }}</td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
-                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}">
-                                                                <button type="button" class="btn btn-xs btn-outline-primary">
-                                                                    <span class="fas fa-pencil-alt" data-toggle="tooltip" title="Editar Categoria"></span> Editar
-                                                                </button>
-                                                            </a>
-                                                            <a href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();">
-                                                                <button type="button" class="btn btn-xs btn-outline-danger">
-                                                                    <span class="fas fa-times" data-toggle="tooltip" title="Remover Categoria"></span> Deletar
-                                                                </button>
-                                                            </a>
+                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}" data-toggle="tooltip" title="Editar Categoria"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();" data-toggle="tooltip" title="Remover Categoria"><i class="fas fa-times text-danger"></i></a>
                                                             {!! Form::open(['url' => 'staff/categories/' . $category->id, 'method' => 'DELETE', 'id' => 'category-del-' . $category->id , 'style' => 'display: none']) !!}
                                                             {!! Form::close() !!}
                                                         </div>
@@ -192,14 +164,13 @@
                             </div>
                             <div class="tab-pane" id="torrent">
                                 <div class="card">
-                                    <div class="card-header">Torrent</div>
                                     <table class="table card-table">
                                         <thead class="thead-light">
                                         <tr>
                                             <th>Nome</th>
                                             <th>Icone</th>
                                             <th>Views</th>
-                                            <th>Opções</th>
+                                            <th class="text-center">Opções</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -211,16 +182,8 @@
                                                     <td>{{ $category->views }}</td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
-                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}">
-                                                                <button type="button" class="btn btn-xs btn-outline-primary">
-                                                                    <span class="fas fa-pencil-alt" data-toggle="tooltip" title="Editar Categoria"></span> Editar
-                                                                </button>
-                                                            </a>
-                                                            <a href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();">
-                                                                <button type="button" class="btn btn-xs btn-outline-danger">
-                                                                    <span class="fas fa-times" data-toggle="tooltip" title="Remover Categoria"></span> Deletar
-                                                                </button>
-                                                            </a>
+                                                            <a href="{{ url('staff/categories/' . $category->id . '/edit') }}" data-toggle="tooltip" title="Editar Categoria"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('category-del-{{ $category->id }}').submit();" data-toggle="tooltip" title="Remover Categoria"><i class="fas fa-times text-danger"></i></a>
                                                             {!! Form::open(['url' => 'staff/categories/' . $category->id, 'method' => 'DELETE', 'id' => 'category-del-' . $category->id , 'style' => 'display: none']) !!}
                                                             {!! Form::close() !!}
                                                         </div>
