@@ -11,13 +11,13 @@ class NewsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
     {
         $news = News::with('user:id,username')
-            ->select('id', 'user_id', 'name', 'views')
+            ->select('id', 'user_id', 'name', 'views', 'is_published')
             ->orderBy('id', 'DESC')->get();
         return view('staff.news.index', compact('news'));
     }
@@ -30,7 +30,7 @@ class NewsController extends Controller
     public function store(NewsRequest $request)
     {
         $new = new News($request->except('_token'));
-        $new->staff_id = auth()->user()->id;
+        $new->user_id = $request->user()->id;
         $new->save();
         toastr()->success('News cadastrada.', 'Sucesso');
         return redirect()->to('staff/news');
@@ -45,7 +45,6 @@ class NewsController extends Controller
     public function update(NewsRequest $request, $news_id)
     {
         $new = News::findOrFail($news_id);
-        $new->staff_id = auth()->user()->id;
         $new->update($request->except('_token'));
         toastr()->info('News atualizada.', 'Sucesso');
         return redirect()->to('staff/news');
