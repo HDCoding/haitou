@@ -44,18 +44,18 @@
                                 <tr>
                                     <td class="text-center">
                                         <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" id="option" name="option[]" value="{{ $option->id }}"><span></span>
+                                            <input type="checkbox" id="name" name="name[]" value="{{ $option->id }}"><span></span>
                                         </label>
                                     </td>
                                     <td>
-                                        {{ $option->option }}
+                                        {{ $option->name }}
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                         <br>
-                        {!! Form::submit('Remover', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Remover', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
