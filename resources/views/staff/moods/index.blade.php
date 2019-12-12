@@ -5,6 +5,8 @@
 @section('css')
     <!-- X-Editable -->
     <link href="{{ asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -35,8 +37,8 @@
                             <b class="text-danger">OBS:</b>
                             <b>Nome</b> = max: 45 caracteres - <b>Pontos</b> = min: 1 - max 120
                         </div>
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
                                     <th>Imagem</th>
@@ -51,11 +53,11 @@
                                         <th>
                                             <img class="img-avatar img-avatar48" src="{{ $mood->image() }}" alt="">
                                         </th>
-                                        <td><a href="#" class="MoodText" id="name" data-type="text" data-column="name" data-title="Editar Mood" data-name="name" data-value="{{ $mood->name }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', ['id' => $mood->id]) }}">{{ $mood->name }}</a></td>
-                                        <td><a href="#" class="MoodNumber" id="points" data-type="number" data-column="points" data-title="Editar Ponto" data-name="points" data-value="{{ $mood->points }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', ['id' => $mood->id]) }}">{{ $mood->points }}</a></td>
+                                        <td><a href="#" class="MoodText" id="name" data-type="text" data-column="name" data-title="Editar Mood" data-name="name" data-value="{{ $mood->name }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->name }}</a></td>
+                                        <td><a href="#" class="MoodNumber" id="points" data-type="number" data-column="points" data-title="Editar Ponto" data-name="points" data-value="{{ $mood->points }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->points }}</a></td>
                                         {{-- <td class="text-center"> --}}
                                         {{-- <div class="btn-group"> --}}
-                                        {{-- <a href="javascript:;" onclick="document.getElementById('mood-del-{{ $mood->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover"><i class="fa fa-times text-danger"></i></a> --}}
+                                        {{-- <a href="javascript:;" onclick="document.getElementById('mood-del-{{ $mood->id }}').submit();" data-toggle="tooltip" title="Remover"><i class="fa fa-times text-danger"></i></a> --}}
                                         {{-- {!! Form::open(['url' => 'moods/' . $mood->id, 'method' => 'DELETE', 'id' => 'mood-del-' . $mood->id , 'style' => 'display: none']) !!} --}}
                                         {{-- {!! Form::close() !!} --}}
                                         {{-- </div> --}}
@@ -76,8 +78,21 @@
 @section('scripts')
     <!-- X-Editable -->
     <script src="{{ asset('vendor/x-editable/dist/js/bootstrap-editable.min.js') }}"></script>
+    <!-- DataTable -->
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function() {
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
