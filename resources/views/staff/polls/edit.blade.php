@@ -59,7 +59,7 @@
                             @endforeach
                         </ul>
                         <hr>
-                        {!! Form::submit('Editar', ['class' => 'btn btn-success btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
                         <br>
                         {!! Form::close() !!}
                     </div>
@@ -70,7 +70,7 @@
 
 @endsection
 
-@section('script')
+@section('scripts')
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
