@@ -9,14 +9,14 @@
 @extends('log-viewer::bootstrap-4._master')
 
 @section('content')
-    <div class="page-header mb-4">
+    <div class="page-header m-b-4">
         <h1>Log [{{ $log->date }}]</h1>
     </div>
 
     <div class="row">
         <div class="col-lg-2">
             {{-- Log Menu --}}
-            <div class="card mb-4">
+            <div class="card m-b-4">
                 <div class="card-header"><i class="fa fa-fw fa-flag"></i> Levels</div>
                 <div class="list-group list-group-flush log-menu">
                     @foreach($log->menu() as $levelKey => $item)
@@ -37,7 +37,7 @@
         </div>
         <div class="col-lg-10">
             {{-- Log Details --}}
-            <div class="card mb-4">
+            <div class="card m-b-4">
                 <div class="card-header">
                     Log info :
                     <div class="group-btns pull-right">
@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-condensed mb-0">
+                    <table class="table table-condensed m-b-0">
                         <tbody>
                             <tr>
                                 <td>File path :</td>
@@ -100,7 +100,7 @@
             </div>
 
             {{-- Log Entries --}}
-            <div class="card mb-4">
+            <div class="card m-b-4">
                 @if ($entries->hasPages())
                     <div class="card-header">
                         <span class="badge badge-info float-right">
@@ -110,7 +110,7 @@
                 @endif
 
                 <div class="table-responsive">
-                    <table id="entries" class="table mb-0">
+                    <table id="entries" class="table m-b-0">
                         <thead>
                             <tr>
                                 <th>ENV</th>
