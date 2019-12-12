@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Conquistas')
+@section('title', 'Editar')
 
 @section('content')
 
@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::model($actor, ['url' => 'staff/actors/' . $actor->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($actor, ['url' => 'staff/actors/' . $actor->id, 'method' => 'PUT', 'files' => true, 'class' => 'form-horizontal']) !!}
                         @include('staff.actors.form', ['submitButton' => 'Editar'])
                         {!! Form::close() !!}
                     </div>
