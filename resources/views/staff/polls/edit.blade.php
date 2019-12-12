@@ -54,13 +54,12 @@
                         <hr>
                         Opções:
                         <ul class="options">
-                            @foreach($poll->poll_options as $option)
-                                <li>{{ $option->option }}</li>
+                            @foreach($poll->options as $option)
+                                <li>{{ $option->name }}</li>
                             @endforeach
                         </ul>
                         <hr>
                         {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
-                        <br>
                         {!! Form::close() !!}
                     </div>
                 </div>
