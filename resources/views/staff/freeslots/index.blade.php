@@ -26,7 +26,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.freeslots')</h4>
-                        <div class="table-responsive m-t-40">
+                        <a href="{{ url('staff/freeslots/create') }}">
+                            <button type="button" class="btn btn-xs btn-outline-primary">
+                                <span class="ion ion-md-add"></span> Adicionar
+                            </button>
+                        </a>
+                        <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
                                 <tr>
