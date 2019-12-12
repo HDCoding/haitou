@@ -50,7 +50,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group mb-3">
+                        <div class="form-group m-b-3">
                             <div class="col-sm-8">
                                 {!! Form::label('description', 'Descrição: *') !!}
                                 {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8, 'required']) !!}
@@ -101,10 +101,9 @@
                             </tbody>
                         </table>
 
-                        <br>
                         <div class="form-group">
                             <div class="col-sm-5">
-                                {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                                {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}
