@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\BonusRequest;
 use App\Models\Bonus;
-use Illuminate\Http\Request;
 
 class BonusController extends Controller
 {
@@ -49,6 +48,22 @@ class BonusController extends Controller
         return redirect()->to('staff/bonus');
     }
 
+    private function convert($size, $unit)
+    {
+        $convert = null;
+
+        if ($unit == 0) {
+            $convert = round($size * 1024 * 1024, 4);
+        }
+        if ($unit == 1) {
+            $convert = round($size * 1024 * 1024 * 1024, 4);
+        }
+        if ($unit == 2) {
+            $convert = round($size * 1024 * 1024 * 1024 * 1024, 4);
+        }
+        return $convert;
+    }
+
     public function edit($bonus_id)
     {
         $bon = Bonus::findOrFail($bonus_id);
@@ -85,22 +100,6 @@ class BonusController extends Controller
         Bonus::findOrFail($bonus_id)->delete();
         toastr()->warning('Bônus deletado.', 'Aviso');
         return redirect()->to('staff/bonus');
-    }
-
-    private function convert($size, $unit)
-    {
-        $convert = null;
-
-        if ($unit == 0) {
-            $convert = round($size * 1024 * 1024, 4);
-        }
-        if ($unit == 1) {
-            $convert = round($size * 1024 * 1024 * 1024, 4);
-        }
-        if ($unit == 2) {
-            $convert = round($size * 1024 * 1024 * 1024 * 1024, 4);
-        }
-        return $convert;
     }
 
     public function enableDisable($bonus_id)
