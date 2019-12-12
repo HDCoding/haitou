@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\GroupsRequest;
 use App\Models\Group;
-use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {
