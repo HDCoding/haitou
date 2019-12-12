@@ -26,6 +26,8 @@ class Character extends Model
         'views'
     ];
 
+    const uploaderFolder = 'characters';
+
     public function sluggable()
     {
         return [
