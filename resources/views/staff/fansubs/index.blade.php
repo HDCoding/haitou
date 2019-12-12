@@ -2,6 +2,11 @@
 
 @section('title', trans('dashboard.fansubs'))
 
+@section('css')
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -25,39 +30,35 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Conquistas</h4>
-                        <a href="{{ secure_url('staff/fansubs/create') }}">
+                        <h4 class="card-title">@lang('dashboard.fansubs')</h4>
+                        <a href="{{ url('staff/fansubs/create') }}">
                             <button type="button" class="btn btn-xs btn-outline-primary">
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th class="text-center"><i class="fas fa-user"></i></th>
-                                    <th class="text-center">Nome</th>
-                                    <th class="text-center"><i class="fas fa-file-alt text-warning"></i> Torrents</th>
-                                    <th class="text-center"><i class="fas fa-eye"></i> Views</th>
-                                    <th class="text-center">Opções</th>
+                                    <th><i class="fas fa-user"></i></th>
+                                    <th>Nome</th>
+                                    <th><i class="fas fa-file-alt text-warning"></i> Torrents</th>
+                                    <th><i class="fas fa-eye"></i> Views</th>
+                                    <th>Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($fansubs as $fansub)
                                     <tr>
-                                        <td class="text-center">
-                                            <img class="" src="{{ $fansub->logo }}" alt="{{ $fansub->name }}" width="70px">
-                                        </td>
-                                        <td class="text-center">{{ $fansub->name }}</td>
-                                        <td class="text-center">{{ $fansub->torrents->count() }}</td>
-                                        <td class="text-center">
-                                            <span class="badge badge-info">{{ $fansub->views }}</span>
-                                        </td>
-                                        <td class="text-center">
+                                        <th><img src="{{ $fansub->logo }}" alt="{{ $fansub->name }}" width="70px"></th>
+                                        <td>{{ $fansub->name }}</td>
+                                        <td>{{ $fansub->torrents->count() }}</td>
+                                        <td><span class="badge badge-info">{{ $fansub->views }}</span></td>
+                                        <td>
                                             <div class="btn-group">
-                                                <a href="{{ secure_url('staff/fansub/' . $fansub->id . '/members') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Fansub Membros"><i class="fas fa-users text-success"></i> Membros</a>
-                                                <a href="{{ secure_url('staff/fansubs/' . $fansub->id . '/edit') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Editar Fansub"><i class="fas fa-pencil-alt text-info"></i> Editar</a>
-                                                <a href="javascript:;" onclick="document.getElementById('fansub-del-{{ $fansub->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Fansub"><i class="fas fa-times text-danger"></i> Deletar</a>
+                                                <a href="{{ url('staff/fansub/' . $fansub->id . '/members') }}" data-toggle="tooltip" title="Fansub Membros"><i class="fas fa-users text-success"></i></a>
+                                                <a class="m-l-15" href="{{ url('staff/fansubs/' . $fansub->id . '/edit') }}" data-toggle="tooltip" title="Editar Fansub"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('fansub-del-{{ $fansub->id }}').submit();" data-toggle="tooltip" title="Remover Fansub"><i class="fas fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/fansubs/' . $fansub->id, 'method' => 'DELETE', 'id' => 'fansub-del-' . $fansub->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -73,4 +74,21 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @endsection
