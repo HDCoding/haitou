@@ -34,7 +34,7 @@
                         <h4 class="card-title">Report</h4>
                         @includeIf('errors.errors', [$errors])
 
-                        <h5 class="push-15 mb-3">Link:
+                        <h5 class="push-15 m-b-3">Link:
                             @if ($report->calendar)
                                 <p class="well well-sm mt-2">
                                     <a href="{{ route('calendars', ['id' => $report->calendar->id]) }}" target="_blank">
@@ -59,7 +59,7 @@
                                 </p>
                             @endif
 
-                            @if ($report->forum_post)
+                            @if ($report->post)
                                 <p class="well well-sm mt-2">
                                     <a href="{{ route('user.profile', ['slug' => $report->forum_post->slug]) }}" target="_blank">
                                         {{ $report->name }}
@@ -76,15 +76,15 @@
                             @endif
                         </h5>
 
-                        <h5 class="push-15 mb-3">Categoria: {!! $report->getType() !!}</h5>
+                        <h5 class="push-15 m-b-3">Categoria: {!! $report->type() !!}</h5>
                         <p class="h5 mt-5">Problema:</p>
 
-                        {!! $report->getReasonHtml() !!}
+                        {!! $report->reasonHtml() !!}
 
                         @if($report->is_solved)
                             <p class="h5 push-15 mt-4">Solução:</p>
                             <div class="col-sm-12">
-                                {!! $report->getSolutionHtml() !!}
+                                {!! $report->solutionHtml() !!}
                             </div>
                         @else
                             {!! Form::model($report, ['url' => 'staff/reports/' . $report->id, 'method' => 'PUT', 'class' => 'form-horizontal mt-5']) !!}
@@ -121,7 +121,7 @@
     <!-- script -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function() {
-            var textarea = document.getElementById('solution');
+            let textarea = document.getElementById('solution');
             sceditor.create(textarea, {
                 format: 'bbcode',
                 locale: 'pt-BR',
