@@ -2,6 +2,11 @@
 
 @section('title', trans('dashboard.polls'))
 
+@section('css')
+    <!-- DataTables -->
+    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -31,18 +36,17 @@
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
-                        <hr>
-                        <div class="table-responsive m-t-40">
-                            <table class="table">
+                        <div class="table-responsive m-t-15">
+                            <table class="table" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th style="width: 5%;">#</th>
-                                    <th style="width: 30%;">Pergunta</th>
-                                    <th style="width: 12%;">Multipla escolha</th>
-                                    <th style="width: 50px;">Tópico</th>
-                                    <th style="width: 10px;">Fechado</th>
-                                    <th style="width: 10px;">Votos</th>
-                                    <th style="width: 10px;">Criado em</th>
+                                    <th>#</th>
+                                    <th>Pergunta</th>
+                                    <th>Multipla escolha</th>
+                                    <th>Tópico</th>
+                                    <th>Fechado</th>
+                                    <th>Votos</th>
+                                    <th>Criado em</th>
                                     <th class="text-center" style="width: 100px;">Opções</th>
                                 </tr>
                                 </thead>
@@ -50,11 +54,11 @@
                                 @foreach($polls as $poll)
                                     <tr>
                                         <td>{{ $poll->id }}</td>
-                                        <td>{{ link_to_route('polls.show', $poll->name, ['id' => $poll->id]) }}</td>
+                                        <td>{{ link_to_route('polls.show', $poll->name, $poll->id) }}</td>
                                         <td>{{ $poll->multi_choice ? 'Sim' : 'Não' }}</td>
-                                        <td>{{ $poll->getName() }}</td>
-                                        <td class="text-center">
-                                            <a href="javascript:;" onclick="document.getElementById('poll-upd-{{ $poll->id }}').submit();" class="btn btn-xs" type="button">
+                                        <td>{{ $poll->name() }}</td>
+                                        <td>
+                                            <a href="javascript:;" onclick="document.getElementById('poll-upd-{{ $poll->id }}').submit();">
                                                 @if($poll->is_closed)
                                                     <i class="fa fa-stop text-danger" data-toggle="tooltip" title="Fechado"></i>
                                                 @else
@@ -64,14 +68,14 @@
                                             {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/update', 'method' => 'PUT', 'id' => 'poll-upd-' . $poll->id, 'style' => 'display: none']) !!}
                                             {!! Form::close() !!}
                                         </td>
-                                        <td>{{ $poll->poll_votes()->count() }}</td>
-                                        <td>{{ $poll->created_at->format('d/m/Y') }}</td>
+                                        <td>{{ $poll->votes()->count() }}</td>
+                                        <td>{{ format_date($poll->created_at) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/poll/' . $poll->id . '/options/add') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
-                                                <a href="{{ url('staff/poll/' . $poll->id . '/options/remove') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
-                                                <a href="{{ url('staff/polls/' . $poll->id . '/edit') }}" class="btn btn-xs" type="button" data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
-                                                <a href="javascript:;" onclick="document.getElementById('poll-del-{{ $poll->id }}').submit();" class="btn btn-xs" type="button" data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="{{ url('staff/poll/' . $poll->id . '/options/add') }}" data-toggle="tooltip" title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
+                                                <a class="m-l-15" href="{{ url('staff/poll/' . $poll->id . '/options/remove') }}" data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
+                                                <a class="m-l-15" href="{{ url('staff/polls/' . $poll->id . '/edit') }}" data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('poll-del-{{ $poll->id }}').submit();" data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/polls/' . $poll->id, 'method' => 'DELETE', 'id' => 'poll-del-' . $poll->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
@@ -87,4 +91,21 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "displayLength": 50,
+                "searching": true,
+                "responsive": true,
+                "order": [[ 1, "asc" ]],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                }
+            });
+        });
+    </script>
 @endsection
