@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\SettingsRequest;
 use App\Models\Setting;
-use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
