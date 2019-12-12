@@ -51,14 +51,14 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('option', 'Opção 1: *', ['class' => 'col-xs-12']) !!}
-                            {!! Form::text('option[]', null, ['class' => 'form-control', 'maxlength' => 250, 'required']) !!}
+                            {!! Form::label('name', 'Opção 1: *', ['class' => 'col-xs-12']) !!}
+                            {!! Form::text('name[]', null, ['class' => 'form-control', 'maxlength' => 250, 'required']) !!}
                         </div>
 
                         <div class="form-group after-add-more">
-                            {!! Form::label('option', 'Opção 2: *', ['class' => 'col-xs-12']) !!}
+                            {!! Form::label('name', 'Opção 2: *', ['class' => 'col-xs-12']) !!}
                             <div class="input-group">
-                                {!! Form::text('option[]', null, ['class' => 'form-control', 'maxlength' => 250, 'required']) !!}
+                                {!! Form::text('name[]', null, ['class' => 'form-control', 'maxlength' => 250, 'required']) !!}
                                 <span class="input-group-btn">
                                     <button class="btn btn-success add-more" type="button">
                                         <i class="fa fa-plus-circle"></i>
@@ -66,16 +66,14 @@
                                 </span>
                             </div>
                         </div>
-
-                        <br>
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
                         {!! Form::close() !!}
 
                         <!-- Copy Fields-These are the fields which we get through jquery and then add after the above input -->
                         <div class="form-group copy-fields" id="hide" style="display: none">
-                            <label for="option" class="col-xs-12">Opção: *</label>
+                            <label for="name" class="col-xs-12">Opção: *</label>
                             <div class="form-group control-group input-group">
-                                <input type="text" name="option[]" class="form-control" maxlength="250" required>
+                                <input type="text" name="name[]" class="form-control" maxlength="250" required>
                                 <div class="input-group-btn">
                                     <button class="btn btn-danger remove" type="button">
                                         <i class="fa fa-minus-circle"></i>
