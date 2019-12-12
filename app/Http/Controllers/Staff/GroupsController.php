@@ -11,7 +11,7 @@ class GroupsController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -29,7 +29,6 @@ class GroupsController extends Controller
     {
         Group::create([
             'name' => $request->input('name'),
-            'description' => $request->input('description'),
             'color' => $request->input('color'),
             'icon' => $request->input('icon'),
             'hnr' => ($request->input('hnr') * 3600)
@@ -49,7 +48,6 @@ class GroupsController extends Controller
     {
         $group = Group::findOrFail($group_id);
         $group->name = $request->input('name');
-        $group->description = $request->input('description');
         $group->color = $request->input('color');
         $group->icon = $request->input('icon');
         $group->hnr = ($request->input('hnr') * 3600);
