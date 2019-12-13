@@ -34,7 +34,7 @@ class Setting extends Model
      */
     public static function allCached()
     {
-        return Cache::tags(['settings'])->rememberForever('settings.all:pt-br', function () {
+        return Cache::tags(['settings'])->rememberForever('settings.all', function () {
             return self::all()->mapWithKeys(function ($setting) {
                 return [$setting->key => $setting->value];
             });
@@ -48,7 +48,7 @@ class Setting extends Model
      */
     public static function has($key)
     {
-        return static::where('key', $key)->exists();
+        return static::where('key', '=', $key)->exists();
     }
 
     /**
@@ -59,7 +59,7 @@ class Setting extends Model
      */
     public static function get($key, $default = null)
     {
-        return static::where('key', $key)->first()->value ?? $default;
+        return static::where('key', '=', $key)->select('value')->first()->value ?: $default;
     }
 
     /**
@@ -75,9 +75,9 @@ class Setting extends Model
 
     /**
      * Set the given settings.
-     * @param $settings
+     * @param array $settings
      */
-    public static function setMany($settings)
+    public static function setMany(array $settings)
     {
         foreach ($settings as $key => $value) {
             self::set($key, $value);
@@ -90,15 +90,23 @@ class Setting extends Model
      */
     public function getValueAttribute()
     {
-        return unserialize($this->value);
+        if (isset($this->attributes['value']) AND $this->attributes['value']) {
+            return $this->attributes['value'];
+        }
+        return unserialize($this->attributes['value']);
     }
 
     /**
      * Set the value of the setting.
      * @param $value
      */
-    public function setPlainValueAttribute($value)
+    public function setValueAttribute($value)
     {
         $this->attributes['value'] = serialize($value);
+    }
+
+    public function __toString()
+    {
+        return $this->getValueAttribute();
     }
 }
