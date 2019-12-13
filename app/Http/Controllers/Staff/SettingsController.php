@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\SettingsRequest;
 use App\Models\Setting;
+use Illuminate\Support\Facades\View;
 
 class SettingsController extends Controller
 {
@@ -15,14 +16,23 @@ class SettingsController extends Controller
 
     public function index()
     {
-        $setting = Setting::all();
-        return view('staff.settings.index', compact('setting'));
+        $settings = setting()->all();
+        return View::make('staff.settings.index', compact('settings'));
+//        return view('staff.settings.index', compact('settings'));
     }
 
-    public function update(SettingsRequest $request, $setting_id)
+    public function edit($setting_id)
     {
-        Setting::findOrFail($setting_id)->update($request->except('_token'));
-        toastr()->info('Configurações atualizada.', 'Sucesso');
+        $setting = Setting::find($setting_id);
+        return view('staff.settings.edit', compact('setting'));
+    }
+
+    public function update(SettingsRequest $request)
+    {
+
+        setting($request->except('_token', '_method'));
+
+        toastr()->info('Configuração atualizada.', 'Sucesso');
         return redirect()->to('staff/settings');
     }
 }
