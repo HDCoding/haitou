@@ -43,7 +43,7 @@
                                     <th>Freeleech</th>
                                     <th>Silver</th>
                                     <th>DoubleUP</th>
-                                    <th>Opções</th>
+                                    <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -54,10 +54,21 @@
                                         <td>{{ $freeslot->required }}</td>
                                         <td>{{ $freeslot->actual }}</td>
                                         <td>{{ $freeslot->days }}</td>
-                                        <td>{{ $freeslot->is_freeleech }}</td>
-                                        <td>{{ $freeslot->is_silver }}</td>
-                                        <td>{{ $freeslot->is_doubleup }}</td>
-                                        <td>Deletar?</td>
+                                        <td>{{ $freeslot->is_freeleech == 1 ? 'Sim' : 'Nao' }}</td>
+                                        <td>{{ $freeslot->is_silver == 1 ? 'Sim' : 'Nao' }}</td>
+                                        <td>{{ $freeslot->is_doubleup == 1 ? 'Sim' : 'Nao' }}</td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="{{ url('staff/freeslots/' . $freeslot->id . '/edit') }}" data-toggle="tooltip" title="Editar FreeSlot">
+                                                    <span class="fas fa-pencil-alt text-info"></span>
+                                                </a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('freeslot-del-{{ $freeslot->id }}').submit();" data-toggle="tooltip" title="Remover FreeSlot">
+                                                    <span class="fas fa-times text-danger"></span>
+                                                </a>
+                                                {!! Form::open(['url' => 'staff/freeslots/' . $freeslot->id, 'method' => 'DELETE', 'id' => 'freeslot-del-' . $freeslot->id , 'style' => 'display: none']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
