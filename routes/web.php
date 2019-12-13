@@ -256,7 +256,7 @@ Route::namespace('Site')->group(function () {
             Route::resource('fansubs', 'FansubsController')->except(['show']);
             //Fansub members
             Route::get('fansub/{id}/members', 'FansubsController@members');
-            Route::post('fansub/addmembers', 'FansubsController@addMembers');
+            Route::post('fansub/{fansub_id}/addmembers', 'FansubsController@addMembers')->name('staff.fansub.addmember');
             Route::delete('fansub/{member_id}/delmembers', 'FansubsController@delMembers');
             //Faqs
             Route::resource('faqs', 'FaqsController');
@@ -305,8 +305,7 @@ Route::namespace('Site')->group(function () {
             //Reports
             Route::resource('reports', 'ReportsController')->only(['index', 'show', 'update']);
             //Freeslots
-            Route::resource('freeslots', 'FreeSlotsController')->only(['index', 'update']);
-            Route::post('freeslots/enableDisable', 'FreeSlotsController@enableDisable');
+            Route::resource('freeslots', 'FreeSlotsController')->except(['show']);
             //Rules
             Route::resource('rules', 'RulesController')->except(['show']);
             //Settings
