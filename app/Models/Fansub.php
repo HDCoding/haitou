@@ -36,11 +36,14 @@ class Fansub extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'users');
+    }
+
     public function users()
     {
-        return $this->belongsToMany(User::class, 'fansub_users')
-            ->withPivot('id', 'job', 'is_admin')
-            ->withTimestamps();
+        return $this->hasMany(FansubUser::class);
     }
 
     public function torrents()
