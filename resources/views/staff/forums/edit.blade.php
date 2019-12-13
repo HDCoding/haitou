@@ -61,38 +61,38 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Grupos</th>
-                                <th>Ver o fórum</th>
-                                <th>Ler tópicos</th>
-                                <th>Responder aos tópicos</th>
-                                <th>Iniciar novo tópico</th>
+                                <th class="text-center">Grupos</th>
+                                <th class="text-center">Ver o fórum</th>
+                                <th class="text-center">Ler tópicos</th>
+                                <th class="text-center">Responder aos tópicos</th>
+                                <th class="text-center">Iniciar novo tópico</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($roles as $role)
+                            @foreach ($groups as $group)
                                 <tr>
-                                    <td>{{ $role->name }}</td>
-                                    <td>
+                                    <th class="text-center">{{ $group->name }}</th>
+                                    <td class="text-center">
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][view_forum]" value="1" {{ $role->getPermissionsByForum($forum)->view_forum ? 'checked' : '' }}>
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][view_forum]" value="1" {{ $group->permissionsByForum($forum)->view_forum ? 'checked' : '' }}>
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][read_topic]" value="1" {{ $role->getPermissionsByForum($forum)->read_topic ? 'checked' : '' }}>
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][read_topic]" value="1" {{ $group->permissionsByForum($forum)->read_topic ? 'checked' : '' }}>
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][reply_topic]" value="1" {{ $role->getPermissionsByForum($forum)->reply_topic ? 'checked' : '' }}>
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][reply_topic]" value="1" {{ $group->permissionsByForum($forum)->reply_topic ? 'checked' : '' }}>
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][start_topic]" value="1" {{ $role->getPermissionsByForum($forum)->start_topic ? 'checked' : '' }}>
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][start_topic]" value="1" {{ $group->permissionsByForum($forum)->start_topic ? 'checked' : '' }}>
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
