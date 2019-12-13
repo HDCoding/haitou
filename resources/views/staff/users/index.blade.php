@@ -63,29 +63,29 @@
                                                 <div class="dropdown-menu">
                                                     @if($user->status != 3)
                                                         <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/ban') }}">
-                                                            <i class="fa fa-ban text-danger"></i> Banir Usuário
+                                                            <i class="fa fa-ban text-danger m-r-10"></i> Banir Usuário
                                                         </a>
                                                     @endif
                                                     @if($user->status != 2)
                                                         <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/suspend') }}">
-                                                            <i class="fa fa-pause text-success"></i> Suspender Usuário
+                                                            <i class="fa fa-pause text-success m-r-10"></i> Suspender Usuário
                                                         </a>
                                                     @endif
                                                     @if($user->status != 2 || $user->status != 3)
                                                         <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/warn') }}">
-                                                            <i class="fas fa-hand-point-right text-warning"></i> Advertir Usuário
+                                                            <i class="fas fa-hand-point-right text-warning m-r-10"></i> Advertir Usuário
                                                         </a>
                                                     @endif
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="{{ url('staff/users/' . $user->id . '/edit') }}">
-                                                        <i class="fas fa-pencil-alt text-info"></i> Editar Usuário
+                                                        <i class="fas fa-pencil-alt text-info m-r-10"></i> Editar Usuário
                                                     </a>
                                                     <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/permissions') }}">
-                                                        <i class="fas fa-key text-success"></i> Editar Permissões
+                                                        <i class="fas fa-key text-success m-r-10"></i> Editar Permissões
                                                     </a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/notes') }}">
-                                                        <i class="fas fa-book text-info"></i> Anotações
+                                                        <i class="fas fa-book text-info m-r-10"></i> Anotações
                                                     </a>
                                                 </div>
                                             </div>
@@ -132,37 +132,31 @@
                                 </div>
                             </div>
                         {!! Form::close() !!}
-                        <h4 class="card-title m-t-30">Grupos</h4>
-                        <div class="list-group">
-                            <a href="javascript:void(0)" class="list-group-item"><i class="ti-flag-alt-2 m-r-10"></i> 1
-                                <span class="badge badge-info float-right">20</span>
-                            </a>
-                            <a href="javascript:void(0)" class="list-group-item"><i class="ti-notepad m-r-10"></i> 2
-                                <span class="badge badge-success float-right">12</span>
-                            </a>
-                            <a href="javascript:void(0)" class="list-group-item"><i class="ti-target m-r-10"></i> 3
-                                <span class="badge badge-dark float-right">22</span>
-                            </a>
-                            <a href="javascript:void(0)" class="list-group-item"><i class="ti-comments m-r-10"></i> 4
-                                <span class="badge badge-danger float-right">101</span>
-                            </a>
-                        </div>
                         <h4 class="card-title m-t-30">Contas</h4>
                         <div class="list-group">
                             <p class="list-group-item">
-                                <span class="badge badge-success m-r-10"><i class="fa fa-user-check"></i></span> Ativadas
+                                <span class="badge badge-success m-r-10">
+                                    <i class="fa fa-user-check"></i>
+                                </span>
+                                Ativadas
                                 <span class="float-right">{{ $activated }}</span>
                             </p>
                             <a class="list-group-item">
-                                <span class="badge badge-danger m-r-10"><i class="fa fa-user-alt-slash"></i></span> Banidas
+                                <span class="badge badge-danger m-r-10">
+                                    <i class="fa fa-user-alt-slash"></i>
+                                </span> Banidas
                                 <span class="float-right">{{ $banned }}</span>
                             </a>
                             <a class="list-group-item">
-                                <span class="badge badge-info m-r-10"><i class="fa fa-user-clock"></i></span> Pendentes
+                                <span class="badge badge-info m-r-10">
+                                    <i class="fa fa-user-clock"></i>
+                                </span> Pendentes
                                 <span class="float-right">{{ $pendent }}</span>
                             </a>
                             <a class="list-group-item">
-                                <span class="badge badge-warning m-r-10"><i class="fa fa-user-lock"></i></span> Suspensas
+                                <span class="badge badge-warning m-r-10">
+                                    <i class="fa fa-user-lock"></i>
+                                </span> Suspensas
                                 <span class="float-right">{{ $suspended }}</span>
                             </a>
                         </div>
