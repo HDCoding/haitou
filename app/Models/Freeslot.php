@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Freeslot extends Model
 {
+    use Sluggable;
     use SoftDeletes;
     protected $table = 'freeslots';
 
@@ -56,5 +58,14 @@ class Freeslot extends Model
     public function percent()
     {
         return $this->actual >= 1 ? number_format(($this->actual / $this->required) * 100, 2, '.', ',') : 0.0;
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }
