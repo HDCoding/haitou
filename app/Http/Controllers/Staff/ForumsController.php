@@ -24,7 +24,7 @@ class ForumsController extends Controller
     {
         $categories = Category::orderBy('position', 'ASC')->where('is_forum', '=', true)->get();
         $forums = Forum::orderBy('position', 'ASC')->get();
-        $moderators = Moderator::all();
+        $moderators = Moderator::select('forum_id', 'username')->get();
         return view('staff.forums.index', compact('categories', 'forums', 'moderators'));
     }
 
@@ -151,7 +151,7 @@ class ForumsController extends Controller
             $forum->moderators()->create([
                 'forum_id' => $forum_id,
                 'user_id' => $user,
-                'username' => User::where('id', '=', $user)->select('username')->pluck('username'),
+                'username' => str_replace(['["', '"]'], '', User::where('id', '=', $user)->select('username')->pluck('username'))
             ]);
         }
 
