@@ -50,7 +50,7 @@
                                 <tbody>
                                 @foreach($members as $member)
                                     <tr>
-                                        <th>{{ $member->user->username }}</th>
+                                        <th>{{ $member->username }}</th>
                                         <td>{{ $member->job }}</td>
                                         <td>{{ $member->is_admin ? 'Sim' : 'Não' }}</td>
                                         <td>
@@ -73,8 +73,7 @@
         <!-- Add Modal -->
         <div class="modal fade" id="modal-add-member" aria-hidden="true">
             <div class="modal-dialog modal-lg">
-                {!! Form::open(['url' => 'staff/fansub/addmembers', 'class' => 'modal-content form-horizontal']) !!}
-                {!! Form::hidden('fansub_id', $fansub->id) !!}
+                {!! Form::open(['route' => ['staff.fansub.addmember', 'fansub_id' => $fansub->id], 'class' => 'modal-content form-horizontal']) !!}
                 <div class="modal-header">
                     <h5 class="modal-title">Adicionar Membro</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
