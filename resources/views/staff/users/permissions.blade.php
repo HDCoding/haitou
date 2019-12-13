@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Conquistas')
+@section('title', 'Permissoes membro')
 
 @section('content')
 
@@ -12,7 +12,8 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('staff') }}">@lang('dashboard.title')</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            <li class="breadcrumb-item"><a href="{{ url('staff/users') }}">@lang('dashboard.users')</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Permissoes membro</li>
                         </ol>
                     </nav>
                 </div>
