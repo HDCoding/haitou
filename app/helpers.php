@@ -1,5 +1,8 @@
 <?php
 
+use App\Helpers\Settings;
+use Carbon\Carbon;
+
 if (!function_exists('md5_gen')) {
     /**
      * Generates random characters using MD5 values
@@ -94,21 +97,6 @@ if (!function_exists('ative_page')) {
     }
 }
 
-if (!function_exists('setting')) {
-    /**
-     * Settings table instance.
-     *
-     */
-    function setting()
-    {
-        $time = \Carbon\Carbon::now()->addMinutes(10);
-        $setting = \Illuminate\Support\Facades\Cache::remember('setting', $time, function () {
-            return \App\Models\Setting::all()->where('id', '=', 1)->first();
-        });
-        return $setting;
-    }
-}
-
 if (!function_exists('toastr')) {
     /**
      * Get the toastr instance
@@ -142,14 +130,13 @@ if (!function_exists('hideref')) {
     }
 }
 
-
 if (!function_exists('format_date_time')) {
     /**
      * Formata data do timestamp
      */
     function format_date_time($date_time)
     {
-        return \Carbon\Carbon::parse($date_time)->format('d/m/Y H:i');
+        return Carbon::parse($date_time)->format('d/m/Y H:i');
     }
 }
 
@@ -159,11 +146,11 @@ if (!function_exists('format_date')) {
      */
     function format_date($date)
     {
-        return \Carbon\Carbon::parse($date)->format('d/m/Y');
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }
 
-if (! function_exists('setting')) {
+if (!function_exists('setting')) {
     /**
      * Get / set the specified setting value.
      *
@@ -171,7 +158,7 @@ if (! function_exists('setting')) {
      *
      * @param string|array $key
      * @param mixed $default
-     * @return mixed|\App\Models\Setting
+     * @return mixed|Settings
      */
     function setting($key = null, $default = null)
     {
