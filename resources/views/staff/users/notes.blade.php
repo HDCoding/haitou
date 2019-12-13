@@ -17,7 +17,8 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('staff') }}">@lang('dashboard.title')</a></li>
-                            <li class="breadcrumb-item"><a href="{{ url('staff/users') }}">@lang('dashboard.users')</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('staff/users') }}">@lang('dashboard.users')</a>
+                            </li>
                             <li class="breadcrumb-item active" aria-current="page">Anotações</li>
                         </ol>
                     </nav>
@@ -45,21 +46,20 @@
                     </div>
                 </div>
             </div>
-            @foreach($notes as $note)
-                <div class="card">
-                    <div class="card-header">
-                        <a class="text-body" data-toggle="collapse" href="#note-{{ $note->id }}">
-                            {{ format_date($note->created_at) }} || Por {{ $note->staff->username }}
-                        </a>
-                    </div>
-
-                    <div id="note-{{ $note->id }}" class="collapse" data-parent="#note">
+        </div>
+        <div class="row">
+            <div class="col-12">
+                @foreach($notes as $note)
+                    <div class="card m-b-20">
                         <div class="card-body">
+                            <div class="card-title">
+                                {{ format_date($note->created_at) }} || Por {{ $note->staff->username }}
+                            </div>
                             {!! $note->descriptionHtml() !!}
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
 
