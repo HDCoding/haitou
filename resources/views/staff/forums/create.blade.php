@@ -69,30 +69,30 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($roles as $role)
+                            @foreach ($groups as $group)
                                 <tr>
-                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $group->name }}</td>
                                     <td>
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][view_forum]" value="1" checked="">
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][view_forum]" value="1" checked="">
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
                                     <td>
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][read_topic]" value="1" checked="">
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][read_topic]" value="1" checked="">
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
                                     <td>
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][reply_topic]" value="1" checked="">
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][reply_topic]" value="1" checked="">
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
                                     <td>
                                         <label class="custom-control custom-checkbox px-2 m-0">
-                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $role->id }}][start_topic]" value="1" checked="">
+                                            <input class="custom-control-input" type="checkbox" name="permissions[{{ $group->id }}][start_topic]" value="1" checked="">
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
