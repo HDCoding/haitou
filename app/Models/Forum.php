@@ -41,7 +41,7 @@ class Forum extends Model
 
     public function moderators()
     {
-        return $this->belongsToMany(Moderator::class, 'moderators', 'forum_id', 'user_id');
+        return $this->hasMany(Moderator::class);
     }
 
     public function permissions()
