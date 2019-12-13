@@ -40,7 +40,7 @@ class Log extends Model
         $agent = new Agent();
 
         return self::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => request()->user()->id,
             'content' => $content,
             'ip' => request()->ip(),
             'user_agent' => $agent->browser() ? $agent->browser() : NULL,
