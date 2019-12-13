@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- select2 -->
-    <link href="{{ asset('vendor/select2/select2.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -38,8 +38,8 @@
                         {!! Form::open(['route' => ['forum.editmod', 'id' => $forum->id], 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             <div class="col-sm-10">
-                                {!! Form::label('staff_id', 'Membro: *') !!}
-                                {!! Form::select('staff_id[]', $members, $mod, ['class' => 'form-control select2', 'multiple' => 'multiple']) !!}
+                                {!! Form::label('user_id', 'Membro: *') !!}
+                                {!! Form::select('user_id[]', $members, $mod, ['class' => 'duallistbox-custom-height', 'multiple' => 'multiple']) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,7 +47,6 @@
                                 {!! Form::submit('Alterar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
                             </div>
                         </div>
-                        <br>
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -59,11 +58,14 @@
 
 @section('scripts')
     <!-- Select2 -->
-    <script src="{{ asset('vendor/select2/select2.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
     <!-- Script -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $('.select2').select2({
-            tags: true
+        $(document).ready(function () {
+            $('.duallistbox-custom-height').bootstrapDualListbox({
+                moveOnSelect: true,
+                selectorMinimalHeight: 250
+            });
         });
     </script>
 @endsection
