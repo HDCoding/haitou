@@ -24,6 +24,7 @@ class FreeSlotsRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|max:250',
             'is_enabled' => 'boolean',
             'required' => 'required|integer|min:1000|max:2000000000',
             'actual' => 'integer|max:2000000000',
