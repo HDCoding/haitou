@@ -63,12 +63,6 @@ class SettingsTableSeeder extends Seeder
             ['display_name' => 'Mail usuario', 'key' => 'mail_username', 'value' => ''],
             ['display_name' => 'Mail senha', 'key' => 'mail_password', 'value' => ''],
             ['display_name' => 'Mail tls', 'key' => 'mail_encryption', 'value' => ''],
-            //Others
-            ['display_name' => 'Favicon', 'key' => 'favicon', 'value' => ''],
-            ['display_name' => 'Logo', 'key' => 'logo', 'value' => ''],
-            ['display_name' => 'Login-Registro Imagem', 'key' => 'login_register_image', 'value' => ''],
-            ['display_name' => 'Imagem Inicial', 'key' => 'index_image', 'value' => ''],
-            ['display_name' => 'Imagem Home', 'key' => 'home_image', 'value' => ''],
 
         ];
         foreach ($settings as $setting) {
