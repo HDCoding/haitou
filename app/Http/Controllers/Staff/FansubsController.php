@@ -59,20 +59,23 @@ class FansubsController extends Controller
     {
         $fansub = Fansub::findOrFail($fansub_id);
         $members = FansubUser::with('user:id,username')->where('fansub_id', '=', $fansub_id)->get();
-        $users = User::select(['id', 'username'])->pluck('username', 'id');
+        $users = User::select(['id', 'username'])->where('status', '=', 1)->pluck('username', 'id');
         return view('staff.fansubs.members', compact('fansub', 'members', 'users'));
     }
 
-    public function addMembers(Request $request)
+    public function addMembers(Request $request, $fansub_id)
     {
-        $fansub_member = new FansubUser();
-        $fansub_id = $request->input('fansub_id');
-        $fansub_member->fansub_id = $fansub_id;
-        $fansub_member->user_id = $request->input('user_id');
-        //$fansub_member->username = $request->input('username');
-        $fansub_member->job = $request->input('job');
-        $fansub_member->is_admin = $request->input('is_admin') ? true : false;
-        $fansub_member->save();
+        $fansub = Fansub::find($fansub_id);
+
+        $userId = $request->input('user_id');
+
+        $fansub->users()->create([
+            'user_id' => $userId,
+            'username' => str_replace(['["', '"]'], '', User::where('id', '=', $userId)->select('username')->pluck('username')),
+            'job' => $request->input('job'),
+            'is_admin' => $request->input('is_admin') ? true : false
+        ]);
+
         return redirect()->to('staff/fansub/' . $fansub_id . '/members');
     }
 
