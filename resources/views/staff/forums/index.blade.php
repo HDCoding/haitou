@@ -86,7 +86,7 @@
                                         <b>Moderadores: &nbsp;</b>
                                         @foreach($moderators as $moderator)
                                             @if($moderator->forum_id == $forum->id)
-                                                {{ link_to_route('user.profile', $moderator->user->username, ['slug' => $moderator->user->slug], ['target' => '_blank']) }}
+                                                {{ $moderator->username }}
                                                 &nbsp;
                                             @endif
                                         @endforeach
