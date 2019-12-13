@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
-    <title>Site :: @yield('title')</title>
+    <title>{{ setting()->get('site_title') }} :: @yield('title')</title>
     <!-- Icon fonts -->
     <link href="{{ asset('fonts/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('fonts/ionicons.css') }}" rel="stylesheet">
