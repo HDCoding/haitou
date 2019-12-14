@@ -2,7 +2,7 @@
 
 namespace App\Validators;
 
-use App\Helpers\EmailUpdater;
+use App\Helpers\BlacklistUpdater;
 use Illuminate\Support\Facades\Cache;
 
 class EmailBlacklistValidator
@@ -31,7 +31,7 @@ class EmailBlacklistValidator
     {
         $autoupdate = config('email-blacklist.email.auto-update');
         if ($autoupdate && !Cache::has(config('email-blacklist.email.cache-key'))) {
-            EmailUpdater::update();
+            BlacklistUpdater::update();
         }
     }
 
