@@ -21,11 +21,6 @@ class AppServiceProvider extends ServiceProvider
             return new Toastr($app['session'], $app['config']);
         });
 
-        //Setting
-        $this->app->singleton('setting', function ($app) {
-            return new Settings($app);
-        });
-
         // Return apis without: data[]
         Resource::withoutWrapping();
 
