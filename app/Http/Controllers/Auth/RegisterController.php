@@ -27,8 +27,6 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    protected $points;
-
     /**
      * Where to redirect users after registration.
      *
@@ -44,7 +42,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->points = setting('points_signup');
     }
 
     /**
@@ -55,14 +52,14 @@ class RegisterController extends Controller
      */
     protected function register(RegisterRequest $request)
     {
-        $points = $this->points;
+        $points = setting('points_signup');
 
         //Account activation code
         $code = sha1_gen();
 
         //Create new user account
         $user = new User();
-        $user->role_id = 1;
+        $user->group_id = 1;
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
