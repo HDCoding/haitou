@@ -8,20 +8,32 @@
                 <li>
                     <!-- User Profile-->
                     <div class="user-profile d-flex no-block dropdown mt-3">
-                        <div class="user-pic"><img src="{{ asset('images/avatar.jpg') }}" alt="users" class="rounded-circle" width="40" /></div>
+                        <div class="user-pic"><img src="{{ auth()->user()->avatar() }}" alt="users" class="rounded-circle" width="40" /></div>
                         <div class="user-content hide-menu ml-2">
                             <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <h5 class="m-b-0 user-name font-medium">Steave Jobs <i class="fa fa-angle-down"></i></h5>
-                                <span class="op-5 user-email">varun@gmail.com</span>
+                                <h5 class="m-b-0 user-name font-medium">{{ auth()->user()->username }} <i class="fa fa-angle-down"></i></h5>
+                                <span class="op-5 user-email">{{ auth()->user()->group->name }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user mr-1 ml-1"></i> My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet mr-1 ml-1"></i> My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email mr-1 ml-1"></i> Inbox</a>
+                                <div class="dropdown-toggle">
+                                    <div class="dropdown-item">Meus Favoritos</div>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ route('bookmark.actors') }}">Atrizes/Atores</a>
+                                        <a class="dropdown-item" href="{{ route('bookmark.characters') }}">Personagens</a>
+                                        <a class="dropdown-item" href="{{ route('bookmark.medias') }}">Mídias</a>
+                                    </div>
+                                </div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings mr-1 ml-1"></i> Account Setting</a>
+                                <a class="dropdown-item" href="{{ route('torrent.uploads') }}">
+                                    <i class="fas fa-upload text-lightest m-r-5 m-l-5 text-info"></i> Meus Uploads
+                                </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off mr-1 ml-1"></i> Sair</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-power-off mr-1 ml-1 text-danger"></i> Sair
+                                </a>
+                                {!! Form::open(['url' => 'logout', 'id' => 'logout-form', 'style' => 'display: none']) !!}
+                                {!! Form::close() !!}
                             </div>
                         </div>
                     </div>
