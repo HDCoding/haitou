@@ -39,14 +39,4 @@ class Invitation extends Model
     {
         return $this->belongsTo(User::class, 'accepted_by');
     }
-
-    public function getExpireDate()
-    {
-        return $this->expires_on->format('d/m/Y');
-    }
-
-    public function getCreateDate()
-    {
-        return $this->created_at->format('d/m/Y');
-    }
 }
