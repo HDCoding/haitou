@@ -34,17 +34,9 @@ Route::namespace('Auth')->group(function () {
     Route::post('unlockscreen', 'LockscreenController@unlock')->name('unlockscreen');
 });
 
-//Site Folder
-Route::namespace('Site')->group(function () {
-
-    //Home
-    Route::get('home', 'HomeController@index')->name('home');
-
-});
-
 //Middleware
-//Route::middleware(['auth', 'lockscreen'])->group(function () {
-//Site Folder
+Route::middleware(['auth', 'lockscreen'])->group(function () {
+    //Site Folder
     Route::namespace('Site')->group(function () {
         // Achievements
         Route::get('achievements', 'AchievementsController@index')->name('achievements');
@@ -309,7 +301,7 @@ Route::namespace('Site')->group(function () {
             //Rules
             Route::resource('rules', 'RulesController')->except(['show']);
             //Settings
-            Route::resource('settings', 'SettingsController')->only(['index', 'update']);
+            Route::resource('settings', 'SettingsController')->only(['index', 'store']);
             //Studios
             Route::resource('studios', 'StudiosController')->except(['show']);
             //Torrents
@@ -354,4 +346,4 @@ Route::namespace('Site')->group(function () {
             Route::get('visitors', 'VisitorsController@index')->name('staff.visitors');
         });
     });
-//});
+});
