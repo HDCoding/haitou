@@ -26,13 +26,9 @@ use Illuminate\Support\Facades\Mail;
 
 class InvitationController extends Controller
 {
-    protected $signup, $invite;
-
     public function __construct()
     {
         $this->middleware('guest');
-        $this->signup = setting('points_signup');
-        $this->invite = setting('points_invite');
     }
 
     public function code(string $code)
@@ -59,12 +55,12 @@ class InvitationController extends Controller
             }
 
             //Points
-            $signup = $this->signup;
-            $invite = $this->invite;
+            $signup = setting('points_signup');
+            $invite = setting('points_invite');
 
             //Adicionar usuario convidado ao banco
             $user = new User();
-            $user->role_id = 1;
+            $user->group_id = 1;
             $user->username = $request->input('username');
             $user->email = $invitation->email;
             $user->password = Hash::make($request->input('password'));
