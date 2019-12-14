@@ -17,7 +17,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        This is some text within a card block.
+                        Em desenvolvimento
                     </div>
                 </div>
             </div>
