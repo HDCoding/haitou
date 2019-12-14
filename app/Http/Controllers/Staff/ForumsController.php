@@ -151,7 +151,7 @@ class ForumsController extends Controller
             $forum->moderators()->create([
                 'forum_id' => $forum_id,
                 'user_id' => $user,
-                'username' => str_replace(['["', '"]'], '', User::where('id', '=', $user)->select('username')->pluck('username'))
+                'username' => str_replace(['["', '"]'], '', User::where('id', '=', $user)->select('username')->pluck('username')->first())
             ]);
         }
 
