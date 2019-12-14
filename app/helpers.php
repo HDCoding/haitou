@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\Settings;
+use App\Models\Setting;
 use Carbon\Carbon;
 
 if (!function_exists('md5_gen')) {
@@ -158,22 +159,17 @@ if (!function_exists('setting')) {
      *
      * @param string|array $key
      * @param mixed $default
-     * @return mixed|Settings
+     * @return mixed|Setting
      */
-    function setting($key = null, $default = null)
+    function setting($key, $default = null)
     {
         if (is_null($key)) {
-            return app('setting');
+            return new Setting();
         }
-
         if (is_array($key)) {
-            return app('setting')->set($key);
+            return Setting::set($key[0], $key[1]);
         }
-
-        try {
-            return app('setting')->get($key, $default);
-        } catch (PDOException $e) {
-            return $default;
-        }
+        $value = Setting::get($key);
+        return is_null($value) ? value($default) : $value;
     }
 }
