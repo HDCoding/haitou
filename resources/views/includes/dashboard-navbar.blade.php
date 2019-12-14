@@ -241,42 +241,39 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle" width="31">
+                        <img src="{{ auth()->user()->avatar() }}" alt="user" class="rounded-circle" width="31">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                         <span class="with-arrow"><span class="bg-primary"></span></span>
                         <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
                             <div class="">
-                                <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="img-circle" width="60">
+                                <img src="{{ auth()->user()->avatar() }}" alt="user" class="img-circle" width="60">
                             </div>
                             <div class="m-l-10">
-                                <h4 class="m-b-0">Steave Jobs</h4>
-                                <p class=" m-b-0">varun@gmail.com</p>
+                                <h4 class="m-b-0">{{ auth()->user()->username }}</h4>
+                                <p class="m-b-0">{{ auth()->user()->group->name }}</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="ti-user m-r-5 m-l-5"></i> My Profile
+                        <a class="dropdown-item" href="{{ url('achievements') }}">
+                            <i class="ion ion-ios-trophy text-lightest m-r-5 m-l-5"></i> Conquistas
                         </a>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="ti-wallet m-r-5 m-l-5"></i> My Balance
+                        <a class="dropdown-item" href="{{ route('notifications.index') }}">
+                            <i class="ion ion-md-notifications-outline text-lightest m-r-5 m-l-5"></i> Notificações
                         </a>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="ti-email m-r-5 m-l-5"></i> Inbox
+                        <a class="dropdown-item" href="{{ url('user/edit/account') }}">
+                            <i class="ion ion-md-settings text-lightest m-r-5 m-l-5"></i> Editar conta
                         </a>
+                        <a class="dropdown-item" href="{{ url('lockscreen') }}">
+                            <i class="ion ion-md-lock text-lightest m-r-5 m-l-5"></i> Bloquear Tela
+                        </a>
+
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="ti-settings m-r-5 m-l-5"></i> Account Setting
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-power-off m-r-5 m-l-5 text-danger"></i> Sair
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)">
-                            <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <div class="p-l-30 p-10">
-                            <a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">
-                                View Profile
-                            </a>
-                        </div>
+                        {!! Form::open(['url' => 'logout', 'id' => 'logout-form', 'style' => 'display: none']) !!}
+                        {!! Form::close() !!}
                     </div>
                 </li>
                 <!-- ============================================================== -->
