@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\EmailUpdater;
+use App\Helpers\BlacklistUpdater;
 use Illuminate\Console\Command;
 
 class EmailBlacklistUpdate extends Command
@@ -38,7 +38,7 @@ class EmailBlacklistUpdate extends Command
      */
     public function handle()
     {
-        $count = EmailUpdater::update();
+        $count = BlacklistUpdater::update();
 
         if ($count === false) {
             $this->warn('No domains retrieved. Check the email.blacklist.source key for validation config.');
