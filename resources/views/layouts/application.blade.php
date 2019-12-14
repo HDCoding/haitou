@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon.ico') }}">
-    <title>{{ setting()->get('site_title') }} :: @yield('subtitle')</title>
+    <title>{{ setting('site_title') }} :: @yield('subtitle')</title>
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
