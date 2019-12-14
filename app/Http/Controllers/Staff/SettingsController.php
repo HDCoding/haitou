@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Staff\SettingsRequest;
 use App\Models\Setting;
-use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -16,9 +15,7 @@ class SettingsController extends Controller
 
     public function index()
     {
-        $settings = setting()->all();
-        return View::make('staff.settings.index', compact('settings'));
-//        return view('staff.settings.index', compact('settings'));
+        return view('staff.settings.index');
     }
 
     public function edit($setting_id)
@@ -27,10 +24,17 @@ class SettingsController extends Controller
         return view('staff.settings.edit', compact('setting'));
     }
 
-    public function update(SettingsRequest $request)
+    public function store(Request $request)
     {
 
-        setting($request->except('_token', '_method'));
+        $rules = Setting::getValidationRules();
+        $data = $this->validate($request, $rules);
+        $validSettings = array_keys($rules);
+        foreach ($data as $key => $val) {
+            if( in_array($key, $validSettings) ) {
+                Setting::add($key, $val, Setting::getDataType($key));
+            }
+        }
 
         toastr()->info('Configuração atualizada.', 'Sucesso');
         return redirect()->to('staff/settings');
