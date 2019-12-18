@@ -56,10 +56,10 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ url('staff/actors/' . $actor->id . '/edit') }}" data-toggle="tooltip" title="Editar Atriz/Ator">
-                                                    <span class="fas fa-pencil-alt"></span> Editar
+                                                    <i class="fas fa-pencil-alt"></i> Editar
                                                 </a>
                                                 <a href="javascript:;" class="m-l-10" onclick="document.getElementById('actor-del-{{ $actor->id }}').submit();" data-toggle="tooltip" title="Remover Atriz/Ator">
-                                                    <span class="fas fa-times"></span> Deletar
+                                                    <i class="fas fa-times"></i> Deletar
                                                 </a>
                                                 {!! Form::open(['url' => 'staff/actors/' . $actor->id, 'method' => 'DELETE', 'id' => 'actor-del-' . $actor->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
