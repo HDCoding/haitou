@@ -26,7 +26,7 @@
                         <div class="col-12">
                             @includeIf('errors.errors', [$errors])
                             @include('includes.messages')
-                            @if(true)
+                            @if(setting('signup_on'))
                             <form class="js-validation-register form-horizontal m-t-20" method="POST" action="{{ url('register') }}">
                                 @csrf
                                 <div class="form-group row ">
