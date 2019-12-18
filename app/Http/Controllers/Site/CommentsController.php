@@ -40,27 +40,27 @@ class CommentsController extends Controller
         $studio_id = $request->input('studio_id');
         $torrent_id = $request->input('torrent_id');
 
-        if (!empty($actor_id)) {
-            abort_unless($user->permission->actors_comment, 403);
-        }
-        if (!empty($calendar_id)) {
-            abort_unless($user->permission->calendars_comment, 403);
-        }
-        if (!empty($character_id)) {
-            abort_unless($user->permission->characters_comment, 403);
-        }
-        if (!empty($fansub_id)) {
-            abort_unless($user->permission->fansubs_comment, 403);
-        }
-        if (!empty($media_id)) {
-            abort_unless($user->permission->medias_comment, 403);
-        }
-        if (!empty($studio_id)) {
-            abort_unless($user->permission->studios_comment, 403);
-        }
-        if (!empty($torrent_id)) {
-            abort_unless($user->permission->torrents_comment, 403);
-        }
+//        if (!empty($actor_id)) {
+//            abort_unless($user->permission->actors_comment, 403);
+//        }
+//        if (!empty($calendar_id)) {
+//            abort_unless($user->permission->calendars_comment, 403);
+//        }
+//        if (!empty($character_id)) {
+//            abort_unless($user->permission->characters_comment, 403);
+//        }
+//        if (!empty($fansub_id)) {
+//            abort_unless($user->permission->fansubs_comment, 403);
+//        }
+//        if (!empty($media_id)) {
+//            abort_unless($user->permission->medias_comment, 403);
+//        }
+//        if (!empty($studio_id)) {
+//            abort_unless($user->permission->studios_comment, 403);
+//        }
+//        if (!empty($torrent_id)) {
+//            abort_unless($user->permission->torrents_comment, 403);
+//        }
 
         $comment = new Comment();
         $comment->user_id = $user->id;
@@ -71,6 +71,7 @@ class CommentsController extends Controller
         $comment->media_id = $media_id;
         $comment->studio_id = $studio_id;
         $comment->torrent_id = $torrent_id;
+        $comment->username = $user->username;
         $comment->content = $request->input('content');
         $comment->is_spoiler = $request->input('is_spoiler') ? true : false;
         $comment->save();
