@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\FansubsRequest;
 use App\Models\Fansub;
 use App\Models\FansubUser;
+use App\User;
 use Illuminate\Http\Request;
 
 class FansubsController extends Controller
@@ -36,5 +38,49 @@ class FansubsController extends Controller
         }
         //return view
         return view('site.fansubs.fansub', compact('fansub', 'comments', 'members'));
+    }
+
+    public function edit($fansub_id)
+    {
+        $fansub = Fansub::findOrFail($fansub_id);
+        return view('site.fansubs.edit', compact('fansub'));
+    }
+
+    public function update(FansubsRequest $request, $fansub_id)
+    {
+        Fansub::findOrFail($fansub_id)->update($request->except('_token'));
+        toastr()->info('Fansub atualizado.', 'Sucesso');
+        return redirect()->to('fansubs');
+    }
+
+    public function members($fansub_id)
+    {
+        $fansub = Fansub::findOrFail($fansub_id);
+        $members = FansubUser::with('user:id,username')->where('fansub_id', '=', $fansub_id)->get();
+        $users = User::select(['id', 'username'])->where('status', '=', 1)->pluck('username', 'id');
+        return view('site.fansubs.members', compact('fansub', 'members', 'users'));
+    }
+
+    public function addMembers(Request $request, $fansub_id)
+    {
+        $fansub = Fansub::find($fansub_id);
+
+        $userId = $request->input('user_id');
+
+        $fansub->users()->create([
+            'user_id' => $userId,
+            'username' => str_replace(['["', '"]'], '', User::where('id', '=', $userId)->select('username')->pluck('username')),
+            'job' => $request->input('job'),
+            'is_admin' => $request->input('is_admin') ? true : false
+        ]);
+
+        return redirect()->to('fansub/' . $fansub->id . '.' . $fansub->slug . '/members');
+    }
+
+    public function delMembers($member_id)
+    {
+        FansubUser::findOrFail($member_id)->delete();
+        toastr()->warning('Membro deletado do fansub.', 'Aviso');
+        return redirect()->back();
     }
 }
