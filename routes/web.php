@@ -62,6 +62,11 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         //Fansubs
         Route::get('fansubs', 'FansubsController@index')->name('site.fansubs');
         Route::get('fansub/{id}.{slug}', 'FansubsController@show')->name('fansub.show');
+        Route::get('fansub/{id}/edit', 'FansubsController@edit');
+        Route::put('fansub/{id}/edit', 'FansubsController@update');
+        Route::get('fansub/{id}/members', 'FansubsController@members');
+        Route::post('fansub/{fansub_id}/addmembers', 'FansubsController@addMembers')->name('site.fansub.addmember');
+        Route::delete('fansub/{member_id}/delmembers', 'FansubsController@delMembers');
         //Faqs
         Route::get('faq', 'FaqsController@index')->name('site.faq');
         //Forum
