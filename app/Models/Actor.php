@@ -47,4 +47,9 @@ class Actor extends Model
     {
         return (new BBCode())->parse($this->description, true);
     }
+
+    public function image()
+    {
+        return asset('images/' . self::uploaderFolder . '/' . $this->image);
+    }
 }
