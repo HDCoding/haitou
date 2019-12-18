@@ -18,7 +18,7 @@
                 @foreach($categories as $key => $category)
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $category->name }}</h4>
+                        <h4 class="card-title text-danger">{{ $category->name }}</h4>
                         <!-- Accordian-part -->
                         <div id="accordian-part">
                             <div id="accordian-3">
