@@ -27,9 +27,9 @@ class FansubsController extends Controller
         //increment views
         $fansub->increment('views');
         //get all members
-        $members = FansubUser::with('user:id,username,slug,avatar')->where('fansub_id', '=', $fansub->id)->get();
+        $members = FansubUser::with('user:id,username,slug,avatar')->where('fansub_id', '=', $fansub_id)->get();
         //get all comments
-        $comments = $fansub->comments()->latest()->paginate(5);
+        $comments = $fansub->comments()->latest('id')->paginate(5);
         //paginate the comments
         if (request()->ajax()) {
             return view('includes.comments', compact('comments'));
