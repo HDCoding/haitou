@@ -19,7 +19,7 @@
                     <img class="card-img-top" src="{{ $fansub->logo }}" alt="Logo">
                     <div class="card-body">
                         <h4 class="card-title">{{ $fansub->name }}</h4>
-                        <a href="{{ route('fansub.show', [$fansub->id, $fansub->slug]) }}" class="btn btn-primary btn-outline-primary">Visualizar</a>
+                        <a class="btn btn-primary btn-outline-primary" href="{{ route('fansub.show', [$fansub->id, $fansub->slug]) }}">Visualizar</a>
                     </div>
                 </div>
             @endforeach
