@@ -26,8 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                         <center class="m-t-30"> <img src="{{ $fansub->logo }}" class="img-thumbnail" width="450" alt="Logo" />
-                            <h4 class="card-title m-t-10">{{ $fansub->name }}</h4>
-                            <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                            <h4 class="card-title m-t-10 m-b-20">{{ $fansub->name }}</h4>
                             <div class="row text-center justify-content-md-center">
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">{{ $fansub->users->count() }}</font></a></div>
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-folder"></i> <font class="font-medium">{{ $fansub->torrents->count() }}</font></a></div>
@@ -39,22 +38,24 @@
                         <small class="text-muted">Status</small>
                         <h6>{!! $fansub->status() !!}</h6>
                     </div>
-                    @if($fansub->fansub_mod($fansub->id))
-                        <div class="card-body">
-                            <div class="ml-auto">
-                                <a href="{{ url('staff/fansubs/' . $fansub->id . '/edit') }}" class="btn btn-xs btn-outline-success">
-                                    <i class="ion ion-ios-link"></i> Editar
-                                </a>
+                    <div class="row text-center m-b-30">
+                        @if($fansub->fansub_mod($fansub->id))
+                            <div class="col-md-6">
+                                <div class="ml-auto">
+                                    <a href="{{ url('fansub/' . $fansub->id . '/edit') }}" class="btn btn-xs btn-outline-success">
+                                        <i class="ion ion-ios-link"></i> Editar
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    @endif
-                    @if($fansub->fansub_mod($fansub->id))
-                        <div class="ml-auto">
-                            <a href="{{ url('staff/fansub/' . $fansub->id . '/members') }}" class="btn btn-xs btn-outline-primary">
-                                <i class="ion ion-md-add"></i> Adicionar/Editar Membros
-                            </a>
-                        </div>
-                    @endif
+                            <div class="col-md-6">
+                                <div class="ml-auto">
+                                    <a href="{{ url('fansub/' . $fansub->id . '/members') }}" class="btn btn-xs btn-outline-primary">
+                                        <i class="ion ion-md-add"></i> Adicionar/Editar Membros
+                                    </a>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
             <!-- Column -->
@@ -134,55 +135,41 @@
                         </div>
                         <div class="tab-pane fade" id="nav-members" role="tabpanel" aria-labelledby="pills-setting-tab">
                             <div class="card-body">
-                                <form class="form-horizontal form-material">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Full Name</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Password</label>
-                                        <div class="col-md-12">
-                                            <input type="password" value="password" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Phone No</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Message</label>
-                                        <div class="col-md-12">
-                                            <textarea rows="5" class="form-control form-control-line"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Select Country</label>
-                                        <div class="col-sm-12">
-                                            <select class="form-control form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <div class="table-responsive">
+                                    <table class="table no-wrap v-middle">
+                                        <thead>
+                                        <tr class="border-0">
+                                            <th class="border-0">Membros</th>
+                                            <th class="border-0"></th>
+                                            <th class="border-0"></th>
+                                            <th class="border-0"></th>
+                                            <th class="border-0"></th>
+                                            <th class="border-0"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($members->chunk(4) as $member)
+                                        <tr>
+                                            @foreach($member as $user)
+                                            <td>
+                                                <div class="d-flex no-block align-items-center">
+                                                    <div class="m-r-10">
+                                                        <img src="{{ $user->user->avatar() }}" alt="user" class="rounded-circle" width="45" />
+                                                    </div>
+                                                    <div class="">
+                                                        <h5 class="m-b-0 font-16 font-medium">
+                                                            <a href="{{ route('user.profile', ['slug' => $user->user->slug]) }}">{{ $user->username }}</a>
+                                                        </h5>
+                                                        <span>{{ $user->job }}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            @endforeach
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
