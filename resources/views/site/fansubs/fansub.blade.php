@@ -25,6 +25,7 @@
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card">
                     <div class="card-body">
+                        @includeIf('errors.errors', [$errors])
                         <center class="m-t-30"> <img src="{{ $fansub->logo }}" class="img-thumbnail" width="450" alt="Logo" />
                             <h4 class="card-title m-t-10 m-b-20">{{ $fansub->name }}</h4>
                             <div class="row text-center justify-content-md-center">
