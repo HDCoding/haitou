@@ -48,7 +48,7 @@ class TorrentsController extends Controller
         $torrents = Torrent::with('user:id,username,slug')
             ->with('fansub:id,name')
             ->with('media:id,name,poster')
-            ->select('id', 'uploader_id', 'category_id', 'media_id', 'fansub_id', 'name',
+            ->select('id', 'user_id', 'category_id', 'media_id', 'fansub_id', 'name',
                 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'is_anonymous', 'is_freeleech', 'is_silver', 'is_doubleup', 'created_at')
             ->orderBy('id', 'desc')
             ->paginate(30);
@@ -101,6 +101,7 @@ class TorrentsController extends Controller
             $torrent->category_id = $request->input('category_id');
             $torrent->media_id = $request->input('media_id');
             $torrent->fansub_id = $request->input('fansub_id');
+            $torrent->username = $user->username;
             $torrent->info_hash = $check->hash_info();
             $torrent->name = $request->input('name');
             $torrent->filename = $check->name();
@@ -173,7 +174,7 @@ class TorrentsController extends Controller
         $medias = Media::select('id', 'name')->orderBy('name', 'ASC')->pluck('name', 'id');
         $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
 
-        abort_unless(auth()->user()->id == $torrent->uploader_id, 403);
+        abort_unless(auth()->user()->id == $torrent->user_id, 403);
 
         return view('site.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs'));
     }
@@ -189,7 +190,7 @@ class TorrentsController extends Controller
 
         $torrent = Torrent::findOrFail($torrent_id);
 
-        abort_unless($user->id == $torrent->uploader_id, 403);
+        abort_unless($user->id == $torrent->user_id, 403);
 
         $torrent->update($request->except('token'));
 
@@ -271,7 +272,7 @@ class TorrentsController extends Controller
                 User::find($complete->user_id)->notify(new NewReseedRequestNotification($torrent));
             }
 
-            User::find($torrent->uploader_id)->notify(new NewReseedRequestNotification($torrent));
+            User::find($torrent->user_id)->notify(new NewReseedRequestNotification($torrent));
 
             // Activity Log
             $this->log::record("Membro {$user->name} solicitou uma solicitação de nova propagação no torrent, ID: {$torrent->id} NOME: {$torrent->name}.");
@@ -290,9 +291,9 @@ class TorrentsController extends Controller
         $user = $request->user();
 
         $uploads = Torrent::with('category:id,name')
-            ->select('id', 'uploader_id', 'category_id', 'name', 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'created_at')
-            ->where('uploader_id', '=', $user->id)
-            ->paginate(30);
+            ->select('id', 'user_id', 'category_id', 'name', 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'created_at')
+            ->where('user_id', '=', $user->id)
+            ->get();
 
         return view('site.users.uploads', compact('uploads'));
     }
