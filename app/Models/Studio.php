@@ -27,6 +27,16 @@ class Studio extends Model
         'views'
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class);
+    }
+
     public function sluggable()
     {
         return [
