@@ -340,7 +340,7 @@ class User extends Authenticatable
 
     public function torrents()
     {
-        return $this->hasMany(Torrent::class, 'uploader_id');
+        return $this->hasMany(Torrent::class, 'user_id');
     }
 
     public function notes()
