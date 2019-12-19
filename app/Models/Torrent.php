@@ -151,11 +151,7 @@ class Torrent extends Model
 
     public function uploader()
     {
-        if ($this->is_anonymous) {
-            return 'Anonymous';
-        } else {
-            return link_to_route('user.profile', $this->user->username, [$this->user->slug]);
-        }
+        return $this->is_anonymous == false ? 'Anonymous' : $this->username;
     }
 
     public function descriptionHtml()
