@@ -31,7 +31,6 @@ use App\Http\Requests\Forum\NewTopicRequest;
 use App\Http\Requests\Forum\ReplyTopicRequest;
 use App\Models\Category;
 use App\Models\Forum;
-use App\Models\Log;
 use App\Models\Moderator;
 use App\Models\Post;
 use App\Models\Topic;
@@ -96,11 +95,11 @@ class ForumsController extends Controller
             $result->whereNotIn('topics.id', $topic_neos)->whereNotIn('topics.forum_id', $forum_neos);
         }
 
-        if ($request->has('locked') && $request->input('locked') == 1) {
+        if ($request->has('is_locked') && $request->input('is_locked') == 1) {
             $result->where('topics.is_locked', '=', true);
         }
 
-        if ($request->has('pinned') && $request->input('pinned') == 1) {
+        if ($request->has('is_pinned') && $request->input('is_pinned') == 1) {
             $result->where('topics.is_pinned', '=', true);
         }
 
@@ -172,8 +171,8 @@ class ForumsController extends Controller
             ->leftJoin('topics', 'forums.id', '=', 'topics.forum_id')
             ->whereNotIn('topics.forum_id', $pests)
             ->where(function ($query) use ($topic_neos, $forum_neos) {
-            $query->whereIn('topics.id', $topic_neos)->orWhereIn('forums.id', $forum_neos);
-        })->groupBy('forums.id');
+                $query->whereIn('topics.id', $topic_neos)->orWhereIn('forums.id', $forum_neos);
+            })->groupBy('forums.id');
 
         $results = $result->orderBy('id', 'DESC')->paginate(30);
         $results->setPath('?name=' . $request->input('name'));
