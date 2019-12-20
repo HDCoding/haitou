@@ -15,10 +15,14 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('forum_id')->index();
             $table->unsignedBigInteger('topic_id')->index()->unique();
             $table->unsignedBigInteger('user_id')->index()->unique();
             $table->boolean('email')->default(0);
             $table->boolean('notify')->default(0);
+
+            $table->foreign('forum_id')->references('id')->on('forums')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->foreign('topic_id')->references('id')->on('topics')
                 ->onUpdate('cascade')->onDelete('cascade');
