@@ -90,9 +90,9 @@ class Topic extends Model
     public function postNumberFromId($search_id)
     {
         $count = 0;
-        foreach ($this->posts() as $forum_post) {
+        foreach ($this->posts() as $post) {
             $count += 1;
-            if ($search_id == $forum_post->id) {
+            if ($search_id == $post->id) {
                 break;
             }
         }
