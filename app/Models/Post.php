@@ -58,12 +58,12 @@ class Post extends Model
 
     public function postNumber()
     {
-        return $this->topic()->postNumberFromId($this->id);
+        return $this->topic->postNumberFromId($this->id);
     }
 
-    public function getPageNumber()
+    public function pageNumber()
     {
-        $result = ($this->getPostNumber() - 1) / 30 + 1;
+        $result = ($this->postNumber() - 1) / 30 + 1;
         $result = floor($result);
         return $result;
     }
