@@ -43,4 +43,24 @@ class Category extends Model
             ]
         ];
     }
+
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class);
+    }
+
+    public function forums()
+    {
+        return $this->hasMany(Forum::class);
+    }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class);
+    }
+
+    public function torrents()
+    {
+        return $this->hasMany(Torrent::class);
+    }
 }
