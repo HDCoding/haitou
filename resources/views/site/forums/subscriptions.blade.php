@@ -54,16 +54,16 @@
 
                                     @if (in_array($result->id, $forum_neos))
                                         <tr>
-                                            <th class="f-display-topic-icon">
+                                            <th>
                                                 <a href="{{ route('forum.topics', ['id' => $result->id, 'slug' => $result->slug]) }}">
                                                     <span class="badge-extra text-bold">{{ $result->name }}</span>
                                                 </a>
                                             </th>
-                                            <td class="f-display-topic-title">--</td>
-                                            <td class="f-display-topic-started">--</td>
-                                            <td class="f-display-topic-stats">--</td>
-                                            <td class="f-display-topic-last-post">--</td>
-                                            <td class="f-display-topic-stats">
+                                            <td>--</td>
+                                            <td>--</td>
+                                            <td>--</td>
+                                            <td>--</td>
+                                            <td>
                                                 @if (auth()->user()->isSubscribed('forum', $result->id))
                                                     <a href="{{ route('unsubscribe_forum', ['forum' => $result->id, 'route' => 'subscriptions']) }}" class="label label-sm label-danger">
                                                         <i class="fa fa-bell-slash"></i> Cancelar inscrição</a>
@@ -79,10 +79,10 @@
 
                                         @foreach($result->subscription_topics as $t)
                                             <tr>
-                                                <th class="f-display-topic-icon">
+                                                <th>
                                                     <span class="badge-extra text-bold">{{ $t->forum->name }}</span>
                                                 </th>
-                                                <td class="f-display-topic-title">
+                                                <td>
                                                     <a class="h5 text-info" href="{{ route('forum.topic', [$t->id, $t->slug]) }}">{{ $t->name }}</a>
                                                     @if ($t->is_locked)
                                                         <span class="badge badge-danger">Fechado</span>
@@ -91,15 +91,15 @@
                                                         <span class="badge badge-success">Pinned</span>
                                                     @endif
                                                 </td>
-                                                <td class="f-display-topic-started">
+                                                <td>
                                                     <a href="{{ route('user.profile', ['slug' => Str::slug($t->first_post_username)]) }}">
                                                         {{ $t->first_post_username }}
                                                     </a>
                                                 </td>
-                                                <td class="f-display-topic-stats">
+                                                <td>
                                                     {{ $t->posts->count() - 1 }} Respostas / {{ $t->views }} Views
                                                 </td>
-                                                <td class="f-display-topic-last-post">
+                                                <td>
                                                     <a href="{{ route('user.profile', ['slug' => Str::slug($t->last_post_username)]) }}">
                                                         {{ $t->last_post_username }}
                                                     </a>,
@@ -111,7 +111,7 @@
                                                         <time datetime="N/A">N/A</time>
                                                     @endif
                                                 </td>
-                                                <td class="f-display-topic-stats">
+                                                <td>
                                                     @if (auth()->user()->isSubscribed('topic', $t->id))
                                                         <a href="{{ route('unsubscribe_topic', ['topic' => $t->id, 'route' => 'subscriptions']) }}" class="badge badge-danger">
                                                             <i class="fa fa-bell-slash"></i> Cancelar inscrição
