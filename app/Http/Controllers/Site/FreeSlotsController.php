@@ -16,9 +16,11 @@ class FreeSlotsController extends Controller
 
     public function index()
     {
-        $freeslot = Freeslot::all()->where('is_active', '=', true)->last();
-        $percent = $freeslot->percent();
-        return view('site.freeslots.index', compact('freeslot', 'percent'));
+        $freeslot = Freeslot::with('freeslotlog')
+            ->where('is_active', '=', true)
+            ->first();
+
+        return view('site.freeslots.index', compact('freeslot'));
     }
 
     public function store(FreeSlotRequest $request)
