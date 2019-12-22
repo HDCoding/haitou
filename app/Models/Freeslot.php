@@ -60,6 +60,11 @@ class Freeslot extends Model
         return $this->actual >= 1 ? number_format(($this->actual / $this->required) * 100, 2, '.', ',') : 0.0;
     }
 
+    public function freeslotlog()
+    {
+        return $this->hasMany(FreeslotLog::class);
+    }
+
     public function sluggable()
     {
         return [
