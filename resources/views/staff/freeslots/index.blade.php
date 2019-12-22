@@ -51,8 +51,8 @@
                                     <tr>
                                         <th>{{ $freeslot->id }}</th>
                                         <td>{{ $freeslot->name }}</td>
-                                        <td>{{ $freeslot->required }}</td>
-                                        <td>{{ $freeslot->actual }}</td>
+                                        <td>{{ number_format($freeslot->required) }}</td>
+                                        <td>{{ number_format($freeslot->actual) }}</td>
                                         <td>{{ $freeslot->days }}</td>
                                         <td>{{ $freeslot->is_freeleech == 1 ? 'Sim' : 'Nao' }}</td>
                                         <td>{{ $freeslot->is_silver == 1 ? 'Sim' : 'Nao' }}</td>
