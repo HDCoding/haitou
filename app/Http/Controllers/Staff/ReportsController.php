@@ -16,7 +16,11 @@ class ReportsController extends Controller
     public function index()
     {
         $reports = Report::select('id', 'name', 'report_type', 'is_solved')->orderBy('id', 'DESC')->get();
-        return view('staff.reports.index', compact('reports'));
+        $total = Report::count();
+        $resolve = Report::where('is_solved', '=', true)->count();
+        $pending = Report::where('is_solved', '=', false)->count();
+
+        return view('staff.reports.index', compact('reports', 'total', 'resolve', 'pending'));
     }
 
     public function show($report_id)
