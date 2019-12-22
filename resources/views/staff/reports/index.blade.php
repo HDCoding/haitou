@@ -31,23 +31,55 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.reports')</h4>
+                        <div class="row m-t-40">
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-info text-center">
+                                        <h1 class="font-light text-white">{{ $total }}</h1>
+                                        <h6 class="text-white">Total Reports</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-success text-center">
+                                        <h1 class="font-light text-white">{{ $resolve }}</h1>
+                                        <h6 class="text-white">Resolvido</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                            <div class="col-md-6 col-lg-3 col-xlg-3">
+                                <div class="card card-hover">
+                                    <div class="box bg-dark text-center">
+                                        <h1 class="font-light text-white">{{ $pending }}</h1>
+                                        <h6 class="text-white">Pendente</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Column -->
+                        </div>
                         <div class="table-responsive m-t-15">
                             <table class="table" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Assunto</th>
                                     <th>Tipo</th>
+                                    <th>Assunto</th>
+                                    <th>ID</th>
                                     <th>Resolvido</th>
+                                    <th>Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($reports as $report)
                                     <tr>
-                                        <td class="text-center">{{ $report->id }}</td>
+                                        <th>{!! $report->type() !!}</th>
                                         <td>{{ link_to_route('reports.show', $report->name, ['id' => $report->id]) }}</td>
-                                        <td>{!! $report->type() !!}</td>
-                                        <td class="hidden-xs">{!! $report->solved() !!}</td>
+                                        <td>{{ $report->id }}</td>
+                                        <td>{!! $report->solved() !!}</td>
+                                        <td>{{ format_date($report->created_at) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
