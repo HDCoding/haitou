@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Permissoes membro')
+@section('title', 'Permissões membro')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('staff') }}">@lang('dashboard.title')</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('staff/users') }}">@lang('dashboard.users')</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Permissoes membro</li>
+                            <li class="breadcrumb-item active" aria-current="page">Permissões membro</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,21 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        This is some text within a card block.
+                        <h4 class="card-title m-b-30">Permissões: {{ $user->username }}</h4>
+                        @includeIf('errors.errors', [$errors])
+                        {!! Form::open(['url' => 'staff/user/' . $user->id . '/updatepermission']) !!}
+                        @foreach($user->permissions as $permission)
+                            <div class="custom-control custom-checkbox m-b-20">
+{{--                                <input type="hidden" name="{{ $permission['key'] }}" value="{{ $permission['value'] == false ? 'false' : '' }}">--}}
+{{--                                <input type="checkbox" class="custom-control-input" name="{{ $permission['key'] }}" id="{{ $permission['key'] }}" value="true" {{ $permission['value'] == true ? 'checked' : '' }}>--}}
+{{--                                <label class="custom-control-label" for="{{ $permission['key'] }}">{{ $permission['title'] }}</label>--}}
+                            </div>
+                        @endforeach
+                        <div class="text-center m-t-5">
+                            <button type="submit" class="btn btn-primary m-r-10">Salvar alterações</button>
+                            <button type="reset" class="btn btn-default">Cancelar</button>
+                        </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
