@@ -93,7 +93,8 @@ class User extends Authenticatable
         'receive_email' => 'bool',
         'torrents_per_page' => 'int',
         'topics_per_page' => 'int',
-        'posts_per_page' => 'int'
+        'posts_per_page' => 'int',
+        'permissions' => 'array'
     ];
 
     protected $dates = [
@@ -104,7 +105,10 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
-        'remember_token'
+        'remember_token',
+        'passkey',
+        'permissions',
+        'status'
     ];
 
     protected $fillable = [
@@ -137,6 +141,7 @@ class User extends Authenticatable
         'time_online',
         'css_style',
         'code',
+        'permissions',
         'views',
         'show_achievements',
         'show_mood',
@@ -451,6 +456,18 @@ class User extends Authenticatable
             return (bool) $this->subscriptions()->where('topic_id', '=', $topic_id)->first(['id']);
         }
         return (bool) $this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
+    }
+
+    public function allow($key)
+    {
+        foreach ($this->permissions as $value) {
+            if (!is_null($value[$key])) {
+                if ($value[$key] === 'true') {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
