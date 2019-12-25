@@ -56,6 +56,8 @@ class CreateUsersTable extends Migration
             $table->string('css_style', 45)->nullable();
             $table->string('code', 100)->nullable();
 
+            $table->json('permissions');
+
             $table->integer('views')->default(0);
 
             $table->boolean('show_achievements')->default(1);
