@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
              FaqTableSeeder::class,
              MediasTableSeeder::class,
              RulesTableSeeder::class,
-             TagsTableSeeder::class
+             TagsTableSeeder::class,
+             AllowsTableSeeder::class,
          ]);
     }
 }
