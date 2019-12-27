@@ -80,7 +80,7 @@
                                                 {!! Form::label('content', 'Comentário: *') !!}
                                                 {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) !!}
                                             </div>
-                                            {!! Form::submit('Comentar', ['class' => 'btn btn-primary btn-outline-primary']) !!}
+                                            {!! Form::submit('Comentar', ['class' => 'btn btn-primary btn-rounded']) !!}
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
