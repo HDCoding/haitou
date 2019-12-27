@@ -38,7 +38,7 @@
                             {!! Form::label('name', 'Título do tópico: *', ['class' => 'form-label']) !!}
                             {!! Form::text('name', null, ['class' => 'form-control', 'required', 'maxlength' => 250]) !!}
                         </div>
-                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
