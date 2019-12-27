@@ -39,8 +39,8 @@ class Freeslot extends Model
         $freeleech = $this->is_freeleech;
         $silver = $this->is_silver;
         $doubleup = $this->is_doubleup;
-        $type = '';
 
+        $type = '';
         if ($freeleech and $doubleup) {
             $type = ' Freeleech e o Double UP ';
         } elseif ($silver and $doubleup) {
@@ -62,7 +62,7 @@ class Freeslot extends Model
 
     public function freeslotlog()
     {
-        return $this->hasMany(FreeslotLog::class);
+        return $this->hasMany(FreeslotLog::class, 'freeslot_id');
     }
 
     public function sluggable()
