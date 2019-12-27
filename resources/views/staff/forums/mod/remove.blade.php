@@ -3,7 +3,7 @@
 @section('title', 'Remover Moderadores')
 
 @section('css')
-    <!-- select2 -->
+    <!-- duallistbox -->
     <link href="{{ asset('vendor/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}" rel="stylesheet">
 @endsection
 
@@ -57,14 +57,19 @@
 @endsection
 
 @section('scripts')
-    <!-- Select2 -->
+    <!-- duallistbox -->
     <script src="{{ asset('vendor/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
     <!-- Script -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
             $('.duallistbox-custom-height').bootstrapDualListbox({
                 moveOnSelect: true,
-                selectorMinimalHeight: 250
+                selectorMinimalHeight: 350,
+                filterPlaceHolder: 'Filtrar',
+                moveAllLabel: 'Mover Tudo',
+                removeSelectedLabel: 'Remover selecionado',
+                removeAllLabel: 'Remover Tudo',
+                infoText: 'Mostrando tudo {0}'
             });
         });
     </script>
