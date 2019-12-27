@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" class="landing-2 default-style">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <title>{{ setting('site_title') }}</title>
 
