@@ -120,6 +120,11 @@ class Torrent extends Model
         return $this->hasMany(File::class, 'torrent_id');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'torrent_tags');
+    }
+
     public function sluggable()
     {
         return [
@@ -141,7 +146,7 @@ class Torrent extends Model
 
     public function silver()
     {
-        return $this->is_silver ? '<span class="badge badge-default mr-2"><i class="fa fa-minus"></i> Silver</span>' : '';
+        return $this->is_silver ? '<span class="badge badge-light mr-2"><i class="fa fa-minus"></i> Silver</span>' : '';
     }
 
     public function doubleUp()
@@ -151,7 +156,7 @@ class Torrent extends Model
 
     public function uploader()
     {
-        return $this->is_anonymous == false ? 'Anonymous' : $this->username;
+        return $this->is_anonymous == true ? 'Anonymous' : $this->username;
     }
 
     public function descriptionHtml()
