@@ -31,7 +31,7 @@
                             <div class="form-row align-items-center">
                                 <div class="col-md mb-4">
                                     {!! Form::label('user_id', 'Membro:', ['class' => 'form-label']) !!}
-                                    {!! Form::select('user_id', $members, null, ['class' => 'custom-select select2', 'required']) !!}
+                                    {!! Form::select('user_id', $members, null, ['class' => 'custom-select select2', 'required', 'size' => 10]) !!}
                                 </div>
                                 <div class="col-md mb-4">
                                     {!! Form::label('quantity', 'Quantidade:', ['class' => 'form-label']) !!}
@@ -71,14 +71,14 @@
                                 @foreach($points as $point)
                                     <tr>
                                         <td>
-                                            <p><strong>{{ $point->name }}</strong></p>
+                                            <p class="font-weight-bold">{{ $point->name }}</p>
                                             <p class="text-muted">{{ $point->description }}</p>
                                         </td>
-                                        <td><span class="badge badge-outline-success">{{ $point->cost }}</span></td>
+                                        <td><span class="badge badge-success">{{ $point->cost }}</span></td>
                                         <td class="hidden-xs">
                                             {!! Form::open(['url' => 'bonus']) !!}
                                             {!! Form::hidden('bonus_id', $point->id) !!}
-                                            {!! Form::submit('Escolher', ['class' => 'btn btn-primary btn-outline-primary', 'data-toggle' => 'tooltip', 'title' => 'Escolher']) !!}
+                                            {!! Form::submit('Escolher', ['class' => 'btn btn-primary btn-rounded']) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
