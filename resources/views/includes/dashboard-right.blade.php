@@ -20,7 +20,7 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="p-15 border-bottom">
                     <!-- Sidebar -->
-                    <h5 class="font-medium m-b-10 m-t-10">Layout Settings</h5>
+                    <h5 class="font-medium m-b-10 m-t-10">Configurações de Layout</h5>
                     <div class="custom-control custom-checkbox m-t-10">
                         <input type="checkbox" class="custom-control-input" name="theme-view" id="theme-view">
                         <label class="custom-control-label" for="theme-view">Dark Theme</label>
@@ -147,62 +147,62 @@
             <!-- End Tab 2 -->
             <!-- Tab 3 -->
             <div class="tab-pane fade p-15" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <h6 class="m-t-20 m-b-20">Activity Timeline</h6>
+                <h6 class="m-t-20 m-b-20">Status</h6>
                 <div class="steamline">
                     <div class="sl-item">
-                        <div class="sl-left bg-success"> <i class="ti-user"></i></div>
+                        <div class="sl-left">
+                            <img src="{{ auth()->user()->levelImage() }}" class="d-block ui-w-40" alt="Level">
+                        </div>
                         <div class="sl-right">
-                            <div class="font-medium">Meeting today <span class="sl-date"> 5pm</span></div>
-                            <div class="desc">you can write anything </div>
+                            <div class="font-medium">{{ auth()->user()->level() }}</div>
+                            <div class="desc">Level </div>
                         </div>
                     </div>
                     <div class="sl-item">
-                        <div class="sl-left bg-info"><i class="fas fa-image"></i></div>
+                        <div class="sl-left">
+                            <img src="{{ asset('images/status/heart.png') }}" class="rounded-circle" alt="Points">
+                        </div>
                         <div class="sl-right">
-                            <div class="font-medium">Send documents to Clark</div>
-                            <div class="desc">Lorem Ipsum is simply </div>
+                            <div class="font-medium">{{ auth()->user()->points() }}</div>
+                            <div class="desc">Pontos </div>
+                        </div>
+                    </div>
+                    @if(auth()->user()->is_warned)
+                    <div class="sl-item">
+                        <div class="sl-left">
+                            <img src="{{ asset('images/status/warned.png') }}" class="rounded-circle" alt="Warned">
+                        </div>
+                        <div class="sl-right">
+                            <div class="font-medium">Advertência</div>
+                            <div class="desc">Regularize antes de uma uma suspensão ou banimento.</div>
+                        </div>
+                    </div>
+                    @endif
+                    <div class="sl-item">
+                        <div class="sl-left">
+                            <img src="{{ asset('images/status/ratio.png') }}" class="rounded-circle" alt="Ratio">
+                        </div>
+                        <div class="sl-right">
+                            <div class="font-medium">{{ auth()->user()->ratio() }}</div>
+                            <div class="desc">Ratio</div>
                         </div>
                     </div>
                     <div class="sl-item">
-                        <div class="sl-left"> <img class="rounded-circle" alt="user" src="{{ asset('images/avatar.jpg') }}"> </div>
+                        <div class="sl-left">
+                            <img src="{{ asset('images/status/downloaded.png') }}" class="rounded-circle" alt="Downloaded">
+                        </div>
                         <div class="sl-right">
-                            <div class="font-medium">Go to the Doctor <span class="sl-date">5 minutes ago</span></div>
-                            <div class="desc">Contrary to popular belief</div>
+                            <div class="font-medium">{{ auth()->user()->downloaded() }}</div>
+                            <div class="desc">Download </div>
                         </div>
                     </div>
                     <div class="sl-item">
-                        <div class="sl-left"> <img class="rounded-circle" alt="user" src="{{ asset('images/avatar.jpg') }}"> </div>
-                        <div class="sl-right">
-                            <div><a href="javascript:void(0)">Stephen</a> <span class="sl-date">5 minutes ago</span></div>
-                            <div class="desc">Approve meeting with tiger</div>
+                        <div class="sl-left">
+                            <img src="{{ asset('images/status/uploaded.png') }}" class="rounded-circle" alt="Uploaded">
                         </div>
-                    </div>
-                    <div class="sl-item">
-                        <div class="sl-left bg-primary"> <i class="ti-user"></i></div>
                         <div class="sl-right">
-                            <div class="font-medium">Meeting today <span class="sl-date"> 5pm</span></div>
-                            <div class="desc">you can write anything </div>
-                        </div>
-                    </div>
-                    <div class="sl-item">
-                        <div class="sl-left bg-info"><i class="fas fa-image"></i></div>
-                        <div class="sl-right">
-                            <div class="font-medium">Send documents to Clark</div>
-                            <div class="desc">Lorem Ipsum is simply </div>
-                        </div>
-                    </div>
-                    <div class="sl-item">
-                        <div class="sl-left"> <img class="rounded-circle" alt="user" src="{{ asset('images/avatar.jpg') }}"> </div>
-                        <div class="sl-right">
-                            <div class="font-medium">Go to the Doctor <span class="sl-date">5 minutes ago</span></div>
-                            <div class="desc">Contrary to popular belief</div>
-                        </div>
-                    </div>
-                    <div class="sl-item">
-                        <div class="sl-left"> <img class="rounded-circle" alt="user" src="{{ asset('images/avatar.jpg') }}"> </div>
-                        <div class="sl-right">
-                            <div><a href="javascript:void(0)">Stephen</a> <span class="sl-date">5 minutes ago</span></div>
-                            <div class="desc">Approve meeting with tiger</div>
+                            <div class="font-medium">{{ auth()->user()->uploaded() }}</div>
+                            <div class="desc">Upload</div>
                         </div>
                     </div>
                 </div>
