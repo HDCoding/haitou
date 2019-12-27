@@ -45,7 +45,7 @@
 
                                 @if($calendar->user_id == auth()->user()->id)
                                     <a href="{{ route('calendars.edit', [$calendar->id]) }}">
-                                        <button type="button" class="btn btn-xs btn-outline-primary" data-toggle="tooltip" title="Editar Evento">
+                                        <button type="button" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Editar Evento">
                                             <i class="fas fa-pencil-alt"></i> Editar
                                         </button>
                                     </a>
@@ -54,7 +54,7 @@
                                 @if($calendar->user_id == auth()->user()->id)
                                     <a href="javascript:;"
                                        onclick="document.getElementById('event-del-{{ $calendar->id }}').submit();">
-                                        <button type="submit" class="btn btn-xs btn-outline-danger" data-toggle="tooltip" title="Deletar Evento">
+                                        <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Deletar Evento">
                                             <i class="fas fa-times"></i> Deletar
                                         </button>
                                     </a>
@@ -63,7 +63,7 @@
                                 @endif
 
                                 @if($calendar->user_id !== auth()->user()->id)
-                                    <a class="btn btn-xs btn-outline-warning" href="{{ route('calendar.report', [$calendar->id]) }}" data-toggle="tooltip" title="Reportar Evento">
+                                    <a class="btn btn-xs btn-warning" href="{{ route('calendar.report', [$calendar->id]) }}" data-toggle="tooltip" title="Reportar Evento">
                                         <i class="fas fa-flag"></i> Reportar
                                     </a>
                                 @endif
@@ -100,7 +100,7 @@
                                             {!! Form::label('content', 'Comentário: *') !!}
                                             {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) !!}
                                         </div>
-                                        {!! Form::submit('Comentar', ['class' => 'btn btn-primary btn-outline-primary']) !!}
+                                        {!! Form::submit('Comentar', ['class' => 'btn btn-primary btn-rounded']) !!}
                                         {!! Form::close() !!}
                                     </div>
                                 </div>
