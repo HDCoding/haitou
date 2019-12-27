@@ -59,7 +59,7 @@
                             ], null, ['class' => 'custom-select form-control', 'required']) !!}
                         </div>
                         <br>
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-success btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
