@@ -59,7 +59,7 @@
                             @endforeach
                         </ul>
                         <hr>
-                        {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Editar', ['class' => 'btn btn-success btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
