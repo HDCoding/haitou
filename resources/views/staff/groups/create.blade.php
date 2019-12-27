@@ -54,7 +54,7 @@
                             {!! Form::text('hnr', null, ['class' => 'form-control', 'placeholder' => 'Valores em horas', 'required']) !!}
                         </div>
 
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
