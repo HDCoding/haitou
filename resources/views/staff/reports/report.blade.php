@@ -98,7 +98,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-9">
-                                    {!! Form::submit('Solucionar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                                    {!! Form::submit('Solucionar', ['class' => 'btn btn-primary btn-rounded']) !!}
                                 </div>
                             </div>
                             <br>
