@@ -39,7 +39,7 @@
                             {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                             {!! Form::textarea('content', $post->content, ['class' => 'form-control', 'rows' => 10]) !!}
                         </div>
-                        {!! Form::submit('Editar Postagem', ['class' => 'btn btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Editar Postagem', ['class' => 'btn btn-success btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
