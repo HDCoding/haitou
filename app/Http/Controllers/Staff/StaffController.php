@@ -17,7 +17,12 @@ class StaffController extends Controller
     {
         $system = new SystemInformation();
 
-        $certificate = SslCertificate::createForHostName('spatie.be');//config('app.url')
+        try {
+            $certificate = SslCertificate::createForHostName(config('app.url'));
+        } catch (\Exception $exception) {
+            $certificate = '';
+        }
+
 
         return view('staff.staff.index', compact('system', 'certificate'));
     }
