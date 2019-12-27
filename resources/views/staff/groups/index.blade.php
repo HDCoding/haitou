@@ -54,11 +54,11 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ url('staff/groups/' . $group->id . '/edit') }}" data-toggle="tooltip" title="Editar Grupo"><i class="fas fa-pencil-alt text-info"></i></a>
-{{--                                                @if(auth()->user()->permission->full_access)--}}
+                                                @if(auth()->user()->can('acesso-total'))
                                                     <a class="m-l-15" href="javascript:;" onclick="document.getElementById('role-del-{{$group->id}}').submit();" data-toggle="tooltip" title="Remover Grupo"><i class="fa fa-times text-danger"></i></a>
                                                     {!! Form::open(['url' => 'staff/groups/' . $group->id, 'method' => 'DELETE', 'id' => 'role-del-' . $group->id , 'style' => 'display: none']) !!}
                                                     {!! Form::close() !!}
-{{--                                                @endif--}}
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
