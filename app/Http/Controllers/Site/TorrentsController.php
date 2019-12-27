@@ -49,7 +49,8 @@ class TorrentsController extends Controller
         $torrents = Torrent::with('user:id,username,slug')
             ->with('fansub:id,name')
             ->with('media:id,name,poster')
-            ->select('id', 'user_id', 'category_id', 'media_id', 'fansub_id', 'name',
+            ->with('tags:name')
+            ->select('id', 'user_id', 'username', 'category_id', 'media_id', 'fansub_id', 'name',
                 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'is_anonymous', 'is_freeleech', 'is_silver', 'is_doubleup', 'created_at')
             ->orderBy('id', 'desc')
             ->paginate(30);
@@ -63,7 +64,7 @@ class TorrentsController extends Controller
 
     public function create()
     {
-        //abort_unless(auth()->user()->can('upload-torrent'), 403);
+        abort_unless(auth()->user()->can('upload-torrent'), 403);
 
         $categories = Category::where('is_torrent', '=', true)->pluck('name', 'id');
         $medias = Media::select('id', 'name')->orderBy('name', 'ASC')->pluck('name', 'id');
@@ -203,11 +204,6 @@ class TorrentsController extends Controller
         return redirect()->to('torrents');
     }
 
-    public function destroy($torrent_id)
-    {
-        //
-    }
-
     public function download($torrent_id, Request $request)
     {
         $user = $request->user();
@@ -229,8 +225,6 @@ class TorrentsController extends Controller
             toastr()->error('Arquivo nao encontrado. Report esse torrent!', 'Aviso');
             return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
         }
-
-        abort_unless(auth()->user()->can('download-torrent'), 403);
 
         $torrent->increment('downs');
 
