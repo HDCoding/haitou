@@ -6,25 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class TorrentTag extends Model
 {
-    public $timestamps = false;
-    protected $table = 'torrent_tags';
-    protected $casts = [
-        'torrent_id' => 'int',
-        'tag_id' => 'int'
-    ];
+	protected $table = 'torrent_tags';
 
-    protected $fillable = [
-        'torrent_id',
-        'tag_id'
-    ];
+	public $incrementing = false;
 
-    public function tag()
-    {
-        return $this->belongsTo(Tag::class);
-    }
+	public $timestamps = false;
 
-    public function torrent()
-    {
-        return $this->belongsTo(Torrent::class);
-    }
+	protected $casts = [
+		'torrent_id' => 'int',
+		'tag_id' => 'int'
+	];
+
+	public function tag()
+	{
+		return $this->belongsTo(Tag::class);
+	}
+
+	public function torrent()
+	{
+		return $this->belongsTo(Torrent::class);
+	}
 }
