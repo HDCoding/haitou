@@ -49,7 +49,7 @@
                             {!! Form::text('icon', $category->icon, ['class' => 'form-control']) !!}
                         </div>
                         <br>
-                        {!! Form::submit('Alterar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Alterar', ['class' => 'btn btn-success btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
