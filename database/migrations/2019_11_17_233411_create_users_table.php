@@ -56,15 +56,13 @@ class CreateUsersTable extends Migration
             $table->string('css_style', 45)->nullable();
             $table->string('code', 100)->nullable();
 
-            $table->json('permissions');
-
             $table->integer('views')->default(0);
 
             $table->boolean('show_achievements')->default(1);
 
             $table->boolean('show_mood')->default(1);
             $table->boolean('show_state')->default(1);
-            $table->boolean('show_role')->default(1);
+            $table->boolean('show_group')->default(1);
 
             $table->boolean('show_downloaded')->default(1);
             $table->boolean('show_uploaded')->default(1);
