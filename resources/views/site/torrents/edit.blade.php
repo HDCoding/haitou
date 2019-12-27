@@ -84,7 +84,7 @@
                             {!! Form::textarea('description', $torrent->description) !!}
                         </div>
 
-                        {!! Form::submit('Atulizar', ['class' => 'btn btn-primary btn-outline-primary']) !!}
+                        {!! Form::submit('Atulizar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
