@@ -24,6 +24,7 @@ use App\Models\Fansub;
 use App\Models\File;
 use App\Models\Log;
 use App\Models\Media;
+use App\Models\Tag;
 use App\Models\Thank;
 use App\Models\Torrent;
 use App\Notifications\NewReseedRequestNotification;
@@ -62,13 +63,14 @@ class TorrentsController extends Controller
 
     public function create()
     {
-        abort_unless(auth()->user()->permission->torrents_upload, 403);
+        //abort_unless(auth()->user()->can('upload-torrent'), 403);
 
         $categories = Category::where('is_torrent', '=', true)->pluck('name', 'id');
         $medias = Media::select('id', 'name')->orderBy('name', 'ASC')->pluck('name', 'id');
         $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
+        $tags = Tag::select('id', 'name')->pluck('name', 'id');
 
-        return view('site.torrents.upload', compact('categories', 'medias', 'fansubs'));
+        return view('site.torrents.create', compact('categories', 'medias', 'fansubs', 'tags'));
     }
 
     public function store(UploadRequest $request)
@@ -123,6 +125,8 @@ class TorrentsController extends Controller
             foreach ($check->content() as $file => $size) {
                 File::create(['torrent_id' => $torrent->id, 'size' => $size, 'name' => $file]);
             }
+
+            $torrent->tags()->attach($request->input('tag_id'));
 
             $check->save($torrentFile, $torrent->id);
 
@@ -194,6 +198,8 @@ class TorrentsController extends Controller
 
         $torrent->update($request->except('token'));
 
+        $torrent->tags()->sync($request->input('tag_id'));
+
         return redirect()->to('torrents');
     }
 
@@ -212,7 +218,7 @@ class TorrentsController extends Controller
             return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         }
 
-        if ($user->permission->torrents_download == false) {
+        if ($user->can('download-torrent') == false) {
             toastr()->warning('Sua permissão de fazer download em torrents foram revogadas!!', 'Aviso');
             return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         }
@@ -224,7 +230,7 @@ class TorrentsController extends Controller
             return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
         }
 
-        abort_unless(auth()->user()->permission->torrents_download, 403);
+        abort_unless(auth()->user()->can('download-torrent'), 403);
 
         $torrent->increment('downs');
 
