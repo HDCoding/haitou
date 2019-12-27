@@ -47,7 +47,7 @@
                                         </td>
                                         <td class="text-center">
                                             {!! Form::open(['route' => ['delete.bookmark', $bookmark->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
-                                            <button type="submit" class="btn btn-xs icon-btn btn-outline-danger" data-toggle="tooltip"
+                                            <button type="submit" class="btn btn-xs icon-btn btn-danger" data-toggle="tooltip"
                                                     data-placement="top" title="Remover dos favoritos"
                                                     data-original-title="Remover dos favoritos">
                                                 <i class="fas fa-times"></i>
