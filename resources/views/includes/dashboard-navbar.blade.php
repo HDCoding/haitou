@@ -58,14 +58,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
+                        <span class="d-none d-md-block">Meus Favoritos <i class="fa fa-angle-down"></i></span>
                         <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="{{ route('bookmark.actors') }}">Atrizes/Atores</a>
+                        <a class="dropdown-item" href="{{ route('bookmark.characters') }}">Personagens</a>
+                        <a class="dropdown-item" href="{{ route('bookmark.medias') }}">Mídias</a>
                     </div>
                 </li>
                 <!-- ============================================================== -->
@@ -85,156 +84,6 @@
             <!-- ============================================================== -->
             <ul class="navbar-nav float-right">
                 <!-- ============================================================== -->
-                <!-- Comment -->
-                <!-- ============================================================== -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="mdi mdi-bell font-24"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
-                        <span class="with-arrow"><span class="bg-primary"></span></span>
-                        <ul class="list-style-none">
-                            <li>
-                                <div class="drop-title bg-primary text-white">
-                                    <h4 class="m-b-0 m-t-5">4 New</h4>
-                                    <span class="font-light">Notifications</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="message-center notifications">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="btn btn-danger btn-circle"><i class="fa fa-link"></i></span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Luanch Admin</h5>
-                                            <span class="mail-desc">Just see the my new admin!</span>
-                                            <span class="time">9:30 AM</span>
-                                        </span>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Event today</h5>
-                                            <span class="mail-desc">Just a reminder that you have event</span>
-                                            <span class="time">9:10 AM</span>
-                                        </span>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="btn btn-info btn-circle"><i class="ti-settings"></i></span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Settings</h5>
-                                            <span class="mail-desc">You can customize this template as you want</span>
-                                            <span class="time">9:08 AM</span>
-                                        </span>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="btn btn-primary btn-circle"><i class="ti-user"></i></span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Pavan kumar</h5>
-                                            <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:02 AM</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="nav-link text-center m-b-5" href="javascript:void(0);">
-                                    <strong>Check all notifications</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- ============================================================== -->
-                <!-- End Comment -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Messages -->
-                <!-- ============================================================== -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="font-24 mdi mdi-comment-processing"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
-                        <span class="with-arrow"><span class="bg-danger"></span></span>
-                        <ul class="list-style-none">
-                            <li>
-                                <div class="drop-title text-white bg-danger">
-                                    <h4 class="m-b-0 m-t-5">5 New</h4>
-                                    <span class="font-light">Messages</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="message-center message-body">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="user-img">
-                                            <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                            <span class="profile-status online pull-right"></span>
-                                        </span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Pavan kumar</h5>
-                                            <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:30 AM</span>
-                                        </span>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="user-img">
-                                            <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                            <span class="profile-status busy pull-right"></span>
-                                        </span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Sonu Nigam</h5>
-                                            <span class="mail-desc">I've sung a song! See you at</span>
-                                            <span class="time">9:10 AM</span>
-                                        </span>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="user-img">
-                                            <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                            <span class="profile-status away pull-right"></span>
-                                        </span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Arijit Sinh</h5>
-                                            <span class="mail-desc">I am a singer!</span>
-                                            <span class="time">9:08 AM</span>
-                                        </span>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)" class="message-item">
-                                        <span class="user-img">
-                                            <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                            <span class="profile-status offline pull-right"></span>
-                                        </span>
-                                        <span class="mail-contnet">
-                                            <h5 class="message-title">Pavan kumar</h5>
-                                            <span class="mail-desc">Just see the my admin!</span>
-                                            <span class="time">9:02 AM</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="nav-link text-center link" href="javascript:void(0);">
-                                    <b>See all e-Mails</b>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- ============================================================== -->
-                <!-- End Messages -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
@@ -250,7 +99,7 @@
                             </div>
                             <div class="m-l-10">
                                 <h4 class="m-b-0">{{ auth()->user()->username }}</h4>
-                                <p class="m-b-0">{{ auth()->user()->group->name }}</p>
+                                <p class="m-b-0">{{ auth()->user()->groupName() }}</p>
                             </div>
                         </div>
                         <a class="dropdown-item" href="{{ url('achievements') }}">
@@ -268,10 +117,10 @@
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                           onclick="event.preventDefault(); document.getElementById('logout-top').submit();">
                             <i class="fa fa-power-off m-r-5 m-l-5 text-danger"></i> Sair
                         </a>
-                        {!! Form::open(['url' => 'logout', 'id' => 'logout-form', 'style' => 'display: none']) !!}
+                        {!! Form::open(['url' => 'logout', 'id' => 'logout-top', 'style' => 'display: none']) !!}
                         {!! Form::close() !!}
                     </div>
                 </li>
