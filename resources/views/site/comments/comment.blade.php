@@ -68,7 +68,7 @@
                                 <div class="clearfix">
                                     <span class="float-left text-muted small mr-3">{{ $comment->created_at->format('d/m/Y H:i') }}</span>
 
-                                    @if($comment->user_id == auth()->user()->id || auth()->user()->permission->staff_panel)
+                                    @if($comment->user_id == auth()->user()->id || auth()->user()->can('painel-staff'))
                                         <a href="{{ route('comments.edit', [$comment->id]) }}">
                                             <button type="button" class="btn btn-xs btn-outline-primary">
                                                 <span class="fas fa-pencil-alt" data-toggle="tooltip" title="Editar Comentário"></span>
@@ -76,7 +76,7 @@
                                         </a>
                                     @endif
 
-                                    @if($comment->user_id == auth()->user()->id || auth()->user()->permission->staff_panel)
+                                    @if($comment->user_id == auth()->user()->id || auth()->user()->can('painel-staff'))
                                         <a href="javascript:;" onclick="document.getElementById('comment-del-{{ $comment->id }}').submit();">
                                             <i class="fas fa-times" data-toggle="tooltip" title="Deletar Comentário"></i>
                                         </a>
