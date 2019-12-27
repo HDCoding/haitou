@@ -14,9 +14,9 @@ class CreateTorrentTagsTable extends Migration
     public function up()
     {
         Schema::create('torrent_tags', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->unsignedBigInteger('torrent_id')->index();
             $table->unsignedBigInteger('tag_id')->index();
+            $table->primary(['torrent_id','tag_id']);
 
             $table->foreign('torrent_id')->references('id')->on('torrents')
                 ->onDelete('cascade')->onUpdate('cascade');
