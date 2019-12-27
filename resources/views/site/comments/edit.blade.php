@@ -43,7 +43,7 @@
                             </div>
                         @endif
 
-                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
