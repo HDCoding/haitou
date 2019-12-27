@@ -48,13 +48,17 @@
                         <div class="d-flex align-items-center">
                             <div class="m-r-10">
                                 <span>CERTIFICADO SSL</span>
+                                @if($certificate != '')
                                 <b class="text-{{ $certificate->isValid() ? 'success' : 'warning' }}">
                                     {{ $certificate->isValid() ? 'Válido' : 'Inválido' }}
                                 </b>
+                                @endif
                             </div>
                             <div class="ml-auto">
+                                @if($certificate != '')
                                 Emitido por {{ $certificate->getIssuer() }} <br>
                                 Expira {{ $certificate->expirationDate()->diffForHumans() }}
+                                @endif
                             </div>
                         </div>
                     </div>
