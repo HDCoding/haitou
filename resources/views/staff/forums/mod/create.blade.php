@@ -41,7 +41,7 @@
                             {!! Form::select('user_id[]', $members, null, ['class' => 'duallistbox-custom-height', 'multiple' => 'multiple', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                            {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         </div>
                         {!! Form::close() !!}
                     </div>
