@@ -8,6 +8,7 @@ use App\Http\Requests\Staff\UserNotesRequest;
 use App\Http\Requests\Staff\UserSuspendedRequest;
 use App\Http\Requests\Staff\UserUpdatesRequest;
 use App\Http\Requests\Staff\UserWarnedRequest;
+use App\Models\Allow;
 use App\Models\Group;
 use App\Models\Log;
 use App\Models\Moderate;
@@ -199,20 +200,21 @@ class UsersController extends Controller
 
     public function formPermission(int $user_id)
     {
-        $user = User::where('id', '=', $user_id)
-            ->select('id', 'username', 'permissions')
-            ->first();
+        $user = User::where('id', '=', $user_id)->select('id', 'username')->first();
 
-        return view('staff.users.permissions', compact('user'));
+        $permissions = Allow::all()->pluck('name', 'id');
+
+        $allowed = DB::table('user_allows')
+            ->where('user_id', '=', $user_id)
+            ->pluck('allow_id', 'allow_id')->all();
+
+        return view('staff.users.permissions', compact('user', 'permissions', 'allowed'));
     }
 
     public function updatePermission(Request $request, int $user_id)
     {
-//        dd($request->all());
-//        exit();
         $user = User::where('id', '=', $user_id)->first();
-        $user->permissions = json_encode($request->except('_token'));
-        $user->update();
+        $user->allows()->sync($request->input('allow_id'));
 
         return redirect()->route('staff.user.permissions', [$user_id]);
     }
