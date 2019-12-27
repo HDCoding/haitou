@@ -43,7 +43,7 @@
                             {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                             {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 10]) !!}
                         </div>
-                        {!! Form::submit('Adicionar Tópico', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Adicionar Tópico', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
