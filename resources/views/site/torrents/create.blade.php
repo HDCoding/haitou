@@ -99,7 +99,7 @@
                             {!! Form::textarea('description', null, ['class' => 'form-control', 'required']) !!}
                         </div>
 
-                        {!! Form::submit('Enviar', ['class' => 'btn btn-primary btn-outline-primary']) !!}
+                        {!! Form::submit('Enviar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
