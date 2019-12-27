@@ -103,7 +103,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-5">
-                                {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
+                                {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded']) !!}
                             </div>
                         </div>
                         {!! Form::close() !!}
