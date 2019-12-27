@@ -42,7 +42,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -70,7 +70,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -99,7 +99,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-lg btn-info waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-lg btn-info btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -127,7 +127,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -158,7 +158,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -186,7 +186,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -214,7 +214,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -242,7 +242,7 @@
                                             <i class="ti-reload m-r-5"></i>00 Convites
                                         </li>
                                         <li class="border-bottom p-20">
-                                            <button class="btn btn-success waves-effect waves-light">Escolher</button>
+                                            <button class="btn btn-success btn-rounded waves-effect waves-light">Escolher</button>
                                         </li>
                                     </ul>
                                 </div>
