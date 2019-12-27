@@ -43,14 +43,14 @@
                         @if($fansub->fansub_mod($fansub->id))
                             <div class="col-md-6">
                                 <div class="ml-auto">
-                                    <a href="{{ url('fansub/' . $fansub->id . '/edit') }}" class="btn btn-xs btn-outline-success">
+                                    <a href="{{ url('fansub/' . $fansub->id . '/edit') }}" class="btn btn-xs btn-success">
                                         <i class="ion ion-ios-link"></i> Editar
                                     </a>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ml-auto">
-                                    <a href="{{ url('fansub/' . $fansub->id . '/members') }}" class="btn btn-xs btn-outline-primary">
+                                    <a href="{{ url('fansub/' . $fansub->id . '/members') }}" class="btn btn-xs btn-primary">
                                         <i class="ion ion-md-add"></i> Adicionar/Editar Membros
                                     </a>
                                 </div>
@@ -125,7 +125,7 @@
                                                 {!! Form::label('content', 'Comentário: *') !!}
                                                 {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 5]) !!}
                                             </div>
-                                            {!! Form::submit('Comentar', ['class' => 'btn btn-primary btn-outline-primary']) !!}
+                                            {!! Form::submit('Comentar', ['class' => 'btn btn-primary btn-rounded']) !!}
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
