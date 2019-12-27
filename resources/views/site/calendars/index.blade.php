@@ -63,13 +63,13 @@
                                                 <div class="calendar-events m-b-20" data-class="bg-danger"><i class="fa fa-circle text-danger m-r-10"></i>Event Three</div>
                                                 <div class="calendar-events m-b-20" data-class="bg-warning"><i class="fa fa-circle text-warning m-r-10"></i>Event Four</div>
                                             </div>
-                                            {{-- @if(auth()->user()->permission->calendars_create)--}}
+                                             @if(auth()->user()->can('criar-calendario'))
                                             <a href="javascript:void(0)" data-toggle="modal" data-target="#fullcalendar-default-view-modal" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
                                                 <i class="ti-plus"></i> Adicionar
                                             </a>
-                                            {{-- @else--}}
+                                             @else
                                                 <p class="text-center font-weight-bold m-t-20 text-danger">Sua permissão de criar novos eventos foram revogadas!!</p>
-                                            {{-- @endif--}}
+                                             @endif
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        {{-- @if(auth()->user()->permission->calendars_create)--}}
+    @if(auth()->user()->can('criar-calendario'))
         <!-- Event modal -->
         {!! Form::open(['url' => 'calendars', 'class' => 'modal modal-top fade', 'autocomplete' => 'off', 'id' => 'fullcalendar-default-view-modal']) !!}
         <div class="modal-dialog modal-lg">
@@ -158,7 +158,7 @@
         </div>
         {!! Form::close() !!}
         <!-- / Event modal -->
-        {{-- @endif--}}
+        @endif
     </div>
 
 @endsection
