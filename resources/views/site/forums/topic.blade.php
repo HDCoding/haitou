@@ -149,7 +149,7 @@
                         {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                         {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 8]) !!}
                     </div>
-                    {!! Form::submit('Postar', ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+                    {!! Form::submit('Postar', ['class' => 'btn btn-primary btn-rounded']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
