@@ -174,7 +174,7 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.options')</h4>
                         <div class="row text-center">
-                            {{--                @if(auth()->user()->permission->achievements_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/achievements') }}">
                                     <img src="{{ asset('images/staff/achievements.png') }}" alt="@lang('dashboard.achievements')">
@@ -182,7 +182,7 @@
                                 <h5 class="mt-2">@lang('dashboard.achievements')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->actors_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/actors') }}">
                                     <img src="{{ asset('images/staff/actors.png') }}" alt="@lang('dashboard.actors')">
@@ -190,7 +190,7 @@
                                 <h5 class="mt-2">@lang('dashboard.actors')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->backups_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/backups') }}">
                                     <img src="{{ asset('images/staff/backups.png') }}" alt="@lang('dashboard.backups')">
@@ -198,7 +198,7 @@
                                 <h5 class="mt-2">@lang('dashboard.backups')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->bonus_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/bonus') }}">
                                     <img src="{{ asset('images/staff/bonus.png') }}" alt="@lang('dashboard.bonus')">
@@ -206,7 +206,7 @@
                                 <h5 class="mt-2">@lang('dashboard.bonus')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->calendars_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/calendars') }}">
                                     <img src="{{ asset('images/staff/calendars.png') }}" alt="@lang('dashboard.calendars')">
@@ -214,7 +214,7 @@
                                 <h5 class="mt-2">@lang('dashboard.calendars')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->categories_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/categories') }}">
                                     <img src="{{ asset('images/staff/categories.png') }}" alt="@lang('dashboard.categories')">
@@ -222,7 +222,7 @@
                                 <h5 class="mt-2">@lang('dashboard.categories')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->characters_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/characters') }}">
                                     <img src="{{ asset('images/staff/characters.png') }}" alt="@lang('dashboard.characters')">
@@ -230,7 +230,7 @@
                                 <h5 class="mt-2">@lang('dashboard.characters')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->cheaters_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/cheaters') }}">
                                     <img src="{{ asset('images/staff/cheaters.png') }}" alt="@lang('dashboard.cheaters')">
@@ -238,7 +238,7 @@
                                 <h5 class="mt-2">@lang('dashboard.cheaters')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->commands_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/commands') }}">
                                     <img src="{{ asset('images/staff/commands.png') }}" alt="@lang('dashboard.commands')">
@@ -246,7 +246,7 @@
                                 <h5 class="mt-2">@lang('dashboard.commands')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->failed_logins_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/failedlogins') }}">
                                     <img src="{{ asset('images/staff/failedlogins.png') }}" alt="@lang('dashboard.failedlogins')">
@@ -254,7 +254,7 @@
                                 <h5 class="mt-2">@lang('dashboard.failedlogins')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->fansubs_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/fansubs') }}">
                                     <img src="{{ asset('images/staff/fansubs.png') }}" alt="@lang('dashboard.fansubs')">
@@ -262,7 +262,7 @@
                                 <h5 class="mt-2">@lang('dashboard.fansubs')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->faqs_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/faqs') }}">
                                     <img src="{{ asset('images/staff/faqs.png') }}" alt="@lang('dashboard.faqs')">
@@ -270,7 +270,7 @@
                                 <h5 class="mt-2">@lang('dashboard.faqs')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->forums_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/forums') }}">
                                     <img src="{{ asset('images/staff/forums.png') }}" alt="@lang('dashboard.forums')">
@@ -278,7 +278,7 @@
                                 <h5 class="mt-2">@lang('dashboard.forums')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->genres_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/genres') }}">
                                     <img src="{{ asset('images/staff/genres.png') }}" alt="@lang('dashboard.genres')">
@@ -286,7 +286,7 @@
                                 <h5 class="mt-2">@lang('dashboard.genres')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->roles_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/groups') }}">
                                     <img src="{{ asset('images/staff/groups.png') }}" alt="@lang('dashboard.groups')">
@@ -300,7 +300,7 @@
                                 </a>
                                 <h5 class="mt-2">@lang('dashboard.icons')</h5>
                             </div>
-                            {{--                @if(auth()->user()->permission->logs_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/logs') }}">
                                     <img src="{{ asset('images/staff/logs.png') }}" alt="@lang('dashboard.logs')">
@@ -308,7 +308,7 @@
                                 <h5 class="mt-2">@lang('dashboard.logs')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->lotteries_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/lotteries') }}">
                                     <img src="{{ asset('images/staff/lotteries.png') }}" alt="@lang('dashboard.lotteries')">
@@ -316,7 +316,7 @@
                                 <h5 class="mt-2">@lang('dashboard.lotteries')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->medias_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/medias') }}">
                                     <img src="{{ asset('images/staff/medias.png') }}" alt="@lang('dashboard.medias')">
@@ -324,7 +324,7 @@
                                 <h5 class="mt-2">@lang('dashboard.medias')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->moods_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/moods') }}">
                                     <img src="{{ asset('images/staff/moods.png') }}" alt="@lang('dashboard.moods')">
@@ -332,7 +332,7 @@
                                 <h5 class="mt-2">@lang('dashboard.moods')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->news_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/news') }}">
                                     <img src="{{ asset('images/staff/news.png') }}" alt="@lang('dashboard.news')">
@@ -340,7 +340,7 @@
                                 <h5 class="mt-2">@lang('dashboard.news')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->polls_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/polls') }}">
                                     <img src="{{ asset('images/staff/polls.png') }}" alt="@lang('dashboard.polls')">
@@ -348,7 +348,7 @@
                                 <h5 class="mt-2">@lang('dashboard.polls')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->reports_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/reports') }}">
                                     <img src="{{ asset('images/staff/reports.png') }}" alt="@lang('dashboard.reports')">
@@ -356,7 +356,7 @@
                                 <h5 class="mt-2">@lang('dashboard.reports')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->requests_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/freeslots') }}">
                                     <img src="{{ asset('images/staff/freeslots.png') }}" alt="@lang('dashboard.freeslots')">
@@ -364,7 +364,7 @@
                                 <h5 class="mt-2">@lang('dashboard.freeslots')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->rules_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/rules') }}">
                                     <img src="{{ asset('images/staff/rules.png') }}" alt="@lang('dashboard.rules')">
@@ -372,7 +372,7 @@
                                 <h5 class="mt-2">@lang('dashboard.rules')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->settings_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/settings') }}">
                                     <img src="{{ asset('images/staff/settings.png') }}" alt="@lang('dashboard.settings')">
@@ -380,7 +380,7 @@
                                 <h5 class="mt-2">@lang('dashboard.settings')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->studios_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/studios') }}">
                                     <img src="{{ asset('images/staff/studios.png') }}" alt="@lang('dashboard.studios')">
@@ -388,7 +388,7 @@
                                 <h5 class="mt-2">@lang('dashboard.studios')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->torrents_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/torrents') }}">
                                     <img src="{{ asset('images/staff/torrents.png') }}" alt="@lang('dashboard.torrents')">
@@ -402,7 +402,7 @@
                                 </a>
                                 <h5 class="mt-2">@lang('dashboard.traffics')</h5>
                             </div>
-                            {{--                @if(auth()->user()->permission->users_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/users') }}">
                                     <img src="{{ asset('images/staff/users.png') }}" alt="@lang('dashboard.users')">
@@ -410,7 +410,7 @@
                                 <h5 class="mt-2">@lang('dashboard.users')</h5>
                             </div>
                             {{--                @endif--}}
-                            {{--                @if(auth()->user()->permission->visitors_mod)--}}
+                            {{--                @if(auth()->user()->can(''))--}}
                             <div class="col-md-3 col-lg-3">
                                 <a href="{{ url('staff/visitors') }}">
                                     <img src="{{ asset('images/staff/visitors.png') }}" alt="@lang('dashboard.visitors')">
