@@ -176,7 +176,6 @@ return [
         Bepsvpt\SecureHeaders\SecureHeadersServiceProvider::class,
         HDCoding\Coders\CodersServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        App\Providers\EmailBlacklistServiceProvider::class,
         Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
 
         /*
@@ -187,6 +186,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\EmailBlacklistServiceProvider::class,
+        App\Providers\PermissionsServiceProvider::class,
 
     ],
 
