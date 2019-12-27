@@ -116,7 +116,7 @@
                                 @include('includes.comments')
                                 <br>
                                 <hr>
-{{--                                @if(auth()->user()->permission->fansubs_comment)--}}
+                                @if(auth()->user()->can('comentar-fansubs'))
                                     <div class="card">
                                         <div class="card-body">
                                             {!! Form::open(['route' => ['comments.store'], 'class' => 'form-horizontal']) !!}
@@ -129,9 +129,9 @@
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
-{{--                                @else--}}
+                                @else
                                     <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em Fansubs foram revogadas!!</p>
-{{--                                @endif--}}
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-members" role="tabpanel" aria-labelledby="pills-setting-tab">
