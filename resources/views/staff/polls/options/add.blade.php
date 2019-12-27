@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <br>
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
 
                         <!-- Copy Fields-These are the fields which we get through jquery and then add after the above input -->
