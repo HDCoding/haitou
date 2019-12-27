@@ -70,7 +70,7 @@
 
                                     @if($comment->user_id == auth()->user()->id || auth()->user()->can('painel-staff'))
                                         <a href="{{ route('comments.edit', [$comment->id]) }}">
-                                            <button type="button" class="btn btn-xs btn-outline-primary">
+                                            <button type="button" class="btn btn-xs btn-primary">
                                                 <span class="fas fa-pencil-alt" data-toggle="tooltip" title="Editar Comentário"></span>
                                             </button>
                                         </a>
