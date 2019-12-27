@@ -11,7 +11,6 @@ use App\Models\Complete;
 use App\Models\Donation;
 use App\Models\FailedLogin;
 use App\Models\Fansub;
-use App\Models\Group;
 use App\Models\Historic;
 use App\Models\Invitation;
 use App\Models\Like;
@@ -25,7 +24,6 @@ use App\Models\Mood;
 use App\Models\News;
 use App\Models\Note;
 use App\Models\Peer;
-use App\Models\Permission;
 use App\Models\Poll;
 use App\Models\Post;
 use App\Models\Rating;
@@ -38,6 +36,7 @@ use App\Models\Torrent;
 use App\Models\UserBonus;
 use App\Models\Vip;
 use App\Models\Vote;
+use App\Traits\HasPermissions;
 use App\Traits\UsersOnline;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Gstt\Achievements\Achiever;
@@ -52,6 +51,7 @@ class User extends Authenticatable
     use Notifiable;
     use Sluggable;
     use UsersOnline;
+    use HasPermissions;
 
     protected $table = 'users';
 
@@ -76,7 +76,7 @@ class User extends Authenticatable
         'show_achievements' => 'bool',
         'show_mood' => 'bool',
         'show_state' => 'bool',
-        'show_role' => 'bool',
+        'show_group' => 'bool',
         'show_downloaded' => 'bool',
         'show_uploaded' => 'bool',
         'show_profile' => 'bool',
@@ -93,8 +93,7 @@ class User extends Authenticatable
         'receive_email' => 'bool',
         'torrents_per_page' => 'int',
         'topics_per_page' => 'int',
-        'posts_per_page' => 'int',
-        'permissions' => 'array'
+        'posts_per_page' => 'int'
     ];
 
     protected $dates = [
@@ -107,7 +106,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'passkey',
-        'permissions',
         'status'
     ];
 
@@ -141,12 +139,11 @@ class User extends Authenticatable
         'time_online',
         'css_style',
         'code',
-        'permissions',
         'views',
         'show_achievements',
         'show_mood',
         'show_state',
-        'show_role',
+        'show_group',
         'show_downloaded',
         'show_uploaded',
         'show_profile',
@@ -173,11 +170,6 @@ class User extends Authenticatable
         'activated_at',
         'disabled_at'
     ];
-
-    public function group()
-    {
-        return $this->belongsTo(Group::class, 'group_id');
-    }
 
     public function mood()
     {
@@ -238,7 +230,7 @@ class User extends Authenticatable
 
     public function moderators()
     {
-        return $this->hasMany(Moderator::class, 'staff_id');
+        return $this->hasMany(Moderator::class, 'user_id');
     }
 
     public function posts()
@@ -300,17 +292,12 @@ class User extends Authenticatable
 
     public function news()
     {
-        return $this->hasMany(News::class, 'staff_id');
+        return $this->hasMany(News::class, 'user_id');
     }
 
     public function peers()
     {
         return $this->hasMany(Peer::class, 'user_id');
-    }
-
-    public function permission()
-    {
-        return $this->hasOne(Permission::class, 'user_id');
     }
 
     public function votes()
@@ -456,18 +443,6 @@ class User extends Authenticatable
             return (bool) $this->subscriptions()->where('topic_id', '=', $topic_id)->first(['id']);
         }
         return (bool) $this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
-    }
-
-    public function allow($key)
-    {
-        foreach ($this->permissions as $value) {
-            if (!is_null($value[$key])) {
-                if ($value[$key] === 'true') {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }
