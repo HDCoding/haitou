@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.bonus')</h4>
                         <a href="{{ url('staff/bonus/create') }}">
-                            <button type="button" class="btn btn-xs btn-outline-primary">
+                            <button type="button" class="btn btn-xs btn-primary">
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
@@ -48,8 +48,8 @@
                                     <tr>
                                         <td class="text-center"><i class="fa fa-angle-right"></i></td>
                                         <td class="">{{ $b->name }}</td>
-                                        <td><span class="badge badge-outline-primary">{{ $b->type() }}</span></td>
-                                        <td><span class="badge badge-outline-info">{{ $b->cost }}</span></td>
+                                        <td><span class="badge badge-primary">{{ $b->type() }}</span></td>
+                                        <td><span class="badge badge-info">{{ $b->cost }}</span></td>
                                         <td>{!! $b->enabled() !!}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
