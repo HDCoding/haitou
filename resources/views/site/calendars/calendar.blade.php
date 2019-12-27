@@ -91,7 +91,7 @@
                                 @include('includes.comments')
                                 <br>
                                 <hr>
-                                {{--                                @if(auth()->user()->permission->fansubs_comment)--}}
+                                @if(auth()->user()->can('comentar-calendarios'))
                                 <div class="card">
                                     <div class="card-body">
                                         {!! Form::open(['route' => ['comments.store'], 'class' => 'form-horizontal']) !!}
@@ -104,9 +104,9 @@
                                         {!! Form::close() !!}
                                     </div>
                                 </div>
-                                {{--                                @else--}}
-                                <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em Fansubs foram revogadas!!</p>
-                                {{--                                @endif--}}
+                                @else
+                                <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em Calendários foram revogadas!!</p>
+                                @endif
                             </div>
                         </div>
                     </div>
