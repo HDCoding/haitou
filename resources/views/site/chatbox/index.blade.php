@@ -1,13 +1,13 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Chatbox')
+@section('title', 'Chat')
 
 @section('content')
 
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Chatbox</h4>
+                <h4 class="page-title">Chat</h4>
             </div>
         </div>
     </div>
