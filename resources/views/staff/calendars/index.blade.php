@@ -59,12 +59,12 @@
                                             <div class="btn-group">
                                                 <a href="javascript:;" onclick="document.getElementById('calendar-upd-{{ $calendar->id }}').submit();">
                                                     @if($calendar->is_enabled)
-                                                        <button type="button" class="btn btn-xs btn-outline-info">
+                                                        <button type="button" class="btn btn-xs btn-info">
                                                             <i class="fas fa-pause" data-toggle="tooltip" title="Desativar Evento"></i>
                                                             Desativar Evento
                                                         </button>
                                                     @else
-                                                        <button type="button" class="btn btn-xs btn-outline-success">
+                                                        <button type="button" class="btn btn-xs btn-success">
                                                             <i class="fas fa-play" data-toggle="tooltip" title="Ativar Evento"></i>
                                                             Ativar Evento
                                                         </button>
@@ -73,7 +73,7 @@
                                                 {!! Form::open(['url' => 'staff/calendars/' . $calendar->id, 'method' => 'PUT', 'id' => 'calendar-upd-' . $calendar->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                                 <a class="m-l-15" href="javascript:;" onclick="document.getElementById('calendar-del-{{ $calendar->id }}').submit();" data-toggle="tooltip" title="Remover Evento">
-                                                    <button type="button" class="btn btn-xs btn-outline-danger">
+                                                    <button type="button" class="btn btn-xs btn-danger">
                                                         <span class="fas fa-times"></span> Deletar
                                                     </button>
                                                 </a>
