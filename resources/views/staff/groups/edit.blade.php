@@ -54,7 +54,7 @@
                             {!! Form::text('hnr', ($group->hnr / 3600), ['class' => 'form-control', 'required']) !!}
                         </div>
 
-                        {!! Form::submit('Alterar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
+                        {!! Form::submit('Alterar', ['class' => 'btn btn-success btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
