@@ -71,7 +71,7 @@
                             {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
                         </div>
 
-                        {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
