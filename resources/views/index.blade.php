@@ -56,8 +56,8 @@
     <!-- END Icons -->
 
     <!-- Icon fonts -->
-    <link rel="stylesheet" href="{{ asset('fonts/ionicons.css') }}">
-    <link rel="stylesheet" href="{{ asset('fonts/linearicons.css') }}">
+    <link href="{{ asset('fonts/ionicons.css') }}" rel="stylesheet">
+    <link href="{{ asset('fonts/linearicons.css') }}" rel="stylesheet">
 
     <!-- Core stylesheets -->
     <link href="{{ asset('css/index.css') }}" rel="stylesheet">
