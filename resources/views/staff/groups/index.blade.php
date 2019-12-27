@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.groups')</h4>
                         <a href="{{ url('staff/groups/create') }}">
-                            <button type="button" class="btn btn-xs btn-outline-primary">
+                            <button type="button" class="btn btn-xs btn-primary">
                                 <span class="ion ion-md-add"></span> Adicionar
                             </button>
                         </a>
