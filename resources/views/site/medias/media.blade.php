@@ -71,7 +71,7 @@
                                 @endif
                                 <div class="col-sm-2">
                                     <!-- Resultado -->
-                                    <h3 class="font-w700">{{ $media->getAvgRating() }}</h3>
+                                    <h3 class="font-w700">{{ $media->avgRating() }}</h3>
                                 </div>
                                 <div class="col-sm-2">
                                     {!! Form::open(['route' => ['media.vote', $media->id], 'class' => 'form-horizontal']) !!}
@@ -235,7 +235,7 @@
                                 @include('includes.comments')
                                 <br>
                                 <hr>
-                                {{--                                @if(auth()->user()->permission->fansubs_comment)--}}
+                                @if(auth()->user()->can('comentar-midias'))
                                 <div class="card">
                                     <div class="card-body">
                                         {!! Form::open(['route' => ['comments.store'], 'class' => 'form-horizontal']) !!}
@@ -254,9 +254,9 @@
                                         {!! Form::close() !!}
                                     </div>
                                 </div>
-                                {{--                                @else--}}
-                                <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em Fansubs foram revogadas!!</p>
-                                {{--                                @endif--}}
+                                @else
+                                <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em Mídias foram revogadas!!</p>
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-trailer" role="tabpanel" aria-labelledby="pills-setting-tab">
