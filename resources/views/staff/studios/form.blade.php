@@ -19,7 +19,7 @@
     {!! Form::label('description', 'Descrição') !!}
     {!! Form::textarea('description', null, ['class' => 'form-control note', 'rows' => 8]) !!}
 </div>
-{!! Form::submit($submitButton, ['class' => 'btn btn-rounded btn-outline-primary']) !!}
+{!! Form::submit($submitButton, ['class' => 'btn btn-primary btn-rounded']) !!}
 
 @section('scripts')
     <!-- sceditor -->
