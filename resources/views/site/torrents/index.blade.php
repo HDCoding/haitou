@@ -85,22 +85,22 @@
                                     <th>Torrent info</th>
                                     <th class="text-center">
                                         <span class="fa fa-arrow-up text-success"></span>
-                                        <a href="#" title="Ordenar por Seeds">Seeds</a>
+                                        <a href="#" data-toggle="tooltip" title="Ordenar por Seeders">Seeders</a>
                                     </th>
                                     <th class="text-center">
                                         <span class="fa fa-arrow-down text-danger"></span>
-                                        <a href="#" title="Ordenar por Leechers">Leechers</a>
+                                        <a href="#" data-toggle="tooltip" title="Ordenar por Leechers">Leechers</a>
                                     </th>
                                     <th class="text-center">
                                         <span class="fa fa-check text-info"></span>
-                                        <a href="#" title="Ordenar por Completado">Completado</a>
+                                        <a href="#" data-toggle="tooltip" title="Ordenar por Completado">Completado</a>
                                     </th>
                                     <th class="text-center">
-                                        <a href="#" title="Ordenar por Tamanho">Tamanho</a>
+                                        <a href="#" data-toggle="tooltip" title="Ordenar por Tamanho">Tamanho</a>
                                     </th>
                                     <th class="text-center">
                                         <span class="fa fa-calendar-alt text-dark"></span>
-                                        <a href="#" title="Ordenar por Data Upload">Data Upload</a>
+                                        <a href="#" data-toggle="tooltip" title="Ordenar por Data Upload">Data Upload</a>
                                     </th>
                                     <th class="text-center">Uploader</th>
                                 </tr>
@@ -111,8 +111,7 @@
                                         <td class="col-md-7">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <img class="media-object" width="92px" height="130px" alt="Poster"
-                                                         src="{{ $torrent->media->poster }}">
+                                                    <img src="{{ $torrent->media->poster }}" width="92px" height="130px" alt="Poster">
                                                 </div>
                                                 <div class="media-body">
                                                     <h5 class="media-heading ml-3">
@@ -126,10 +125,15 @@
                                                     </div>
 
                                                     <div class="ml-3">
-                                                        <span class="badge badge-info badge-outline-info" title="Categoria">{{ $torrent->category->name }}</span>
+                                                        <span class="badge badge-info" title="Categoria">{{ $torrent->category->name }}</span>
                                                         {!! $torrent->freeleech() !!}
                                                         {!! $torrent->silver() !!}
                                                         {!! $torrent->doubleUp() !!}
+                                                    </div>
+                                                    <div class="ml-3 mt-1">
+                                                        @foreach($torrent->tags as $tag)
+                                                            <span class="badge badge-dark">{{ $tag->name }}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
