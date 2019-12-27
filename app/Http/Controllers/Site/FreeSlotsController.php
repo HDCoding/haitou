@@ -18,14 +18,15 @@ class FreeSlotsController extends Controller
     {
         $freeslot = Freeslot::with('freeslotlog')
             ->where('is_active', '=', true)
-            ->first();
+            ->latest('id');
 
         return view('site.freeslots.index', compact('freeslot'));
     }
 
     public function store(FreeSlotRequest $request)
     {
-        $site_point = Freeslot::findOrFail(1);
+        $freeslot_id = $request->input('freeslot_id');
+        $freeslot = Freeslot::findOrFail($freeslot_id);
         $user = $request->user();
         $value = $request->input('point');
 
@@ -34,10 +35,10 @@ class FreeSlotsController extends Controller
             $user->points -= $value;
             $user->save();
             //insert the points to request table
-            $site_point->actual += $value;
-            $site_point->save();
+            $freeslot->actual += $value;
+            $freeslot->save();
 
-            $site_point->request_points()->create(['user_id' => $user->id, 'donated' => $value]);
+            $freeslot->freeslotlog()->create(['user_id' => $user->id, 'donated' => $value]);
 
         } else {
             toastr()->warning('Infelizmente você não possui pontos suficientes para doar!');
