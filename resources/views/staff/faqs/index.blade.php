@@ -22,7 +22,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <a href="{{ url('staff/faqs/create') }}" class="btn btn-outline-primary m-b-4 m-l-15">
+            <a href="{{ url('staff/faqs/create') }}" class="btn btn-primary m-b-4 m-l-15">
                 <i class="fas fa-plus"></i>Adicionar Pergunta
             </a>
             @includeIf('errors.errors', [$errors])
