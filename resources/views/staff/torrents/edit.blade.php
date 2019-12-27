@@ -101,7 +101,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-9">
-                                {!! Form::submit('Editar', ['class' => 'btn btn-rounded btn-outline-success']) !!}
+                                {!! Form::submit('Editar', ['class' => 'btn btn-success btn-rounded']) !!}
                             </div>
                         </div>
 
