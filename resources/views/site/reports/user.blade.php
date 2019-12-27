@@ -25,7 +25,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Reportar: {{ $user->name }}</h4>
+                        <h4 class="card-title">Reportar: {{ $user->username }}</h4>
                         @includeIf('errors.errors', [$errors])
                         @include('includes.messages')
                         {!! Form::open(['url' => 'report', 'class' => 'form-horizontal']) !!}
