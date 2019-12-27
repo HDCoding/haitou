@@ -12,27 +12,18 @@
                         <div class="user-content hide-menu ml-2">
                             <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <h5 class="m-b-0 user-name font-medium">{{ auth()->user()->username }} <i class="fa fa-angle-down"></i></h5>
-                                <span class="op-5 user-email">{{ auth()->user()->group->name }}</span>
+                                <span class="op-5 user-email">{{ auth()->user()->groupName() }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
-                                <div class="dropdown-toggle">
-                                    <div class="dropdown-item">Meus Favoritos</div>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('bookmark.actors') }}">Atrizes/Atores</a>
-                                        <a class="dropdown-item" href="{{ route('bookmark.characters') }}">Personagens</a>
-                                        <a class="dropdown-item" href="{{ route('bookmark.medias') }}">Mídias</a>
-                                    </div>
-                                </div>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('torrent.uploads') }}">
                                     <i class="fas fa-upload text-lightest m-r-5 m-l-5 text-info"></i> Meus Uploads
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault(); document.getElementById('logout-left').submit();">
                                     <i class="fa fa-power-off mr-1 ml-1 text-danger"></i> Sair
                                 </a>
-                                {!! Form::open(['url' => 'logout', 'id' => 'logout-form', 'style' => 'display: none']) !!}
+                                {!! Form::open(['url' => 'logout', 'id' => 'logout-left', 'style' => 'display: none']) !!}
                                 {!! Form::close() !!}
                             </div>
                         </div>
@@ -53,7 +44,9 @@
                 <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ion ion-logo-buffer"></i><span class="hide-menu">Torrents</span></a>
                     <ul aria-expanded="false" class="collapse  first-level">
                         <li class="sidebar-item"><a href="{{ url('torrents') }}" class="sidebar-link"><i class="mdi mdi-layers"></i><span class="hide-menu">Torrents</span></a></li>
+                        @can('upload-torrent')
                         <li class="sidebar-item"><a href="{{ url('torrents/create') }}" class="sidebar-link"><i class="mdi mdi-credit-card-scan"></i><span class="hide-menu">Upload</span></a></li>
+                        @endcan
                     </ul>
                 </li>
 
@@ -64,9 +57,10 @@
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Suporte</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('faq') }}" aria-expanded="false"><i class="far fa-question-circle"></i><span class="hide-menu">F.A.Q</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('rules') }}" aria-expanded="false"><i class="pe-7s-news-paper"></i><span class="hide-menu">Regras</span></a></li>
-
+                @can('painel-staff')
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Dashboard</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('staff') }}" aria-expanded="false"><i class="fab fa-fort-awesome"></i><span class="hide-menu">Painel Staff</span></a></li>
+                @endcan
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
