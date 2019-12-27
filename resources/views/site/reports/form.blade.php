@@ -13,7 +13,7 @@
     {!! Form::textarea('reason', null, ['class' => 'form-control', 'rows' => 8]) !!}
 </div>
 
-{!! Form::submit($submitButton, ['class' => 'btn btn-primary btn-rounded btn-outline-primary']) !!}
+{!! Form::submit($submitButton, ['class' => 'btn btn-primary btn-rounded']) !!}
 
 @section('scripts')
     <!-- sceditor -->
