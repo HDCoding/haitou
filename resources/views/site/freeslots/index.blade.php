@@ -38,6 +38,7 @@
                             @includeIf('errors.errors', [$errors])
                             @include('includes.messages')
                             {!! Form::open(['url' => 'freeslots', 'class' => 'mt-4 container col-md-5 col-md-offset-4']) !!}
+                            {!! Form::hidden('freeslot_id', $freeslot->id) !!}
                             <div class="form-group row ml-5">
                                 {!! Form::label('point', 'Quantia:', ['class' => 'col-form-label col-sm-2 text-sm-right']) !!}
                                 <div class="col-sm-4">
