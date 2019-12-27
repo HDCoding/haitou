@@ -45,7 +45,7 @@ class ReportsController extends Controller
 
     public function user($user_id)
     {
-        $user = User::findOrFail($user_id)->select(['id', 'username']);
+        $user = User::findOrFail($user_id)->select(['id', 'username'])->first();
         return view('site.reports.user', compact('user'));
     }
 
