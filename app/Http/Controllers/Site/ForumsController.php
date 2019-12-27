@@ -330,7 +330,7 @@ class ForumsController extends Controller
         $post = Post::findOrFail($postId);
         $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$postId}";
 
-        abort_unless($user->permission->forum_mod || $user->id === $post->user_id, 403);
+        abort_unless($user->can('forum-mod') || $user->id === $post->user_id, 403);
 
         $post->content = $request->input('content');
         $post->update();
@@ -346,7 +346,7 @@ class ForumsController extends Controller
 
         $post = Post::with('topic')->findOrFail($postId);
 
-        abort_unless($user->permission->forum_mod || $user->id === $post->user_id, 403);
+        abort_unless($user->can('forum-mod') || $user->id === $post->user_id, 403);
 
         $post->delete();
         $user->updatePoints($points);
@@ -359,7 +359,7 @@ class ForumsController extends Controller
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
 
-        abort_unless($user->permission->forum_mod || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->can('forum-mod') || $user->id === $topic->first_post_user_id, 403);
         $posts = $topic->posts();
         $posts->delete();
         $topic->delete();
@@ -380,7 +380,7 @@ class ForumsController extends Controller
         $permission = $topic->forum;
 
         // Check if the user has permission to read the topic
-        if ($permission->getPermission()->reply_topic != true || ($topic->is_locked == true && !$user->permission->forum_mod)) {
+        if ($permission->getPermission()->reply_topic != true || ($topic->is_locked == true && !$user->can('forum-mod'))) {
             toastr()->warning('Você não pode responder a este tópico!', 'Hey');
             return redirect()->route('forum');
         }
@@ -428,7 +428,7 @@ class ForumsController extends Controller
         //Open or Close the topic
         $topic = Topic::findOrFail($topic_id);
 
-        abort_unless($user->permission->forum_mod || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->can('forum-mod') || $user->id === $topic->first_post_user_id, 403);
 
         $topic->is_locked = !$topic->is_locked;
         $topic->save();
@@ -444,7 +444,7 @@ class ForumsController extends Controller
         //Open or Close the topic
         $topic = Topic::findOrFail($topic_id);
 
-        abort_unless($user->permission->forum_mod || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->can('forum-mod') || $user->id === $topic->first_post_user_id, 403);
 
         $topic->is_pinned = !$topic->is_pinned;
         $topic->save();
