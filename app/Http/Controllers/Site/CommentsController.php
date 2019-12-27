@@ -40,27 +40,27 @@ class CommentsController extends Controller
         $studio_id = $request->input('studio_id');
         $torrent_id = $request->input('torrent_id');
 
-//        if (!empty($actor_id)) {
-//            abort_unless($user->permission->actors_comment, 403);
-//        }
-//        if (!empty($calendar_id)) {
-//            abort_unless($user->permission->calendars_comment, 403);
-//        }
-//        if (!empty($character_id)) {
-//            abort_unless($user->permission->characters_comment, 403);
-//        }
-//        if (!empty($fansub_id)) {
-//            abort_unless($user->permission->fansubs_comment, 403);
-//        }
-//        if (!empty($media_id)) {
-//            abort_unless($user->permission->medias_comment, 403);
-//        }
-//        if (!empty($studio_id)) {
-//            abort_unless($user->permission->studios_comment, 403);
-//        }
-//        if (!empty($torrent_id)) {
-//            abort_unless($user->permission->torrents_comment, 403);
-//        }
+        if (!empty($actor_id)) {
+            abort_unless($user->can('comentar-atores'), 403);
+        }
+        if (!empty($calendar_id)) {
+            abort_unless($user->can('comentar-calendarios'), 403);
+        }
+        if (!empty($character_id)) {
+            abort_unless($user->can('comentar-personagens'), 403);
+        }
+        if (!empty($fansub_id)) {
+            abort_unless($user->can('comentar-fansubs'), 403);
+        }
+        if (!empty($media_id)) {
+            abort_unless($user->can('comentar-midias'), 403);
+        }
+        if (!empty($studio_id)) {
+            abort_unless($user->can('comentar-estudios'), 403);
+        }
+        if (!empty($torrent_id)) {
+            abort_unless($user->can('comentar-torrents'), 403);
+        }
 
         $comment = new Comment();
         $comment->user_id = $user->id;
@@ -102,7 +102,7 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->permission->staff_panel, 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->can('painel-staff'), 403);
 
         return view('site.comments.comment', compact('comment'));
     }
@@ -111,7 +111,7 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->permission->staff_panel, 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->can('painel-staff'), 403);
 
         return view('site.comments.edit', compact('comment'));
     }
@@ -122,7 +122,7 @@ class CommentsController extends Controller
 
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($user->id == $comment->user_id || $user->permission->staff_panel, 403);
+        abort_unless($user->id == $comment->user_id || $user->can('painel-staff'), 403);
 
         $comment->update($request->except('_token'));
 
@@ -134,7 +134,7 @@ class CommentsController extends Controller
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->permission->staff_panel, 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->can('painel-staff'), 403);
 
         $comment->delete();
 
