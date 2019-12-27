@@ -40,7 +40,7 @@
                 @includeIf('errors.errors', [$errors])
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title m-b-30">{{ $torrent->media->name }}</h3>
+                        <h3 class="card-title m-b-30">{{ $torrent->name }}</h3>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6">
                                 <div class="white-box text-center">
@@ -48,14 +48,14 @@
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
-                                @if(auth()->user()->permission->torrents_download)
+                                @if(auth()->user()->can('download-torrent'))
                                     <a href="{{ route('torrent.download', [$torrent->id]) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Download" data-original-title="Download">
                                         <button type="button" class="btn icon-btn btn-outline-success">
                                             <span class="oi oi-cloud-download"></span>
                                         </button>
                                     </a>
                                 @endif
-                                @if($torrent->seeders < 2)
+                                @if($torrent->seeders < 2 AND $torrent->create_at > now()->addDays(7))
                                     <a href="{{ route('torrent.reseed', [$torrent->id]) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Pedir Re-Seed" data-original-title="Pedir Re-Seed">
                                         <button type="button" class="btn icon-btn btn-outline-warning">
                                             <span class="fas fa-exclamation"></span>
@@ -67,6 +67,18 @@
                                         <span class="fas fa-flag"></span>
                                     </button>
                                 </a>
+                                <h4 class="box-title m-t-40">Descrição Mídia</h4>
+                                {!! $torrent->media->descriptionHtml() !!}
+
+                                <h4 class="box-title m-t-40">Descrição Torrent</h4>
+                                {!! $torrent->descriptionHtml() !!}
+
+                                @if(!$thanks)
+                                    <h4 class="box-title m-t-40">Agradecer</h4>
+                                    {!! Form::open(['route' => ['torrent.thanks', $torrent->id], 'class' => 'form-horizontal']) !!}
+                                        <button type="submit" class="btn btn-danger btn-rounded" data-toggle="tooltip" title="" data-original-title="Obrigada(o)"><i class="ti-heart"></i> </button>
+                                    {!! Form::close() !!}
+                                @endif
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <h3 class="box-title m-t-40">Info</h3>
@@ -118,35 +130,13 @@
                                         <tr>
                                             <td>Bônus</td>
                                             <td>
-                                                <p class="nice-copy">
+                                                <div class="row">
                                                     {!! $torrent->freeleech() !!}
                                                     {!! $torrent->silver() !!}
                                                     {!! $torrent->doubleUp() !!}
-                                                </p>
+                                                </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td><b>Descrição:</b></td>
-                                            <td>{!! $torrent->descriptionHtml() !!}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="table table-borderless remove-margin-b">
-                                        <thead>
-                                        <tr>
-                                            <th colspan="2">Agradecer</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @if(!$thanks)
-                                            <tr>
-                                                <td colspan="2">
-                                                    {!! Form::open(['route' => ['torrent.thanks', $torrent->id], 'class' => 'form-horizontal']) !!}
-                                                    {!! Form::submit('Obrigada(o)', ['class' => 'btn  btn-primary btn-rounded btn-outline']) !!}
-                                                    {!! Form::close() !!}
-                                                </td>
-                                            </tr>
-                                        @endif
                                         <tr>
                                             <td><i class="fa fa-users text-muted "></i> Agradecimentos</td>
                                             <td>({{ $total }})</td>
@@ -172,7 +162,7 @@
                     </ul>
                     <!-- Tabs -->
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="tab-pane fade show active" id="nav-comments" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Comentários Recentes</h4>
@@ -181,7 +171,7 @@
                                 @include('includes.comments')
                                 <br>
                                 <hr>
-                                {{--                                @if(auth()->user()->permission->fansubs_comment)--}}
+                                @if(auth()->user()->can('comentar-fansubs') OR $torrent->allow_comments == true)
                                 <div class="card">
                                     <div class="card-body">
                                         {!! Form::open(['route' => ['comments.store'], 'class' => 'form-horizontal']) !!}
@@ -200,9 +190,9 @@
                                         {!! Form::close() !!}
                                     </div>
                                 </div>
-                                {{--                                @else--}}
+                                @else
                                 <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em torrents foram revogadas <strong class="text-info">OU</strong> comentários para este torrent foram desativadas</p>
-                                {{--                                @endif--}}
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="nav-files" role="tabpanel" aria-labelledby="pills-setting-tab">
