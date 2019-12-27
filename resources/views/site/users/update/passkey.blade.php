@@ -32,11 +32,12 @@
                             <h4 class="card-title">Passkey</h4>
                             @includeIf('errors.errors', [$errors])
                             {!! Form::open(['url' => 'user/edit/passkey', 'class' => 'form-horizontal', 'autocomplete' => 'off']) !!}
-                            <h5 class="mb-2 mt-5">
-                                <i class="fas fa-key text-info"></i> Meu Passkey:
+                            <h5 class="mt-4">
+                                <i class="fas fa-key text-info"></i>
+                                Meu Passkey:
                             </h5>
                             {{ auth()->user()->passkey }}
-                            <p class="mb-2 text-danger">Alterando seu passkey, voce precisa baixar todos os torrents que baixou anteriormente para continuar seedando</p>
+                            <p class="mb-4 text-danger">Alterando seu passkey, voce precisa baixar todos os torrents que baixou anteriormente para continuar seedando</p>
                             <button type="submit" class="btn btn-primary">Alterar</button>&nbsp;
                             <button type="button" class="btn btn-default">Cancelar</button>
                             {!! Form::close() !!}
