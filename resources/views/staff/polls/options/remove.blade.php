@@ -55,7 +55,7 @@
                             </tbody>
                         </table>
                         <br>
-                        {!! Form::submit('Remover', ['class' => 'btn btn-rounded btn-outline-primary']) !!}
+                        {!! Form::submit('Remover', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
