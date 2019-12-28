@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
              GroupsTableSeeder::class,
              FansubsTableSeeder::class,
              BonusTableSeeder::class,
-             SettingsTableSeeder::class,
              MoodsTableSeeder::class,
              GenresTableSeeder::class,
              StudiosTableSeeder::class,
