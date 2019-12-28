@@ -10,6 +10,7 @@ class FailedLoginsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:falhas-login-mod');
     }
 
     public function index()
