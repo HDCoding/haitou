@@ -12,6 +12,7 @@ class FreeSlotsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:freeslots-mod');
     }
 
     public function index()
