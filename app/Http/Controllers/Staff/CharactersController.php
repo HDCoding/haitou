@@ -14,6 +14,7 @@ class CharactersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:personagens-mod');
         $this->imageFile = new ImageUploader();
     }
 
