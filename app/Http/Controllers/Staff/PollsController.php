@@ -13,6 +13,7 @@ class PollsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:pesquisas-mod');
     }
 
     public function index()
