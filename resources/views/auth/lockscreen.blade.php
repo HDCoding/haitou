@@ -17,7 +17,9 @@
             <div class="auth-box">
                 <div>
                     <div class="logo">
-                        <span class="db"><img alt="thumbnail" class="rounded-circle" width="100" src="{{ auth()->user()->avatar() }}"></span>
+                        <span class="db">
+                            <img src="{{ auth()->user()->avatar() }}" class="rounded-circle mb-3" width="100" alt="thumbnail">
+                        </span>
                         <h5 class="font-medium m-b-20">Tela de Bloqueio</h5>
                     </div>
                     <!-- Form -->
@@ -53,9 +55,9 @@
 
 @endsection
 
-@section('scripts')
-    <script src="{{ asset('vendor/validate/validate.js') }}"></script>
-    <script src="{{ asset('js/pages/lockscreen.js') }}"></script>
+@section('script')
+{{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/pages/lockscreen.js') }}"></script>--}}
     <script>
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
