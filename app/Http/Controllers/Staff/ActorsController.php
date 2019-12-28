@@ -14,6 +14,7 @@ class ActorsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:atores-mod');
         $this->imageFile = new ImageUploader();
     }
 
