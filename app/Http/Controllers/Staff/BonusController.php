@@ -11,6 +11,7 @@ class BonusController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:bonus-mod');
     }
 
     public function index()
