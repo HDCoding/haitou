@@ -30,8 +30,9 @@ class SettingsController extends Controller
         $rules = Setting::getValidationRules();
         $data = $this->validate($request, $rules);
         $validSettings = array_keys($rules);
+
         foreach ($data as $key => $val) {
-            if( in_array($key, $validSettings) ) {
+            if (in_array($key, $validSettings)) {
                 Setting::add($key, $val, Setting::getDataType($key));
             }
         }
