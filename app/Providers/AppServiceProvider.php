@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Helpers\Settings;
 use App\Helpers\Toastr;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\ServiceProvider;
