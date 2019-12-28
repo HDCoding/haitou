@@ -12,6 +12,7 @@ class TrafficsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:acesso-total');
         $this->vnstat = new NetwordInformation();
     }
 
