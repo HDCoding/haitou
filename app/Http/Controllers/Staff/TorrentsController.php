@@ -15,6 +15,7 @@ class TorrentsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:torrents-mod');
     }
 
     public function index()
