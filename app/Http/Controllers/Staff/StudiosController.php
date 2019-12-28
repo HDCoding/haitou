@@ -11,6 +11,7 @@ class StudiosController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:estudios-mod');
     }
 
     public function index()
