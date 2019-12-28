@@ -88,9 +88,9 @@
 
 @endsection
 
-@section('scripts')
-    <script src="{{ asset('vendor/validate/validate.js') }}"></script>
-    <script src="{{ asset('js/pages/invitation.js') }}"></script>
+@section('script')
+{{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/pages/invitation.js') }}"></script>--}}
     <script>
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
