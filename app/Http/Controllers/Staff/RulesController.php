@@ -11,6 +11,7 @@ class RulesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:regras-mod');
     }
 
     public function index()
