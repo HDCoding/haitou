@@ -25,6 +25,7 @@ class UsersController extends Controller
     public function __construct(User $user)
     {
         $this->middleware('auth');
+        $this->middleware('allow:usuarios-mod');
         $this->pendent = $user->where('status', '=', 0)->count();
         $this->activated = $user->where('status', '=', 1)->count();
         $this->suspended = $user->where('status', '=', 2)->count();
@@ -47,6 +48,7 @@ class UsersController extends Controller
     public function edit($user_id)
     {
         $user = User::where('id', '=', $user_id)->first();
+        abort_unless($user->id !== auth()->user()->id, 403);
         $groups = Group::all()->pluck('name', 'id');
         return view('staff.users.edit', compact('user', 'groups'));
     }
@@ -55,7 +57,7 @@ class UsersController extends Controller
     {
         $user = User::find($user_id);
         $user->update($request->except('_token'));
-
+        abort_unless($user->id !== auth()->user()->id, 403);
         $group = $request->input('group_id');
         if ($user->group_id !== $group) {
             $user->group_id = $group;
@@ -201,7 +203,7 @@ class UsersController extends Controller
     public function formPermission(int $user_id)
     {
         $user = User::where('id', '=', $user_id)->select('id', 'username')->first();
-
+        abort_unless($user->id !== auth()->user()->id, 403);
         $permissions = Allow::all()->pluck('name', 'id');
 
         $allowed = DB::table('user_allows')
@@ -214,6 +216,7 @@ class UsersController extends Controller
     public function updatePermission(Request $request, int $user_id)
     {
         $user = User::where('id', '=', $user_id)->first();
+        abort_unless($user->id !== auth()->user()->id, 403);
         $user->allows()->sync($request->input('allow_id'));
 
         return redirect()->route('staff.user.permissions', [$user_id]);
