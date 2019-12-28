@@ -79,6 +79,13 @@
                             </div>
                         </div>
 
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                {!! Form::label('tag_id', 'Tags:') !!}
+                                {!! Form::select('tag_id[]', $tags, $tag, ['class' => 'custom-select select2', 'multiple' => 'multiple', 'size' => '10']) !!}
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição:') !!}
                             {!! Form::textarea('description', $torrent->description) !!}
