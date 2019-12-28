@@ -11,6 +11,7 @@ class NewsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:noticias-mod');
     }
 
     public function index()
