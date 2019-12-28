@@ -30,6 +30,7 @@ use App\Models\Torrent;
 use App\Notifications\NewReseedRequestNotification;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TorrentsController extends Controller
@@ -179,9 +180,13 @@ class TorrentsController extends Controller
         $medias = Media::select('id', 'name')->orderBy('name', 'ASC')->pluck('name', 'id');
         $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
 
+        $tag = DB::table('torrent_tags')
+            ->where('torrent_id', '=', $torrent_id)
+            ->pluck('tag_id', 'tag_id')->all();
+
         abort_unless(auth()->user()->id == $torrent->user_id, 403);
 
-        return view('site.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs'));
+        return view('site.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs', 'tag'));
     }
 
     public function update(UpdateRequest $request, $torrent_id)
