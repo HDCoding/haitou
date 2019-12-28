@@ -30,10 +30,13 @@ class ActivationController extends Controller
             //Send thank-you email
             Mail::to($user)->send(new AccountThanksActivation());
 
+            //Set user permissions
+            $user->allows()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 11]);
+
             //Return to confirmation page
             return view('auth.activation')->with('info', 'Conta ativada com sucesso, agora você pode fazer o login.');
         } else {
-            return redirect()->to('login', ['info' => 'Chave de ativação não existe ou conta já ativada.']);
+            return view('auth.activation')->with('info', 'Chave de ativação não existe ou conta já ativada.');
         }
     }
 
@@ -50,7 +53,7 @@ class ActivationController extends Controller
             //Return to confirmation page
             return view('auth.activation')->with('info', 'Conta ativada com sucesso, agora você pode fazer o login.');
         } else {
-            return redirect()->to('login', ['info' => 'Chave de ativação não existe ou conta já ativada.']);
+            return view('auth.activation')->with('info', 'Chave de ativação não existe ou conta já ativada.');
         }
     }
 }
