@@ -12,6 +12,7 @@ class MoodsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:humor-mod');
     }
 
     public function index()
@@ -19,16 +20,6 @@ class MoodsController extends Controller
         $moods = Mood::select('id', 'name', 'image', 'points')->get();
         return view('staff.moods.index', compact('moods'));
     }
-
-//    public function create()
-//    {
-//        //
-//    }
-//
-//    public function store(Request $request)
-//    {
-//        //
-//    }
 
     public function update(Request $request, $mood_id)
     {
@@ -42,8 +33,4 @@ class MoodsController extends Controller
         return response()->json(['error' => 400, 'message' => 'Parametros insuficientes.'], 400);
     }
 
-//    public function destroy($mood_id)
-//    {
-//        //
-//    }
 }
