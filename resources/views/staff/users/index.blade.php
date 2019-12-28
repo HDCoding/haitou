@@ -56,6 +56,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>
+                                            @if(auth()->user()->id !== $user->id)
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     Opções
@@ -80,15 +81,18 @@
                                                     <a class="dropdown-item" href="{{ url('staff/users/' . $user->id . '/edit') }}">
                                                         <i class="fas fa-pencil-alt text-info m-r-10"></i> Editar Usuário
                                                     </a>
+                                                    @if(auth()->user()->can('permissoes-mod'))
                                                     <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/permissions') }}">
                                                         <i class="fas fa-key text-success m-r-10"></i> Editar Permissões
                                                     </a>
+                                                    @endif
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/notes') }}">
                                                         <i class="fas fa-book text-info m-r-10"></i> Anotações
                                                     </a>
                                                 </div>
                                             </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
