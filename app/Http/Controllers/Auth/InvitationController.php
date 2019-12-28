@@ -75,6 +75,9 @@ class InvitationController extends Controller
             $user->activated_at = Carbon::today();
             $user->save();
 
+            //Set user permissions
+            $user->allows()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 11]);
+
             //send thank you email
             Mail::to($invitation->email)->send(new AccountThanksActivation());
 
