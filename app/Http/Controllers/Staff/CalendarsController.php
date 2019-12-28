@@ -10,6 +10,7 @@ class CalendarsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:calendarios-mod');
     }
 
     public function index()
