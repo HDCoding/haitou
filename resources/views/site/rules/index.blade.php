@@ -18,7 +18,6 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Regras</h4>
-                        <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             @foreach($rules as $key => $rule)
