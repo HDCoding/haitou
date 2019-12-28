@@ -11,6 +11,7 @@ class StaffController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('allow:painel-staff');
     }
 
     public function index()
