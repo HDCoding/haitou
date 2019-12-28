@@ -306,7 +306,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Rules
             Route::resource('rules', 'RulesController')->except(['show']);
             //Settings
-            Route::resource('settings', 'SettingsController')->only(['index', 'store']);
+            //Route::resource('settings', 'SettingsController')->only(['index', 'store']);
             //Studios
             Route::resource('studios', 'StudiosController')->except(['show']);
             //Torrents
