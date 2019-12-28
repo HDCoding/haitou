@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\SettingSaved;
 use App\Helpers\BBCode;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -13,10 +12,6 @@ class Setting extends Model
     public $timestamps = false;
 
     protected $table = 'settings';
-
-    protected $dispatchesEvents = [
-        'saved' => SettingSaved::class
-    ];
 
     protected $fillable = [
         'key',
