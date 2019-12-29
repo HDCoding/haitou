@@ -104,6 +104,16 @@ class Media extends Model
         ];
     }
 
+    public function poster()
+    {
+        return empty($this->poster) ? null : urlencode($this->poster);
+    }
+
+    public function cover()
+    {
+        return empty($this->cover) ? null : urlencode($this->cover);
+    }
+
     public function genre()
     {
         $type = $this->media_type;
