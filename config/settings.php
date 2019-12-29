@@ -19,7 +19,6 @@ return [
                 'data' => 'string',
                 'name' => 'site_title',
                 'label' => 'Site Título',
-                'rules' => 'required|min:2|max:45',
                 'value' => 'Forumm'
             ],
             [
@@ -46,7 +45,7 @@ return [
         'title' => 'Analytics',
         'elements' => [
             [
-                'type' => 'textarea',
+                'type' => 'text',
                 'data' => 'string',
                 'name' => 'analytics',
                 'label' => 'Analytics'
@@ -60,50 +59,43 @@ return [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'facebook',
-                'label' => 'Facebook',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'Facebook'
             ],
             [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'Twitter',
-                'label' => 'twitter',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'twitter'
             ],
             [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'Pinterest',
-                'label' => 'pinterest',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'pinterest'
             ],
             [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'Youtube',
-                'label' => 'youtube',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'youtube'
             ],
             [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'Instagram',
-                'label' => 'instagram',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'instagram'
             ],
             [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'Twitch',
-                'label' => 'twitch',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'twitch'
             ],
             [
                 'type' => 'text',
                 'data' => 'string',
                 'name' => 'Discord',
-                'label' => 'discord',
-                'rules' => 'nullable|string|url|max:255'
+                'label' => 'discord'
             ],
         ]
     ],
@@ -115,88 +107,77 @@ return [
                 'data' => 'int',
                 'name' => 'Pontos Signup',
                 'label' => 'points_signup',
-                'value' => '200',
-                'rules' => 'required|min:1|max:250',
+                'value' => '200'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Convite',
                 'label' => 'points_invite',
-                'value' => '100',
-                'rules' => 'required|min:1|max:250',
+                'value' => '100'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Download',
                 'label' => 'points_download',
-                'value' => '20',
-                'rules' => 'required|min:1|max:250',
+                'value' => '20'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Comentar',
                 'label' => 'points_comment',
-                'value' => '4',
-                'rules' => 'required|min:1|max:250',
+                'value' => '4'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Upload',
                 'label' => 'points_upload',
-                'value' => '30',
-                'rules' => 'required|min:1|max:250',
+                'value' => '30'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Classificação',
                 'label' => 'points_rating',
-                'value' => '5',
-                'rules' => 'required|min:1|max:250',
+                'value' => '5'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Tópico',
                 'label' => 'points_topic',
-                'value' => '8',
-                'rules' => 'required|min:1|max:250',
+                'value' => '8'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Postagem',
                 'label' => 'points_post',
-                'value' => '5',
-                'rules' => 'required|min:1|max:250',
+                'value' => '5'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Deletar',
                 'label' => 'points_delete',
-                'value' => '15',
-                'rules' => 'required|min:1|max:250',
+                'value' => '15'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Agradecer',
                 'label' => 'points_thanks',
-                'value' => '5',
-                'rules' => 'required|min:1|max:250',
+                'value' => '5'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Reportar',
                 'label' => 'points_report',
-                'value' => '5',
-                'rules' => 'required|min:1|max:250',
+                'value' => '5'
             ],
         ]
     ],
@@ -207,22 +188,19 @@ return [
                 'type' => 'textarea',
                 'data' => 'string',
                 'name' => 'privacy',
-                'label' => 'Privacidade',
-                'rules' => 'nullable|string|max:65530'
+                'label' => 'Privacidade'
             ],
             [
                 'type' => 'textarea',
                 'data' => 'string',
                 'name' => 'disclaimer',
-                'label' => 'Aviso Legal',
-                'rules' => 'nullable|string|max:65530'
+                'label' => 'Aviso Legal'
             ],
             [
                 'type' => 'textarea',
                 'data' => 'string',
                 'name' => 'terms',
-                'label' => 'Termos e Condições',
-                'rules' => 'nullable|string|max:65530'
+                'label' => 'Termos e Condições'
             ]
         ]
     ],
@@ -252,7 +230,6 @@ return [
                 'data' => 'string',
                 'name' => 'Mail usuario',
                 'label' => 'mail_username',
-                'rules' => 'required|email'
             ],
             [
                 'type' => 'text',
@@ -276,7 +253,6 @@ return [
                 'data' => 'boolean', // data type, string, int, boolean
                 'name' => 'Signup On',
                 'label' => 'signup_on',
-                'rules' => 'required|boolean', // validation rule of laravel
                 'value' => '1',
                 'options' => [
                     '1' => 'Sim',
@@ -288,7 +264,6 @@ return [
                 'data' => 'boolean', // data type, string, int, boolean
                 'name' => 'Convite On',
                 'label' => 'invite_on',
-                'rules' => 'required|boolean', // validation rule of laravel
                 'value' => '1',
                 'options' => [
                     '1' => 'Sim',
@@ -300,7 +275,6 @@ return [
                 'data' => 'boolean', // data type, string, int, boolean
                 'name' => 'forum On',
                 'label' => 'forum_on',
-                'rules' => 'required|boolean', // validation rule of laravel
                 'value' => '1',
                 'options' => [
                     '1' => 'Sim',
@@ -312,7 +286,6 @@ return [
                 'data' => 'boolean', // data type, string, int, boolean
                 'name' => 'RNH On',
                 'label' => 'rnh_on',
-                'rules' => 'required|boolean', // validation rule of laravel
                 'value' => '1',
                 'options' => [
                     '1' => 'Sim',
@@ -345,8 +318,7 @@ return [
                 'data' => 'int',
                 'name' => 'Convite expira em',
                 'label' => 'invitedays',
-                'value' => '7',
-                'rules' => 'required|integer|min:1|max:150'
+                'value' => '7'
             ],
         ]
     ],
