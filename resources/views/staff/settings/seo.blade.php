@@ -34,7 +34,7 @@
                                 {!! Form::open(['url' => 'staff/settings/seo', 'class' => 'form-horizontal']) !!}
                                 <div class="form-group">
                                     {!! Form::label('site_title', 'Site Título: *') !!}
-                                    {!! Form::text('site_title', setting('site_title'), ['class' => 'form-control']) !!}
+                                    {!! Form::text('site_title', setting('site_title'), ['class' => 'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('meta_keywords', 'Meta Keywords') !!}
