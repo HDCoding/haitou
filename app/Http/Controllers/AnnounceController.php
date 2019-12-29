@@ -124,7 +124,7 @@ class AnnounceController extends Controller
         $redundant = $request->has('redundant') ? $request->input('redundant') : null;
 
         if (!$compact) {
-            return $this->encodeMessage('Seu cliente nao suporta compact, atualize seu cliente', 200);
+            return $this->encodeMessage('Seu programa nao suporta compact, atualize seu programa', 200);
         }
 
         // Se o cliente do usuário está enviando valores negativos Retornar erro ao cliente
@@ -287,7 +287,7 @@ class AnnounceController extends Controller
             $torrent->times_completed += 1;
 
             //salva no banco como download completo
-            $torrent->torrent_completes()->create(['user_id' => $user->id]);
+            $torrent->completes()->create(['user_id' => $user->id]);
 
             //Seedtime
             $new_update = $client->updated_at->timestamp;
