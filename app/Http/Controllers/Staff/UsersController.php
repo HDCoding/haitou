@@ -26,22 +26,23 @@ class UsersController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('allow:usuarios-mod');
-        $this->pendent = $user->where('status', '=', 0)->count();
-        $this->activated = $user->where('status', '=', 1)->count();
-        $this->suspended = $user->where('status', '=', 2)->count();
-        $this->banned = $user->where('status', '=', 3)->count();
+        $this->pendent = $user;
+        $this->activated = $user;
+        $this->suspended = $user;
+        $this->banned = $user;
         $this->log = new Log();
     }
 
     public function index()
     {
-        $pendent = $this->pendent;
-        $activated = $this->activated;
-        $suspended = $this->suspended;
-        $banned = $this->banned;
+        $pendent = $this->pendent->where('status', '=', 0)->count();
+        $activated = $this->activated->where('status', '=', 1)->count();
+        $suspended = $this->suspended->where('status', '=', 2)->count();
+        $banned = $this->banned->where('status', '=', 3)->count();
 
-        $users = User::with('group:id,name')->select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();
+        $users = User::select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();
         $groups = Group::select('id', 'name')->get();
+
         return view('staff.users.index', compact('users', 'groups', 'pendent', 'activated', 'suspended', 'banned'));
     }
 
@@ -172,15 +173,15 @@ class UsersController extends Controller
     {
         if ($request->isMethod('POST')) {
 
-            $pendent = $this->pendent;
-            $activated = $this->activated;
-            $suspended = $this->suspended;
-            $banned = $this->banned;
+            $pendent = $this->pendent->where('status', '=', 0)->count();
+            $activated = $this->activated->where('status', '=', 1)->count();
+            $suspended = $this->suspended->where('status', '=', 2)->count();
+            $banned = $this->banned->where('status', '=', 3)->count();
 
             $groups = Group::select('id', 'name')->get();
 
-            $group = $request->get('group');
-            $status = $request->get('status');
+            $group = $request->input('group');
+            $status = $request->input('status');
 
             if ($request->has('group') && !empty($group) && $group != null && $group != '') {
                 $users = User::with('group:id,name')
@@ -189,7 +190,10 @@ class UsersController extends Controller
                     ->get(); // Returns only users with the group
             }
             if ($request->has('status') && !empty($status) && $status != null && $status != '') {
-                $users = User::where('status', '==', $status)->select('id', 'group_id', 'username', 'avatar', 'status')->get();
+                $users = User::with('group:id,name')
+                    ->select('id', 'group_id', 'username', 'avatar', 'status')
+                    ->where('status', '=', $status)
+                    ->get(); // Returns only users with the status
             }
             if (empty($group) && empty($status)) {
                 $users = User::select('id', 'group_id', 'username', 'avatar', 'status')->orderBy('username', 'ASC')->get();
