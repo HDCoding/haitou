@@ -402,6 +402,11 @@ class User extends Authenticatable
         return empty($this->avatar) ? asset('images/avatar.jpg') : urlencode($this->avatar);
     }
 
+    public function cover()
+    {
+        return empty($this->cover) ? null : urlencode($this->cover);
+    }
+
     public function points()
     {
         return number_format($this->points);
@@ -432,9 +437,7 @@ class User extends Authenticatable
 
     public function groupName()
     {
-        if (auth()->check()) {
-            return $this->group()->select('name')->pluck('name')->first();
-        }
+        return $this->group()->select('name')->pluck('name')->first();
     }
 
     public function isSubscribed(string $type, $topic_id)
