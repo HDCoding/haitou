@@ -30,7 +30,7 @@
                         <div class="m-t-30 text-center">
                             <img src="{{ $user->avatar() }}" class="rounded-circle" width="150" alt="avatar"/>
                             <h4 class="card-title m-t-10">{{ $user->username }}</h4>
-                            <h6 class="card-subtitle">{{ $user->group->name }}</h6>
+                            <h6 class="card-subtitle">{{ $user->groupName() }}</h6>
                             <div class="row text-center justify-content-md-center">
                                 <div class="col-4">
                                     <a href="javascript:void(0)" class="link" data-toggle="tooltip" title="ID">
@@ -87,7 +87,7 @@
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('cover', 'Cover:', ['class' => 'form-label']) !!}
-                                        {!! Form::text('cover', $user->cover, ['class' => 'form-control']) !!}
+                                        {!! Form::text('cover', $user->cover(), ['class' => 'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         {!! Form::label('title', 'Título para o Fórum', ['class' => 'form-label']) !!}
