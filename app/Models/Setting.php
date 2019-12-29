@@ -15,13 +15,15 @@ class Setting extends Model
 
     protected $fillable = [
         'key',
-        'value',
-        'type'
+        'value'
     ];
 
-    public function contentHtml()
+    public function contentHtml($key)
     {
-        return (new BBCode())->parse($this->value, true);
+        if (self::has($key)) {
+            $value = self::get($key);
+            return (new BBCode())->parse($value, true);
+        }
     }
 
     /**
@@ -29,15 +31,14 @@ class Setting extends Model
      *
      * @param $key
      * @param $value
-     * @param string $type
      * @return bool
      */
-    public static function add($key, $value, $type = 'string')
+    public static function add($key, $value)
     {
         if (self::has($key)) {
-            return self::set($key, $value, $type);
+            return self::set($key, $value);
         }
-        return self::create(['key' => $key, 'value' => $value, 'type' => $type]) ? $value : false;
+        return self::create(['key' => $key, 'value' => $value]);
     }
 
     /**
@@ -50,8 +51,8 @@ class Setting extends Model
     public static function get($key, $default = null)
     {
         if (self::has($key)) {
-            $setting = self::getAllSettings()->where('key', '=', $key)->first();
-            return self::castValue($setting->value, $setting->type);
+            $setting = self::where('key', '=', $key)->first();
+            return $setting->value;
         }
         return self::getDefaultValue($key, $default);
     }
@@ -61,18 +62,14 @@ class Setting extends Model
      *
      * @param $key
      * @param $value
-     * @param string $type
      * @return bool
      */
-    public static function set($key, $value, $type = 'string')
+    public static function set($key, $value)
     {
-        if ($setting = self::getAllSettings()->where('key', '=', $key)->first()) {
-            return $setting->update([
-                'key' => $key,
-                'value' => $value,
-                'type' => $type]) ? $value : false;
+        if ($setting = self::where('key', '=', $key)->first()) {
+            return $setting->update(['key' => $key, 'value' => $value]);
         }
-        return self::add($key, $value, $type);
+        return self::add($key, $value);
     }
 
     /**
@@ -84,7 +81,7 @@ class Setting extends Model
     public static function remove($key)
     {
         if (self::has($key)) {
-            return self::whereName($key)->delete();
+            return self::where('key', '=', $key)->delete();
         }
         return false;
     }
@@ -97,40 +94,31 @@ class Setting extends Model
      */
     public static function has($key)
     {
-        return (boolean)self::getAllSettings()->whereStrict('key', '=', $key)->count();
+        return (boolean)self::where('key', '=', $key)->count();
     }
 
     /**
-     * Get the validation rules for setting fields
+     * Get all the settings
      *
-     * @return array
-     */
-    public static function getValidationRules()
-    {
-        return self::getDefinedSettingFields()->pluck('rules', 'key')
-            ->reject(function ($value) {
-                return is_null($value);
-            })->toArray();
-    }
-
-    /**
-     * Get the data type of a setting
-     *
-     * @param $field
      * @return mixed
      */
-    public static function getDataType($field)
+    public static function getAllSettings()
     {
-        $type = self::getDefinedSettingFields()->pluck('data', 'key')->get($field);
-        return is_null($type) ? 'string' : $type;
+        return Cache::remember('settings.all', 10 * 60, function () {
+            return self::all()->mapWithKeys(function ($setting) {
+                return [$setting->key => $setting->value];
+            });
+        });
     }
 
     /**
-     * Get default value for a setting
-     *
-     * @param $field
-     * @return mixed
+     * Flush the cache
      */
+    public static function flushCache()
+    {
+        Cache::forget('settings.all');
+    }
+
     public static function getDefaultValueForField($field)
     {
         return self::getDefinedSettingFields()->pluck('value', 'name')->get($field);
@@ -158,56 +146,6 @@ class Setting extends Model
         return collect(config('settings'))->pluck('elements')->flatten(1);
     }
 
-    /**
-     * caste value into respective type
-     *
-     * @param $value
-     * @param $castTo
-     * @return bool|int
-     */
-    private static function castValue($value, $castTo)
-    {
-        switch ($castTo) {
-            case 'int':
-            case 'integer':
-                return intval($value);
-                break;
-            case 'bool':
-            case 'boolean':
-                return boolval($value);
-                break;
-            default:
-                return $value;
-        }
-    }
-
-    /**
-     * Get all the settings
-     *
-     * @return mixed
-     */
-    public static function getAllSettings()
-    {
-        return Cache::remember('settings.all', 10 * 60, function () {
-            return self::all()->mapWithKeys(function ($setting) {
-                return [$setting->key => $setting->value];
-            });
-        });
-    }
-
-    /**
-     * Flush the cache
-     */
-    public static function flushCache()
-    {
-        Cache::forget('settings.all');
-    }
-
-    /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
     protected static function boot()
     {
         parent::boot();
