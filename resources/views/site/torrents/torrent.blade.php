@@ -27,7 +27,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            @if(!empty($torrent->media->cover))
+            @if(!empty($torrent->media->cover()))
                 <div class="col-sm-12 col-lg-12">
                     <div class="card vegas-fixed-background" id="media-cover">
                         <div class="card-body py-5 my-5">
@@ -265,7 +265,7 @@
         }
     </script>
 
-    @if(!empty($torrent->media->cover))
+    @if(!empty($torrent->media->cover()))
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(function() {
             // Fixed bg
@@ -274,7 +274,7 @@
                 timer: false,
                 shuffle: true,
                 slides: [
-                    { src: "{{ $torrent->media->cover }}" },
+                    { src: "{{ $torrent->media->cover() }}" },
                 ],
                 transition: [ 'fade', 'zoomOut', 'zoomIn', 'blur' ],
                 animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ]
