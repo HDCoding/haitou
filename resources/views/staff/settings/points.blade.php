@@ -39,49 +39,49 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('points_signup', 'Registrar-se:') !!}
-                                            {!! Form::number('points_signup', setting('points_signup'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_signup', setting('points_signup'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_invite', 'Convidar:') !!}
-                                            {!! Form::number('points_invite', setting('points_invite'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_invite', setting('points_invite'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_download', 'Download:') !!}
-                                            {!! Form::number('points_download', setting('points_download'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_download', setting('points_download'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_comment', 'Comentar:') !!}
-                                            {!! Form::number('points_comment', setting('points_comment'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_comment', setting('points_comment'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_upload', 'Upload:') !!}
-                                            {!! Form::number('points_upload', setting('points_upload'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_upload', setting('points_upload'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_rating', 'Votar:') !!}
-                                            {!! Form::number('points_rating', setting('points_rating'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_rating', setting('points_rating'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('points_topic', 'Novo Tópico:') !!}
-                                            {!! Form::number('points_topic', setting('points_topic'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_topic', setting('points_topic'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_post', 'Postar:') !!}
-                                            {!! Form::number('points_post', setting('points_post'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_post', setting('points_post'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_delete', 'Deletar:') !!}
-                                            {!! Form::number('points_delete', setting('points_delete'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_delete', setting('points_delete'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_thanks', 'Agradecer:') !!}
-                                            {!! Form::number('points_thanks', setting('points_thanks'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_thanks', setting('points_thanks'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('points_report', 'Reportar:') !!}
-                                            {!! Form::number('points_report', setting('points_report'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('points_report', setting('points_report'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
