@@ -26,7 +26,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            @if(!empty($member->cover))
+            @if(!empty($member->cover()))
             <div class="col-sm-12 col-lg-12">
                 <div class="card vegas-fixed-background" id="member-cover">
                     <div class="card-body py-5 my-5">
@@ -187,7 +187,7 @@
     <!-- VegasJS -->
     <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
 
-    @if(!empty($member->cover))
+    @if(!empty($member->cover()))
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(function() {
             // Fixed bg
@@ -196,7 +196,7 @@
                 timer: false,
                 shuffle: true,
                 slides: [
-                    { src: "{{ $member->cover }}" },
+                    { src: "{{ $member->cover() }}" },
                 ],
                 transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
                 animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
