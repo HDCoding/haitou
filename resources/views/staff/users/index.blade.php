@@ -38,7 +38,7 @@
                                 <thead>
                                 <tr>
                                     <th><i class="fas fa-user"></i></th>
-                                    <th>Nome</th>
+                                    <th>Nick</th>
                                     <th>Grupo</th>
                                     <th>Status</th>
                                     <th>Suspensões</th>
@@ -51,7 +51,7 @@
                                     <tr>
                                         <td><img class="rounded-circle" src="{{ $user->avatar() }}" alt="Avatar" width="70px"></td>
                                         <td>{{ $user->username }}</td>
-                                        <td>{{ $user->group->name }}</td>
+                                        <td>{{ $user->groupName() }}</td>
                                         <td>{!! $user->status() !!}</td>
                                         <td></td>
                                         <td></td>
@@ -123,7 +123,7 @@
                             <div class="col-md m-b-4 m-t-10">
                                 <label class="form-label" for="status">Status da conta</label>
                                 <select class="custom-select" name="status" id="status" data-style="form-control">
-                                    <option value="null" disabled selected>Status</option>
+                                    <option value="" disabled selected>Status</option>
                                     <option value="0">Pendente</option>
                                     <option value="1">Confirmada</option>
                                     <option value="2">Suspensa</option>
