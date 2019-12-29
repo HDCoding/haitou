@@ -306,7 +306,15 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Rules
             Route::resource('rules', 'RulesController')->except(['show']);
             //Settings
-            //Route::resource('settings', 'SettingsController')->only(['index', 'store']);
+            Route::match(['get', 'post'], 'settings/analytics', 'SettingsController@analytics')->name('setting.analytics');
+            Route::match(['get', 'post'], 'settings/favicon', 'SettingsController@favicon')->name('setting.favicon');
+            Route::match(['get', 'post'], 'settings/images', 'SettingsController@images')->name('setting.images');
+            Route::match(['get', 'post'], 'settings/mail', 'SettingsController@mail')->name('setting.mail');
+            Route::match(['get', 'post'], 'settings/others', 'SettingsController@others')->name('setting.others');
+            Route::match(['get', 'post'], 'settings/points', 'SettingsController@points')->name('setting.points');
+            Route::match(['get', 'post'], 'settings/policy', 'SettingsController@policy')->name('setting.policy');
+            Route::match(['get', 'post'], 'settings/seo', 'SettingsController@seo')->name('setting.seo');
+            Route::match(['get', 'post'], 'settings/social', 'SettingsController@social')->name('setting.social');
             //Studios
             Route::resource('studios', 'StudiosController')->except(['show']);
             //Torrents
