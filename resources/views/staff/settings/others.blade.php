@@ -36,38 +36,38 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('signup_on', 'Registro aberto?') !!}
-                                            {!! Form::select('signup_on', [true => 'Sim', false => 'Não'], setting('signup_on'), ['class' => 'form-control']) !!}
+                                            {!! Form::select('signup_on', [true => 'Sim', false => 'Não'], setting('signup_on'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('invite_on', 'Convites liberado?') !!}
-                                            {!! Form::select('invite_on', [true => 'Sim', false => 'Não'], setting('invite_on'), ['class' => 'form-control']) !!}
+                                            {!! Form::select('invite_on', [true => 'Sim', false => 'Não'], setting('invite_on'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('forum_on', 'Fórum Online?') !!}
-                                            {!! Form::select('forum_on', [true => 'Sim', false => 'Não'], setting('forum_on'), ['class' => 'form-control']) !!}
+                                            {!! Form::select('forum_on', [true => 'Sim', false => 'Não'], setting('forum_on'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('rnh_on', 'H-N-R Ligado?') !!}
-                                            {!! Form::select('rnh_on', [true => 'Sim', false => 'Não'], setting('rnh_on'), ['class' => 'form-control']) !!}
+                                            {!! Form::select('rnh_on', [true => 'Sim', false => 'Não'], setting('rnh_on'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('max_ratio', 'Max. Ratio:') !!}
-                                            {!! Form::number('max_ratio', setting('max_ratio'), ['class' => 'form-control', 'step' => 'any']) !!}
+                                            {!! Form::number('max_ratio', setting('max_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('min_ratio', 'Min. Ratio:') !!}
-                                            {!! Form::number('min_ratio', setting('min_ratio'), ['class' => 'form-control', 'step' => 'any']) !!}
+                                            {!! Form::number('min_ratio', setting('min_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('low_ratio', 'Low. Ratio:') !!}
-                                            {!! Form::number('low_ratio', setting('low_ratio'), ['class' => 'form-control', 'step' => 'any']) !!}
+                                            {!! Form::number('low_ratio', setting('low_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('invitedays', 'Convite limite de dias:') !!}
-                                            {!! Form::number('invitedays', setting('invitedays'), ['class' => 'form-control']) !!}
+                                            {!! Form::number('invitedays', setting('invitedays'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
