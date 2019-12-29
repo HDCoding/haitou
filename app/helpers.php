@@ -167,7 +167,7 @@ if (!function_exists('setting')) {
             return new Setting();
         }
         if (is_array($key)) {
-            return Setting::set($key[0], $key[1]);
+            return Setting::set($key, $default);
         }
         $value = Setting::get($key);
         return is_null($value) ? value($default) : $value;
