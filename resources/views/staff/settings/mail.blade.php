@@ -31,30 +31,30 @@
                             @include('staff.settings.nav')
                             <div class="col-lg-8 col-xl-9">
                                 @includeIf('errors.errors', [$errors])
-                                {!! Form::open(['url' => 'staff/settings/mail', 'class' => 'form-horizontal']) !!}
+                                {!! Form::open(['url' => 'staff/settings/mail', 'class' => 'form-horizontal', 'required']) !!}
                                 <div class="form-group">
                                     {!! Form::label('mail_driver', 'Mail driver: *') !!}
-                                    {!! Form::text('mail_driver', setting('mail_driver'), ['class' => 'form-control']) !!}
+                                    {!! Form::text('mail_driver', setting('mail_driver'), ['class' => 'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('mail_host', 'Mail host: *') !!}
-                                    {!! Form::text('mail_host', setting('mail_host'), ['class' => 'form-control']) !!}
+                                    {!! Form::text('mail_host', setting('mail_host'), ['class' => 'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('mail_port', 'Mail porta: *') !!}
-                                    {!! Form::number('mail_port', setting('mail_port'), ['class' => 'form-control']) !!}
+                                    {!! Form::number('mail_port', setting('mail_port'), ['class' => 'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('mail_username', 'Mail usuario: *') !!}
-                                    {!! Form::email('mail_username', setting('mail_username'), ['class' => 'form-control']) !!}
+                                    {!! Form::email('mail_username', setting('mail_username'), ['class' => 'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="mail_password">Mail Senha: *</label>
-                                    <input class="form-control" name="mail_password" type="password" id="mail_password" value="*******">
+                                    <input class="form-control" name="mail_password" type="password" id="mail_password" value="*******" required>
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('mail_encryption', 'Mail tls: *') !!}
-                                    {!! Form::text('mail_encryption', setting('mail_encryption'), ['class' => 'form-control']) !!}
+                                    {!! Form::text('mail_encryption', setting('mail_encryption'), ['class' => 'form-control', 'required']) !!}
                                 </div>
                                 {!! Form::submit('Atualizar', ['class' => 'btn btn-success btn-rounded']) !!}
                                 {!! Form::close() !!}
