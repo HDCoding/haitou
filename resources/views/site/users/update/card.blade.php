@@ -5,7 +5,7 @@
             <center class="m-t-30">
                 <img src="{{ auth()->user()->avatar() }}" class="rounded-circle" width="150" alt="avatar"/>
                 <h4 class="card-title m-t-10">{{ auth()->user()->username }}</h4>
-                <h6 class="card-subtitle">{{ auth()->user()->group->name }}</h6>
+                <h6 class="card-subtitle">{{ auth()->user()->groupName() }}</h6>
                 <div class="row text-center justify-content-md-center">
                     <div class="col-4">
                         <a href="javascript:void(0)" class="link">
