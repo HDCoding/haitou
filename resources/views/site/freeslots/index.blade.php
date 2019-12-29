@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Site Points</h3>
-                        @if($freeslot->is_active == true)
+                        @if(empty($freeslot) OR $freeslot->is_active == true)
                             <h4 class="card-title">Uma vez que o Site Points tiverem
                                 <b class="text-danger">{{ number_format($freeslot->required) }}</b> pontos, o
                                 <b class="text-danger">{{ $freeslot->type() }}</b> estará liberado para todos por
