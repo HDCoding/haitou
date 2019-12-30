@@ -20,7 +20,7 @@ class RulesController extends Controller
 
         $user = $request->user();
 
-        if ($user->read_rules == false) {
+        if ($user->readed_rules == false) {
             $user->unlock(new UserReadRules());
             $user->readed_rules = true;
             $user->save();
