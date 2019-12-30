@@ -49,7 +49,11 @@ class SettingsTableSeeder extends Seeder
             ['key' => 'points_report', 'value' => '5'],
             //Policy
             ['key' => 'privacy', 'value' => ''],
-            ['key' => 'disclaimer', 'value' => ''],
+            ['key' => 'disclaimer', 'value' => 'Nenhum dos arquivos mostrados aqui está realmente hospedado neste servidor. Os links são fornecidos
+                exclusivamente pelos usuários deste site. O administrador deste site não pode ser responsabilizado por
+                o que seus usuários postam ou qualquer outra ação de seus usuários. Você não pode usar este site para
+                distribuir ou baixar qualquer material quando você não tem os direitos legais para fazê-lo. Isto é sua
+                própria responsabilidade de aderir a estes termos.'],
             ['key' => 'terms', 'value' => ''],
             //Mail
             ['key' => 'mail_driver', 'value' => ''],
