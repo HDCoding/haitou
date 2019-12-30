@@ -47,11 +47,11 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::label('avatar', 'Avatar:', ['class' => 'form-label']) !!}
-                                {!! Form::text('avatar', auth()->user()->avatar(), ['class' => 'form-control']) !!}
+                                {!! Form::text('avatar', auth()->user()->avatar, ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('cover', 'Cover:', ['class' => 'form-label']) !!}
-                                {!! Form::text('cover', auth()->user()->cover(), ['class' => 'form-control']) !!}
+                                {!! Form::text('cover', auth()->user()->cover, ['class' => 'form-control']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('birthday', 'Nascimento:', ['class' => 'form-label']) !!}
