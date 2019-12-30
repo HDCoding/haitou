@@ -23,28 +23,28 @@
                     <h5 class="font-medium m-b-10 m-t-10">Configurações de Layout</h5>
                     <div class="custom-control custom-checkbox m-t-10">
                         <input type="checkbox" class="custom-control-input" name="theme-view" id="theme-view">
-                        <label class="custom-control-label" for="theme-view">Dark Theme</label>
+                        <label class="custom-control-label" for="theme-view">Tema escuro</label>
                     </div>
                     <div class="custom-control custom-checkbox m-t-10">
                         <input type="checkbox" class="custom-control-input sidebartoggler" name="collapssidebar" id="collapssidebar">
-                        <label class="custom-control-label" for="collapssidebar">Collapse Sidebar</label>
+                        <label class="custom-control-label" for="collapssidebar">Recolher barra lateral</label>
                     </div>
                     <div class="custom-control custom-checkbox m-t-10">
                         <input type="checkbox" class="custom-control-input" name="sidebar-position" id="sidebar-position">
-                        <label class="custom-control-label" for="sidebar-position">Fixed Sidebar</label>
+                        <label class="custom-control-label" for="sidebar-position">Barra lateral fixa</label>
                     </div>
                     <div class="custom-control custom-checkbox m-t-10">
                         <input type="checkbox" class="custom-control-input" name="header-position" id="header-position">
-                        <label class="custom-control-label" for="header-position">Fixed Header</label>
+                        <label class="custom-control-label" for="header-position">Cabeçalho fixo</label>
                     </div>
                     <div class="custom-control custom-checkbox m-t-10">
                         <input type="checkbox" class="custom-control-input" name="boxed-layout" id="boxed-layout">
-                        <label class="custom-control-label" for="boxed-layout">Boxed Layout</label>
+                        <label class="custom-control-label" for="boxed-layout">Layout em caixa</label>
                     </div>
                 </div>
                 <div class="p-15 border-bottom">
                     <!-- Logo BG -->
-                    <h5 class="font-medium m-b-10 m-t-10">Logo Backgrounds</h5>
+                    <h5 class="font-medium m-b-10 m-t-10">Cor do Logotipo</h5>
                     <ul class="theme-color">
                         <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin1"></a></li>
                         <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-logobg="skin2"></a></li>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="p-15 border-bottom">
                     <!-- Navbar BG -->
-                    <h5 class="font-medium m-b-10 m-t-10">Navbar Backgrounds</h5>
+                    <h5 class="font-medium m-b-10 m-t-10">Cor do Cabeçalho</h5>
                     <ul class="theme-color">
                         <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin1"></a></li>
                         <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-navbarbg="skin2"></a></li>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="p-15 border-bottom">
                     <!-- Logo BG -->
-                    <h5 class="font-medium m-b-10 m-t-10">Sidebar Backgrounds</h5>
+                    <h5 class="font-medium m-b-10 m-t-10">Cor da Barra Lateral</h5>
                     <ul class="theme-color">
                         <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin1"></a></li>
                         <li class="theme-item"><a href="javascript:void(0)" class="theme-link" data-sidebarbg="skin2"></a></li>
@@ -89,55 +89,103 @@
                     <li>
                         <div class="message-center chat-scroll">
                             <a href="javascript:void(0)" class="message-item" id='chat_user_1' data-user-id='1'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status online pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status online pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </span>
+                                    <h5 class="message-title">Pavan kumar</h5>
+                                    <span class="mail-desc">Just see the my admin!</span>
+                                    <span class="time">9:30 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_2' data-user-id='2'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status busy pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status busy pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span> </span>
+                                    <h5 class="message-title">Sonu Nigam</h5>
+                                    <span class="mail-desc">I've sung a song! See you at</span>
+                                    <span class="time">9:10 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_3' data-user-id='3'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status away pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status away pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span> </span>
+                                    <h5 class="message-title">Arijit Sinh</h5>
+                                    <span class="mail-desc">I am a singer!</span>
+                                    <span class="time">9:08 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_4' data-user-id='4'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status offline pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Nirav Joshi</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </span>
+                                    <h5 class="message-title">Nirav Joshi</h5>
+                                    <span class="mail-desc">Just see the my admin!</span>
+                                    <span class="time">9:02 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_5' data-user-id='5'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status offline pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Sunil Joshi</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </span>
+                                <h5 class="message-title">Sunil Joshi</h5>
+                                    <span class="mail-desc">Just see the my admin!</span>
+                                    <span class="time">9:02 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_6' data-user-id='6'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status offline pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Akshay Kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </span>
+                                <h5 class="message-title">Akshay Kumar</h5>
+                                    <span class="mail-desc">Just see the my admin!</span>
+                                    <span class="time">9:02 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_7' data-user-id='7'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status offline pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </span>
+                                <h5 class="message-title">Pavan kumar</h5>
+                                    <span class="mail-desc">Just see the my admin!</span>
+                                    <span class="time">9:02 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                             <!-- Message -->
                             <a href="javascript:void(0)" class="message-item" id='chat_user_8' data-user-id='8'>
-                                <span class="user-img"> <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle"> <span class="profile-status offline pull-right"></span> </span>
+                                <span class="user-img">
+                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
+                                    <span class="profile-status offline pull-right"></span>
+                                </span>
                                 <span class="mail-contnet">
-                                        <h5 class="message-title">Varun Dhavan</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </span>
+                                <h5 class="message-title">Varun Dhavan</h5>
+                                    <span class="mail-desc">Just see the my admin!</span>
+                                    <span class="time">9:02 AM</span>
+                                </span>
                             </a>
                             <!-- Message -->
                         </div>
