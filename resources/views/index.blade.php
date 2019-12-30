@@ -219,6 +219,7 @@
 </div>
 <!-- / Block -->
 
+@if(!empty(setting('disclaimer')))
 <!-- Block -->
 <div id="subscribe" class="bg-secondary text-white py-5">
     <div class="container px-3">
@@ -227,16 +228,13 @@
                 AVISO LEGAL
             </div>
             <div class="col-md-7 col-lg-8 mt-3 mt-md-0">
-                Nenhum dos arquivos mostrados aqui está realmente hospedado neste servidor. Os links são fornecidos
-                exclusivamente pelos usuários deste site. O administrador deste site não pode ser responsabilizado por
-                o que seus usuários postam ou qualquer outra ação de seus usuários. Você não pode usar este site para
-                distribuir ou baixar qualquer material quando você não tem os direitos legais para fazê-lo. Isto é sua
-                própria responsabilidade de aderir a estes termos.
+                {{ setting('disclaimer') }}
             </div>
         </div>
     </div>
 </div>
 <!-- / Block -->
+@endif
 
 <!-- Footer -->
 <nav class="footer bg-lightest pt-4">
