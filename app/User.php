@@ -399,12 +399,12 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return empty($this->avatar) ? asset('images/avatar.jpg') : urlencode($this->avatar);
+        return empty($this->avatar) ? asset('images/avatar.jpg') : $this->avatar;
     }
 
     public function cover()
     {
-        return empty($this->cover) ? null : urlencode($this->cover);
+        return empty($this->cover) ? null : $this->cover;
     }
 
     public function points()
@@ -443,9 +443,9 @@ class User extends Authenticatable
     public function isSubscribed(string $type, $topic_id)
     {
         if ($type == 'topic') {
-            return (bool) $this->subscriptions()->where('topic_id', '=', $topic_id)->first(['id']);
+            return (bool)$this->subscriptions()->where('topic_id', '=', $topic_id)->first(['id']);
         }
-        return (bool) $this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
+        return (bool)$this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
     }
 
 }
