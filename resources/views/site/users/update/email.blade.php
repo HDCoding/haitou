@@ -37,8 +37,8 @@
                                 {!! Form::email('email', null, ['class' => 'form-control', 'maxlength' => 70, 'autocomplete' => 'off', 'required']) !!}
                             </div>
                             <h5 class="text-danger m-t-10">Ao alterar seu e-mail, sua conta será congelada até a confirmação do novo e-mail!!</h5>
-                            <button type="submit" class="btn btn-primary">Alterar email</button>&nbsp;
-                            <button type="reset" class="btn btn-default">Cancelar</button>
+                            <button type="submit" class="btn btn-primary btn-rounded">Alterar email</button>&nbsp;
+                            <button type="reset" class="btn btn-default btn-rounded">Cancelar</button>
                             {!! Form::close() !!}
                         </div>
                     </div>
