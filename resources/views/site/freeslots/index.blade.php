@@ -21,8 +21,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Site Points</h3>
-                        @if(empty($freeslot) OR $freeslot->is_active == true)
+                        <h4 class="card-title">Site Points</h4>
+                        @if($freeslot != false)
+                            @if($freeslot->is_active == true)
                             <h4 class="card-title">Uma vez que o Site Points tiverem
                                 <b class="text-danger">{{ number_format($freeslot->required) }}</b> pontos, o
                                 <b class="text-danger">{{ $freeslot->type() }}</b> estará liberado para todos por
@@ -49,11 +50,38 @@
                                 </div>
                             </div>
                             {!! Form::close() !!}
+                            @endif
                         @else
                             <div class="block-header">
                                 <h3 class="block-title text-center mt-5 mb-5">Fechado!</h3>
                             </div>
                         @endif
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Quem mais contribuiu</h4>
+                        <h6 class="card-subtitle">Using the most basic table markup, here’s tables look in Bootstrap. All table styles are inherited in Bootstrap 4, meaning any nested tables will be styled in the same manner as the parent.</h6>
+                        <h6 class="card-title m-t-40"><i class="m-r-5 font-18 fa fa-heart text-danger"></i> Coracao</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nick</th>
+                                    <th scope="col">Valor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,6 +93,7 @@
 @section('script')
     <script src="{{ asset('vendor/c3/c3.min.js') }}"></script>
     <script src="{{ asset('vendor/c3/d3.min.js') }}"></script>
+    @if($freeslot != false)
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function() {
             $(function() {
@@ -101,4 +130,5 @@
             });
         });
     </script>
+    @endif
 @endsection
