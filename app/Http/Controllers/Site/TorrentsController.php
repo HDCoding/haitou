@@ -45,6 +45,61 @@ class TorrentsController extends Controller
         $this->torrentTool = new TorrentUploader();
     }
 
+    public function search(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+
+            $name = $request->input('name');
+            $fansub = $request->input('fansub_id');
+            $categories = $request->input('category_id');
+            $freeleech = $request->input('is_freeleech');
+            $silver = $request->input('is_silver');
+            $doubleup = $request->input('is_doubleup');
+
+            $terms = explode(' ', $name);
+            $name = '';
+            foreach ($terms as $term) {
+                $name .= '%'.$term.'%';
+            }
+
+            $torrents = Torrent::with('user:id,username,slug')
+                ->with('fansub:id,name')
+                ->with('media:id,name,poster')
+                ->with('tags:name');
+
+            if ($request->has('name') && $request->input('name') != null) {
+                $torrents->where(function ($query) use ($name) {
+                    $query->where('torrents.name', 'like', $name);
+                });
+            }
+            if ($request->has('fansub_id') && $request->input('fansub_id') != null) {
+                $torrents->where('torrents.fansub_id', '=', $fansub);
+            }
+            if ($request->has('category_id') && $request->input('category_id') != null) {
+                $torrents->whereIn('torrents.category_id', $categories);
+            }
+            if ($request->has('is_freeleech') && $request->input('is_freeleech') != null) {
+                $torrents->where('torrents.is_freeleech', '=', $freeleech);
+            }
+            if ($request->has('is_silver') && $request->input('is_silver') != null) {
+                $torrents->where('torrents.is_silver', '=', $silver);
+            }
+            if ($request->has('is_doubleup') && $request->input('is_doubleup') != null) {
+                $torrents->where('torrents.is_doubleup', '=', $doubleup);
+            }
+
+            $torrents = $torrents->orderBy('id', 'desc')->paginate(30);
+
+            $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
+
+            $categories = Category::select('id', 'name')->where('is_torrent', '=', true)->get();
+
+            return view('site.torrents.search', compact('torrents', 'fansubs', 'categories'));
+        } else {
+            return redirect()->to('torrents');
+        }
+    }
+
     public function index()
     {
         $torrents = Torrent::with('user:id,username,slug')
@@ -56,7 +111,7 @@ class TorrentsController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(30);
 
-        $fansubs = Fansub::select('id', 'name')->get();
+        $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
 
         $categories = Category::select('id', 'name')->where('is_torrent', '=', true)->get();
 
@@ -219,7 +274,7 @@ class TorrentsController extends Controller
             return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         }
 
-        if ($user->can('download-torrent') == false) {
+        if ($user->can('download-torrent') == false && $torrent->user_id != $user->id) {
             toastr()->warning('Sua permissão de fazer download em torrents foram revogadas!!', 'Aviso');
             return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         }
