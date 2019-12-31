@@ -156,6 +156,8 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::get('studio/{id}.{slug}', 'StudiosController@show')->name('studio.show');
         //Torrents
         Route::resource('torrents', 'TorrentsController')->except(['show']);
+        //Search torrent
+        Route::post('torrents/search', 'TorrentsController@search')->name('torrents.search');
         Route::prefix('torrent')->group(function () {
             //Download file
             Route::get('/{id}/download', 'TorrentsController@download')->name('torrent.download');
