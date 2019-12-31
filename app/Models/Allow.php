@@ -29,4 +29,5 @@ class Allow extends Model
             ]
         ];
     }
+
 }
