@@ -94,10 +94,11 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
+
         $user->show_achievements = $request->input('show_achievements') ? true : false;
         $user->show_mood = $request->input('show_mood') ? true : false;
         $user->show_state = $request->input('show_state') ? true : false;
-        $user->show_role = $request->input('show_role') ? true : false;
+        $user->show_group = $request->input('show_group') ? true : false;
         $user->show_downloaded = $request->input('show_downloaded') ? true : false;
         $user->show_uploaded = $request->input('show_uploaded') ? true : false;
         $user->show_profile = $request->input('show_profile') ? true : false;
@@ -110,10 +111,8 @@ class UsersController extends Controller
         $user->show_profile_signature = $request->input('show_profile_signature') ? true : false;
         $user->show_profile_birthday = $request->input('show_profile_birthday') ? true : false;
         $user->show_profile_social_links = $request->input('show_profile_social_links') ? true : false;
-        $user->show_profile_friends = $request->input('show_profile_friends') ? true : false;
         $user->show_profile_warning = $request->input('show_profile_warning') ? true : false;
         $user->show_forum_signatures = $request->input('show_forum_signatures') ? true : false;
-        $user->pm_from_all = $request->input('pm_from_all') ? true : false;
         $user->save();
 
         // Achievement
@@ -192,6 +191,7 @@ class UsersController extends Controller
         $request->session()->flush();
         auth()->logout();
         //Redireciona para o login e informa que precisa ativar a conta novamente
-        return redirect()->route('login', ['info' => 'E-mail alterado com sucesso, ative sua conta novamente com novo e-mail inserido!']);
+        return view('auth.activation')
+            ->with('info', 'E-mail alterado com sucesso, ative sua conta novamente com novo e-mail inserido!');
     }
 }
