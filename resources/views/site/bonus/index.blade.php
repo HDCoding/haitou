@@ -29,17 +29,17 @@
                         <div class="ui-bordered px-4 pt-4 mb-4">
                             {!! Form::open(['url' => 'bonus/donate']) !!}
                             <div class="form-row align-items-center">
-                                <div class="col-md mb-4">
+                                <div class="col-md-5">
                                     {!! Form::label('user_id', 'Membro:', ['class' => 'form-label']) !!}
                                     {!! Form::select('user_id', $members, null, ['class' => 'custom-select select2', 'required', 'size' => 10]) !!}
                                 </div>
-                                <div class="col-md mb-4">
+                                <div class="col-md-5">
                                     {!! Form::label('quantity', 'Quantidade:', ['class' => 'form-label']) !!}
                                     {!! Form::number('quantity', null, ['class' => 'form-control', 'min' => 1, 'required']) !!}
                                 </div>
-                                <div class="col-md col-xl-2 mb-4">
+                                <div class="col-md-2">
                                     <label class="form-label d-none d-md-block">&nbsp;</label>
-                                    <button type="submit" class="btn btn-secondary btn-block">Doar</button>
+                                    <button type="submit" class="btn btn-secondary btn-block btn-rounded">Doar</button>
                                 </div>
                             </div>
                             {!! Form::close() !!}
