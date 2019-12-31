@@ -2,6 +2,11 @@
 
 @section('title', 'Torrents')
 
+@section('css')
+    <!-- select2 -->
+    <link href="{{ asset('vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -20,20 +25,15 @@
                         <b class="card-header-title">Pesquisar Torrents</b>
                     </div>
                     <div class="card-body">
-                        <form>
+                        {!! Form::open(['url' => 'torrents/search', 'class' => 'form-horizontal']) !!}
                             <div class="form-row">
                                 <div class="form-group col-md-8">
-                                    <label class="form-label" for="name">Nome</label>
-                                    <input type="text" class="form-control" name="name" id="name">
+                                    {!! Form::label('name', 'Nome:', ['class' => 'form-label']) !!}
+                                    {!! Form::text('name', null, ['class' => 'form-control']) !!}
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label class="form-label" for="fansub_id">Fansub</label>
-                                    <select class="custom-select" name="fansub_id" id="fansub_id" data-style="form-control">
-                                        <option value="null" disabled selected>Fansub</option>
-                                        @foreach($fansubs as $fansub)
-                                            <option value="{{ $fansub->id }}">{{ $fansub->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    {!! Form::label('fansub_id', 'Fansub:', ['class' => 'form-label']) !!}
+                                    {!! Form::select('fansub_id', $fansubs, null, ['class' => 'custom-select select2', 'size' => 10]) !!}
                                 </div>
                             </div>
 
@@ -44,7 +44,7 @@
                                     <div class="form-check-inline">
                                         @foreach($categories as $category)
                                             <label class="custom-control custom-checkbox form-check-inline" for="{{ $category->id }}">
-                                                <input type="checkbox" class="custom-control-input" id="{{ $category->id }}" value="{{ $category->id }}">
+                                                <input name="category_id[]" type="checkbox" class="custom-control-input" id="{{ $category->id }}" value="{{ $category->id }}">
                                                 <span class="custom-control-label">{{ $category->name }}</span>
                                             </label>
                                         @endforeach
@@ -54,24 +54,23 @@
                                     <div class="text-light small mb-3">Opções:</div>
                                     <div class="form-check-inline">
                                         <label class="custom-control custom-checkbox form-check-inline" for="is_freeleech">
-                                            <input type="checkbox" class="custom-control-input" id="is_freeleech" value="is_freeleech">
+                                            <input name="is_freeleech" type="checkbox" class="custom-control-input" id="is_freeleech" value="1">
                                             <span class="custom-control-label">Freeleech</span>
                                         </label>
                                         <label class="custom-control custom-checkbox form-check-inline" for="is_silver">
-                                            <input type="checkbox" class="custom-control-input" id="is_silver" value="is_silver">
+                                            <input name="is_silver" type="checkbox" class="custom-control-input" id="is_silver" value="1">
                                             <span class="custom-control-label">Silver</span>
                                         </label>
                                         <label class="custom-control custom-checkbox form-check-inline" for="is_doubleup">
-                                            <input type="checkbox" class="custom-control-input" id="is_doubleup" value="is_doubleup">
+                                            <input name="is_doubleup" type="checkbox" class="custom-control-input" id="is_doubleup" value="1">
                                             <span class="custom-control-label">DoubleUP</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-secondary mt-4">Pesquisar</button>
-
-                        </form>
+                            <button type="submit" class="btn btn-secondary mt-4 btn-rounded">Pesquisar</button>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
@@ -156,4 +155,18 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <!-- Select2 -->
+    <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
+
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function() {
+            $(".select2").select2({
+                placeholder: "Selecione um Fansub",
+                allowClear: true
+            });
+        });
+    </script>
 @endsection
