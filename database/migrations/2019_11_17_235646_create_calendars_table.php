@@ -23,8 +23,8 @@ class CreateCalendarsTable extends Migration
             $table->string('color', 10);
             $table->boolean('is_enabled')->default(1);
             $table->integer('views')->default(0);
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
