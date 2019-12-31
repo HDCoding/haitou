@@ -65,8 +65,8 @@
                                 {!! Form::label('signature', 'Assinatura (Fórum):', ['class' => 'form-label']) !!}
                                 {!! Form::textarea('signature', auth()->user()->signature, ['class' => 'form-control', 'rows' => 8]) !!}
                             </div>
-                            <button type="submit" class="btn btn-primary">Salvar alterações</button>&nbsp;
-                            <button type="button" class="btn btn-default">Cancelar</button>
+                            <button type="submit" class="btn btn-primary btn-rounded">Salvar alterações</button>&nbsp;
+                            <button type="button" class="btn btn-default btn-rounded">Cancelar</button>
                             {!! Form::close() !!}
                         </div>
                     </div>
