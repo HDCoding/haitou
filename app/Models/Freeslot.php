@@ -57,7 +57,7 @@ class Freeslot extends Model
 
     public function percent()
     {
-        return $this->actual >= 1 ? number_format(($this->actual / $this->required) * 100, 2, '.', ',') : 0.0;
+        return $this->actual >= 10 ? number_format(($this->actual / $this->required) * 100, 2, '.', ',') : 0.0;
     }
 
     public function freeslotlog()
