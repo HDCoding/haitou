@@ -38,8 +38,8 @@
                             </h5>
                             {{ auth()->user()->passkey }}
                             <p class="mb-4 text-danger">Alterando seu passkey, voce precisa baixar todos os torrents que baixou anteriormente para continuar seedando</p>
-                            <button type="submit" class="btn btn-primary">Alterar</button>&nbsp;
-                            <button type="button" class="btn btn-default">Cancelar</button>
+                            <button type="submit" class="btn btn-primary btn-rounded">Alterar</button>&nbsp;
+                            <button type="button" class="btn btn-default btn-rounded">Cancelar</button>
                             {!! Form::close() !!}
                         </div>
                     </div>
