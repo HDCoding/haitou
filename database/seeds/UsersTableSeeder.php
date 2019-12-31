@@ -22,8 +22,8 @@ class UsersTableSeeder extends Seeder
                 'state_id' => 25,
                 'group_id' => 12,
                 'username' => 'System',
-                'email' => 'system@none.net',
-                'password' => bcrypt('951753'),
+                'email' => 'system@haitou.net',
+                'password' => bcrypt(sha1_gen()),
                 'status' => 0,
                 'passkey' => md5_gen(),
                 'birthday' => Carbon::today(),
@@ -34,8 +34,8 @@ class UsersTableSeeder extends Seeder
                 'state_id' => 25,
                 'group_id' => 12,
                 'username' => 'Bot',
-                'email' => 'bot@none.net',
-                'password' => bcrypt('159357'),
+                'email' => 'bot@haitou.net',
+                'password' => bcrypt(sha1_gen()),
                 'status' => 0,
                 'passkey' => md5_gen(),
                 'birthday' => Carbon::today(),
@@ -45,20 +45,8 @@ class UsersTableSeeder extends Seeder
                 'mood_id' => 1,
                 'state_id' => 25,
                 'group_id' => 1,
-                'username' => 'me',
-                'email' => 'me@me.com',
-                'password' => bcrypt('123123'),
-                'status' => 1,
-                'passkey' => md5_gen(),
-                'birthday' => Carbon::today(),
-                'activated_at' => Carbon::now()
-            ],
-            [
-                'mood_id' => 1,
-                'state_id' => 25,
-                'group_id' => 1,
-                'username' => 'mee',
-                'email' => 'mee@me.com',
+                'username' => 'monil',
+                'email' => 'monil@me.com',
                 'password' => bcrypt('123123'),
                 'status' => 1,
                 'passkey' => md5_gen(),
@@ -70,5 +58,6 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user) {
             User::create($user);
         }
+
     }
 }
