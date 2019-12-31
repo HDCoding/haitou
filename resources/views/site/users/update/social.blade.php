@@ -64,20 +64,18 @@
                                 {!! Form::label('posts_per_page', 'Posts por pagina', ['class' => 'form-label']) !!}
                                 {!! Form::number('posts_per_page', auth()->user()->posts_per_page, ['class' => 'form-control', 'min' => 10, 'max' => 50]) !!}
                             </div>
-
-                            <h6 class="mb-4">Notificações</h6>
+                            <hr class="border-light m-0">
+                            <h6 class="mt-4">Notificações</h6>
                             <div class="form-group">
-                                <label class="switcher">
-                                    {!! Form::checkbox('receive_email', 1, auth()->user()->receive_email, ['class' => 'switcher-input']) !!}
-                                    <span class="switcher-indicator">
-                                        <span class="switcher-yes"></span>
-                                        <span class="switcher-no"></span>
-                                    </span>
-                                    <span class="switcher-label">Receber e-mails</span>
+                                <label class="custom-control custom-checkbox form-check-inline" for="receive_email">
+                                    {!! Form::checkbox('receive_email', 1, auth()->user()->receive_email, ['class' => 'custom-control-input', 'id' => 'receive_email']) !!}
+                                    <span class="custom-control-label">Receber e-mails</span>
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary">Salvar alterações</button>&nbsp;
-                            <button type="reset" class="btn btn-default">Cancelar</button>
+                            <div class="mt-5">
+                                <button type="submit" class="btn btn-primary btn-rounded">Salvar alterações</button>&nbsp;
+                                <button type="reset" class="btn btn-default btn-rounded">Cancelar</button>
+                            </div>
                             {!! Form::close() !!}
                         </div>
                     </div>
