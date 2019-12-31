@@ -10,13 +10,13 @@
                     <div class="col-4">
                         <a href="javascript:void(0)" class="link">
                             <i class="icon-people"></i>
-                            <font class="font-medium">254</font>
+                            <font class="font-medium">123</font>
                         </a>
                     </div>
                     <div class="col-4">
                         <a href="javascript:void(0)" class="link">
                             <i class="icon-picture"></i>
-                            <font class="font-medium">54</font>
+                            <font class="font-medium">123</font>
                         </a>
                     </div>
                 </div>
@@ -25,9 +25,12 @@
         <div>
             <hr>
         </div>
-        <div class="card-body"><small class="text-muted">Email address </small>
-            <h6>hannagover@gmail.com</h6> <small class="text-muted p-t-30 db">Phone</small>
-            <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
+        <div class="card-body">
+            <small class="text-muted">Email address </small>
+            <h6>hannagover@gmail.com</h6>
+            <small class="text-muted p-t-30 db">Phone</small>
+            <h6>+91 654 784 547</h6>
+            <small class="text-muted p-t-30 db">Address</small>
             <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
             <small class="text-muted p-t-30 db">Social Profile</small>
             <br/>
