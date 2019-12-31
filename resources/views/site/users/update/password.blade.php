@@ -44,8 +44,8 @@
                                 {!! Form::label('password_confirmation', 'Confirmar Senha', ['class' => 'form-label']) !!}
                                 {!! Form::password('password_confirmation', ['class' => 'form-control', 'minlength' => 6, 'maxlength' => 16, 'required']) !!}
                             </div>
-                            <button type="submit" class="btn btn-primary">Salvar alterações</button>&nbsp;
-                            <button type="reset" class="btn btn-default">Cancelar</button>
+                            <button type="submit" class="btn btn-primary btn-rounded">Salvar alterações</button>&nbsp;
+                            <button type="reset" class="btn btn-default btn-rounded">Cancelar</button>
                             {!! Form::close() !!}
                         </div>
                     </div>
