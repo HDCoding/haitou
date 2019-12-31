@@ -18,6 +18,11 @@ class UserAllow extends Model
 		'allow_id' => 'int'
 	];
 
+	protected $fillable = [
+        'user_id',
+        'allow_id'
+    ];
+
 	public function allow()
 	{
 		return $this->belongsToMany(Allow::class, 'allows');
