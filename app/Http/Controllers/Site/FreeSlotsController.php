@@ -18,7 +18,8 @@ class FreeSlotsController extends Controller
     {
         $freeslot = Freeslot::with('freeslotlog')
             ->where('is_active', '=', true)
-            ->latest('id');
+            ->latest('id')
+            ->exists();
 
         return view('site.freeslots.index', compact('freeslot'));
     }
