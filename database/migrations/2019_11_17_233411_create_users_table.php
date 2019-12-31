@@ -70,13 +70,13 @@ class CreateUsersTable extends Migration
             $table->boolean('show_profile')->default(1);
             $table->boolean('show_profile_points')->default(1);
             $table->boolean('show_profile_level')->default(1);
+            $table->boolean('show_profile_avatar')->default(1);
+            $table->boolean('show_profile_cover')->default(1);
             $table->boolean('show_profile_info')->default(1);
             $table->boolean('show_profile_title')->default(1);
             $table->boolean('show_profile_signature')->default(1);
             $table->boolean('show_profile_birthday')->default(1);
             $table->boolean('show_profile_social_links')->default(1);
-
-            $table->boolean('show_profile_friends')->default(1);
 
             $table->boolean('show_profile_warning')->default(1);
 
