@@ -6,13 +6,12 @@
 
     <!-- Content -->
     <div class="main-wrapper">
-
-        <div class="preloader">
-            <div class="lds-ripple">
-                <div class="lds-pos"></div>
-                <div class="lds-pos"></div>
-            </div>
-        </div>
+{{--        <div class="preloader">--}}
+{{--            <div class="lds-ripple">--}}
+{{--                <div class="lds-pos"></div>--}}
+{{--                <div class="lds-pos"></div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ asset('images/login-register.jpg') }}) no-repeat center center;">
             <div class="auth-box">
