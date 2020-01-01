@@ -286,7 +286,7 @@
                                     <h5 class="mt-2">@lang('dashboard.faqs')</h5>
                                 </div>
                             @endif
-                            @if(auth()->user()->can('forums-mod'))
+                            @if(auth()->user()->can('forum-mod'))
                                 <div class="col-md-3 col-lg-3">
                                     <a href="{{ url('staff/forums') }}">
                                         <img src="{{ asset('images/staff/forums.png') }}"
