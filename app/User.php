@@ -439,6 +439,15 @@ class User extends Authenticatable
         }
     }
 
+    public function updateOfflinePoints($user_id, $points)
+    {
+        $user = self::where('id', '=', $user_id)->first();
+        $user->points += $points;
+        $user->experience += $points;
+        $user->save();
+
+    }
+
     public function groupName()
     {
         return $this->group()->select('name')->pluck('name')->first();

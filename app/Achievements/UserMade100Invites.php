@@ -6,6 +6,14 @@ use Gstt\Achievements\Achievement;
 
 class UserMade100Invites extends Achievement
 {
+    private $userId;
+
+    public function __construct($userId)
+    {
+        parent::__construct();
+        $this->userId = $userId;
+    }
+
     /*
      * The achievement name
      */
@@ -26,7 +34,7 @@ class UserMade100Invites extends Achievement
     */
     public function whenUnlocked($progress)
     {
-        return auth()->user()->updatePoints($this->points);
+        return auth()->user()->updateOfflinePoints($this->userId, $this->points);
     }
 
 }

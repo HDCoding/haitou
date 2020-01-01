@@ -100,18 +100,18 @@ class InvitationController extends Controller
             $friend->save();
 
             // Achievements
-            $friend->unlock(new UserMadeFirstInvite(), 1);
-            $friend->addProgress(new UserMade50Invites(), 1);
-            $friend->addProgress(new UserMade100Invites(), 1);
-            $friend->addProgress(new UserMade200Invites(), 1);
-            $friend->addProgress(new UserMade300Invites(), 1);
-            $friend->addProgress(new UserMade400Invites(), 1);
-            $friend->addProgress(new UserMade500Invites(), 1);
-            $friend->addProgress(new UserMade600Invites(), 1);
-            $friend->addProgress(new UserMade700Invites(), 1);
-            $friend->addProgress(new UserMade800Invites(), 1);
-            $friend->addProgress(new UserMade900Invites(), 1);
-            $friend->addProgress(new UserMade1000Invites(), 1);
+            $friend->unlock(new UserMadeFirstInvite($friend->id), 1);
+            $friend->addProgress(new UserMade50Invites($friend->id), 1);
+            $friend->addProgress(new UserMade100Invites($friend->id), 1);
+            $friend->addProgress(new UserMade200Invites($friend->id), 1);
+            $friend->addProgress(new UserMade300Invites($friend->id), 1);
+            $friend->addProgress(new UserMade400Invites($friend->id), 1);
+            $friend->addProgress(new UserMade500Invites($friend->id), 1);
+            $friend->addProgress(new UserMade600Invites($friend->id), 1);
+            $friend->addProgress(new UserMade700Invites($friend->id), 1);
+            $friend->addProgress(new UserMade800Invites($friend->id), 1);
+            $friend->addProgress(new UserMade900Invites($friend->id), 1);
+            $friend->addProgress(new UserMade1000Invites($friend->id), 1);
 
             return view('auth.activation')
                 ->with('info', 'Conta criada e ativada com sucesso, agora você pode fazer login.');
