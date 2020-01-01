@@ -30,6 +30,7 @@ class TagsTableSeeder extends Seeder
             ['name' => 'HDTV'],
             ['name' => 'WEB-DL'],
             ['name' => 'WEBrip'],
+			['name' => 'H264'],
             ['name' => 'x264'],
             ['name' => 'x265'],
             ['name' => 'XviD'],
