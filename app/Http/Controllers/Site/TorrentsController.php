@@ -267,6 +267,7 @@ class TorrentsController extends Controller
     public function download($torrent_id, Request $request)
     {
         $user = $request->user();
+
         $torrent = Torrent::where('id', '=', $torrent_id)->firstOrFail();
 
         if ($user->ratio() < setting('low_ratio')) {
