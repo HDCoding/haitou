@@ -43,6 +43,6 @@ class TrafficsController extends Controller
     public function topten()
     {
         $topten = $this->vnstat->topten('eth1');
-        return view('staff.traffics.topten', compact('topten'));
+        return view('staff.traffics.top10', compact('topten'));
     }
 }
