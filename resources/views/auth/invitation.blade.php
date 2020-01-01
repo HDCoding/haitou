@@ -27,6 +27,7 @@
                             @include('includes.messages')
                             <form class="js-validation-register form-horizontal m-t-20" method="POST" action="{{ url('invitations') }}">
                                 @csrf
+                                {!! Form::hidden('code', $code) !!}
                                 <div class="form-group row ">
                                     <div class="col-12">
                                         <label for="username" class="form-label">Nick</label>

@@ -50,8 +50,9 @@ class InvitationController extends Controller
 
             $original_code = $invitation->code;
 
-            if (!$invitation) {
-                return view('auth.activation', compact('original_code'))->with('warning', 'Não altere o código de convite!')->withInput();
+            if (!$original_code) {
+                return view('auth.activation', compact('original_code'))
+                    ->with('warning', 'Não altere o código de convite!')->withInput();
             }
 
             //Points
