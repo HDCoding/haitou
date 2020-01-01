@@ -413,7 +413,7 @@ class User extends Authenticatable
 
     public function points()
     {
-        return number_format($this->points);
+        return $this->points > 0 ? number_format($this->points) : 0;
     }
 
     public function levelImage()
