@@ -28,7 +28,7 @@ Route::namespace('Auth')->group(function () {
     Route::get('activations/{code}/update', 'ActivationController@updateEmail')->name('update.activation');
     //Accept invitations
     Route::get('invitations/{code}', 'InvitationController@code')->name('invitations');
-    Route::post('invitations', 'InvitationController@signUp');
+    Route::post('invitations', 'InvitationController@register');
     //Lock Screen
     Route::get('lockscreen', 'LockscreenController@lock')->name('lockscreen');
     Route::post('unlockscreen', 'LockscreenController@unlock')->name('unlockscreen');
