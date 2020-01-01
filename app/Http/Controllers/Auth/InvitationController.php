@@ -59,6 +59,8 @@ class InvitationController extends Controller
             $signup = setting('points_signup');
             $invite = setting('points_invite');
 
+            $points = $signup + $invite;
+
             //Adicionar usuario convidado ao banco
             $user = new User();
             $user->group_id = 1;
@@ -69,8 +71,8 @@ class InvitationController extends Controller
             $user->mood_id = 1;
             $user->state_id = 25;
             $user->invites += 2;
-            $user->points += $signup + $invite;
-            $user->experience += $signup + $invite;
+            $user->points = $points;
+            $user->experience = $points;
             $user->passkey = md5_gen();
             $user->birthday = Carbon::today();
             $user->activated_at = Carbon::today();
@@ -93,8 +95,8 @@ class InvitationController extends Controller
             //Send points to friend whos have invited
             $friend = User::where('id', '=', $invitation->user_id)->first();
             $friend->invites += 2;
-            $friend->points += $signup + $invite;
-            $friend->experience += $signup + $invite;
+            $friend->points += $points;
+            $friend->experience += $points;
             $friend->save();
 
             // Achievements
