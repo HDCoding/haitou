@@ -209,7 +209,7 @@ class TorrentUploader
         $response->header('Cache-control', 'public');
         $response->header('Content-Length', strlen($data));
         $response->header('Content-Type', 'application/x-bittorent');
-        $response->header('Content-Disposition', 'attachment; filename=' . $torrent_name . '.torrent');
+        $response->header('Content-Disposition', 'attachment; filename=' . str_replace(' ', '.', $torrent_name) . '.torrent');
         $response->header('Progma', 'no-cache');
         return $response;
     }

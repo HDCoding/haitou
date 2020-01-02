@@ -36,54 +36,30 @@
                         {!! Form::model($calendar, ['url' => 'staff/calendars/' . $calendar->id, 'method' => 'PUT', 'files' => true, 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Título:', ['class' => 'col-md-12']) !!}
-                            <div class="col-md-12">
-                                {!! Form::text('name', $calendar->name, ['class' => 'form-control form-rounded', 'required', 'maxlength' => 250]) !!}
-                            </div>
+                            {!! Form::text('name', $calendar->name, ['class' => 'form-control form-rounded', 'required', 'maxlength' => 250]) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('color', 'Tipo:', ['class' => 'col-md-12']) !!}
-                            <div class="col-md-12">
-                                {!! Form::select('color', [
-                                    '#007bff' => 'Primary',
-                                    '#dc3545' => 'Danger',
-                                    '#ffc107' => 'Warning',
-                                    '#28a745' => 'Success',
-                                    '#17a2b8' => 'Info'
-                                ], $calendar->color, ['class' => 'form-control', 'required']) !!}
-                            </div>
+                            {!! Form::select('color', [
+                                '#007bff' => 'Primary',
+                                '#dc3545' => 'Danger',
+                                '#ffc107' => 'Warning',
+                                '#28a745' => 'Success',
+                                '#17a2b8' => 'Info'
+                            ], $calendar->color, ['class' => 'form-control', 'required']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('start_date', 'Início:', ['class' => 'col-md-12']) !!}
-                            <div class="col-md-12">
-                                <div class="js-datetimepicker input-group date">
-                                    {!! Form::text('start_date', $calendar->start_date, ['class' => 'form-control', 'required']) !!}
-                                    <span class="input-group-addon">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            {!! Form::text('start_date', $calendar->start_date, ['class' => 'form-control', 'required']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('end_date', 'Término:', ['class' => 'col-md-12']) !!}
-                            <div class="col-md-12">
-                                <div class="js-datetimepicker input-group date">
-                                    {!! Form::text('end_date', $calendar->end_date, ['class' => 'form-control', 'required']) !!}
-                                    <span class="input-group-addon">
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            {!! Form::text('end_date', $calendar->end_date, ['class' => 'form-control', 'required']) !!}
                         </div>
-
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição:', ['class' => 'col-md-12']) !!}
-                            <div class="col-md-12">
-                                {!! Form::textarea('description', $calendar->description, ['class' => 'form-control form-rounded', 'rows' => 6]) !!}
-                                <div id="charNum"></div>
-                            </div>
+                            {!! Form::textarea('description', $calendar->description, ['class' => 'form-control form-rounded', 'rows' => 6]) !!}
+                            <div id="charNum"></div>
                         </div>
                         {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
