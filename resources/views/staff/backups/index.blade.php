@@ -72,7 +72,7 @@
                                                         </button>
                                                     </a>
                                                 @endif
-                                                <a data-disk="{{ $backup['disk'] }}" data-file="{{ $backup['file_name'] }}" data-button-type="delete"
+                                                <a class="m-l-10" data-disk="{{ $backup['disk'] }}" data-file="{{ $backup['file_name'] }}" data-button-type="delete"
                                                    href="{{ url('staff/backup/delete') }}" data-toggle="tooltip" title="Delete">
                                                     <button type="button" class="btn btn-xs btn-danger">
                                                         <span class="fas fa-trash"></span> Deletar
