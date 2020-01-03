@@ -32,7 +32,7 @@ class Historic extends Model
     protected $fillable = [
         'torrent_id',
         'user_id',
-        'passkey',
+        'info_hash',
         'client',
         'uploaded',
         'mod_uploaded',
