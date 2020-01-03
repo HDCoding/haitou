@@ -17,7 +17,7 @@ class CreateHistoricsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('torrent_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('passkey', 45);
+            $table->string('info_hash', 45);
             $table->string('client', 70)->nullable();
             $table->unsignedBigInteger('uploaded')->default(0);
             $table->unsignedBigInteger('mod_uploaded')->default(0);
