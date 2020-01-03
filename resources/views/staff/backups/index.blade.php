@@ -37,10 +37,10 @@
                             <span class="ladda-label"><i class="fa fa-plus"></i> Backup Completo</span>
                         </button>
                         <button id="create-files-backup-button" href="{{ url('staff/backup/create-files') }}" class="btn btn-success ladda-button" data-style="zoom-in">
-                            <span class="ladda-label"><i class="fa fa-plus"></i> Arquivos de Backup</span>
+                            <span class="ladda-label"><i class="fa fa-plus"></i> Backup dos Arquivos</span>
                         </button>
                         <button id="create-db-backup-button" href="{{ url('staff/backup/create-db') }}" class="btn btn-danger ladda-button" data-style="zoom-in">
-                            <span class="ladda-label"><i class="fa fa-plus"></i> Banco de Dados</span>
+                            <span class="ladda-label"><i class="fa fa-plus"></i> Banco do DB</span>
                         </button>
                         <div class="table-responsive m-t-15">
                             <table class="table">
