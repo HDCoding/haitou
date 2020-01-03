@@ -21,7 +21,6 @@ class CreatePeersTable extends Migration
             $table->string('peer_id', 60);
             $table->string('ip', 70);
             $table->string('client', 70);
-            $table->string('passkey', 45);
             $table->boolean('is_seeder')->default(0);
             $table->boolean('is_leecher')->default(0);
             $table->unsignedSmallInteger('port')->default(0);
