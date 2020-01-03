@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Exception;
 use App\Models\Cheater;
 use App\Models\Historic;
 use App\Models\Peer;
 use App\Models\Torrent;
 use App\Torrent\Encoder;
 use App\User;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -133,8 +133,8 @@ class AnnounceController extends Controller
         }
 
         //seleciona o torrent no DB
-        $torrent = Torrent::with('peers', 'completes', 'historics')
-            ->select('id', 'times_completed', 'seeders', 'leechers', 'is_freeleech', 'is_silver', 'is_doubleup')
+        $torrent = Torrent::with('peers', 'completes')
+            ->select('id', 'times_completed', 'seeders', 'leechers', 'is_freeleech', 'is_silver', 'is_doubleup', 'vip_first')
             ->where('info_hash', '=', $info_hash)
             ->first();
 
@@ -172,13 +172,13 @@ class AnnounceController extends Controller
         }
 
         //Pega informacoes do Historico
-        $historic = $torrent->historics()->where('user_id', '=', $user->id)->where('passkey', '=', $passkey)->first();
+        $historic = Historic::where('info_hash', '=', $info_hash)->where('user_id', '=', $user->id)->first();
 
         if (!$historic) {
             $historic = new Historic();
             $historic->torrent_id = $torrent->id;
             $historic->user_id = $user->id;
-            $historic->passkey = $user->passkey;
+            $historic->info_hash = $info_hash;
         }
 
         if ($ghost) {
@@ -193,27 +193,27 @@ class AnnounceController extends Controller
         $old_update = $client->updated_at ? $client->updated_at->timestamp : Carbon::now()->timestamp;
 
         //checa se o usuario tem direitos de VIP
-        $isVip = $user->vips()->where('user_id', '=', $user->id)->first();
+        $is_vip = $user->vips()->where('user_id', '=', $user->id)->first();
 
         //modifica o upload ou download
-        if (!$isVip) {
+        if (!$is_vip) {
             //Freeleech
-            $modDown = $torrent->is_freeleech == true ? 0 : $downloaded;
+            $mod_down = $torrent->is_freeleech == true ? 0 : $downloaded;
             //Silver
-            $modDownloaded = $torrent->is_silver == true ? $downloaded / 2 : $downloaded;
+            $mod_downloaded = $torrent->is_silver == true ? ($downloaded / 2) : $downloaded;
             //DoubleUP
-            $modUpload = $torrent->is_doubleup == true ? $uploaded * 2 : $uploaded;
+            $mod_upload = $torrent->is_doubleup == true ? ($uploaded * 2) : $uploaded;
             //Modded Download
-            $modDownload = $modDown ?: $modDownloaded;
+            $mod_download = $mod_down ?: $mod_downloaded;
         } else {
             //Freeleech
-            $modDown = $isVip->is_freeleech == true ? 0 : $downloaded;
+            $mod_down = $is_vip->is_freeleech == true ? 0 : $downloaded;
             //Silver
-            $modDownloaded = $isVip->is_silver == true ? ($downloaded / 2) : $downloaded;
+            $mod_downloaded = $is_vip->is_silver == true ? ($downloaded / 2) : $downloaded;
             //DoubleUP
-            $modUpload = $isVip->is_doubleup == true ? ($uploaded * 2) : $uploaded;
+            $mod_upload = $is_vip->is_doubleup == true ? ($uploaded * 2) : $uploaded;
             //Modded Download
-            $modDownload = $modDown ?: $modDownloaded;
+            $mod_download = $mod_down ?: $mod_downloaded;
         }
 
         if ($event == 'started') {
@@ -228,6 +228,7 @@ class AnnounceController extends Controller
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
             $historic->is_active = true;
+            $historic->is_released = ($is_vip) ? true : false;
             $historic->save();
 
             //Peer data
@@ -237,7 +238,6 @@ class AnnounceController extends Controller
             $client->peer_id = $peer_id;
             $client->ip = $ip;
             $client->client = $agent;
-            $client->passkey = $passkey;
             $client->is_seeder = ($left == 0) ? true : false;
             $client->is_leecher = ($left > 0) ? true : false;
             $client->port = $port;
@@ -250,17 +250,17 @@ class AnnounceController extends Controller
             //historic
             $historic->client = $agent;
             $historic->uploaded += $uploaded;
-            $historic->mod_uploaded += $modUpload;
+            $historic->mod_uploaded += $mod_upload;
             $historic->real_uploaded = $real_uploaded;
             $historic->downloaded += $downloaded;
-            $historic->mod_downloaded += $modDownload;
+            $historic->mod_downloaded += $mod_download;
             $historic->real_downloaded = $real_downloaded;
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
             $historic->is_active = true;
-            $historic->is_released = $isVip ? true : false;
+            $historic->is_released = ($is_vip) ? true : false;
             $historic->completed_at = now();
-            $historic->save();
+            $historic->update();
 
             //Peer data
             $client->torrent_id = $torrent->id;
@@ -269,19 +269,18 @@ class AnnounceController extends Controller
             $client->peer_id = $peer_id;
             $client->ip = $ip;
             $client->client = $agent;
-            $client->passkey = $passkey;
             $client->is_seeder = ($left == 0) ? true : false;
             $client->is_leecher = ($left > 0) ? true : false;
             $client->port = $port;
             $client->uploaded = $real_uploaded;
             $client->downloaded = $real_downloaded;
             $client->remaining = 0;
-            $client->save();
+            $client->update();
 
             //User data
-            $user->uploaded += $modUpload;
-            $user->downloaded += $modDownload;
-            $user->save();
+            $user->uploaded += $mod_upload;
+            $user->downloaded += $mod_download;
+            $user->update();
 
             //Torrent update
             $torrent->times_completed += 1;
@@ -293,21 +292,22 @@ class AnnounceController extends Controller
             $new_update = $client->updated_at->timestamp;
             $diff = $new_update - $old_update;
             $historic->seed_time += $diff;
-            $historic->save();
+            $historic->update();
 
         } elseif ($event == 'stopped') {
             //historic
             $historic->client = $agent;
             $historic->uploaded += $uploaded;
-            $historic->mod_uploaded += $modUpload;
+            $historic->mod_uploaded += $mod_upload;
             $historic->real_uploaded = $real_uploaded;
             $historic->downloaded += $downloaded;
-            $historic->mod_downloaded += $modDownload;
+            $historic->mod_downloaded += $mod_download;
             $historic->real_downloaded = $real_downloaded;
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
             $historic->is_active = false;
-            $historic->save();
+            $historic->is_released = ($is_vip) ? true : false;
+            $historic->update();
 
             //Peer data
             $client->torrent_id = $torrent->id;
@@ -316,26 +316,25 @@ class AnnounceController extends Controller
             $client->peer_id = $peer_id;
             $client->ip = $ip;
             $client->client = $agent;
-            $client->passkey = $passkey;
             $client->is_seeder = ($left == 0) ? true : false;
             $client->is_leecher = ($left > 0) ? true : false;
             $client->port = $port;
             $client->uploaded = $real_uploaded;
             $client->downloaded = $real_downloaded;
             $client->remaining = $left;
-            $client->save();
+            $client->update();
 
             //user update
-            $user->uploaded += $modUpload;
-            $user->downloaded += $modDownload;
-            $user->save();
+            $user->uploaded += $mod_upload;
+            $user->downloaded += $mod_download;
+            $user->update();
 
             // Seedtime allocation
             if ($left == 0) {
                 $new_update = $client->updated_at->timestamp;
                 $diff = $new_update - $old_update;
                 $historic->seed_time += $diff;
-                $historic->save();
+                $historic->update();
             }
 
             $client->delete();
@@ -343,10 +342,10 @@ class AnnounceController extends Controller
             // Set the torrent data
             $historic->client = $agent;
             $historic->uploaded += $uploaded;
-            $historic->mod_uploaded += $modUpload;
+            $historic->mod_uploaded += $mod_upload;
             $historic->real_uploaded = $real_uploaded;
             $historic->downloaded += $downloaded;
-            $historic->mod_downloaded += $modDownload;
+            $historic->mod_downloaded += $mod_download;
             $historic->real_downloaded = $real_downloaded;
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
@@ -360,7 +359,6 @@ class AnnounceController extends Controller
             $client->peer_id = $peer_id;
             $client->ip = $ip;
             $client->client = $agent;
-            $client->passkey = $passkey;
             $client->is_seeder = ($left == 0) ? true : false;
             $client->is_leecher = ($left > 0) ? true : false;
             $client->port = $port;
@@ -370,22 +368,22 @@ class AnnounceController extends Controller
             $client->save();
 
             //User update
-            $user->uploaded += $modUpload;
-            $user->downloaded += $modDownload;
-            $user->save();
+            $user->uploaded += $mod_upload;
+            $user->downloaded += $mod_download;
+            $user->update();
 
             // Seedtime allocation
             if ($left == 0) {
                 $new_update = $client->updated_at->timestamp;
                 $diff = $new_update - $old_update;
                 $historic->seed_time += $diff;
-                $historic->save();
+                $historic->update();
             }
         }
 
         $torrent->seeders = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '=', '0')->count();
         $torrent->leechers = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '>', '0')->count();
-        $torrent->save();
+        $torrent->update();
 
         $response = [
             'interval' => config('announce.time.interval'),
@@ -398,7 +396,7 @@ class AnnounceController extends Controller
             'peers6' => $this->giverPeersIPV6($peers, $compact, $no_peer_id),
         ];
 
-        return response(Encoder::encode($response), 200, ['Content-Type' => 'text/plain']);
+        return response(Encoder::encode($response), 200)->withHeaders(['Content-Type' => 'text/plain']);
     }
 
     /**
@@ -449,16 +447,16 @@ class AnnounceController extends Controller
         if ($compact) {
             $pcomp = '';
             foreach ($peers as &$peer) {
-                if (isset($peer->ip) && isset($peer->port)) {
+                if (isset($peer['ip']) && isset($peer['port'])) {
                     if ($ipv4 == true) {
-                        if (filter_var($peer->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                            $pcomp .= inet_pton($peer->ip);
-                            $pcomp .= pack('n', (int)$peer->port);
+                        if (filter_var($peer['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+                            $pcomp .= inet_pton($peer['ip']);
+                            $pcomp .= pack('n', (int)$peer['port']);
                         }
                     } else {
-                        if (filter_var($peer->ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-                            $pcomp .= inet_pton($peer->ip);
-                            $pcomp .= pack('n', (int)$peer->port);
+                        if (filter_var($peer['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+                            $pcomp .= inet_pton($peer['ip']);
+                            $pcomp .= pack('n', (int)$peer['port']);
                         }
                     }
                 }
@@ -466,7 +464,7 @@ class AnnounceController extends Controller
             return $pcomp;
         } elseif ($no_peer_id) {
             foreach ($peers as &$peer) {
-                unset($peer->peer_id);
+                unset($peer['peer_id']);
             }
             return $peers;
         } else {
