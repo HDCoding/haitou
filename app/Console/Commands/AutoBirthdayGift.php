@@ -57,7 +57,7 @@ class AutoBirthdayGift extends Command
                 ]);
 
                 //Save changes
-                $user->save();
+                $user->update();
             }
         }
     }
