@@ -264,11 +264,8 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::resource('forums', 'ForumsController');
             Route::put('forum-order', 'ForumsController@order')->name('forum.order');
             //Forum Add Mods
-            Route::get('forum/{id}/addmod', 'ForumsController@formAddMod')->name('forum.formaddmod');
-            Route::post('forum/{id}/addmod', 'ForumsController@postAddMod')->name('forum.addmod');
-            //Forum Edit Mods
-            Route::get('forum/{id}/editmod', 'ForumsController@formEditMod')->name('forum.formeditmod');
-            Route::post('forum/{id}/editmod', 'ForumsController@postEditMod')->name('forum.editmod');
+            Route::get('forum/{id}/moderators', 'ForumsController@formModerators');
+            Route::post('forum/{id}/moderators', 'ForumsController@postModerators');
             //Genres
             Route::resource('genres', 'GenresController')->except(['create', 'show', 'edit']);
             //Groups
