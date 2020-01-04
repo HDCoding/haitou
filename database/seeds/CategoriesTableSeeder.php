@@ -42,7 +42,11 @@ class CategoriesTableSeeder extends Seeder
             ['name' => 'Anime', 'is_torrent' => true],
             ['name' => 'Dorama', 'is_torrent' => true],
             ['name' => 'Filme', 'is_torrent' => true],
-            ['name' => 'OVA', 'is_torrent' => true]
+            ['name' => 'OVA', 'is_torrent' => true],
+            //Forum
+            ['name' => 'Site', 'is_forum' => true],
+            ['name' => 'Geral', 'is_forum' => true],
+            ['name' => 'Wikisub', 'is_forum' => true],
         ];
 
         foreach ($categories as $category) {
