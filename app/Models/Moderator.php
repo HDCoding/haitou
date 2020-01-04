@@ -9,6 +9,10 @@ class Moderator extends Model
 {
     protected $table = 'moderators';
 
+    public $incrementing = false;
+
+    public $timestamps = false;
+
     protected $casts = [
         'forum_id' => 'int',
         'user_id' => 'int'
@@ -16,8 +20,7 @@ class Moderator extends Model
 
     protected $fillable = [
         'forum_id',
-        'user_id',
-        'username'
+        'user_id'
     ];
 
     public function forum()
@@ -29,4 +32,5 @@ class Moderator extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
 }
