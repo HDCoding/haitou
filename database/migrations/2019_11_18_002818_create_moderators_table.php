@@ -14,11 +14,9 @@ class CreateModeratorsTable extends Migration
     public function up()
     {
         Schema::create('moderators', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->unsignedBigInteger('forum_id')->index();
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('username', 25)->nullable();
-            $table->timestamps();
+            $table->primary(['forum_id', 'user_id']);
 
             $table->foreign('forum_id')->references('id')->on('forums')
                 ->onUpdate('cascade')->onDelete('cascade');
