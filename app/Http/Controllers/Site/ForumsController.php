@@ -206,7 +206,6 @@ class ForumsController extends Controller
             ->where('is_forum', '=', true)
             ->orderBy('position', 'ASC')->get();
 
-
         // Total Forums Count
         $num_forums = Forum::count();
         // Total Posts Count
