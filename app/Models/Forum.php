@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Forum extends Model
 {
-    use SoftDeletes;
     use Sluggable;
+    use SoftDeletes;
 
     protected $table = 'forums';
 
@@ -28,6 +28,15 @@ class Forum extends Model
         'icon',
         'views'
     ];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function category()
     {
@@ -74,15 +83,6 @@ class Forum extends Model
             });
         }
         return $this->hasMany(Topic::class, 'id', 'topic_id');
-    }
-
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
     }
 
     public function getPermission()
