@@ -57,7 +57,6 @@ return [
                         'password_resets',
                         'peers',
                         'sessions',
-                        'visitors',
                     ]
                 ]
             ],
@@ -139,7 +138,7 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'your@example.com',
+            'to' => 'sitetracker2k19@gmail.com',
 
             'from' => [
                 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
