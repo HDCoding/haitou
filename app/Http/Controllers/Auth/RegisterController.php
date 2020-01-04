@@ -64,8 +64,8 @@ class RegisterController extends Controller
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
         $user->state_id = 25;
-        $user->points += $points;
-        $user->experience += $points;
+        $user->points = $points;
+        $user->experience = $points;
         $user->passkey = md5_gen();
         $user->birthday = Carbon::today();
         $user->mood_id = 1;
