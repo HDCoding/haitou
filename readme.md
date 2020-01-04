@@ -65,8 +65,8 @@ MacOS or Linux: Follow Laravel [Documentation](https://laravel.com/docs/5.8/inst
 | [Laravel Backup](https://github.com/spatie/laravel-backup) | Laravel Backup |
 | [Laravel Collective](https://laravelcollective.com/docs/master/html) | Laravel Collective |
 | [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) | Laravel Debugbar |
-| [LogViewer](https://github.com/ARCANEDEV/LogViewer) | LogViewer |
 | [Laravel Models](https://github.com/hdcoding/laravel-models) | HDCoding Laravel Models |
+| [LogViewer](https://github.com/ARCANEDEV/LogViewer) | LogViewer |
 | [Secure Headers](https://github.com/BePsvPT/secure-headers) | Secure Headers |
 
 ## Development
