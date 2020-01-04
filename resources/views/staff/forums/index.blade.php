@@ -86,12 +86,11 @@
                                         <b>Moderadores: &nbsp;</b>
                                         @foreach($moderators as $moderator)
                                             @if($moderator->forum_id == $forum->id)
-                                                {{ $moderator->username }}
-                                                &nbsp;
+                                                {{ $moderator->user->username }}&nbsp;
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td>{{ $forum->topics()->count() }}</td>
+                                    <td>{{ $forum->topics->count() }}</td>
                                     <td>
                                         <a href="#" class="OrderEdit" id="position" data-type="number"
                                            data-column="position" data-title="Editar Ordem" data-name="position"
@@ -104,11 +103,8 @@
                                                 Opções
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('forum.formaddmod', ['id' => $forum->id]) }}">
-                                                    <i class="fa fa-plus text-warning"></i> Add Mod
-                                                </a>
-                                                <a class="dropdown-item" href="{{ route('forum.formeditmod', ['id' => $forum->id]) }}">
-                                                    <i class="fa fa-pencil-alt text-primary"></i> Editar Mod
+                                                <a class="dropdown-item" href="{{ url('staff/forum/' . $forum->id . '/moderators') }}">
+                                                    <i class="fa fa-pencil-alt text-primary"></i> Moderadores
                                                 </a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="{{ url('staff/forums/' . $forum->id . '/edit') }}">
