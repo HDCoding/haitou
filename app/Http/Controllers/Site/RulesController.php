@@ -23,7 +23,7 @@ class RulesController extends Controller
         if ($user->readed_rules == false) {
             $user->unlock(new UserReadRules());
             $user->readed_rules = true;
-            $user->save();
+            $user->update();
         }
         return view('site.rules.index', compact('rules'));
     }
