@@ -24,8 +24,9 @@ class ForumsController extends Controller
     public function index()
     {
         $categories = Category::orderBy('position', 'ASC')->where('is_forum', '=', true)->get();
-        $forums = Forum::orderBy('position', 'ASC')->get();
-        $moderators = Moderator::select('forum_id', 'username')->get();
+        $forums = Forum::with('topics:id,forum_id')->orderBy('position', 'ASC')->get();
+        $moderators = Moderator::with('user:id,username')->get();
+
         return view('staff.forums.index', compact('categories', 'forums', 'moderators'));
     }
 
@@ -135,44 +136,25 @@ class ForumsController extends Controller
         return response()->json(['error' => 400, 'message' => 'Parametros insuficientes.'], 400);
     }
 
-    public function formAddMod($forum_id)
+    public function formModerators($forum_id)
     {
         $forum = Forum::find($forum_id);
         $members = User::where('status', '=', 1)->select('id', 'username')->pluck('username', 'id');
-        return view('staff.forums.mod.create', compact('members', 'forum'));
+
+        $member = DB::table('moderators')
+            ->where('forum_id', '=', $forum_id)
+            ->pluck('user_id', 'user_id')->all();
+
+        return view('staff.forums.moderators', compact('members', 'forum', 'member'));
     }
 
-    public function postAddMod(Request $request, $forum_id)
+    public function postModerators(Request $request, $forum_id)
     {
         $forum = Forum::find($forum_id);
-
-        $userId = $request->input('user_id');
-
-        foreach ($userId as $user) {
-            $forum->moderators()->create([
-                'forum_id' => $forum_id,
-                'user_id' => $user,
-                'username' => str_replace(['["', '"]'], '', User::where('id', '=', $user)->select('username')->pluck('username')->first())
-            ]);
-        }
+        $forum->moderators()->sync($request->input('user_id'));
 
         toastr()->info('Moderadores adicionado.', 'Aviso');
         return redirect()->to('staff/forums');
     }
 
-    public function formEditMod($forum_id)
-    {
-        $forum = Forum::find($forum_id);
-        $members = User::where('status', '=', 1)->select('id', 'username')->pluck('username', 'id');
-        $mod = Moderator::all()->where('forum_id', '=', $forum->id)->pluck('staff_id');
-        return view('staff.forums.mod.remove', compact('members', 'forum', 'mod'));
-    }
-
-    public function postEditMod(Request $request, $forum_id)
-    {
-        $forum = Forum::find($forum_id);
-        $forum->moderators()->sync($request->input('staff_id'));
-        toastr()->info('Moderadores atualizados.', 'Aviso');
-        return redirect()->to('staff/forums');
-    }
 }
