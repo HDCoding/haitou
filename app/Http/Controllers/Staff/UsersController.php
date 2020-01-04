@@ -66,7 +66,7 @@ class UsersController extends Controller
             $this->log::record('Staff atualizou classe do membro', true);
         }
 
-        $this->log::novo('Staff atualizou conta do membro', true);
+        $this->log::record('Staff atualizou conta do membro', true);
 
         toastr()->info('Usuário atualizado.', 'Sucesso');
         return redirect()->to('staff/users');
