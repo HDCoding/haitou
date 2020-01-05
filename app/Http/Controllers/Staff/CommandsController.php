@@ -87,7 +87,7 @@ class CommandsController extends Controller
      */
     public function clearAllCache()
     {
-        Artisan::call('clear:all_cache');
+        Artisan::call('haitou:clear-all-cache');
         toastr()->info(trim(Artisan::output()), 'Aviso');
         return redirect()->route('staff.commands');
     }
@@ -97,7 +97,7 @@ class CommandsController extends Controller
      */
     public function setAllCache()
     {
-        Artisan::call('set:all_cache');
+        Artisan::call('haitou:set-all-cache');
         toastr()->info(trim(Artisan::output()), 'Aviso');
         return redirect()->route('staff.commands');
     }
