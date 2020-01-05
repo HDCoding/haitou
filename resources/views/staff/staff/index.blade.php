@@ -260,7 +260,7 @@
                                     <h5 class="mt-2">@lang('dashboard.commands')</h5>
                                 </div>
                             @endif
-                            @if(auth()->user()->can('falha-logins-mod'))
+                            @if(auth()->user()->can('falhas-login-mod'))
                                 <div class="col-md-3 col-lg-3">
                                     <a href="{{ url('staff/failedlogins') }}">
                                         <img src="{{ asset('images/staff/failedlogins.png') }}"
@@ -278,7 +278,7 @@
                                     <h5 class="mt-2">@lang('dashboard.fansubs')</h5>
                                 </div>
                             @endif
-                            @if(auth()->user()->can('faqs-mod'))
+                            @if(auth()->user()->can('faq-mod'))
                                 <div class="col-md-3 col-lg-3">
                                     <a href="{{ url('staff/faqs') }}">
                                         <img src="{{ asset('images/staff/faqs.png') }}" alt="@lang('dashboard.faqs')">
@@ -321,7 +321,7 @@
                             </div>
                             @if(auth()->user()->can('logs-mod'))
                                 <div class="col-md-3 col-lg-3">
-                                    <a href="{{ url('staff/logs') }}">
+                                    <a href="{{ url('staff/logs') }}" target="_blank">
                                         <img src="{{ asset('images/staff/logs.png') }}" alt="@lang('dashboard.logs')">
                                     </a>
                                     <h5 class="mt-2">@lang('dashboard.logs')</h5>
