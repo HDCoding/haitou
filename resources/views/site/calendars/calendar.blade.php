@@ -35,9 +35,9 @@
                                 <h4 class="box-title m-t-40">Criado por</h4>
                                 <p>{{ $calendar->username }}</p>
                                 <h4 class="box-title m-t-40">Data de início</h4>
-                                <p>{{ format_date_time($calendar->start_at) }}</p>
+                                <p>{{ format_date_time($calendar->start_date) }}</p>
                                 <h4 class="box-title m-t-40">Data final</h4>
-                                <p>{{ format_date_time($calendar->end_at) }}</p>
+                                <p>{{ format_date_time($calendar->end_date) }}</p>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
                                 <h4 class="box-title m-t-40">Descrição</h4>
