@@ -13,7 +13,7 @@
     <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet"/>
 
     <style>
-        #aviso {
+        #aviso-view {
             display: none;
             background: #eee;
             border-bottom: 1px solid #ddd;
@@ -24,7 +24,27 @@
             font-size: 12px;
             color: red;
         }
-        #loading {
+
+        #aviso-list {
+            display: none;
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            padding: 0 10px;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: red;
+        }
+
+        #loading-view {
+            text-align: center;
+            color: #bb0000;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        #loading-list {
             text-align: center;
             color: #bb0000;
             text-transform: uppercase;
@@ -76,9 +96,26 @@
                             </div>
                             <div class="col-lg-10">
                                 <div class="card-body b-l calender-sidebar">
-                                    <div id="aviso">Não foi possível conectar-se com banco de dados.</div>
-                                    <div id="loading">Loading...</div>
+                                    <div id="aviso-view">Não foi possível conectar-se com banco de dados.</div>
+                                    <div id="loading-view">Carregando...</div>
                                     <div id="fullcalendar-default"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-body b-l calender-sidebar">
+                                    <div id="aviso-list">Não foi possível conectar-se com banco de dados.</div>
+                                    <div id="loading-list">Carregando...</div>
+                                    <div id="fullcalendar-list"></div>
                                 </div>
                             </div>
                         </div>
