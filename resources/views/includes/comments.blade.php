@@ -44,7 +44,7 @@
     <!-- Comment Row -->
     @empty
         <p class="text-center push-30">Nenhum comentário no momento. Seja a(o) primeira(o)</p>
-        @if(!isset($torrent->allow_comments))
+        @if(isset($torrent->allow_comments) AND $torrent->allow_comments == false)
             <p class="text-center push-30">Comentários foram desativados para esse torrent.</p>
         @endif
     @endforelse
