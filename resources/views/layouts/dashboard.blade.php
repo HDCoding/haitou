@@ -62,8 +62,6 @@
 
 @include('includes.dashboard-right')
 
-<div class="chat-windows"></div>
-
 <!-- All Jquery -->
 <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap tether Core JavaScript -->
