@@ -1,7 +1,7 @@
 <!-- ============================================================== -->
 <!-- footer -->
 <!-- ============================================================== -->
-<footer class="footer text-center">
+<footer class="footer text-center" id="footer">
     Desenvolvido com &hearts; por {{ setting('site_title') }}. © {{ date('Y') }}
 </footer>
 <!-- ============================================================== -->
