@@ -50,8 +50,8 @@
                                     <tr>
                                         <th>{{ $calendar->username }}</th>
                                         <td>{{ $calendar->name }}</td>
-                                        <td>{{ format_date_time($calendar->start_at) }}</td>
-                                        <td>{{ format_date_time($calendar->end_at) }}</td>
+                                        <td>{{ format_date_time($calendar->start_date) }}</td>
+                                        <td>{{ format_date_time($calendar->end_date) }}</td>
                                         <td>{{ $calendar->is_enabled ? 'Sim' : 'Não'}}</td>
                                         <td><span class="badge badge-info">{{ $calendar->views }}</span></td>
                                         <td>{{ format_date_time($calendar->created_at) }}</td>
