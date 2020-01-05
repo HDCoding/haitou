@@ -33,7 +33,11 @@ class BonusController extends Controller
     public function index()
     {
         $points = Bonus::where('is_enabled', '=', true)->get();
-        $members = User::select('id', 'username')->get()->pluck('username', 'id');
+        $members = User::select('id', 'username')
+            ->where('status', '=', 1)
+            ->where('id', '!=', auth()->user()->id)
+            ->get()
+            ->pluck('username', 'id');
 
         return view('site.bonus.index', compact('points', 'members'));
     }
@@ -85,7 +89,7 @@ class BonusController extends Controller
         $item = Bonus::where('id', '=', $point_id)->first();
         $user = User::findOrFail($user_id);
 
-        $freeleecher = VipUser::where('user_id', '=', $user->id)->first();
+        $freeleecher = Vip::where('user_id', '=', $user->id)->first();
 
         $transation = new UserBonus();
 
@@ -146,6 +150,7 @@ class BonusController extends Controller
         if ($user->points >= $quantity) {
 
             $exchange = new UserBonus();
+            $exchange->bonus_id = 1;
             $exchange->user_id = $user->id;
             $exchange->member_id = $member_id;
             $exchange->cost = $quantity;
@@ -154,12 +159,12 @@ class BonusController extends Controller
 
             //subtrai os pontos do usuario logado
             $user->points -= $quantity;
-            $user->save();
+            $user->update();
 
             //adiciona o pontos ao membro
             $member = User::where('id', '=', $member_id)->first();
             $member->points += $quantity;
-            $member->save();
+            $member->update();
 
             // Achievements
             $user->unlock(new UserMadeFirtBonusTransation());
