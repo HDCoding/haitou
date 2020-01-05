@@ -52,4 +52,3 @@
 <div class="m-t-40">
     {{ $comments->links() }}
 </div>
-
