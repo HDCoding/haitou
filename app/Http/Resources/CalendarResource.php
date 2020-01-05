@@ -20,7 +20,7 @@ class CalendarResource extends JsonResource
             'slug' => $this->slug,
             'start' => $this->start_date->format('Y-m-d H:i'),
             'end' => $this->end_date->format('Y-m-d H:i'),
-            'textColor' => $this->color
+            'color' => $this->color
         ];
     }
 }
