@@ -1,11 +1,7 @@
 $(function () {
     let today = new Date();
-    let y = today.getFullYear();
-    let m = today.getMonth();
-    let d = today.getDate();
 
     // Default view
-    // color classes: [ fc-event-success | fc-event-info | fc-event-warning | fc-event-danger | fc-event-dark ]
     $('#fullcalendar-default').fullCalendar({
         // Bootstrap styling
         themeSystem: 'bootstrap4',
@@ -48,7 +44,6 @@ $(function () {
     });
 
     // List view
-    // color classes: [ fc-event-success | fc-event-info | fc-event-warning | fc-event-danger | fc-event-dark ]
     $('#fullcalendar-list').fullCalendar({
         // Bootstrap styling
         themeSystem: 'bootstrap4',
