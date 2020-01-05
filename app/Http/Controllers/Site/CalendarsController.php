@@ -37,7 +37,10 @@ class CalendarsController extends Controller
     public function store(CalendarRequest $request)
     {
         $user = $request->user();
-        $user->calendars()->create($request->except('_token'));
+        $data = $request->except('_token');
+        $data['username'] = $user->username;
+
+        $user->calendars()->create($data);
 
         // Achievements
         $user->unlock(new UserMadeFirstEvent());
