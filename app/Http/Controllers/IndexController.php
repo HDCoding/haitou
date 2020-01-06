@@ -10,4 +10,14 @@ class IndexController extends Controller
     {
         return view('index');
     }
+
+    public function terms()
+    {
+        return view('terms');
+    }
+
+    public function privacy()
+    {
+        return view('privacy');
+    }
 }

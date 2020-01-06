@@ -13,6 +13,8 @@
 
 //Index
 Route::get('/', 'IndexController@index');
+Route::get('terms', 'IndexController@terms');
+Route::get('privacy', 'IndexController@privacy');
 
 //Announce
 Route::get('announce/{passkey}', 'AnnounceController@announce')->name('announce');
