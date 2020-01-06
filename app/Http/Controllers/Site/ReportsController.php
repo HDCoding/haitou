@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\ReportRequest;
 use App\Models\Calendar;
 use App\Models\Comment;
+use App\Models\Log;
 use App\Models\Post;
 use App\Models\Report;
 use App\Models\Torrent;
@@ -14,9 +15,12 @@ use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
+    private $log;
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->log = new Log();
     }
 
     public function calendar($calendar_id)
@@ -39,13 +43,13 @@ class ReportsController extends Controller
 
     public function torrent($torrent_id)
     {
-        $torrent = Torrent::findOrFail($torrent_id);
+        $torrent = Torrent::where('id', '=', $torrent_id)->select(['id', 'name'])->firstOrFail();
         return view('site.reports.torrent', compact('torrent'));
     }
 
     public function user($user_id)
     {
-        $user = User::findOrFail($user_id)->select(['id', 'username'])->first();
+        $user = User::where('id', '=', $user_id)->select(['id', 'username'])->firstOrFail();
         return view('site.reports.user', compact('user'));
     }
 
@@ -69,7 +73,7 @@ class ReportsController extends Controller
         $points = setting('points_report');
         $user->updatePoints($points);
 
-//        $this->log::novo('Registrou um novo report.');
+        $this->log::record('Registrou um novo report.');
 
         toastr()->success('Report recebido com sucesso. Iremos analizar o mais breve possível.', 'Report');
         return redirect()->to('home');
