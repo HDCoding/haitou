@@ -39,8 +39,7 @@
                         <b>Moderadores: &nbsp;</b>
                         @foreach($moderators as $moderator)
                             @if($moderator->forum_id == $forum->id)
-                                {{ link_to_route('user.profile', $moderator->staff->username, ['slug' => $moderator->staff->slug], ['target' => '_blank']) }}
-                                &nbsp;
+                                {{ link_to_route('user.profile', $moderator->user->username, $moderator->user->slug, ['target' => '_blank']) }}&nbsp;
                             @endif
                         @endforeach
                         <div class="table-responsive m-t-20">
