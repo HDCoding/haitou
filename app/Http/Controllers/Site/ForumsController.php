@@ -219,7 +219,7 @@ class ForumsController extends Controller
     public function topics($forum_id, $slug)
     {
         $forum = Forum::findOrFail($forum_id);
-        $moderators = Moderator::all();
+        $moderators = Moderator::with('user:id,username,slug')->get();
         $forum->increment('views');
 
         $topics = $forum->topics()->latest('is_pinned')->latest('id')->paginate(30);
