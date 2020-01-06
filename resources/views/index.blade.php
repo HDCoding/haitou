@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<head>
-    <title>{{ setting('site_title') }}</title>
 
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta name="keywords" content="{{ setting('meta_keywords') }}">
     <meta name="description" content="{{ setting('meta_description') }}">
     <meta name="robots" content="index, follow">
@@ -18,22 +19,20 @@
     <meta property="og:url" content="{{ url('/') }}" />
     <meta property="og:title" content="{{ setting('site_title') }}" />
     <meta property="og:description" content="{{ setting('meta_description') }}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicons/favicon.ico') }}">
-
-    <!-- Icons -->
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ asset('images/favicons/ms-icon-144x144.png') }}">
-    <meta name="theme-color" content="#ffffff">
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700" rel="stylesheet">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
 
-    <!-- Icons -->
+    <title>{{ setting('site_title') }}</title>
+
+    <!-- Favicons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('images/favicons/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicons/favicon.ico') }}">
+
     <link rel="shortcut icon" href="{{ asset('images/favicons/favicon.png') }}">
 
     <link rel="icon" type="image/png" href="{{ asset('images/favicons/favicon-16x16.png') }}" sizes="16x16">
@@ -53,198 +52,342 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('images/favicons/apple-icon-144x144.png') }}">
     <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('images/favicons/apple-icon-152x152.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-icon-180x180.png') }}">
-    <!-- END Icons -->
+    <!-- END Favicons -->
 
-    <!-- Icon fonts -->
-    <link href="{{ asset('fonts/ionicons.css') }}" rel="stylesheet">
-    <link href="{{ asset('fonts/linearicons.css') }}" rel="stylesheet">
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:500,600,700,800,900,400,300' rel='stylesheet' type='text/css'>
 
-    <!-- Core stylesheets -->
-    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap -->
+    <link href="{{ asset('index/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Pixeden Icon Font -->
+    <link href="{{ asset('fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="{{ asset('index/css/font-awesome.min.css') }}" rel="stylesheet">
+
+    <!-- Style -->
+    <link href="{{ asset('index/css/style.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('index/css/animate.css') }}" rel="stylesheet">
+    <!-- Responsive CSS -->
+    <link href="{{ asset('index/css/responsive.css') }}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-<div class="page-loader">
-    <div class="bg-primary"></div>
+<!-- PRELOADER -->
+<div class="spn_hol">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
 </div>
+<!-- END PRELOADER -->
 
-<!-- Navbar -->
-<nav class="landing-navbar navbar navbar-expand-lg navbar-dark fixed-top pt-lg-4">
-    <div class="container-fluid px-3">
-        <a href="{{ url('/') }}" class="navbar-brand text-big font-weight-bolder line-height-1 text-expanded py-3">{{ setting('site_title') }}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#landing-navbar-collapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="landing-navbar-collapse">
-            <div class="navbar-nav align-items-lg-center ml-auto">
-                @if (Route::has('login'))
-                    @auth
-                        <div class="nav-item py-2 py-lg-0 ml-lg-1">
-                            <a href="{{ route('home') }}" class="btn btn-success rounded-pill">Home</a>
-                        </div>
-                    @else
-                        <div class="nav-item py-2 py-lg-0 ml-lg-4">
-                            <a href="{{ route('login') }}" class="btn btn-outline-white rounded-pill borderless">Login</a>
-                        </div>
-                        @if (Route::has('register'))
-                            <div class="nav-item py-2 py-lg-0 ml-lg-1">
-                                <a href="{{ route('register') }}" class="btn btn-primary rounded-pill">Cadastre-se</a>
-                            </div>
+<!-- START ABOUT US SECTION -->
+<section class="header parallax home-parallax page" id="HOME">
+    <h2></h2>
+    <div class="section_overlay">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="{{ asset('images/favicons/favicon-16x16.png') }}" alt="Logo">
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- NAV -->
+                        @if (Route::has('login'))
+                            @auth
+                                <li>
+                                    <a href="{{ route('home') }}">Home</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{ route('login') }}">Login</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li>
+                                        <a href="{{ route('register') }}">Cadastre-se</a>
+                                    </li>
+                                @endif
+                            @endauth
                         @endif
-                    @endauth
-                @endif
-                @if(!empty(setting('discord')))
-                    <div class="nav-item py-2 py-lg-0 ml-lg-1">
-                        <a href="{{ hideref(setting('discord')) }}" target="_blank" class="btn purple rounded-pill borderless">Discord Chat</a>
-                    </div>
-                @endif
+                        @if(!empty(setting('discord')))
+                        <li>
+                            <a href="{{ hideref(setting('discord')) }}" target="_blank">Discord Chat</a>
+                        </li>
+                        @endif
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-        </div>
-    </div>
-</nav>
-<!-- / Navbar -->
+            <!-- /.container- -->
+        </nav>
 
-<!-- Header -->
-<div class="jumbotron ui-hero ui-mh-100vh ui-bg-cover ui-bg-fixed ui-bg-overlay-container text-white" style="background-image: url('{{ asset('images/index.png') }}');">
-    <div class="ui-bg-overlay bg-dark opacity-50"></div>
-    <div class="container py-5 px-3">
-        <div class="row pt-4">
-            <div class="w-100">
-                <div class="col-md-11 col-lg-8 col-xl-7 text-center mx-auto mb-5">
-                    <h1 class="display-3 font-secondary font-weight-bolder mb-4">{{ setting('site_title') }}</h1>
-                    <div class="lead opacity-75">
-                        Text text.
+        <div class="container home-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo text-center">
+                        <!-- LOGO -->
+                        <img width="125" height="55" src="{{ asset('images/favicons/apple-icon-114x114.png') }}" alt="">
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <div class="home_text">
+                        <!-- TITLE AND DESC -->
+                        <h1>Brilliant Landing Page Design. Executed for Your App</h1>
+                        <p>Now create a beautiful, app landing page.</p>
+
+                        <div class="download-btn">
+                            <!-- BUTTON -->
+                            @if (Route::has('login'))
+                                @auth
+                                    <a href="{{ route('home') }}" class="tour btn wow fadeInDown">Home</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="tuor btn wow fadeInLeft">Login</a>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="btn home-btn wow fadeInRight">Cadastre-se</a>
+                                    @endif
+                                @endauth
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END HEADER SECTION -->
+
+<!-- START FEATURES -->
+<section id="FEATURES" class="features page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <!-- FEATURES SECTION TITLE -->
+                <div class="section_title wow fadeIn" data-wow-duration="1s">
+                    <h2>Features</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                </div>
+                <!-- END FEATURES SECTION TITLE -->
+            </div>
+        </div>
+    </div>
+
+    <div class="feature_inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 right_no_padding wow fadeInLeft" data-wow-duration="1s">
+                    <!-- FEATURE -->
+
+                    <div class="left_single_feature">
+                        <!-- ICON -->
+                        <div><span class="pe-7s-like"></span></div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>Creative Design<span>/</span></h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="left_single_feature">
+                        <!-- ICON -->
+                        <div><span class="pe-7s-science"></span></div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>Modern Look<span>/</span></h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="left_single_feature">
+                        <!-- ICON -->
+                        <div><span class="pe-7s-look"></span></div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3>Minimal Layout<span>/</span></h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+                </div>
+                <div class="col-md-4">
+                    <div class="feature_iphone">
+                        <!-- FEATURE PHONE IMAGE -->
+                        <img class="wow bounceIn" data-wow-duration="1s" src="images/iPhone02.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
+
+                    <!-- FEATURE -->
+                    <div class="right_single_feature">
+                        <!-- ICON -->
+                        <div><span class="pe-7s-monitor"></span></div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3><span>/</span>Retina ready</h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="right_single_feature">
+                        <!-- ICON -->
+                        <div><span class="pe-7s-phone"></span></div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3><span>/</span>Responsive Ready</h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+
+
+                    <!-- FEATURE -->
+                    <div class="right_single_feature">
+                        <!-- ICON -->
+                        <div><span class="pe-7s-gleam"></span></div>
+
+                        <!-- FEATURE HEADING AND DESCRIPTION -->
+                        <h3><span>/</span>Clean Code</h3>
+                        <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
+                    </div>
+                    <!-- END SINGLE FEATURE -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END FEATURES SECTION -->
+
+
+
+<!-- START CALL TO ACTION -->
+<div class="call_to_action">
+    <div class="container">
+        <div class="row wow fadeInLeftBig" data-wow-duration="1s">
+            <div class="col-md-9">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-primary btn-action" href="#" role="button">Download Now</a>
+            </div>
         </div>
     </div>
 </div>
-<!-- / Header -->
+<!-- END CALL TO ACTION -->
 
-<div class="bg-white">
-    <!-- Block -->
-    <div class="landing-block pb-5">
-        <div class="container px-3">
-            <div class="col-md-10 col-lg-8 col-xl-7 text-center p-0 mx-auto">
-                <div class="display-3 text-primary mb-4">
-                    <i class="lnr lnr-rocket"></i>
+<!-- START CONTCT FORM AREA -->
+<section class="contact page" id="CONTACT">
+    <div class="section_overlay">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1 wow bounceIn">
+                <!-- Start Contact Section Title-->
+                <div class="section_title">
+                    <h2>Get in touch</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
                 </div>
-                <h1 class="display-4 font-secondary font-weight-semibold mb-5">
-                    Ultimate Tool for Professionals
-                </h1>
-                <div class="text-muted">
-                    Lorem ipsum dolor sit amet, ad eam consul vituperata. Cum assum inimicus an, his ne liber aeterno
-                    debitis. Te his iudico tollit efficiendi. Eu harum volumus pri, oporteat probatus disputationi id his.
-                    Mei in vidit mollis mediocrem, cum ad suas democritum, ea eos e ligendi nominati volutpat.
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 wow bounceInLeft">
+                    <div class="social_icons">
+                        <ul>
+                            <li><a href=""><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href=""><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li><a href=""><i class="fa fa-dribbble"></i></a>
+                            </li>
+                            <li><a href=""><i class="fa fa-behance"></i></a>
+                            </li>
+                            <li><a href=""><i class="fa fa-youtube-play"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- / Block -->
-</div>
-
-<!-- Block -->
-<div id="features" class="landing-block">
-    <div class="container px-3">
-        <div class="col-md-10 col-lg-8 col-xl-7 text-center p-0 mx-auto">
-            <div class="text-lighter text-tiny font-weight-bold mb-3">FEATURES</div>
-            <h1 class="display-4 font-secondary font-weight-semibold mb-4">
-                Tudo o que você precisa em um site
-            </h1>
-            <div class="lead text-muted mb-5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed interdum lorem, non hendrerit lectus.
-                Suspendisse ultricies lobortis vulputate.
-            </div>
-        </div>
-        <hr class="landing-separator border-light mx-auto">
-        <div class="row text-center">
-            <div class="col-md-4 mt-5">
-                <div class="display-4 text-primary mx-auto mb-4">
-                    <span class="lnr lnr-star"></span>
-                </div>
-                <h5>Dapibus ac facilisis in</h5>
-                <div class="text-muted small">
-                    Lorem ipsum dolor sit amet, ius virtute suscipit te. Ius prima euismod consequat eu, cu quo alii scriptorem
-                </div>
-            </div>
-            <div class="col-md-4 mt-5">
-                <div class="display-4 text-primary mx-auto mb-4">
-                    <span class="lnr lnr-picture"></span>
-                </div>
-                <h5>Cras justo odio</h5>
-                <div class="text-muted small">
-                    Etiam vivendo eu sea, purto ponderum mediocritatem at pro. Ex tantas invenire dissentiunt mea.
-                </div>
-            </div>
-            <div class="col-md-4 mt-5">
-                <div class="display-4 text-primary mx-auto mb-4">
-                    <span class="lnr lnr-calendar-full"></span>
-                </div>
-                <h5>Porta ac consectetur ac</h5>
-                <div class="text-muted small">
-                    Iuvaret deleniti vulputate nec ne, id vix lucilius legendos deseruisse, harum honestatis cum te.
-                </div>
-            </div>
-            <div class="col-md-4 mt-5">
-                <div class="display-4 text-primary mx-auto mb-4">
-                    <span class="lnr lnr-camera"></span>
-                </div>
-                <h5>Nullam lobortis</h5>
-                <div class="text-muted small">
-                    Praesent massa quam, luctus et efficitur congue, aliquam quis quam. In tellus quam, ornare et consectetur ut, ullamcorper vitae nunc.
-                </div>
-            </div>
-            <div class="col-md-4 mt-5">
-                <div class="display-4 text-primary mx-auto mb-4">
-                    <span class="lnr lnr-pie-chart"></span>
-                </div>
-                <h5>Quisque dictum magna</h5>
-                <div class="text-muted small">
-                    Curabitur rutrum eleifend urna, sit amet iaculis metus consequat at. Pellentesque id accumsan leo.
-                </div>
-            </div>
-            <div class="col-md-4 mt-5">
-                <div class="display-4 text-primary mx-auto mb-4">
-                    <span class="lnr lnr-layers"></span>
-                </div>
-                <h5>Suspendisse facilisis laoreet</h5>
-                <div class="text-muted small">
-                    Curabitur tristique in elit in fermentum. Sed pellentesque ullamcorper risus pellentesque finibus.
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<!-- / Block -->
+</section>
+<!-- END CONTACT -->
 
 @if(!empty(setting('disclaimer')))
-<!-- Block -->
-<div id="subscribe" class="bg-secondary text-white py-5">
-    <div class="container px-3">
-        <div class="row align-items-center">
-            <div class="font-secondary col-md-5 col-lg-4 text-xlarge font-weight-light">
-                AVISO LEGAL
-            </div>
-            <div class="col-md-7 col-lg-8 mt-3 mt-md-0">
-                {{ setting('disclaimer') }}
+<section class="subscribe parallax subscribe-parallax" data-stellar-background-ratio="0.6" data-stellar-vertical-offset="20">
+    <div class="section_overlay wow lightSpeedIn">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <!-- Start Subscribe Section Title -->
+                    <div class="section_title">
+                        <h2>Aviso Legal</h2>
+                        <p>{{ setting('disclaimer') }}</p>
+                    </div>
+                    <!-- End Subscribe Section Title -->
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- / Block -->
+</section>
+<!-- END SUBSCRIPBE FORM -->
 @endif
 
 <!-- Footer -->
-<nav class="footer bg-lightest pt-4">
-    <div class="container text-center py-4">
-        <div class="pb-3">
-            <span class="align-top">{{ date('Y') }} &copy {{ setting('site_title') }}. Todos os direitos reservados.</span>
+<section class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="copy_right_text">
+                    <!-- COPYRIGHT TEXT -->
+                    <p>&copy; {{ date('Y') }} {{ setting('site_title') }}. Todos os direitos reservados.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="scroll_top">
+                    <a href="#HOME"><i class="fa fa-angle-up"></i></a>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
-<!-- / Footer -->
+</section>
+<!-- END FOOTER -->
+
+<!-- SCRIPTS -->
+<script src="{{ asset('index/js/jquery.min.js') }}"></script>
+<script src="{{ asset('index/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('index/js/smoothscroll.js') }}"></script>
+<script src="{{ asset('index/js/jquery.parallax-1.1.3.js') }}"></script>
+<script src="{{ asset('index/js/jquery.prettyPhoto.js') }}"></script>
+<script src="{{ asset('index/js/wow.min.js') }}"></script>
+<script src="{{ asset('index/js/waypoints.min') }}.js"></script>
+<script src="{{ asset('index/js/script.js') }}"></script>
 
 </body>
 </html>
