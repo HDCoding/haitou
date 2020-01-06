@@ -30,7 +30,9 @@
                         @if($forum->getPermission()->start_topic)
                             <div class="mb-4">
                                 <a href="{{ route('new.topic', [$forum->id, $forum->slug]) }}">
-                                    <button type="button" class="btn btn-primary"><i class="ion ion-md-add"></i>&nbsp; Novo Tópico</button>
+                                    <button type="button" class="btn btn-primary btn-rounded">
+                                        <i class="ion ion-md-add"></i>&nbsp; Novo Tópico
+                                    </button>
                                 </a>
                             </div>
                         @endif
