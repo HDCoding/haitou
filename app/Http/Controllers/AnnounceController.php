@@ -114,14 +114,11 @@ class AnnounceController extends Controller
         $ip = $request->ip();
 
         //Informacoes adicionais
-        $tracker_id = $request->has('trackerid') ? bin2hex($request->input('tracker_id')) : null;
+        $tracker_id = $request->has('trackerid') ? $request->input('trackerid') : $md5_peer_id;
         $compact = ($request->has('compact') && $request->input('compact') == 1) ? true : false;
         $no_peer_id = ($request->has('no_peer_id') && $request->input('no_peer_id') == 1) ? true : false;
         $numwanted = (int)$request->has('numwant') ? (int)$request->input('numwant') : 50;
         $key = $request->has('key') ? bin2hex($request->input('key')) : null;
-        $corrupt = $request->has('corrupt') ? $request->input('corrupt') : null;
-        $supportcrypto = $request->has('supportcrypto') ? $request->input('supportcrypto') : null;
-        $redundant = $request->has('redundant') ? $request->input('redundant') : null;
 
         if (!$compact) {
             return $this->encodeMessage('Seu programa nao suporta compact, atualize seu programa', 200);
@@ -388,7 +385,7 @@ class AnnounceController extends Controller
         $response = [
             'interval' => config('announce.time.interval'),
             'min interval' => config('announce.time.min_interval'),
-            'tracker_id' => $md5_peer_id,
+            'tracker id' => $tracker_id,
             'private' => 1,
             'complete' => (int)$torrent->seeders,
             'incomplete' => (int)$torrent->leechers,
@@ -417,7 +414,7 @@ class AnnounceController extends Controller
      */
     private function encodeMessage($message, $status)
     {
-        return response(Encoder::encode(['failure reason' => $message]), $status, ['Content-Type' => 'text/plain']);
+        return response(Encoder::encode(['failure reason' => $message]), $status)->withHeaders(['Content-Type' => 'text/plain']);
     }
 
     /**
