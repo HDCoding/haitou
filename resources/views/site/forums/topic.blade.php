@@ -34,22 +34,35 @@
             <small><span class="badge badge-default align-text-bottom ml-1">Trancado</span></small>
         @endif
         @includeIf('errors.errors', [$errors])
-        <div class="text-center mb-3">
-            @if(auth()->user()->can('forum-mod'))
-                <h3>Moderação</h3>
-                @if ($topic->is_locked)
-                    <a class="btn btn-success" href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}">Abrir Tópico</a>
-                @else
-                    <a class="btn btn-info" href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}">Fechar Tópoco</a>
-                @endif
+        @if(auth()->user()->can('forum-mod'))
+        <div class="row">
+            <div class="col-md-12 mt-3 mb-4">
+                <h4>Moderação</h4>
+                <div class="float-left">
+                    @if ($topic->is_locked)
+                    <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-success btn-rounded">
+                        <i class="fa fa-lock-open"></i> Abrir Tópico
+                    </a>
+                    @else
+                    <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-primary btn-rounded">
+                        <i class="ion ion-ios-lock"></i> Fechar Tópico
+                    </a>
+                    @endif
 
-                @if (!$topic->is_pinned)
-                    <a class="btn btn-primary" href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}">Pin Tópico</a>
-                @else
-                    <a class="btn btn-default" href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}">Unpin Tópico</a>
-                @endif
-            @endif
+                    @if (!$topic->is_pinned)
+                    <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
+                        <i class="fa fa-file"></i> Pin Tópico
+                    </a>
+                    @else
+                    <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
+                        <i class="fa fa-file"></i> Unpin Tópico
+                    </a>
+                    @endif
+                </div>
+            </div>
         </div>
+        @endif
+
         @foreach($posts as $post)
             <div class="row">
                 <div class="col-md-9 col-lg-9">
