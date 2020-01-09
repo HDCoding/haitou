@@ -80,6 +80,7 @@
                 </div>
             </div>
             <!-- End Tab 1 -->
+
             <!-- Tab 2 -->
             <div class="tab-pane fade p-15" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                 <h6 class="m-t-20 m-b-20">Status</h6>
