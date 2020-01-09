@@ -64,7 +64,7 @@
 @section('scripts')
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/minified/formats/xhtml.js') }}"></script>
     <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
     <!-- Page JS Code -->
@@ -73,7 +73,7 @@
             //terms
             let terms = document.getElementById('terms');
             sceditor.create(terms, {
-                format: 'bbcode',
+                format: 'xhtml',
                 locale: 'pt-BR',
                 emoticonsRoot: '/vendor/sceditor/',
                 style: '/vendor/sceditor/minified/themes/content/default.min.css'
@@ -81,15 +81,15 @@
             //privacy
             let privacy = document.getElementById('privacy');
             sceditor.create(privacy, {
-                format: 'bbcode',
+                format: 'xhtml',
                 locale: 'pt-BR',
                 emoticonsRoot: '/vendor/sceditor/',
                 style: '/vendor/sceditor/minified/themes/content/default.min.css'
             });
-            //terms
+            //disclaimer
             let disclaimer = document.getElementById('disclaimer');
             sceditor.create(disclaimer, {
-                format: 'bbcode',
+                format: 'xhtml',
                 locale: 'pt-BR',
                 emoticonsRoot: '/vendor/sceditor/',
                 style: '/vendor/sceditor/minified/themes/content/default.min.css'
