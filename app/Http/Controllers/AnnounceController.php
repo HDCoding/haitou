@@ -389,8 +389,8 @@ class AnnounceController extends Controller
             'private' => 1,
             'complete' => (int)$torrent->seeders,
             'incomplete' => (int)$torrent->leechers,
-            'peers' => $this->giverPeersIPV4($peers, $compact, $no_peer_id),
-            'peers6' => $this->giverPeersIPV6($peers, $compact, $no_peer_id),
+            'peers' => $this->givePeersIPV4($peers, $compact, $no_peer_id),
+            'peers6' => $this->givePeersIPV6($peers, $compact, $no_peer_id),
         ];
 
         return response(Encoder::encode($response), 200)->withHeaders(['Content-Type' => 'text/plain']);
@@ -423,7 +423,7 @@ class AnnounceController extends Controller
      * @param $no_peer_id
      * @return string
      */
-    private function giverPeersIPV4($peers, $compact, $no_peer_id)
+    private function givePeersIPV4($peers, $compact, $no_peer_id)
     {
         return $this->giver($peers, $compact, $no_peer_id, true);
     }
@@ -434,12 +434,19 @@ class AnnounceController extends Controller
      * @param $no_peer_id
      * @return string
      */
-    private function giverPeersIPV6($peers, $compact, $no_peer_id)
+    private function givePeersIPV6($peers, $compact, $no_peer_id)
     {
         return $this->giver($peers, $compact, $no_peer_id, false);
     }
 
-    private function giver($peers, $compact, $no_peer_id, bool $ipv4 = true)
+    /**
+     * @param $peers
+     * @param $compact
+     * @param $no_peer_id
+     * @param bool $ipv4
+     * @return string
+     */
+    private function giver($peers, $compact, $no_peer_id, bool $ipv4 = true): string
     {
         if ($compact) {
             $pcomp = '';
