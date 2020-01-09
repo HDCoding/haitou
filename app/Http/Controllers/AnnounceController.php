@@ -144,10 +144,10 @@ class AnnounceController extends Controller
         }
 
         //seleciona os peers no DB
-        $peers = $torrent->peers()->where('torrent_id', '=', $torrent->id)->take($numwanted)->get()->toArray();
+        $peers = Peer::where('torrent_id', '=', $torrent->id)->take($numwanted)->get()->toArray();
 
         // Limite de torrent por vez baixando
-        $limit = $torrent->peers()->where('user_id', '=', $user->id)->where('is_leecher', '=', true)->count();
+        $limit = Peer::where('user_id', '=', $user->id)->where('is_leecher', '=', true)->count();
 
         //se o usuario excedeu o limite volta mensagem
         if ($limit > $user->max_slots) {
@@ -155,7 +155,7 @@ class AnnounceController extends Controller
         }
 
         // Pega os peers atuais
-        $client = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('user_id', '=', $user->id)->first();
+        $client = Peer::where('torrent_id', '=', $torrent->id)->where('user_id', '=', $user->id)->first();
 
         //O sinalizador é desarmado se uma nova sessão for criada, mas os relatórios do cliente para up/down > 0
         $ghost = false;
@@ -381,8 +381,8 @@ class AnnounceController extends Controller
             }
         }
 
-        $torrent->seeders = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '=', '0')->count();
-        $torrent->leechers = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '>', '0')->count();
+        $torrent->seeders = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '=', 0)->count();
+        $torrent->leechers = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '>', 0)->count();
         $torrent->update();
 
         $response = [
