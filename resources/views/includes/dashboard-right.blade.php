@@ -9,9 +9,6 @@
                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true"><i class="mdi mdi-wrench font-20"></i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#chat" role="tab" aria-controls="chat" aria-selected="false"><i class="mdi mdi-message-reply font-20"></i></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false"><i class="mdi mdi-star-circle font-20"></i></a>
             </li>
         </ul>
@@ -84,117 +81,7 @@
             </div>
             <!-- End Tab 1 -->
             <!-- Tab 2 -->
-            <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <ul class="mailbox list-style-none m-t-20">
-                    <li>
-                        <div class="message-center chat-scroll">
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_1' data-user-id='1'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status online pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                    <h5 class="message-title">Pavan kumar</h5>
-                                    <span class="mail-desc">Just see the my admin!</span>
-                                    <span class="time">9:30 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_2' data-user-id='2'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status busy pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                    <h5 class="message-title">Sonu Nigam</h5>
-                                    <span class="mail-desc">I've sung a song! See you at</span>
-                                    <span class="time">9:10 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_3' data-user-id='3'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status away pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                    <h5 class="message-title">Arijit Sinh</h5>
-                                    <span class="mail-desc">I am a singer!</span>
-                                    <span class="time">9:08 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_4' data-user-id='4'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status offline pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                    <h5 class="message-title">Nirav Joshi</h5>
-                                    <span class="mail-desc">Just see the my admin!</span>
-                                    <span class="time">9:02 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_5' data-user-id='5'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status offline pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                <h5 class="message-title">Sunil Joshi</h5>
-                                    <span class="mail-desc">Just see the my admin!</span>
-                                    <span class="time">9:02 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_6' data-user-id='6'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status offline pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                <h5 class="message-title">Akshay Kumar</h5>
-                                    <span class="mail-desc">Just see the my admin!</span>
-                                    <span class="time">9:02 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_7' data-user-id='7'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status offline pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                <h5 class="message-title">Pavan kumar</h5>
-                                    <span class="mail-desc">Just see the my admin!</span>
-                                    <span class="time">9:02 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                            <!-- Message -->
-                            <a href="javascript:void(0)" class="message-item" id='chat_user_8' data-user-id='8'>
-                                <span class="user-img">
-                                    <img src="{{ asset('images/avatar.jpg') }}" alt="user" class="rounded-circle">
-                                    <span class="profile-status offline pull-right"></span>
-                                </span>
-                                <span class="mail-contnet">
-                                <h5 class="message-title">Varun Dhavan</h5>
-                                    <span class="mail-desc">Just see the my admin!</span>
-                                    <span class="time">9:02 AM</span>
-                                </span>
-                            </a>
-                            <!-- Message -->
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- End Tab 2 -->
-            <!-- Tab 3 -->
-            <div class="tab-pane fade p-15" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                 <h6 class="m-t-20 m-b-20">Status</h6>
                 <div class="steamline">
                     <div class="sl-item">
@@ -255,7 +142,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End Tab 3 -->
+            <!-- End Tab 2 -->
         </div>
     </div>
 </aside>
