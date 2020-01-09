@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12  mt-3 mb-3">
+    <div class="col-md-12 mt-3 mb-3">
         <div class="float-left">
             <a href="{{ route('forum') }}" class="btn btn-sm btn-success btn-rounded">
                 <i class="ion ion-ios-chatbubbles"></i> Fórum
@@ -23,5 +23,4 @@
             <strong>Postagens:</strong> {{ $num_posts }}
         </div>
     </div>
-
 </div>
