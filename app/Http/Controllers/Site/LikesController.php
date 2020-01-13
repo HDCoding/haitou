@@ -79,7 +79,7 @@ class LikesController extends Controller
 
         $user = $request->user();
 
-        $postUrl = "forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->getPageNumber()}#post-{$post_id}";
+        $postUrl = "forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post_id}";
 
         $like = $user->likes()->where('post_id', '=', $post->id)->where('is_like', '=', true)->first();
         $dislike = $user->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', true)->first();
@@ -108,7 +108,7 @@ class LikesController extends Controller
 
         $user = $request->user();
 
-        $postUrl = "forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->getPageNumber()}#post-{$post_id}";
+        $postUrl = "forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post_id}";
 
         $like = $user->likes()->where('post_id', '=', $post->id)->where('is_like', '=', true)->first();
         $dislike = $user->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', true)->first();
