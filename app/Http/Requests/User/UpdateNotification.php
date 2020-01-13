@@ -24,9 +24,7 @@ class UpdateNotification extends FormRequest
     public function rules()
     {
         return [
-            'receive_email' => 'boolean',
-            'show_bon_gift' => 'boolean',
-            'show_mention_forum_post' => 'boolean'
+            'receive_email' => 'boolean'
         ];
     }
 }
