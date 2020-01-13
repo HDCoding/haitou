@@ -84,7 +84,7 @@
                                         <strong>Website</strong>
                                         <br>
                                         @if(!empty($fansub->website))
-                                        <a class="text-info" href="{{ $fansub->website }}" target="_blank">{{ $fansub->name }}</a>
+                                        <a class="text-info" href="{{ hideref($fansub->website) }}" target="_blank">{{ $fansub->name }}</a>
                                         @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
