@@ -66,7 +66,7 @@ class NewPostTagNotification extends Notification
             'title' => $this->tagger . ' Marcou você em uma postagem',
             'icon' => '',
             'body' => $this->tagger . ' marcou você em uma postagem no tópico ' . $this->post->topic->name,
-            'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->getPageNumber()}#post-{$this->post->id}"
+            'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}"
         ];
     }
 }
