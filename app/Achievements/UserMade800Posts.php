@@ -9,12 +9,12 @@ class UserMade800Posts extends Achievement
     /*
      * The achievement name
      */
-    public $name = "Completou 800 Postagens";
+    public $name = "800 Postagens";
 
     /*
      * A small description for the achievement
      */
-    public $description = "";
+    public $description = "Completou 800 Postagens";
 
     /*
      * The amount of points required to unlock this achievement.
