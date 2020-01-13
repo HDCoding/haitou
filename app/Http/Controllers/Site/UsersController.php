@@ -132,7 +132,6 @@ class UsersController extends Controller
 
         $user->facebook = $request->input('facebook');
         $user->twitter = $request->input('twitter');
-        $user->googleplus = $request->input('googleplus');
         $user->linkedin = $request->input('linkedin');
         $user->instagram = $request->input('instagram');
         $user->pinterest = $request->input('pinterest');
