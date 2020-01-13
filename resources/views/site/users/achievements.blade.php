@@ -42,15 +42,15 @@
                                             <img src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->details->name) . '.png')) }}"
                                                  data-toggle="tooltip"
                                                  data-original-title="{{ $achievement->details->name }}"
-                                                 alt="{{ $achievement->details->name }}" width="40px">
+                                                 alt="{{ $achievement->details->name }}" width="90px">
                                         </td>
-                                        <td>{{ $achievement->details->description }}</td>
+                                        <td class="align-middle">{{ $achievement->details->description }}</td>
                                         @if($achievement->isUnlocked())
-                                            <td class="text-center">
+                                            <td class="text-center align-middle">
                                                 <span class="badge badge-pill badge-success">Desbloqueado</span>
                                             </td>
                                         @else
-                                            <td class="text-center">
+                                            <td class="text-center align-middle">
                                                 <span class="badge badge-pill badge-warning"> Progresso:
                                                 {{ $achievement->points }} / {{ $achievement->details->points }}
                                                 </span>
