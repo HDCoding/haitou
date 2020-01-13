@@ -39,7 +39,10 @@ class AutoRecycleInvites extends Command
     public function handle()
     {
         $current = now();
-        $invites = Invitation::whereNull('accepted_by')->whereNull('accepted_at')->where('expires_on', '<', $current)->get();
+        $invites = Invitation::whereNull('accepted_by')
+            ->whereNull('accepted_at')
+            ->where('expires_on', '<', $current)
+            ->get();
 
         foreach ($invites as $invite) {
             $invite->delete();
