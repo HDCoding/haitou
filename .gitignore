@@ -15,3 +15,4 @@ composer.lock
 nbproject
 package-lock.json
 .rnd
+resources/views/site/chatbox/index.blade.php
