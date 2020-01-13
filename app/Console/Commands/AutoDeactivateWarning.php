@@ -39,8 +39,11 @@ class AutoDeactivateWarning extends Command
     public function handle()
     {
         $current = now();
-        $warnings = Moderate::with('user,is_warned')->where('is_warned', '=', 1)
-            ->where('is_enabled', '=', 1)->where('expires_on', '<', $current)->get();
+        $warnings = Moderate::with('user,is_warned')
+            ->where('is_warned', '=', 1)
+            ->where('is_enabled', '=', 1)
+            ->where('expires_on', '<', $current)
+            ->get();
 
         foreach ($warnings as $warning) {
             // Set Records Active To 0 in warnings table
