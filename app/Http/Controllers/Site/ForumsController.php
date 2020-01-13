@@ -291,7 +291,12 @@ class ForumsController extends Controller
         $topic->name = $request->input('name');
         $topic->save();
 
-        $topic->posts()->create(['forum_id' => $forum_id, 'user_id' => $user->id, 'post_username' => $user->username, 'content' => $request->input('content')]);
+        $topic->posts()->create([
+            'forum_id' => $forum_id,
+            'user_id' => $user->id,
+            'post_username' => $user->username,
+            'content' => $request->input('content')
+        ]);
 
         //give points to user
         $points = setting('points_topic');
@@ -312,7 +317,7 @@ class ForumsController extends Controller
         $user->addProgress(new UserMade1000Topics(), 1);
 
         toastr()->success('Tópico criado com sucesso!', 'Tópico');
-        return redirect()->route('forum.topic', [$forum_id, $forum->slug]);
+        return redirect()->route('forum.topic', [$topic->id, $topic->slug]);
     }
 
     public function postEditForm($topic_id, $slug, $postId)
