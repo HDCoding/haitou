@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('haitou:auto-ban')->daily(); //Ban User If Has More Than X Active Warnings.
+        // $schedule->command('haitou:auto-ban')->daily(); //Ban User If Has More Than X Active Warnings.
         $schedule->command('haitou:auto-birthday-gift')->daily(); //Automatically gives gift to user on they special day.
         $schedule->command('haitou:auto-birthday-restore')->yearly(); //Automatically restore gifted users to false every new Year.
         $schedule->command('haitou:auto-deactivate-suspended')->daily(); //Automatically Deactivates User Warnings If Expired.
