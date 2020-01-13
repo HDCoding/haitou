@@ -83,22 +83,30 @@
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Website</strong>
                                         <br>
+                                        @if(!empty($fansub->website))
                                         <a class="text-info" href="{{ $fansub->website }}" target="_blank">{{ $fansub->name }}</a>
+                                        @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Discord</strong>
                                         <br>
+                                        @if(!empty($fansub->discord))
                                         <a class="text-info" href="{{ $fansub->discord }}" target="_blank">Discord</a>
+                                        @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>IRC Server</strong>
                                         <br>
+                                        @if(!empty($fansub->irc_server))
                                         <p class="text-muted">{{ $fansub->irc_server }}</p>
+                                        @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6">
                                         <strong>IRC Channel</strong>
                                         <br>
+                                        @if(!empty($fansub->irc_channel))
                                         <p class="text-muted">{{ $fansub->irc_channel }}</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <hr>
