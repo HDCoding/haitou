@@ -41,13 +41,18 @@ class AutoBirthdayGift extends Command
     public function handle()
     {
         //select users from DB
-        $users = User::with('logs')->select(['id', 'points', 'birthday', 'birth_gifted'])->where('birth_gifted', '=', 0)->get();
+        $users = User::with('logs')
+            ->select(['id', 'points', 'birthday', 'birth_gifted'])
+            ->where('birth_gifted', '=', 0)
+            ->get();
 
         foreach ($users as $user) {
             if (Carbon::parse($user->birthday)->isBirthday()) {
+                //Save changes
                 $user->points += 1000;
                 $user->experience += 1000;
                 $user->birth_gifted = 1;
+                $user->update();
 
                 //Save in log for futures complains
                 $user->logs()->create([
@@ -55,9 +60,6 @@ class AutoBirthdayGift extends Command
                     'content' => 'Recebeu presente de aniversario',
                     'ip' => '127.0.0.1'
                 ]);
-
-                //Save changes
-                $user->update();
             }
         }
     }
