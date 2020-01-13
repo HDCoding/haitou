@@ -68,14 +68,14 @@ class NewPostNotification extends Notification
                 'title' => $this->poster->name . ' Postou em um Subscrito Tópico',
                 'icon' => '',
                 'body' => $this->poster->name . ' deixou uma nova postagem no Tópico inscrito ' . $this->post->topic->name,
-                'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->getPageNumber()}#post-{$this->post->id}"
+                'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}"
             ];
         } else {
             return [
                 'title' => $this->poster->name . ' Postou em um tópico que você iniciou',
                 'icon' => '',
                 'body' => $this->poster->name . ' deixou uma nova postagem em seu tópico ' . $this->post->topic->name,
-                'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->getPageNumber()}#post-{$this->post->id}"
+                'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}"
             ];
         }
     }
