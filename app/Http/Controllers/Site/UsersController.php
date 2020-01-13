@@ -94,7 +94,6 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
-
         $user->show_achievements = $request->input('show_achievements') ? true : false;
         $user->show_mood = $request->input('show_mood') ? true : false;
         $user->show_state = $request->input('show_state') ? true : false;
