@@ -139,8 +139,6 @@ class UsersController extends Controller
         $user->topics_per_page = $request->input('topics_per_page');
         $user->posts_per_page = $request->input('posts_per_page');
         $user->receive_email = $request->input('receive_email') ? true : false;
-        $user->show_bon_gift = $request->input('show_bon_gift') ? true : false;
-        $user->show_mention_forum_post = $request->input('show_mention_forum_post') ? true : false;
         $user->save();
 
         // Achievement
