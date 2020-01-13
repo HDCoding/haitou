@@ -14,7 +14,7 @@ class UserReadRules extends Achievement
     /*
      * A small description for the achievement
      */
-    public $description = "Completo Leu as Regras";
+    public $description = "Completou Leu as Regras";
 
     /*
      * The amount of points required to unlock this achievement.
