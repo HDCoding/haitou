@@ -49,29 +49,29 @@
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
                                 @if(auth()->user()->can('download-torrent'))
-                                    <a href="{{ route('torrent.download', [$torrent->id]) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Download" data-original-title="Download">
+                                    <a href="{{ route('torrent.download', [$torrent->id]) }}" class="mr-2 mt-2" data-toggle="tooltip" data-placement="top" title="Download" data-original-title="Download">
                                         <button type="button" class="btn icon-btn btn-success">
                                             <span class="oi oi-cloud-download"></span>
                                         </button>
                                     </a>
                                 @endif
-                                @if($torrent->seeders < 2 AND $torrent->create_at > now()->addDays(7))
-                                    <a href="{{ route('torrent.reseed', [$torrent->id]) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Pedir Re-Seed" data-original-title="Pedir Re-Seed">
+                                @if($torrent->seeders < 2 AND $torrent->created_at > now()->addDays(7))
+                                    <a href="{{ route('torrent.reseed', [$torrent->id]) }}" class="mr-2 mt-2" data-toggle="tooltip" data-placement="top" title="Pedir Re-Seed" data-original-title="Pedir Re-Seed">
                                         <button type="button" class="btn icon-btn btn-warning">
                                             <span class="fas fa-exclamation"></span>
                                         </button>
                                     </a>
                                 @endif
-                                <a href="{{ route('torrent.report', [$torrent->id]) }}" class="mr-2" data-toggle="tooltip" data-placement="top" title="Reportar Torrent" data-original-title="Reportar Torrent">
+                                <a href="{{ route('torrent.report', [$torrent->id]) }}" class="mr-2 mt-2" data-toggle="tooltip" data-placement="top" title="Reportar Torrent" data-original-title="Reportar Torrent">
                                     <button type="button" class="btn icon-btn btn-dark">
                                         <span class="fas fa-flag"></span>
                                     </button>
                                 </a>
-                                <h4 class="box-title m-t-40">Descrição Mídia</h4>
-                                {!! $torrent->media->descriptionHtml() !!}
+                                <h4 class="box-title mr-2 m-t-40">Descrição Mídia</h4>
+                                <p>{!! $torrent->media->descriptionHtml() !!}</p>
 
-                                <h4 class="box-title m-t-40">Descrição Torrent</h4>
-                                {!! $torrent->descriptionHtml() !!}
+                                <h4 class="box-title mr-2 m-t-40">Descrição Torrent</h4>
+                                <p>{!! $torrent->descriptionHtml() !!}</p>
 
                                 @if(!$thanks)
                                     <h4 class="box-title m-t-40">Agradecer</h4>
