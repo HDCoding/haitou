@@ -36,17 +36,17 @@ class AutoFlushPeers extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
         $current = new Carbon();
-        $peers = Peer::select(['id', 'info_hash', 'user_id', 'updated_at'])
+        $peers = Peer::select(['id', 'torrent_id', 'user_id', 'updated_at'])
             ->where('updated_at', '<', $current->copy()->subHours(2)->toDateTimeString())
             ->get();
 
         foreach ($peers as $peer) {
-            $history = Historic::where('info_hash', '=', $peer->info_hash)
+            $history = Historic::where('torrent_id', '=', $peer->torrent_id)
                 ->where('user_id', '=', $peer->user_id)
                 ->first();
 
