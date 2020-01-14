@@ -267,7 +267,7 @@
                                 @if(!empty($media->yt_video))
                                     <div class="bd-example">
                                         <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="{{ $media->trailer() }}" allowfullscreen=""></iframe>
+                                            <iframe class="embed-responsive-item" src="{{ $media->trailer() }}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 @else
