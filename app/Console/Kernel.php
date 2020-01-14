@@ -29,10 +29,13 @@ class Kernel extends ConsoleKernel
         $schedule->command('haitou:auto-birthday-restore')->yearly(); //Automatically restore gifted users to false every new Year.
         $schedule->command('haitou:auto-deactivate-suspended')->daily(); //Automatically Deactivates User Warnings If Expired.
         $schedule->command('haitou:auto-deactivate-warning')->daily(); //Automatically Deactivates User Warnings If Expired.
+        $schedule->command('haitou:auto-flush-peers')->hourly();
+        $schedule->command('haitou:auto-group')->daily();
         $schedule->command('haitou:auto-recycle-accounts')->monthly(); //Recycle Non-Activated Account With More 30 Days Old.
         $schedule->command('haitou:auto-recycle-cheaters')->monthly(); //Recycle Cheaters Table Once 30 Days Old.
         $schedule->command('haitou:auto-recycle-failed-logins')->daily(); //Recycle Failed Logins Once 30 Days Old.
         $schedule->command('haitou:auto-recycle-invites')->daily(); //Recycle Invites That Are Expired.
+        $schedule->command('haitou:auto-sync-peers')->daily();
         $schedule->command('haitou:auto-recycle-vips')->daily(); //Automatically Removes A Users Vips If It Has Expired.
         $schedule->command('haitou:email-blacklist-update')->monthly(); //Update cache for email domains blacklist.
     }
