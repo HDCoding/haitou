@@ -86,6 +86,8 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <h3 class="box-title m-t-40">Info</h3>
                                 <div class="table-responsive">
@@ -261,9 +263,12 @@
                         </div>
                         <div class="tab-pane fade" id="nav-trailer" role="tabpanel" aria-labelledby="pills-setting-tab">
                             <div class="card-body">
+                                <h4 class="card-title">Trailer</h4>
                                 @if(!empty($media->yt_video))
-                                    <div class="embed-responsive embed-responsive-16by9 push-30">
-                                        <iframe class="embed-responsive-item" type="text/html" src="{{ $media->trailer() }}" allowfullscreen></iframe>
+                                    <div class="bd-example">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="{{ $media->trailer() }}" allowfullscreen=""></iframe>
+                                        </div>
                                     </div>
                                 @else
                                     <p class="text-center push-30">Nenhum trailer cadastrado no momento.</p>
