@@ -53,7 +53,9 @@
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Website</strong>
                                         <br>
+                                        @if(!empty($studio->website))
                                         <a class="text-info" href="{{ $studio->website }}" target="_blank">{{ $studio->name }}</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <hr>
