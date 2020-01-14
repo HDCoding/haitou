@@ -43,9 +43,9 @@
                         <h3 class="card-title m-b-30">{{ $torrent->name }}</h3>
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6">
-                                <div class="white-box text-center">
+{{--                                <div class="white-box text-center">--}}
                                     <img class="img-responsive" src="{{ $torrent->media->poster }}" alt="Poster" width="300px">
-                                </div>
+{{--                                </div>--}}
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
                                 @if(auth()->user()->can('download-torrent'))
