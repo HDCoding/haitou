@@ -148,7 +148,7 @@ class Media extends Model
         if (!empty($url)) {
             if ($this->checkUrl($url)) {
                 $fetch = explode("v=", $url);
-                return "https://www.youtube.com/embed/{$fetch[1]}?rel=0&amp;showinfo=0";
+                return "https://www.youtube-nocookie.com/embed/{$fetch[1]}?rel=0&amp;showinfo=0";
             }
         }
         return 'Erro';
