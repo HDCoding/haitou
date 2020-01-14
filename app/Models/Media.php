@@ -185,7 +185,7 @@ class Media extends Model
             return false;
         }
         // Check that URL exists
-        $file_headers = @get_headers($url);
+        $file_headers = get_headers($url);
         return !$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found' ? false : true;
     }
 }
