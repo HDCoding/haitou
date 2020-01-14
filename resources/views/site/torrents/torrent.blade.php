@@ -80,6 +80,8 @@
                                     {!! Form::close() !!}
                                 @endif
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <h3 class="box-title m-t-40">Info</h3>
                                 <div class="table-responsive">
