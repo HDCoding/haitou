@@ -130,6 +130,7 @@ class BonusController extends Controller
             $user->save();
         }
 
+        $transation->bonus_id = $item->bonus_type;
         $transation->user_id = 1;
         $transation->member_id = $user->id;
         $transation->cost = $item->cost;
