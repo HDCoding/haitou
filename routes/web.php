@@ -98,15 +98,12 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             // Like - Dislike
             Route::get('/like/post/{postId}', 'LikesController@likePost')->name('like.post');
             Route::get('/dislike/post/{postId}', 'LikesController@dislikePost')->name('dislike.post');
-
             //Search
             Route::get('search', 'ForumsController@search')->name('forum.search');
-
             //Other
             Route::get('subscriptions', 'ForumsController@subscriptions')->name('forum_subscriptions');
             Route::get('latest/topics', 'ForumsController@latestTopics')->name('forum_latest_topics');
             Route::get('latest/posts', 'ForumsController@latestPosts')->name('forum_latest_posts');
-
             // Subscription System
             Route::get('subscribe/topic/{route}.{topic}', 'SubscriptionsController@subscribeTopic')->name('subscribe_topic');
             Route::get('unsubscribe/topic/{route}.{topic}', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe_topic');
@@ -128,6 +125,8 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Votar na Media
             Route::post('{id}/vote', 'MediasController@vote')->name('media.vote');
         });
+        //News
+        Route::get('news/{id}.{slug}', 'NewsController@show')->name('read.news');
         //Notifications
         Route::get('notifications', 'NotificationsController@index')->name('notifications.index');
         Route::get('notifications/{id}', 'NotificationsController@show')->name('notifications.show');
