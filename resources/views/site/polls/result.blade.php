@@ -23,21 +23,33 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="card poll-widget">
                     <div class="card-body">
-                        <h3 class="card-title">{{ $poll->name }}</h3>
-                        @foreach ($poll->options as $option)
-                            <strong>{{ $option->name }}</strong>
-                            <span class="pull-right">{{ $option->votes()->count() }} Voto(s)</span>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ $option->votesPercent($totalVotes) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $option->votesPercent($totalVotes) }}%;">
-                                    {{ $option->votesPercent($totalVotes) }}%
+                        <h4 class="card-title">Resultados da Pesquisa: {{ $poll->name }}</h4>
+                        <h5 class="card-subtitle">Aqui está o resultado da última pesquisa</h5>
+                        <p class="font-bold text-muted mt-4">
+                            {!! $poll->descriptionHtml() !!}
+                        </p>
+                        <ul class="list-style-none m-t-20 m-b-10">
+                            @foreach ($poll->options as $option)
+                            <li class="m-t-25">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <h6 class="m-b-0 font-bold">{{ $option->name }}
+                                            <span class="font-light">{{ $option->votes()->count() }} Voto(s)</span>
+                                        </h6>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <h6 class="m-b-0 font-bold">{{ $option->votesPercent($totalVotes) }}%</h6>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                        <br>
-                        <p>Total votos: {{ $totalVotes }}</p>
-                        <hr />
+                                <div class="progress m-t-10">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $option->votesPercent($totalVotes) }}%" aria-valuenow="{{ $option->votesPercent($totalVotes) }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                        <p class="mt-5"><strong>Total votos</strong>: {{ $poll->totalVotes() }}</p>
                     </div>
                 </div>
             </div>
