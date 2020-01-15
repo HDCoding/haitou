@@ -87,6 +87,9 @@ class Forum extends Model
 
     public function getPermission()
     {
-        return $this->permissions()->where('forum_id', '=', $this->id)->first();
+        if (auth()->check()) {
+            $group = auth()->user()->group;
+        }
+        return $group->permissions->where('forum_id', '=', $this->id)->first();
     }
 }
