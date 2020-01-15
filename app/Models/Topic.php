@@ -104,6 +104,6 @@ class Topic extends Model
         if (auth()->user()->can('forum-mod')) {
             return true;
         }
-        return $this->forum()->getPermission()->read_topic;
+        return (bool)$this->forum()->getPermission()->read_topic;
     }
 }
