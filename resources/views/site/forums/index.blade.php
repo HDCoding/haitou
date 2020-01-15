@@ -24,7 +24,7 @@
             <div class="col-12">
                 @includeIf('errors.errors', [$errors])
 
-{{--                @if(setting('forum_on'))--}}
+                @if(setting('forum_on'))
 
                     @include('site.forums.buttons')
 
@@ -98,9 +98,9 @@
 
                         </div>
                     @endforeach
-{{--                @else--}}
-{{--                    <p class="text-center"><b>Forúm fechado para manutenção momento.</b></p>--}}
-{{--                @endif--}}
+                @else
+                    <p class="text-center"><b>Fórum fechado para manutenção no momento.</b></p>
+                @endif
             </div>
         </div>
     </div>
