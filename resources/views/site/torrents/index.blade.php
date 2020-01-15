@@ -95,6 +95,7 @@
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Completado">Completado</a>
                                     </th>
                                     <th class="text-center">
+                                        <span class="fa fa-database text-lighter"></span>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Tamanho">Tamanho</a>
                                     </th>
                                     <th class="text-center">
