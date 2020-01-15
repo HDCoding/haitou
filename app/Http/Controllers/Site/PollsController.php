@@ -37,7 +37,7 @@ class PollsController extends Controller
 
     public function vote($poll_id, $slug, Request $request)
     {
-        $poll = Poll::findOrFail($poll_id)->whereSlug($slug);
+        $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->findOrFail($poll_id);
 
         $user = $request->user();
 
