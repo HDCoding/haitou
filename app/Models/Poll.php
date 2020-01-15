@@ -18,7 +18,8 @@ class Poll extends Model
         'topic_id' => 'int',
         'multi_choice' => 'bool',
         'is_main' => 'bool',
-        'is_closed' => 'bool'
+        'is_closed' => 'bool',
+        'views' => 'int'
     ];
 
     protected $dates = [
@@ -34,7 +35,8 @@ class Poll extends Model
         'multi_choice',
         'is_main',
         'is_closed',
-        'closed_at'
+        'views',
+        'closed_at',
     ];
 
     public function topic()
