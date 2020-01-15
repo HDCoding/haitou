@@ -118,8 +118,7 @@ class BonusController extends Controller
             if ($user->warned == true) {
                 $user->warned = false;
                 $user->save();
-                DB::table('moderated_users')->where('user_id', '=', $user->id)->update(['is_enabled' => false, 'expires_on' => null]);
-                DB::table('users')->where('id', '=', $user->id)->update(['is_warned' => false]);
+                DB::table('moderates')->where('user_id', '=', $user->id)->update(['is_enabled' => false, 'expires_on' => null]);
             } else {
                 return false;
             }
@@ -127,7 +126,7 @@ class BonusController extends Controller
             $user->invites += $item->quantity;
             $user->save();
         } elseif ($item->bonus_type == 5) {
-            $user->maxslots += $item->quantity;
+            $user->max_slots += $item->quantity;
             $user->save();
         }
 
