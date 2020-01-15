@@ -17,46 +17,33 @@ class PollsController extends Controller
         $this->request = $request;
     }
 
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-
-    }
-
-    public function store()
-    {
-
-    }
-
     public function show($poll_id, $slug)
     {
         $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->firstOrFail();
 
+        //logged user
         $user = $this->request->user();
 
         if ($poll->hasVoted($user->id)) {
             toastr()->info('Você já votou nesta enquete. Aqui estão os resultados.', 'Enquete');
-            return redirect()->route('poll.results', ['id' => $poll->id, 'slug' => $poll->slug]);
+            return redirect()->route('site.poll.results', ['id' => $poll->id, 'slug' => $poll->slug]);
         }
+
+        //increment views
+        $poll->increment('views');
 
         return view('site.polls.poll', compact('poll'));
     }
 
-    public function vote(Request $request)
+    public function vote($poll_id, $slug, Request $request)
     {
-        $poll_id = $request->input('poll_id');
+        $poll = Poll::findOrFail($poll_id)->whereSlug($slug);
 
         $user = $request->user();
 
-        $poll = Poll::findOrFail($poll_id);
-
         if ($poll->hasVoted($user->id)) {
             toastr()->info('Você já votou nesta enquete. Aqui estão os resultados.', 'Enquete');
-            return redirect()->route('poll.results', ['id' => $poll->id, 'slug' => $poll->slug]);
+            return redirect()->route('site.poll.results', ['id' => $poll->id, 'slug' => $poll->slug]);
         }
 
         $options = $request->input('option');
@@ -77,12 +64,12 @@ class PollsController extends Controller
         }
 
         toastr()->info('O seu voto foi contado.', 'Enquete');
-        return redirect()->route('poll.results', [$poll->id, $poll->slug]);
+        return redirect()->route('site.poll.results', [$poll->id, $poll->slug]);
     }
 
     public function result($poll_id, $slug)
     {
-        $poll = Poll::findOrFail($poll_id)->whereSlug($slug);
+        $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->firstOrFail();
         $totalVotes = $poll->totalVotes();
         return view('site.polls.result', compact('poll', 'totalVotes'));
     }
