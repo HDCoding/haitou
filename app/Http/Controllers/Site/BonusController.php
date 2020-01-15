@@ -57,7 +57,6 @@ class BonusController extends Controller
             }
 
             $user->points -= $point->cost;
-            $user->points_used += $point->cost;
             $user->save();
 
             // Achievements
