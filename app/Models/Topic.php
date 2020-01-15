@@ -98,4 +98,12 @@ class Topic extends Model
         }
         return $count;
     }
+
+    public function viewable()
+    {
+        if (auth()->user()->can('forum-mod')) {
+            return true;
+        }
+        return $this->forum()->getPermission()->read_topic;
+    }
 }
