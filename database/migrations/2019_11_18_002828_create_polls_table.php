@@ -24,6 +24,7 @@ class CreatePollsTable extends Migration
             $table->boolean('is_main')->default(1);
             $table->boolean('is_closed')->default(0);
             $table->timestamp('closed_at')->nullable();
+            $table->integer('views')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
