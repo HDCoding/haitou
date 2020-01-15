@@ -25,21 +25,23 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Pesquisa: {{ $poll->name }}</h3>
-                        {!! Form::open(['url' => 'poll/' . $poll->id, 'class' => 'form-horizontal']) !!}
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                @foreach ($poll->options as $option)
-                                    @if($poll->multivote)
-                                        <label for="option-checkbox-{{ $option->id }}"></label>
-                                        <input type="checkbox" id="option-checkbox-{{ $option->id }}" name="option[]" value="{{ $option->id }}"> {{ $option->name }}
-                                    @else
-                                        <label for="option-radio-{{ $option->id }}"></label>
-                                        <input type="radio" id="option-radio-{{ $option->id }}" name="option" value="{{ $option->id }}"> {{ $option->name }}
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
+                        <h4 class="card-title">Pesquisa: {{ $poll->name }}</h4>
+
+                        {!! $poll->descriptionHtml() !!}
+                        <hr>
+
+                        {!! Form::open(['url' => route('site.poll.vote', [$poll->id, $poll->slug]), 'class' => 'form-horizontal mt-4']) !!}
+                            @foreach ($poll->options as $option)
+                                <div class="form-group">
+                                @if($poll->multivote)
+                                    <label for="option-checkbox-{{ $option->id }}"></label>
+                                    <input type="checkbox" id="option-checkbox-{{ $option->id }}" name="option[]" value="{{ $option->id }}"> {{ $option->name }}
+                                @else
+                                    <label for="option-radio-{{ $option->id }}"></label>
+                                    <input type="radio" id="option-radio-{{ $option->id }}" name="option" value="{{ $option->id }}"> {{ $option->name }}
+                                @endif
+                                </div>
+                            @endforeach
                         {!! Form::submit('Votar', ['class' => 'btn  btn-primary btn-rounded btn-outline']) !!}
                         {!! Form::close() !!}
                     </div>
