@@ -31,8 +31,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="button-group">
-                            <a href="{{ url('staff/forums/create') }}" class="btn btn-primary waves-effect">Adicionar Fórum</a>
-                            <a href="{{ url('staff/categories/create') }}" target="_blank" class="btn btn-secondary waves-effect">Adicionar Categoria</a>
+                            <a href="{{ url('staff/forums/create') }}" class="btn btn-primary btn-rounded waves-effect">Adicionar Fórum</a>
+                            <a href="{{ url('staff/categories/create') }}" target="_blank" class="btn btn-secondary btn-rounded waves-effect">Adicionar Categoria</a>
                         </div>
 
                         <div class="tab-content">
