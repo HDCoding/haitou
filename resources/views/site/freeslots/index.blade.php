@@ -64,8 +64,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Quem mais contribuiu</h4>
-                        <h6 class="card-subtitle">Using the most basic table markup, here’s tables look in Bootstrap. All table styles are inherited in Bootstrap 4, meaning any nested tables will be styled in the same manner as the parent.</h6>
-                        <h6 class="card-title m-t-40"><i class="m-r-5 font-18 fa fa-heart text-danger"></i> Coracao</h6>
+                        <h6 class="card-title m-t-20"><i class="m-r-5 font-18 fa fa-heart text-danger"></i></h6>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
