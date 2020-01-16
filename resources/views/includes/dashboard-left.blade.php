@@ -4,32 +4,6 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <!-- User Profile-->
-                <li>
-                    <!-- User Profile-->
-                    <div class="user-profile d-flex no-block dropdown mt-3">
-                        <div class="user-pic"><img src="{{ auth()->user()->avatar() }}" alt="users" class="rounded-circle" width="40" /></div>
-                        <div class="user-content hide-menu ml-2">
-                            <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <h5 class="m-b-0 user-name font-medium">{{ auth()->user()->username }} <i class="fa fa-angle-down"></i></h5>
-                                <span class="op-5 user-email">{{ auth()->user()->groupName() }}</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="Userdd">
-                                <a class="dropdown-item" href="{{ route('torrent.uploads') }}">
-                                    <i class="fas fa-upload text-lightest m-r-5 m-l-5 text-info"></i> Meus Uploads
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault(); document.getElementById('logout-left').submit();">
-                                    <i class="fa fa-power-off mr-1 ml-1 text-danger"></i> Sair
-                                </a>
-                                {!! Form::open(['url' => 'logout', 'id' => 'logout-left', 'style' => 'display: none']) !!}
-                                {!! Form::close() !!}
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End User Profile-->
-                </li>
                 <!-- Home -->
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('home') }}" aria-expanded="false"><i class="ion ion-ios-rocket"></i><span class="hide-menu">Home</span></a></li>
 				<!-- Suporte -->
