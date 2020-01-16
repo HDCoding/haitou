@@ -69,26 +69,18 @@
                                     <th>E-mail</th>
                                     <th>Data do convite</th>
                                     <th>Expira em</th>
-                                    <th>Re-enviar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($invites as $invite)
                                     <tr>
-                                        <td>{{ $invite->email }}</td>
+                                        <th>{{ $invite->email }}</th>
                                         <td>{{ format_date($invite->created_at) }}</td>
                                         <td>{{ format_date($invite->expires_on) }}</td>
-                                        <td>
-                                            @if ($invite->accepted_at !== null)
-                                                <a class="btn btn-xs btn-success" href="{{ route('invite.resend', ['id' => $invite->id]) }}">
-                                                    <i class="fa fa-sync-alt"></i> Re-enviar
-                                                </a>
-                                            @endif
-                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4">
+                                        <td colspan="3">
                                             <p class="text-center">Nenhum convite enviado no momento!</p>
                                         </td>
                                     </tr>
