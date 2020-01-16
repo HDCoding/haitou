@@ -51,9 +51,9 @@ class ForumsController extends Controller
 
         $user = $request->user();
 
-        $pests = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
-        if (!is_array($pests)) {
-            $pests = [];
+        $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        if (!is_array($posts)) {
+            $posts = [];
         }
 
         $topic_neos = $user->subscriptions->where('topic_id', '>', 0)->pluck('topic_id')->toArray();
@@ -71,12 +71,12 @@ class ForumsController extends Controller
             $result = Post::selectRaw('posts.id as id,posts.*')
                 ->with(['topic', 'user'])
                 ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
-                ->whereNotIn('topics.forum_id', $pests);
+                ->whereNotIn('topics.forum_id', $posts);
         }
 
         if (!isset($logger)) {
             $logger = 'site.forums.results_topics';
-            $result = Topic::whereNotIn('topics.forum_id', $pests);
+            $result = Topic::whereNotIn('topics.forum_id', $posts);
         }
 
         if ($request->has('body') && $request->input('body') != '') {
@@ -151,9 +151,9 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        $pests = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
-        if (!is_array($pests)) {
-            $pests = [];
+        $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        if (!is_array($posts)) {
+            $posts = [];
         }
 
         $topic_neos = $user->subscriptions->where('topic_id', '>', 0)->pluck('topic_id')->toArray();
@@ -169,7 +169,7 @@ class ForumsController extends Controller
         $result = Forum::with('subscription_topics')
             ->selectRaw('forums.id, max(forums.position) as position, max(forums.name) as name, max(forums.slug) as slug, max(forums.description) as description, max(forums.created_at), max(forums.updated_at), max(topics.id) as topic_id, max(topics.created_at) as topic_created_at')
             ->leftJoin('topics', 'forums.id', '=', 'topics.forum_id')
-            ->whereNotIn('topics.forum_id', $pests)
+            ->whereNotIn('topics.forum_id', $posts)
             ->where(function ($query) use ($topic_neos, $forum_neos) {
                 $query->whereIn('topics.id', $topic_neos)->orWhereIn('forums.id', $forum_neos);
             })->groupBy('forums.id');
@@ -202,9 +202,16 @@ class ForumsController extends Controller
 
     public function index()
     {
-        $categories = Category::with('forums')
-            ->where('is_forum', '=', true)
+        $categories = Category::where('is_forum', '=', true)
+            ->select('id', 'name')
             ->orderBy('position', 'ASC')->get();
+
+        $forums = Forum::with([
+            'topics:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug',
+            'posts:id,forum_id,user_id,post_username,created_at'
+        ])
+        ->select('id', 'category_id', 'name', 'slug', 'description', 'icon')
+        ->get();
 
         // Total Forums Count
         $num_forums = Forum::count();
@@ -213,7 +220,7 @@ class ForumsController extends Controller
         // Total Topics Count
         $num_topics = Topic::count();
 
-        return view('site.forums.index', compact('categories', 'num_forums', 'num_posts', 'num_topics'));
+        return view('site.forums.index', compact('categories', 'forums', 'num_forums', 'num_posts', 'num_topics'));
     }
 
     public function topics($forum_id, $slug)
@@ -246,7 +253,7 @@ class ForumsController extends Controller
 
         //Get all posts
         $posts = $topic->posts()
-            ->with('user:id,group_id,slug,username,signature,avatar,mood_id,created_at')
+            ->with('user:id,group_id,slug,username,title,signature,avatar')
             ->paginate(30);
 
         //Increment view
@@ -432,7 +439,7 @@ class ForumsController extends Controller
         //Open or Close the topic
         $topic = Topic::findOrFail($topic_id);
 
-        abort_unless($user->can('forum-mod') || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->can('forum-mod'), 403);
 
         $topic->is_locked = !$topic->is_locked;
         $topic->save();
@@ -448,7 +455,7 @@ class ForumsController extends Controller
         //Open or Close the topic
         $topic = Topic::findOrFail($topic_id);
 
-        abort_unless($user->can('forum-mod') || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->can('forum-mod'), 403);
 
         $topic->is_pinned = !$topic->is_pinned;
         $topic->save();
@@ -461,12 +468,12 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        $pests = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
-        if (!is_array($pests)) {
-            $pests = [];
+        $topics = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        if (!is_array($topics)) {
+            $topics = [];
         }
 
-        $results = Topic::whereNotIn('topics.forum_id', $pests)->latest('id')->paginate(30);
+        $results = Topic::whereNotIn('topics.forum_id', $topics)->latest('id')->paginate(30);
 
         // Total Forums Count
         $num_forums = Forum::count();
@@ -488,15 +495,18 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        $pests = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
-        if (!is_array($pests)) {
-            $pests = [];
+        $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        if (!is_array($posts)) {
+            $posts = [];
         }
 
-        $results = Post::selectRaw('posts.id as id,posts.*')
-            ->with(['topic', 'user'])
+        $results = Post::selectRaw('posts.id as id,posts.*, views')
+            ->with([
+                'topic:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug,is_locked,is_pinned',
+                'user:id,username,slug,group_id'
+            ])
             ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
-            ->whereNotIn('topics.forum_id', $pests)
+            ->whereNotIn('topics.forum_id', $posts)
             ->orderBy('posts.created_at', 'desc')->paginate(30);
 
         // Total Forums Count
@@ -508,7 +518,6 @@ class ForumsController extends Controller
 
         return view('site.forums.latest_posts', [
             'results' => $results,
-            'user' => $user,
             'num_posts' => $num_posts,
             'num_forums' => $num_forums,
             'num_topics' => $num_topics,
