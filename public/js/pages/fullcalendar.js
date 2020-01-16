@@ -36,7 +36,7 @@ $(function () {
             }
         },
         loading: function (bool) {
-            $('#loading-view').toggle(bool);
+            $("#loading-view").toggle(bool);
         },
         eventClick: function (event, jsEvent, view) {
             window.location.href = '/calendars/' + event.id +'.'+ event.slug;
@@ -76,12 +76,12 @@ $(function () {
         events: {
             url: '/api/calendars',
             error: function () {
-                $('#aviso-list').show();
-                $('#fullcalendar-list').hide();
+                $("#aviso-list").show();
+                $("#fullcalendar-list").hide();
             }
         },
         loading: function (bool) {
-            $('#loading-list').toggle(bool);
+            $("#loading-list").toggle(bool);
         }
     });
 });
