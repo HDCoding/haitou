@@ -38,12 +38,6 @@
                                         <span class="font-medium">{{ $user->id }}</span>
                                     </a>
                                 </div>
-{{--                                <div class="col-4">--}}
-{{--                                    <a href="javascript:void(0)" class="link">--}}
-{{--                                        <i class="icon-picture"></i>--}}
-{{--                                        <p class="font-medium">54</p>--}}
-{{--                                    </a>--}}
-{{--                                </div>--}}
                             </div>
                         </div>
                     </div>
