@@ -44,7 +44,9 @@
                                     <th>Imagem</th>
                                     <th>Nome</th>
                                     <th>Pontos</th>
-                                    {{--<th class="text-center">Opções</th>--}}
+                                    @if(auth()->user()->can('acesso-total'))
+                                    <th class="text-center">Opções</th>
+                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -55,13 +57,15 @@
                                         </th>
                                         <td><a href="#" class="MoodText" id="name" data-type="text" data-column="name" data-title="Editar Mood" data-name="name" data-value="{{ $mood->name }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->name }}</a></td>
                                         <td><a href="#" class="MoodNumber" id="points" data-type="number" data-column="points" data-title="Editar Ponto" data-name="points" data-value="{{ $mood->points }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->points }}</a></td>
-                                        {{-- <td class="text-center"> --}}
-                                        {{-- <div class="btn-group"> --}}
-                                        {{-- <a href="javascript:;" onclick="document.getElementById('mood-del-{{ $mood->id }}').submit();" data-toggle="tooltip" title="Remover"><i class="fa fa-times text-danger"></i></a> --}}
-                                        {{-- {!! Form::open(['url' => 'moods/' . $mood->id, 'method' => 'DELETE', 'id' => 'mood-del-' . $mood->id , 'style' => 'display: none']) !!} --}}
-                                        {{-- {!! Form::close() !!} --}}
-                                        {{-- </div> --}}
-                                        {{-- </td> --}}
+                                        @if(auth()->user()->can('acesso-total'))
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="javascript:;" onclick="document.getElementById('mood-del-{{ $mood->id }}').submit();" data-toggle="tooltip" title="Remover"><i class="fa fa-times text-danger"></i></a>
+                                                {!! Form::open(['url' => 'moods/' . $mood->id, 'method' => 'DELETE', 'id' => 'mood-del-' . $mood->id , 'style' => 'display: none']) !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>
