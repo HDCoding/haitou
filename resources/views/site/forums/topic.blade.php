@@ -5,8 +5,6 @@
 @section('css')
     <!-- sceditor -->
     <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
-    <!-- atwho -->
-    {{--    <link rel="stylesheet" href="{{ asset('vendor/atwho/css/jquery.atwho.min.css') }}">--}}
 @endsection
 
 @section('content')
@@ -71,19 +69,19 @@
                             <a class="mr-3" href="#" data-toggle="tooltip" title="Reportar Post">
                                 <i class="fas fa-flag"></i>
                             </a>
-                            @if($post->user_id == auth()->user()->id)
+                            @if($post->user_id == auth()->user()->id OR auth()->user()->can('forum-mod'))
                                 <a href="{{ route('post.edit', ['id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id]) }}" data-toggle="tooltip" title="Editar Post">
                                     <i class="fas fa-pencil-alt text-dark mr-3"></i>
                                 </a>
                             @endif
-                            @if($post->user_id === auth()->user()->id)
+                            @if(auth()->user()->can('forum-mod'))
                                 <a href="javascript:;" onclick="document.getElementById('post-del-{{ $post->id }}').submit();" data-toggle="tooltip" title="Deletar Post">
                                     <i class="fas fa-trash-alt text-danger mr-3"></i>
                                 </a>
                                 {!! Form::open(['route' => ['post.delete', $post->id], 'method' => 'DELETE', 'id' => 'post-del-' . $post->id , 'style' => 'display: none']) !!}
                                 {!! Form::close() !!}
                             @endif
-                            <b class="float-right">Postagem em: {{ format_date_time($post->created_at) }}</b>
+                            <b class="float-right">{{ format_date_time($post->created_at) }}</b>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -109,16 +107,13 @@
                                 </div>
                                 <div class="float-left">
                                     <h5 class="m-b-0 font-16 font-medium">
-                                        <a href="{{ route('user.profile', [$post->user->slug]) }}">{{ $post->user->username }}</a>
+                                        <a href="{{ route('user.profile', [$post->user->slug]) }}">{{ $post->post_username }}</a>
                                     </h5>
-                                    <span>{{ $post->user->group->name }}</span>
-                                </div>
-                                <div class="float-right m-l-40">
-                                    <p class="m-t-10 m-l-40">Conta desde {{ format_date($post->user->created_at) }}</p>
+                                    <span>{{ $post->user->groupName() }}</span>
                                 </div>
                             </div>
                             <hr>
-                            <img class="img-avatar img-avatar32" src="{{ $post->user->mood->image() }}" title="{{ $post->user->mood->name() }}" alt="Humor">
+                            <p>{{ $post->user->title }}</p>
                         </div>
                     </div>
                     <div class="card">
@@ -154,13 +149,13 @@
         @if(!$topic->is_locked)
             <div class="card mb-4">
                 <div class="card-header with-elements">
-                    <span class="card-header-title mr-2">Postar</span>
+                    <span class="card-header-title mr-2">Resposta rápida:</span>
                 </div>
                 <div class="card-body">
                     {!! Form::open(['url' => route('forum.reply', ['id' => $topic->id, 'slug' => $topic->slug]), 'class' => 'form-horizontal']) !!}
                     <div class="form-group">
                         {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
-                        {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 8]) !!}
+                        {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 8, 'required']) !!}
                     </div>
                     {!! Form::submit('Postar', ['class' => 'btn btn-primary btn-rounded']) !!}
                     {!! Form::close() !!}
