@@ -18,7 +18,7 @@
                 {!! Form::open(['route' => 'forum.search', 'method' => 'GET']) !!}
                 {!! Form::hidden('sorting', 'created_at') !!}
                 {!! Form::hidden('direction', 'desc') !!}
-                {!! Form::text('name', (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : ''), ['class' => 'form-control', 'placeholder' => 'Pesquisar...', 'required', 'minlength' => 3, 'maxlengt' => 30]) !!}
+                {!! Form::text('name', (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : ''), ['class' => 'form-control', 'placeholder' => 'Pesquisa rápida...', 'required', 'minlength' => 3, 'maxlengt' => 30]) !!}
                 {!! Form::close() !!}
             </div>
             <div class="col-12">
@@ -42,7 +42,8 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @forelse($category->forums as $forum)
+                                        @forelse($forums as $forum)
+                                            @if($category->id === $forum->category_id)
                                             @if($forum->getPermission() != null && $forum->getPermission()->view_forum)
                                                 <tr>
                                                     <th scope="row">
@@ -85,6 +86,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
+                                            @endif
                                             @endif
                                         @empty
                                             <tr class="card-body py-3">
