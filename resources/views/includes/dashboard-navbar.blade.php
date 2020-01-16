@@ -5,8 +5,9 @@
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <div class="navbar-header">
             <!-- This is for the sidebar toggle which is visible on mobile only -->
-            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
-                    class="ti-menu ti-close"></i></a>
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                <i class="ti-menu ti-close"></i>
+            </a>
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
@@ -51,7 +52,6 @@
                         <i class="mdi mdi-menu font-24"></i>
                     </a>
                 </li>
-
                 <!-- ============================================================== -->
                 <!-- create new -->
                 <!-- ============================================================== -->
@@ -105,6 +105,9 @@
                         <a class="dropdown-item" href="{{ url('achievements') }}">
                             <i class="ion ion-ios-trophy text-lightest m-r-5 m-l-5"></i> Conquistas
                         </a>
+                        <a class="dropdown-item" href="{{ route('torrent.uploads') }}">
+                            <i class="fas fa-upload text-lightest m-r-5 m-l-5"></i> Meus Uploads
+                        </a>
                         <a class="dropdown-item" href="{{ route('notifications.index') }}">
                             <i class="ion ion-md-notifications-outline text-lightest m-r-5 m-l-5"></i> Notificações
                         </a>
@@ -114,7 +117,6 @@
                         <a class="dropdown-item" href="{{ url('lockscreen') }}">
                             <i class="ion ion-md-lock text-lightest m-r-5 m-l-5"></i> Bloquear Tela
                         </a>
-
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-top').submit();">
