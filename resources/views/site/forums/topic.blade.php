@@ -103,7 +103,7 @@
                         <div class="card-body">
                             <div class="d-flex no-block align-items-center">
                                 <div class="m-r-10">
-                                    <img src="{{ $post->user->avatar() }}" alt="user" class="rounded-circle" width="45" />
+                                    <img class="img-fluid" src="{{ $post->user->avatar() }}" alt="{{ $post->post_username }}" width="50" />
                                 </div>
                                 <div class="float-left">
                                     <h5 class="m-b-0 font-16 font-medium">
@@ -112,6 +112,8 @@
                                     <span>{{ $post->user->groupName() }}</span>
                                 </div>
                             </div>
+                            <hr>
+                            <img class="img-fluid" src="{{ $post->user->mood->image() }}" title="{{ $post->user->mood->name() }}" alt="{{ $post->user->mood->name() }}">
                             <hr>
                             <p>{{ $post->user->title }}</p>
                         </div>

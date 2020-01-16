@@ -253,7 +253,7 @@ class ForumsController extends Controller
 
         //Get all posts
         $posts = $topic->posts()
-            ->with('user:id,group_id,slug,username,title,signature,avatar')
+            ->with('user:id,group_id,mood_id,slug,username,title,signature,avatar')
             ->paginate(30);
 
         //Increment view
