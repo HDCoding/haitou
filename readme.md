@@ -1,5 +1,6 @@
 <p align="center"><img src="https://i.imgur.com/4wihrL1.png" alt="Forum Logo"></p>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b75c011dc7994b0a8ad12c6535447bf0)](https://app.codacy.com/gh/HDCoding/haitou?utm_source=github.com&utm_medium=referral&utm_content=HDCoding/haitou&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://poser.pugx.org/laravel/framework/v/stable.svg)]()
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]()
 <img alt="Website" src="https://img.shields.io/website/https/haitou.tk">
