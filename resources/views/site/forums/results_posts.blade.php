@@ -189,7 +189,7 @@
                                                                 <a href="{{ route('user.profile', ['slug' => $r->user->slug]) }}" class="post-info-name" style="color:{{ $r->user->group->color }}; display:inline;">
                                                                     {{ $r->user->username }}
                                                                 </a>
-                                                                @ {{ format_date_time($r->created_at) }}
+                                                                {{ format_date_time($r->created_at) }}
                                                             </div>
                                                             <div class="button-right">
                                                                 <a class="text-bold" href="{{ route('forum.topic', ['id' => $r->topic->id, 'slug' => $r->topic->slug]) }}?page={{$r->pageNumber()}}#post-{{$r->id}}">#{{$r->id}}</a>
