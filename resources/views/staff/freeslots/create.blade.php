@@ -68,7 +68,6 @@
                             </div>
                         </div>
                         <div class="form-group form-inline row mt-2">
-                            {{--<div class="col-sm-2">--}}
                             <label class="custom-control custom-checkbox ml-3 mr-5">
                                 {!! Form::checkbox('is_freeleech', 1, null, ['class' => 'custom-control-input']) !!}
                                 <span class="custom-control-label">Freeleech</span>
@@ -81,7 +80,6 @@
                                 {!! Form::checkbox('is_doubleup', 1, null, ['class' => 'custom-control-input']) !!}
                                 <span class="custom-control-label">Double UP</span>
                             </label>
-                            {{--</div>--}}
                         </div>
                         {!! Form::submit('Cadastrar', ['class' => 'btn btn-success btn-rounded btn-outline mt-4']) !!}
                         {!! Form::close() !!}
