@@ -51,7 +51,7 @@ class Setting extends Model
     public static function get($key, $default = null)
     {
         if (self::has($key)) {
-            $setting = self::where('key', '=', $key)->first();
+            $setting = self::where('key', '=', $key)->select('value')->first();
             return $setting->value;
         }
         return self::getDefaultValue($key, $default);
