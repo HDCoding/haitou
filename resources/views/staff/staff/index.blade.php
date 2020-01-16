@@ -75,8 +75,7 @@
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <div class="d-flex align-items-center">
                                     <div class="m-r-20">
-                                        <div data-label="{{ $system->disk()['percentage'] }}%"
-                                             class="css-bar m-b-0 css-bar-primary css-bar-50"></div>
+                                        <div data-label="{{ $system->disk()['percentage'] }}%" class="css-bar m-b-0 css-bar-primary css-bar-50"></div>
                                     </div>
                                     <div class="media-body small">
                                         <div class="m-b-1">Total: {{ $system->disk()['total'] }}</div>
@@ -94,8 +93,7 @@
                             <div class="col-sm-12 col-md-6 col-lg-3">
                                 <div class="d-flex align-items-center">
                                     <div class="m-r-20">
-                                        <div data-label="{{ $system->memory()['percentage'] }}%"
-                                             class="css-bar m-b-0 css-bar-danger css-bar-30"></div>
+                                        <div data-label="{{ $system->memory()['percentage'] }}%" class="css-bar m-b-0 css-bar-danger css-bar-30"></div>
                                     </div>
                                     <div class="media-body small">
                                         <div class="font-weight-semibold m-b-3"></div>
@@ -127,7 +125,7 @@
                             <div class="text-xlarge">{{ $system->basic()['os'] }}</div>
                             <div class="small opacity-75">Sistema Operacional</div>
                         </div>
-                        <i class="ion ion-md-time text-xlarge opacity-25"></i>
+                        <i class="fab fa-linux fa-3x"></i>
                     </div>
                 </div>
 
@@ -140,7 +138,7 @@
                             <div class="text-xlarge">{{ $system->basic()['php'] }}</div>
                             <div class="small opacity-75">PHP Versão</div>
                         </div>
-                        <i class="ion ion-md-time text-xlarge opacity-25"></i>
+                        <i class="fab fa-php fa-3x"></i>
                     </div>
                 </div>
 
@@ -153,7 +151,7 @@
                             <div class="text-xlarge">{{ $system->basic()['database'] }}</div>
                             <div class="small opacity-75">Database</div>
                         </div>
-                        <i class="ion ion-md-time text-xlarge opacity-25"></i>
+                        <i class="fas fa-database fa-3x"></i>
                     </div>
                 </div>
 
@@ -166,7 +164,7 @@
                             <div class="text-xlarge">{{ $system->basic()['laravel'] }}</div>
                             <div class="small opacity-75">Laravel Versão</div>
                         </div>
-                        <i class="ion ion-md-time text-xlarge opacity-25"></i>
+                        <i class="fab fa-laravel fa-3x"></i>
                     </div>
                 </div>
 
