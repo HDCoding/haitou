@@ -84,7 +84,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::post('/{id}.{slug}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
             //Edit Post
             Route::get('/topic/{id}.{slug}/post-{postId}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
-            Route::put('/topic/{id}.{slug}/post-{postId}/edit', 'ForumsController@postEdit')->name('post.edit');
+            Route::put('/post/{postId}/edit', 'ForumsController@postEdit')->name('post.edit');
             //Delete Post
             Route::delete('/post/{postId}', 'ForumsController@postDelete')->name('post.delete');
             //Delete Topic

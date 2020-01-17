@@ -335,7 +335,7 @@ class ForumsController extends Controller
         return view('site.forums.edit_post', compact('topic', 'post'));
     }
 
-    public function postEdit(EditTopicRequest $request, $slug, $postId)
+    public function postEdit(EditTopicRequest $request, $postId)
     {
         $user = $request->user();
         $post = Post::findOrFail($postId);

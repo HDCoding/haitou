@@ -70,7 +70,7 @@
                                 <i class="fas fa-flag"></i>
                             </a>
                             @if($post->user_id == auth()->user()->id OR auth()->user()->can('forum-mod'))
-                                <a href="{{ route('post.edit', ['id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id]) }}" data-toggle="tooltip" title="Editar Post">
+                                <a href="{{ route('post.edit.form', ['id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id]) }}" data-toggle="tooltip" title="Editar Post">
                                     <i class="fas fa-pencil-alt text-dark mr-3"></i>
                                 </a>
                             @endif
