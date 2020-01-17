@@ -45,14 +45,14 @@
                             <h6 class="card-subtitle m-b-20">{{ $member->groupName() }}</h6>
                             <div class="row justify-content-md-center">
                                 <div class="col-4">
-                                    <a href="javascript:void(0)" class="link">
-                                        <i class="icon-people"></i>
+                                    <a href="javascript:void(0)" class="link" data-toggle="tooltip" data-original-title="Ratio">
+                                        <i class="fas fa-signal"></i>
                                         <font class="font-medium">{{ $member->ratio() }}</font>
                                     </a>
                                 </div>
                                 <div class="col-4">
-                                    <a href="javascript:void(0)" class="link">
-                                        <i class="icon-picture"></i>
+                                    <a href="javascript:void(0)" class="link" data-toggle="tooltip" data-original-title="Pontos">
+                                        <i class="icon-heart"></i>
                                         <font class="font-medium">{{ $member->points() }}</font>
                                     </a>
                                 </div>
