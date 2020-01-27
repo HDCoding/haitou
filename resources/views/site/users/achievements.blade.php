@@ -22,45 +22,73 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12 col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Conquistas desbloqueadas: {{ $unlocked }}</h4>
-                        <div class="table-responsive m-t-15">
-                            <table class="table">
-                                <thead>
+                        <h4 class="card-title text-success">Conquistas desbloqueadas: {{ $unlocked }}</h4>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Troféu</th>
+                                <th>Descrição</th>
+                                <th class="text-center">Progresso</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($achievements as $achievement)
                                 <tr>
-                                    <th>Troféu</th>
-                                    <th>Descrição</th>
-                                    <th class="text-center">Progresso</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($achievements as $achievement)
-                                    <tr>
-                                        <td>
-                                            <img src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->details->name) . '.png')) }}"
-                                                 data-toggle="tooltip"
-                                                 data-original-title="{{ $achievement->details->name }}"
-                                                 alt="{{ $achievement->details->name }}" width="90px">
+                                    <td>
+                                        <img src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->details->name) . '.png')) }}"
+                                             data-toggle="tooltip"
+                                             data-original-title="{{ $achievement->details->name }}"
+                                             alt="{{ $achievement->details->name }}" width="90px">
+                                    </td>
+                                    <td class="text-center align-middle">{{ $achievement->details->description }}</td>
+                                    @if($achievement->isUnlocked())
+                                        <td class="text-center align-middle">
+                                            <span class="badge badge-pill badge-success">Desbloqueado</span>
                                         </td>
-                                        <td class="align-middle">{{ $achievement->details->description }}</td>
-                                        @if($achievement->isUnlocked())
-                                            <td class="text-center align-middle">
-                                                <span class="badge badge-pill badge-success">Desbloqueado</span>
-                                            </td>
-                                        @else
-                                            <td class="text-center align-middle">
-                                                <span class="badge badge-pill badge-warning"> Progresso:
-                                                {{ $achievement->points }} / {{ $achievement->details->points }}
-                                                </span>
-                                            </td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    @endif
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-danger">Conquistas pendentes: {{ $locked }}</h4>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Troféu</th>
+                                <th>Descrição</th>
+                                <th class="text-center">Progresso</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($pending as $achievement)
+                                <tr>
+                                    <td>
+                                        <img src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->details->name) . '.png')) }}"
+                                             data-toggle="tooltip"
+                                             data-original-title="{{ $achievement->details->name }}"
+                                             alt="{{ $achievement->details->name }}" width="90px">
+                                    </td>
+                                    <td class="text-center align-middle">{{ $achievement->details->description }}</td>
+                                    <td class="text-center align-middle">
+                                        <span class="badge badge-pill badge-warning"> Progresso:
+                                            {{ $achievement->points }} / {{ $achievement->details->points }}
+                                        </span>
+                                        <span class="label label-danger">Bloqueada</span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
