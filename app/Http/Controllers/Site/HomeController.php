@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
+use App\Models\Login;
 use App\Models\News;
 use App\Models\Poll;
 use App\Models\Post;
 use App\Models\Topic;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -46,11 +46,23 @@ class HomeController extends Controller
                 ->latest()->take(5)->get();
         });
 
+        // Users Online
+        $logins = Login::with('user:id,group_id,username,slug,is_warned,show_profile')
+            ->where('created_at', '>', now()->subMinutes(10))
+            ->get();
+
+        // Groups
+        $groups = cache()->remember('user_groups', $expire_at, function () {
+            return Group::select(['name', 'color', 'icon'])->oldest('id')->get();
+        });
+
         return view('site.home.index', [
             'news' => $news,
             'topics' => $topics,
             'posts' => $posts,
             'polls' => $polls,
+            'logins' => $logins,
+            'groups' => $groups,
         ]);
     }
 
