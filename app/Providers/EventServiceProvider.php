@@ -4,13 +4,13 @@ namespace App\Providers;
 
 use App\Listeners\FailedLoginListener;
 use App\Listeners\LoginListener;
+use App\Listeners\LogoutListener;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
             LoginListener::class
         ],
         Logout::class => [
-            LoginListener::class
+            LogoutListener::class
         ]
     ];
 
