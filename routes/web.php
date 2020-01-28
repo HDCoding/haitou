@@ -47,6 +47,15 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         //Bonus
         Route::resource('bonus', 'BonusController')->only(['index', 'store']);
         Route::post('bonus/donate', 'BonusController@donate');
+        //Bookmark
+        Route::prefix('bookmark')->group(function () {
+            //Actors
+            Route::get('actors', 'BookmarksController@actors')->name('bookmark.actors');
+            //Characters
+            Route::get('characters', 'BookmarksController@characters')->name('bookmark.characters');
+            //Medias
+            Route::get('medias', 'BookmarksController@medias')->name('bookmark.medias');
+        });
         //Bookmark Save
         Route::post('savebookmark', 'BookmarksController@store')->name('save.bookmark');
         //Bookmark Delete
@@ -78,26 +87,26 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Topics
             Route::get('{id}.{slug}', 'ForumsController@topics')->name('forum.topics');
             //Topic
-            Route::get('/topic/{id}.{slug}', 'ForumsController@topic')->name('forum.topic');
+            Route::get('topic/{id}.{slug}', 'ForumsController@topic')->name('forum.topic');
             //New topic
-            Route::get('/{id}.{slug}/new-topic', 'ForumsController@newTopicForm')->name('new.topic');
-            Route::post('/{id}.{slug}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
+            Route::get('{id}.{slug}/new-topic', 'ForumsController@newTopicForm')->name('new.topic');
+            Route::post('{id}.{slug}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
             //Edit Post
-            Route::get('/topic/{id}.{slug}/post-{postId}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
-            Route::put('/post/{postId}/edit', 'ForumsController@postEdit')->name('post.edit');
+            Route::get('topic/{id}.{slug}/post-{postId}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
+            Route::put('post/{postId}/edit', 'ForumsController@postEdit')->name('post.edit');
             //Delete Post
-            Route::delete('/post/{postId}', 'ForumsController@postDelete')->name('post.delete');
+            Route::delete('post/{postId}', 'ForumsController@postDelete')->name('post.delete');
             //Delete Topic
-            Route::delete('/topic/{id}.{slug}', 'ForumsController@topicDelete')->name('topic.delete');
+            Route::delete('topic/{id}.{slug}', 'ForumsController@topicDelete')->name('topic.delete');
             //Reply
-            Route::post('/topic/{id}.{slug}/reply', 'ForumsController@reply')->name('forum.reply');
+            Route::post('topic/{id}.{slug}/reply', 'ForumsController@reply')->name('forum.reply');
             // Open/Close Topic
-            Route::get('/topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum_openclose_topic');
+            Route::get('topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum_openclose_topic');
             // Pin/Unpin Topic
-            Route::get('/topic/{id}.{slug}/pinunpin', 'ForumsController@pinUnpinTopic')->name('forum_pinunpin_topic');
+            Route::get('topic/{id}.{slug}/pinunpin', 'ForumsController@pinUnpinTopic')->name('forum_pinunpin_topic');
             // Like - Dislike
-            Route::get('/like/post/{postId}', 'LikesController@likePost')->name('like.post');
-            Route::get('/dislike/post/{postId}', 'LikesController@dislikePost')->name('dislike.post');
+            Route::get('like/post/{postId}', 'LikesController@likePost')->name('like.post');
+            Route::get('dislike/post/{postId}', 'LikesController@dislikePost')->name('dislike.post');
             //Search
             Route::get('search', 'ForumsController@search')->name('forum.search');
             //Other
@@ -109,9 +118,11 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('unsubscribe/topic/{route}.{topic}', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe_topic');
 
             //Poll Add
-//        Route::get('/topico/{id}.{slug}/add-poll', 'ForumsController@topicAddPoll')->name('topic.add.poll');
-//        Route::post('/topico/{id}.{slug}/add-poll', 'ForumsController@topicSavePoll')->name('topic.save.poll');
+//        Route::get('topico/{id}.{slug}/add-poll', 'ForumsController@topicAddPoll')->name('topic.add.poll');
+//        Route::post('topico/{id}.{slug}/add-poll', 'ForumsController@topicSavePoll')->name('topic.save.poll');
         });
+        //Freeslots
+        Route::resource('freeslots', 'FreeSlotsController')->only(['index', 'store']);
         //Home
         Route::get('home', 'HomeController@index')->name('home');
         //Invites
@@ -149,10 +160,30 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('torrent/{id}', 'ReportsController@torrent')->name('torrent.report');
             Route::get('user/{id}', 'ReportsController@user')->name('user.report');
         });
-        //Requests
-        Route::resource('freeslots', 'FreeSlotsController')->only(['index', 'store']);
         //Rules
         Route::get('rules', 'RulesController@index')->name('site.rules');
+        //Statistics
+        Route::prefix('statistics')->group(function () {
+            Route::get('/', 'StatisticsController@index')->name('statistics');
+            Route::get('user/uploaded', 'StatisticsController@uploaded')->name('stats.uploaded');
+            Route::get('user/downloaded', 'StatisticsController@downloaded')->name('stats.downloaded');
+            Route::get('user/seeders', 'StatisticsController@seeders')->name('stats.seeders');
+            Route::get('user/leechers', 'StatisticsController@leechers')->name('stats.leechers');
+            Route::get('user/uploaders', 'StatisticsController@uploaders')->name('stats.uploaders');
+            Route::get('user/points', 'StatisticsController@points')->name('stats.points');
+            Route::get('user/levels', 'StatisticsController@levels')->name('stats.levels');
+            Route::get('user/seedtime', 'StatisticsController@seedtime')->name('stats.seedtime');
+            Route::get('user/seedsize', 'StatisticsController@seedsize')->name('stats.seedsize');
+
+            Route::get('torrent/seeded', 'StatisticsController@seeded')->name('stats.seeded');
+            Route::get('torrent/leeched', 'StatisticsController@leeched')->name('stats.leeched');
+            Route::get('torrent/completed', 'StatisticsController@completed')->name('stats.completed');
+            Route::get('torrent/dying', 'StatisticsController@dying')->name('stats.dying');
+            Route::get('torrent/dead', 'StatisticsController@dead')->name('stats.dead');
+
+            Route::get('groups', 'StatisticsController@groups')->name('stats.groups');
+            Route::get('group/{slug}', 'StatisticsController@group')->name('stats.group');
+        });
         //Studios
         Route::get('studio/{id}.{slug}', 'StudiosController@show')->name('studio.show');
         //Torrents
@@ -161,13 +192,13 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::post('torrents/search', 'TorrentsController@search')->name('torrents.search');
         Route::prefix('torrent')->group(function () {
             //Download file
-            Route::get('/{id}/download', 'TorrentsController@download')->name('torrent.download');
+            Route::get('{id}/download', 'TorrentsController@download')->name('torrent.download');
             //Page info
             Route::get('{id}.{slug}', 'TorrentsController@show')->name('torrent.show');
             //Thanks
-            Route::post('/{id}/thanks', 'TorrentsController@thanks')->name('torrent.thanks');
+            Route::post('{id}/thanks', 'TorrentsController@thanks')->name('torrent.thanks');
             //ReSeed
-            Route::get('/{id}/reseed', 'TorrentsController@reSeed')->name('torrent.reseed');
+            Route::get('{id}/reseed', 'TorrentsController@reSeed')->name('torrent.reseed');
             //Uploads
             Route::get('uploads', 'TorrentsController@uploads')->name('torrent.uploads');
         });
@@ -194,16 +225,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         //Update/Edit Email
         Route::get('user/edit/email', 'UsersController@formEmail')->name('edit.email');
         Route::post('user/edit/email', 'UsersController@postEmail')->name('post.email');
-
-        //User Bookmark
-        Route::prefix('bookmark')->group(function () {
-            //Actors
-            Route::get('actors', 'BookmarksController@actors')->name('bookmark.actors');
-            //Characters
-            Route::get('characters', 'BookmarksController@characters')->name('bookmark.characters');
-            //Medias
-            Route::get('medias', 'BookmarksController@medias')->name('bookmark.medias');
-        });
 
         //Search in all sites
         Route::post('search', 'SearchesController@search')->name('search');
