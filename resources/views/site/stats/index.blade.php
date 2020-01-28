@@ -153,7 +153,7 @@
                     <div class="card-body">
                         <div class="d-flex no-block align-items-center">
                             <div>
-                                <h2>{{ $torrent_size }}</h2>
+                                <h2>{{ make_size($torrent_size) }}</h2>
                                 <h6 class="text-cyan">Tamanho total de torrents</h6>
                             </div>
                             <div class="ml-auto">
@@ -219,7 +219,7 @@
                                 <span class="text-info display-6"><i class="ti-pie-chart"></i></span>
                             </div>
                             <div class="ml-auto">
-                                <h2>{{ $real_upload }}</h2>
+                                <h2>{{ make_size($real_upload) }}</h2>
                                 <h6 class="text-info">Real Uploaded</h6>
                             </div>
                         </div>
@@ -234,7 +234,7 @@
                                 <span class="text-cyan display-6"><i class="ti-panel"></i></span>
                             </div>
                             <div class="ml-auto">
-                                <h2>{{ $real_download }}</h2>
+                                <h2>{{ make_size($real_download) }}</h2>
                                 <h6 class="text-cyan">Real Downloaded</h6>
                             </div>
                         </div>
@@ -249,7 +249,7 @@
                     <div class="card-body">
                         <div class="d-flex no-block align-items-center">
                             <div>
-                                <h2>{{ $actual_up_down }}</h2>
+                                <h2>{{ make_size($actual_up_down) }}</h2>
                                 <h6 class="text-success">Real Tráfego total</h6>
                             </div>
                             <div class="ml-auto">
@@ -264,7 +264,7 @@
                     <div class="card-body">
                         <div class="d-flex no-block align-items-center">
                             <div>
-                                <h2>{{ $credited_upload }}</h2>
+                                <h2>{{ make_size($credited_upload) }}</h2>
                                 <h6 class="text-success">Credited Total Upload</h6>
                             </div>
                             <div class="ml-auto">
@@ -279,7 +279,7 @@
                     <div class="card-body">
                         <div class="d-flex no-block align-items-center">
                             <div>
-                                <h2>{{ $credited_download }}</h2>
+                                <h2>{{ make_size($credited_download) }}</h2>
                                 <h6 class="text-dark">Credited Total Download</h6>
                             </div>
                             <div class="ml-auto">
@@ -294,7 +294,7 @@
                     <div class="card-body">
                         <div class="d-flex no-block align-items-center">
                             <div>
-                                <h2>{{ $credited_up_down }}</h2>
+                                <h2>{{ make_size($credited_up_down) }}</h2>
                                 <h6 class="text-info">Credited Total Traffic</h6>
                             </div>
                             <div class="ml-auto">
