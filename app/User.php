@@ -380,7 +380,7 @@ class User extends Authenticatable
         } elseif ($this->uploaded > 0 && $this->downloaded > 0) {
             return (float)number_format($this->uploaded / $this->downloaded, 2);
         } else {
-            return "Info";
+            return '<i class="fas fa-infinity"></i>';
         }
     }
 
@@ -458,6 +458,36 @@ class User extends Authenticatable
             return (bool)$this->subscriptions()->where('topic_id', '=', $topic_id)->first(['id']);
         }
         return (bool)$this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
+    }
+
+    /**
+     * Gets the amount of torrents a user seeds
+     */
+    public function seeding()
+    {
+        return $this->peers()->where('user_id', '=', $this->id)
+            ->where('is_seeder', '=', true)
+            ->distinct('user_id')
+            ->count();
+    }
+
+    /**
+     * Gets the amount of torrents a user seeds
+     */
+    public function leeching()
+    {
+        return $this->peers()->where('user_id', '=', $this->id)
+            ->where('remaining', '>', '0')
+            ->distinct('user_id')
+            ->count();
+    }
+
+    /**
+     * Gets the amount of torrents a user seeds
+     */
+    public function uploads()
+    {
+        return $this->torrents()->where('user_id', '=', $this->id)->count();
     }
 
 }
