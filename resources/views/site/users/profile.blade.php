@@ -47,7 +47,7 @@
                                 <div class="col-4">
                                     <a href="javascript:void(0)" class="link" data-toggle="tooltip" data-original-title="Ratio">
                                         <i class="fas fa-signal"></i>
-                                        <font class="font-medium">{{ $member->ratio() }}</font>
+                                        <span class="font-medium">{!! $member->ratio() !!}</span>
                                     </a>
                                 </div>
                                 <div class="col-4">
