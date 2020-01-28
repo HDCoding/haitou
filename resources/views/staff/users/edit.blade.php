@@ -52,7 +52,7 @@
                         <small class="text-muted p-t-30 db">Upload</small>
                         <h6>{{ $user->uploaded() }}</h6>
                         <small class="text-muted p-t-30 db">Ratio</small>
-                        <h6>{{ $user->ratio() }}</h6>
+                        <h6>{!! $user->ratio() !!}</h6>
                         <small class="text-muted p-t-30 db">Status</small>
                         <h6>{!! $user->status() !!}</h6>
                         <br/>
