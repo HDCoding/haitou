@@ -1,6 +1,5 @@
 <?php
 
-use App\Helpers\Settings;
 use App\Models\Setting;
 use Carbon\Carbon;
 
@@ -171,5 +170,43 @@ if (!function_exists('setting')) {
         }
         $value = Setting::get($key);
         return is_null($value) ? value($default) : $value;
+    }
+}
+
+if (!function_exists('human_time')) {
+    function human_time($oldtime, $newtime = null, $returnarray = false)
+    {
+        if (!$newtime) {
+            $newtime = time();
+        }
+
+        $time = $newtime - $oldtime; // to get the time since that moment
+
+        $values = [
+            31536000 => 'Ano',
+            2592000 => 'Mês',
+            604800 => 'Semana',
+            86400 => 'Dia',
+            3600 => 'Hora',
+            60 => 'Minuto',
+            1 => 'Segundo'
+        ];
+
+        $htarray = [];
+
+        foreach ($values as $unit => $value) {
+            if ($time < $unit) {
+                continue;
+            }
+            $number_of_units = floor($time / $unit);
+            $htarray[$value] = $number_of_units.' '.$value.(($number_of_units > 1) ? 's' : '');
+            $time = $time - ($unit * $number_of_units);
+        }
+
+        if ($returnarray) {
+            return $htarray;
+        }
+
+        return implode(' ', $htarray);
     }
 }
