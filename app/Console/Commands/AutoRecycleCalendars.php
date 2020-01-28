@@ -2,24 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\User;
+use App\Models\Calendar;
 use Illuminate\Console\Command;
 
-class AutoBirthdayRestore extends Command
+class AutoRecycleCalendars extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'haitou:auto-birthday-restore';
+    protected $signature = 'haitou:auto-recycle-calendars';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Automatically restore gifted users to false every new Year.';
+    protected $description = 'Disable Old Calendar Events After End of the Date';
 
     /**
      * Create a new command instance.
@@ -38,11 +38,12 @@ class AutoBirthdayRestore extends Command
      */
     public function handle()
     {
-        $users = User::select('birth_gifted')->get();
+        $current = now();
+        $calendars = Calendar::where('end_date', '<', $current)->get();
 
-        foreach ($users as $user) {
-            $user->birth_gifted = 0;
-            $user->update();
+        foreach ($calendars as $calendar) {
+            $calendar->is_enabled = false;
+            $calendar->update();
         }
     }
 }
