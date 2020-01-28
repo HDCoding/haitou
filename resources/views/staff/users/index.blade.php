@@ -148,19 +148,22 @@
                             <a class="list-group-item">
                                 <span class="badge badge-danger m-r-10">
                                     <i class="fa fa-user-alt-slash"></i>
-                                </span> Banidas
+                                </span>
+                                Banidas
                                 <span class="float-right">{{ $banned }}</span>
                             </a>
                             <a class="list-group-item">
                                 <span class="badge badge-info m-r-10">
                                     <i class="fa fa-user-clock"></i>
-                                </span> Pendentes
+                                </span>
+                                Pendentes
                                 <span class="float-right">{{ $pendent }}</span>
                             </a>
                             <a class="list-group-item">
                                 <span class="badge badge-warning m-r-10">
                                     <i class="fa fa-user-lock"></i>
-                                </span> Suspensas
+                                </span>
+                                Suspensas
                                 <span class="float-right">{{ $suspended }}</span>
                             </a>
                         </div>
