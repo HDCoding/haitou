@@ -35,7 +35,7 @@
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Suporte</span></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('faq') }}" aria-expanded="false"><i class="far fa-question-circle"></i><span class="hide-menu">F.A.Q</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('rules') }}" aria-expanded="false"><i class="pe-7s-news-paper"></i><span class="hide-menu">Regras</span></a></li>
-                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false"><i class="fa fa-chart-bar"></i><span class="hide-menu">Estatísticas</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('statistics') }}" aria-expanded="false"><i class="fa fa-chart-bar"></i><span class="hide-menu">Estatísticas</span></a></li>
                 <!-- End Support -->
 				<!-- Staff Panel -->
                 @can('painel-staff')
