@@ -46,9 +46,9 @@
                                 <tbody>
                                 @foreach($groups as $group)
                                     <tr>
-                                        <td>{{ $group->icon }}</td>
+                                        <td><i class="display-7 {{ $group->icon }}"></i></td>
                                         <td>{{ $group->name }}</td>
-                                        <td style="color:{{ $group->color }}"><strong>{{ $group->color }}</strong></td>
+                                        <td style="color: {{ $group->color }}"><b>{{ $group->color }}</b></td>
                                         <td>{{ $group->users()->count() }}</td>
                                         <td>{{ ($group->hnr / 3600) }} Horas</td>
                                         <td class="text-center">
