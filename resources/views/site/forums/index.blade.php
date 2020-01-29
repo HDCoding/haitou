@@ -38,6 +38,7 @@
                                         <tr>
                                             <th scope="col">Fórums</th>
                                             <th scope="col">Tópicos</th>
+                                            <th scope="col">Posts</th>
                                             <th scope="col">Último Tópico</th>
                                         </tr>
                                         </thead>
@@ -52,6 +53,7 @@
                                                         <div class="text-muted small ml-5">{{ $forum->description }}</div>
                                                     </th>
                                                     <td>{{ $forum->topics->count() }}</td>
+                                                    <td>{{ $forum->posts->count() }}</td>
                                                     <td>
                                                         @if($forum->posts->count() > 0)
                                                             @if(empty($forum->topics->last()->last_post_username))
