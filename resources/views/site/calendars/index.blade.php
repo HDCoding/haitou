@@ -11,11 +11,6 @@
     <link href="{{ asset('css/calendar.css') }}" rel="stylesheet"/>
     <!-- DateTimePicker -->
     <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet"/>
-    <style>
-
-
-
-    </style>
 @endsection
 
 @section('content')
@@ -66,8 +61,9 @@
                                                     <i class="ti-plus"></i> Adicionar
                                                 </a>
                                             @else
-                                                <p class="text-center font-weight-bold m-t-20 text-danger">Sua permissão
-                                                    de criar novos eventos foram revogadas!!</p>
+                                                <p class="text-center font-weight-bold m-t-20 text-danger">
+                                                    Sua permissão de criar novos eventos foram revogadas!!
+                                                </p>
                                             @endif
                                         </div>
                                     </div>
