@@ -14,7 +14,6 @@ use Intervention\Image\ImageManagerStatic as Image;
  */
 class ImageUploader
 {
-
     /**
      * Uploading image
      * It receives as a parameter the directory, ID, file name in MD5 and the image file
