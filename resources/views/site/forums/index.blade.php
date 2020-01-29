@@ -22,29 +22,29 @@
                 {!! Form::close() !!}
             </div>
             <div class="col-12">
-                @includeIf('errors.errors', [$errors])
+            @includeIf('errors.errors', [$errors])
 
-                @if(setting('forum_on'))
+            @if(setting('forum_on'))
 
-                    @include('site.forums.buttons')
+                @include('site.forums.buttons')
 
-                    @foreach($categories as $category)
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">{{ $category->name }}</h4>
-                                <div class="table-responsive m-t-20">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Fórums</th>
-                                            <th scope="col">Tópicos</th>
-                                            <th scope="col">Posts</th>
-                                            <th scope="col">Última Mensagem</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @forelse($forums as $forum)
-                                            @if($category->id === $forum->category_id)
+                @foreach($categories as $category)
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ $category->name }}</h4>
+                            <div class="table-responsive m-t-20">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Fórums</th>
+                                        <th scope="col">Tópicos</th>
+                                        <th scope="col">Posts</th>
+                                        <th scope="col">Última Mensagem</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse($forums as $forum)
+                                        @if($category->id === $forum->category_id)
                                             @if($forum->getPermission() != null && $forum->getPermission()->view_forum)
                                                 <tr>
                                                     <th scope="row">
@@ -69,9 +69,9 @@
                                                                     <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->last()->id, $forum->topics->last()->slug]) }}">
                                                                         {{ $forum->topics->last()->name }}
                                                                     </a>
-                                                                    <div class="text-muted small text-truncate">
+                                                                    <div class="text-dark small text-truncate">
                                                                         {{ format_date_time($forum->posts->last()->created_at) }}
-                                                                        &nbsp;·&nbsp;
+                                                                        <span class="ml-1 mr-1">·</span>
                                                                         <a class="text-info" href="{{ route('user.profile', [strtolower($forum->topics->last()->first_post_username)]) }}">
                                                                             {{ $forum->topics->last()->first_post_username }}
                                                                         </a>
@@ -82,9 +82,9 @@
                                                                     <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->last()->id, $forum->topics->last()->slug]) }}">
                                                                         {{ $forum->topics->last()->name }}
                                                                     </a>
-                                                                    <div class="text-muted small text-truncate">
+                                                                    <div class="text-dark small text-truncate">
                                                                         {{ format_date_time($forum->posts->last()->created_at) }}
-                                                                        &nbsp;·&nbsp;
+                                                                        <span class="ml-1 mr-1">·</span>
                                                                         <a class="text-info" href="{{ route('user.profile', [strtolower($forum->topics->last()->last_post_username)]) }}">
                                                                             {{ $forum->topics->last()->last_post_username }}
                                                                         </a>
@@ -97,22 +97,22 @@
                                                     </td>
                                                 </tr>
                                             @endif
-                                            @endif
-                                        @empty
-                                            <tr class="card-body py-3">
-                                                <td class="text-center" colspan="3">Nenhum forum no momento.</td>
-                                            </tr>
-                                        @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        @endif
+                                    @empty
+                                        <tr class="card-body py-3">
+                                            <td class="text-center" colspan="3">Nenhum forum no momento.</td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
                             </div>
-
                         </div>
-                    @endforeach
-                @else
-                    <p class="text-center"><b>Fórum fechado para manutenção no momento.</b></p>
-                @endif
+
+                    </div>
+                @endforeach
+            @else
+                <p class="text-center"><b>Fórum fechado para manutenção no momento.</b></p>
+            @endif
             </div>
         </div>
     </div>
