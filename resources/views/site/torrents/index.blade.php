@@ -81,7 +81,7 @@
                             <table class="table" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th>Torrent info</th>
+                                    <th>Nome</th>
                                     <th class="text-center">
                                         <span class="fa fa-arrow-up text-success"></span>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Seeders">Seeders</a>
@@ -102,16 +102,15 @@
                                         <span class="fa fa-calendar-alt text-dark"></span>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Data Upload">Data Upload</a>
                                     </th>
-                                    <th class="text-center">Uploader</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($torrents as $torrent)
                                     <tr>
-                                        <td class="col-md-7">
+                                        <td class="col-md-4">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <img src="{{ $torrent->media->poster }}" width="92px" height="130px" alt="Poster">
+                                                    <img class="img-fluid img-responsive" src="{{ $torrent->media->poster }}" width="92px" height="130px" alt="Poster">
                                                 </div>
                                                 <div class="media-body">
                                                     <h5 class="media-heading ml-3">
@@ -143,13 +142,11 @@
                                         <td class="col-md-1 text-center">{{ $torrent->times_completed }}</td>
                                         <td class="col-md-1 text-center">{{ $torrent->size() }}</td>
                                         <td class="col-md-1 text-center">{{ format_date($torrent->created_at) }}</td>
-                                        <td class="col-md-1 text-center">{{ $torrent->uploader() }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        {{ $torrents->links() }}
                     </div>
                 </div>
             </div>
