@@ -29,7 +29,7 @@
                             <i class="fa fa-terminal"></i> Ativar modo de manutenção
                         </h4>
                         <p class="card-text">Esses comandos ativam o modo de manutenção enquanto na lista de permissões apenas o seu endereço IP.</p>
-                        <a href="{{ url('staff/command/maintance-enable') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/maintance-enable') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                             <i class="fa fa-terminal"></i> Desativar modo de manutenção
                         </h4>
                         <p class="card-text">Este comando desativa o modo de manutenção. Trazendo o backup do site para todos acessarem.</p>
-                        <a href="{{ url('staff/command/maintance-disable') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/maintance-disable') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                             <i class="fa fa-terminal"></i> Limpar cache
                         </h4>
                         <p class="card-text">Este comando limpa o cache do seu site.</p>
-                        <a href="{{ url('staff/command/clear-cache') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/clear-cache') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                             <i class="fa fa-terminal"></i> Limpar cache de exibição
                         </h4>
                         <p class="card-text">Este comando limpa o cache de visualizações compiladas dos sites.</p>
-                        <a href="{{ url('staff/command/clear-view-cache') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/clear-view-cache') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                             <i class="fa fa-terminal"></i> Limpar cache de rota
                         </h4>
                         <p class="card-text">Este comando limpa o cache de rotas compiladas dos sites.</p>
-                        <a href="{{ url('staff/command/clear-route-cache') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/clear-route-cache') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                             <i class="fa fa-terminal"></i> Limpar cache de configuração
                         </h4>
                         <p class="card-text">Este comando limpa o cache de configurações compiladas dos seus sites.</p>
-                        <a href="{{ url('staff/command/clear-config-cache') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/clear-config-cache') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                             <i class="fa fa-terminal"></i> Limpar todo o cache
                         </h4>
                         <p class="card-text">Este comando limpa TODO o cache do seu site.</p>
-                        <a href="{{ url('staff/command/clear-all-cache') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/clear-all-cache') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                             <i class="fa fa-terminal"></i> Redefinir todo o cache
                         </h4>
                         <p class="card-text">Este comando define TODOS os seus sites em cache.</p>
-                        <a href="{{ url('staff/command/set-all-cache') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/set-all-cache') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                             <i class="fa fa-terminal"></i> Enviar email de teste
                         </h4>
                         <p class="card-text">Este comando testa sua configuração de email.</p>
-                        <a href="{{ url('staff/command/test-email') }}" class="btn btn-primary">Executar Comando</a>
+                        <a href="{{ url('staff/commands/test-email') }}" class="btn btn-primary">Executar Comando</a>
                     </div>
                 </div>
             </div>
