@@ -1,4 +1,4 @@
-<div class="comment-widgets scrollable" style="height:560px;">
+<div class="comment-widgets scrollable">
     @forelse($comments as $comment)
     <!-- Comment Row -->
     <div class="d-flex flex-row comment-row">
