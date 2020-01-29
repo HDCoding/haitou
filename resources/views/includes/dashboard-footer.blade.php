@@ -2,7 +2,7 @@
 <!-- footer -->
 <!-- ============================================================== -->
 <footer class="footer text-center" id="footer">
-    Desenvolvido com &hearts; por {{ setting('site_title') }}. © {{ date('Y') }}
+    Desenvolvido com <i class="fas fa-heart text-danger"></i> por {{ setting('site_title') }}. © {{ date('Y') }}
 </footer>
 <!-- ============================================================== -->
 <!-- End footer -->
