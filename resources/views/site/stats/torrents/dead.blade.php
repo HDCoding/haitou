@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Top Seed')
+@section('title', 'Top Dead')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('statistics') }}">Estatísticas</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Top Seed</li>
+                            <li class="breadcrumb-item active" aria-current="page">Top Dead</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Top Seed</h4>
+                        <h4 class="card-title">Top Dead</h4>
                         @include('site.stats.torrents.block_torrent_menu')
                         <div class="table-responsive m-t-15">
                             <table class="table table-striped">
@@ -40,19 +40,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($dead as $key => $dead)
+                                @foreach ($dead as $key => $dd)
                                     <tr>
                                         <td>
                                             {{ ++$key }}
                                         </td>
                                         <td>
-                                            <a class="font-weight-bold" href="{{ route('torrent.show', ['id' => $dead->id, 'slug' => $dead->slug]) }}">
-                                                {{ $dead->name }}
+                                            <a class="font-weight-bold" href="{{ route('torrent.show', ['id' => $dd->id, 'slug' => $dd->slug]) }}">
+                                                {{ $dd->name }}
                                             </a>
                                         </td>
-                                        <td>{{ $dead->seeders }}</td>
-                                        <td>{{ $dead->leechers }}</td>
-                                        <td>{{ $dead->times_completed }}</td>
+                                        <td>{{ $dd->seeders }}</td>
+                                        <td>{{ $dd->leechers }}</td>
+                                        <td>{{ $dd->times_completed }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
