@@ -52,14 +52,14 @@
                                 <h5 class="m-t-40">Favoritos</h5>
                                 @if($bookmarked)
                                     {!! Form::open(['route' => ['delete.bookmark', $bookmarked->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
-                                    <button type="submit" class="btn icon-btn btn-dark" data-toggle="tooltip" title="Remover dos favoritos" data-original-title="Remover dos favoritos">
-                                        <i class="fas fa-heartbeat"></i>
+                                    <button type="submit" class="btn icon-btn btn-dark" data-toggle="tooltip" title="Remover dos favoritos">
+                                        <i class="fas fa-star"></i>
                                     </button>
                                     {!! Form::close() !!}
                                 @else
                                     {!! Form::open(['route' => ['save.bookmark'], 'class' => 'form-horizontal']) !!}
                                     {!! Form::hidden('media_id', $media->id) !!}
-                                    <button type="submit" class="btn icon-btn btn-info" data-toggle="tooltip" title="Adicionar aos favoritos" data-original-title="Adicionar aos favoritos">
+                                    <button type="submit" class="btn icon-btn btn-info" data-toggle="tooltip" title="Adicionar aos favoritos">
                                         <i class="fas fa-star"></i>
                                     </button>
                                     {!! Form::close() !!}
