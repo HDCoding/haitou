@@ -50,11 +50,11 @@
                                 @foreach($attempts as $attempt)
                                     <tr>
                                         <th scope="row">{{ $attempt->id }}</th>
-                                        <td>{{ !empty($attempt->user_id) ? $attempt->user->name : ''}}</td>
+                                        <td>{{ !empty($attempt->user_id) ? $attempt->user->username : ''}}</td>
                                         <td>{{ !empty($attempt->email) ? $attempt->email : '' }}</td>
                                         <td>{{ $attempt->ip }}</td>
                                         <td>{{ $attempt->user_agent }}</td>
-                                        <td>{{ $attempt->system }}</td>
+                                        <td>{{ $attempt->os }}</td>
                                         <td>{{ $attempt->is_mobile ? 'Sim' : 'Nao'}}</td>
                                         <td>{{ $attempt->is_tablet ? 'Sim' : 'Nao'}}</td>
                                         <td>{{ $attempt->is_desktop ? 'Sim' : 'Nao' }}</td>
