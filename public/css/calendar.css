@@ -64,3 +64,41 @@
     text-align: center;
     background: #40c4ff;
 }
+
+#aviso-view {
+    display: none;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    color: red;
+}
+
+#aviso-list {
+    display: none;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    color: red;
+}
+
+#loading-view {
+    text-align: center;
+    color: #bb0000;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#loading-list {
+    text-align: center;
+    color: #bb0000;
+    text-transform: uppercase;
+    font-weight: bold;
+}
