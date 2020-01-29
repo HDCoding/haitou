@@ -59,8 +59,8 @@
                                 @else
                                     {!! Form::open(['route' => ['save.bookmark'], 'class' => 'form-horizontal']) !!}
                                     {!! Form::hidden('media_id', $media->id) !!}
-                                    <button type="submit" class="btn icon-btn btn-danger" data-toggle="tooltip" title="Adicionar aos favoritos" data-original-title="Adicionar aos favoritos">
-                                        <i class="oi oi-heart"></i>
+                                    <button type="submit" class="btn icon-btn btn-info" data-toggle="tooltip" title="Adicionar aos favoritos" data-original-title="Adicionar aos favoritos">
+                                        <i class="fas fa-star"></i>
                                     </button>
                                     {!! Form::close() !!}
                                 @endif
@@ -207,7 +207,7 @@
                                                     <img class="img rounded" src="{{ $cast->actor->image }}" alt="{{ $cast->actor->name }}" style="width:60px; height:60px;">
                                                 </th>
                                                 <td class="align-middle text-left">
-                                                    <a href="{{ route('actors.show', [$cast->actor->id, $cast->actor->slug]) }}">
+                                                    <a href="{{ route('actor.show', [$cast->actor->id, $cast->actor->slug]) }}">
                                                         {{ $cast->actor->name }}
                                                     </a>
                                                 </td>
