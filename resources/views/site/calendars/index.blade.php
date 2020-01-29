@@ -7,49 +7,14 @@
     <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- Calendar CSS -->
     <!-- Custom CSS -->
-    <link href="{{ asset('vendor/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendor/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet"/>
     <!-- DateTimePicker -->
     <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet"/>
-
     <style>
-        #aviso-view {
-            display: none;
-            background: #eee;
-            border-bottom: 1px solid #ddd;
-            padding: 0 10px;
-            line-height: 40px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 12px;
-            color: red;
-        }
 
-        #aviso-list {
-            display: none;
-            background: #eee;
-            border-bottom: 1px solid #ddd;
-            padding: 0 10px;
-            line-height: 40px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 12px;
-            color: red;
-        }
 
-        #loading-view {
-            text-align: center;
-            color: #bb0000;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
 
-        #loading-list {
-            text-align: center;
-            color: #bb0000;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
     </style>
 @endsection
 
@@ -78,18 +43,32 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="calendar-events" class="">
-                                                <div class="calendar-events m-b-20" data-class="bg-info"><i class="fa fa-circle text-info m-r-10"></i>Event One</div>
-                                                <div class="calendar-events m-b-20" data-class="bg-success"><i class="fa fa-circle text-success m-r-10"></i> Event Two</div>
-                                                <div class="calendar-events m-b-20" data-class="bg-danger"><i class="fa fa-circle text-danger m-r-10"></i>Event Three</div>
-                                                <div class="calendar-events m-b-20" data-class="bg-warning"><i class="fa fa-circle text-warning m-r-10"></i>Event Four</div>
+                                                <div class="calendar-events m-b-20" data-class="bg-warning">
+                                                    <i class="fa fa-circle text-orange m-r-10"></i> Aniversário
+                                                </div>
+                                                <div class="calendar-events m-b-20" data-class="bg-info">
+                                                    <i class="fa fa-circle text-info m-r-10"></i> Encontros
+                                                </div>
+                                                <div class="calendar-events m-b-20" data-class="bg-success">
+                                                    <i class="fa fa-circle text-success m-r-10"></i> Eventos
+                                                </div>
+                                                <div class="calendar-events m-b-20" data-class="bg-danger">
+                                                    <i class="fa fa-circle text-danger m-r-10"></i> Exemplo 1
+                                                </div>
+                                                <div class="calendar-events m-b-20" data-class="bg-warning">
+                                                    <i class="fa fa-circle text-warning m-r-10"></i> Exemplo 2
+                                                </div>
                                             </div>
-                                             @if(auth()->user()->can('criar-calendario'))
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#fullcalendar-default-view-modal" class="btn m-t-20 btn-info btn-block waves-effect waves-light">
-                                                <i class="ti-plus"></i> Adicionar
-                                            </a>
-                                             @else
-                                                <p class="text-center font-weight-bold m-t-20 text-danger">Sua permissão de criar novos eventos foram revogadas!!</p>
-                                             @endif
+                                            @if(auth()->user()->can('criar-calendario'))
+                                                <a href="javascript:void(0)" data-toggle="modal"
+                                                   data-target="#fullcalendar-default-view-modal"
+                                                   class="btn m-t-20 btn-info btn-block waves-effect waves-light">
+                                                    <i class="ti-plus"></i> Adicionar
+                                                </a>
+                                            @else
+                                                <p class="text-center font-weight-bold m-t-20 text-danger">Sua permissão
+                                                    de criar novos eventos foram revogadas!!</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -112,7 +91,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="card-body b-l calender-sidebar">
+                                <div class="card-body">
                                     <div id="aviso-list">Não foi possível conectar-se com banco de dados.</div>
                                     <div id="loading-list">Carregando...</div>
                                     <div id="fullcalendar-list"></div>
@@ -123,52 +102,53 @@
                 </div>
             </div>
         </div>
-    @if(auth()->user()->can('criar-calendario'))
-        <!-- Event modal -->
-        {!! Form::open(['url' => 'calendars', 'class' => 'modal modal-top fade', 'autocomplete' => 'off', 'id' => 'fullcalendar-default-view-modal']) !!}
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Adicionar novo evento</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        {!! Form::label('name', 'Evento:', ['class' => 'col-md-12']) !!}
-                        {!! Form::text('name', null, ['class' => 'form-control form-rounded', 'required', 'maxlength' => 250]) !!}
+        @if(auth()->user()->can('criar-calendario'))
+            <!-- Event modal -->
+            {!! Form::open(['url' => 'calendars', 'class' => 'modal modal-top fade', 'autocomplete' => 'off', 'id' => 'fullcalendar-default-view-modal']) !!}
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Adicionar novo evento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('color', 'Tipo:', ['class' => 'col-md-12']) !!}
-                        {!! Form::select('color', [
-                            '#007bff' => 'Primary',
-                            '#dc3545' => 'Danger',
-                            '#ffc107' => 'Warning',
-                            '#28a745' => 'Success',
-                            '#17a2b8' => 'Info'
-                        ], null, ['class' => 'form-control', 'required']) !!}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            {!! Form::label('name', 'Evento:', ['class' => 'col-md-12']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control form-rounded', 'required', 'maxlength' => 250]) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('color', 'Tipo:', ['class' => 'col-md-12']) !!}
+                            {!! Form::select('color', [
+                                '#007bff' => 'Primary',
+                                '#dc3545' => 'Danger',
+                                '#ffc107' => 'Warning',
+                                '#28a745' => 'Success',
+                                '#17a2b8' => 'Info'
+                            ], null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('start_date', 'Início:', ['class' => 'col-md-12']) !!}
+                            {!! Form::text('start_date', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('end_date', 'Término:', ['class' => 'col-md-12']) !!}
+                            {!! Form::text('end_date', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('description', 'Descrição:', ['class' => 'col-md-12']) !!}
+                            {!! Form::textarea('description', null, ['class' => 'form-control form-rounded', 'rows' => 6, 'placeholder' => 'Descrição do evento']) !!}
+                        </div>
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('start_date', 'Início:', ['class' => 'col-md-12']) !!}
-                        {!! Form::text('start_date', null, ['class' => 'form-control', 'required']) !!}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default md-btn-flat btn-rounded" data-dismiss="modal">
+                            Fechar
+                        </button>
+                        {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
                     </div>
-                    <div class="form-group">
-                        {!! Form::label('end_date', 'Término:', ['class' => 'col-md-12']) !!}
-                        {!! Form::text('end_date', null, ['class' => 'form-control', 'required']) !!}
-                    </div>
-                    <div class="form-group">
-                        {!! Form::label('description', 'Descrição:', ['class' => 'col-md-12']) !!}
-                        {!! Form::textarea('description', null, ['class' => 'form-control form-rounded', 'rows' => 6, 'placeholder' => 'Descrição do evento']) !!}
-                        <div id="charNum"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default md-btn-flat btn-rounded" data-dismiss="modal">Fechar</button>
-                    {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
                 </div>
             </div>
-        </div>
-        {!! Form::close() !!}
-        <!-- / Event modal -->
+            {!! Form::close() !!}
+            <!-- / Event modal -->
         @endif
     </div>
 
@@ -183,7 +163,7 @@
 
     <!-- DateTimePicker -->
     <script src="{{ asset('vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js') }}" charset="UTF-8"></script>
+    <script src="{{ asset('vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js') }}"></script>
 
     <!-- sceditor -->
     <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
