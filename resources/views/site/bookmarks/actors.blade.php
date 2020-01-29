@@ -42,7 +42,7 @@
                                             <img class="" src="{{ $bookmark->actor->image }}" alt="{{ $bookmark->actor->name }}" width="70px">
                                         </td>
                                         <td>
-                                            <a href="{{ route('actors.show', [$bookmark->actor->id, $bookmark->actor->slug]) }}"
+                                            <a href="{{ route('actor.show', [$bookmark->actor->id, $bookmark->actor->slug]) }}"
                                                target="_blank">{{ $bookmark->actor->name }}</a>
                                         </td>
                                         <td class="text-center">
