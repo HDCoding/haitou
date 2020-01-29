@@ -95,6 +95,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('posts_per_page')->default(15);
 
             $table->rememberToken();
+            $table->timestamp('last_action')->nullable();
             $table->timestamp('activated_at')->nullable();
             $table->timestamp('disabled_at')->nullable();
             $table->timestamps();
