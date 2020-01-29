@@ -39,7 +39,7 @@
                                             <th scope="col">Fórums</th>
                                             <th scope="col">Tópicos</th>
                                             <th scope="col">Posts</th>
-                                            <th scope="col">Último Tópico</th>
+                                            <th scope="col">Última Mensagem</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -48,9 +48,17 @@
                                             @if($forum->getPermission() != null && $forum->getPermission()->view_forum)
                                                 <tr>
                                                     <th scope="row">
-                                                        <i class="fas fa-file-alt fa-2x mr-4"></i>
-                                                        <a class="h5 text-info" href="{{ route('forum.topics', [$forum->id, $forum->slug]) }}">{{ $forum->name }}</a>
-                                                        <div class="text-muted small ml-5">{{ $forum->description }}</div>
+                                                        <div class="media">
+                                                            <div class="mt-1">
+                                                                <i class="fas fa-file-alt fa-2x mr-4"></i>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <h5 class="media-heading">
+                                                                    <a class="h5 text-info" href="{{ route('forum.topics', [$forum->id, $forum->slug]) }}">{{ $forum->name }}</a>
+                                                                </h5>
+                                                                <div class="text-dark">{{ $forum->description }}</div>
+                                                            </div>
+                                                        </div>
                                                     </th>
                                                     <td>{{ $forum->topics->count() }}</td>
                                                     <td>{{ $forum->posts->count() }}</td>
