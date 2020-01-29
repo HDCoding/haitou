@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class SystemInformation
@@ -121,5 +122,46 @@ class SystemInformation
         $result = DB::select(DB::raw('select version()'));
 
         return $result[0]->{'version()'};
+    }
+
+    /**
+     * Get all the directory permissions as well as the recommended ones.
+     */
+    public function directoryPermissions()
+    {
+        return [
+            [
+                'directory'   => base_path('bootstrap/cache'),
+                'permission'  => $this->getDirectoryPermission('bootstrap/cache'),
+                'recommended' => '0775',
+            ],
+            [
+                'directory'   => base_path('public'),
+                'permission'  => $this->getDirectoryPermission('public'),
+                'recommended' => '0775',
+            ],
+            [
+                'directory'   => base_path('storage'),
+                'permission'  => $this->getDirectoryPermission('storage'),
+                'recommended' => '0775',
+            ],
+            [
+                'directory'   => base_path('vendor'),
+                'permission'  => $this->getDirectoryPermission('vendor'),
+                'recommended' => '0775',
+            ],
+        ];
+    }
+
+    /**
+     * Get the file permissions for a specific path/file.
+     */
+    public function getDirectoryPermission($path)
+    {
+        try {
+            return substr(sprintf('%o', fileperms(base_path($path))), -4);
+        } catch (Exception $ex) {
+            return 'Erro';
+        }
     }
 }
