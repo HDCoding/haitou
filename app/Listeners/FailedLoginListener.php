@@ -13,21 +13,30 @@ class FailedLoginListener
     {
         $user_id = $event->user ? $event->user->id : null;
 
-        $agent = new Agent();
-
         if (isset($event->user) && is_a($event->user, 'Illuminate\Database\Eloquent\Model')) {
             $event->user->notify(new FailedLoginNotification());
         }
+
+        $agent = new Agent();
+        //User Agent
+        $browser = $agent->browser() ? $agent->browser() : NULL;
+        //Operational System
+        $system = $agent->platform() ? $agent->platform() : NULL;
 
         return FailedLogin::create([
             'user_id' => $user_id,
             'email' => $event->credentials['email'],
             'ip' => request()->ip(),
-            'user_agent' => $agent->browser() ? $agent->browser() : NULL,
-            'system' => $agent->platform() ? $agent->platform() : NULL,
-            'is_mobile' => $agent->isMobile(),
-            'is_tablet' => $agent->isTablet(),
-            'is_desktop' => $agent->isDesktop()
+            'user_agent' => $browser,
+            'bot' => $agent->robot() == false ? null : $agent->robot(),
+            'os_family' => strtolower($system),
+            'os' => $system,
+            'browser_family' => strtolower($browser),
+            'browser' => $browser . ' ' . $agent->version($browser),
+            'is_desktop' => $agent->isDesktop(), //Is Desktop
+            'is_mobile' => $agent->isMobile(), //Is Mobile
+            'is_tablet' => $agent->isTablet(), //Is Tablet
+            'is_bot' => $agent->isRobot(), //Is Bot
         ]);
     }
 }
