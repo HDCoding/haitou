@@ -16,15 +16,19 @@ class StaffController extends Controller
 
     public function index()
     {
+        // System Information
         $system = new SystemInformation();
 
+        // SSL Info
         try {
             $certificate = SslCertificate::createForHostName(config('app.url'));
         } catch (\Exception $exception) {
             $certificate = '';
         }
 
+        // Directory Permissions
+        $file_permissions = $system->directoryPermissions();
 
-        return view('staff.staff.index', compact('system', 'certificate'));
+        return view('staff.staff.index', compact('system', 'certificate', 'file_permissions'));
     }
 }
