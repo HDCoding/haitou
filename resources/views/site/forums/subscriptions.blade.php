@@ -29,7 +29,7 @@
                     {!! Form::hidden('sorting', 'created_at') !!}
                     {!! Form::hidden('direction', 'desc') !!}
                     {!! Form::hidden('subscribed', 1) !!}
-                    {!! Form::text('name', (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : ''), ['class' => 'form-control', 'placeholder' => 'Pesquisa rápida de nome de tópico (dentro de assinaturas)', 'required', 'minlength' => 3, 'maxlengt' => 30]) !!}
+                    {!! Form::text('name', (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : ''), ['class' => 'form-control', 'placeholder' => 'Pesquisa rápida...', 'required', 'minlength' => 3, 'maxlengt' => 30]) !!}
                     {!! Form::close() !!}
                 </div>
                 @include('site.forums.buttons')
