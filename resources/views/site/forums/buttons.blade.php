@@ -18,9 +18,11 @@
             </a>
         </div>
         <div class="float-right">
-            <strong>Fóruns:</strong> {{ $num_forums }} |
-            <strong>Tópicos:</strong> {{ $num_topics }} |
-            <strong>Postagens:</strong> {{ $num_posts }}
+            @if(!empty($num_forums) && !empty($num_topics) && !empty($num_posts))
+                <strong>Fóruns:</strong> {{ $num_forums }} |
+                <strong>Tópicos:</strong> {{ $num_topics }} |
+                <strong>Postagens:</strong> {{ $num_posts }}
+            @endif
         </div>
     </div>
 </div>
