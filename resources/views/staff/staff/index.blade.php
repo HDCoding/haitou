@@ -450,6 +450,52 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Permissões de diretório</h4>
+                        <div class="table-responsive m-t-15">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th><i class="fas fa-folder-open"></i> Diretório</th>
+                                    <th>Atual</th>
+                                    <th>Recomendado</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($file_permissions as $permission)
+                                    <tr>
+                                        <td>{{ $permission['directory'] }}</td>
+                                        <td>
+                                            @if ($permission['permission'] == $permission['recommended'])
+                                                <span class="text-success font-weight-bold">
+                                                    <i class="fas fa-check-circle"></i>
+                                                    {{ $permission['permission'] }}
+                                                </span>
+                                            @else
+                                                <span class="text-danger font-weight-bold">
+                                                    <i class="fas fa-times-circle"></i>
+                                                    {{ $permission['permission'] }}
+                                                </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <span class="text-success font-weight-bold">
+                                                {{ $permission['recommended'] }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @endsection
