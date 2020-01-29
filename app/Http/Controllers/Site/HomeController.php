@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\Poll;
 use App\Models\Post;
 use App\Models\Topic;
+use App\User;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -47,8 +48,9 @@ class HomeController extends Controller
         });
 
         // Users Online
-        $logins = Login::with('user:id,group_id,username,slug,is_warned,show_profile')
-            ->where('created_at', '>', now()->subMinutes(10))
+        $users = User::with('group')
+            ->select('id', 'group_id', 'username', 'slug', 'is_warned', 'show_profile')
+            ->where('last_action', '>', now()->subMinutes(5))
             ->get();
 
         // Groups
@@ -61,8 +63,8 @@ class HomeController extends Controller
             'topics' => $topics,
             'posts' => $posts,
             'polls' => $polls,
-            'logins' => $logins,
-            'groups' => $groups,
+            'users' => $users,
+            'groups' => $groups
         ]);
     }
 
