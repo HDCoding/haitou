@@ -55,7 +55,7 @@
                                         </button>
                                     </a>
                                 @endif
-                                @if($torrent->seeders < 2 AND $torrent->created_at > now()->addDays(7))
+                                @if($torrent->seeders < 2 AND $torrent->created_at < now()->copy()->subDays(7)->toDateTimeString())
                                     <a href="{{ route('torrent.reseed', [$torrent->id]) }}" class="mr-2 mt-20" data-toggle="tooltip" data-placement="top" title="Pedir Re-Seed" data-original-title="Pedir Re-Seed">
                                         <button type="button" class="btn icon-btn btn-warning">
                                             <span class="fas fa-exclamation"></span>
@@ -207,10 +207,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($torrent->files as $files)
+                                        @foreach($torrent->files as $file)
                                             <tr>
-                                                <td>{{ $files->name }}</td>
-                                                <td>{!! $files->fileSize() !!}</td>
+                                                <td>{{ $file->name }}</td>
+                                                <td>{!! $file->fileSize() !!}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
