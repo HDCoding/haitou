@@ -37,15 +37,15 @@
                                 <p>{!! $actor->descriptionHtml() !!}</p>
                                 @if($bookmarked)
                                     {!! Form::open(['route' => ['delete.bookmark', $bookmarked->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
-                                    <button type="submit" class="btn icon-btn btn-danger btn-rounded" data-toggle="tooltip" data-placement="top" title="Remover dos favoritos" data-original-title="Remover dos favoritos">
-                                        <i class="fas fa-heartbeat"></i>
+                                    <button type="submit" class="btn icon-btn btn-dark" data-toggle="tooltip" data-placement="top" title="Remover dos favoritos">
+                                        <i class="fas fa-star"></i>
                                     </button>
                                     {!! Form::close() !!}
                                 @else
                                     {!! Form::open(['route' => ['save.bookmark'], 'class' => 'form-horizontal']) !!}
                                     {!! Form::hidden('actor_id', $actor->id) !!}
-                                    <button type="submit" class="btn icon-btn btn-danger btn-rounded m-r-5" data-toggle="tooltip" data-placement="top" title="Adicionar aos favoritos" data-original-title="Adicionar aos favoritos">
-                                        <i class="oi oi-heart"></i>
+                                    <button type="submit" class="btn icon-btn btn-info" data-toggle="tooltip" data-placement="top" title="Adicionar aos favoritos">
+                                        <i class="fas fa-star"></i>
                                     </button>
                                     {!! Form::close() !!}
                                 @endif
