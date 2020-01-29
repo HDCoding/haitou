@@ -13,7 +13,11 @@ trait UsersOnline
 
     public function isOnline()
     {
-        return Cache::has($this->getCacheKey());
+        if (!$this->last_action) {
+            return false;
+        }
+
+        return $this->last_action->gt(now()->subMinutes(5));
     }
 
     public function leastRecentOnline()
