@@ -101,14 +101,16 @@ class User extends Authenticatable
     protected $dates = [
         'birthday',
         'activated_at',
-        'disabled_at'
+        'disabled_at',
+        'last_action'
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
         'passkey',
-        'status'
+        'status',
+        'last_action'
     ];
 
     protected $fillable = [
@@ -171,6 +173,7 @@ class User extends Authenticatable
         'topics_per_page',
         'posts_per_page',
         'remember_token',
+        'last_action',
         'activated_at',
         'disabled_at'
     ];
