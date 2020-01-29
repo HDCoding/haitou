@@ -62,7 +62,7 @@
                                                                         {{ $forum->topics->last()->name }}
                                                                     </a>
                                                                     <div class="text-muted small text-truncate">
-                                                                        {{ format_date_time($forum->topics->last()->updated_at) }}
+                                                                        {{ format_date_time($forum->posts->last()->created_at) }}
                                                                         &nbsp;·&nbsp;
                                                                         <a class="text-info" href="{{ route('user.profile', [strtolower($forum->topics->last()->first_post_username)]) }}">
                                                                             {{ $forum->topics->last()->first_post_username }}
@@ -75,7 +75,7 @@
                                                                         {{ $forum->topics->last()->name }}
                                                                     </a>
                                                                     <div class="text-muted small text-truncate">
-                                                                        {{ format_date_time($forum->topics->last()->updated_at) }}
+                                                                        {{ format_date_time($forum->posts->last()->created_at) }}
                                                                         &nbsp;·&nbsp;
                                                                         <a class="text-info" href="{{ route('user.profile', [strtolower($forum->topics->last()->last_post_username)]) }}">
                                                                             {{ $forum->topics->last()->last_post_username }}
