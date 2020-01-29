@@ -100,16 +100,17 @@ class TorrentsController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $torrents = Torrent::with('user:id,username,slug')
-            ->with('fansub:id,name')
+        $user = $request->user();
+
+        $torrents = Torrent::with('fansub:id,name')
             ->with('media:id,name,poster')
             ->with('tags:name')
-            ->select('id', 'user_id', 'username', 'category_id', 'media_id', 'fansub_id', 'name',
-                'slug', 'size', 'seeders', 'leechers', 'times_completed', 'is_anonymous', 'is_freeleech', 'is_silver', 'is_doubleup', 'created_at')
+            ->select('id', 'category_id', 'media_id', 'fansub_id', 'name',
+                'slug', 'size', 'seeders', 'leechers', 'times_completed', 'is_freeleech', 'is_silver', 'is_doubleup', 'created_at')
             ->orderBy('id', 'desc')
-            ->paginate(30);
+            ->paginate($user->torrents_per_page);
 
         $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
 
