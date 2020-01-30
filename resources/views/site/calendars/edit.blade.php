@@ -3,6 +3,8 @@
 @section('title', 'Editar Calendário')
 
 @section('css')
+    <!-- sceditor -->
+    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- DateTimePicker -->
     <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet"/>
 @endsection
@@ -33,7 +35,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar o evento</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::model($calendar, ['url' => 'staff/calendars/' . $calendar->id, 'method' => 'PUT', 'files' => true, 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($calendar, ['url' => 'calendars/' . $calendar->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Título:', ['class' => 'col-md-12']) !!}
                             {!! Form::text('name', $calendar->name, ['class' => 'form-control form-rounded', 'required', 'maxlength' => 250]) !!}
@@ -59,7 +61,6 @@
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição:', ['class' => 'col-md-12']) !!}
                             {!! Form::textarea('description', $calendar->description, ['class' => 'form-control form-rounded', 'rows' => 6]) !!}
-                            <div id="charNum"></div>
                         </div>
                         {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
@@ -76,14 +77,32 @@
     <script src="{{ asset('vendor/bootstrap-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js') }}"></script>
 
+    <!-- sceditor -->
+    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+
     <!-- script -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $(function () {
+        $(document).ready(function () {
+            let textarea = document.getElementById('description');
+            sceditor.create(textarea, {
+                format: 'bbcode',
+                locale: 'pt-BR',
+                emoticonsRoot: '/vendor/sceditor/',
+                style: '/vendor/sceditor/minified/themes/content/default.min.css'
+            });
+
+            //datetimer
             $('#start_date').datetimepicker({
                 format: 'yyyy-mm-dd hh:ii:ss',
+                autoclose: true,
+                language: 'pt-BR'
             });
             $('#end_date').datetimepicker({
                 format: 'yyyy-mm-dd hh:ii:ss',
+                autoclose: true,
+                language: 'pt-BR',
                 useCurrent: false //Important! See issue #1075
             });
             $("#start_date").on("dp.change", function (e) {
