@@ -6,15 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\InvitationRequest;
 use App\Mail\AccountInvitation;
 use App\Models\Invitation;
+use App\Models\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class InvitationsController extends Controller
 {
+    private $log;
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->log = new Log();
     }
 
     public function index(Request $request)
@@ -50,8 +54,8 @@ class InvitationsController extends Controller
         //send email
         Mail::to($email)->send(new AccountInvitation($invite));
 
-        // Activity Log
-//        $this->log::novo("Membro {$user->name} enviou um convite para {$email} .");
+        // Log
+        $this->log::record("Membro {$user->name} enviou um convite para {$email}");
 
         toastr()->success('Convite enviado com sucesso.', 'Sucesso');
         return redirect()->to('invites');
@@ -71,8 +75,8 @@ class InvitationsController extends Controller
 
         Mail::to($invite->email)->send(new AccountInvitation($invite));
 
-        // Activity Log
-//        $this->log::novo("Membro {$user->name} reenviou o convite para {$invite->email} .");
+        // Log
+        $this->log::record("Membro {$user->name} reenviou o convite para {$invite->email} .");
 
         toastr()->success('O convite foi reenviado com sucesso!', 'Aviso');
         return redirect()->route('invites');
