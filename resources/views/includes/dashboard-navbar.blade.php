@@ -26,7 +26,7 @@
                     <!-- dark Logo text -->
                     <img src="{{ asset('images/favicons/android-icon-36x36.png') }}" alt="homepage" class="dark-logo"/>
                     <!-- Light Logo text -->
-                    <img src="{{ asset('images/favicons/android-icon-36x36.png') }}" class="light-logo" alt="homepage"/>
+                    <img src="{{ asset('images/logo-text.png') }}" class="light-logo" alt="homepage"/>
                 </span>
             </a>
             <!-- ============================================================== -->
