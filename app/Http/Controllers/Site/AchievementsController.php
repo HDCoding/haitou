@@ -22,22 +22,22 @@ class AchievementsController extends Controller
         $expire_at = Carbon::now()->addMinutes(20);
 
         // Unlocked
-        $achievements = cache()->remember('achievements_'.$user->id, $expire_at, function () use ($user) {
+        $achievements = cache()->remember('achievements_' . $user->id, $expire_at, function () use ($user) {
             return $user->unlockedAchievements();
         });
 
         //Pending
-        $pending = cache()->remember('pending_achievement_'.$user->id, $expire_at, function () use ($user) {
+        $pending = cache()->remember('pending_achievement_' . $user->id, $expire_at, function () use ($user) {
             return $user->inProgressAchievements();
         });
 
         //Count unlocked
-        $unlocked = cache()->remember('unlocked_achievement_'.$user->id, $expire_at, function () use ($user) {
+        $unlocked = cache()->remember('unlocked_achievement_' . $user->id, $expire_at, function () use ($user) {
             return $user->unlockedAchievements()->count();
         });
 
         //Count locked
-        $locked = cache()->remember('locked_achievement_'.$user->id, $expire_at, function () use ($user) {
+        $locked = cache()->remember('locked_achievement_' . $user->id, $expire_at, function () use ($user) {
             return $user->lockedAchievements()->count();
         });
 
