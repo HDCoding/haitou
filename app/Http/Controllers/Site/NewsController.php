@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id, $slug)
     {
         $new = News::where('id', '=', $id)->whereSlug($slug)->firstOrFail();
