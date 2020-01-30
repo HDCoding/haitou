@@ -25,7 +25,7 @@ class StatisticsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->expire_at = Carbon::now()->addMinutes(1);
+        $this->expire_at = Carbon::now()->addMinutes(20);
     }
 
     public function index()
