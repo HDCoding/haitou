@@ -6,7 +6,6 @@
     <!-- sceditor -->
     <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- Calendar CSS -->
-    <!-- Custom CSS -->
     <link href="{{ asset('vendor/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/calendar.css') }}" rel="stylesheet"/>
     <!-- DateTimePicker -->
