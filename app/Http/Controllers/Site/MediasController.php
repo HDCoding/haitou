@@ -21,7 +21,7 @@ class MediasController extends Controller
         $media = Media::where('id', '=', $media_id)->whereSlug($slug)->firstOrFail();
         $media->increment('views'); //increment views
 
-        $user = \request()->user(); //logged user
+        $user = request()->user(); //logged user
 
         $comments = $media->comments()->latest('id')->paginate(5);
 
