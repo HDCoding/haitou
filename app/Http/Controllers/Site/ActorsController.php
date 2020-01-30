@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Actor;
-use App\Models\Bookmark;
 use Illuminate\Http\Request;
 
 class ActorsController extends Controller
