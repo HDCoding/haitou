@@ -3,7 +3,7 @@
     <!-- Comment Row -->
     <div class="d-flex flex-row comment-row">
         <div class="p-2">
-            <img src="{{ $comment->user->avatar() }}" alt="user" width="50" class="rounded-circle">
+            <img src="{{ $comment->user->avatar() }}" alt="user" width="50" class="img-rounded">
         </div>
         <div class="comment-text active w-100">
             <h6 class="font-medium">
