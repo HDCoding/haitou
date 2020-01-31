@@ -3,36 +3,23 @@
     <div class="card">
         <div class="card-body">
             <center class="m-t-30">
-                <img src="{{ auth()->user()->avatar() }}" class="rounded-circle" width="150" alt="avatar"/>
+                <div class="el-card-avatar el-overlay-1">
+                    <img src="{{ auth()->user()->avatar() }}" class="img-thumbnail" width="300" alt="avatar" onclick="chooseAvatar()"/>
+                    {!! Form::open(['route' => 'post.avatar', 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-avatar']) !!}
+                    <input type="file" id="avatarInput" name="avatar" class="form-control" accept="image/*" style="display: none"/>
+                    {!! Form::close() !!}
+                </div>
                 <h4 class="card-title m-t-10">{{ auth()->user()->username }}</h4>
                 <h6 class="card-subtitle">{{ auth()->user()->groupName() }}</h6>
-                <div class="row text-center justify-content-md-center">
-                    <div class="col-4">
-                        <a href="javascript:void(0)" class="link">
-                            <i class="icon-people"></i>
-                            <font class="font-medium">123</font>
-                        </a>
-                    </div>
-                    <div class="col-4">
-                        <a href="javascript:void(0)" class="link">
-                            <i class="icon-picture"></i>
-                            <font class="font-medium">123</font>
-                        </a>
-                    </div>
-                </div>
+                <div class="row text-center justify-content-md-center"></div>
             </center>
         </div>
         <div>
             <hr>
         </div>
         <div class="card-body">
-            <small class="text-muted">Email address </small>
-            <h6>hannagover@gmail.com</h6>
-            <small class="text-muted p-t-30 db">Phone</small>
-            <h6>+91 654 784 547</h6>
-            <small class="text-muted p-t-30 db">Address</small>
-            <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
-            <small class="text-muted p-t-30 db">Social Profile</small>
+            <small class="text-muted">Email </small>
+            <h6>email@mail.com</h6>
             <br/>
             <button class="btn btn-circle btn-secondary"><i class="fab fa-facebook-f"></i></button>
             <button class="btn btn-circle btn-secondary"><i class="fab fa-twitter"></i></button>
