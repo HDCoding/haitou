@@ -33,17 +33,39 @@ class CharactersController extends Controller
     {
         $character = new Character();
         $character->name = $request->input('name');
+
         //Image
-        $img = $request->file('image');
-        $filename = md5_gen() . '.' . $img->getClientOriginalExtension(); //recebe nome aleatório e a extensão do arquivo
+        if ($request->hasFile('image') && $request->file('image')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->image->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->image->storeAs('characters', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/characters/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $character->image = $name_file;
+            }
+        } else {
+            return redirect()->back()
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
+        }
         //End Image
 
-        $character->image = $filename;
         $character->description = $request->input('description');
         $character->save();
-
-        //upload da imagem
-        $this->imageFile->uploadImage(Character::uploaderFolder, $filename, $img);
 
         toastr()->success('Novo personagem cadastrada.', 'Sucesso');
         return redirect()->to('staff/characters');
@@ -59,23 +81,39 @@ class CharactersController extends Controller
     {
         $character = Character::findOrFail($character_id);
         $character->name = $request->input('name');
+
         //Image
-        $img = $request->file('image');
-        if ($img != null) {
-            $this->imageFile->removeImage(Character::uploaderFolder, $character->image); //remove a imagem antiga
-            $filename = md5_gen() . '.' . $img->getClientOriginalExtension(); //recebe nome aleatório e a extensão do arquivo
+        if ($request->hasFile('image') && $request->file('image')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->image->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->image->storeAs('characters', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/characters/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $character->image = $name_file;
+            }
         } else {
-            $filename = $character->image; //se o usuario nao atualizar a imagem o nome e extensão continua igual
+            return redirect()->back()
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
         }
         //End Image
 
-        $character->image = $filename;
         $character->description = $request->input('description');
         $character->update();
-
-        if ($img != null) {
-            $this->imageFile->uploadImage(Character::uploaderFolder, $filename, $img); //upload da imagem
-        }
 
         toastr()->info('Personagem atualizado.', 'Sucesso');
         return redirect()->to('staff/characters');
