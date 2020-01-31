@@ -40,7 +40,7 @@
                 <div class="card">
                     <div class="card-body">
                         <center class="m-t-30">
-                            <img src="{{ $member->avatar() }}" class="rounded-circle" width="150"/>
+                            <img src="{{ $member->avatar() }}" class="img-rounded" width="150"/>
                             <h4 class="card-title m-t-10">{{ $member->username }}</h4>
                             <h6 class="card-subtitle m-b-20">{{ $member->groupName() }}</h6>
                             <div class="row justify-content-md-center">
