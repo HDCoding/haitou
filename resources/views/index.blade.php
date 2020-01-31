@@ -65,7 +65,7 @@
     <link href="{{ asset('fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="{{ asset('index/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('fonts/fontawesome.css') }}" rel="stylesheet">
 
     <!-- Style -->
     <link href="{{ asset('index/css/style.css') }}" rel="stylesheet">
@@ -107,7 +107,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('images/favicons/favicon-16x16.png') }}" alt="Logo">
+                        <img src="{{ asset('images/logo-text.png') }}" alt="Logo" width="140">
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -147,7 +147,7 @@
                 <div class="col-md-12">
                     <div class="logo text-center">
                         <!-- LOGO -->
-                        <img width="125" height="55" src="{{ asset('images/favicons/apple-icon-114x114.png') }}" alt="">
+                        <img width="150" height="75" src="{{ asset('images/logo-index.png') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -162,7 +162,7 @@
                             <!-- BUTTON -->
                             @if (Route::has('login'))
                                 @auth
-                                    <a href="{{ route('home') }}" class="tour btn wow fadeInDown">Home</a>
+                                    <a href="{{ route('home') }}" class="tour btn wow btn-rounded fadeInLeft">Home</a>
                                 @else
                                     <a href="{{ route('login') }}" class="tuor btn wow fadeInLeft">Login</a>
                                     @if (Route::has('register'))
@@ -186,8 +186,11 @@
             <div class="col-md-10 col-md-offset-1">
                 <!-- FEATURES SECTION TITLE -->
                 <div class="section_title wow fadeIn" data-wow-duration="1s">
-                    <h2>Features</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                    <h2>Recursos</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip.
+                    </p>
                 </div>
                 <!-- END FEATURES SECTION TITLE -->
             </div>
@@ -199,18 +202,14 @@
             <div class="row">
                 <div class="col-md-4 right_no_padding wow fadeInLeft" data-wow-duration="1s">
                     <!-- FEATURE -->
-
                     <div class="left_single_feature">
                         <!-- ICON -->
                         <div><span class="pe-7s-like"></span></div>
-
                         <!-- FEATURE HEADING AND DESCRIPTION -->
-                        <h3>Creative Design<span>/</span></h3>
+                        <h3>Design criativo<span>/</span></h3>
                         <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
-
                     <!-- END SINGLE FEATURE -->
-
 
                     <!-- FEATURE -->
                     <div class="left_single_feature">
@@ -218,19 +217,17 @@
                         <div><span class="pe-7s-science"></span></div>
 
                         <!-- FEATURE HEADING AND DESCRIPTION -->
-                        <h3>Modern Look<span>/</span></h3>
+                        <h3>Aparência moderna<span>/</span></h3>
                         <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
                     <!-- END SINGLE FEATURE -->
-
 
                     <!-- FEATURE -->
                     <div class="left_single_feature">
                         <!-- ICON -->
                         <div><span class="pe-7s-look"></span></div>
-
                         <!-- FEATURE HEADING AND DESCRIPTION -->
-                        <h3>Minimal Layout<span>/</span></h3>
+                        <h3>Layout mínimo<span>/</span></h3>
                         <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
                     <!-- END SINGLE FEATURE -->
@@ -239,42 +236,37 @@
                 <div class="col-md-4">
                     <div class="feature_iphone">
                         <!-- FEATURE PHONE IMAGE -->
-                        <img class="wow bounceIn" data-wow-duration="1s" src="images/iPhone02.png" alt="">
+                        <!-- image copyright: https://www.deviantart.com/thekarmaking/art/Kizuna-Ai-fanart-render-763435974 -->
+                        <img class="wow bounceIn" data-wow-duration="1s" src="{{ asset('images/index-resource.png')  }}" alt="">
                     </div>
                 </div>
                 <div class="col-md-4 left_no_padding wow fadeInRight" data-wow-duration="1s">
-
                     <!-- FEATURE -->
                     <div class="right_single_feature">
                         <!-- ICON -->
                         <div><span class="pe-7s-monitor"></span></div>
-
                         <!-- FEATURE HEADING AND DESCRIPTION -->
-                        <h3><span>/</span>Retina ready</h3>
+                        <h3><span>/</span>Texto</h3>
                         <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
                     <!-- END SINGLE FEATURE -->
-
 
                     <!-- FEATURE -->
                     <div class="right_single_feature">
                         <!-- ICON -->
                         <div><span class="pe-7s-phone"></span></div>
-
                         <!-- FEATURE HEADING AND DESCRIPTION -->
-                        <h3><span>/</span>Responsive Ready</h3>
+                        <h3><span>/</span>Responsivo</h3>
                         <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
                     <!-- END SINGLE FEATURE -->
-
 
                     <!-- FEATURE -->
                     <div class="right_single_feature">
                         <!-- ICON -->
                         <div><span class="pe-7s-gleam"></span></div>
-
                         <!-- FEATURE HEADING AND DESCRIPTION -->
-                        <h3><span>/</span>Clean Code</h3>
+                        <h3><span>/</span>Código Limpo</h3>
                         <p>Lorem ipsum dolor, consectetur sed do adipisicing elit, sed do eiusmod tempor incididunt</p>
                     </div>
                     <!-- END SINGLE FEATURE -->
@@ -292,10 +284,13 @@
     <div class="container">
         <div class="row wow fadeInLeftBig" data-wow-duration="1s">
             <div class="col-md-9">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                    et olore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip.
+                </p>
             </div>
             <div class="col-md-3">
-                <a class="btn btn-primary btn-action" href="#" role="button">Download Now</a>
+                <a class="btn btn-primary btn-action" href="#" role="button">Cadastre-se Agora</a>
             </div>
         </div>
     </div>
@@ -309,8 +304,11 @@
             <div class="col-md-10 col-md-offset-1 wow bounceIn">
                 <!-- Start Contact Section Title-->
                 <div class="section_title">
-                    <h2>Get in touch</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                    <h2>Entre em contato</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                        nisi ut aliquip.
+                    </p>
                 </div>
             </div>
         </div>
@@ -320,16 +318,55 @@
                 <div class="col-md-12 wow bounceInLeft">
                     <div class="social_icons">
                         <ul>
-                            <li><a href=""><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href=""><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href=""><i class="fa fa-dribbble"></i></a>
-                            </li>
-                            <li><a href=""><i class="fa fa-behance"></i></a>
-                            </li>
-                            <li><a href=""><i class="fa fa-youtube-play"></i></a>
-                            </li>
+                            @if(!empty(setting('facebook')))
+                                <li>
+                                    <a href="{{ hideref(setting('facebook')) }}" target="_blank">
+                                        <i class="fab fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty(setting('twitter')))
+                                <li>
+                                    <a href="{{ hideref(setting('twitter')) }}" target="_blank">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty(setting('pinterest')))
+                                <li>
+                                    <a href="{{ hideref(setting('pinterest')) }}" target="_blank">
+                                        <i class="fab fa-pinterest"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty(setting('youtube')))
+                                <li>
+                                    <a href="{{ hideref(setting('youtube')) }}" target="_blank">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty(setting('instagram')))
+                                <li>
+                                    <a href="{{ hideref(setting('instagram')) }}" target="_blank">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty(setting('twitch')))
+                                <li>
+                                    <a href="{{ hideref(setting('twitch')) }}" target="_blank">
+                                        <i class="fab fa-twitch"></i>
+                                    </a>
+                                </li>
+                            @endif
+                            @if(!empty(setting('discord')))
+                                <li>
+                                    <a href="{{ hideref(setting('discord')) }}" target="_blank">
+                                        <i class="fab fa-discord"></i>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -348,7 +385,7 @@
                     <!-- Start Subscribe Section Title -->
                     <div class="section_title">
                         <h2>Aviso Legal</h2>
-                        <p>{{ setting('disclaimer') }}</p>
+                        <p>{!! setting('disclaimer') !!}</p>
                     </div>
                     <!-- End Subscribe Section Title -->
                 </div>
@@ -356,7 +393,6 @@
         </div>
     </div>
 </section>
-<!-- END SUBSCRIPBE FORM -->
 @endif
 
 <!-- Footer -->
