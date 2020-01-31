@@ -30,9 +30,9 @@ class MediasController extends Controller
 
     public function create()
     {
-        $categories = Category::where('is_media', '=', true)->pluck('name', 'id');
-        $studios = Studio::all()->pluck('name', 'id');
-        $genres = Genre::all()->pluck('name', 'id');
+        $categories = Category::select('id', 'name')->where('is_media', '=', true)->pluck('name', 'id');
+        $studios = Studio::all('name', 'id')->pluck('name', 'id');
+        $genres = Genre::all('name', 'id')->pluck('name', 'id');
         return view('staff.medias.create', compact('categories', 'studios', 'genres'));
     }
 
@@ -104,5 +104,73 @@ class MediasController extends Controller
         MediaCast::findOrFail($cast_id)->delete();
         toastr()->warning('Cast deletada.', 'Aviso');
         return redirect()->back();
+    }
+
+    public function updatePoster()
+    {
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->avatar->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->avatar->storeAs('avatars', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/avatars/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->route('edit.profile')
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $user->avatar = $name_file;
+            }
+        } else {
+            return redirect()->route('edit.profile')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
+        }
+
+        $user->update();
+        return redirect()->route('edit.profile');
+    }
+
+    public function updateCover()
+    {
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->avatar->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->avatar->storeAs('avatars', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/avatars/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->route('edit.profile')
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $user->avatar = $name_file;
+            }
+        } else {
+            return redirect()->route('edit.profile')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
+        }
+
+        $user->update();
+        return redirect()->route('edit.profile');
     }
 }
