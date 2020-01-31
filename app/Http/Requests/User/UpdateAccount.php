@@ -26,8 +26,6 @@ class UpdateAccount extends FormRequest
         return [
             'state_id' => 'required|integer|exists:states,id',
             'mood_id' => 'required|integer|exists:moods,id',
-            'avatar' => 'nullable|url|string|max:250',
-            'cover' => 'nullable|url|string|max:250',
             'birthday' => 'nullable|date',
             'info' => 'nullable|string|max:250',
             'signature' => 'nullable|string|max:1000'
