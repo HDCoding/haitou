@@ -18,7 +18,7 @@
                 <div>
                     <div class="logo">
                         <span class="db">
-                            <img src="{{ auth()->user()->avatar() }}" class="rounded-circle mb-3" width="100" alt="thumbnail">
+                            <img src="{{ auth()->user()->avatar() }}" class="img-rounded mb-3" width="100" alt="thumbnail">
                         </span>
                         <h5 class="font-medium m-b-20">Tela de Bloqueio</h5>
                     </div>
