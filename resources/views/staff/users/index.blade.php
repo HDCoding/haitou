@@ -49,7 +49,7 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td><img class="rounded-circle" src="{{ $user->avatar() }}" alt="Avatar" width="70px"></td>
+                                        <td><img class="img-rounded" src="{{ $user->avatar() }}" alt="Avatar" width="70px"></td>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->groupName() }}</td>
                                         <td>{!! $user->status() !!}</td>
