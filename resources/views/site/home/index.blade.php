@@ -59,12 +59,15 @@
         $(function() {
             // Fixed bg
             $('#home-cover').vegas({
-                overlay: false,
-                timer: false,
+                delay: 25000,
                 shuffle: true,
+                timer: false,
                 slides: [
-                    { src: "{{ asset('images/home.jpg') }}" },
+                    @for($i = 1; $i <= 21; $i++)
+                    { src: "{{ asset("images/covers/{$i}.jpg") }}" },
+                    @endfor
                 ],
+                overlay: '{{ asset('vendor/vegas/overlays/07.png') }}',
                 transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
                 animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
             });
