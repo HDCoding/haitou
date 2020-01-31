@@ -7,6 +7,8 @@ use App\Achievements\UserChangePrivacies;
 use App\Achievements\UserChangeSettings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UpdateAccount;
+use App\Http\Requests\User\UpdateAvatar;
+use App\Http\Requests\User\UpdateCover;
 use App\Http\Requests\User\UpdateEmail;
 use App\Http\Requests\User\UpdatePassword;
 use App\Http\Requests\User\UpdatePrivacy;
@@ -49,19 +51,86 @@ class UsersController extends Controller
 
         $user->state_id = $request->input('state_id');
         $user->mood_id = $request->input('mood_id');
-        $avatar = $request->input('avatar');
-        $user->avatar = $avatar;
-        $user->cover = $request->input('cover');
         $user->birthday = $request->input('birthday');
         $user->info = $request->input('info');
         $user->signature = $request->input('signature');
         $user->update();
+        return redirect()->route('edit.profile');
+    }
 
-        // Achievement
-        if (!empty($avatar)) {
-            $user->unlock(new UserChangeAvatar());
+    public function postAvatar(UpdateAvatar $request)
+    {
+        $user = $request->user();
+
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->avatar->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$user->id}.{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->avatar->storeAs('avatars', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/avatars/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->route('edit.profile')
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $user->avatar = $name_file;
+                // Achievement
+                $user->unlock(new UserChangeAvatar());
+            }
+        } else {
+            return redirect()->route('edit.profile')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
         }
 
+        $user->update();
+        return redirect()->route('edit.profile');
+    }
+
+    public function postCover(UpdateCover $request)
+    {
+        $user = $request->user();
+
+        if ($request->hasFile('cover') && $request->file('cover')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->cover->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$user->id}.{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->cover->storeAs('covers', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/covers/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->route('edit.profile')
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $user->cover = $name_file;
+                // Achievement
+                $user->unlock(new UserChangeAvatar());
+            }
+        } else {
+            return redirect()->route('edit.profile')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
+        }
+
+        $user->update();
         return redirect()->route('edit.profile');
     }
 
