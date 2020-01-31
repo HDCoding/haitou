@@ -26,8 +26,8 @@ class CreateMediasTable extends Migration
             $table->date('finished_at')->nullable();
             $table->text('description');
             $table->boolean('is_adult')->default(0);
-            $table->string('cover')->nullable();
             $table->string('poster')->nullable();
+            $table->string('cover')->nullable();
             $table->tinyInteger('status'); // 0 = Finalizado, 1 = Exibindo, 2 = Cancelado
             $table->string('yt_video', 45)->nullable();
             $table->integer('views')->default(0);
