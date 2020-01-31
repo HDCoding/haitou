@@ -163,7 +163,7 @@
                                             <td>
                                                 <div class="d-flex no-block align-items-center">
                                                     <div class="m-r-10">
-                                                        <img src="{{ $user->user->avatar() }}" alt="user" class="rounded-circle" width="45" />
+                                                        <img src="{{ $user->user->avatar() }}" alt="user" class="img-rounded" width="45" />
                                                     </div>
                                                     <div class="">
                                                         <h5 class="m-b-0 font-16 font-medium">
