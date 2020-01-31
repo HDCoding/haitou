@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-sm-12 col-lg-12">
                 <div class="card vegas-fixed-background" id="home-cover">
-                    <div class="card-body py-5 my-5">
+                    <div class="card-body py-home">
                         <h2 class="text-center text-primary">Okaeri {{ auth()->user()->username }}-chan</h2>
                     </div>
                 </div>
