@@ -58,7 +58,7 @@
                         </h6>
 
                         <div class="media pb-1 mb-3">
-                            <img src="{{ $comment->user->avatar() }}" class="d-block ui-w-40 rounded-circle" alt="avatar">
+                            <img src="{{ $comment->user->avatar() }}" class="d-block ui-w-40 img-rounded" alt="avatar">
                             <div class="media-body ml-3">
                                 {{ link_to_route('user.profile', $comment->user->username, ['slug' => $comment->user->slug]) }}
                                 @if($comment->is_spoiler)
