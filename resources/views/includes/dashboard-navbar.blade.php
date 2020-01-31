@@ -89,7 +89,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ auth()->user()->avatar() }}" alt="user" class="rounded-circle" width="31">
+                        <img src="{{ auth()->user()->avatar() }}" alt="user" class="img-rounded" width="31">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                         <span class="with-arrow"><span class="bg-primary"></span></span>
