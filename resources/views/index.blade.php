@@ -162,7 +162,7 @@
                             <!-- BUTTON -->
                             @if (Route::has('login'))
                                 @auth
-                                    <a href="{{ route('home') }}" class="tour btn wow btn-rounded fadeInLeft">Home</a>
+                                    <a href="{{ route('home') }}" class="btn home-btn wow fadeInRight">Home</a>
                                 @else
                                     <a href="{{ route('login') }}" class="tuor btn wow fadeInLeft">Login</a>
                                     @if (Route::has('register'))
