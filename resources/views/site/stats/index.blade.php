@@ -116,7 +116,7 @@
                 </div>
             </div>
         </div>
-
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card border-bottom border-danger">
@@ -179,7 +179,7 @@
                 </div>
             </div>
         </div>
-
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card border-right border-orange">
@@ -242,7 +242,7 @@
                 </div>
             </div>
         </div>
-
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card border-top border-success">
@@ -305,7 +305,7 @@
                 </div>
             </div>
         </div>
-
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card border-left border-orange">
@@ -368,7 +368,7 @@
                 </div>
             </div>
         </div>
-
+        <hr>
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card border-bottom border-success">
