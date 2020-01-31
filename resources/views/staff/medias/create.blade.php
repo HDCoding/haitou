@@ -97,16 +97,6 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('cover', 'Cover:') !!}
-                            {!! Form::text('cover', null, ['class' => 'form-control', 'placeholder' => 'Link da imagem retangular/horizontal', 'maxlength' => 255]) !!}
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::label('poster', 'Poster:') !!}
-                            {!! Form::text('poster', null, ['class' => 'form-control', 'placeholder' => 'Link da imagem Poster', 'maxlength' => 255]) !!}
-                        </div>
-
-                        <div class="form-group">
                             {!! Form::label('status', 'Status:') !!}
                             {!! Form::select('status', [
                                 1 => 'Finalizado',
