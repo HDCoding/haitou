@@ -41,32 +41,32 @@
 
                         <div class="form-group">
                             {!! Form::label('media_type', 'Tipo: *') !!}
-                            {!! Form::select('media_type', [0 => 'Anime', 1 => 'Manga', 2 => 'Dorama'], null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('media_type', [0 => 'Anime', 1 => 'Manga', 2 => 'Dorama'], $media->media_type, ['class' => 'form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nome: *') !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'required', 'maxlength' => 255]) !!}
+                            {!! Form::text('name', $media->name, ['class' => 'form-control', 'required', 'maxlength' => 255]) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('title_english', 'Título Inglês:') !!}
-                            {!! Form::text('title_english', null, ['class' => 'form-control', 'maxlength' => 255]) !!}
+                            {!! Form::text('title_english', $media->title_english, ['class' => 'form-control', 'maxlength' => 255]) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('title_japanese', 'Título Japonês:') !!}
-                            {!! Form::text('title_japanese', null, ['class' => 'form-control', 'maxlength' => 255]) !!}
+                            {!! Form::text('title_japanese', $media->title_japanese, ['class' => 'form-control', 'maxlength' => 255]) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('category_id', 'Categoria: *') !!}
-                            {!! Form::select('category_id', $categories, null, ['class' => 'form-control select2', 'required']) !!}
+                            {!! Form::select('category_id', $categories, $media->category_id, ['class' => 'form-control select2', 'required']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('studio_id', 'Studio: *') !!}
-                            {!! Form::select('studio_id', $studios, null, ['class' => 'form-control select2', 'required']) !!}
+                            {!! Form::select('studio_id', $studios, $media->studio_id, ['class' => 'form-control select2', 'required']) !!}
                         </div>
 
                         <div class="form-group">
@@ -86,22 +86,12 @@
 
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição: *') !!}
-                            {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
+                            {!! Form::textarea('description', $media->description, ['class' => 'form-control', 'rows' => 8]) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('adult', 'Adulto: *') !!}
-                            {!! Form::select('adult', [false => 'Não', true => 'Sim'], null, ['class' => 'form-control']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::label('cover', 'Cover:') !!}
-                            {!! Form::text('cover', null, ['class' => 'form-control', 'placeholder' => 'Link da imagem retangular/horizontal', 'maxlength' => 255]) !!}
-                        </div>
-
-                        <div class="form-group">
-                            {!! Form::label('poster', 'Poster:') !!}
-                            {!! Form::text('poster', null, ['class' => 'form-control', 'placeholder' => 'Link da imagem Poster', 'maxlength' => 255]) !!}
+                            {!! Form::select('adult', [false => 'Não', true => 'Sim'], $media->adult, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
@@ -110,34 +100,34 @@
                                 1 => 'Finalizado',
                                 2 => 'Exibindo',
                                 3 => 'Cancelado'
-                            ], null, ['class' => 'custom-select form-control', 'required']) !!}
+                            ], $media->status, ['class' => 'custom-select form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('yt_video', 'Youtube Trailer:') !!}
-                            {!! Form::text('yt_video', null, ['class' => 'form-control', 'placeholder' => 'YT video', 'maxlength' => 45]) !!}
+                            {!! Form::text('yt_video', $media->yt_video, ['class' => 'form-control', 'placeholder' => 'YT video', 'maxlength' => 45]) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('total_episodes', 'Total episodios:') !!}
-                            {!! Form::number('total_episodes', null, ['class' => 'form-control']) !!}
+                            {!! Form::number('total_episodes', $media->total_episodes, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('duration', 'Duração:') !!}
-                            {!! Form::number('duration', null, ['class' => 'form-control', 'placeholder' => 'Minutos']) !!}
+                            {!! Form::number('duration', $media->duration, ['class' => 'form-control', 'placeholder' => 'Minutos']) !!}
                         </div>
 
                         <p class="text-info">Somente se for manga</p>
 
                         <div class="form-group">
                             {!! Form::label('total_chapters', 'Capítulos:') !!}
-                            {!! Form::number('total_chapters', null, ['class' => 'form-control']) !!}
+                            {!! Form::number('total_chapters', $media->total_chapters, ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('total_volumes', 'Volumes:') !!}
-                            {!! Form::number('total_volumes', null, ['class' => 'form-control']) !!}
+                            {!! Form::number('total_volumes', $media->total_volumes, ['class' => 'form-control']) !!}
                         </div>
 
                         {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
