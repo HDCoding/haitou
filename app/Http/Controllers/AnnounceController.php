@@ -516,7 +516,7 @@ class AnnounceController extends Controller
                 $cheat->save();
 
                 //log info
-                //info('Usuario tentou utilizar programa bloqueado. IP: ' . $ip);
+                info('Usuario tentou utilizar programa bloqueado. IP: ' . $ip);
                 abort(500);
                 return $this->encodeMessage('Programa ou versao desatualizada', 401);
             }
