@@ -120,15 +120,15 @@ class MediasController extends Controller
             $name_file = "{$name}.{$extension}";
 
             // Faz o upload
-            $upload = $request->avatar->storeAs('avatars', $name_file, 'public');
-            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/avatars/nomedinamicoarquivo.extensao
+            $upload = $request->avatar->storeAs('medias', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/medias/nomedinamicoarquivo.extensao
 
             if (!$upload) {
                 return redirect()->route('edit.profile')
                     ->with('error', 'Falha ao fazer upload')
                     ->withInput();
             } else {
-                $user->avatar = $name_file;
+                $media->avatar = $name_file;
             }
         } else {
             return redirect()->route('edit.profile')
@@ -136,7 +136,7 @@ class MediasController extends Controller
                 ->withInput();
         }
 
-        $user->update();
+        $media->update();
         return redirect()->route('edit.profile');
     }
 
@@ -154,15 +154,15 @@ class MediasController extends Controller
             $name_file = "{$name}.{$extension}";
 
             // Faz o upload
-            $upload = $request->avatar->storeAs('avatars', $name_file, 'public');
-            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/avatars/nomedinamicoarquivo.extensao
+            $upload = $request->avatar->storeAs('medias', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/medias/nomedinamicoarquivo.extensao
 
             if (!$upload) {
                 return redirect()->route('edit.profile')
                     ->with('error', 'Falha ao fazer upload')
                     ->withInput();
             } else {
-                $user->avatar = $name_file;
+                $media->avatar = $name_file;
             }
         } else {
             return redirect()->route('edit.profile')
@@ -170,7 +170,7 @@ class MediasController extends Controller
                 ->withInput();
         }
 
-        $user->update();
+        $media->update();
         return redirect()->route('edit.profile');
     }
 }
