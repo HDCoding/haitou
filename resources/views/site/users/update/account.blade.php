@@ -30,8 +30,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-lg-12">
-                <div class="card vegas-fixed-background" id="user-cover" style="height: 400px">
-                    <div class="card-body py-5 my-5">
+                <div class="card vegas-fixed-background" id="user-cover">
+                    <div class="card-body py-home">
                         {!! Form::open(['route' => 'post.cover', 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-cover']) !!}
                         <h2 class="text-center text-primary">
                             <button class="btn btn-outline-light waves-effect waves-light" type="button" onclick="chooseCover()">
