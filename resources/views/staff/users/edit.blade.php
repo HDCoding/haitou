@@ -28,7 +28,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="m-t-30 text-center">
-                            <img src="{{ $user->avatar() }}" class="rounded-circle" width="150" alt="avatar"/>
+                            <img src="{{ $user->avatar() }}" class="img-rounded" width="150" alt="avatar"/>
                             <h4 class="card-title m-t-10">{{ $user->username }}</h4>
                             <h6 class="card-subtitle">{{ $user->groupName() }}</h6>
                             <div class="row text-center justify-content-md-center">
