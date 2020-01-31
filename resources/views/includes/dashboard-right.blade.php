@@ -96,7 +96,7 @@
                     </div>
                     <div class="sl-item">
                         <div class="sl-left">
-                            <img src="{{ asset('images/status/heart.png') }}" class="rounded-circle" alt="Points">
+                            <img src="{{ asset('images/status/heart.png') }}" class="img-rounded" alt="Points">
                         </div>
                         <div class="sl-right">
                             <div class="font-medium">{{ auth()->user()->points() }}</div>
@@ -106,7 +106,7 @@
                     @if(auth()->user()->is_warned)
                     <div class="sl-item">
                         <div class="sl-left">
-                            <img src="{{ asset('images/status/warned.png') }}" class="rounded-circle" alt="Warned">
+                            <img src="{{ asset('images/status/warned.png') }}" class="img-rounded" alt="Warned">
                         </div>
                         <div class="sl-right">
                             <div class="font-medium">Advertência</div>
@@ -116,7 +116,7 @@
                     @endif
                     <div class="sl-item">
                         <div class="sl-left">
-                            <img src="{{ asset('images/status/ratio.png') }}" class="rounded-circle" alt="Ratio">
+                            <img src="{{ asset('images/status/ratio.png') }}" class="img-rounded" alt="Ratio">
                         </div>
                         <div class="sl-right">
                             <div class="font-medium">{!! auth()->user()->ratio() !!}</div>
@@ -125,7 +125,7 @@
                     </div>
                     <div class="sl-item">
                         <div class="sl-left">
-                            <img src="{{ asset('images/status/downloaded.png') }}" class="rounded-circle" alt="Downloaded">
+                            <img src="{{ asset('images/status/downloaded.png') }}" class="img-rounded" alt="Downloaded">
                         </div>
                         <div class="sl-right">
                             <div class="font-medium">{{ auth()->user()->downloaded() }}</div>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="sl-item">
                         <div class="sl-left">
-                            <img src="{{ asset('images/status/uploaded.png') }}" class="rounded-circle" alt="Uploaded">
+                            <img src="{{ asset('images/status/uploaded.png') }}" class="img-rounded" alt="Uploaded">
                         </div>
                         <div class="sl-right">
                             <div class="font-medium">{{ auth()->user()->uploaded() }}</div>
