@@ -35533,3 +35533,8 @@ html[dir=rtl] #main-wrapper[data-sidebartype=overlay].show-sidebar .left-sidebar
         display: block !important
     }
 }
+
+.py-home {
+    padding-top: 7rem !important;
+    padding-bottom: 8rem !important;
+}
