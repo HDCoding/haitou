@@ -340,10 +340,10 @@ class TorrentsController extends Controller
             $this->log::record("Membro {$user->name} solicitou uma solicitação de nova propagação no torrent, ID: {$torrent->id} NOME: {$torrent->name}.");
 
             toastr()->success('Uma notificação foi enviada a todos os usuários que baixaram esse torrent junto com o uploader original!', 'Aviso');
-            return redirect()->route('torrent', ['id' => $torrent->id, 'slug' => $torrent->slug]);
+            return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         } else {
             toastr()->error('Este torrent não atende às regras para uma solicitação de nova propagação.', 'Aviso');
-            return redirect()->route('torrent', ['id' => $torrent->id, 'slug' => $torrent->slug]);
+            return redirect()->route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]);
         }
     }
 
