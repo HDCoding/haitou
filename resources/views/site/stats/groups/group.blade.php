@@ -44,7 +44,7 @@
                                 <tbody>
                                 @foreach($users as $user)
                                     <tr>
-                                        <td><img class="rounded-circle" src="{{ $user->avatar() }}" alt="Avatar" width="70px"></td>
+                                        <td><img class="img-rounded" src="{{ $user->avatar() }}" alt="Avatar" width="70px"></td>
                                         <td class="align-middle">
                                             <a href="{{ route('user.profile', ['slug' => $user->slug]) }}">
                                                 {{ $user->username }}
