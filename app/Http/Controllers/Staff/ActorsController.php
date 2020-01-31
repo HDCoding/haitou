@@ -35,18 +35,38 @@ class ActorsController extends Controller
         $actor->name = $request->input('name');
 
         //Image
-        $img = $request->file('image');
-        $filename = md5_gen() . '.' . $img->getClientOriginalExtension(); //recebe nome aleatório e a extensão do arquivo
-        //End Image
+        if ($request->hasFile('image') && $request->file('image')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
 
-        $actor->image = $filename;
+            // Recupera a extensão do arquivo
+            $extension = $request->image->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->image->storeAs('actors', $name_file);
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/actors/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->route('edit.profile')
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $actor->image = $name_file;
+            }
+        } else {
+            return redirect()->route('edit.profile')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
+        }
+
         $actor->website = $request->input('website');
         $actor->description = $request->input('description');
         $actor->birthday = $request->input('birthday');
         $actor->save();
-
-        //upload da imagem
-        $this->imageFile->uploadImage(Actor::uploaderFolder, $filename, $img);
 
         toastr()->success('Novo Atriz/Ator cadastrada(o).', 'Sucesso');
         return redirect()->to('staff/actors');
@@ -65,24 +85,39 @@ class ActorsController extends Controller
         $actor->name = $request->input('name');
 
         //Image
-        $img = $request->file('image');
-        if ($img != null) {
-            $this->imageFile->removeImage(Actor::uploaderFolder, $actor->image); //remove a imagem antiga
-            $filename = md5_gen() . '.' . $img->getClientOriginalExtension(); //recebe nome aleatório e a extensão do arquivo
+        if ($request->hasFile('image') && $request->file('image')->isValid())
+        {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->image->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->image->storeAs('actors', $name_file);
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/actors/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->route('edit.profile')
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+                $actor->image = $name_file;
+            }
         } else {
-            $filename = $actor->image; //se o usuario nao atualizar a imagem o nome e extensão continua igual
+            return redirect()->route('edit.profile')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
+                ->withInput();
         }
         //End Image
 
-        $actor->image = $filename;
         $actor->website = $request->input('website');
         $actor->description = $request->input('description');
         $actor->birthday = $request->input('birthday');
         $actor->update();
-
-        if ($img != null) {
-            $this->imageFile->uploadImage(Actor::uploaderFolder, $filename, $img); //upload da imagem
-        }
 
         toastr()->info('Atriz/Ator atualizada(o).', 'Sucesso');
         return redirect()->to('staff/actors');
@@ -90,9 +125,7 @@ class ActorsController extends Controller
 
     public function destroy($actor_id)
     {
-        $actor = Actor::findOrFail($actor_id);
-        //$this->imageFile->removeImage(Actor::uploaderFolder, $actor->image);
-        $actor->delete();
+        Actor::findOrFail($actor_id)->delete();
 
         toastr()->warning('Atriz/Ator deletada(o).', 'Aviso');
         return redirect()->to('staff/actors');
