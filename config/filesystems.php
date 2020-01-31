@@ -74,21 +74,6 @@ return [
             'root'   => storage_path('backups'),
         ],
 
-        'medias' => [
-            'driver' => 'local',
-            'root'   => storage_path('app/public/medias'),
-        ],
-
-        'users' => [
-            'driver' => 'local',
-            'root'   => storage_path('app/public/users'),
-        ],
-
-        'actors' => [
-            'driver' => 'local',
-            'root'   => storage_path('app/public/actors'),
-        ],
-
     ],
 
 ];
