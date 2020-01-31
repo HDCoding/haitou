@@ -47,11 +47,11 @@ class ActorsController extends Controller
             $name_file = "{$name}.{$extension}";
 
             // Faz o upload
-            $upload = $request->image->storeAs('actors', $name_file);
+            $upload = $request->image->storeAs('actors', $name_file, 'public');
             // Se tiver funcionado o arquivo foi armazenado em storage/app/public/actors/nomedinamicoarquivo.extensao
 
             if (!$upload) {
-                return redirect()->route('edit.profile')
+                return redirect()->back()
                     ->with('error', 'Falha ao fazer upload')
                     ->withInput();
             } else {
@@ -97,18 +97,18 @@ class ActorsController extends Controller
             $name_file = "{$name}.{$extension}";
 
             // Faz o upload
-            $upload = $request->image->storeAs('actors', $name_file);
+            $upload = $request->image->storeAs('actors', $name_file, 'public');
             // Se tiver funcionado o arquivo foi armazenado em storage/app/public/actors/nomedinamicoarquivo.extensao
 
             if (!$upload) {
-                return redirect()->route('edit.profile')
+                return redirect()->back()
                     ->with('error', 'Falha ao fazer upload')
                     ->withInput();
             } else {
                 $actor->image = $name_file;
             }
         } else {
-            return redirect()->route('edit.profile')
+            return redirect()->back()
                 ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
                 ->withInput();
         }
