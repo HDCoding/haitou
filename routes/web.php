@@ -256,6 +256,9 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('{slug}', 'UsersController@profile')->name('user.profile');
             Route::get('{slug}/friends', 'UsersController@friends')->name('user.friends');
             Route::get('{slug}/achievements', 'UsersController@achievements')->name('user.achievements');
+            //Post Avatar/Cover image
+            Route::post('edit/avatar', 'UsersController@postAvatar')->name('post.avatar');
+            Route::post('edit/cover', 'UsersController@postCover')->name('post.cover');
             //Update/Edit Account
             Route::get('edit/account', 'UsersController@formAccount')->name('edit.profile');
             Route::post('edit/account', 'UsersController@postAccount')->name('post.profile');
