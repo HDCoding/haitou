@@ -34,8 +34,6 @@ class MediasRequest extends FormRequest
             'finished_on' => 'nullable|date',
             'description' => 'required|string|max:65530',
             'is_adult' => 'boolean',
-            'cover' => 'nullable|string|max:255',
-            'poster' => 'string|max:255',
             'status' => 'required|integer',
             'yt_video' => 'nullable|string|max:45',
             'total_episodes' => 'nullable|integer|max:2000',
