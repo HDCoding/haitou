@@ -57,7 +57,7 @@ class NewReseedRequestNotification extends Notification
         return [
             'title' => 'Nova Solicitação de Reseed',
             'icon' => 'ion ion-logo-buffer bg-secondary',
-            'body' => "Há algum tempo, você baixou: {$this->torrent->name}. Agora está morto e alguém solicitou uma nova propagação. Se você ainda tiver esse torrent em armazenamento, considere realimentá-lo novamente!",
+            'body' => "Há algum tempo, você baixou: {$this->torrent->name}. Agora está morto e alguém solicitou uma nova propagação. <br> Se você ainda tiver esse torrent em armazenamento, considere realimentá-lo novamente!",
             'url' => "{$appurl}/torrent/{$this->torrent->id}.{$this->torrent->slug}",
         ];
     }
