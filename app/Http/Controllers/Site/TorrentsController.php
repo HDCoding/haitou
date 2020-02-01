@@ -232,17 +232,19 @@ class TorrentsController extends Controller
     public function edit($torrent_id)
     {
         $torrent = Torrent::where('id', '=', $torrent_id)->firstOrFail();
+
+        abort_unless(auth()->user()->id == $torrent->user_id, 403);
+
         $categories = Category::where('is_torrent', '=', true)->pluck('name', 'id');
         $medias = Media::select('id', 'name')->orderBy('name', 'ASC')->pluck('name', 'id');
         $fansubs = Fansub::select('id', 'name')->pluck('name', 'id');
+        $tags = Tag::select('id', 'name')->pluck('name', 'id');
 
         $tag = DB::table('torrent_tags')
             ->where('torrent_id', '=', $torrent_id)
             ->pluck('tag_id', 'tag_id')->all();
 
-        abort_unless(auth()->user()->id == $torrent->user_id, 403);
-
-        return view('site.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs', 'tag'));
+        return view('site.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs', 'tags', 'tag'));
     }
 
     public function update(UpdateRequest $request, $torrent_id)
@@ -352,11 +354,11 @@ class TorrentsController extends Controller
         //Show all torrents uploaded by the user
         $user = $request->user();
 
-        $uploads = Torrent::with('category:id,name')
+        $torrents = Torrent::with('category:id,name')
             ->select('id', 'user_id', 'category_id', 'name', 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'created_at')
             ->where('user_id', '=', $user->id)
             ->get();
 
-        return view('site.users.uploads', compact('uploads'));
+        return view('site.users.uploads', compact('torrents'));
     }
 }
