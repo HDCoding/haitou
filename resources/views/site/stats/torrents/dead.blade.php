@@ -42,9 +42,7 @@
                                 <tbody>
                                 @foreach ($dead as $key => $dd)
                                     <tr>
-                                        <td>
-                                            {{ ++$key }}
-                                        </td>
+                                        <td>{{ ++$key }}</td>
                                         <td>
                                             <a class="font-weight-bold" href="{{ route('torrent.show', ['id' => $dd->id, 'slug' => $dd->slug]) }}">
                                                 {{ $dd->name }}
