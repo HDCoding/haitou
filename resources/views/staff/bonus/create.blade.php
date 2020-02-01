@@ -66,13 +66,7 @@
                             {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
                         </div>
 
-                        <div class="form-group">
-                            {!! Form::label('description', 'Descrição:') !!}
-                            {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
-                        </div>
-
                         {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded']) !!}
-                        <br>
                         {!! Form::close() !!}
                     </div>
                 </div>
