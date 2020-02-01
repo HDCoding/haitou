@@ -245,12 +245,16 @@ class StatisticsController extends Controller
 
     public function seedtime()
     {
-        //TODO: fix foreach
-        // Fetch Top Total Seedtime
-        $seedtimes = Historic::with('user')
+        $seedtimes = Historic::with('user:id,username,slug,show_profile')
+            ->select('user_id', DB::raw('sum(seed_time) as seedtime'))
+            ->where('is_seeder', '=', 1)
             ->groupBy('user_id')
+            ->orderBy('seedtime', 'DESC')
             ->take(100)
-            ->sum('seed_time');
+            ->get();
+
+//        dump($seedtimes);
+//        exit();
 
         return view('site.stats.users.seedtime', compact('seedtimes'));
     }

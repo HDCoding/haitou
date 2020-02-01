@@ -126,7 +126,7 @@ if (!function_exists('hideref')) {
      */
     function hideref($strUrl): string
     {
-        return "https://dereferer.me/?".urlencode($strUrl);
+        return "https://dereferer.me/?" . urlencode($strUrl);
     }
 }
 
@@ -174,39 +174,18 @@ if (!function_exists('setting')) {
 }
 
 if (!function_exists('human_time')) {
-    function human_time($oldtime, $newtime = null, $returnarray = false)
+    function human_time($seconds)
     {
-        if (!$newtime) {
-            $newtime = time();
-        }
+        $days = intval(intval($seconds) / (3600 * 24));
+        $hours = (intval($seconds) / 3600) % 24;
+        $minutes = (intval($seconds) / 60) % 60;
+        $seconds = intval($seconds) % 60;
 
-        $time = $newtime - $oldtime; // to get the time since that moment
+        $days = $days ? $days . ' Dias - ' : '';
+        $hours = $hours ? $hours . ':' : '';
+        $minutes = $minutes ? $minutes . ':' : '';
+        $seconds = $seconds ? $seconds . '' : '';
 
-        $values = [
-            31536000 => 'Ano',
-            2592000 => 'Mês',
-            604800 => 'Semana',
-            86400 => 'Dia',
-            3600 => 'Hora',
-            60 => 'Minuto',
-            1 => 'Segundo'
-        ];
-
-        $htarray = [];
-
-        foreach ($values as $unit => $value) {
-            if ($time < $unit) {
-                continue;
-            }
-            $number_of_units = floor($time / $unit);
-            $htarray[$value] = $number_of_units.' '.$value.(($number_of_units > 1) ? 's' : '');
-            $time = $time - ($unit * $number_of_units);
-        }
-
-        if ($returnarray) {
-            return $htarray;
-        }
-
-        return implode(' ', $htarray);
+        return $days . $hours . $minutes . $seconds;
     }
 }

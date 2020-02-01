@@ -34,7 +34,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Membro</th>
-                                    <th>Seed Time</th>
+                                    <th>Tempo de Seed</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -58,7 +58,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td><span class="text-primary">{{ $seeder->seed_time }}</span></td>
+                                        <td><span class="text-primary">{{ human_time($seeder->seedtime) }}</span></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
