@@ -253,24 +253,7 @@ class StatisticsController extends Controller
             ->take(100)
             ->get();
 
-//        dump($seedtimes);
-//        exit();
-
         return view('site.stats.users.seedtime', compact('seedtimes'));
-    }
-
-    public function seedsize()
-    {
-        //TODO: fix foreach
-        // Fetch Top Total Seedsize Users
-        $seedsizes = User::with(['peers', 'torrents'])
-            ->select(DB::raw('user_id, count(*) as value'))
-            ->groupBy('user_id')
-            ->latest('value')
-            ->take(100)
-            ->sum('uploaded');
-
-        return view('site.stats.users.seedsize', compact('seedsizes'));
     }
 
     public function seeded()
