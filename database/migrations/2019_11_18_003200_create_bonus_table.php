@@ -16,7 +16,6 @@ class CreateBonusTable extends Migration
         Schema::create('bonus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('description')->nullable();
             $table->unsignedInteger('cost');
             $table->unsignedBigInteger('quantity')->default(0);
             $table->tinyInteger('bonus_type'); // 0 = download, 1 = upload, 2 = freeleech, 3 = warning, 4 = invite, 5 = slots
