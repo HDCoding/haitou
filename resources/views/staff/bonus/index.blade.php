@@ -43,11 +43,11 @@
                                     <th>Opções</th>
                                 </tr>
                                 </thead>
+                                <tbody class="js-table-sections-header">
                                 @forelse($bonus as $b)
-                                    <tbody class="js-table-sections-header">
                                     <tr>
-                                        <td class="text-center"><i class="fa fa-angle-right"></i></td>
-                                        <td class="">{{ $b->name }}</td>
+                                        <td><i class="fa fa-angle-right"></i></td>
+                                        <td>{{ $b->name }}</td>
                                         <td><span class="badge badge-primary">{{ $b->type() }}</span></td>
                                         <td><span class="badge badge-info">{{ $b->cost }}</span></td>
                                         <td>{!! $b->enabled() !!}</td>
@@ -69,21 +69,12 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center">#</td>
-                                        <td class="text-success" colspan="5">{{ $b->description }}</td>
-                                    </tr>
-                                    </tbody>
                                 @empty
-                                    <tbody>
                                     <tr>
-                                        <td class="text-center"></td>
-                                        <td class="text-center" colspan="5">Nada cadastrado no momento.</td>
+                                        <td class="text-center" colspan="6">Nada cadastrado no momento.</td>
                                     </tr>
-                                    </tbody>
-                                    @endforelse
+                                @endforelse
+                                </tbody>
                             </table>
                         </div>
                     </div>
