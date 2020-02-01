@@ -16,7 +16,7 @@ class BonusController extends Controller
 
     public function index()
     {
-        $bonus = Bonus::select('id', 'name', 'description', 'cost', 'is_enabled')->get();
+        $bonus = Bonus::all();
         return view('staff.bonus.index', compact('bonus'));
     }
 
@@ -42,7 +42,6 @@ class BonusController extends Controller
             $bonus->quantity = $value;
         }
 
-        $bonus->description = $request->input('description');
         $bonus->save();
 
         toastr()->success('Novo bônus cadastrado.', 'Sucesso');
@@ -90,7 +89,6 @@ class BonusController extends Controller
             $bon->quantity = $value;
         }
 
-        $bon->description = $request->input('description');
         $bon->update();
         toastr()->info('Bônus atualizado.', 'Sucesso');
         return redirect()->to('staff/bonus');
