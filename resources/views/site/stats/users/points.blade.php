@@ -41,7 +41,7 @@
                                 @foreach ($points as $key => $point)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td {{ auth()->user()->username == $point->username ? 'class=bg-success' : '' }}>
+                                        <td {{ auth()->user()->id == $point->id ? 'class=bg-success' : '' }}>
                                             @if ($point->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
