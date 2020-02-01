@@ -7,7 +7,9 @@ use App\Http\Requests\Torrent\UpdateRequest;
 use App\Models\Category;
 use App\Models\Fansub;
 use App\Models\Media;
+use App\Models\Tag;
 use App\Models\Torrent;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TorrentsController extends Controller
@@ -23,6 +25,7 @@ class TorrentsController extends Controller
         $torrents = Torrent::with(['category:id,name'])
             ->select('id', 'category_id', 'name', 'size', 'views', 'is_freeleech', 'is_silver', 'is_doubleup')
             ->get();
+
         return view('staff.torrents.index', compact('torrents'));
     }
 
@@ -32,7 +35,13 @@ class TorrentsController extends Controller
         $categories = Category::where('is_torrent', '=', true)->pluck('name', 'id');
         $medias = Media::all()->pluck('name', 'id');
         $fansubs = Fansub::all()->pluck('name', 'id');
-        return view('staff.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs'));
+        $tags = Tag::all()->pluck('name', 'id');
+
+        $tag = DB::table('torrent_tags')
+            ->where('torrent_id', '=', $torrent_id)
+            ->pluck('tag_id', 'tag_id')->all();
+
+        return view('staff.torrents.edit', compact('torrent', 'categories', 'medias', 'fansubs', 'tags', 'tag'));
     }
 
     public function update(UpdateRequest $request, $torrent_id)
@@ -44,6 +53,8 @@ class TorrentsController extends Controller
 
         $torrent = Torrent::findOrFail($torrent_id);
         $torrent->update($request->except('token'));
+
+        $torrent->tags()->sync($request->input('tag_id'));
 
         toastr()->info('Torrent atualizado.', 'Sucesso');
         return redirect()->to('staff/torrents');
