@@ -83,7 +83,7 @@ class BonusController extends Controller
             $user->save();
 
             // Achievements
-            $this->unlock($user);
+            $this->achievement($user);
 
         } else {
             toastr()->warning('Infelizmente não foi possivel realizado a troca!', 'Aviso');
@@ -195,7 +195,7 @@ class BonusController extends Controller
             $member->update();
 
             // Achievements
-            $this->unlock($user);
+            $this->achievement($user);
 
         } else {
             toastr()->warning('Voce nao possui pontos suficientes', 'Aviso');
@@ -206,7 +206,7 @@ class BonusController extends Controller
         return redirect()->to('bonus');
     }
 
-    private function unlock(User $user)
+    private function achievement(User $user)
     {
         // Achievements
         $user->unlock(new UserMadeFirtBonusTransation());

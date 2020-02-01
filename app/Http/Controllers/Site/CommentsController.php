@@ -16,6 +16,7 @@ use App\Achievements\UserMade900Comments;
 use App\Achievements\UserMadeFirstComment;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\User;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
@@ -77,18 +78,7 @@ class CommentsController extends Controller
         $comment->save();
 
         // Achievements
-        $user->unlock(new UserMadeFirstComment());
-        $user->addProgress(new UserMade50Comments(), 1);
-        $user->addProgress(new UserMade100Comments(), 1);
-        $user->addProgress(new UserMade200Comments(), 1);
-        $user->addProgress(new UserMade300Comments(), 1);
-        $user->addProgress(new UserMade400Comments(), 1);
-        $user->addProgress(new UserMade500Comments(), 1);
-        $user->addProgress(new UserMade600Comments(), 1);
-        $user->addProgress(new UserMade700Comments(), 1);
-        $user->addProgress(new UserMade800Comments(), 1);
-        $user->addProgress(new UserMade900Comments(), 1);
-        $user->addProgress(new UserMade1000Comments(), 1);
+        $this->achievement($user);
 
         //give points to user
         $points = setting('points_comment');
@@ -140,5 +130,22 @@ class CommentsController extends Controller
 
         toastr()->warning('Comentário deletado', 'Aviso');
         return redirect()->to('home');
+    }
+
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstComment());
+        $user->addProgress(new UserMade50Comments(), 1);
+        $user->addProgress(new UserMade100Comments(), 1);
+        $user->addProgress(new UserMade200Comments(), 1);
+        $user->addProgress(new UserMade300Comments(), 1);
+        $user->addProgress(new UserMade400Comments(), 1);
+        $user->addProgress(new UserMade500Comments(), 1);
+        $user->addProgress(new UserMade600Comments(), 1);
+        $user->addProgress(new UserMade700Comments(), 1);
+        $user->addProgress(new UserMade800Comments(), 1);
+        $user->addProgress(new UserMade900Comments(), 1);
+        $user->addProgress(new UserMade1000Comments(), 1);
     }
 }

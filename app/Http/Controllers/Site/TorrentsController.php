@@ -190,18 +190,7 @@ class TorrentsController extends Controller
             $check->save($torrentFile, $torrent->id);
 
             // Achievements
-            $user->unlock(new UserMadeFirstUpload());
-            $user->addProgress(new UserMade50Uploads(), 1);
-            $user->addProgress(new UserMade100Uploads(), 1);
-            $user->addProgress(new UserMade200Uploads(), 1);
-            $user->addProgress(new UserMade300Uploads(), 1);
-            $user->addProgress(new UserMade400Uploads(), 1);
-            $user->addProgress(new UserMade500Uploads(), 1);
-            $user->addProgress(new UserMade600Uploads(), 1);
-            $user->addProgress(new UserMade700Uploads(), 1);
-            $user->addProgress(new UserMade800Uploads(), 1);
-            $user->addProgress(new UserMade900Uploads(), 1);
-            $user->addProgress(new UserMade1000Uploads(), 1);
+            $this->achievement($user);
 
             return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
         } else {
@@ -373,5 +362,22 @@ class TorrentsController extends Controller
             ->get();
 
         return view('site.users.uploads', compact('torrents'));
+    }
+
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstUpload());
+        $user->addProgress(new UserMade50Uploads(), 1);
+        $user->addProgress(new UserMade100Uploads(), 1);
+        $user->addProgress(new UserMade200Uploads(), 1);
+        $user->addProgress(new UserMade300Uploads(), 1);
+        $user->addProgress(new UserMade400Uploads(), 1);
+        $user->addProgress(new UserMade500Uploads(), 1);
+        $user->addProgress(new UserMade600Uploads(), 1);
+        $user->addProgress(new UserMade700Uploads(), 1);
+        $user->addProgress(new UserMade800Uploads(), 1);
+        $user->addProgress(new UserMade900Uploads(), 1);
+        $user->addProgress(new UserMade1000Uploads(), 1);
     }
 }

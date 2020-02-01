@@ -28,5 +28,4 @@ class UserMadeFirtBonusTransation extends Achievement
     {
         return auth()->user()->updatePoints($this->points);
     }
-
 }

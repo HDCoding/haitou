@@ -34,6 +34,7 @@ use App\Models\Forum;
 use App\Models\Moderator;
 use App\Models\Post;
 use App\Models\Topic;
+use App\User;
 use Illuminate\Http\Request;
 
 class ForumsController extends Controller
@@ -310,18 +311,7 @@ class ForumsController extends Controller
         $user->updatePoints($points);
 
         // Achievements
-        $user->unlock(new UserMadeFirstTopic());
-        $user->addProgress(new UserMade50Topics(), 1);
-        $user->addProgress(new UserMade100Topics(), 1);
-        $user->addProgress(new UserMade200Topics(), 1);
-        $user->addProgress(new UserMade300Topics(), 1);
-        $user->addProgress(new UserMade400Topics(), 1);
-        $user->addProgress(new UserMade500Topics(), 1);
-        $user->addProgress(new UserMade600Topics(), 1);
-        $user->addProgress(new UserMade700Topics(), 1);
-        $user->addProgress(new UserMade800Topics(), 1);
-        $user->addProgress(new UserMade900Topics(), 1);
-        $user->addProgress(new UserMade1000Topics(), 1);
+        $this->unlockAchievementTopics($user);
 
         toastr()->success('Tópico criado com sucesso!', 'Tópico');
         return redirect()->route('forum.topic', [$topic->id, $topic->slug]);
@@ -414,17 +404,7 @@ class ForumsController extends Controller
         $user->updatePoints($points);
 
         // Achievements
-        $user->unlock(new UserMadeFirstPost());
-        $user->addProgress(new UserMade50Posts(), 1);
-        $user->addProgress(new UserMade100Posts(), 1);
-        $user->addProgress(new UserMade200Posts(), 1);
-        $user->addProgress(new UserMade300Posts(), 1);
-        $user->addProgress(new UserMade400Posts(), 1);
-        $user->addProgress(new UserMade500Posts(), 1);
-        $user->addProgress(new UserMade600Posts(), 1);
-        $user->addProgress(new UserMade700Posts(), 1);
-        $user->addProgress(new UserMade800Posts(), 1);
-        $user->addProgress(new UserMade1000Posts(), 1);
+        $this->unlockAchievementPosts($user);
 
         $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
 
@@ -522,5 +502,38 @@ class ForumsController extends Controller
             'num_forums' => $num_forums,
             'num_topics' => $num_topics,
         ]);
+    }
+
+    private function unlockAchievementTopics(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstTopic());
+        $user->addProgress(new UserMade50Topics(), 1);
+        $user->addProgress(new UserMade100Topics(), 1);
+        $user->addProgress(new UserMade200Topics(), 1);
+        $user->addProgress(new UserMade300Topics(), 1);
+        $user->addProgress(new UserMade400Topics(), 1);
+        $user->addProgress(new UserMade500Topics(), 1);
+        $user->addProgress(new UserMade600Topics(), 1);
+        $user->addProgress(new UserMade700Topics(), 1);
+        $user->addProgress(new UserMade800Topics(), 1);
+        $user->addProgress(new UserMade900Topics(), 1);
+        $user->addProgress(new UserMade1000Topics(), 1);
+    }
+
+    private function unlockAchievementPosts(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstPost());
+        $user->addProgress(new UserMade50Posts(), 1);
+        $user->addProgress(new UserMade100Posts(), 1);
+        $user->addProgress(new UserMade200Posts(), 1);
+        $user->addProgress(new UserMade300Posts(), 1);
+        $user->addProgress(new UserMade400Posts(), 1);
+        $user->addProgress(new UserMade500Posts(), 1);
+        $user->addProgress(new UserMade600Posts(), 1);
+        $user->addProgress(new UserMade700Posts(), 1);
+        $user->addProgress(new UserMade800Posts(), 1);
+        $user->addProgress(new UserMade1000Posts(), 1);
     }
 }

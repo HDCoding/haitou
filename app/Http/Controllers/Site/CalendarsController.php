@@ -17,6 +17,7 @@ use App\Achievements\UserMadeFirstEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\CalendarRequest;
 use App\Models\Calendar;
+use App\User;
 use Illuminate\Http\Request;
 
 class CalendarsController extends Controller
@@ -43,18 +44,7 @@ class CalendarsController extends Controller
         $user->calendars()->create($data);
 
         // Achievements
-        $user->unlock(new UserMadeFirstEvent());
-        $user->addProgress(new UserMade50Events(), 1);
-        $user->addProgress(new UserMade100Events(), 1);
-        $user->addProgress(new UserMade200Events(), 1);
-        $user->addProgress(new UserMade300Events(), 1);
-        $user->addProgress(new UserMade400Events(), 1);
-        $user->addProgress(new UserMade500Events(), 1);
-        $user->addProgress(new UserMade600Events(), 1);
-        $user->addProgress(new UserMade700Events(), 1);
-        $user->addProgress(new UserMade800Events(), 1);
-        $user->addProgress(new UserMade900Events(), 1);
-        $user->addProgress(new UserMade1000Events(), 1);
+        $this->achievement($user);
 
         //give points to user
         $points = setting('points_rating');
@@ -109,5 +99,22 @@ class CalendarsController extends Controller
 
         toastr()->warning('Evento Deletado', 'Aviso');
         return redirect()->to('calendars');
+    }
+
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstEvent());
+        $user->addProgress(new UserMade50Events(), 1);
+        $user->addProgress(new UserMade100Events(), 1);
+        $user->addProgress(new UserMade200Events(), 1);
+        $user->addProgress(new UserMade300Events(), 1);
+        $user->addProgress(new UserMade400Events(), 1);
+        $user->addProgress(new UserMade500Events(), 1);
+        $user->addProgress(new UserMade600Events(), 1);
+        $user->addProgress(new UserMade700Events(), 1);
+        $user->addProgress(new UserMade800Events(), 1);
+        $user->addProgress(new UserMade900Events(), 1);
+        $user->addProgress(new UserMade1000Events(), 1);
     }
 }
