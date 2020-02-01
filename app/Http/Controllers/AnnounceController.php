@@ -190,7 +190,7 @@ class AnnounceController extends Controller
         $old_update = $client->updated_at ? $client->updated_at->timestamp : Carbon::now()->timestamp;
 
         //checa se o usuario tem direitos de VIP
-        $is_vip = $user->vips()->where('user_id', '=', $user->id)->first();
+        $is_vip = $user->vips()->where('user_id', '=', $user->id)->where('is_active', '=', true)->first();
 
         //modifica o upload ou download
         if (!$is_vip) {
