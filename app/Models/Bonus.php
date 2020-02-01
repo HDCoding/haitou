@@ -20,7 +20,6 @@ class Bonus extends Model
 
     protected $fillable = [
         'name',
-        'description',
         'cost',
         'quantity',
         'bonus_type',
@@ -31,13 +30,13 @@ class Bonus extends Model
     public function type()
     {
         switch ($this->bonus_type) {
-            case 0: return 'Download'; break;
-            case 1: return 'Upload'; break;
-            case 2: return 'Freeleech'; break;
-            case 3: return 'Advertencia'; break;
-            case 4: return 'Convite'; break;
-            case 5: return 'Slots'; break;
-            default: return 'Bug'; break;
+            case 0: echo 'Download'; break;
+            case 1: echo 'Upload'; break;
+            case 2: echo 'Freeleech'; break;
+            case 3: echo 'Advertência'; break;
+            case 4: echo 'Convite'; break;
+            case 5: echo 'Slots'; break;
+            default: echo 'Bug'; break;
         }
     }
 
