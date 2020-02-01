@@ -42,7 +42,7 @@
                                 @foreach ($levels as $key => $level)
                                     <tr>
                                         <td class="align-middle">{{ ++$key }}</td>
-                                        <td class="align-middle {{ auth()->user()->username == $level->username ? 'bg-success' : '' }}">
+                                        <td class="align-middle {{ auth()->user()->id == $level->id ? 'bg-success' : '' }}">
                                             @if ($level->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
