@@ -213,7 +213,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('user/points', 'StatisticsController@points')->name('stats.points');
             Route::get('user/levels', 'StatisticsController@levels')->name('stats.levels');
             Route::get('user/seedtime', 'StatisticsController@seedtime')->name('stats.seedtime');
-            Route::get('user/seedsize', 'StatisticsController@seedsize')->name('stats.seedsize');
 
             Route::get('torrent/seeded', 'StatisticsController@seeded')->name('stats.seeded');
             Route::get('torrent/leeched', 'StatisticsController@leeched')->name('stats.leeched');
