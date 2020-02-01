@@ -42,9 +42,7 @@
                                 <tbody>
                                 @foreach ($seeded as $key => $seed)
                                     <tr>
-                                        <td>
-                                            {{ ++$key }}
-                                        </td>
+                                        <td>{{ ++$key }}</td>
                                         <td>
                                             <a class="font-weight-bold" href="{{ route('torrent.show', ['id' => $seed->id, 'slug' => $seed->slug]) }}">
                                                 {{ $seed->name }}
