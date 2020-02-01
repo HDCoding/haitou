@@ -42,9 +42,7 @@
                                 <tbody>
                                 @foreach ($completed as $key => $complete)
                                     <tr>
-                                        <td>
-                                            {{ ++$key }}
-                                        </td>
+                                        <td>{{ ++$key }}</td>
                                         <td>
                                             <a class="font-weight-bold" href="{{ route('torrent.show', ['id' => $complete->id, 'slug' => $complete->slug]) }}">
                                                 {{ $complete->name }}
