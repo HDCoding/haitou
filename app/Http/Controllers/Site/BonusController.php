@@ -20,6 +20,7 @@ use App\Models\Bonus;
 use App\Models\UserBonus;
 use App\Models\Vip;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,26 +34,48 @@ class BonusController extends Controller
     public function index()
     {
         $points = Bonus::where('is_enabled', '=', true)->get();
+        return view('site.bonus.bonus', compact('points'));
+    }
+
+    public function stats()
+    {
+        return view('site.bonus.stats');
+    }
+
+    public function gifts(Request $request)
+    {
+        $user = $request->user();
+
+        $transactions = UserBonus::with(['user:id,username,slug', 'member:id,username,slug'])->where(function ($query) use ($user) {
+            $query->where('user_id', '=', $user->id)->orwhere('member_id', '=', $user->id);
+        })->where('bonus_id', '=', 1)->orderBy('created_at', 'DESC')->paginate(30);
+
+        $sent = UserBonus::where('user_id', '=', $user->id)->where('bonus_id', '=', 1)->sum('cost');
+        $received = UserBonus::where('member_id', '=', $user->id)->where('bonus_id', '=', 1)->sum('cost');
+
+        return view('site.bonus.gifts', compact('transactions', 'sent', 'received'));
+    }
+
+    public function donates()
+    {
         $members = User::select('id', 'username')
-            ->where('status', '=', 1)
             ->where('id', '!=', auth()->user()->id)
+            ->whereNotIn('status', [0, 2, 3])
             ->get()
             ->pluck('username', 'id');
 
-        return view('site.bonus.index', compact('points', 'members'));
+        return view('site.bonus.donates', compact('members'));
     }
 
-    public function store(Request $request)
+    public function exchange(Request $request, $bonus_id)
     {
-        $bonus_id = $request->input('bonus_id');
-
-        $point = Bonus::where('id', '=', $bonus_id)->firstOrFail();
         $user = $request->user();
+        $point = Bonus::where('id', '=', $bonus_id)->firstOrFail();
 
         if ($user->points >= $point->cost) {
-            $try = $this->exchange($user->id, $bonus_id);
+            $try = $this->doItemExchange($user->id, $bonus_id);
             if (!$try) {
-                toastr()->warning('Infelizmente não foi possivel realizado a troca!');
+                toastr()->warning('Infelizmente não foi possivel realizado a troca!', 'Aviso');
                 return redirect()->to('bonus');
             }
 
@@ -60,18 +83,7 @@ class BonusController extends Controller
             $user->save();
 
             // Achievements
-            $user->unlock(new UserMadeFirtBonusTransation());
-            $user->addProgress(new UserMade50BonusTransaction(), 1);
-            $user->addProgress(new UserMade100BonusTransation(), 1);
-            $user->addProgress(new UserMade200BonusTransation(), 1);
-            $user->addProgress(new UserMade300BonusTransation(), 1);
-            $user->addProgress(new UserMade400BonusTransation(), 1);
-            $user->addProgress(new UserMade500BonusTransation(), 1);
-            $user->addProgress(new UserMade600BonusTransation(), 1);
-            $user->addProgress(new UserMade700BonusTransation(), 1);
-            $user->addProgress(new UserMade800BonusTransation(), 1);
-            $user->addProgress(new UserMade900BonusTransation(), 1);
-            $user->addProgress(new UserMade1000BonusTransation(), 1);
+            $this->unlock($user);
 
         } else {
             toastr()->warning('Infelizmente não foi possivel realizado a troca!', 'Aviso');
@@ -82,27 +94,30 @@ class BonusController extends Controller
         return redirect()->to('bonus');
     }
 
-    public function exchange($user_id, $point_id)
+    private function doItemExchange($user_id, $point_id)
     {
-        $data = now();
+        $data = new Carbon();
         $item = Bonus::where('id', '=', $point_id)->first();
+
         $user = User::findOrFail($user_id);
 
         $freeleecher = Vip::where('user_id', '=', $user->id)->first();
 
-        $transation = new UserBonus();
-
         if ($item->bonus_type == 0) {
             if ($user->downloaded >= $item->quantity) {
                 $user->downloaded -= $item->quantity;
-                $user->save();
+                $user->update();
             } else {
                 return false;
             }
+
         } elseif ($item->bonus_type == 1) {
+
             $user->uploaded += $item->quantity;
-            $user->save();
+            $user->update();
+
         } elseif ($item->bonus_type == 2) {
+
             if (!$freeleecher) {
                 $freeleech = new Vip();
                 $freeleech->user_id = $user->id;
@@ -110,26 +125,40 @@ class BonusController extends Controller
                 $freeleech->is_active = true;
                 $freeleech->expires_on = $data->addDays($item->quantity);
                 $freeleech->save();
+
+                //change user group
+                $user->group_id = 6;
+                $user->update();
             } else {
                 return false;
             }
+
         } elseif ($item->bonus_type == 3) {
+
             if ($user->warned == true) {
                 $user->warned = false;
-                $user->save();
-                DB::table('moderates')->where('user_id', '=', $user->id)->update(['is_enabled' => false, 'expires_on' => null]);
+                $user->update();
+                DB::table('moderates')
+                    ->where('user_id', '=', $user->id)
+                    ->update(['is_enabled' => false, 'expires_on' => null]);
             } else {
                 return false;
             }
+
         } elseif ($item->bonus_type == 4) {
+
             $user->invites += $item->quantity;
-            $user->save();
+            $user->update();
+
         } elseif ($item->bonus_type == 5) {
+
             $user->max_slots += $item->quantity;
-            $user->save();
+            $user->update();
+
         }
 
-        $transation->bonus_id = $item->bonus_type;
+        $transation = new UserBonus();
+        $transation->bonus_id = $item->id;
         $transation->user_id = 1;
         $transation->member_id = $user->id;
         $transation->cost = $item->cost;
@@ -166,25 +195,31 @@ class BonusController extends Controller
             $member->update();
 
             // Achievements
-            $user->unlock(new UserMadeFirtBonusTransation());
-            $user->addProgress(new UserMade50BonusTransaction(), 1);
-            $user->addProgress(new UserMade100BonusTransation(), 1);
-            $user->addProgress(new UserMade200BonusTransation(), 1);
-            $user->addProgress(new UserMade300BonusTransation(), 1);
-            $user->addProgress(new UserMade400BonusTransation(), 1);
-            $user->addProgress(new UserMade500BonusTransation(), 1);
-            $user->addProgress(new UserMade600BonusTransation(), 1);
-            $user->addProgress(new UserMade700BonusTransation(), 1);
-            $user->addProgress(new UserMade800BonusTransation(), 1);
-            $user->addProgress(new UserMade900BonusTransation(), 1);
-            $user->addProgress(new UserMade1000BonusTransation(), 1);
+            $this->unlock($user);
 
         } else {
-            toastr()->warning('Infelizmente não foi possivel realizado a troca! Voce nao possui pontos suficientes', 'Aviso');
+            toastr()->warning('Voce nao possui pontos suficientes', 'Aviso');
             return redirect()->to('bonus');
         }
 
         toastr()->success('Troca realizada com sucesso!', 'Bonus');
         return redirect()->to('bonus');
+    }
+
+    private function unlock(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirtBonusTransation());
+        $user->addProgress(new UserMade50BonusTransaction(), 1);
+        $user->addProgress(new UserMade100BonusTransation(), 1);
+        $user->addProgress(new UserMade200BonusTransation(), 1);
+        $user->addProgress(new UserMade300BonusTransation(), 1);
+        $user->addProgress(new UserMade400BonusTransation(), 1);
+        $user->addProgress(new UserMade500BonusTransation(), 1);
+        $user->addProgress(new UserMade600BonusTransation(), 1);
+        $user->addProgress(new UserMade700BonusTransation(), 1);
+        $user->addProgress(new UserMade800BonusTransation(), 1);
+        $user->addProgress(new UserMade900BonusTransation(), 1);
+        $user->addProgress(new UserMade1000BonusTransation(), 1);
     }
 }
