@@ -41,7 +41,7 @@
                                 @foreach ($uploaders as $key => $uploader)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td {{ auth()->user()->username == $uploader->user->username ? 'class=bg-success' : '' }}>
+                                        <td {{ auth()->user()->id == $uploader->user->id ? 'class=bg-success' : '' }}>
                                             @if ($uploader->user->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
