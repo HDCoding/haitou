@@ -65,7 +65,7 @@ class NewPostNotification extends Notification
 
         if ($this->type == 'subscription') {
             return [
-                'title' => $this->poster->name . ' Postou em um Subscrito Tópico',
+                'title' => $this->poster->name . ' Postou em um Tópico que você é inscrito(a)',
                 'icon' => '',
                 'body' => $this->poster->name . ' deixou uma nova postagem no Tópico inscrito ' . $this->post->topic->name,
                 'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}"
