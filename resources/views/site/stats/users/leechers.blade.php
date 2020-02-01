@@ -41,7 +41,7 @@
                                 @foreach ($leechers as $key => $leecher)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td {{ auth()->user()->username == $leecher->user->username ? 'class=bg-success' : '' }}>
+                                        <td {{ auth()->user()->id == $leecher->user->id ? 'class=bg-success' : '' }}>
                                             @if ($leecher->user->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
