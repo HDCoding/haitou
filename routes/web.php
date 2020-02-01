@@ -223,6 +223,9 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
             Route::get('groups', 'StatisticsController@groups')->name('stats.groups');
             Route::get('group/{slug}', 'StatisticsController@group')->name('stats.group');
+
+            Route::get('states', 'StatisticsController@states')->name('stats.states');
+            Route::get('state/{state_id}', 'StatisticsController@state')->name('stats.state');
         });
 
         //Studios
