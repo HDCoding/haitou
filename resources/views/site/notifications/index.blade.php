@@ -22,19 +22,20 @@
 
     <div class="container-fluid">
         <!-- Options -->
-        <div class="text-center mb-4">
-            <a href="{{ route('notifications.updateall') }}">
-                <button type="button" class="btn btn btn-success" data-toggle="tooltip" data-original-title="Marcar tudo como lido">
-                    <i class="fa fa-eye"></i> Marcar tudo como lido
-                </button>
-            </a>
-            <a href="{{ route('notifications.destroyall') }}">
-                <button type="button" class="btn btn btn-danger" data-toggle="tooltip" data-original-title="Excluir todas as notificações">
-                    <i class="fa fa-times"></i> Excluir todas as notificações
-                </button>
-            </a>
+        <div class="row">
+            <div class="col-md-12 mt-3 mb-3">
+                <div class="float-left">
+                    <a href="{{ route('notifications.updateall') }}" class="btn btn-sm btn-success btn-rounded">
+                        <i class="fa fa-eye"></i> Marcar tudo como lido
+                    </a>
+                    <a href="{{ route('notifications.destroyall') }}" class="btn btn-sm btn-danger btn-rounded">
+                        <i class="fa fa-times"></i> Excluir todas as notificações
+                    </a>
+                </div>
+            </div>
         </div>
         <!-- / Options -->
+
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -44,13 +45,13 @@
                         @forelse($notifications as $notification)
                             <div class="media pb-1 mb-4">
                                 <!-- Icone -->
-                                <div class="ui-icon ui-icon-sm {{ $notification->data['icon'] }} border-0 text-white"></div>
+                                <div class="ui-icon {{ $notification->data['icon'] }} border-0 text-dark"></div>
                                 <!-- End Icone -->
                                 <div class="media-body ml-3">
                                     <a href="{{ route('notifications.show', ['id' => $notification->id]) }}">
                                         {{ $notification->data['title'] }}
                                     </a>
-                                    <p class="my-1 text-dark {{ !empty($notification->read_at) ?: 'bg-lighter' }}">
+                                    <p class="my-1 text-dark {{ !empty($notification->read_at) ?: 'bg-light' }}">
                                         {{ $notification->data['body'] }}
                                     </p>
                                     <div class="clearfix">
