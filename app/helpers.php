@@ -86,12 +86,12 @@ if (!function_exists('day_month_year')) {
     }
 }
 
-if (!function_exists('ative_page')) {
+if (!function_exists('active_page')) {
     /**
      * Check the current URL that the user is browsing
      * Set as active for the current page
      */
-    function ative_page(string $url): string
+    function active_page(string $url): string
     {
         return request()->is($url) || request()->is("$url/*") ? 'active' : '';
     }
