@@ -50,8 +50,15 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::get('actor/{id}.{slug}', 'ActorsController@show')->name('actor.show');
 
         //Bonus
-        Route::resource('bonus', 'BonusController')->only(['index', 'store']);
-        Route::post('bonus/donate', 'BonusController@donate');
+        //Bookmark
+        Route::prefix('bonus')->group(function () {
+            Route::get('/', 'BonusController@index')->name('bonus');
+            Route::get('stats', 'BonusController@stats')->name('bonus.stats');
+            Route::get('gifts', 'BonusController@gifts')->name('bonus.gifts');
+            Route::get('donates', 'BonusController@donates')->name('bonus.donates');
+            Route::post('{id}/exchange', 'BonusController@exchange')->name('bonus.exchange');
+            Route::post('donate', 'BonusController@donate')->name('bonus.donate');
+        });
 
         //Bookmark
         Route::prefix('bookmark')->group(function () {
