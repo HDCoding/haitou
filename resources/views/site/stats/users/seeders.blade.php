@@ -41,7 +41,7 @@
                                 @foreach ($seeders as $key => $seeder)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td {{ auth()->user()->username == $seeder->user->username ? 'class=bg-success' : '' }}>
+                                        <td {{ auth()->user()->id == $seeder->user->id ? 'class=bg-success' : '' }}>
                                             @if ($seeder->user->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
