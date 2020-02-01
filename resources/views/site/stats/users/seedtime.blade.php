@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Top seedtime')
+@section('title', 'Top Tempo Seed')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('statistics') }}">Estatísticas</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Top seedtime</li>
+                            <li class="breadcrumb-item active" aria-current="page">Top Tempo Seed</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Top seedtime</h4>
+                        <h4 class="card-title">Top Tempo Seed</h4>
                         @include('site.stats.users.block_user_menu')
                         <div class="table-responsive m-t-15">
                             <table class="table table-striped">
@@ -41,7 +41,7 @@
                                 @foreach ($seedtimes as $key => $seeder)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td {{ auth()->user()->username == $seeder->user->username ? 'class=bg-success' : '' }}>
+                                        <td {{ auth()->user()->id == $seeder->user->id ? 'class=bg-success' : '' }}>
                                             @if ($seeder->user->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
@@ -58,9 +58,7 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <span class="text-primary">{{ human_time($seeder->seed_time) }}</span>
-                                        </td>
+                                        <td><span class="text-primary">{{ $seeder->seed_time }}</span></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
