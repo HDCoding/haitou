@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Vip;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class AutoRecycleVips extends Command
 {
@@ -41,9 +42,16 @@ class AutoRecycleVips extends Command
         $current = now();
         $vips = Vip::where('expires_on', '<', $current)->get();
 
+        //Disable VIP on database
         foreach ($vips as $vip) {
             // Delete The Record From DB
-            $vip->delete();
+            $vip->is_active = false;
+            $vip->save();
+        }
+
+        //Update user group
+        foreach ($vips as $vip) {
+            DB::table('users')->where('id', '=', $vip->user_id)->update(['group_id' => 2]);
         }
     }
 }
