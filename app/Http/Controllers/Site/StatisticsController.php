@@ -12,6 +12,7 @@ use App\Models\Historic;
 use App\Models\Invitation;
 use App\Models\Peer;
 use App\Models\Report;
+use App\Models\State;
 use App\Models\Thank;
 use App\Models\Torrent;
 use App\User;
@@ -323,7 +324,25 @@ class StatisticsController extends Controller
         $users = User::select('id', 'username', 'slug', 'group_id', 'avatar', 'created_at')
             ->where('group_id', '=', $group->id)->latest()->paginate(100);
 
-        return view('site.stats.groups.group', compact('users', 'group'));
+        return view('site.stats.groups.group', compact('group', 'users'));
+    }
+
+    public function states()
+    {
+        // Fetch States User Counts
+        $states = State::all();
+
+        return view('site.stats.states.states', compact('states'));
+    }
+
+    public function state($state_id)
+    {
+        // Fetch Users In State
+        $state = State::where('id', '=', $state_id)->firstOrFail();
+        $users = User::select('id', 'username', 'slug', 'state_id', 'avatar', 'created_at')
+            ->where('state_id', '=', $state->id)->latest()->paginate(100);
+
+        return view('site.stats.states.state', compact('state', 'users'));
     }
 
 }
