@@ -44,28 +44,31 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($uploads as $upload)
+                                @foreach($torrents as $torrent)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('torrent.show', ['id' => $upload->id, 'slug' => $upload->slug]) }}" target="_blank">
-                                                {{ $upload->name }}
+                                            <a href="{{ route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]) }}" target="_blank">
+                                                {{ $torrent->name }}
                                             </a>
                                             <div class="pull-right">
-                                                <a href="{{ route('torrent.download', ['id' => $upload->id]) }}">
+                                                <a href="{{ route('torrents.edit', [$torrent->id]) }}">
+                                                    <button class="btn btn-xs btn-success btn-round" type="button">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </button>
+                                                </a>
+                                                <a href="{{ route('torrent.download', ['id' => $torrent->id]) }}">
                                                     <button class="btn btn-xs btn-primary btn-round" type="button">
                                                         <i class="fas fa-download"></i>
                                                     </button>
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $upload->category->name }}</td>
-                                        <td><span class="badge badge-info font-weight-bold"> {{ $upload->size() }}</span></td>
-                                        <td><span class="badge badge-success font-weight-bold"> {{ $upload->seeders }}</span></td>
-                                        <td><span class="badge badge-danger font-weight-bold"> {{ $upload->leechers }}</span></td>
-                                        <td><span class="badge badge-warning font-weight-bold"> {{ $upload->times_completed }}</span></td>
-                                        <td>
-                                            {{ (format_date($upload->created_at) ? $upload->created_at->diffForHumans() : 'N/A') }}
-                                        </td>
+                                        <td>{{ $torrent->category->name }}</td>
+                                        <td><span class="badge badge-info font-weight-bold"> {{ $torrent->size() }}</span></td>
+                                        <td><span class="badge badge-success font-weight-bold"> {{ $torrent->seeders }}</span></td>
+                                        <td><span class="badge badge-danger font-weight-bold"> {{ $torrent->leechers }}</span></td>
+                                        <td><span class="badge badge-warning font-weight-bold"> {{ $torrent->times_completed }}</span></td>
+                                        <td>{{ $torrent->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
