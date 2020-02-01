@@ -28,6 +28,7 @@ use App\Models\Tag;
 use App\Models\Thank;
 use App\Models\Torrent;
 use App\Notifications\NewReseedRequestNotification;
+use App\Notifications\NewThankYouNotification;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -311,14 +312,26 @@ class TorrentsController extends Controller
             return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
         }
 
+        if ($user->id == $torrent->user_id) {
+            toastr()->warning('Você não pode agradecer seu próprio Upload.', 'Aviso');
+            return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
+        }
+
         $thank = new Thank();
         $thank->torrent_id = $torrent->id;
         $thank->user_id = $user->id;
         $thank->save();
 
-        //give points to user
+        //Thank you notification to uploader
+        $uploader = User::where('id', '=', $torrent->user_id)->first();
+        $uploader->notify(new NewThankYouNotification($torrent));
+
+        // Give points to both users
         $points = setting('points_thanks');
+        //logged user
         $user->updatePoints($points);
+        //uploader
+        $uploader->updateOfflinePoints($torrent->user_id, $points);
 
         return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
     }
