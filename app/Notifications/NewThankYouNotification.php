@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Thank;
+use App\Models\Torrent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
@@ -10,9 +11,7 @@ class NewThankYouNotification extends Notification
 {
     use Queueable;
 
-    public $type;
-
-    public $thank;
+    public $torrent;
 
     /**
      * Create a new notification instance.
@@ -20,10 +19,9 @@ class NewThankYouNotification extends Notification
      * @param string $type
      * @param Thank $thank
      */
-    public function __construct(string $type, Thank $thank)
+    public function __construct(Torrent $torrent)
     {
-        $this->type = $type;
-        $this->thank = $thank;
+        $this->torrent = $torrent;
     }
 
     /**
@@ -59,10 +57,10 @@ class NewThankYouNotification extends Notification
         $appurl = config('app.url');
 
         return [
-            'title' => $this->thank->user->username . ' Agradeceu por um Torrent enviado',
+            'title' => 'Agradeceu pelo Torrent enviado',
             'icon' => '',
-            'body' => $this->thank->user->username . ' deixou um agradecimento em Uploaded Torrent ' . $this->thank->torrent->name,
-            'url' => "{$appurl}/torrent/{$this->thank->torrent->id}.{$this->thank->torrent->slug}",
+            'body' => ' Deixou um agradecimento em Uploaded Torrent ' . $this->torrent->name,
+            'url' => "{$appurl}/torrent/{$this->torrent->id}.{$this->torrent->torrent->slug}",
         ];
     }
 }
