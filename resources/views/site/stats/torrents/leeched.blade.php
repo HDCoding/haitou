@@ -42,9 +42,7 @@
                                 <tbody>
                                 @foreach ($leeched as $key => $leech)
                                     <tr>
-                                        <td>
-                                            {{ ++$key }}
-                                        </td>
+                                        <td>{{ ++$key }}</td>
                                         <td>
                                             <a class="font-weight-bold" href="{{ route('torrent.show', ['id' => $leech->id, 'slug' => $leech->slug]) }}">
                                                 {{ $leech->name }}
