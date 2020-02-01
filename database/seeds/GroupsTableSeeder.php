@@ -12,7 +12,7 @@ class GroupsTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = [
+        $groups = [
             [
                 'name' => 'Membro',
                 'color' => '#7289DA',
@@ -93,8 +93,8 @@ class GroupsTableSeeder extends Seeder
             ]
         ];
 
-        foreach ($roles as $role) {
-            Group::create($role);
+        foreach ($groups as $group) {
+            Group::create($group);
         }
     }
 }
