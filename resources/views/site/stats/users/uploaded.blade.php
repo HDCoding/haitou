@@ -45,7 +45,7 @@
                                         <td>
                                             {{ ++$key }}
                                         </td>
-                                        <td {{ auth()->user()->username == $uploader->username ? 'class=bg-success' : '' }}>
+                                        <td {{ auth()->user()->id == $uploader->id ? 'class=bg-success' : '' }}>
                                             @if ($uploader->show_profile == false)
                                                 <span class="badge badge-pill badge-light font-weight-bold">
                                                     <span class="text-orange">
