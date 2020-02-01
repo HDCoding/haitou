@@ -83,6 +83,14 @@
             <!-- Right side toggle and nav items -->
             <!-- ============================================================== -->
             <ul class="navbar-nav float-right">
+                @if(auth()->user()->unreadNotifications()->count() > 0)
+                <li class="nav-item dropdown">
+                    <a class="nav-link waves-effect waves-dark" href="{{ route('notifications.index') }}" aria-haspopup="true" aria-expanded="false">
+                        <span class="far fa-dot-circle text-danger"></span>
+                        <i class="mdi mdi-bell font-24 text-success align-middle"></i>
+                    </a>
+                </li>
+                @endif
                 <!-- ============================================================== -->
                 <!-- User profile and search -->
                 <!-- ============================================================== -->
