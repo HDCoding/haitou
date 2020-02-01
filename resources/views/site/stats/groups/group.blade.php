@@ -72,7 +72,7 @@
                 "displayLength": 100,
                 "searching": true,
                 "responsive": true,
-                "order": [[ 0, "asc" ]],
+                "order": [[ 1, "asc" ]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                 }
