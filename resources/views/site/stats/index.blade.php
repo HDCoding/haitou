@@ -52,6 +52,16 @@
                 </div>
             </div>
             <!-- Column -->
+            <!-- Column -->
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="m-t-0"><i class="fa fa-flag text-orange"></i></h1>
+                        <a class="h3 text-success" href="{{ route('stats.states') }}">Estados</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
         </div>
         <hr>
         <div class="row">
