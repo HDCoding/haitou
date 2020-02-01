@@ -326,9 +326,9 @@ class TorrentsController extends Controller
         $user = $request->user();
         $torrent = Torrent::findOrFail($torrent_id);
 
-        $completed = Complete::where('torrent_id', '=', $torrent->id)->get();
+        $completed = Complete::select('user_id')->where('torrent_id', '=', $torrent->id)->get();
 
-        if ($torrent->seeders <= 2) {
+        if ($torrent->seeders < 2) {
             // Send Notification
             foreach ($completed as $complete) {
                 User::find($complete->user_id)->notify(new NewReseedRequestNotification($torrent));
