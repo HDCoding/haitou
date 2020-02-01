@@ -33,25 +33,31 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Editar</h3>
+                        <h4 class="card-title">Editar: {{ $torrent->name }}</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::model($torrent, ['route' => ['update.torrent', 'id' => $torrent->id], 'method' => 'PUT',  'class' => 'form-horizontal']) !!}
+                        {!! Form::model($torrent, ['route' => ['torrents.update', $torrent->id], 'method' => 'PUT',  'class' => 'form-horizontal']) !!}
 
-                        <div class="form-group">
-                            {!! Form::label('name', 'Nome:') !!}
-                            {!! Form::text('name', $torrent->name, ['class' => 'form-control', 'maxlength' => '250', 'required']) !!}
+                        <div class="form-row">
+                            <div class="form-group col-sm-9">
+                                {!! Form::label('name', 'Nome:') !!}
+                                {!! Form::text('name', $torrent->name, ['class' => 'form-control', 'maxlength' => '250', 'required']) !!}
+                            </div>
+                            <div class="form-group col-sm-3">
+                                {!! Form::label('is_anonymous', 'Upload Anonimo:') !!}
+                                {!! Form::select('is_anonymous', [true => 'Sim', false => 'Não'], $torrent->is_anonymous, ['class' => 'custom-select', 'required']) !!}
+                            </div>
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-sm-3">
+                            <div class="form-group col-sm-4">
                                 {!! Form::label('category_id', 'Categoria:') !!}
                                 {!! Form::select('category_id', $categories, $torrent->category_id, ['class' => 'custom-select select2']) !!}
                             </div>
-                            <div class="form-group col-sm-3">
+                            <div class="form-group col-sm-4">
                                 {!! Form::label('media_id', 'Mídia:') !!}
                                 {!! Form::select('media_id', $medias, $torrent->media_id, ['class' => 'custom-select select2']) !!}
                             </div>
-                            <div class="form-group col-sm-3">
+                            <div class="form-group col-sm-4">
                                 {!! Form::label('fansub_id', 'Fansub:') !!}
                                 {!! Form::select('fansub_id', $fansubs, $torrent->fansub_id, ['class' => 'custom-select select2']) !!}
                             </div>
@@ -60,22 +66,22 @@
                         <div class="form-row">
                             <div class="form-group col-sm-3">
                                 {!! Form::label('allow_comments', 'Habilita comentário:') !!}
-                                {!! Form::select('allow_comments', [false => 'Não', true => 'Sim'], $torrent->allowcomments, ['class' => 'custom-select', 'required']) !!}
+                                {!! Form::select('allow_comments', [false => 'Não', true => 'Sim'], $torrent->allow_comments, ['class' => 'custom-select', 'required']) !!}
 
                             </div>
                             <div class="form-group col-sm-3">
                                 {!! Form::label('is_freeleech', 'Free Leech:') !!}
-                                {!! Form::select('is_freeleech', [false => 'Não', true => 'Sim'], $torrent->freeleech, ['class' => 'custom-select', 'required']) !!}
+                                {!! Form::select('is_freeleech', [false => 'Não', true => 'Sim'], $torrent->is_freeleech, ['class' => 'custom-select', 'required']) !!}
 
                             </div>
                             <div class="form-group col-sm-3">
                                 {!! Form::label('is_silver', 'Silver:') !!}
-                                {!! Form::select('is_silver', [false => 'Não', true => 'Sim'], $torrent->silver, ['class' => 'custom-select', 'required']) !!}
+                                {!! Form::select('is_silver', [false => 'Não', true => 'Sim'], $torrent->is_silver, ['class' => 'custom-select', 'required']) !!}
 
                             </div>
                             <div class="form-group col-sm-3">
                                 {!! Form::label('is_doubleup', 'Double UP:') !!}
-                                {!! Form::select('is_doubleup', [false => 'Não', true => 'Sim'], $torrent->doubleup, ['class' => 'custom-select', 'required']) !!}
+                                {!! Form::select('is_doubleup', [false => 'Não', true => 'Sim'], $torrent->is_doubleup, ['class' => 'custom-select', 'required']) !!}
                             </div>
                         </div>
 
@@ -88,10 +94,10 @@
 
                         <div class="form-group">
                             {!! Form::label('description', 'Descrição:') !!}
-                            {!! Form::textarea('description', $torrent->description) !!}
+                            {!! Form::textarea('description', $torrent->description, ['class' => 'form-control', 'required']) !!}
                         </div>
 
-                        {!! Form::submit('Atulizar', ['class' => 'btn btn-primary btn-rounded']) !!}
+                        {!! Form::submit('Atulizar', ['class' => 'btn btn-success btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
