@@ -130,11 +130,6 @@
                                 @endif
                             @endauth
                         @endif
-                        @if(!empty(setting('discord')))
-                        <li>
-                            <a href="{{ hideref(setting('discord')) }}" target="_blank">Discord Chat</a>
-                        </li>
-                        @endif
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
