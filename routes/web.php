@@ -64,7 +64,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Save
             Route::post('save', 'BookmarksController@store')->name('save.bookmark');
             //Delete
-            Route::delete('delete/{id}', 'BookmarksController@destroy')->name('delete.bookmark');
+            Route::delete('{id}/delete', 'BookmarksController@destroy')->name('delete.bookmark');
         });
 
         //Calendars
@@ -434,7 +434,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::resource('studios', 'StudiosController')->except(['show']);
 
             //Torrents
-            Route::resource('torrents', 'TorrentsController')->except(['create', 'store', 'show']);
+            Route::get('torrents', 'TorrentsController@index');
+            Route::get('torrents/{torrent_id}/edit', 'TorrentsController@edit');
+            Route::put('torrents/{torrent_id}', 'TorrentsController@update');
+            Route::delete('torrents/{torrent_id}', 'TorrentsController@destroy');
 
             //Torrent Options
             Route::put('torrent/{id}/freeleech', 'TorrentsController@freeleech');
