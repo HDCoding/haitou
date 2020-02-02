@@ -2,6 +2,13 @@
 
 @section('title', 'Editar Membro')
 
+@section('css')
+    <!-- Vegas -->
+    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <!-- sceditor -->
+    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -23,12 +30,35 @@
 
     <div class="container-fluid">
         <div class="row">
+            <div class="col-md-12 mt-3 mb-3">
+                <div class="float-left">
+                    <a href="{{ route('staff.user.avatar', ['id' => $user->id]) }}" class="btn btn-sm btn-success btn-rounded">
+                        <i class="fa fa-times-circle"></i> Remover Avatar
+                    </a>
+                    <a href="{{ route('staff.user.cover', ['id' => $user->id]) }}" class="btn btn-sm btn-primary btn-rounded">
+                        <i class="fa fa-times"></i> Remover Cover
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <div class="card vegas-fixed-background" id="user-cover">
+                    <div class="card-body py-home">
+                        <h2 class="text-center text-primary"></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <!-- Column -->
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="m-t-30 text-center">
-                            <img src="{{ $user->avatar() }}" class="img-rounded" width="150" alt="avatar"/>
+                            <img src="{{ $user->avatar() }}" class="img-thumbnail" width="300" alt="avatar"/>
                             <h4 class="card-title m-t-10">{{ $user->username }}</h4>
                             <h6 class="card-subtitle">{{ $user->groupName() }}</h6>
                             <div class="row text-center justify-content-md-center">
@@ -76,14 +106,6 @@
                                 @includeIf('errors.errors', [$errors])
                                 {!! Form::model($user, ['url' => 'staff/users/' . $user->id, 'method' => 'PUT', 'class' => 'form-horizontal form-material']) !!}
                                     <div class="form-group">
-                                        {!! Form::label('avatar', 'Avatar:', ['class' => 'form-label']) !!}
-                                        {!! Form::text('avatar', $user->avatar, ['class' => 'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('cover', 'Cover:', ['class' => 'form-label']) !!}
-                                        {!! Form::text('cover', $user->cover(), ['class' => 'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
                                         {!! Form::label('title', 'Título para o Fórum', ['class' => 'form-label']) !!}
                                         {!! Form::text('title', $user->title, ['class' => 'form-control']) !!}
                                     </div>
@@ -115,5 +137,41 @@
             <!-- Column -->
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+    <!-- VegasJS -->
+    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <!-- sceditor -->
+    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        // vegasjs
+        $(function() {
+            // Fixed bg
+            $('#user-cover').vegas({
+                overlay: false,
+                timer: false,
+                shuffle: true,
+                slides: [
+                    { src: "{{ $user->cover() }}" },
+                ],
+                transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
+                animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
+            });
+        });
+
+        //sceditor
+        let textarea = document.getElementById('signature');
+        sceditor.create(textarea, {
+            format: 'bbcode',
+            locale: 'pt-BR',
+            emoticonsRoot: '/vendor/sceditor/',
+            style: '/vendor/sceditor/minified/themes/content/default.min.css'
+        });
+    </script>
 
 @endsection
