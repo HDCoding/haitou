@@ -32,34 +32,42 @@
             <small><span class="badge badge-default align-text-bottom ml-1">Trancado</span></small>
         @endif
         @includeIf('errors.errors', [$errors])
-        @if(auth()->user()->can('forum-mod'))
+
         <div class="row">
             <div class="col-md-12 mt-3 mb-4">
-                <h4>Moderação</h4>
+                @if(auth()->user()->can('forum-mod'))
+                    <h4>Moderação</h4>
+                @endif
                 <div class="float-left">
-                    @if ($topic->is_locked)
-                    <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-success btn-rounded">
-                        <i class="fa fa-lock-open"></i> Abrir Tópico
-                    </a>
-                    @else
-                    <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-primary btn-rounded">
-                        <i class="ion ion-ios-lock"></i> Fechar Tópico
-                    </a>
-                    @endif
+                    @if(auth()->user()->can('forum-mod'))
+                        @if ($topic->is_locked)
+                        <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-success btn-rounded">
+                            <i class="fa fa-lock-open"></i> Abrir Tópico
+                        </a>
+                        @else
+                        <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-primary btn-rounded">
+                            <i class="ion ion-ios-lock"></i> Fechar Tópico
+                        </a>
+                        @endif
 
-                    @if (!$topic->is_pinned)
-                    <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
-                        <i class="fa fa-file"></i> Pin Tópico
-                    </a>
-                    @else
-                    <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
-                        <i class="fa fa-file"></i> Unpin Tópico
-                    </a>
+                        @if (!$topic->is_pinned)
+                        <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
+                            <i class="fa fa-file"></i> Pin Tópico
+                        </a>
+                        @else
+                        <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
+                            <i class="fa fa-file"></i> Unpin Tópico
+                        </a>
+                        @endif
+                    @endif
+                    @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
+                        <a href="{{ route('topic.form.edit', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-orange btn-rounded">
+                            <i class="fa fa-pencil-alt"></i> Editar Tópico
+                        </a>
                     @endif
                 </div>
             </div>
         </div>
-        @endif
 
         @foreach($posts as $post)
             <div class="row">
@@ -162,7 +170,7 @@
                     <span class="card-header-title mr-2">Resposta rápida:</span>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['url' => route('forum.reply', ['id' => $topic->id, 'slug' => $topic->slug]), 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['url' => route('forum.post', ['id' => $topic->id, 'slug' => $topic->slug]), 'class' => 'form-horizontal']) !!}
                     <div class="form-group">
                         {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                         {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 8, 'required']) !!}
