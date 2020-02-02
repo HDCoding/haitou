@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="m-r-10">
-                                <span>RefeLoad Average</span>
+                                <span>Load Average</span>
                                 <h4>{{ $system->avg() }}</h4>
                             </div>
                         </div>
