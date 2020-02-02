@@ -118,18 +118,22 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('{id}.{slug}/new-topic', 'ForumsController@newTopicForm')->name('new.topic');
             Route::post('{id}.{slug}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
 
+            //Edit Topic
+            Route::get('topic/{id}.{slug}/edit', 'ForumsController@formTopicEdit')->name('topic.form.edit');
+            Route::put('topic/{id}.{slug}/edit', 'ForumsController@topicEdit')->name('topic.edit');
+
+            //Delete Topic
+            Route::delete('topic/{id}.{slug}', 'ForumsController@topicDelete')->name('topic.delete');
+
+            //Fast post
+            Route::post('topic/{id}.{slug}/post', 'ForumsController@post')->name('forum.post');
+
             //Edit Post
             Route::get('topic/{id}.{slug}/post-{postId}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
             Route::put('post/{postId}/edit', 'ForumsController@postEdit')->name('post.edit');
 
             //Delete Post
             Route::delete('post/{postId}', 'ForumsController@postDelete')->name('post.delete');
-
-            //Delete Topic
-            Route::delete('topic/{id}.{slug}', 'ForumsController@topicDelete')->name('topic.delete');
-
-            //Reply
-            Route::post('topic/{id}.{slug}/reply', 'ForumsController@reply')->name('forum.reply');
 
             // Open/Close Topic
             Route::get('topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum_openclose_topic');
