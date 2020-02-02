@@ -166,7 +166,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //Invites
         Route::resource('invites', 'InvitationsController')->only(['index', 'store']);
-        Route::get('resendinvite/{id}', 'InvitationsController@resend')->name('invite.resend');
+        Route::get('invites/{id}/resend', 'InvitationsController@resend')->name('invite.resend');
 
         //Lotteries TODO
         //Route::get('lotteries', 'LotteriesController@index')->name('site.lotteries');
