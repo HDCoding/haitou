@@ -61,7 +61,7 @@
 
                             @if ($report->post)
                                 <p class="well well-sm mt-2">
-                                    <a href="{{ route('user.profile', ['slug' => $report->forum_post->slug]) }}" target="_blank">
+                                    <a href="{{ route('post.edit.form', [$report->post->topic->id, $report->post->topic->slug, $report->post->id]) }}" target="_blank">
                                         {{ $report->name }}
                                     </a>
                                 </p>
@@ -69,7 +69,7 @@
 
                             @if ($report->torrent)
                                 <p class="well well-sm mt-2">
-                                    <a href="{{ route('torrent.show', ['id' => $report->torrent->id, 'slug' => $report->torrent->slug]) }}" target="_blank">
+                                    <a href="{{ route('torrent.show', [$report->torrent->id, $report->torrent->slug]) }}" target="_blank">
                                         {{ $report->name }}
                                     </a>
                                 </p>
