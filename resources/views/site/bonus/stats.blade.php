@@ -78,7 +78,7 @@
 
                                 <tr>
                                     <td><b>Por agradecimentos</b></td>
-                                    <td><b class="text-info">{{ setting('points_tdanks') }}</b></td>
+                                    <td><b class="text-info">{{ setting('points_thanks') }}</b></td>
                                 </tr>
                                 <tr>
                                     <td><b>Reportar (post, perfil, comentário, etc)</b></td>
