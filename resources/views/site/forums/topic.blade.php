@@ -87,7 +87,7 @@
                             <div class="table-responsive">
                                 {!! $post->contentHtml() !!}
                                 <hr>
-                                {{ $post->user->signature }}
+                                {!! $post->user->signature() !!}
                                 <div class="d-flex no-block align-items-center">
                                     <div class="ml-auto">
                                         <button class="btn btn-danger"><i class="fa fa fa-reply"></i> Reply</button>
