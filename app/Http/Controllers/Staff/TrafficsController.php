@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Helpers\NetwordInformation;
+use App\Helpers\NetworkInformation;
 use App\Http\Controllers\Controller;
 
 class TrafficsController extends Controller
@@ -13,7 +13,7 @@ class TrafficsController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('allow:acesso-total');
-        $this->vnstat = new NetwordInformation();
+        $this->vnstat = new NetworkInformation();
     }
 
     public function index()

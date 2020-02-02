@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class NetwordInformation
+class NetworkInformation
 {
     public function formatBitrate($bytes, $seconds)
     {
@@ -43,7 +43,6 @@ class NetwordInformation
                 return json_decode($streamBuffer, true);
             }
         }
-
     }
 
     public function hourly($interface)
