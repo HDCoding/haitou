@@ -87,12 +87,20 @@
                             <div class="table-responsive">
                                 {!! $post->contentHtml() !!}
                                 <hr>
-                                {!! $post->user->signature() !!}
-                                <div class="d-flex no-block align-items-center">
-                                    <div class="ml-auto">
-                                        <button class="btn btn-danger"><i class="fa fa fa-reply"></i> Reply</button>
+
+                                <div class="row col">
+                                    <div class="col-lg-10">
+                                        {!! $post->user->signature() !!}
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="d-flex no-block align-items-center">
+                                            <div class="ml-auto">
+                                                <button class="btn btn-danger"><i class="fa fa fa-reply"></i> Reply</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
