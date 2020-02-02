@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\BBCode;
 use App\Models\Attachment;
 use App\Models\Bookmark;
 use App\Models\Calendar;
@@ -491,6 +492,11 @@ class User extends Authenticatable
     public function uploads()
     {
         return $this->torrents()->where('user_id', '=', $this->id)->count();
+    }
+
+    public function signature()
+    {
+        return (new BBCode())->parse($this->signature, true);
     }
 
 }
