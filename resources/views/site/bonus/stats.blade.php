@@ -60,7 +60,7 @@
                                     <td><b class="text-info">{{ setting('points_upload') }}</b></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Votar na mídias</b></td>
+                                    <td><b>Votar nas mídias</b></td>
                                     <td><b class="text-info">{{ setting('points_rating') }}</b></td>
                                 </tr>
                                 <tr>
