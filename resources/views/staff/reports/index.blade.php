@@ -76,7 +76,7 @@
                                 @foreach($reports as $report)
                                     <tr>
                                         <th>{!! $report->type() !!}</th>
-                                        <td>{{ link_to_route('reports.show', $report->name, ['id' => $report->id]) }}</td>
+                                        <td>{{ link_to_route('reports.show', $report->name, [$report->id]) }}</td>
                                         <td>{{ $report->id }}</td>
                                         <td>{!! $report->solved() !!}</td>
                                         <td>{{ format_date($report->created_at) }}</td>
@@ -101,7 +101,7 @@
                 "displayLength": 50,
                 "searching": true,
                 "responsive": true,
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "desc" ]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                 }
