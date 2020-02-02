@@ -27,6 +27,7 @@ use App\Achievements\UserMadeFirstPost;
 use App\Achievements\UserMadeFirstTopic;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Forum\EditTopicRequest;
+use App\Http\Requests\Forum\FastPostRequest;
 use App\Http\Requests\Forum\NewTopicRequest;
 use App\Http\Requests\Forum\ReplyTopicRequest;
 use App\Models\Category;
@@ -365,14 +366,14 @@ class ForumsController extends Controller
         $posts->delete();
         $topic->delete();
 
-        toastr()->info('Este tópico foi excluído agora!', 'Tópico');
+        toastr()->info('Este tópico foi excluído!', 'Tópico');
         return redirect()->route('forum.topics', ['id' => $topic->forum->id, 'slug' => $topic->forum->slug]);
     }
 
     /**
-     * Add a Post to a Topic
+     * Add a Fast Post to a Topic
      */
-    public function reply(ReplyTopicRequest $request, $topic_id, $slug)
+    public function post(FastPostRequest $request, $topic_id, $slug)
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
@@ -535,5 +536,35 @@ class ForumsController extends Controller
         $user->addProgress(new UserMade700Posts(), 1);
         $user->addProgress(new UserMade800Posts(), 1);
         $user->addProgress(new UserMade1000Posts(), 1);
+    }
+
+    public function formTopicEdit(Request $request, $topic_id, $slug)
+    {
+        //Logged user
+        $user = $request->user();
+
+        //Edit topic title
+        $topic = Topic::whereSlug($slug)->findOrFail($topic_id);
+
+        abort_unless($user->can('forum-mod') || $user->id !== $topic->first_post_user_id, 403);
+
+        return view('site.forums.edit_topic', compact('topic'));
+    }
+
+    public function topicEdit(Request $request, $topic_id, $slug)
+    {
+        //Logged user
+        $user = $request->user();
+
+        //Edit topic title
+        $topic = Topic::whereSlug($slug)->findOrFail($topic_id);
+
+        abort_unless($user->can('forum-mod') || $user->id !== $topic->first_post_user_id, 403);
+
+        $topic->name = $request->input('name');
+        $topic->update();
+
+        toastr()->success('Título do Tópico Alterado', 'Tópico');
+        return redirect()->route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]);
     }
 }
