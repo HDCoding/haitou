@@ -22,9 +22,6 @@ class AppServiceProvider extends ServiceProvider
 
         // Return apis without: data[]
         Resource::withoutWrapping();
-
-        // X-Powered-By Attack
-        header_remove('X-Powered-By');
     }
 
     /**
