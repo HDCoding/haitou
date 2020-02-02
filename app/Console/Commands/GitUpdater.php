@@ -125,7 +125,7 @@ class GitUpdater extends Command
 
                 $this->clearCache();
 
-                if ($this->io->confirm('Atualizar novos pacotes (composer update)', true)) {
+                if ($this->io->confirm('Atualizar novos pacotes (composer update)', false)) {
                     $this->composer();
                 }
 
