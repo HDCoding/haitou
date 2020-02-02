@@ -99,7 +99,7 @@ class GitUpdater extends Command
             $this->cyan('Arquivos que precisam ser atualizados:');
             $this->io->listing($updating);
 
-            if ($this->io->confirm('Start the update process', false)) {
+            if ($this->io->confirm('Iniciar o processo de atualização?', false)) {
                 $this->call('down', [
                     '--message' => 'Currently Updating',
                     '--retry'   => '300',
