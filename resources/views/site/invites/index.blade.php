@@ -59,7 +59,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Meus Convites</h4>
                         <p class="text-muted text-center">
-                            Sua/Seu amiga(o) tem <b>{{ setting('invitedays') }}</b> dias para aceitar o
+                            Sua/Seu amiga(o) tem <b class="text-danger font-16">{{ setting('invitedays') }}</b> dias para aceitar o
                             convite, até que o mesmo seja deletado.
                         </p>
                         <div class="table-responsive m-t-15">
@@ -69,6 +69,7 @@
                                     <th>E-mail</th>
                                     <th>Data do convite</th>
                                     <th>Expira em</th>
+                                    <th>Re-enviar</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -77,10 +78,17 @@
                                         <th>{{ $invite->email }}</th>
                                         <td>{{ format_date($invite->created_at) }}</td>
                                         <td>{{ format_date($invite->expires_on) }}</td>
+                                        <td>
+                                            @if (!empty($invite->accepted_at) AND $invite->created_at < now()->copy()->subDays(2)->toDateTimeString())
+                                                <a class="btn btn-xs btn-success" href="{{ route('invite.resend', ['id' => $invite->id]) }}">
+                                                    <i class="fa fa-sync-alt"></i> Re-enviar
+                                                </a>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="4">
                                             <p class="text-center">Nenhum convite enviado no momento!</p>
                                         </td>
                                     </tr>
