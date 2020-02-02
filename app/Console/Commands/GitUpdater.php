@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Traits\ConsoleTools;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -73,7 +72,7 @@ class GitUpdater extends Command
         <fg=red>AO PROCEDER QUE VOCÊ CONCORDA COM A ISENÇÃO DE RESPONSABILIDADE ACIMA! USE POR SUA CONTA E RISCO!</>
         </>');
 
-        if (!$this->io->confirm('Gostaria de continuar?', false)) {
+        if (!$this->io->confirm('Gostaria de continuar?', true)) {
             $this->line('<fg=red>Cancelado...</>');
             die();
         }
@@ -99,9 +98,9 @@ class GitUpdater extends Command
             $this->cyan('Arquivos que precisam ser atualizados:');
             $this->io->listing($updating);
 
-            if ($this->io->confirm('Iniciar o processo de atualização?', false)) {
+            if ($this->io->confirm('Iniciar o processo de atualização?', true)) {
                 $this->call('down', [
-                    '--message' => 'Currently Updating',
+                    '--message' => 'Atualização em andamento, check novamente em alguns minutos.',
                     '--retry'   => '300',
                 ]);
 
@@ -109,16 +108,12 @@ class GitUpdater extends Command
 
                 $paths = $this->paths();
 
-                $this->backup($paths);
-
-                $this->header('Reseting Repository');
+                $this->header('Reposição do Repositório');
 
                 $this->commands([
                     'git fetch origin',
                     'git reset --hard origin/master',
                 ]);
-
-                $this->restore($paths);
 
                 $conflicts = array_intersect($updating, $paths);
                 if (count($conflicts) > 0) {
@@ -130,7 +125,7 @@ class GitUpdater extends Command
 
                 $this->clearCache();
 
-                if ($this->io->confirm('Atualizar novos pacotes (composer install)', true)) {
+                if ($this->io->confirm('Atualizar novos pacotes (composer update)', true)) {
                     $this->composer();
                 }
 
@@ -168,7 +163,7 @@ class GitUpdater extends Command
         $this->red('A atualização fará com que você perca as alterações que você possa ter feito no arquivo!');
 
         foreach ($updating as $file) {
-            if ($this->io->confirm("Update $file", true)) {
+            if ($this->io->confirm("Atualizar $file", true)) {
                 $this->updateFile($file);
             }
         }
@@ -179,46 +174,6 @@ class GitUpdater extends Command
     private function updateFile($file)
     {
         $this->process("git checkout origin/master -- $file");
-    }
-
-    private function backup(array $paths)
-    {
-        $this->header('Fazendo backup de arquivos');
-
-        $this->commands([
-            'rm -rf '.storage_path('gitupdate'),
-            'mkdir '.storage_path('gitupdate'),
-        ], true);
-
-        foreach ($paths as $path) {
-            $this->validatePath($path);
-            $this->createBackupPath($path);
-            $this->process($this->copy_command.' '.base_path($path).' '.storage_path('gitupdate').'/'.$path);
-        }
-
-        $this->done();
-    }
-
-    private function restore(array $paths)
-    {
-        $this->header('Restaurando backups');
-
-        foreach ($paths as $path) {
-            $to = Str::replaceLast('/.', '', base_path(dirname($path)));
-            $from = storage_path('gitupdate').'/'.$path;
-
-            if (is_dir($from)) {
-                $to .= '/'.basename($from).'/';
-                $from .= '/*';
-            }
-
-            $this->process("$this->copy_command $from $to");
-        }
-
-        $this->commands([
-            'git add .',
-            'git checkout origin/master -- composer.lock',
-        ]);
     }
 
     private function composer()
@@ -252,27 +207,6 @@ class GitUpdater extends Command
         $this->header('Atualizando permissões');
         $this->process('chown -R www-data: storage bootstrap public config');
         $this->done();
-    }
-
-    private function validatePath($path)
-    {
-        if (!is_file(base_path($path)) && !is_dir(base_path($path))) {
-            $this->red("O diretório '$path' é inválido");
-            //$this->call('up');
-            //die();
-        }
-    }
-
-    private function createBackupPath($path)
-    {
-        if (!is_dir(storage_path("gitupdate/$path")) && !is_file(base_path($path))) {
-            mkdir(storage_path("gitupdate/$path"), 0775, true);
-        } elseif (is_file(base_path($path)) && dirname($path) !== '.') {
-            $path = dirname($path);
-            if (!is_dir(storage_path("gitupdate/$path"))) {
-                mkdir(storage_path("gitupdate/$path"), 0775, true);
-            }
-        }
     }
 
     /**
