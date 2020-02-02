@@ -66,7 +66,7 @@
                 <div class="col-md-9 col-lg-9">
                     <div class="card">
                         <div class="card-header" id="post-{{ $post->id }}">
-                            <a class="mr-3" href="#" data-toggle="tooltip" title="Reportar Post">
+                            <a class="mr-3" href="{{ route('post.report', [$post->id]) }}" data-toggle="tooltip" title="Reportar Post">
                                 <i class="fas fa-flag"></i>
                             </a>
                             @if($post->user_id == auth()->user()->id OR auth()->user()->can('forum-mod'))
