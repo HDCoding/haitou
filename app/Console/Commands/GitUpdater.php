@@ -128,17 +128,9 @@ class GitUpdater extends Command
                     $this->manualUpdate($conflicts);
                 }
 
-                if ($this->io->confirm('Executar novas migrações (php artisan migrate)', true)) {
-                    $this->migrations();
-                }
-
-                if ($this->io->confirm('Compilar assets (npm run prod)', true)) {
-                    $this->compile();
-                }
-
                 $this->clearCache();
 
-                if ($this->io->confirm('Instale novos pacotes (composer install)', true)) {
+                if ($this->io->confirm('Atualizar novos pacotes (composer install)', true)) {
                     $this->composer();
                 }
 
@@ -146,7 +138,7 @@ class GitUpdater extends Command
 
                 $this->permissions();
 
-                $this->header('Trazendo site ao vivo');
+                $this->header('Trazendo site de volta ao ar');
                 $this->call('up');
             } else {
                 $this->alertDanger('Atualização interrompida');
@@ -231,24 +223,11 @@ class GitUpdater extends Command
 
     private function composer()
     {
-        $this->header('Instalando pacotes do composer');
+        $this->header('Atualizar pacotes do composer');
 
         $this->commands([
-            'composer install',
+            'composer update',
             'composer dump-autoload',
-        ]);
-
-        $this->done();
-    }
-
-    private function compile()
-    {
-        $this->header('Compilando Assets...');
-
-        $this->commands([
-            'rm -rf node_modules',
-            'npm install',
-            'npm run prod',
         ]);
 
         $this->done();
@@ -265,13 +244,6 @@ class GitUpdater extends Command
     {
         $this->header('Configurando o cache');
         $this->call('haitou:set-all-cache');
-        $this->done();
-    }
-
-    private function migrations()
-    {
-        $this->header('Executando novas migrações');
-        $this->call('migrate');
         $this->done();
     }
 
