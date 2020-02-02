@@ -182,12 +182,14 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::get('news/{id}.{slug}', 'NewsController@show')->name('read.news');
 
         //Notifications
-        Route::get('notifications', 'NotificationsController@index')->name('notifications.index');
-        Route::get('notifications/{id}', 'NotificationsController@show')->name('notifications.show');
-        Route::get('notification/update/{id}', 'NotificationsController@update')->name('notifications.update');
-        Route::get('notification/updateall', 'NotificationsController@updateAll')->name('notifications.updateall');
-        Route::get('notification/destroy/{id}', 'NotificationsController@destroy')->name('notifications.destroy');
-        Route::get('notification/destroyall', 'NotificationsController@destroyAll')->name('notifications.destroyall');
+        Route::prefix('notifications')->group(function () {
+            Route::get('/', 'NotificationsController@index')->name('notifications.index');
+            Route::get('{id}', 'NotificationsController@show')->name('notifications.show');
+            Route::get('update/{id}', 'NotificationsController@update')->name('notifications.update');
+            Route::get('updateall', 'NotificationsController@updateAll')->name('notifications.updateall');
+            Route::get('destroy/{id}', 'NotificationsController@destroy')->name('notifications.destroy');
+            Route::get('destroyall', 'NotificationsController@destroyAll')->name('notifications.destroyall');
+        });
 
         //Polls
         Route::prefix('poll')->group(function () {
@@ -482,6 +484,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
                 //Permissions
                 Route::get('{id}/permissions', 'UsersController@formPermission')->name('staff.user.permissions');
                 Route::post('{id}/updatepermission', 'UsersController@updatePermission');
+                //Remove avatar
+                Route::get('{id}/avatar', 'UsersController@avatarDelete')->name('staff.user.avatar');
+                //Remove cover
+                Route::get('{id}/cover', 'UsersController@coverDelete')->name('staff.user.cover');
             });
 
             //Visitors
