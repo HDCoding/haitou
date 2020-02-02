@@ -36,7 +36,7 @@
                                 <div class="d-flex align-items-center">
                                     <div>
                                         <h6 class="m-b-0 font-bold">{{ $option->name }}
-                                            <span class="font-light">{{ $option->votes()->count() }} Voto(s)</span>
+                                            <span class="font-light">{{ $option->votes()->count() }} Votos</span>
                                         </h6>
                                     </div>
                                     <div class="ml-auto">
