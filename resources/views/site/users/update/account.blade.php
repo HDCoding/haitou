@@ -7,6 +7,8 @@
     <link href="{{ asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet"/>
     <!-- Vegas -->
     <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <!-- sceditor -->
+    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
 @endsection
 
 @section('content')
@@ -94,8 +96,12 @@
     <script src="{{ asset('vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
     <!-- VegasJS -->
     <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <!-- sceditor -->
+    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        <!-- datepicker -->
+        // datepicker
         $(document).ready(function () {
             $('#birthday').datepicker({
                 format: 'yyyy-mm-dd',
@@ -103,6 +109,7 @@
                 autoclose: true
             });
         });
+        // vegasjs
         $(function() {
             // Fixed bg
             $('#user-cover').vegas({
@@ -115,6 +122,15 @@
                 transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
                 animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
             });
+        });
+
+        //sceditor
+        let textarea = document.getElementById('signature');
+        sceditor.create(textarea, {
+            format: 'bbcode',
+            locale: 'pt-BR',
+            emoticonsRoot: '/vendor/sceditor/',
+            style: '/vendor/sceditor/minified/themes/content/default.min.css'
         });
     </script>
 
