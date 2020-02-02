@@ -2,11 +2,6 @@
 
 @section('title', 'Editar Tópico')
 
-@section('css')
-    <!-- sceditor -->
-    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 
     <div class="page-breadcrumb">
@@ -33,12 +28,12 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar Tópico</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::open(['route' => ['new.topic', 'id' => $forum->id, 'slug' => $forum->slug], 'class' => 'form-horizontal']) !!}
-                        <div class="form-group">
+                        {!! Form::model($topic, ['route' => ['topic.edit', 'id' => $topic->id, 'slug' => $topic->slug], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        <div class="form-group ">
                             {!! Form::label('name', 'Título do tópico: *', ['class' => 'form-label']) !!}
-                            {!! Form::text('name', null, ['class' => 'form-control', 'required', 'maxlength' => 250]) !!}
+                            {!! Form::text('name', $topic->name, ['class' => 'form-control', 'required', 'maxlength' => 250, 'minlength' => 3]) !!}
                         </div>
-                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded']) !!}
+                        {!! Form::submit('Editar título', ['class' => 'btn btn-primary btn-rounded']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -46,24 +41,4 @@
         </div>
     </div>
 
-@endsection
-
-@section('scripts')
-    <!-- sceditor -->
-    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
-
-    <!-- script -->
-    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $(document).ready(function () {
-            let textarea = document.getElementById('content');
-            sceditor.create(textarea, {
-                format: 'bbcode',
-                locale: 'pt-BR',
-                emoticonsRoot: '/vendor/sceditor/',
-                style: '/vendor/sceditor/minified/themes/content/default.min.css'
-            });
-        });
-    </script>
 @endsection
