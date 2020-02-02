@@ -225,4 +225,16 @@ class UsersController extends Controller
 
         return redirect()->route('staff.user.permissions', [$user_id]);
     }
+
+    public function avatarDelete($user_id)
+    {
+        DB::table('users')->where('id', '=', $user_id)->update(['avatar' => null]);
+        return redirect()->back();
+    }
+
+    public function coverDelete($user_id)
+    {
+        DB::table('users')->where('id', '=', $user_id)->update(['cover' => null]);
+        return redirect()->back();
+    }
 }
