@@ -30,7 +30,7 @@
                         @include('includes.messages')
                         {!! Form::open(['url' => 'report', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('report_type', 2) !!}
-                        {!! Form::hidden('user_id', $user->id) !!}
+                        {!! Form::hidden('member_id', $user->id) !!}
                         @include('site.reports.form', ['submitButton' => 'Reportar'])
                         {!! Form::close() !!}
                     </div>
