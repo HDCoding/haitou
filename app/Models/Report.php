@@ -51,7 +51,7 @@ class Report extends Model
         return $this->belongsTo(Comment::class);
     }
 
-    public function user()
+    public function member()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
