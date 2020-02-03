@@ -135,6 +135,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Delete Post
             Route::delete('post/{postId}', 'ForumsController@postDelete')->name('post.delete');
 
+            //Reply Post
+            Route::get('t.{topicId}-p.{postId}/reply', 'ForumsController@formReply')->name('post.reply');
+            Route::post('t.{topicId}/reply', 'ForumsController@reply')->name('reply');
+
             // Open/Close Topic
             Route::get('topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum_openclose_topic');
 
