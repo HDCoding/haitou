@@ -353,7 +353,9 @@ class ForumsController extends Controller
         $post->delete();
         $user->updatePoints($points);
 
-        return redirect()->route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]);
+        $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
+
+        return redirect()->to($appurl);
     }
 
     public function topicDelete(Request $request, $topic_id, $slug)
@@ -361,7 +363,7 @@ class ForumsController extends Controller
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
 
-        abort_unless($user->can('forum-mod') || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->can('forum-mod'), 403);
         $posts = $topic->posts();
         $posts->delete();
         $topic->delete();
@@ -409,7 +411,7 @@ class ForumsController extends Controller
 
         $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
 
-        toastr()->success('Reply Postado com sucesso', 'Postagem');
+        toastr()->success('Postado com sucesso', 'Post');
         return redirect()->to($appurl);
     }
 
@@ -566,5 +568,54 @@ class ForumsController extends Controller
 
         toastr()->success('Título do Tópico Alterado', 'Tópico');
         return redirect()->route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]);
+    }
+
+    public function formReply($topic_id, $post_id)
+    {
+        $topic = Topic::findOrFail($topic_id);
+        $post = Post::findOrFail($post_id);
+
+        return view('site.forums.reply', compact('topic', 'post'));
+    }
+
+    public function reply(ReplyTopicRequest $request, $topic_id)
+    {
+        $user = $request->user();
+        $topic = Topic::findOrFail($topic_id);
+
+        //Get Permission
+        $permission = $topic->forum;
+
+        // Check if the user has permission to read the topic
+        if ($permission->getPermission()->reply_topic != true || ($topic->is_locked == true && !$user->can('forum-mod'))) {
+            toastr()->warning('Você não pode responder a este tópico!', 'Hey');
+            return redirect()->route('forum');
+        }
+
+        $post = new Post();
+        $post->forum_id = $topic->forum_id;
+        $post->topic_id = $topic->id;
+        $post->user_id = $user->id;
+        $post->post_username = $user->username;
+        $post->content = $request->input('content');
+        $post->save();
+
+        // Save last post user data to topic table
+        $topic->last_post_user_id = $user->id;
+        $topic->last_post_username = $user->username;
+        $topic->save();
+
+        //give points to user
+        $points = setting('points_post');
+        $user->updatePoints($points);
+
+        // Achievements
+        $this->unlockAchievementPosts($user);
+
+        $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
+
+        toastr()->success('Reply Postado com sucesso', 'Postagem');
+        return redirect()->to($appurl);
+
     }
 }
