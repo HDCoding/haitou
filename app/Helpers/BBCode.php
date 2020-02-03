@@ -103,7 +103,7 @@ class BBCode
 
         'quote' => [
             'pattern' => '/\[quote\](.*?)\[\/quote\]/s',
-            'replace' => '<blockquote>$1</blockquote>',
+            'replace' => '<blockquote class="blockquote">$1</blockquote>',
             'content' => '$1',
         ],
 
@@ -169,7 +169,7 @@ class BBCode
 
         'code' => [
             'pattern' => '/\[code\](.*?)\[\/code\]/s',
-            'replace' => '<pre>$1</pre>',
+            'replace' => '<code>$1</code>',
             'content' => '$1',
         ],
 
