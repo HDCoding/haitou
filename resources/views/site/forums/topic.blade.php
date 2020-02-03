@@ -95,7 +95,6 @@
                             <div class="table-responsive">
                                 {!! $post->contentHtml() !!}
                                 <hr>
-
                                 <div class="row col">
                                     <div class="col-lg-10">
                                         {!! $post->user->signature() !!}
@@ -103,12 +102,13 @@
                                     <div class="col-lg-2">
                                         <div class="d-flex no-block align-items-center">
                                             <div class="ml-auto">
-                                                <button class="btn btn-danger"><i class="fa fa fa-reply"></i> Reply</button>
+                                                <a href="{{ route('post.reply', ['topicId' => $topic->id, 'postId' => $post->id]) }}">
+                                                    <button class="btn btn-danger"><i class="fa fa fa-reply"></i> Reply</button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
