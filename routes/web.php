@@ -164,6 +164,13 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Poll Add TODO
 //        Route::get('topico/{id}.{slug}/add-poll', 'ForumsController@topicAddPoll')->name('topic.add.poll');
 //        Route::post('topico/{id}.{slug}/add-poll', 'ForumsController@topicSavePoll')->name('topic.save.poll');
+
+            //My Topics
+            Route::get('topics', 'UsersController@topics')->name('my.topics');
+
+            //My Posts
+            Route::get('posts', 'UsersController@posts')->name('my.posts');
+
         });
 
         //Freeslots
@@ -250,9 +257,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         //Torrents
         Route::resource('torrents', 'TorrentsController')->except(['show']);
 
-        //Torrent Search
-        Route::post('torrents/search', 'TorrentsController@search')->name('torrents.search');
-
         //Torrent Options
         Route::prefix('torrent')->group(function () {
             //Download file
@@ -263,12 +267,13 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::post('{id}/thanks', 'TorrentsController@thanks')->name('torrent.thanks');
             //ReSeed
             Route::get('{id}/reseed', 'TorrentsController@reSeed')->name('torrent.reseed');
+            //Search
+            Route::post('search', 'TorrentsController@search')->name('torrent.search');
             //Uploads
             Route::get('uploads', 'TorrentsController@uploads')->name('torrent.uploads');
+            //My Downloads
+            Route::get('downloads', 'TorrentsController@downloads')->name('torrent.downloads');
         });
-
-        //Users
-        Route::get('users', 'UsersController@index')->name('site.users');
 
         //User Options
         Route::prefix('user')->group(function () {
@@ -302,7 +307,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::post('search', 'SearchesController@search')->name('search');
     });
 
-//Staff Folder
+    //Staff Folder
     Route::namespace('Staff')->group(function () {
         //Staff panel prefix
         Route::prefix('staff')->group(function () {
@@ -374,11 +379,14 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
             //Forums
             Route::resource('forums', 'ForumsController');
-            Route::put('forum-order', 'ForumsController@order')->name('forum.order');
+            Route::prefix('forum')->group(function () {
+                //Order Forum Position
+                Route::put('order', 'ForumsController@order')->name('forum.order');
 
-            //Forum Add Mods
-            Route::get('forum/{id}/moderators', 'ForumsController@formModerators');
-            Route::post('forum/{id}/moderators', 'ForumsController@postModerators');
+                //Forum Add Mods
+                Route::get('{id}/moderators', 'ForumsController@formModerators');
+                Route::post('{id}/moderators', 'ForumsController@postModerators');
+            });
 
             //Genres
             Route::resource('genres', 'GenresController')->except(['create', 'show', 'edit']);
@@ -405,9 +413,11 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::resource('medias', 'MediasController')->except(['show']);
 
             //Medias Casts
-            Route::get('media/{id}/casts', 'MediasController@casts');
-            Route::post('media/{id}/casts', 'MediasController@castSave');
-            Route::delete('media/cast/{id}/delete', 'MediasController@castDelete');
+            Route::prefix('media')->group(function () {
+                Route::get('{id}/casts', 'MediasController@casts');
+                Route::post('{id}/casts', 'MediasController@castSave');
+                Route::delete('cast/{id}/delete', 'MediasController@castDelete');
+            });
 
             //Moods
             Route::resource('moods', 'MoodsController')->only(['index', 'update']);
@@ -417,13 +427,18 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
             //Polls
             Route::resource('polls', 'PollsController');
-            Route::put('poll/{id}/update', 'PollsController@openClose'); //Enable/Disable
-
             //Poll Options
-            Route::get('poll/{id}/options/add', 'PollsController@formAddOptions'); //Add
-            Route::post('poll/options/add', 'PollsController@postAddOptions');
-            Route::get('poll/{id}/options/remove', 'PollsController@formRemoveOptions'); //Remove
-            Route::post('poll/options/remove', 'PollsController@postRemoveOptions');
+            Route::prefix('poll')->group(function () {
+                //Enable/Disable
+                Route::put('{id}/update', 'PollsController@openClose');
+
+                //Add
+                Route::get('{id}/options/add', 'PollsController@formAddOptions');
+                Route::post('options/add', 'PollsController@postAddOptions');
+                //Remove
+                Route::get('{id}/options/remove', 'PollsController@formRemoveOptions');
+                Route::post('options/remove', 'PollsController@postRemoveOptions');
+            });
 
             //Reports
             Route::resource('reports', 'ReportsController')->only(['index', 'show', 'update']);
@@ -451,15 +466,17 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::resource('studios', 'StudiosController')->except(['show']);
 
             //Torrents
-            Route::get('torrents', 'TorrentsController@index');
-            Route::get('torrents/{torrent_id}/edit', 'TorrentsController@edit');
-            Route::put('torrents/{torrent_id}', 'TorrentsController@update');
-            Route::delete('torrents/{torrent_id}', 'TorrentsController@destroy');
+            Route::prefix('torrents')->group(function () {
+                Route::get('/', 'TorrentsController@index');
+                Route::get('{torrent_id}/edit', 'TorrentsController@edit');
+                Route::put('{torrent_id}', 'TorrentsController@update');
+                Route::delete('{torrent_id}', 'TorrentsController@destroy');
 
-            //Torrent Options
-            Route::put('torrent/{id}/freeleech', 'TorrentsController@freeleech');
-            Route::put('torrent/{id}/silver', 'TorrentsController@silver');
-            Route::put('torrent/{id}/doubleup', 'TorrentsController@doubleup');
+                //Torrent Options
+                Route::put('{id}/freeleech', 'TorrentsController@freeleech');
+                Route::put('{id}/silver', 'TorrentsController@silver');
+                Route::put('{id}/doubleup', 'TorrentsController@doubleup');
+            });
 
             //Traffics
             Route::prefix('traffics')->group(function () {
