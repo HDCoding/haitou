@@ -55,7 +55,7 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ url('staff/studios/' . $studio->id . '/edit') }}" data-toggle="tooltip" title="Editar Estúdio"><i class="fas fa-pencil-alt text-info"></i></a>
-                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('studio-del-{{$studio->id}}').submit();" data-toggle="tooltip" title="Remover Estúdio"><i class="fa fa-times text-danger"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('studio-del-{{ $studio->id }}').submit();" data-toggle="tooltip" title="Remover Estúdio"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/studios/' . $studio->id, 'method' => 'DELETE', 'id' => 'studio-del-' . $studio->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
