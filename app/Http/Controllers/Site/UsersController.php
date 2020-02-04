@@ -16,7 +16,9 @@ use App\Http\Requests\User\UpdateSetting;
 use App\Mail\AccountEmailUpdate;
 use App\Mail\PasswordNotification;
 use App\Models\Mood;
+use App\Models\Post;
 use App\Models\State;
+use App\Models\Topic;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -62,8 +64,7 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
-        {
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
@@ -100,8 +101,7 @@ class UsersController extends Controller
     {
         $user = $request->user();
 
-        if ($request->hasFile('cover') && $request->file('cover')->isValid())
-        {
+        if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
@@ -259,4 +259,29 @@ class UsersController extends Controller
         return view('auth.activation')
             ->with('info', 'E-mail alterado com sucesso, ative sua conta novamente com novo e-mail inserido!');
     }
+
+    public function topics(Request $request)
+    {
+        $user = $request->user();
+        $topics = Topic::with('forum:id,name,slug')
+            ->where('topics.first_post_user_id', '=', $user->id)
+            ->latest()
+            ->paginate(25);
+
+        return view('site.users.topics', compact('topics'));
+    }
+
+    public function posts(Request $request)
+    {
+        $user = $request->user();
+        $posts = Post::with(['topic', 'user'])
+            ->selectRaw('posts.id as id,posts.*')
+            ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
+            ->where('posts.user_id', '=', $user->id)
+            ->orderBy('posts.created_at', 'desc')
+            ->paginate(25);
+
+        return view('site.users.posts', compact('posts'));
+    }
+
 }
