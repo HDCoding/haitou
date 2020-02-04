@@ -16,6 +16,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('torrents') }}">Torrents</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Meus Uploads</li>
                         </ol>
                     </nav>
@@ -39,12 +40,12 @@
                                     <th>Tamanho</th>
                                     <th>Seeders</th>
                                     <th>Leechers</th>
-                                    <th>Completado</th>
+                                    <th>Downloads</th>
                                     <th>Data</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($torrents as $torrent)
+                                @foreach($uploads as $upload)
                                     <tr>
                                         <td>
                                             <a href="{{ route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]) }}" target="_blank">
@@ -64,10 +65,10 @@
                                             </div>
                                         </td>
                                         <td>{{ $torrent->category->name }}</td>
-                                        <td><span class="badge badge-info font-weight-bold"> {{ $torrent->size() }}</span></td>
-                                        <td><span class="badge badge-success font-weight-bold"> {{ $torrent->seeders }}</span></td>
-                                        <td><span class="badge badge-danger font-weight-bold"> {{ $torrent->leechers }}</span></td>
-                                        <td><span class="badge badge-warning font-weight-bold"> {{ $torrent->times_completed }}</span></td>
+                                        <td><span class="text-info font-weight-bold"> {{ $torrent->size() }}</span></td>
+                                        <td><span class="text-success font-weight-bold"> {{ $torrent->seeders }}</span></td>
+                                        <td><span class="text-danger font-weight-bold"> {{ $torrent->leechers }}</span></td>
+                                        <td><span class="text-warning font-weight-bold"> {{ $torrent->times_completed }}</span></td>
                                         <td>{{ $torrent->created_at->diffForHumans() }}</td>
                                     </tr>
                                 @endforeach
@@ -88,7 +89,7 @@
         $(document).ready(function () {
             $('#datatable').DataTable({
                 "displayLength": 50,
-                "searching": true,
+                "searching": false,
                 "responsive": true,
                 "order": [[ 0, "asc" ]],
                 "language": {
