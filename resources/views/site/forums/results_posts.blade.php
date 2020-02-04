@@ -142,40 +142,40 @@
                                 <tr>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
-                                    <th>Autor</th>
+                                    <th>Autor(a)</th>
                                     <th>Stats</th>
                                     <th>Última Mensagem</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($results as $r)
+                                @foreach ($results as $result)
                                     <tr>
                                         <td>
-                                            <span class="badge-extra text-bold">{{ $r->topic->forum->name }}</span>
+                                            <a href="{{ route('forum.topics', [$result->topic->forum->id, $result->topic->forum->slug]) }}">{{ $result->topic->forum->name }}</a>
                                         </td>
                                         <td>
                                             <strong>
-                                                <a href="{{ route('forum.topic', ['id' => $r->topic->id, 'slug' => $r->topic->slug]) }}">{{ $r->topic->name }}</a>
+                                                <a href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}">{{ $result->topic->name }}</a>
                                             </strong>
-                                            @if ($r->topic->is_locked == true)
+                                            @if ($result->topic->is_locked == true)
                                                 <span class='label label-sm label-primary'>Fechado</span>
                                             @endif
-                                            @if ($r->topic->is_pinned == true)
+                                            @if ($result->topic->is_pinned == true)
                                                 <span class='label label-sm label-success'>Pin</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($r->topic->first_post_username)]) }}">
-                                                {{ $r->topic->first_post_username }}
+                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->topic->first_post_username)]) }}">
+                                                {{ $result->topic->first_post_username }}
                                             </a>
                                         </td>
                                         <td>
-                                            {{ $r->topic->posts->count() - 1 }} Respostas / {{ $r->topic->views }} Views
+                                            {{ $result->topic->posts->count() - 1 }} Respostas / {{ $result->topic->views }} Views
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($r->topic->last_post_username)]) }}">{{ $r->topic->last_post_username }}</a>,
-                                            <time datetime="{{ format_date_time($r->topic->updated_at) }}">
-                                                {{ format_date($r->topic->updated_at) }}
+                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->topic->last_post_username)]) }}">{{ $result->topic->last_post_username }}</a>,
+                                            <time datetime="{{ format_date_time($result->topic->updated_at) }}">
+                                                {{ format_date($result->topic->updated_at) }}
                                             </time>
                                         </td>
                                     </tr>
@@ -183,20 +183,20 @@
                                         <tr>
                                             <td colspan="5" class="some-padding button-padding">
                                                 <div class="topic-posts button-padding">
-                                                    <div class="post" id="post-{{$r->id}}">
+                                                    <div class="post" id="post-{{ $result->id }}">
                                                         <div class="button-holder">
                                                             <div class="button-left">
-                                                                <a href="{{ route('user.profile', ['slug' => $r->user->slug]) }}" class="post-info-name" style="color:{{ $r->user->group->color }}; display:inline;">
-                                                                    {{ $r->user->username }}
+                                                                <a href="{{ route('user.profile', ['slug' => $result->user->slug]) }}" class="post-info-name" style="color:{{ $result->user->group->color }}; display:inline;">
+                                                                    {{ $result->user->username }}
                                                                 </a>
-                                                                {{ format_date_time($r->created_at) }}
+                                                                {{ format_date_time($result->created_at) }}
                                                             </div>
                                                             <div class="button-right">
-                                                                <a class="text-bold" href="{{ route('forum.topic', ['id' => $r->topic->id, 'slug' => $r->topic->slug]) }}?page={{$r->pageNumber()}}#post-{{$r->id}}">#{{$r->id}}</a>
+                                                                <a class="text-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
                                                             </div>
                                                         </div>
                                                         <hr class="some-margin">
-                                                        {!! $r->contentHtml() !!}
+                                                        {!! $result->contentHtml() !!}
                                                     </div>
                                                 </div>
                                             </td>
