@@ -53,7 +53,7 @@
                                 @foreach ($results as $result)
                                     <tr>
                                         <th>
-                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{$result->pageNumber()}}#post-{{$result->id}}">#{{$result->id}}</a>
+                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
                                         </th>
                                         <td>
                                             <a href="{{ route('forum.topics', [$result->topic->forum->id, $result->topic->forum->slug]) }}">
