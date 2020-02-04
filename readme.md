@@ -3,7 +3,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b75c011dc7994b0a8ad12c6535447bf0)](https://app.codacy.com/gh/HDCoding/haitou?utm_source=github.com&utm_medium=referral&utm_content=HDCoding/haitou&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://poser.pugx.org/laravel/framework/v/stable.svg)]()
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)]()
-<img alt="Website" src="https://img.shields.io/website/https/hdcoding.org">
+<img alt="Website" src="https://img.shields.io/website/https/haitou.site">
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](/LICENSE)
 [![Trello](https://img.shields.io/badge/Trello-HERE-blue.svg)](https://trello.com/invite/b/s7ad4xHY/523810e2f6c966e29f4ffc9bc16e7e44/haitou)
 ![Discord](https://img.shields.io/discord/525675007322357760?label=Discord&logo=discord)
