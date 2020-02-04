@@ -47,7 +47,7 @@
                                 <tbody>
                                 @foreach($uploads as $upload)
                                     <tr>
-                                        <td>
+                                        <th>
                                             <a href="{{ route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]) }}" target="_blank">
                                                 {{ $torrent->name }}
                                             </a>
@@ -63,7 +63,7 @@
                                                     </button>
                                                 </a>
                                             </div>
-                                        </td>
+                                        </th>
                                         <td>{{ $torrent->category->name }}</td>
                                         <td><span class="text-info font-weight-bold"> {{ $torrent->size() }}</span></td>
                                         <td><span class="text-success font-weight-bold"> {{ $torrent->seeders }}</span></td>
