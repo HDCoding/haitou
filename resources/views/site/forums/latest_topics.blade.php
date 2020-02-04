@@ -43,7 +43,7 @@
                                 <tr>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
-                                    <th>Autor</th>
+                                    <th>Autor(a)</th>
                                     <th>Estatísticas</th>
                                     <th>Última Informação</th>
                                 </tr>
@@ -52,7 +52,9 @@
                                 @foreach ($results as $result)
                                     <tr>
                                         <th>
-                                            <span class="badge badge-extra text-bold">{{ $result->forum->name }}</span>
+                                            <a href="{{ route('forum.topics', [$result->forum->id, $result->forum->slug]) }}">
+                                                {{ $result->forum->name }}
+                                            </a>
                                         </th>
                                         <td>
                                             <a href="{{ route('forum.topic', ['id' => $result->id, 'slug' => $result->slug]) }}">{{ $result->name }}</a>
