@@ -33,7 +33,6 @@
                                 <tr>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
-                                    <th>Autor</th>
                                     <th>Stats</th>
                                     <th>Última Mensagem</th>
                                 </tr>
@@ -43,7 +42,7 @@
                                     @if ($topic->viewable())
                                     <tr>
                                         <th>
-                                            <span class="badge badge-extra text-bold">{{ $topic->forum->name }}</span>
+                                             <a href="{{ route('forum.topics', [$topic->forum->id, $topic->forum->slug]) }}">{{ $topic->forum->name }}</a>
                                         </th>
                                         <td>
                                             <a href="{{ route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]) }}">{{ $topic->name }}</a>
@@ -53,11 +52,6 @@
                                             @if ($topic->is_pinned)
                                                 <span class="badge badge-success">Pinned</span>
                                             @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($topic->first_post_username)]) }}">
-                                                {{ $topic->first_post_username }}
-                                            </a>
                                         </td>
                                         <td>
                                             {{ $topic->posts->count() - 1 }} Respostas / {{ $topic->views }} Views
