@@ -59,7 +59,7 @@
                                         <td><span class="badge badge-success">{{ $genre->media->count() }}</span></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:" onclick="document.getElementById('genre-del-{{$genre->id}}').submit();" data-toggle="tooltip" title="Remover Gênero"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="javascript:" onclick="document.getElementById('genre-del-{{ $genre->id }}').submit();" data-toggle="tooltip" title="Remover Gênero"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/genres/' . $genre->id, 'method' => 'DELETE', 'id' => 'genre-del-' . $genre->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
