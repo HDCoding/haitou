@@ -49,7 +49,7 @@ class ForumsController extends Controller
 
     public function search(Request $request)
     {
-        $categories = Forum::oldest('position')->get();
+        $categories = Forum::select('id', 'name')->orderBy('name')->get();
 
         $user = $request->user();
 
@@ -70,8 +70,8 @@ class ForumsController extends Controller
 
         if ($request->has('body') && $request->input('body') != '') {
             $logger = 'site.forums.results_posts';
-            $result = Post::selectRaw('posts.id as id,posts.*')
-                ->with(['topic', 'user'])
+            $result = Post::with(['topic', 'user'])
+                ->selectRaw('posts.id as id, posts.*')
                 ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
                 ->whereNotIn('topics.forum_id', $posts);
         }
@@ -134,12 +134,11 @@ class ForumsController extends Controller
         // Total Topics Count
         $num_topics = Topic::count();
 
-        $params = $request->all();
+        $params = $request->except('_token');
 
         return view($logger, [
             'categories' => $categories,
             'results' => $results,
-            'user' => $user,
             'name' => $request->input('name'),
             'body' => $request->input('body'),
             'num_posts' => $num_posts,
@@ -212,8 +211,8 @@ class ForumsController extends Controller
             'topics:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug',
             'posts:id,forum_id,user_id,post_username,created_at'
         ])
-        ->select('id', 'category_id', 'name', 'slug', 'description', 'icon')
-        ->get();
+            ->select('id', 'category_id', 'name', 'slug', 'description', 'icon')
+            ->get();
 
         // Total Forums Count
         $num_forums = Forum::count();
