@@ -83,7 +83,7 @@
                                     <tr>
                                         <td colspan="5" class="some-padding button-padding">
                                             <div class="topic-posts button-padding">
-                                                <div class="post" id="post-{{$result->id}}">
+                                                <div class="post" id="post-{{ $result->id }}">
                                                     <div class="button-holder">
                                                         <div class="button-left">
                                                             <a href="{{ route('user.profile', ['slug' => $result->user->slug]) }}" style="color:{{ $result->user->group->color }}; display:inline;">
