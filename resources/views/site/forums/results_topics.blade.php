@@ -144,7 +144,7 @@
                                     <th>Tópico</th>
                                     <th>Autor</th>
                                     <th>Stats</th>
-                                    <th>Última Informação</th>
+                                    <th>Última Mensagem</th>
                                 </tr>
                                 </thead>
                                 <tbody>
