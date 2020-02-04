@@ -32,15 +32,21 @@
 
                         @include('site.forums.buttons')
 
-                        <form class="form-horizontal m-t4" role="form" method="GET" action="{{ route('forum.search') }}">
+                        <form class="form-horizontal mt-4" role="form" method="GET" action="{{ route('forum.search') }}">
                             @csrf
-                            <div class="form-group">
-                                <label for="name">Tópico</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Tópico" value="{{ (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : '') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="body">Post</label>
-                                <input type="text" class="form-control" name="body" id="body" placeholder="Post" value="{{ (isset($params) && is_array($params) && array_key_exists('body', $params) ? $params['body'] : '') }}">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Tópico</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Tópico" value="{{ (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : '') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="body">Post</label>
+                                        <input type="text" class="form-control" name="body" id="body" placeholder="Post" value="{{ (isset($params) && is_array($params) && array_key_exists('body', $params) ? $params['body'] : '') }}">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -111,35 +117,44 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="sorting">Data</label>
-                                <select id="sorting" name="sorting" class="form-control">
-                                    <option value="updated_at" {{ (isset($params) && is_array($params) && array_key_exists('sorting', $params) && $params['sorting'] == 'updated_at' ? 'selected' : '') }}>
-                                        Atualizado em
-                                    </option>
-                                    <option value="created_at" {{ (isset($params) && is_array($params) && array_key_exists('sorting', $params) && $params['sorting'] == 'created_at' ? 'selected' : '') }}>
-                                        Criado em
-                                    </option>
-                                </select>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sorting">Data</label>
+                                        <select id="sorting" name="sorting" class="form-control">
+                                            <option value="updated_at" {{ (isset($params) && is_array($params) && array_key_exists('sorting', $params) && $params['sorting'] == 'updated_at' ? 'selected' : '') }}>
+                                                Crescente
+                                            </option>
+                                            <option value="created_at" {{ (isset($params) && is_array($params) && array_key_exists('sorting', $params) && $params['sorting'] == 'created_at' ? 'selected' : '') }}>
+                                                Decrescente
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="direction">Ordenar</label>
+                                        <select id="direction" name="direction" class="form-control">
+                                            <option value="desc"{{ (isset($params) && is_array($params) && array_key_exists('direction',$params) && $params['direction'] == 'desc' ? 'SELECTED' : '') }}>
+                                                Decrescente
+                                            </option>
+                                            <option value="asc"{{ (isset($params) && is_array($params) && array_key_exists('direction',$params) && $params['direction'] == 'asc' ? 'SELECTED' : '') }}>
+                                                Crescente
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="direction">Ordem</label>
-                                <select id="direction" name="direction" class="form-control">
-                                    <option value="desc"{{ (isset($params) && is_array($params) && array_key_exists('direction',$params) && $params['direction'] == 'desc' ? 'SELECTED' : '') }}>
-                                        Decrescente
-                                    </option>
-                                    <option value="asc"{{ (isset($params) && is_array($params) && array_key_exists('direction',$params) && $params['direction'] == 'asc' ? 'SELECTED' : '') }}>
-                                        Crescente
-                                    </option>
-                                </select>
-                            </div>
+
                             <button type="submit" class="btn btn-primary">Atualizar resultados</button>
                         </form>
+                        <hr>
 
                         <div class="table-responsive m-t-30">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
                                     <th>Autor(a)</th>
@@ -150,18 +165,19 @@
                                 <tbody>
                                 @foreach ($results as $result)
                                     <tr>
+                                        <th>
+                                            <a class="text-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
+                                        </th>
                                         <td>
                                             <a href="{{ route('forum.topics', [$result->topic->forum->id, $result->topic->forum->slug]) }}">{{ $result->topic->forum->name }}</a>
                                         </td>
                                         <td>
-                                            <strong>
-                                                <a href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}">{{ $result->topic->name }}</a>
-                                            </strong>
-                                            @if ($result->topic->is_locked == true)
-                                                <span class='label label-sm label-primary'>Fechado</span>
+                                            <a href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}">{{ $result->topic->name }}</a>
+                                            @if ($result->topic->is_locked)
+                                                <span class='badge badge-purple'>Fechado</span>
                                             @endif
-                                            @if ($result->topic->is_pinned == true)
-                                                <span class='label label-sm label-success'>Pin</span>
+                                            @if ($result->topic->is_pinned)
+                                                <span class='badge badge-success'>Pin</span>
                                             @endif
                                         </td>
                                         <td>
@@ -175,29 +191,15 @@
                                         <td>
                                             <a href="{{ route('user.profile', ['slug' => Str::slug($result->topic->last_post_username)]) }}">{{ $result->topic->last_post_username }}</a>,
                                             <time datetime="{{ format_date_time($result->topic->updated_at) }}">
-                                                {{ format_date($result->topic->updated_at) }}
+                                                {{ format_date_time($result->topic->updated_at) }}
                                             </time>
                                         </td>
                                     </tr>
                                     @if(isset($params) && is_array($params) && array_key_exists('body', $params))
                                         <tr>
-                                            <td colspan="5" class="some-padding button-padding">
-                                                <div class="topic-posts button-padding">
-                                                    <div class="post" id="post-{{ $result->id }}">
-                                                        <div class="button-holder">
-                                                            <div class="button-left">
-                                                                <a href="{{ route('user.profile', ['slug' => $result->user->slug]) }}" class="post-info-name" style="color:{{ $result->user->group->color }}; display:inline;">
-                                                                    {{ $result->user->username }}
-                                                                </a>
-                                                                {{ format_date_time($result->created_at) }}
-                                                            </div>
-                                                            <div class="button-right">
-                                                                <a class="text-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
-                                                            </div>
-                                                        </div>
-                                                        <hr class="some-margin">
-                                                        {!! $result->contentHtml() !!}
-                                                    </div>
+                                            <td colspan="6">
+                                                <div class="post" id="post-{{ $result->id }}">
+                                                    {!! $result->contentHtml() !!}
                                                 </div>
                                             </td>
                                         </tr>
