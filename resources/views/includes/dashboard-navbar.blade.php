@@ -113,9 +113,6 @@
                         <a class="dropdown-item" href="{{ url('achievements') }}">
                             <i class="ion ion-ios-trophy text-lightest m-r-5 m-l-5"></i> Conquistas
                         </a>
-                        <a class="dropdown-item" href="{{ route('torrent.uploads') }}">
-                            <i class="fas fa-upload text-lightest m-r-5 m-l-5"></i> Meus Uploads
-                        </a>
                         <a class="dropdown-item" href="{{ route('notifications.index') }}">
                             <i class="ion ion-md-notifications-outline text-lightest m-r-5 m-l-5"></i> Notificações
                         </a>
