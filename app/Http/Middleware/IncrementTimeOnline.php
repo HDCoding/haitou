@@ -19,16 +19,16 @@ class IncrementTimeOnline
             return $next($request);
         }
 
-        // Update Time Online
-        $old_update = $user->updated_at ? $user->updated_at->timestamp : now()->timestamp;
-
-        //Time Online
-        $new_time = now()->timestamp - $old_update;
-
-        if ($new_time < 200) {
-            $user->time_online += $new_time;
-            $user->save();
-        }
+//        $last_login = $user->logins->last();
+//
+//        // Update Time Online
+//        $old_update = $last_login->created_at ? $last_login->created_at->timestamp : now()->timestamp;
+//
+//        //Time Online
+//        $new_time = now()->timestamp - $old_update;
+//
+//        $user->time_online += $new_time;
+//        $user->save();
 
         return $next($request);
     }
