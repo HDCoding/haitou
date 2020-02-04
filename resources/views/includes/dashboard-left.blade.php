@@ -23,6 +23,8 @@
                         @can('upload-torrent')
                         <li class="sidebar-item"><a href="{{ url('torrents/create') }}" class="sidebar-link"><i class="mdi mdi-credit-card-scan"></i><span class="hide-menu">Upload</span></a></li>
                         @endcan
+                        <li class="sidebar-item"><a href="{{ route('torrent.uploads') }}" class="sidebar-link"><i class="fas fa-upload"></i><span class="hide-menu">Meus Uploads</span></a></li>
+                        <li class="sidebar-item"><a href="{{ route('torrent.downloads') }}" class="sidebar-link"><i class="fas fa-download"></i><span class="hide-menu">Meus Downloads</span></a></li>
                     </ul>
                 </li>
                 <!-- End Profissional -->
