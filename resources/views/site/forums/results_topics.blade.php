@@ -142,44 +142,44 @@
                                 <tr>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
-                                    <th>Autor</th>
+                                    <th>Autor(a)</th>
                                     <th>Stats</th>
                                     <th>Última Mensagem</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($results as $r)
+                                @foreach ($results as $result)
                                     <tr>
                                         <td>
-                                            <span class="badge-extra text-bold">{{ $r->forum->name }}</span>
+                                            <a href="{{ route('forum.topics', [$result->forum->id, $result->forum->slug]) }}">{{ $result->forum->name }}</a>
                                         </td>
                                         <td>
                                             <strong>
-                                                <a href="{{ route('forum.topic', ['id' => $r->id, 'slug' => $r->slug]) }}">
-                                                    {{ $r->name }}
+                                                <a href="{{ route('forum.topic', ['id' => $result->id, 'slug' => $result->slug]) }}">
+                                                    {{ $result->name }}
                                                 </a>
                                             </strong>
-                                            @if ($r->is_locked == true)
+                                            @if ($result->is_locked == true)
                                                 <span class="badge badge-dark">Fechado</span>
                                             @endif
-                                            @if ($r->is_pinned == true)
+                                            @if ($result->is_pinned == true)
                                                 <span class="label label-sm label-success">Pin</span>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($r->first_post_username)]) }}">
-                                                {{ $r->first_post_username }}
+                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->first_post_username)]) }}">
+                                                {{ $result->first_post_username }}
                                             </a>
                                         </td>
                                         <td>
-                                            {{ $r->posts->count() - 1 }} Respostas / {{ $r->views }} Views
+                                            {{ $result->posts->count() - 1 }} Respostas / {{ $result->views }} Views
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($r->last_post_username)]) }}">
-                                                {{ $r->last_post_username }}
+                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->last_post_username)]) }}">
+                                                {{ $result->last_post_username }}
                                             </a>,
-                                            <time datetime="{{ format_date($r->updated_at) }}">
-                                                {{ format_date($r->updated_at) }}
+                                            <time datetime="{{ format_date($result->updated_at) }}">
+                                                {{ format_date($result->updated_at) }}
                                             </time>
                                         </td>
                                     </tr>
@@ -187,18 +187,18 @@
                                         <tr>
                                             <td colspan="5" class="some-padding button-padding">
                                                 <div class="topic-posts button-padding">
-                                                    <div class="post" id="post-{{$r->id}}">
+                                                    <div class="post" id="post-{{ $result->id }}">
                                                         <div class="button-holder">
                                                             <div class="button-left">
-                                                                <a class="post-info-name" href="{{ route('user.profile', ['slug' => Str::slug($r->user->username)]) }}" style="color:{{ $r->user->group->color }}; display:inline;">{{ $r->user->username }}</a>
-                                                                @ {{ format_date_time($r->created_at) }}
+                                                                <a class="post-info-name" href="{{ route('user.profile', ['slug' => Str::slug($result->user->username)]) }}" style="color:{{ $result->user->group->color }}; display:inline;">{{ $result->user->username }}</a>
+                                                                @ {{ format_date_time($result->created_at) }}
                                                             </div>
                                                             <div class="button-right">
-                                                                <a class="text-bold" href="{{ route('forum.topic', ['id' => $r->id, 'slug' => $r->slug]) }}?page={{$r->pageNumber()}}#post-{{$r->id}}">#{{$r->id}}</a>
+                                                                <a class="text-bold" href="{{ route('forum.topic', ['id' => $result->id, 'slug' => $result->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
                                                             </div>
                                                         </div>
                                                         <hr class="some-margin">
-                                                        {!! $r->contentHtml()  !!}
+                                                        {!! $result->contentHtml()  !!}
                                                     </div>
                                                 </div>
                                             </td>
