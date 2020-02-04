@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Inscrições')
+@section('title', 'Favoritos')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('forum') }}">Fórum</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Inscrições</li>
+                            <li class="breadcrumb-item active" aria-current="page">Favoritos</li>
                         </ol>
                     </nav>
                 </div>
@@ -35,7 +35,7 @@
                 @include('site.forums.buttons')
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Fóruns e Tópicos Inscrições</h4>
+                        <h4 class="card-title">Fóruns e Tópicos Favoritos</h4>
                         @includeIf('errors.errors', [$errors])
                         <div class="table-responsive m-t-15">
                             <table class="table" id="datatable">
@@ -43,9 +43,9 @@
                                 <tr>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
-                                    <th>Autor</th>
+                                    <th>Autor(a)</th>
                                     <th>Estatísticas</th>
-                                    <th>Última Informação</th>
+                                    <th>Última Mensagem</th>
                                     <th>Ação</th>
                                 </tr>
                                 </thead>
@@ -56,7 +56,7 @@
                                         <tr>
                                             <th>
                                                 <a href="{{ route('forum.topics', ['id' => $result->id, 'slug' => $result->slug]) }}">
-                                                    <span class="badge-extra text-bold">{{ $result->name }}</span>
+                                                    {{ $result->name }}
                                                 </a>
                                             </th>
                                             <td>--</td>
