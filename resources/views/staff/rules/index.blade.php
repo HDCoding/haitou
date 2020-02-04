@@ -52,7 +52,7 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ url('staff/rules/' . $rule->id . '/edit') }}" data-toggle="tooltip" title="Editar Regra"><i class="fas fa-pencil-alt text-info"></i></a>
-                                                <a href="javascript:;" onclick="document.getElementById('rule-del-{{$rule->id}}').submit();" class="m-l-15" data-toggle="tooltip" title="Remover Regra"><i class="fa fa-times text-danger"></i></a>
+                                                <a href="javascript:;" onclick="document.getElementById('rule-del-{{ $rule->id }}').submit();" class="m-l-15" data-toggle="tooltip" title="Remover Regra"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/rules/' . $rule->id, 'method' => 'DELETE', 'id' => 'rule-del-' . $rule->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
