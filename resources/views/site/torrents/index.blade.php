@@ -25,7 +25,7 @@
                         <b class="card-header-title">Pesquisar Torrents</b>
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => 'torrents/search', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['route' => 'torrent.search', 'class' => 'form-horizontal']) !!}
                             <div class="form-row">
                                 <div class="form-group col-md-8">
                                     {!! Form::label('name', 'Nome:', ['class' => 'form-label']) !!}
@@ -137,8 +137,8 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="col-md-1 text-center">{{ $torrent->seeders }}</td>
-                                        <td class="col-md-1 text-center">{{ $torrent->leechers }}</td>
+                                        <td class="col-md-1 text-center text-success">{{ $torrent->seeders }}</td>
+                                        <td class="col-md-1 text-center text-danger">{{ $torrent->leechers }}</td>
                                         <td class="col-md-1 text-center">{{ $torrent->times_completed }}</td>
                                         <td class="col-md-1 text-center">{{ $torrent->size() }}</td>
                                         <td class="col-md-1 text-center">{{ format_date($torrent->created_at) }}</td>
