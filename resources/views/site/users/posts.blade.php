@@ -43,7 +43,7 @@
                                     @if ($post->topic->viewable())
                                     <tr>
                                         <th>
-                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{$post->pageNumber()}}#post-{{$post->id}}">#{{$post->id}}</a>
+                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{ $post->pageNumber() }}#post-{{ $post->id }}">#{{ $post->id }}</a>
                                         </th>
                                         <td>
                                             <a href="{{ route('forum.topics', [$post->forum->id, $post->forum->slug]) }}">{{ $post->forum->name }}</a>
