@@ -25,7 +25,7 @@
                         <b class="card-header-title">Pesquisar Torrents</b>
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => 'torrents/search', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['route' => 'torrent.search', 'class' => 'form-horizontal']) !!}
                             <div class="form-row">
                                 <div class="form-group col-md-8">
                                     {!! Form::label('name', 'Nome:', ['class' => 'form-label']) !!}
