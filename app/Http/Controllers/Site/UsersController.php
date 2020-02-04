@@ -275,7 +275,7 @@ class UsersController extends Controller
     {
         $user = $request->user();
         $posts = Post::with(['topic', 'user'])
-            ->selectRaw('posts.id as id,posts.*')
+            ->selectRaw('posts.id as id, posts.*')
             ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
             ->where('posts.user_id', '=', $user->id)
             ->orderBy('posts.created_at', 'desc')
