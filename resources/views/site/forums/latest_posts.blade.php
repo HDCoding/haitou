@@ -41,9 +41,10 @@
                             <table class="table" id="datatable">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Fórum</th>
                                     <th>Tópico</th>
-                                    <th>Autor</th>
+                                    <th>Autor(a)</th>
                                     <th>Estatísticas</th>
                                     <th>Última Informação</th>
                                 </tr>
@@ -52,8 +53,13 @@
                                 @foreach ($results as $result)
                                     <tr>
                                         <th>
-                                            <span class="badge badge-extra text-bold">{{ $result->topic->forum->name }}</span>
+                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{$result->pageNumber()}}#post-{{$result->id}}">#{{$result->id}}</a>
                                         </th>
+                                        <td>
+                                            <a href="{{ route('forum.topics', [$result->topic->forum->id, $result->topic->forum->slug]) }}">
+                                                {{ $result->topic->forum->name }}
+                                            </a>
+                                        </td>
                                         <td>
                                             <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}">
                                                 {{ $result->topic->name }}
@@ -76,26 +82,14 @@
                                         <td>
                                             <a href="{{ route('user.profile', ['slug' => Str::slug($result->topic->last_post_username)]) }}">{{ $result->topic->last_post_username }}</a>,
                                             <time datetime="{{ format_date($result->topic->updated_at) }}">
-                                                {{ format_date($result->topic->updated_at) }}
+                                                {{ format_date_time($result->updated_at) }}
                                             </time>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5" class="some-padding button-padding">
+                                        <td colspan="6" class="some-padding button-padding">
                                             <div class="topic-posts button-padding">
                                                 <div class="post" id="post-{{ $result->id }}">
-                                                    <div class="button-holder">
-                                                        <div class="button-left">
-                                                            <a href="{{ route('user.profile', ['slug' => $result->user->slug]) }}" style="color:{{ $result->user->group->color }}; display:inline;">
-                                                                {{ $result->user->name }}
-                                                            </a>
-                                                            {{ format_date_time($result->created_at) }}
-                                                        </div>
-                                                        <div class="button-right">
-                                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{$result->pageNumber()}}#post-{{$result->id}}">#{{$result->id}}</a>
-                                                        </div>
-                                                    </div>
-                                                    <hr class="some-margin">
                                                     {!! $result->contentHtml() !!}
                                                 </div>
                                             </div>
