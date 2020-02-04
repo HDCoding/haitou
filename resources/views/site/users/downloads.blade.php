@@ -49,7 +49,7 @@
                                     <tr class="userFiltered" active="{{ $download->is_active ? '1' : '0' }}"
                                         seeding="{{ $download->is_seeder == 1 ? '1' : '0' }}"
                                         released="{{ $download->is_released ? '1' : '0' }}">
-                                        <td>
+                                        <th>
                                             <a href="{{ route('torrent.show', ['id' => $download->torrent->id, 'slug' => $download->torrent->slug]) }}" target="_blank">
                                                 {{ $download->torrent->name }}
                                             </a>
@@ -60,7 +60,7 @@
                                                     </button>
                                                 </a>
                                             </div>
-                                        </td>
+                                        </th>
                                         <td>{{ $download->category->name }}</td>
                                         <td><span class="text-info font-weight-bold"> {{ $download->torrent->size() }}</span></td>
                                         <td><span class="text-success font-weight-bold"> {{ $download->torrent->seeders }}</span></td>
