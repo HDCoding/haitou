@@ -235,4 +235,15 @@ return [
         ],
     ],
 
+    'security' => [
+        'password'   => env('APP_KEY'),
+        'encryption' => \App\Interfaces\BackupEncryption::ENCRYPTION_WINZIP_AES_256,
+
+        // Available encryption methods:
+        // \App\Interfaces\BackupEncryption::ENCRYPTION_DEFAULT (PKWARE/ZipCrypto)
+        // \App\Interfaces\BackupEncryption::ENCRYPTION_WINZIP_AES_128 (AES 128)
+        // \App\Interfaces\BackupEncryption::ENCRYPTION_WINZIP_AES_192 (AES 192)
+        // \App\Interfaces\BackupEncryption::ENCRYPTION_WINZIP_AES_256 (AES 256)
+    ],
+
 ];
