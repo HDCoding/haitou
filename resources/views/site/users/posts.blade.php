@@ -71,11 +71,9 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5" class="some-padding button-padding">
-                                            <div class="topic-posts button-padding">
-                                                <div class="post" id="post-{{ $post->id }}">
-                                                    {!! $post->contentHtml() !!}
-                                                </div>
+                                        <td colspan="5">
+                                            <div class="post" id="post-{{ $post->id }}">
+                                                {!! $post->contentHtml() !!}
                                             </div>
                                         </td>
                                     </tr>
