@@ -22,6 +22,7 @@ use App\Models\Category;
 use App\Models\Complete;
 use App\Models\Fansub;
 use App\Models\File;
+use App\Models\Historic;
 use App\Models\Log;
 use App\Models\Media;
 use App\Models\Tag;
@@ -356,12 +357,40 @@ class TorrentsController extends Controller
         //Show all torrents uploaded by the user
         $user = $request->user();
 
-        $torrents = Torrent::with('category:id,name')
+        $uploads = Torrent::with('category:id,name')
             ->select('id', 'user_id', 'category_id', 'name', 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'created_at')
             ->where('user_id', '=', $user->id)
             ->get();
 
-        return view('site.users.uploads', compact('torrents'));
+        return view('site.users.uploads', compact('uploads'));
+    }
+
+    public function downloads(Request $request)
+    {
+        $user = $request->user();
+
+        if (setting('rnh_on')) {
+            $downloads = Historic::with('torrent')
+                ->selectRaw('distinct(historics.info_hash), max(torrents.id), max(historics.completed_at) as completed_at, max(historics.created_at) as created_at, max(historics.id) as id, max(historics.user_id) as user_id, max(historics.seed_time) as seedtime, max(historics.is_seeder) as seeder, max(torrents.size) as size, max(torrents.leechers) as leechers, max(torrents.seeders) as seeders, max(torrents.times_completed) as times_completed')
+                ->leftJoin('torrents', 'torrents.info_hash', '=', 'historics.info_hash')
+                ->where('real_downloaded', '>', 0)
+                ->whereRaw('historics.real_downloaded > (torrents.size * ('.(3 / 100).'))')
+                ->where('historics.user_id', '=', $user->id)
+                ->groupBy('historics.info_hash')
+                ->orderBy('completed_at', 'desc')
+                ->take(50)
+                ->get();
+        } else {
+            $downloads = Historic::with('torrent')
+                ->selectRaw('distinct(historics.info_hash), max(torrents.id), max(historics.completed_at) as completed_at, max(historics.created_at) as created_at, max(historics.id) as id, max(historics.user_id) as user_id, max(historics.seed_time) as seedtime, max(historics.is_seeder) as seeder, max(torrents.size) as size, max(torrents.leechers) as leechers, max(torrents.seeders) as seeders, max(torrents.times_completed) as times_completed')
+                ->leftJoin('torrents', 'torrents.info_hash', '=', 'historics.info_hash')
+                ->where('historics.user_id', '=', $user->id)
+                ->groupBy('historics.info_hash')->orderBy('completed_at', 'desc')
+                ->take(50)
+                ->get();
+        }
+
+        return view('site.users.downloads', compact('downloads'));
     }
 
     private function achievement(User $user)
