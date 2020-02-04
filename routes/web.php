@@ -105,7 +105,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //Forum
         Route::prefix('forum')->group(function () {
-            //Forum main page
+            //Main page
             Route::get('/', 'ForumsController@index')->name('forum');
 
             //Topics
@@ -269,7 +269,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('{id}/reseed', 'TorrentsController@reSeed')->name('torrent.reseed');
             //Search
             Route::post('search', 'TorrentsController@search')->name('torrent.search');
-            //Uploads
+            //My Uploads
             Route::get('uploads', 'TorrentsController@uploads')->name('torrent.uploads');
             //My Downloads
             Route::get('downloads', 'TorrentsController@downloads')->name('torrent.downloads');
@@ -277,8 +277,9 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //User Options
         Route::prefix('user')->group(function () {
+            //User profile
             Route::get('{slug}', 'UsersController@profile')->name('user.profile');
-            Route::get('{slug}/friends', 'UsersController@friends')->name('user.friends');
+            //Achievements
             Route::get('{slug}/achievements', 'UsersController@achievements')->name('user.achievements');
             //Post Avatar/Cover image
             Route::post('edit/avatar', 'UsersController@postAvatar')->name('post.avatar');
