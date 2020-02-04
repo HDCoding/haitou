@@ -60,7 +60,7 @@
                                             {!! Form::open(['url' => 'faq/'.$faq->id.'/update/', 'method' => 'PUT', 'id' => 'faq-disable-' . $faq->id, 'style' => 'display: none']) !!}
                                             {!! Form::close() !!}
                                             <a class="m-l-15" href="{{ url('staff/faqs/' . $faq->id . '/edit') }}" data-toggle="tooltip" title="Editar Pergunta"><i class="fa fa-pencil-alt text-info"></i></a>
-                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('faq-del-{{$faq->id}}').submit();" data-toggle="tooltip" title="Remover Pergunta"><i class="fa fa-times text-danger"></i></a>
+                                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('faq-del-{{ $faq->id }}').submit();" data-toggle="tooltip" title="Remover Pergunta"><i class="fa fa-times text-danger"></i></a>
                                             {!! Form::open(['url' => 'staff/faqs/' . $faq->id, 'method' => 'DELETE', 'id' => 'faq-del-' . $faq->id, 'style' => 'display: none']) !!}
                                             {!! Form::close() !!}
                                         </div>
