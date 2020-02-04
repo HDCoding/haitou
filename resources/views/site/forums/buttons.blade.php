@@ -5,16 +5,22 @@
                 <i class="ion ion-ios-chatbubbles"></i> Fórum
             </a>
             <a href="{{ route('forum_latest_topics') }}" class="btn btn-sm btn-primary btn-rounded">
-                <i class="fa fa-book"></i> Tópicos recentes
+                <i class="fas fa-book"></i> Tópicos recentes
             </a>
             <a href="{{ route('forum_latest_posts') }}" class="btn btn-sm btn-secondary btn-rounded">
-                <i class="fa fa-file"></i> Últimas postagens
+                <i class="fas fa-file"></i> Últimas postagens
             </a>
             <a href="{{ route('forum_subscriptions') }}" class="btn btn-sm btn-danger btn-rounded">
-                <i class="fa fa-heart"></i> Favoritos
+                <i class="fas fa-heart"></i> Favoritos
             </a>
             <a href="{{ route('forum.search') }}" class="btn btn-sm btn-dark btn-rounded">
-                <i class="fa fa-search"></i> Pesquisar
+                <i class="fas fa-search"></i> Pesquisar
+            </a>
+            <a href="{{ route('my.topics') }}" class="btn btn-sm btn-warning btn-rounded">
+                <i class="fas fa-gavel"></i> Meus Tópicos
+            </a>
+            <a href="{{ route('my.posts') }}" class="btn btn-sm btn-info btn-rounded">
+                <i class="fas fa-share-square"></i> Meus Posts
             </a>
         </div>
         <div class="float-right">
