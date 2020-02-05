@@ -12,12 +12,11 @@ class Character extends Model
     use SoftDeletes;
     use Sluggable;
 
+    const uploaderFolder = 'characters';
     protected $table = 'characters';
-
     protected $casts = [
         'views' => 'int'
     ];
-
     protected $fillable = [
         'name',
         'slug',
@@ -25,8 +24,6 @@ class Character extends Model
         'description',
         'views'
     ];
-
-    const uploaderFolder = 'characters';
 
     public function sluggable()
     {
