@@ -41,6 +41,6 @@ class AchievementsController extends Controller
             return $user->lockedAchievements()->count();
         });
 
-        return view('site.users.achievements', compact('achievements', 'pending', 'unlocked', 'locked'));
+        return view('site.achievements.index', compact('achievements', 'pending', 'unlocked', 'locked'));
     }
 }
