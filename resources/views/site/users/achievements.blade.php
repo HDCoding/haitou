@@ -2,6 +2,10 @@
 
 @section('title', 'Conquistas')
 
+@section('css')
+    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -12,6 +16,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('user.profile', ['slug' => $member->slug]) }}">{{ $member->username }}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Conquistas</li>
                         </ol>
                     </nav>
@@ -22,77 +27,45 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title text-success">Conquistas desbloqueadas: {{ $unlocked }}</h4>
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Troféu</th>
-                                <th>Descrição</th>
-                                <th class="text-center">Progresso</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($achievements as $achievement)
-                                <tr>
-                                    <td>
-                                        <img src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->details->name) . '.png')) }}"
-                                             data-toggle="tooltip"
-                                             data-original-title="{{ $achievement->details->name }}"
-                                             alt="{{ $achievement->details->name }}" width="90px">
-                                    </td>
-                                    <td class="text-center align-middle">{{ $achievement->details->description }}</td>
-                                    @if($achievement->isUnlocked())
-                                        <td class="text-center align-middle">
-                                            <span class="badge badge-pill badge-success">Desbloqueado</span>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        @include('site.users.blocks.covers')
 
-            <div class="col-sm-12 col-lg-6">
+        @include('site.users.blocks.left')
+
+        <!-- Column -->
+            <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title text-danger">Conquistas pendentes: {{ $locked }}</h4>
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Troféu</th>
-                                <th>Descrição</th>
-                                <th class="text-center">Progresso</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach ($pending as $achievement)
-                                <tr>
-                                    <td>
-                                        <img src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->details->name) . '.png')) }}"
-                                             data-toggle="tooltip"
-                                             data-original-title="{{ $achievement->details->name }}"
-                                             alt="{{ $achievement->details->name }}" width="90px">
-                                    </td>
-                                    <td class="text-center align-middle">{{ $achievement->details->description }}</td>
-                                    <td class="text-center align-middle">
-                                        <span class="badge badge-pill badge-warning"> Progresso:
-                                            {{ $achievement->points }} / {{ $achievement->details->points }}
-                                        </span>
-                                        <span class="label label-danger">Bloqueada</span>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    <!-- Urls -->
+                @include('site.users.blocks.urls')
+                <!-- Urls -->
+                    @include('site.users.blocks.achievements')
                 </div>
             </div>
+            <!-- Column -->
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+    <!-- VegasJS -->
+    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+
+    @if(!empty($member->cover()))
+        <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+            $(function() {
+                // Fixed bg
+                $('#member-cover').vegas({
+                    overlay: false,
+                    timer: false,
+                    shuffle: true,
+                    slides: [
+                        { src: "{{ $member->cover() }}" },
+                    ],
+                    transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
+                    animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
+                });
+            });
+        </script>
+    @endif
 
 @endsection
