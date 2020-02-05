@@ -13,7 +13,6 @@ use App\Http\Requests\Staff\Settings\PolicyRequest;
 use App\Http\Requests\Staff\Settings\SeoRequest;
 use App\Http\Requests\Staff\Settings\SocialRequest;
 use App\Models\Setting;
-use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -33,6 +32,15 @@ class SettingsController extends Controller
         if ($request->isMethod('GET')) {
             return view('staff.settings.analytics');
         }
+    }
+
+    public function save(array $data)
+    {
+        foreach ($data as $key => $val) {
+            Setting::add($key, $val);
+        }
+
+        toastr()->info('Configuração atualizada.', 'Sucesso');
     }
 
     public function favicon(FaviconRequest $request)
@@ -127,15 +135,6 @@ class SettingsController extends Controller
         if ($request->isMethod('GET')) {
             return view('staff.settings.social');
         }
-    }
-
-    public function save(array $data)
-    {
-        foreach ($data as $key => $val) {
-            Setting::add($key, $val);
-        }
-
-        toastr()->info('Configuração atualizada.', 'Sucesso');
     }
 
 }
