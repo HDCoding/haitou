@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Cache;
 
 trait UsersOnline
 {
-    public function allOnline()
-    {
-        return $this->all()->filter->isOnline();
-    }
-
     public function isOnline()
     {
         if (!$this->last_action) {
@@ -27,6 +22,11 @@ trait UsersOnline
         });
     }
 
+    public function allOnline()
+    {
+        return $this->all()->filter->isOnline();
+    }
+
     public function mostRecentOnline()
     {
         return $this->allOnline()->sortByDesc(function ($user) {
@@ -41,6 +41,11 @@ trait UsersOnline
         }
 
         return $cache['now'];
+    }
+
+    public function getCacheKey()
+    {
+        return sprintf('%s-%s', 'UserOnline', $this->id);
     }
 
     public function setCache($seconds = 300)
@@ -63,10 +68,5 @@ trait UsersOnline
     public function pullCache()
     {
         Cache::pull($this->getCacheKey());
-    }
-
-    public function getCacheKey()
-    {
-        return sprintf('%s-%s', 'UserOnline', $this->id);
     }
 }
