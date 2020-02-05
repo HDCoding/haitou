@@ -15,8 +15,6 @@ use App\Http\Requests\User\UpdatePrivacy;
 use App\Http\Requests\User\UpdateSetting;
 use App\Jobs\SendEmailUpdatedMail;
 use App\Jobs\SendPasswordNotificationMail;
-use App\Mail\AccountEmailUpdate;
-use App\Mail\PasswordNotification;
 use App\Models\Mood;
 use App\Models\Post;
 use App\Models\State;
@@ -24,7 +22,6 @@ use App\Models\Topic;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
