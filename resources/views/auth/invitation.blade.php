@@ -18,7 +18,7 @@
                 <div>
                     <div class="logo">
                         <span class="db"><img src="{{ asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
-                        <h5 class="font-medium m-t-20 m-b-20">Crie a sua conta</h5>
+                        <h5 class="font-medium mt-3 m-b-20">Crie a sua conta</h5>
                     </div>
                     <!-- Form -->
                     <div class="row">
@@ -92,7 +92,7 @@
 @section('script')
 {{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
 {{--    <script src="{{ asset('js/pages/invitation.js') }}"></script>--}}
-    <script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
     </script>

@@ -58,7 +58,7 @@
 @section('script')
 {{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
 {{--    <script src="{{ asset('js/pages/lockscreen.js') }}"></script>--}}
-    <script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
     </script>

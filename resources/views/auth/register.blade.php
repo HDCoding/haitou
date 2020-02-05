@@ -106,9 +106,9 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('vendor/validate/validate.js') }}"></script>
-    <script src="{{ asset('js/pages/register.js') }}"></script>
-    <script>
+{{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/pages/register.js') }}"></script>--}}
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
     </script>
