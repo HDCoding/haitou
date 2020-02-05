@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendActivationThanksMail;
-use App\Mail\AccountThanksActivation;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class ActivationController extends Controller
 {
