@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -30,6 +29,7 @@ class AccountActivation extends Mailable
     /**
      * Create a new message instance.
      *
+     * @param User $user
      * @param string $code
      */
     public function __construct(User $user, string $code)
