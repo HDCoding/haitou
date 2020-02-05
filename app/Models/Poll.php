@@ -54,16 +54,6 @@ class Poll extends Model
         return $this->hasMany(Topic::class);
     }
 
-    public function options()
-    {
-        return $this->hasMany(Option::class);
-    }
-
-    public function votes()
-    {
-        return $this->hasManyThrough(Vote::class, Option::class, 'poll_id', 'option_id', 'id', 'id');
-    }
-
     public function sluggable()
     {
         return [
@@ -83,6 +73,11 @@ class Poll extends Model
         return $this->votes()->count();
     }
 
+    public function votes()
+    {
+        return $this->hasManyThrough(Vote::class, Option::class, 'poll_id', 'option_id', 'id', 'id');
+    }
+
     public function hasVoted($userId)
     {
         return $this->votes()->where('user_id', '=', $userId)->count() > 0;
@@ -91,6 +86,11 @@ class Poll extends Model
     public function optionsCount()
     {
         return $this->options()->count();
+    }
+
+    public function options()
+    {
+        return $this->hasMany(Option::class);
     }
 
     public function descriptionHtml()
