@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
-use Jenssegers\Agent\Agent;
 
 class Login extends Model
 {
