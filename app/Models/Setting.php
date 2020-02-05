@@ -18,14 +18,6 @@ class Setting extends Model
         'value'
     ];
 
-    public function contentHtml($key)
-    {
-        if (self::has($key)) {
-            $value = self::get($key);
-            return (new BBCode())->parse($value, true);
-        }
-    }
-
     /**
      * Add a settings value
      *
@@ -39,22 +31,6 @@ class Setting extends Model
             return self::set($key, $value);
         }
         return self::create(['key' => $key, 'value' => $value]);
-    }
-
-    /**
-     * Get a settings value
-     *
-     * @param $key
-     * @param null $default
-     * @return bool|int|mixed
-     */
-    public static function get($key, $default = null)
-    {
-        if (self::has($key)) {
-            $setting = self::where('key', '=', $key)->select('value')->first();
-            return $setting->value;
-        }
-        return self::getDefaultValue($key, $default);
     }
 
     /**
@@ -87,17 +63,6 @@ class Setting extends Model
     }
 
     /**
-     * Check if setting exists
-     *
-     * @param $key
-     * @return bool
-     */
-    public static function has($key)
-    {
-        return (boolean)self::where('key', '=', $key)->count();
-    }
-
-    /**
      * Get all the settings
      *
      * @return mixed
@@ -109,41 +74,6 @@ class Setting extends Model
                 return [$setting->key => $setting->value];
             });
         });
-    }
-
-    /**
-     * Flush the cache
-     */
-    public static function flushCache()
-    {
-        Cache::forget('settings.all');
-    }
-
-    public static function getDefaultValueForField($field)
-    {
-        return self::getDefinedSettingFields()->pluck('value', 'name')->get($field);
-    }
-
-    /**
-     * Get default value from config if no value passed
-     *
-     * @param $key
-     * @param $default
-     * @return mixed
-     */
-    private static function getDefaultValue($key, $default)
-    {
-        return is_null($default) ? self::getDefaultValueForField($key) : $default;
-    }
-
-    /**
-     * Get all the settings fields from config
-     *
-     * @return Collection
-     */
-    private static function getDefinedSettingFields()
-    {
-        return collect(config('settings'))->pluck('elements')->flatten(1);
     }
 
     protected static function boot()
@@ -158,6 +88,76 @@ class Setting extends Model
         static::deleted(function () {
             self::flushCache();
         });
+    }
+
+    /**
+     * Flush the cache
+     */
+    public static function flushCache()
+    {
+        Cache::forget('settings.all');
+    }
+
+    public function contentHtml($key)
+    {
+        if (self::has($key)) {
+            $value = self::get($key);
+            return (new BBCode())->parse($value, true);
+        }
+    }
+
+    /**
+     * Check if setting exists
+     *
+     * @param $key
+     * @return bool
+     */
+    public static function has($key)
+    {
+        return (boolean)self::where('key', '=', $key)->count();
+    }
+
+    /**
+     * Get a settings value
+     *
+     * @param $key
+     * @param null $default
+     * @return bool|int|mixed
+     */
+    public static function get($key, $default = null)
+    {
+        if (self::has($key)) {
+            $setting = self::where('key', '=', $key)->select('value')->first();
+            return $setting->value;
+        }
+        return self::getDefaultValue($key, $default);
+    }
+
+    /**
+     * Get default value from config if no value passed
+     *
+     * @param $key
+     * @param $default
+     * @return mixed
+     */
+    private static function getDefaultValue($key, $default)
+    {
+        return is_null($default) ? self::getDefaultValueForField($key) : $default;
+    }
+
+    public static function getDefaultValueForField($field)
+    {
+        return self::getDefinedSettingFields()->pluck('value', 'name')->get($field);
+    }
+
+    /**
+     * Get all the settings fields from config
+     *
+     * @return Collection
+     */
+    private static function getDefinedSettingFields()
+    {
+        return collect(config('settings'))->pluck('elements')->flatten(1);
     }
 
 }
