@@ -30,23 +30,45 @@ class Bonus extends Model
     public function type()
     {
         switch ($this->bonus_type) {
-            case 0: echo 'Download'; break;
-            case 1: echo 'Upload'; break;
-            case 2: echo 'Freeleech'; break;
-            case 3: echo 'Advertência'; break;
-            case 4: echo 'Convite'; break;
-            case 5: echo 'Slots'; break;
-            default: echo 'Bug'; break;
+            case 0:
+                echo 'Download';
+                break;
+            case 1:
+                echo 'Upload';
+                break;
+            case 2:
+                echo 'Freeleech';
+                break;
+            case 3:
+                echo 'Advertência';
+                break;
+            case 4:
+                echo 'Convite';
+                break;
+            case 5:
+                echo 'Slots';
+                break;
+            default:
+                echo 'Bug';
+                break;
         }
     }
 
     public function bytes()
     {
         switch ($this->bytes) {
-            case 0: return 'MB'; break;
-            case 1: return 'GB'; break;
-            case 2: return 'TB'; break;
-            default: return 'Bug'; break;
+            case 0:
+                return 'MB';
+                break;
+            case 1:
+                return 'GB';
+                break;
+            case 2:
+                return 'TB';
+                break;
+            default:
+                return 'Bug';
+                break;
         }
     }
 
