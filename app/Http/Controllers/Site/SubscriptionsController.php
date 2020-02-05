@@ -14,24 +14,19 @@ class SubscriptionsController extends Controller
         $this->middleware('auth');
     }
 
-    public function subscribeTopic(Request $request, string $route, Topic $topic)
+    public function subscribeTopic(Request $request, Topic $topic)
     {
-        if ($route == 'subscriptions') {
-            $logger = 'forum_subscriptions';
-            $params = [];
-        }
-        if (!isset($logger)) {
-            $logger = 'forum_topic';
-            $params = ['slug' => $topic->slug, 'id' => $topic->id];
-        }
+        $logger = 'forum.topic';
+        $params = ['id' => $topic->id, 'slug' => $topic->slug,];
 
-        if (!$request->user()->isSubscribed('topic', $topic->id)) {
+        if (!$request->user()->isSubscribed($topic->id)) {
             $subscription = new Subscription();
-            $subscription->user_id = $request->user()->id;
+            $subscription->forum_id = $topic->forum->id;
             $subscription->topic_id = $topic->id;
+            $subscription->user_id = $request->user()->id;
             $subscription->save();
 
-            toastr()->success('Agora você está inscrito no tópico, ' . $topic->name . ' Agora você receberá notificações do site quando uma resposta for deixada.', 'Inscrição');
+            toastr()->success('Agora você está inscrito no tópico, ' . $topic->name . ' Agora você receberá notificações do site quando uma resposta for postada.', 'Inscrição');
             return redirect()->route($logger, $params);
         } else {
             return redirect()->route($logger, $params)
@@ -39,20 +34,13 @@ class SubscriptionsController extends Controller
         }
     }
 
-    public function unsubscribeTopic(Request $request, string $route, Topic $topic)
+    public function unsubscribeTopic(Request $request, Topic $topic)
     {
-        if ($route == 'subscriptions') {
-            $logger = 'forum_subscriptions';
-            $params = [];
-        }
-        if (!isset($logger)) {
-            $logger = 'forum_topic';
-            $params = ['id' => $topic->id, 'slug' => $topic->slug];
-        }
+        $logger = 'forum.topic';
+        $params = ['id' => $topic->id, 'slug' => $topic->slug];
 
-        if ($request->user()->isSubscribed('topic', $topic->id)) {
-            $subscription = $request->user()->subscriptions()->where('topic_id', '=', $topic->id)->first();
-            $subscription->delete();
+        if ($request->user()->isSubscribed($topic->id)) {
+            $request->user()->subscriptions()->where('topic_id', '=', $topic->id)->first()->delete();
 
             toastr()->info('Você não está mais inscrito no tópico, ' . $topic->name . '. Você não receberá mais notificações do site quando uma resposta for deixada.', 'Inscrição Cancelada');
             return redirect()->route($logger, $params);
