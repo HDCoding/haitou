@@ -9,17 +9,17 @@ class Allow extends Model
 {
     use Sluggable;
 
-	protected $table = 'allows';
+    protected $table = 'allows';
 
-	protected $casts = [
+    protected $casts = [
         'is_staff' => 'bool'
     ];
 
-	protected $fillable = [
-		'name',
-		'slug',
+    protected $fillable = [
+        'name',
+        'slug',
         'is_staff'
-	];
+    ];
 
     public function sluggable()
     {
