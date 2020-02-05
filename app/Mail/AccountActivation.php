@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,17 +12,31 @@ class AccountActivation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $code, $siteName;
+    /**
+     * @var User
+     */
+    public $user;
+
+    /**
+     * @var string
+     */
+    public $code;
+
+    /**
+     * @var string
+     */
+    public $site_name;
 
     /**
      * Create a new message instance.
      *
      * @param string $code
      */
-    public function __construct(string $code)
+    public function __construct(User $user, string $code)
     {
+        $this->user = $user;
         $this->code = $code;
-        $this->siteName = setting('site_title');
+        $this->site_name = setting('site_title');
     }
 
     /**
@@ -33,6 +48,6 @@ class AccountActivation extends Mailable
     {
         return $this->subject('Ative sua conta!')
             ->markdown('emails.account_activation')
-            ->with(['siteName' => $this->siteName, 'code' => $this->code]);
+            ->with(['site_name' => $this->site_name, 'code' => $this->code]);
     }
 }
