@@ -108,8 +108,7 @@ class MediasController extends Controller
 
     public function updatePoster()
     {
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
-        {
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
@@ -142,8 +141,7 @@ class MediasController extends Controller
 
     public function updateCover()
     {
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid())
-        {
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
