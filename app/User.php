@@ -441,12 +441,9 @@ class User extends Authenticatable
         return $this->group()->select('name')->pluck('name')->first();
     }
 
-    public function isSubscribed(string $type, $topic_id)
+    public function isSubscribed(int $topic_id)
     {
-        if ($type == 'topic') {
-            return (bool)$this->subscriptions()->where('topic_id', '=', $topic_id)->first(['id']);
-        }
-        return (bool)$this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
+        return (bool)$this->subscriptions()->where('topic_id', '=', $topic_id)->first('id');
     }
 
     public function subscriptions()
