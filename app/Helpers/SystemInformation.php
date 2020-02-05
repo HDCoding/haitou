@@ -101,7 +101,7 @@ class SystemInformation
     {
         return [
             'os' => php_uname('s'),
-            'php' => phpversion(),
+            'php' => substr(phpversion(), 0, 6),
             'database' => $this->database(),
             'laravel' => app()->version()
         ];
@@ -119,9 +119,9 @@ class SystemInformation
             return 'Desconhecido';
         }
 
-        $result = DB::select(DB::raw('select version()'));
+        $result = DB::select(DB::raw('select version() as mysql_version'));
 
-        return $result[0]->{'version()'};
+        return substr($result[0]->{'mysql_version'}, 0, 6);
     }
 
     /**
@@ -155,8 +155,10 @@ class SystemInformation
 
     /**
      * Get the file permissions for a specific path/file.
+     * @param $path
+     * @return false|string
      */
-    public function getDirectoryPermission($path)
+    public function getDirectoryPermission(string $path)
     {
         try {
             return substr(sprintf('%o', fileperms(base_path($path))), -4);
