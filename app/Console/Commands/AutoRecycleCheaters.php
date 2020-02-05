@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use App\Models\Cheater;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class AutoRecycleCheaters extends Command
