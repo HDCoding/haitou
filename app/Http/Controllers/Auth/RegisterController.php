@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Jobs\SendActivationMail;
-use App\Mail\AccountActivation;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -49,7 +46,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param RegisterRequest $request
-     * @return \App\User
+     * @return User
      */
     protected function register(RegisterRequest $request)
     {
