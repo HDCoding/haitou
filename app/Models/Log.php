@@ -30,11 +30,6 @@ class Log extends Model
         'is_staff'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public static function record(string $content, bool $is_staff = false)
     {
         $agent = new Agent();
@@ -50,5 +45,10 @@ class Log extends Model
             'is_desktop' => $agent->isDesktop(),
             'is_staff' => $is_staff
         ]);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
