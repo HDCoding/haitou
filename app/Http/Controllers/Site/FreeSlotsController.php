@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\FreeSlotRequest;
 use App\Models\Freeslot;
-use Illuminate\Http\Request;
 
 class FreeSlotsController extends Controller
 {
