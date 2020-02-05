@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chatbox extends Model
 {
-	protected $table = 'chatbox';
+    protected $table = 'chatbox';
 
-	protected $casts = [
-		'user_id' => 'int'
-	];
+    protected $casts = [
+        'user_id' => 'int'
+    ];
 
-	protected $fillable = [
-		'user_id',
+    protected $fillable = [
+        'user_id',
         'username',
-		'message',
-		'mentions'
-	];
+        'message',
+        'mentions'
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'user_id');
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
