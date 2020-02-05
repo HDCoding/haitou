@@ -54,6 +54,23 @@ class CalendarsController extends Controller
         return redirect()->to('calendars');
     }
 
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstEvent());
+        $user->addProgress(new UserMade50Events(), 1);
+        $user->addProgress(new UserMade100Events(), 1);
+        $user->addProgress(new UserMade200Events(), 1);
+        $user->addProgress(new UserMade300Events(), 1);
+        $user->addProgress(new UserMade400Events(), 1);
+        $user->addProgress(new UserMade500Events(), 1);
+        $user->addProgress(new UserMade600Events(), 1);
+        $user->addProgress(new UserMade700Events(), 1);
+        $user->addProgress(new UserMade800Events(), 1);
+        $user->addProgress(new UserMade900Events(), 1);
+        $user->addProgress(new UserMade1000Events(), 1);
+    }
+
     public function show($calendar_id)
     {
         $calendar = Calendar::findOrFail($calendar_id);
@@ -99,22 +116,5 @@ class CalendarsController extends Controller
 
         toastr()->warning('Evento Deletado', 'Aviso');
         return redirect()->to('calendars');
-    }
-
-    private function achievement(User $user)
-    {
-        // Achievements
-        $user->unlock(new UserMadeFirstEvent());
-        $user->addProgress(new UserMade50Events(), 1);
-        $user->addProgress(new UserMade100Events(), 1);
-        $user->addProgress(new UserMade200Events(), 1);
-        $user->addProgress(new UserMade300Events(), 1);
-        $user->addProgress(new UserMade400Events(), 1);
-        $user->addProgress(new UserMade500Events(), 1);
-        $user->addProgress(new UserMade600Events(), 1);
-        $user->addProgress(new UserMade700Events(), 1);
-        $user->addProgress(new UserMade800Events(), 1);
-        $user->addProgress(new UserMade900Events(), 1);
-        $user->addProgress(new UserMade1000Events(), 1);
     }
 }
