@@ -85,11 +85,6 @@ class Media extends Model
         return $this->belongsToMany(Genre::class, 'media_genres')->withPivot('id');
     }
 
-    public function ratings()
-    {
-        return $this->hasMany(Rating::class);
-    }
-
     public function torrents()
     {
         return $this->hasMany(Torrent::class);
@@ -140,7 +135,6 @@ class Media extends Model
         }
     }
 
-
     public function trailer()
     {
         $url = $this->yt_video;
@@ -152,21 +146,6 @@ class Media extends Model
             }
         }
         return 'Erro';
-    }
-
-    public function avgRating()
-    {
-        return number_format($this->ratings()->avg('vote'), 1, '.', ',');
-    }
-
-    public function totalRating()
-    {
-        return $this->ratings()->count('vote');
-    }
-
-    public function descriptionHtml()
-    {
-        return (new BBCode())->parse($this->description, true);
     }
 
     /**
@@ -187,5 +166,25 @@ class Media extends Model
         // Check that URL exists
         $file_headers = get_headers($url);
         return !$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found' ? false : true;
+    }
+
+    public function avgRating()
+    {
+        return number_format($this->ratings()->avg('vote'), 1, '.', ',');
+    }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function totalRating()
+    {
+        return $this->ratings()->count('vote');
+    }
+
+    public function descriptionHtml()
+    {
+        return (new BBCode())->parse($this->description, true);
     }
 }
