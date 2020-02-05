@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendActivationThanksMail;
 use App\Mail\AccountThanksActivation;
 use App\User;
 use Illuminate\Http\Request;
@@ -27,11 +28,12 @@ class ActivationController extends Controller
             $user->code = null;
             //update user account
             $user->save();
-            //Send thank-you email
-            Mail::to($user)->send(new AccountThanksActivation());
 
             //Set user permissions
             $user->allows()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 11]);
+
+            //send thank you email
+            $this->dispatch(new SendActivationThanksMail($user));
 
             //Return to confirmation page
             return view('auth.activation')->with('info', 'Conta ativada com sucesso, agora você pode fazer o login.');
