@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class AutoRecycleAccounts extends Command
