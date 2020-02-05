@@ -16,6 +16,7 @@ use App\Achievements\UserMade900Invites;
 use App\Achievements\UserMadeFirstInvite;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\InvitationRequest;
+use App\Jobs\SendActivationThanksMail;
 use App\Mail\AccountThanksActivation;
 use App\Models\Invitation;
 use App\User;
@@ -48,10 +49,8 @@ class InvitationController extends Controller
             $code = $request->input('code');
             $invitation = Invitation::where('code', '=', $code)->first();
 
-            $original_code = $invitation->code;
-
-            if (!$original_code) {
-                return view('auth.activation', compact('original_code'))
+            if (!$invitation) {
+                return redirect()->back()
                     ->with('warning', 'Não altere o código de convite!')->withInput();
             }
 
@@ -70,19 +69,19 @@ class InvitationController extends Controller
             $user->status = 1;
             $user->mood_id = 1;
             $user->state_id = 25;
-            $user->invites += 2;
+            $user->invites = 10;
             $user->points = $points;
             $user->experience = $points;
             $user->passkey = md5_gen();
             $user->birthday = Carbon::today();
-            $user->activated_at = Carbon::today();
+            $user->activated_at = Carbon::now();
             $user->save();
 
             //Set user permissions
             $user->allows()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 11]);
 
             //send thank you email
-            Mail::to($invitation->email)->send(new AccountThanksActivation());
+            $this->dispatch(new SendActivationThanksMail($user));
 
             //update the invitation
             $invitation->accepted_by = $user->id;
@@ -94,14 +93,13 @@ class InvitationController extends Controller
 
             //Send points to friend whos have invited
             $friend = User::where('id', '=', $invitation->user_id)->first();
-            $friend->invites += 2;
+            $friend->invites += 3;
             $friend->points += $points;
             $friend->experience += $points;
             $friend->save();
 
             // Achievements
             $this->achievement($friend);
-
 
             return view('auth.activation')
                 ->with('info', 'Conta criada e ativada com sucesso, agora você pode fazer login.');
@@ -110,20 +108,20 @@ class InvitationController extends Controller
         }
     }
 
-    private function achievement(User $friend)
+    private function achievement(User $user)
     {
         // Achievements
-        $friend->unlock(new UserMadeFirstInvite());
-        $friend->addProgress(new UserMade50Invites(), 1);
-        $friend->addProgress(new UserMade100Invites(), 1);
-        $friend->addProgress(new UserMade200Invites(), 1);
-        $friend->addProgress(new UserMade300Invites(), 1);
-        $friend->addProgress(new UserMade400Invites(), 1);
-        $friend->addProgress(new UserMade500Invites(), 1);
-        $friend->addProgress(new UserMade600Invites(), 1);
-        $friend->addProgress(new UserMade700Invites(), 1);
-        $friend->addProgress(new UserMade800Invites(), 1);
-        $friend->addProgress(new UserMade900Invites(), 1);
-        $friend->addProgress(new UserMade1000Invites(), 1);
+        $user->unlock(new UserMadeFirstInvite());
+        $user->addProgress(new UserMade50Invites(), 1);
+        $user->addProgress(new UserMade100Invites(), 1);
+        $user->addProgress(new UserMade200Invites(), 1);
+        $user->addProgress(new UserMade300Invites(), 1);
+        $user->addProgress(new UserMade400Invites(), 1);
+        $user->addProgress(new UserMade500Invites(), 1);
+        $user->addProgress(new UserMade600Invites(), 1);
+        $user->addProgress(new UserMade700Invites(), 1);
+        $user->addProgress(new UserMade800Invites(), 1);
+        $user->addProgress(new UserMade900Invites(), 1);
+        $user->addProgress(new UserMade1000Invites(), 1);
     }
 }
