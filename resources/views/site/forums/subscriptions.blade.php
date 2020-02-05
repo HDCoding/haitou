@@ -38,7 +38,7 @@
                         <h4 class="card-title">Fóruns e Tópicos Favoritos</h4>
                         @includeIf('errors.errors', [$errors])
                         <div class="table-responsive m-t-15">
-                            <table class="table" id="datatable">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th>Fórum</th>
