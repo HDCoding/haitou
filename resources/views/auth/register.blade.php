@@ -18,7 +18,7 @@
                 <div>
                     <div class="logo">
                         <span class="db"><img src="{{ asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
-                        <h5 class="font-medium m-t-20 m-b-20">Crie a sua conta</h5>
+                        <h5 class="font-medium mb-2 mt-3">Crie a sua conta</h5>
                     </div>
                     <!-- Form -->
                     <div class="row">
