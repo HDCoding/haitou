@@ -12,16 +12,14 @@ class Actor extends Model
     use SoftDeletes;
     use Sluggable;
 
+    const uploaderFolder = 'actors';
     protected $table = 'actors';
-
     protected $casts = [
         'views' => 'int'
     ];
-
     protected $dates = [
         'birthday'
     ];
-
     protected $fillable = [
         'name',
         'slug',
@@ -31,8 +29,6 @@ class Actor extends Model
         'birthday',
         'views'
     ];
-
-    const uploaderFolder = 'actors';
 
     public function sluggable()
     {
