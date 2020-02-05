@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Allow;
+use Exception;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,7 +32,7 @@ class PermissionsServiceProvider extends ServiceProvider
                     return $user->hasPermissionTo($permission);
                 });
             });
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
             return false;
         }
