@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
-use App\Models\Log;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class AutoBirthdayGift extends Command
