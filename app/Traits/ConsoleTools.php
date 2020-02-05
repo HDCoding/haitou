@@ -14,11 +14,6 @@ trait ConsoleTools
      */
     protected $io;
 
-    private function cyan($line)
-    {
-        $this->io->writeln("\n<fg=cyan>$line</>");
-    }
-
     private function white($line)
     {
         $this->io->writeln("\n$line");
@@ -29,24 +24,14 @@ trait ConsoleTools
         $this->io->writeln("\n<fg=magenta>$line</>");
     }
 
-    private function green($line)
-    {
-        $this->io->writeln("\n<fg=green>$line</>");
-    }
-
-    private function red($line)
-    {
-        $this->io->writeln("\n<fg=red>$line</>");
-    }
-
-    private function blue($line)
-    {
-        $this->io->writeln("\n<fg=blue>$line</>");
-    }
-
     private function done()
     {
         $this->green('<fg=white>[</>Feito<fg=white>]</>');
+    }
+
+    private function green($line)
+    {
+        $this->io->writeln("\n<fg=green>$line</>");
     }
 
     private function header($line)
@@ -54,6 +39,11 @@ trait ConsoleTools
         $this->blue(str_repeat('=', 50));
         $this->io->write($line);
         $this->blue(str_repeat('=', 50));
+    }
+
+    private function blue($line)
+    {
+        $this->io->writeln("\n<fg=blue>$line</>");
     }
 
     private function alertSuccess($line)
@@ -127,6 +117,11 @@ trait ConsoleTools
         return $process;
     }
 
+    private function cyan($line)
+    {
+        $this->io->writeln("\n<fg=cyan>$line</>");
+    }
+
     /**
      * @return ProgressBar
      */
@@ -140,6 +135,11 @@ trait ConsoleTools
         $bar->start();
 
         return $bar;
+    }
+
+    private function red($line)
+    {
+        $this->io->writeln("\n<fg=red>$line</>");
     }
 
     /**
