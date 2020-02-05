@@ -35,8 +35,7 @@ class CharactersController extends Controller
         $character->name = $request->input('name');
 
         //Image
-        if ($request->hasFile('image') && $request->file('image')->isValid())
-        {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
@@ -83,8 +82,7 @@ class CharactersController extends Controller
         $character->name = $request->input('name');
 
         //Image
-        if ($request->hasFile('image') && $request->file('image')->isValid())
-        {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
