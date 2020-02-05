@@ -35,7 +35,7 @@
                 @include('site.forums.buttons')
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Fóruns e Tópicos Favoritos</h4>
+                        <h4 class="card-title">Tópicos Favoritos</h4>
                         @includeIf('errors.errors', [$errors])
                         <div class="table-responsive m-t-15">
                             <table class="table">
@@ -52,72 +52,49 @@
                                 <tbody>
                                 @foreach ($results as $result)
 
-                                    @if (in_array($result->id, $forum_neos))
-                                        <tr>
-                                            <th>
-                                                <a href="{{ route('forum.topics', ['id' => $result->id, 'slug' => $result->slug]) }}">
-                                                    {{ $result->name }}
-                                                </a>
-                                            </th>
-                                            <td>--</td>
-                                            <td>--</td>
-                                            <td>--</td>
-                                            <td>--</td>
-                                            <td>
-                                                @if (auth()->user()->isSubscribed('forum', $result->id))
-                                                    <a href="{{ route('unsubscribe_forum', ['forum' => $result->id, 'route' => 'subscriptions']) }}" class="label label-sm label-danger">
-                                                        <i class="fa fa-bell-slash"></i> Cancelar inscrição</a>
-                                                @else
-                                                    <a href="{{ route('subscribe_forum', ['forum' => $result->id, 'route' => 'subscriptions']) }}" class="label label-sm label-success">
-                                                        <i class="fa fa-bell"></i> Se inscrever</a>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endif
-
                                     @if ($result->subscription_topics)
 
-                                        @foreach($result->subscription_topics as $t)
+                                        @foreach($result->subscription_topics as $topic)
                                             <tr>
                                                 <th>
-                                                    <span class="badge-extra text-bold">{{ $t->forum->name }}</span>
+                                                    <a href="{{ route('forum.topics', [$topic->forum->id, $topic->forum->slug]) }}">{{ $topic->forum->name }}</a>
                                                 </th>
                                                 <td>
-                                                    <a class="h5 text-info" href="{{ route('forum.topic', [$t->id, $t->slug]) }}">{{ $t->name }}</a>
-                                                    @if ($t->is_locked)
-                                                        <span class="badge badge-danger">Fechado</span>
+                                                    <a href="{{ route('forum.topic', [$topic->id, $topic->slug]) }}">{{ $topic->name }}</a>
+                                                    @if ($topic->is_locked)
+                                                        <span class="badge badge-dark">Fechado</span>
                                                     @endif
-                                                    @if ($t->is_pinned)
+                                                    @if ($topic->is_pinned)
                                                         <span class="badge badge-success">Pinned</span>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('user.profile', ['slug' => Str::slug($t->first_post_username)]) }}">
-                                                        {{ $t->first_post_username }}
+                                                    <a href="{{ route('user.profile', ['slug' => Str::slug($topic->first_post_username)]) }}">
+                                                        {{ $topic->first_post_username }}
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    {{ $t->posts->count() - 1 }} Respostas / {{ $t->views }} Views
+                                                    {{ $topic->posts->count() - 1 }} Respostas / {{ $topic->views }} Views
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('user.profile', ['slug' => Str::slug($t->last_post_username)]) }}">
-                                                        {{ $t->last_post_username }}
+                                                    <a href="{{ route('user.profile', ['slug' => Str::slug($topic->last_post_username)]) }}">
+                                                        {{ $topic->last_post_username }}
                                                     </a>,
-                                                    @if($t->updated_at && $t->updated_at != null)
-                                                        <time datetime="{{ format_date_time($t->updated_at) }}">
-                                                            {{ format_date_time($t->updated_at) }}
+                                                    @if($topic->updated_at && $topic->updated_at != null)
+                                                        <time datetime="{{ format_date_time($topic->updated_at) }}">
+                                                            {{ format_date_time($topic->updated_at) }}
                                                         </time>
                                                     @else
                                                         <time datetime="N/A">N/A</time>
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if (auth()->user()->isSubscribed('topic', $t->id))
-                                                        <a href="{{ route('unsubscribe_topic', ['topic' => $t->id, 'route' => 'subscriptions']) }}" class="badge badge-danger">
-                                                            <i class="fa fa-bell-slash"></i> Cancelar inscrição
+                                                    @if (auth()->user()->isSubscribed($topic->id))
+                                                        <a href="{{ route('unsubscribe.topic', ['topic' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar Inscrição">
+                                                            <i class="fa fa-bell-slash"></i>
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('subscribe_topic', ['topic' => $t->id, 'route' => 'subscriptions']) }}" class="badge badge-success">
+                                                        <a href="{{ route('subscribe.topic', ['topic' => $topic->id]) }}" class="badge badge-success" data-toggle="tooltip" title="Se Inscrever">
                                                             <i class="fa fa-bell"></i> Se Inscrever
                                                         </a>
                                                     @endif
