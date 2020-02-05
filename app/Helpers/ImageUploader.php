@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 /**
@@ -36,18 +35,6 @@ class ImageUploader
     }
 
     /**
-     * Delete only one image
-     * Receive directory and filename as parameter
-     */
-    public function removeImage($path, $filename)
-    {
-        if (File::exists($path . '/' . $filename)) {
-            //File::deleteDirectory($path . $folderId . '/' . $filename);
-            unlink($path . '/' . $filename);
-        }
-    }
-
-    /**
      * Check if the directory exists, otherwise create it with ID name
      * @param $path
      */
@@ -57,6 +44,18 @@ class ImageUploader
 
         if (!file_exists($path) && !is_dir($path)) {
             mkdir($path, 0644, true);
+        }
+    }
+
+    /**
+     * Delete only one image
+     * Receive directory and filename as parameter
+     */
+    public function removeImage($path, $filename)
+    {
+        if (File::exists($path . '/' . $filename)) {
+            //File::deleteDirectory($path . $folderId . '/' . $filename);
+            unlink($path . '/' . $filename);
         }
     }
 }
