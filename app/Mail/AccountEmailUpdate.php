@@ -11,17 +11,19 @@ class AccountEmailUpdate extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $code, $siteName, $setting;
+    public $code;
+
+    public $site_name;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param string $code
      */
     public function __construct(string $code)
     {
         $this->code = $code;
-        $this->siteName = setting('site_title');
+        $this->site_name = setting('site_title');
     }
 
     /**
@@ -33,6 +35,6 @@ class AccountEmailUpdate extends Mailable
     {
         return $this->subject('Atualize sua conta!')
             ->markdown('emails.email_activation')
-            ->with(['siteName' => $this->siteName, 'code' => $this->code]);
+            ->with(['site_name' => $this->site_name, 'code' => $this->code]);
     }
 }
