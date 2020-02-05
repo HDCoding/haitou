@@ -23,28 +23,6 @@ class NetworkInformation
         return sprintf('<div class="ratio"><div style="width: %f%%;"></div></div>', $percentage);
     }
 
-    private function processData()
-    {
-        // Execute a command to output a json dump of the vnstat data
-        if (is_readable('/usr/bin/vnstat')) {
-
-            // Execute a command to output a json dump of the vnstat data
-            $vnstatStream = popen('/usr/bin/vnstat --json', 'r');
-
-            // Is the stream valid?
-            if (is_resource($vnstatStream)) {
-                $streamBuffer = '';
-                while (!feof($vnstatStream)) {
-                    $streamBuffer .= fgets($vnstatStream);
-                }
-                // Close the handle
-                pclose($vnstatStream);
-
-                return json_decode($streamBuffer, true);
-            }
-        }
-    }
-
     public function hourly($interface)
     {
         $data = $this->processData();
@@ -76,6 +54,28 @@ class NetworkInformation
         }
 
         return $traffic_data;
+    }
+
+    private function processData()
+    {
+        // Execute a command to output a json dump of the vnstat data
+        if (is_readable('/usr/bin/vnstat')) {
+
+            // Execute a command to output a json dump of the vnstat data
+            $vnstatStream = popen('/usr/bin/vnstat --json', 'r');
+
+            // Is the stream valid?
+            if (is_resource($vnstatStream)) {
+                $streamBuffer = '';
+                while (!feof($vnstatStream)) {
+                    $streamBuffer .= fgets($vnstatStream);
+                }
+                // Close the handle
+                pclose($vnstatStream);
+
+                return json_decode($streamBuffer, true);
+            }
+        }
     }
 
     public function daily($interface)
