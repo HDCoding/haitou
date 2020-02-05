@@ -50,7 +50,7 @@ class Freeslot extends Model
         } elseif ($doubleup) {
             $type = ' Double UP ';
         } elseif ($freeleech) {
-            $type  = ' Freeleech ';
+            $type = ' Freeleech ';
         }
         return $type;
     }
