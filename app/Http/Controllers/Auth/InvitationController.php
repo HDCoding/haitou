@@ -47,8 +47,7 @@ class InvitationController extends Controller
             $invitation = Invitation::where('code', '=', $code)->first();
 
             if (!$invitation) {
-                return redirect()->back()
-                    ->with('warning', 'Não altere o código de convite!')->withInput();
+                return redirect()->back()->with('warning', 'Não altere o código de convite!')->withInput();
             }
 
             //Points
