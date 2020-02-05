@@ -20,142 +20,6 @@ class Decoder
     }
 
     /**
-     * @param $data
-     * @return array|bool|int|string
-     */
-    private static function decodeData(&$data)
-    {
-        switch (self::char($data)) {
-            case 'i':
-                $data = substr($data, 1);
-                return self::decodeInteger($data);
-                break;
-            case 'l':
-                $data = substr($data, 1);
-                return self::decodeList($data);
-                break;
-            case 'd':
-                $data = substr($data, 1);
-                return self::decodeDictionary($data);
-                break;
-            default:
-                return self::decodeString($data);
-                break;
-        }
-    }
-
-    /**
-     * @param $data
-     * @return array|bool
-     */
-    private static function decodeDictionary(&$data)
-    {
-        $dictionary = [];
-        $previous = null;
-        while (($char = self::char($data)) != 'e') {
-            if (false === $char) {
-                return self::setError(new Exception('Dicionario indeterminado'));
-            }
-            if (!ctype_digit($char)) {
-                return self::setError(new Exception('Chave do dicionario invalida'));
-            }
-            $key = self::decodeString($data);
-            if (isset($dictionary[$key])) {
-                return self::setError(new Exception('Chave do dicionario duplicada'));
-            }
-            if ($key < $previous) {
-                return self::setError(new Exception('Chave do dicionario sem classificacao'));
-            }
-            $dictionary[$key] = self::decodeData($data);
-            $previous = $key;
-        }
-        $data = substr($data, 1);
-        return $dictionary;
-    }
-
-    /**
-     * @param $data
-     * @return array|bool
-     */
-    private static function decodeList(&$data)
-    {
-        $list = [];
-        while (($char = self::char($data)) != 'e') {
-            if (false === $char) {
-                return self::setError(new Exception('Lista indeterminada'));
-            }
-            $list[] = self::decodeData($data);
-        }
-        $data = substr($data, 1);
-        return $list;
-    }
-
-    /**
-     * @param $data
-     * @return bool|string
-     */
-    private static function decodeString(&$data)
-    {
-        if (self::char($data) === '0' && substr($data, 1, 1) != ':') {
-            return self::setError(new Exception('Tamanho da String invalida, iniciando do zero'));
-        }
-        if (!$colon = @strpos($data, ':')) {
-            return self::setError(new Exception('Tamanho da String invalida, coluna nao encontrada'));
-        }
-        $length = (int)substr($data, 0, $colon);
-        if ($length + $colon + 1 > strlen($data)) {
-            return self::setError(new Exception('String invalida, entrada muito curta para comprimento de string'));
-        }
-        $string = substr($data, $colon + 1, $length);
-        $data = substr($data, $colon + $length + 1);
-        return $string;
-    }
-
-    /**
-     * @param $data
-     * @return bool|int
-     */
-    private static function decodeInteger(&$data)
-    {
-        $start = 0;
-        $end = strpos($data, 'e');
-        if (0 === $end) {
-            return self::setError(new Exception('Integer vazio'));
-        }
-        if (self::char($data) == '-') {
-            $start++;
-        }
-        if (substr($data, $start, 1) == '0' && $end > $start + 1) {
-            return self::setError(new Exception('Integer iniciando do zero'));
-        }
-        if (!ctype_digit(substr($data, $start, $start ? $end - 1 : $end))) {
-            return self::setError(new Exception('Nenhum digitos em numeros inteiros'));
-        }
-        $integer = (int)substr($data, 0, $end);
-        $data = substr($data, $end + 1);
-        return 0 + $integer;
-    }
-
-    /**
-     * @param $exception
-     * @param bool $message
-     * @return bool
-     */
-    protected static function setError($exception, $message = false)
-    {
-        return (array_unshift(self::$errors, $exception) && $message) ? $exception->getMessage() : false;
-    }
-
-    /**
-     * @param $data
-     * @return bool|string
-     */
-    private static function char($data)
-    {
-        return empty($data) ? false : substr($data, 0, 1);
-    }
-
-    /**
      * @param $url
      * @return bool
      */
@@ -222,5 +86,141 @@ class Decoder
             substr($content, $offset, $length) :
             substr($content, $offset) :
             $content;
+    }
+
+    /**
+     * @param $exception
+     * @param bool $message
+     * @return bool
+     */
+    protected static function setError($exception, $message = false)
+    {
+        return (array_unshift(self::$errors, $exception) && $message) ? $exception->getMessage() : false;
+    }
+
+    /**
+     * @param $data
+     * @return array|bool|int|string
+     */
+    private static function decodeData(&$data)
+    {
+        switch (self::char($data)) {
+            case 'i':
+                $data = substr($data, 1);
+                return self::decodeInteger($data);
+                break;
+            case 'l':
+                $data = substr($data, 1);
+                return self::decodeList($data);
+                break;
+            case 'd':
+                $data = substr($data, 1);
+                return self::decodeDictionary($data);
+                break;
+            default:
+                return self::decodeString($data);
+                break;
+        }
+    }
+
+    /**
+     * @param $data
+     * @return bool|string
+     */
+    private static function char($data)
+    {
+        return empty($data) ? false : substr($data, 0, 1);
+    }
+
+    /**
+     * @param $data
+     * @return bool|int
+     */
+    private static function decodeInteger(&$data)
+    {
+        $start = 0;
+        $end = strpos($data, 'e');
+        if (0 === $end) {
+            return self::setError(new Exception('Integer vazio'));
+        }
+        if (self::char($data) == '-') {
+            $start++;
+        }
+        if (substr($data, $start, 1) == '0' && $end > $start + 1) {
+            return self::setError(new Exception('Integer iniciando do zero'));
+        }
+        if (!ctype_digit(substr($data, $start, $start ? $end - 1 : $end))) {
+            return self::setError(new Exception('Nenhum digitos em numeros inteiros'));
+        }
+        $integer = (int)substr($data, 0, $end);
+        $data = substr($data, $end + 1);
+        return 0 + $integer;
+    }
+
+    /**
+     * @param $data
+     * @return array|bool
+     */
+    private static function decodeList(&$data)
+    {
+        $list = [];
+        while (($char = self::char($data)) != 'e') {
+            if (false === $char) {
+                return self::setError(new Exception('Lista indeterminada'));
+            }
+            $list[] = self::decodeData($data);
+        }
+        $data = substr($data, 1);
+        return $list;
+    }
+
+    /**
+     * @param $data
+     * @return array|bool
+     */
+    private static function decodeDictionary(&$data)
+    {
+        $dictionary = [];
+        $previous = null;
+        while (($char = self::char($data)) != 'e') {
+            if (false === $char) {
+                return self::setError(new Exception('Dicionario indeterminado'));
+            }
+            if (!ctype_digit($char)) {
+                return self::setError(new Exception('Chave do dicionario invalida'));
+            }
+            $key = self::decodeString($data);
+            if (isset($dictionary[$key])) {
+                return self::setError(new Exception('Chave do dicionario duplicada'));
+            }
+            if ($key < $previous) {
+                return self::setError(new Exception('Chave do dicionario sem classificacao'));
+            }
+            $dictionary[$key] = self::decodeData($data);
+            $previous = $key;
+        }
+        $data = substr($data, 1);
+        return $dictionary;
+    }
+
+    /**
+     * @param $data
+     * @return bool|string
+     */
+    private static function decodeString(&$data)
+    {
+        if (self::char($data) === '0' && substr($data, 1, 1) != ':') {
+            return self::setError(new Exception('Tamanho da String invalida, iniciando do zero'));
+        }
+        if (!$colon = @strpos($data, ':')) {
+            return self::setError(new Exception('Tamanho da String invalida, coluna nao encontrada'));
+        }
+        $length = (int)substr($data, 0, $colon);
+        if ($length + $colon + 1 > strlen($data)) {
+            return self::setError(new Exception('String invalida, entrada muito curta para comprimento de string'));
+        }
+        $string = substr($data, $colon + 1, $length);
+        $data = substr($data, $colon + $length + 1);
+        return $string;
     }
 }
