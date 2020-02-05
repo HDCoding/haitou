@@ -13,6 +13,8 @@ use App\Http\Requests\User\UpdateEmail;
 use App\Http\Requests\User\UpdatePassword;
 use App\Http\Requests\User\UpdatePrivacy;
 use App\Http\Requests\User\UpdateSetting;
+use App\Jobs\SendEmailUpdatedMail;
+use App\Jobs\SendPasswordNotificationMail;
 use App\Mail\AccountEmailUpdate;
 use App\Mail\PasswordNotification;
 use App\Models\Mood;
@@ -149,7 +151,7 @@ class UsersController extends Controller
         }
 
         //envia o email para o novo membro informando alteração de senha
-        Mail::to($user)->send(new PasswordNotification());
+        $this->dispatch(new SendPasswordNotificationMail($user));
 
         return redirect()->route('edit.password');
     }
@@ -250,8 +252,9 @@ class UsersController extends Controller
         $user->code = $token;
         $user->update();
 
-        //envia o email para o novo membro
-        Mail::to($user)->send(new AccountEmailUpdate($token));
+        //send email to update email account
+        $this->dispatch(new SendEmailUpdatedMail($user, $token));
+
         //desloga o usuario
         $request->session()->flush();
         auth()->logout();
