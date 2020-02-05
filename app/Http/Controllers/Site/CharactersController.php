@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bookmark;
 use App\Models\Character;
 use Illuminate\Http\Request;
 
