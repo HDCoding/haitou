@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Group;
-use App\Models\Historic;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
