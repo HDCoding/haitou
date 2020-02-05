@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Jobs\SendActivationMail;
 use App\Mail\AccountActivation;
 use App\User;
 use Carbon\Carbon;
@@ -72,8 +73,8 @@ class RegisterController extends Controller
         $user->code = $code;
         $user->save();
 
-        //send email to new member
-        Mail::to($user)->send(new AccountActivation($code));
+        //send email activation to new member
+        $this->dispatch(new SendActivationMail($user, $code));
 
         //informs that the account was created
         return view('auth.activation')
