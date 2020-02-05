@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\RatingRequest;
-use App\Models\Bookmark;
 use App\Models\Media;
 use App\Models\Rating;
-use Illuminate\Http\Request;
 
 class MediasController extends Controller
 {
