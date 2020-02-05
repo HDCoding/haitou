@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Group;
-use App\Models\Login;
 use App\Models\News;
 use App\Models\Poll;
 use App\Models\Post;
