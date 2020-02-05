@@ -41,21 +41,21 @@
                 <div class="float-left">
                     @if(auth()->user()->can('forum-mod'))
                         @if ($topic->is_locked)
-                        <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-success btn-rounded">
+                        <a href="{{ route('forum.openclose.topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-success btn-rounded">
                             <i class="fa fa-lock-open"></i> Abrir Tópico
                         </a>
                         @else
-                        <a href="{{ route('forum_openclose_topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-primary btn-rounded">
+                        <a href="{{ route('forum.openclose.topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-primary btn-rounded">
                             <i class="ion ion-ios-lock"></i> Fechar Tópico
                         </a>
                         @endif
 
                         @if (!$topic->is_pinned)
-                        <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
+                        <a href="{{ route('forum.pinunpin.topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
                             <i class="fa fa-file"></i> Pin Tópico
                         </a>
                         @else
-                        <a href="{{ route('forum_pinunpin_topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
+                        <a href="{{ route('forum.pinunpin.topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
                             <i class="fa fa-file"></i> Unpin Tópico
                         </a>
                         @endif
