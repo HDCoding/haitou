@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\InvitationRequest;
 use App\Jobs\SendInvitationMail;
-use App\Mail\AccountInvitation;
 use App\Models\Invitation;
 use App\Models\Log;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class InvitationsController extends Controller
 {
