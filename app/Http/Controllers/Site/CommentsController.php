@@ -88,6 +88,23 @@ class CommentsController extends Controller
         return redirect()->back();
     }
 
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstComment());
+        $user->addProgress(new UserMade50Comments(), 1);
+        $user->addProgress(new UserMade100Comments(), 1);
+        $user->addProgress(new UserMade200Comments(), 1);
+        $user->addProgress(new UserMade300Comments(), 1);
+        $user->addProgress(new UserMade400Comments(), 1);
+        $user->addProgress(new UserMade500Comments(), 1);
+        $user->addProgress(new UserMade600Comments(), 1);
+        $user->addProgress(new UserMade700Comments(), 1);
+        $user->addProgress(new UserMade800Comments(), 1);
+        $user->addProgress(new UserMade900Comments(), 1);
+        $user->addProgress(new UserMade1000Comments(), 1);
+    }
+
     public function show($comment_id)
     {
         $comment = Comment::findOrFail($comment_id);
@@ -130,22 +147,5 @@ class CommentsController extends Controller
 
         toastr()->warning('Comentário deletado', 'Aviso');
         return redirect()->to('home');
-    }
-
-    private function achievement(User $user)
-    {
-        // Achievements
-        $user->unlock(new UserMadeFirstComment());
-        $user->addProgress(new UserMade50Comments(), 1);
-        $user->addProgress(new UserMade100Comments(), 1);
-        $user->addProgress(new UserMade200Comments(), 1);
-        $user->addProgress(new UserMade300Comments(), 1);
-        $user->addProgress(new UserMade400Comments(), 1);
-        $user->addProgress(new UserMade500Comments(), 1);
-        $user->addProgress(new UserMade600Comments(), 1);
-        $user->addProgress(new UserMade700Comments(), 1);
-        $user->addProgress(new UserMade800Comments(), 1);
-        $user->addProgress(new UserMade900Comments(), 1);
-        $user->addProgress(new UserMade1000Comments(), 1);
     }
 }
