@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Vote;
 use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
