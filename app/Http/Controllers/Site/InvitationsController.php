@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\InvitationRequest;
+use App\Jobs\SendInvitationMail;
 use App\Mail\AccountInvitation;
 use App\Models\Invitation;
 use App\Models\Log;
@@ -52,7 +53,7 @@ class InvitationsController extends Controller
         $user->save();
 
         //send email
-        Mail::to($email)->send(new AccountInvitation($invite));
+        $this->dispatch(new SendInvitationMail($invite));
 
         // Log
         $this->log::record("Membro {$user->name} enviou um convite para {$email}");
@@ -73,10 +74,11 @@ class InvitationsController extends Controller
             return redirect()->route('invites');
         }
 
-        Mail::to($invite->email)->send(new AccountInvitation($invite));
+        //resend email
+        $this->dispatch(new SendInvitationMail($invite));
 
         // Log
-        $this->log::record("Membro {$user->name} reenviou o convite para {$invite->email} .");
+        $this->log::record("Membro {$user->name} re-enviou o convite para {$invite->email} .");
 
         toastr()->success('O convite foi reenviado com sucesso!', 'Aviso');
         return redirect()->route('invites');
