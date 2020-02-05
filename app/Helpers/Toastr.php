@@ -44,6 +44,11 @@ class Toastr
         }
     }
 
+    public function info($message, $title = null, $options = [])
+    {
+        $this->add('info', $message, $title, $options);
+    }
+
     public function add($type, $message, $title = null, $options = [])
     {
         $types = ['error', 'info', 'success', 'warning'];
@@ -60,11 +65,6 @@ class Toastr
         ];
 
         $this->session->flash('toastr::messages', $this->messages);
-    }
-
-    public function info($message, $title = null, $options = [])
-    {
-        $this->add('info', $message, $title, $options);
     }
 
     public function success($message, $title = null, $options = [])
