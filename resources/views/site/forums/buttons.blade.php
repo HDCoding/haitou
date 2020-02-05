@@ -4,13 +4,13 @@
             <a href="{{ route('forum') }}" class="btn btn-sm btn-success btn-rounded">
                 <i class="ion ion-ios-chatbubbles"></i> Fórum
             </a>
-            <a href="{{ route('forum_latest_topics') }}" class="btn btn-sm btn-primary btn-rounded">
+            <a href="{{ route('forum.latest.topics') }}" class="btn btn-sm btn-primary btn-rounded">
                 <i class="fas fa-book"></i> Tópicos recentes
             </a>
-            <a href="{{ route('forum_latest_posts') }}" class="btn btn-sm btn-secondary btn-rounded">
+            <a href="{{ route('forum.latest.posts') }}" class="btn btn-sm btn-secondary btn-rounded">
                 <i class="fas fa-file"></i> Últimas postagens
             </a>
-            <a href="{{ route('forum_subscriptions') }}" class="btn btn-sm btn-danger btn-rounded">
+            <a href="{{ route('forum.subscriptions') }}" class="btn btn-sm btn-danger btn-rounded">
                 <i class="fas fa-heart"></i> Favoritos
             </a>
             <a href="{{ route('forum.search') }}" class="btn btn-sm btn-dark btn-rounded">
