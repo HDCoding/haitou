@@ -17,13 +17,10 @@ use App\Achievements\UserMadeFirstInvite;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\InvitationRequest;
 use App\Jobs\SendActivationThanksMail;
-use App\Mail\AccountThanksActivation;
 use App\Models\Invitation;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class InvitationController extends Controller
 {
@@ -39,7 +36,7 @@ class InvitationController extends Controller
         if ($invitation) {
             return view('auth.invitation', compact('code'));
         } else {
-            return view('auth.activation')->with('warning',  'Codigo de convite invalido ou expirado');
+            return view('auth.activation')->with('warning', 'Codigo de convite invalido ou expirado');
         }
     }
 
