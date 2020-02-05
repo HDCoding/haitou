@@ -140,10 +140,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::post('t.{topicId}/reply', 'ForumsController@reply')->name('reply');
 
             // Open/Close Topic
-            Route::get('topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum_openclose_topic');
+            Route::get('topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum.openclose.topic');
 
             // Pin/Unpin Topic
-            Route::get('topic/{id}.{slug}/pinunpin', 'ForumsController@pinUnpinTopic')->name('forum_pinunpin_topic');
+            Route::get('topic/{id}.{slug}/pinunpin', 'ForumsController@pinUnpinTopic')->name('forum.pinunpin.topic');
 
             // Like - Dislike
             Route::get('like/post/{postId}', 'LikesController@likePost')->name('like.post');
@@ -153,12 +153,12 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('search', 'ForumsController@search')->name('forum.search');
 
             //Other
-            Route::get('subscriptions', 'ForumsController@subscriptions')->name('forum_subscriptions');
+            Route::get('subscriptions', 'ForumsController@subscriptions')->name('forum.subscriptions');
             //Last Topics
-            Route::get('latest/topics', 'ForumsController@latestTopics')->name('forum_latest_topics');
+            Route::get('latest/topics', 'ForumsController@latestTopics')->name('forum.latest.topics');
             //Last Posts
-            Route::get('latest/posts', 'ForumsController@latestPosts')->name('forum_latest_posts');
-            // Subscription
+            Route::get('latest/posts', 'ForumsController@latestPosts')->name('forum.latest.posts');
+            //Subscription
             Route::get('topic/{topic}/subscribe', 'SubscriptionsController@subscribeTopic')->name('subscribe.topic');
             Route::get('topic/{topic}/unsubscribe', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe.topic');
 
@@ -254,6 +254,14 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //Studios
         Route::get('studio/{id}.{slug}', 'StudiosController@show')->name('studio.show');
+
+        //Subscription
+        Route::prefix('subscription')->group(function () {
+            Route::get('{topic_id}/email-notify-on', 'SubscriptionsController@emailNotifyOn')->name('topic.email.notify.on');
+            Route::get('{topic_id}/email-notify-off', 'SubscriptionsController@emailNotifyOff')->name('topic.email.notify.off');
+            Route::get('{topic_id}/notify-on', 'SubscriptionsController@notifyOn')->name('topic.notify.on');
+            Route::get('{topic_id}/notify-off', 'SubscriptionsController@notifyOff')->name('topic.notify.off');
+        });
 
         //Torrents
         Route::resource('torrents', 'TorrentsController')->except(['show']);
