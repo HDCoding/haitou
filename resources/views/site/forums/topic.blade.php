@@ -65,6 +65,18 @@
                             <i class="fa fa-pencil-alt"></i> Editar Tópico
                         </a>
                     @endif
+
+                </div>
+                <div class="float-right">
+                    @if (auth()->user()->isSubscribed($topic->id))
+                        <a href="{{ route('unsubscribe.topic', ['topic' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
+                            <i class="fa fa-bell-slash"></i> Cancelar Inscrição
+                        </a>
+                    @else
+                        <a href="{{ route('subscribe.topic', ['topic' => $topic->id]) }}" class="btn btn-sm btn-success btn-rounded">
+                            <i class="fa fa-bell"></i> Se Inscrever
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
