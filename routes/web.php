@@ -278,9 +278,14 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         //User Options
         Route::prefix('user')->group(function () {
             //User profile
-            Route::get('{slug}', 'UsersController@profile')->name('user.profile');
+            Route::get('{slug}/profile', 'UsersController@profile')->name('user.profile');
             //Achievements
             Route::get('{slug}/achievements', 'UsersController@achievements')->name('user.achievements');
+            //Logs
+            Route::get('{slug}/logs', 'UsersController@logs')->name('user.logs');
+            //Logins
+            Route::get('{slug}/logins', 'UsersController@logins')->name('user.logins');
+
             //Post Avatar/Cover image
             Route::post('edit/avatar', 'UsersController@postAvatar')->name('post.avatar');
             Route::post('edit/cover', 'UsersController@postCover')->name('post.cover');
@@ -403,9 +408,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
                 Route::get('openiconic', 'IconsController@openiconic')->name('staff.icons.open-iconic');
                 Route::get('strokeicons', 'IconsController@strokeicons')->name('staff.icons.stroke-icons-7');
             });
-
-            //Logs TODO
-            //Route::get('logs', 'LogsController@index')->name('staff.logs');
 
             //Lotteries TODO
             Route::resource('lotteries', 'LotteriesController');
