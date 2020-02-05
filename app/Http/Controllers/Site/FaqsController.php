@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Faq;
-use Illuminate\Http\Request;
 
 class FaqsController extends Controller
 {
