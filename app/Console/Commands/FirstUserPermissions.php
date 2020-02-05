@@ -6,14 +6,14 @@ use App\Models\Allow;
 use App\Models\UserAllow;
 use Illuminate\Console\Command;
 
-class GiveAllPermissionsToOneUser extends Command
+class FirstUserPermissions extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'give:permissions';
+    protected $signature = 'user:permissions';
 
     /**
      * The console command description.
