@@ -132,9 +132,9 @@
                         l.setProgress(0.9);
                         //show an alert with the result
                         if (result.indexOf('failed') >= 0) {
-                            toastr.warning('Your backup may NOT have been created. Please check log files for details.', '', {timeOut: 3000});
+                            toastr.warning('Seu backup NÃO pode ter sido criado. Verifique os arquivos de log para obter detalhes.', '', {timeOut: 6000});
                         } else {
-                            toastr.success('Reloading the page in 3 seconds.', '', {timeOut: 3000});
+                            toastr.success('Recarregando a página em 3 segundos.', '', {timeOut: 5000});
                         }
                         //stop loading
                         l.setProgress(1);
@@ -147,7 +147,7 @@
                     error: function (result) {
                         l.setProgress(0.9);
                         //show an alert with the result
-                        toastr.warning('The backup file could NOT be created.', '', {timeOut: 3000});
+                        toastr.warning('O arquivo de backup NÃO pôde ser criado.', '', {timeOut: 5000});
                     }
                 });
             });
@@ -174,9 +174,9 @@
                         l.setProgress(0.9);
                         // Show an alert with the result
                         if (result.indexOf('failed') >= 0) {
-                            toastr.warning('Your backup may NOT have been created. Please check log files for details.', '', {timeOut: 3000});
+                            toastr.warning('Seu backup NÃO pode ter sido criado. Verifique os arquivos de log para obter detalhes.', '', {timeOut: 6000});
                         } else {
-                            toastr.success('Reloading the page in 3 seconds.', '', {timeOut: 3000});
+                            toastr.success('Recarregando a página em 3 segundos.', '', {timeOut: 5000});
                         }
                         // Stop loading
                         l.setProgress(1);
@@ -189,7 +189,7 @@
                     error: function (result) {
                         l.setProgress(0.9);
                         // Show an alert with the result
-                        toastr.warning('The backup file could NOT be created.', '', {timeOut: 3000});
+                        toastr.warning('O arquivo de backup NÃO pôde ser criado.', '', {timeOut: 5000});
                         // Stop loading
                         l.stop();
                     }
@@ -218,9 +218,9 @@
                         l.setProgress(0.9);
                         // Show an alert with the result
                         if (result.indexOf('failed') >= 0) {
-                            toastr.warning('Your backup may NOT have been created. Please check log files for details.', '', {timeOut: 3000});
+                            toastr.warning('Seu backup NÃO pode ter sido criado. Verifique os arquivos de log para obter detalhes.', '', {timeOut: 6000});
                         } else {
-                            toastr.success('Reloading the page in 3 seconds.', '', {timeOut: 3000});
+                            toastr.success('Recarregando a página em 3 segundos.', '', {timeOut: 5000});
                         }
                         // Stop loading
                         l.setProgress(1);
@@ -233,7 +233,7 @@
                     error: function (result) {
                         l.setProgress(0.9);
                         // Show an alert with the result
-                        toastr.warning('The backup file could NOT be created.', '', {timeOut: 3000});
+                        toastr.warning('O arquivo de backup NÃO pôde ser criado.', '', {timeOut: 5000});
                         // Stop loading
                         l.stop();
                     }
@@ -247,24 +247,24 @@
                 let delete_url = $(this).attr('href');
                 let disk = $(this).attr('data-disk');
                 let file = $(this).attr('data-file');
-                if (confirm("Are your sure you want to delete this backup file?") == true) {
+                if (confirm("Tem certeza de que deseja excluir este arquivo de backup?") == true) {
                     $.ajax({
                         url: delete_url,
-                        data: {_token: '{{csrf_token()}}', disk: disk, file_name: file},
+                        data: {_token: '{{ csrf_token() }}', disk: disk, file_name: file},
                         type: 'POST',
                         success: function (result) {
                             // Show an alert with the result
-                            toastr.success('The backup file was deleted.', '', {timeOut: 3000});
+                            toastr.success('O arquivo de backup foi excluído.', '', {timeOut: 5000});
                             // delete the row from the table
                             delete_button.parentsUntil('tr').parent().remove();
                         },
                         error: function (result) {
                             // Show an alert with the result
-                            toastr.warning('Error.', '', {timeOut: 3000});
+                            toastr.warning('Erro.', '', {timeOut: 5000});
                         }
                     });
                 } else {
-                    toastr.info('The backup file has NOT been deleted.', '', {timeOut: 3000});
+                    toastr.info('O arquivo de backup NÃO foi excluído.', '', {timeOut: 5000});
                 }
             });
         });
