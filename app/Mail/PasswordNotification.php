@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -11,7 +10,7 @@ class PasswordNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $siteName;
+    protected $site_name;
 
     /**
      * Create a new message instance.
@@ -20,7 +19,7 @@ class PasswordNotification extends Mailable
      */
     public function __construct()
     {
-        $this->siteName = setting('site_title');
+        $this->site_name = setting('site_title');
     }
 
     /**
@@ -32,6 +31,6 @@ class PasswordNotification extends Mailable
     {
         return $this->subject('Login não autorizado!')
             ->markdown('emails.password_notification')
-            ->with(['siteName' => $this->siteName]);
+            ->with(['site_name' => $this->site_name]);
     }
 }
