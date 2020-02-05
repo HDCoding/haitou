@@ -101,7 +101,7 @@ class GitUpdater extends Command
             if ($this->io->confirm('Iniciar o processo de atualização?', true)) {
                 $this->call('down', [
                     '--message' => 'Atualização em andamento, check novamente em alguns minutos.',
-                    '--retry'   => '300',
+                    '--retry' => '300',
                 ]);
 
                 $this->process('git add .');
@@ -157,6 +157,21 @@ class GitUpdater extends Command
         return $updating;
     }
 
+    /**
+     * @return array
+     */
+    private function paths()
+    {
+        $p = $this->process('git diff master --name-only');
+        $paths = array_filter(explode("\n", $p->getOutput()), 'strlen');
+
+        $additional = [
+            '.env',
+        ];
+
+        return array_merge($paths, $additional);
+    }
+
     private function manualUpdate($updating)
     {
         $this->alertInfo('Manual Update');
@@ -176,6 +191,13 @@ class GitUpdater extends Command
         $this->process("git checkout origin/master -- $file");
     }
 
+    private function clearCache()
+    {
+        $this->header('Limpando o cache');
+        $this->call('haitou:clear-all-cache');
+        $this->done();
+    }
+
     private function composer()
     {
         $this->header('Atualizar pacotes do composer');
@@ -185,13 +207,6 @@ class GitUpdater extends Command
             'composer dump-autoload',
         ]);
 
-        $this->done();
-    }
-
-    private function clearCache()
-    {
-        $this->header('Limpando o cache');
-        $this->call('haitou:clear-all-cache');
         $this->done();
     }
 
@@ -219,20 +234,5 @@ class GitUpdater extends Command
         return [
 
         ];
-    }
-
-    /**
-     * @return array
-     */
-    private function paths()
-    {
-        $p = $this->process('git diff master --name-only');
-        $paths = array_filter(explode("\n", $p->getOutput()), 'strlen');
-
-        $additional = [
-            '.env',
-        ];
-
-        return array_merge($paths, $additional);
     }
 }
