@@ -63,11 +63,6 @@ class Topic extends Model
         return $this->hasMany(Permission::class, 'topic_id');
     }
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'topic_id');
-    }
-
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class, 'topic_id');
@@ -97,6 +92,11 @@ class Topic extends Model
             }
         }
         return $count;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'topic_id');
     }
 
     public function viewable()
