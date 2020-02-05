@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Presentes</h4>
                         <div class="table-responsive m-t-15">
-                            <table class="table" id="datatable">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th>Remetente</th>
