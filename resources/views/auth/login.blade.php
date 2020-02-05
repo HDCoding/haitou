@@ -18,14 +18,14 @@
                 <div id="loginform">
                     <div class="logo">
                         <span class="db"><img src="{{ asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
-                        <h5 class="font-medium m-b-20 m-t-20">Login</h5>
+                        <h5 class="font-medium mb-2 mt-3">Login</h5>
                     </div>
                     <!-- Form -->
                     <div class="row">
                         <div class="col-12">
                             @includeIf('errors.errors', [$errors])
                             @include('includes.messages')
-                            <form class="js-validation-login form-horizontal m-t-20" method="POST" action="{{ url('login') }}">
+                            <form class="js-validation-login form-horizontal mt-2" method="POST" action="{{ url('login') }}">
                                 @csrf
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -50,18 +50,25 @@
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" name="remember" {{ old('remember') ? 'checked' : '' }} id="remember">
                                             <label class="custom-control-label" for="remember">Lembrar-me</label>
-                                            <a href="{{ route('password.request') }}" id="to-recover" class="text-dark float-right"><i class="fa fa-lock m-r-5"></i> Esqueceu a senha?</a>
+                                            <a href="{{ route('password.request') }}" id="to-recover" class="text-dark float-right">
+                                                <i class="fa fa-lock mr-5"></i> Esqueceu a senha?
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
-                                    <div class="col-xs-12 p-b-20">
+                                    <div class="col-xs-12 pb-2">
                                         <button class="btn btn-block btn-lg btn-info" type="submit">Entrar</button>
                                     </div>
                                 </div>
-                                <div class="form-group m-b-0 m-t-10">
+                                <div class="form-group mb-0 mt-2">
                                     <div class="col-sm-12 text-center">
                                         Não tem uma conta ainda? <a class="text-info m-l-5" href="{{ url('register') }}">Registre-se</a>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0 mt-4">
+                                    <div class="col-sm-12 text-center">
+                                        Não recebeu o email de ativação? <a class="text-info m-l-5 line" href="#">Reenvie o e-mail</a>
                                     </div>
                                 </div>
                             </form>
@@ -76,8 +83,8 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('vendor/validate/validate.js') }}"></script>
-    <script src="{{ asset('js/pages/login.js') }}"></script>
+{{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
+{{--    <script src="{{ asset('js/pages/login.js') }}"></script>--}}
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();
