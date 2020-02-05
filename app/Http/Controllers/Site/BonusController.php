@@ -168,6 +168,23 @@ class BonusController extends Controller
         return true;
     }
 
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirtBonusTransation());
+        $user->addProgress(new UserMade50BonusTransaction(), 1);
+        $user->addProgress(new UserMade100BonusTransation(), 1);
+        $user->addProgress(new UserMade200BonusTransation(), 1);
+        $user->addProgress(new UserMade300BonusTransation(), 1);
+        $user->addProgress(new UserMade400BonusTransation(), 1);
+        $user->addProgress(new UserMade500BonusTransation(), 1);
+        $user->addProgress(new UserMade600BonusTransation(), 1);
+        $user->addProgress(new UserMade700BonusTransation(), 1);
+        $user->addProgress(new UserMade800BonusTransation(), 1);
+        $user->addProgress(new UserMade900BonusTransation(), 1);
+        $user->addProgress(new UserMade1000BonusTransation(), 1);
+    }
+
     public function donate(BonusDonateRequest $request)
     {
         $member_id = $request->input('user_id');
@@ -204,22 +221,5 @@ class BonusController extends Controller
 
         toastr()->success('Troca realizada com sucesso!', 'Bonus');
         return redirect()->to('bonus');
-    }
-
-    private function achievement(User $user)
-    {
-        // Achievements
-        $user->unlock(new UserMadeFirtBonusTransation());
-        $user->addProgress(new UserMade50BonusTransaction(), 1);
-        $user->addProgress(new UserMade100BonusTransation(), 1);
-        $user->addProgress(new UserMade200BonusTransation(), 1);
-        $user->addProgress(new UserMade300BonusTransation(), 1);
-        $user->addProgress(new UserMade400BonusTransation(), 1);
-        $user->addProgress(new UserMade500BonusTransation(), 1);
-        $user->addProgress(new UserMade600BonusTransation(), 1);
-        $user->addProgress(new UserMade700BonusTransation(), 1);
-        $user->addProgress(new UserMade800BonusTransation(), 1);
-        $user->addProgress(new UserMade900BonusTransation(), 1);
-        $user->addProgress(new UserMade1000BonusTransation(), 1);
     }
 }
