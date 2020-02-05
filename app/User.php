@@ -179,6 +179,14 @@ class User extends Authenticatable
         'disabled_at'
     ];
 
+    public static function updateOfflinePoints($user_id, $points)
+    {
+        $user = self::where('id', '=', $user_id)->first();
+        $user->points += $points;
+        $user->experience += $points;
+        $user->save();
+    }
+
     public function mood()
     {
         return $this->belongsTo(Mood::class, 'mood_id');
@@ -246,11 +254,6 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id');
     }
 
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class, 'user_id');
-    }
-
     public function topics()
     {
         return $this->hasMany(Topic::class);
@@ -303,11 +306,6 @@ class User extends Authenticatable
         return $this->hasMany(News::class, 'user_id');
     }
 
-    public function peers()
-    {
-        return $this->hasMany(Peer::class, 'user_id');
-    }
-
     public function votes()
     {
         return $this->hasMany(Vote::class, 'user_id');
@@ -336,11 +334,6 @@ class User extends Authenticatable
     public function completes()
     {
         return $this->hasMany(Complete::class, 'user_id');
-    }
-
-    public function torrents()
-    {
-        return $this->hasMany(Torrent::class, 'user_id');
     }
 
     public function notes()
@@ -443,14 +436,6 @@ class User extends Authenticatable
         }
     }
 
-    public static function updateOfflinePoints($user_id, $points)
-    {
-        $user = self::where('id', '=', $user_id)->first();
-        $user->points += $points;
-        $user->experience += $points;
-        $user->save();
-    }
-
     public function groupName()
     {
         return $this->group()->select('name')->pluck('name')->first();
@@ -464,6 +449,11 @@ class User extends Authenticatable
         return (bool)$this->subscriptions()->where('forum_id', '=', $topic_id)->first(['id']);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'user_id');
+    }
+
     /**
      * Gets the amount of torrents a user seeds
      */
@@ -473,6 +463,11 @@ class User extends Authenticatable
             ->where('is_seeder', '=', true)
             ->distinct('user_id')
             ->count();
+    }
+
+    public function peers()
+    {
+        return $this->hasMany(Peer::class, 'user_id');
     }
 
     /**
@@ -492,6 +487,11 @@ class User extends Authenticatable
     public function uploads()
     {
         return $this->torrents()->where('user_id', '=', $this->id)->count();
+    }
+
+    public function torrents()
+    {
+        return $this->hasMany(Torrent::class, 'user_id');
     }
 
     public function signature()
