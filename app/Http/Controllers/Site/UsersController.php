@@ -290,7 +290,7 @@ class UsersController extends Controller
     {
         $member = User::whereSlug($slug)->firstOrFail();
 
-        return view('site.users.achievement', compact('member'));
+        return view('site.users.achievements', compact('member'));
     }
 
     public function logs($slug)
