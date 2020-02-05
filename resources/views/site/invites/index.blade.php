@@ -63,7 +63,7 @@
                             convite, até que o mesmo seja deletado.
                         </p>
                         <div class="table-responsive m-t-15">
-                            <table class="table" id="datatable">
+                            <table class="table">
                                 <thead>
                                 <tr>
                                     <th>E-mail</th>
