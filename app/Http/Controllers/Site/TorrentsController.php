@@ -61,7 +61,7 @@ class TorrentsController extends Controller
             $terms = explode(' ', $name);
             $name = '';
             foreach ($terms as $term) {
-                $name .= '%'.$term.'%';
+                $name .= '%' . $term . '%';
             }
 
             $torrents = Torrent::with('user:id,username,slug')
@@ -198,6 +198,23 @@ class TorrentsController extends Controller
             toastr()->error('Erro no arquivo .torrent, recrie o arquivo e tente novamente', 'Erro');
             return redirect()->route('torrent.create')->withInput();
         }
+    }
+
+    private function achievement(User $user)
+    {
+        // Achievements
+        $user->unlock(new UserMadeFirstUpload());
+        $user->addProgress(new UserMade50Uploads(), 1);
+        $user->addProgress(new UserMade100Uploads(), 1);
+        $user->addProgress(new UserMade200Uploads(), 1);
+        $user->addProgress(new UserMade300Uploads(), 1);
+        $user->addProgress(new UserMade400Uploads(), 1);
+        $user->addProgress(new UserMade500Uploads(), 1);
+        $user->addProgress(new UserMade600Uploads(), 1);
+        $user->addProgress(new UserMade700Uploads(), 1);
+        $user->addProgress(new UserMade800Uploads(), 1);
+        $user->addProgress(new UserMade900Uploads(), 1);
+        $user->addProgress(new UserMade1000Uploads(), 1);
     }
 
     public function show($torrent_id, $slug)
@@ -374,7 +391,7 @@ class TorrentsController extends Controller
                 ->selectRaw('distinct(historics.info_hash), max(torrents.id), max(historics.completed_at) as completed_at, max(historics.created_at) as created_at, max(historics.id) as id, max(historics.user_id) as user_id, max(historics.seed_time) as seedtime, max(historics.is_seeder) as seeder, max(torrents.size) as size, max(torrents.leechers) as leechers, max(torrents.seeders) as seeders, max(torrents.times_completed) as times_completed')
                 ->leftJoin('torrents', 'torrents.info_hash', '=', 'historics.info_hash')
                 ->where('real_downloaded', '>', 0)
-                ->whereRaw('historics.real_downloaded > (torrents.size * ('.(3 / 100).'))')
+                ->whereRaw('historics.real_downloaded > (torrents.size * (' . (3 / 100) . '))')
                 ->where('historics.user_id', '=', $user->id)
                 ->groupBy('historics.info_hash')
                 ->orderBy('completed_at', 'desc')
@@ -391,22 +408,5 @@ class TorrentsController extends Controller
         }
 
         return view('site.users.downloads', compact('downloads'));
-    }
-
-    private function achievement(User $user)
-    {
-        // Achievements
-        $user->unlock(new UserMadeFirstUpload());
-        $user->addProgress(new UserMade50Uploads(), 1);
-        $user->addProgress(new UserMade100Uploads(), 1);
-        $user->addProgress(new UserMade200Uploads(), 1);
-        $user->addProgress(new UserMade300Uploads(), 1);
-        $user->addProgress(new UserMade400Uploads(), 1);
-        $user->addProgress(new UserMade500Uploads(), 1);
-        $user->addProgress(new UserMade600Uploads(), 1);
-        $user->addProgress(new UserMade700Uploads(), 1);
-        $user->addProgress(new UserMade800Uploads(), 1);
-        $user->addProgress(new UserMade900Uploads(), 1);
-        $user->addProgress(new UserMade1000Uploads(), 1);
     }
 }
