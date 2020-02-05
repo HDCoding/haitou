@@ -35,15 +35,6 @@ class Encoder
     }
 
     /**
-     * @param $string
-     * @return string
-     */
-    private static function encodeString($string)
-    {
-        return strlen($string) . ':' . $string;
-    }
-
-    /**
      * @param $integer
      * @return string
      */
@@ -89,5 +80,14 @@ class Encoder
             }
         }
         return true;
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    private static function encodeString($string)
+    {
+        return strlen($string) . ':' . $string;
     }
 }
