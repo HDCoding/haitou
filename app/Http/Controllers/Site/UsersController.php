@@ -15,6 +15,8 @@ use App\Http\Requests\User\UpdatePrivacy;
 use App\Http\Requests\User\UpdateSetting;
 use App\Jobs\SendEmailUpdatedMail;
 use App\Jobs\SendPasswordNotificationMail;
+use App\Models\Log;
+use App\Models\Login;
 use App\Models\Mood;
 use App\Models\Post;
 use App\Models\State;
@@ -284,4 +286,28 @@ class UsersController extends Controller
         return view('site.users.posts', compact('posts'));
     }
 
+    public function achievements($slug)
+    {
+        $member = User::whereSlug($slug)->firstOrFail();
+
+        return view('site.users.achievement', compact('member'));
+    }
+
+    public function logs($slug)
+    {
+        abort_unless(auth()->user()->can('acesso-total'), 403);
+        $member = User::whereSlug($slug)->firstOrFail();
+        $logs = Log::where('user_id', '=', $member->id)->orderBy('id', 'DESC')->get();
+
+        return view('site.users.logs', compact('member', 'logs'));
+    }
+
+    public function logins($slug)
+    {
+        abort_unless(auth()->user()->can('acesso-total'), 403);
+        $member = User::whereSlug($slug)->firstOrFail();
+        $logins = Login::where('user_id', '=', $member->id)->orderBy('id', 'DESC')->get();
+
+        return view('site.users.logins', compact('member', 'logins'));
+    }
 }
