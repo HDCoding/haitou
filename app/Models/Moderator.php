@@ -7,12 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Moderator extends Model
 {
-    protected $table = 'moderators';
-
     public $incrementing = false;
-
     public $timestamps = false;
-
+    protected $table = 'moderators';
     protected $casts = [
         'forum_id' => 'int',
         'user_id' => 'int'
