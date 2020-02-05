@@ -46,11 +46,6 @@ class Post extends Model
         return $this->hasMany(Attachment::class, 'post_id');
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class, 'post_id');
-    }
-
     public function setContentAttribute($value)
     {
         $this->attributes['content'] = htmlspecialchars($value);
@@ -82,11 +77,6 @@ class Post extends Model
         return $trimmed_text;
     }
 
-    public function postNumber()
-    {
-        return $this->topic->postNumberFromId($this->id);
-    }
-
     public function pageNumber()
     {
         $result = ($this->postNumber() - 1) / 30 + 1;
@@ -94,10 +84,20 @@ class Post extends Model
         return $result;
     }
 
+    public function postNumber()
+    {
+        return $this->topic->postNumberFromId($this->id);
+    }
+
     public function likis($post_id)
     {
         //Count likes and dislike
         return $this->likes()->where('post_id', '=', $post_id)->where('is_like', '=', 1)->count();
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'post_id');
     }
 
     public function dislikes($post_id)
