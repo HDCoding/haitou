@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Invitation;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,16 +13,25 @@ class AccountInvitation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $invite, $siteName;
+    /**
+     * @var string
+     */
+    public $site_name;
+
+    /**
+     * @var Invitation
+     */
+    public $invitation;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Invitation $invitation
      */
-    public function __construct(Invitation $invite)
+    public function __construct(Invitation $invitation)
     {
-        $this->invite = $invite;
-        $this->siteName = setting('site_title');
+        $this->invitation = $invitation;
+        $this->site_name = setting('site_title');
     }
 
     /**
@@ -34,10 +44,10 @@ class AccountInvitation extends Mailable
         return $this->subject('Convite especial ao nosso site!')
             ->markdown('emails.account_invitation')
             ->with([
-                'username' => $this->invite->user->username,
-                'siteName' => $this->siteName,
-                'code' => $this->invite->code,
-                'expire' => $this->invite->expires_on->format('d/m/Y H:i')
+                'username' => $this->invitation->user->username,
+                'site_name' => $this->site_name,
+                'code' => $this->invitation->code,
+                'expire' => $this->invitation->expires_on->format('d/m/Y')
             ]);
     }
 }
