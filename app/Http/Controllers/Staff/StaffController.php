@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Staff;
 
 use App\Helpers\SystemInformation;
 use App\Http\Controllers\Controller;
+use Exception;
 use Spatie\SslCertificate\SslCertificate;
 
 class StaffController extends Controller
@@ -22,7 +23,7 @@ class StaffController extends Controller
         // SSL Info
         try {
             $certificate = SslCertificate::createForHostName(config('app.url'));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $certificate = '';
         }
 
