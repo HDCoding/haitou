@@ -154,12 +154,13 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
             //Other
             Route::get('subscriptions', 'ForumsController@subscriptions')->name('forum_subscriptions');
+            //Last Topics
             Route::get('latest/topics', 'ForumsController@latestTopics')->name('forum_latest_topics');
+            //Last Posts
             Route::get('latest/posts', 'ForumsController@latestPosts')->name('forum_latest_posts');
-
             // Subscription
-            Route::get('subscribe/topic/{route}.{topic}', 'SubscriptionsController@subscribeTopic')->name('subscribe_topic');
-            Route::get('unsubscribe/topic/{route}.{topic}', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe_topic');
+            Route::get('topic/{topic}/subscribe', 'SubscriptionsController@subscribeTopic')->name('subscribe.topic');
+            Route::get('topic/{topic}/unsubscribe', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe.topic');
 
             //Poll Add TODO
 //        Route::get('topico/{id}.{slug}/add-poll', 'ForumsController@topicAddPoll')->name('topic.add.poll');
