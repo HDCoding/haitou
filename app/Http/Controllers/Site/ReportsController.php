@@ -11,7 +11,6 @@ use App\Models\Post;
 use App\Models\Report;
 use App\Models\Torrent;
 use App\User;
-use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
