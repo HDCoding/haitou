@@ -417,6 +417,53 @@ class AnnounceController extends Controller
         return response(Encoder::encode(['failure reason' => $message]), $status)->withHeaders(['Content-Type' => 'text/plain']);
     }
 
+    private function browserBlacklist($agent)
+    {
+        $browsers = config('announce.browsers');
+
+        if (in_array($agent, $browsers)) {
+            info('Tentativa de announce com navegador: ' . request()->ip());
+            abort(405, 'Hmm, peguei no flagra.');
+            exit();
+        }
+    }
+
+    private function peerBlacklist($peer_id, $user_id, $port, $agent)
+    {
+        $programs = config('announce.peers');
+
+        $peer = substr($peer_id, 0, 8);
+        $ip = request()->ip();
+
+        foreach ($programs as $key => $program) {
+            if (stripos($peer, $program) !== false) {
+                //save in DB
+                $cheat = new Cheater();
+                $cheat->user_id = $user_id;
+                $cheat->port = $port;
+                $cheat->ip = $ip;
+                $cheat->program = $agent;
+                $cheat->is_blacklist = true;
+                $cheat->save();
+
+                //log info
+                info('Usuario tentou utilizar programa bloqueado. IP: ' . $ip);
+                abort(500);
+                return $this->encodeMessage('Programa ou versao desatualizada', 401);
+            }
+        }
+    }
+
+    private function portBlacklist($port)
+    {
+        $blocked = config('announce.ports');
+
+        if (in_array($port, $blocked)) {
+            //info('Tentativa de conectar-se usando porta bloqueada: ' . request()->ip());
+            return $this->encodeMessage('Porta na lista negra. Troque de porta', 200);
+        }
+    }
+
     /**
      * @param $peers
      * @param $compact
@@ -426,17 +473,6 @@ class AnnounceController extends Controller
     private function givePeersIPV4($peers, $compact, $no_peer_id)
     {
         return $this->giver($peers, $compact, $no_peer_id, true);
-    }
-
-    /**
-     * @param $peers
-     * @param $compact
-     * @param $no_peer_id
-     * @return string
-     */
-    private function givePeersIPV6($peers, $compact, $no_peer_id)
-    {
-        return $this->giver($peers, $compact, $no_peer_id, false);
     }
 
     /**
@@ -476,50 +512,14 @@ class AnnounceController extends Controller
         }
     }
 
-    private function portBlacklist($port)
+    /**
+     * @param $peers
+     * @param $compact
+     * @param $no_peer_id
+     * @return string
+     */
+    private function givePeersIPV6($peers, $compact, $no_peer_id)
     {
-        $blocked = config('announce.ports');
-
-        if (in_array($port, $blocked)) {
-            //info('Tentativa de conectar-se usando porta bloqueada: ' . request()->ip());
-            return $this->encodeMessage('Porta na lista negra. Troque de porta', 200);
-        }
-    }
-
-    private function browserBlacklist($agent)
-    {
-        $browsers = config('announce.browsers');
-
-        if (in_array($agent, $browsers)) {
-            info('Tentativa de announce com navegador: ' . request()->ip());
-            abort(405, 'Hmm, peguei no flagra.');
-            exit();
-        }
-    }
-
-    private function peerBlacklist($peer_id, $user_id, $port, $agent)
-    {
-        $programs = config('announce.peers');
-
-        $peer = substr($peer_id, 0, 8);
-        $ip = request()->ip();
-
-        foreach ($programs as $key => $program) {
-            if (stripos($peer, $program) !== false) {
-                //save in DB
-                $cheat = new Cheater();
-                $cheat->user_id = $user_id;
-                $cheat->port = $port;
-                $cheat->ip = $ip;
-                $cheat->program = $agent;
-                $cheat->is_blacklist = true;
-                $cheat->save();
-
-                //log info
-                info('Usuario tentou utilizar programa bloqueado. IP: ' . $ip);
-                abort(500);
-                return $this->encodeMessage('Programa ou versao desatualizada', 401);
-            }
-        }
+        return $this->giver($peers, $compact, $no_peer_id, false);
     }
 }
