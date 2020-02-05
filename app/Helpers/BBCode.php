@@ -284,22 +284,6 @@ class BBCode
     }
 
     /**
-     * Parses the BBCode string
-     *
-     * @param $source
-     * @param bool $caseInsensitive
-     * @return string
-     */
-    public function parse($source, $caseInsensitive = false)
-    {
-        foreach ($this->enabledParsers as $name => $parser) {
-            $pattern = ($caseInsensitive) ? $parser['pattern'] . 'i' : $parser['pattern'];
-            $source = $this->searchAndReplace($pattern, $parser['replace'], $source);
-        }
-        return $source;
-    }
-
-    /**
      * Remove all BBCode.
      *
      * @param string $source
@@ -338,6 +322,22 @@ class BBCode
     public function parseCaseSensitive($source)
     {
         return $this->parse($source, false);
+    }
+
+    /**
+     * Parses the BBCode string
+     *
+     * @param $source
+     * @param bool $caseInsensitive
+     * @return string
+     */
+    public function parse($source, $caseInsensitive = false)
+    {
+        foreach ($this->enabledParsers as $name => $parser) {
+            $pattern = ($caseInsensitive) ? $parser['pattern'] . 'i' : $parser['pattern'];
+            $source = $this->searchAndReplace($pattern, $parser['replace'], $source);
+        }
+        return $source;
     }
 
     /**
