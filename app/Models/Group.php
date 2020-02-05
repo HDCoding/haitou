@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\User;
-use App\Models\Permission;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,14 +35,6 @@ class Group extends Model
         ];
     }
 
-    /**
-     * Forum permissions
-     */
-    public function permissions()
-    {
-        return $this->hasMany(Permission::class);
-    }
-
     public function users()
     {
         return $this->hasMany(User::class);
@@ -54,5 +45,13 @@ class Group extends Model
         return $this->permissions()->where('forum_id', '=', $forum->id)
             ->where('group_id', '=', $this->id)
             ->first();
+    }
+
+    /**
+     * Forum permissions
+     */
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
     }
 }
