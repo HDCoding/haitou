@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Helpers\ImageUploader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\ActorsRequest;
 use App\Models\Actor;
 
 class ActorsController extends Controller
 {
-    protected $imageFile;
-
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('allow:atores-mod');
-        $this->imageFile = new ImageUploader();
     }
 
     public function index()
