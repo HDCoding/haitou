@@ -22,8 +22,8 @@
 
     <div class="container-fluid">
         <div class="row">
-            <a href="{{ url('staff/faqs/create') }}" class="btn btn-primary m-b-4 m-l-15">
-                <i class="fas fa-plus"></i>Adicionar Pergunta
+            <a href="{{ url('staff/faqs/create') }}" class="btn btn-primary m-b-4 m-l-15 mb-3">
+                <i class="fas fa-plus"></i> Adicionar Pergunta
             </a>
             @includeIf('errors.errors', [$errors])
             @forelse($categories as $category)
@@ -35,17 +35,17 @@
                     <table class="table m-b-0">
                         <thead>
                         <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
+                            <th>#</th>
                             <th>Pergunta</th>
-                            <th style="width: 15%;">Ativado</th>
-                            <th class="text-center" style="width: 100px;">Opções</th>
+                            <th>Ativado</th>
+                            <th class="text-center">Opções</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($faqs as $faq)
                             @if($faq->category_id == $category->id)
                                 <tr>
-                                    <td class="text-center">{{ $faq->id }}</td>
+                                    <th>{{ $faq->id }}</th>
                                     <td>{{ $faq->question }}</td>
                                     <td>{!! $faq->enabled() !!}</td>
                                     <td class="text-center">
