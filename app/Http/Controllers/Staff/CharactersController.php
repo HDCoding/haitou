@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Helpers\ImageUploader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\CharactersRequest;
 use App\Models\Character;
 
 class CharactersController extends Controller
 {
-    protected $imageFile;
-
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('allow:personagens-mod');
-        $this->imageFile = new ImageUploader();
     }
 
     public function index()
