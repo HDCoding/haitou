@@ -33,6 +33,6 @@
             @endforeach
             </tbody>
         </table>
-        <p class="text-right font-weight-bold"><a href="{{ route('forum_latest_topics') }}">Leia mais</a></p>
+        <p class="text-right font-weight-bold"><a href="{{ route('forum.latest.topics') }}">Leia mais</a></p>
     </div>
 </div>
