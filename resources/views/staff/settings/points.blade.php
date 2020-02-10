@@ -30,10 +30,10 @@
                             <b class="text-danger">OBS:</b>
                             <strong>Min:</strong> 1 Ponto - <strong>Max:</strong> 250 Pontos
                         </h6>
+                        @includeIf('errors.errors', [$errors])
                         <div class="row">
                             @include('staff.settings.nav')
                             <div class="col-lg-8 col-xl-9">
-                                @includeIf('errors.errors', [$errors])
                                 {!! Form::open(['url' => 'staff/settings/points', 'class' => 'form-horizontal']) !!}
                                 <div class="row">
                                     <div class="col-md-6">
