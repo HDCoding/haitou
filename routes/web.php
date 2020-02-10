@@ -464,8 +464,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Settings
             Route::prefix('settings')->group(function () {
                 Route::match(['get', 'post'], 'analytics', 'SettingsController@analytics')->name('setting.analytics');
-                Route::match(['get', 'post'], 'favicon', 'SettingsController@favicon')->name('setting.favicon');
-                Route::match(['get', 'post'], 'images', 'SettingsController@images')->name('setting.images');
+                Route::get('images', 'SettingsController@images')->name('setting.images');
+                Route::post('images/index', 'SettingsController@imageIndex')->name('setting.image.index');
+                Route::post('images/login', 'SettingsController@imageLogin')->name('setting.image.login');
+                Route::post('images/favicon', 'SettingsController@imageFavicon')->name('setting.image.favicon');
                 Route::match(['get', 'post'], 'mail', 'SettingsController@mail')->name('setting.mail');
                 Route::match(['get', 'post'], 'others', 'SettingsController@others')->name('setting.others');
                 Route::match(['get', 'post'], 'points', 'SettingsController@points')->name('setting.points');
