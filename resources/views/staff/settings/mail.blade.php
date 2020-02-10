@@ -27,6 +27,7 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.settings')</h4>
                         <h6 class="card-subtitle">Use default tab with class <code>nav-tabs &amp; tabcontent-border </code></h6>
+                        @includeIf('errors.errors', [$errors])
                         <div class="row">
                             @include('staff.settings.nav')
                             <div class="col-lg-8 col-xl-9">
@@ -50,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="mail_password">Mail Senha: *</label>
-                                    <input class="form-control" name="mail_password" type="password" id="mail_password" value="*******" required>
+                                    <input class="form-control" name="mail_password" type="password" id="mail_password" value="" required>
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('mail_encryption', 'Mail tls: *') !!}
