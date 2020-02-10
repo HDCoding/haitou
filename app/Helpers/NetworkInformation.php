@@ -62,18 +62,18 @@ class NetworkInformation
         if (is_readable('/usr/bin/vnstat')) {
 
             // Execute a command to output a json dump of the vnstat data
-            $vnstatStream = popen('/usr/bin/vnstat --json', 'r');
+            $vnstat_stream = popen('/usr/bin/vnstat --json', 'r');
 
             // Is the stream valid?
-            if (is_resource($vnstatStream)) {
-                $streamBuffer = '';
-                while (!feof($vnstatStream)) {
-                    $streamBuffer .= fgets($vnstatStream);
+            if (is_resource($vnstat_stream)) {
+                $stream_buffer = '';
+                while (!feof($vnstat_stream)) {
+                    $stream_buffer .= fgets($vnstat_stream);
                 }
                 // Close the handle
-                pclose($vnstatStream);
+                pclose($vnstat_stream);
 
-                return json_decode($streamBuffer, true);
+                return json_decode($stream_buffer, true);
             }
         }
     }
