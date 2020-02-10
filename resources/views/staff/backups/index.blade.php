@@ -42,6 +42,7 @@
                         <button id="create-db-backup-button" href="{{ url('staff/backups/create-db') }}" class="btn btn-danger ladda-button" data-style="zoom-in">
                             <span class="ladda-label"><i class="fa fa-plus"></i> Banco do DB</span>
                         </button>
+                        @includeIf('errors.errors', [$errors])
                         <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
