@@ -27,10 +27,10 @@
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.settings')</h4>
                         <h6 class="card-subtitle">Use default tab with class <code>nav-tabs &amp; tabcontent-border </code></h6>
+                        @includeIf('errors.errors', [$errors])
                         <div class="row">
                             @include('staff.settings.nav')
                             <div class="col-lg-8 col-xl-9">
-                                @includeIf('errors.errors', [$errors])
                                 {!! Form::open(['url' => 'staff/settings/others', 'class' => 'form-horizontal']) !!}
                                 <div class="row">
                                     <div class="col-md-6">
@@ -54,15 +54,15 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('max_ratio', 'Max. Ratio:') !!}
-                                            {!! Form::number('max_ratio', setting('max_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
+                                            {!! Form::text('max_ratio', setting('max_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('min_ratio', 'Min. Ratio:') !!}
-                                            {!! Form::number('min_ratio', setting('min_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
+                                            {!! Form::text('min_ratio', setting('min_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
                                         </div>
                                         <div class="form-group">
                                             {!! Form::label('low_ratio', 'Low. Ratio:') !!}
-                                            {!! Form::number('low_ratio', setting('low_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
+                                            {!! Form::text('low_ratio', setting('low_ratio'), ['class' => 'form-control', 'step' => 'any', 'required', 'required']) !!}
 
                                         </div>
                                         <div class="form-group">
