@@ -34,7 +34,7 @@ class SettingsTableSeeder extends Seeder
             ['key' => 'max_ratio', 'value' => '2.000'],
             ['key' => 'min_ratio', 'value' => '1.200'],
             ['key' => 'low_ratio', 'value' => '0.550'],
-            ['key' => 'invitedays', 'value' => '7'],
+            ['key' => 'invite_days', 'value' => '7'],
             //Points
             ['key' => 'points_signup', 'value' => '200'],
             ['key' => 'points_invite', 'value' => '100'],
@@ -47,6 +47,7 @@ class SettingsTableSeeder extends Seeder
             ['key' => 'points_delete', 'value' => '15'],
             ['key' => 'points_thanks', 'value' => '5'],
             ['key' => 'points_report', 'value' => '5'],
+            ['key' => 'points_calendar', 'value' => '50'],
             //Policy
             ['key' => 'privacy', 'value' => ''],
             ['key' => 'disclaimer', 'value' => 'Nenhum dos arquivos mostrados aqui está realmente hospedado neste servidor. Os links são fornecidos
