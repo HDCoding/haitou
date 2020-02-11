@@ -448,7 +448,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::prefix('poll')->group(function () {
                 //Enable/Disable
                 Route::put('{id}/update', 'PollsController@openClose');
-
                 //Add
                 Route::get('{id}/options/add', 'PollsController@formAddOptions');
                 Route::post('options/add', 'PollsController@postAddOptions');
@@ -458,7 +457,15 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             });
 
             //Reports
-            Route::resource('reports', 'ReportsController')->only(['index', 'show', 'update']);
+            Route::prefix('reports')->group(function () {
+                Route::get('/', 'ReportsController@index');
+                Route::get('{report_id}/calendar', 'ReportsController@calendar');
+                Route::get('{report_id}/comment', 'ReportsController@comment');
+                Route::get('{report_id}/member', 'ReportsController@member');
+                Route::get('{report_id}/post', 'ReportsController@post');
+                Route::get('{report_id}/torrent', 'ReportsController@torrent');
+                Route::put('{report_id}/solve', 'ReportsController@update');
+            });
 
             //Freeslots
             Route::resource('freeslots', 'FreeSlotsController')->except(['show']);
