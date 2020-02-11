@@ -38,6 +38,8 @@
                                 <p>{{ format_date_time($calendar->start_date) }}</p>
                                 <h4 class="box-title m-t-40">Data final</h4>
                                 <p>{{ format_date_time($calendar->end_date) }}</p>
+                                <h4 class="box-title m-t-40">Agradecimentos</h4>
+                                <p>({{ $total }})</p>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
                                 <h4 class="box-title m-t-40">Descrição</h4>
@@ -66,6 +68,15 @@
                                     <a class="btn btn-xs btn-dark" href="{{ route('calendar.report', [$calendar->id]) }}" data-toggle="tooltip" title="Reportar Evento">
                                         <i class="fas fa-flag"></i> Reportar
                                     </a>
+                                @endif
+
+                                @if(!$thanks)
+                                    @if (auth()->user()->id !== $calendar->user_id)
+                                        <h4 class="box-title m-t-40">Agradecer</h4>
+                                        {!! Form::open(['route' => ['calendar.thanks', $calendar->id], 'class' => 'form-horizontal']) !!}
+                                        <button type="submit" class="btn btn-danger btn-rounded" data-toggle="tooltip" title="Obrigada(o)"><i class="ti-heart"></i></button>
+                                        {!! Form::close() !!}
+                                    @endif
                                 @endif
                             </div>
                         </div>
