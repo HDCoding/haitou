@@ -36,14 +36,14 @@ class InvitationsController extends Controller
         //codigo enviado para o(a) convidado(a)
         $code = sha1_gen();
 
-        $invitedays = setting('invitedays');
+        $invite_days = setting('invite_days');
 
         //insere os dados no banco
         $invite = new Invitation();
         $invite->user_id = $user->id;
         $invite->email = $email;
         $invite->code = $code;
-        $invite->expires_on = Carbon::now()->addDays($invitedays);
+        $invite->expires_on = Carbon::now()->addDays($invite_days);
         $invite->save();
 
         //subtrai um "invite" de quem enviou o convite
