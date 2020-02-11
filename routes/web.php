@@ -263,6 +263,14 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('{topic_id}/notify-off', 'SubscriptionsController@notifyOff')->name('topic.notify.off');
         });
 
+        //Thanks
+        Route::prefix('thanks')->group(function () {
+            //Calendar
+            Route::post('{id}/calendar', 'ThanksController@calendar')->name('calendar.thanks');
+            //Torrent
+            Route::post('{id}/torrent', 'ThanksController@torrent')->name('torrent.thanks');
+        });
+
         //Torrents
         Route::resource('torrents', 'TorrentsController')->except(['show']);
 
@@ -272,8 +280,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('{id}/download', 'TorrentsController@download')->name('torrent.download');
             //Page info
             Route::get('{id}.{slug}', 'TorrentsController@show')->name('torrent.show');
-            //Thanks
-            Route::post('{id}/thanks', 'TorrentsController@thanks')->name('torrent.thanks');
             //ReSeed
             Route::get('{id}/reseed', 'TorrentsController@reSeed')->name('torrent.reseed');
             //Search
