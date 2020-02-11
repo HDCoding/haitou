@@ -83,6 +83,10 @@
                                             {!! Form::label('points_report', 'Reportar:') !!}
                                             {!! Form::number('points_report', setting('points_report'), ['class' => 'form-control', 'required']) !!}
                                         </div>
+                                        <div class="form-group">
+                                            {!! Form::label('points_calendar', 'Calendário:') !!}
+                                            {!! Form::number('points_calendar', setting('points_calendar'), ['class' => 'form-control', 'required']) !!}
+                                        </div>
                                     </div>
                                 </div>
                                 {!! Form::submit('Atualizar', ['class' => 'btn btn-success btn-rounded']) !!}
