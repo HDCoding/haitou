@@ -179,6 +179,14 @@ return [
                 'label' => 'points_report',
                 'value' => '5'
             ],
+            [
+                'type' => 'number',
+                'data' => 'int',
+                'name' => 'Pontos Calendário',
+                'label' => 'points_calendar',
+                'value' => '50'
+            ],
+
         ]
     ],
     'policy' => [
