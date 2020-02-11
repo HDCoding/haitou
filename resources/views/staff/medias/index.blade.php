@@ -37,10 +37,10 @@
                             </button>
                         </a>
                         <div class="table-responsive m-t-15">
-                            <table class="table" id="datatable">
+                            <table class="table table-striped" id="datatable">
                                 <thead>
                                 <tr>
-                                    <th><i class="si si-user"></i></th>
+                                    <th><i class="fas fa-image"></i></th>
                                     <th>Categoria</th>
                                     <th>Nome</th>
                                     <th>Genero</th>
@@ -52,15 +52,16 @@
                                 <tbody>
                                 @foreach($medias as $media)
                                     <tr>
-                                        <td><img class="" src="{{ $media->poster }}" alt="{{ $media->name }}" width="70px"></td>
-                                        <td>{{ $media->category->name }}</td>
-                                        <td class="">{{ $media->name }}</td>
-                                        <td>{!! $media->genre() !!}</td>
-                                        <td><span class="badge badge-info">{{ $media->views }}</span></td>
-                                        <td>{{ $media->studio->name }}</td>
-                                        <td class="text-center">
+                                        <td class="align-middle"><img class="img-fluid" src="{{ $media->poster() }}" alt="{{ $media->name }}" width="70px"></td>
+                                        <td class="align-middle">{{ $media->category->name }}</td>
+                                        <td class="align-middle">{{ $media->name }}</td>
+                                        <td class="align-middle">{!! $media->genre() !!}</td>
+                                        <td class="align-middle"><span class="badge badge-info">{{ $media->views }}</span></td>
+                                        <td class="align-middle">{{ $media->studio->name }}</td>
+                                        <td class="text-center align-middle">
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/media/' . $media->id . '/casts') }}" data-toggle="tooltip" title="Casts"><i class="fas fa-users text-warning"></i></a>
+                                                <a href="{{ url('staff/media/' . $media->id . '/images') }}" data-toggle="tooltip" title="Imagens"><i class="fas fa-image text-success"></i></a>
+                                                <a class="m-l-15" href="{{ url('staff/media/' . $media->id . '/casts') }}" data-toggle="tooltip" title="Casts"><i class="fas fa-users text-warning"></i></a>
                                                 <a class="m-l-15" href="{{ url('staff/medias/' . $media->id . '/edit') }}" data-toggle="tooltip" title="Editar Mídia"><i class="fas fa-pencil-alt text-info"></i></a>
                                                 <a class="m-l-15" href="javascript:;" onclick="document.getElementById('media-del-{{ $media->id }}').submit();" data-toggle="tooltip" title="Remover Mídia"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/medias/' . $media->id, 'method' => 'DELETE', 'id' => 'media-del-' . $media->id , 'style' => 'display: none']) !!}
@@ -88,7 +89,7 @@
                 "displayLength": 50,
                 "searching": true,
                 "responsive": true,
-                "order": [[ 1, "asc" ]],
+                "order": [[ 2, "asc" ]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                 }
