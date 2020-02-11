@@ -78,11 +78,17 @@ class CalendarsController extends Controller
 
         $comments = $calendar->comments()->latest()->paginate(5);
 
+        $userId = auth()->user()->id;
+
+        $thanks = $calendar->thanks()->where('calendar_id', '=', $calendar->id)->where('user_id', '=', $userId)->first();
+
+        $total = $calendar->thanks()->where('calendar_id', '=', $calendar->id)->count();
+
         if (request()->ajax()) {
             return view('layouts.includes.comment_layout', compact('comments'));
         }
 
-        return view('site.calendars.calendar', compact('calendar', 'comments'));
+        return view('site.calendars.calendar', compact('calendar', 'comments', 'thanks', 'total'));
     }
 
     public function edit($calendar_id)
@@ -117,4 +123,5 @@ class CalendarsController extends Controller
         toastr()->warning('Evento Deletado', 'Aviso');
         return redirect()->to('calendars');
     }
+
 }
