@@ -424,11 +424,16 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Medias
             Route::resource('medias', 'MediasController')->except(['show']);
 
-            //Medias Casts
+            //Medias Casts/Images
             Route::prefix('media')->group(function () {
-                Route::get('{id}/casts', 'MediasController@casts');
+                //Cast
+                Route::get('{id}/casts', 'MediasController@casts')->name('staff.medias.casts');
                 Route::post('{id}/casts', 'MediasController@castSave');
                 Route::delete('cast/{id}/delete', 'MediasController@castDelete');
+                //Images
+                Route::get('{media_id}/images', 'MediasController@images')->name('staff.medias.imagens');
+                Route::post('{media_id}/poster', 'MediasController@updatePoster')->name('staff.media.poster');
+                Route::post('{media_id}/cover', 'MediasController@updateCover')->name('staff.media.cover');
             });
 
             //Moods
