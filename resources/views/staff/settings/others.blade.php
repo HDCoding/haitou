@@ -66,8 +66,8 @@
 
                                         </div>
                                         <div class="form-group">
-                                            {!! Form::label('invitedays', 'Convite limite de dias:') !!}
-                                            {!! Form::number('invitedays', setting('invitedays'), ['class' => 'form-control', 'required']) !!}
+                                            {!! Form::label('invite_days', 'Convite limite de dias:') !!}
+                                            {!! Form::number('invite_days', setting('invite_days'), ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
