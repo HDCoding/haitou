@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\Medias\CoverImageRequest;
+use App\Http\Requests\Staff\Medias\PosterImageRequest;
 use App\Http\Requests\Staff\MediasRequest;
 use App\Models\Actor;
 use App\Models\Category;
@@ -106,69 +108,75 @@ class MediasController extends Controller
         return redirect()->back();
     }
 
-    public function updatePoster()
+    public function images($media_id)
     {
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            // Define um aleatório para o arquivo baseado no timestamps atual
-            $name = md5_gen();
-
-            // Recupera a extensão do arquivo
-            $extension = $request->avatar->extension();
-
-            // Define finalmente o nome
-            $name_file = "{$name}.{$extension}";
-
-            // Faz o upload
-            $upload = $request->avatar->storeAs('medias', $name_file, 'public');
-            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/medias/nomedinamicoarquivo.extensao
-
-            if (!$upload) {
-                return redirect()->route('edit.profile')
-                    ->with('error', 'Falha ao fazer upload')
-                    ->withInput();
-            } else {
-                $media->avatar = $name_file;
-            }
-        } else {
-            return redirect()->route('edit.profile')
-                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
-                ->withInput();
-        }
-
-        $media->update();
-        return redirect()->route('edit.profile');
+        $media = Media::findOrFail($media_id);
+        return view('staff.medias.images', compact('media'));
     }
 
-    public function updateCover()
+    public function updatePoster(PosterImageRequest $request, $media_id)
     {
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+        $media = Media::findOrFail($media_id);
+
+        if ($request->hasFile('poster') && $request->file('poster')->isValid()) {
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = md5_gen();
 
             // Recupera a extensão do arquivo
-            $extension = $request->avatar->extension();
+            $extension = $request->poster->extension();
 
             // Define finalmente o nome
-            $name_file = "{$name}.{$extension}";
+            $name_file = "{$media_id}.poster.{$name}.{$extension}";
 
             // Faz o upload
-            $upload = $request->avatar->storeAs('medias', $name_file, 'public');
+            $upload = $request->poster->storeAs('medias', $name_file, 'public');
             // Se tiver funcionado o arquivo foi armazenado em storage/app/public/medias/nomedinamicoarquivo.extensao
 
             if (!$upload) {
-                return redirect()->route('edit.profile')
-                    ->with('error', 'Falha ao fazer upload')
-                    ->withInput();
+                return redirect()->back()
+                    ->with('error', 'Falha ao fazer upload');
             } else {
-                $media->avatar = $name_file;
+                $media->poster = $name_file;
             }
         } else {
-            return redirect()->route('edit.profile')
-                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
-                ->withInput();
+            return redirect()->back()
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.');
         }
 
         $media->update();
-        return redirect()->route('edit.profile');
+        return redirect()->back();
+    }
+
+    public function updateCover(CoverImageRequest $request, $media_id)
+    {
+        $media = Media::findOrFail($media_id);
+
+        if ($request->hasFile('cover') && $request->file('cover')->isValid()) {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = md5_gen();
+
+            // Recupera a extensão do arquivo
+            $extension = $request->cover->extension();
+
+            // Define finalmente o nome
+            $name_file = "{$media_id}.cover.{$name}.{$extension}";
+
+            // Faz o upload
+            $upload = $request->cover->storeAs('medias', $name_file, 'public');
+            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/medias/nomedinamicoarquivo.extensao
+
+            if (!$upload) {
+                return redirect()->back()
+                    ->with('error', 'Falha ao fazer upload');
+            } else {
+                $media->cover = $name_file;
+            }
+        } else {
+            return redirect()->back()
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.');
+        }
+
+        $media->update();
+        return redirect()->back();
     }
 }
