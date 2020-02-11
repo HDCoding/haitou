@@ -29,7 +29,6 @@ use App\Models\Tag;
 use App\Models\Thank;
 use App\Models\Torrent;
 use App\Notifications\NewReseedRequestNotification;
-use App\Notifications\NewThankYouNotification;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -305,42 +304,6 @@ class TorrentsController extends Controller
         $user->updatePoints($points);
 
         return $this->torrentTool->send($torrent_id, $torrent->name);
-    }
-
-    public function thanks($torrent_id, Request $request)
-    {
-        $user = $request->user();
-        $torrent = Torrent::findOrFail($torrent_id);
-
-        $thanks = $torrent->thanks()->where('user_id', '=', $user->id)->first();
-
-        if ($thanks) {
-            toastr()->info('Você já agradeceu esse torrent.', 'Info');
-            return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
-        }
-
-        if ($user->id == $torrent->user_id) {
-            toastr()->warning('Você não pode agradecer seu próprio Upload.', 'Aviso');
-            return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
-        }
-
-        $thank = new Thank();
-        $thank->torrent_id = $torrent->id;
-        $thank->user_id = $user->id;
-        $thank->save();
-
-        //Thank you notification to uploader
-        $uploader = User::where('id', '=', $torrent->user_id)->first();
-        $uploader->notify(new NewThankYouNotification($torrent));
-
-        // Give points to both users
-        $points = setting('points_thanks');
-        //logged user
-        $user->updatePoints($points);
-        //uploader
-        $uploader->updateOfflinePoints($torrent->user_id, $points);
-
-        return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
     }
 
     public function reSeed(Request $request, $torrent_id)
