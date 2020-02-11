@@ -101,12 +101,12 @@ class Media extends Model
 
     public function poster()
     {
-        return empty($this->poster) ? null : urlencode($this->poster);
+        return empty($this->poster) ? asset('images/no-poster.png') : asset('storage/medias/' . $this->poster);
     }
 
     public function cover()
     {
-        return empty($this->cover) ? null : urlencode($this->cover);
+        return empty($this->cover) ? asset('images/no-cover.jpg') : asset('storage/medias/' . $this->cover);
     }
 
     public function genre()
