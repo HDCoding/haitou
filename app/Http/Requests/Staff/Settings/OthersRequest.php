@@ -34,7 +34,7 @@ class OthersRequest extends FormRequest
             'min_ratio' => 'numeric',
             'low_ratio' => 'numeric',
             //Invite
-            'invitedays' => 'integer|min:1|max:150',
+            'invite_days' => 'integer|min:1|max:150',
         ];
     }
 }
