@@ -59,7 +59,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Meus Convites</h4>
                         <p class="text-muted text-center">
-                            Sua/Seu amiga(o) tem <b class="text-danger font-16">{{ setting('invitedays') }}</b> dias para aceitar o
+                            Sua/Seu amiga(o) tem <b class="text-danger font-16">{{ setting('invite_days') }}</b> dias para aceitar o
                             convite, até que o mesmo seja deletado.
                         </p>
                         <div class="table-responsive m-t-15">
