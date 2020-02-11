@@ -43,27 +43,37 @@ class Report extends Model
 
     public function calendar()
     {
-        return $this->belongsTo(Calendar::class);
+        return $this->belongsTo(Calendar::class, 'calendar_id');
     }
 
     public function comment()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->belongsTo(Comment::class, 'comment_id');
     }
 
     public function member()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'member_id');
     }
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class, 'post_id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(User::class, 'staff_id');
     }
 
     public function torrent()
     {
-        return $this->belongsTo(Torrent::class);
+        return $this->belongsTo(Torrent::class, 'torrent_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function sluggable()
@@ -82,13 +92,30 @@ class Report extends Model
         if ($report_type == 0) {
             return '<span class="badge badge-default">Torrent</span>';
         } elseif ($report_type == 1) {
-            return '<span class="badge badge-primary">Fórum Post</span>';
+            return '<span class="badge badge-primary">Post</span>';
         } elseif ($report_type == 2) {
             return '<span class="badge badge-success">Membro</span>';
         } elseif ($report_type == 3) {
             return '<span class="badge badge-info">Comentário</span>';
         } else {
             return '<span class="badge badge-warning">Calendário</span>';
+        }
+    }
+
+    public function linkTo($report_id)
+    {
+        $report_type = $this->report_type;
+
+        if ($report_type == 0) {
+            return url('staff/reports/' . $report_id . '/torrent');
+        } elseif ($report_type == 1) {
+            return url('staff/reports/' . $report_id . '/post');
+        } elseif ($report_type == 2) {
+            return url('staff/reports/' . $report_id . '/member');
+        } elseif ($report_type == 3) {
+            return url('staff/reports/' . $report_id . '/comment');
+        } else {
+            return url('staff/reports/' . $report_id . '/calendar');
         }
     }
 
