@@ -76,10 +76,10 @@
                                 @foreach($reports as $report)
                                     <tr>
                                         <th>{!! $report->type() !!}</th>
-                                        <td>{{ link_to_route('reports.show', $report->name, [$report->id]) }}</td>
+                                        <td><a href="{{ $report->linkTo($report->id) }}">{{ $report->name }}</a></td>
                                         <td>{{ $report->id }}</td>
                                         <td>{!! $report->solved() !!}</td>
-                                        <td>{{ format_date($report->created_at) }}</td>
+                                        <td>{{ format_date_time($report->created_at) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -99,7 +99,7 @@
         $(document).ready(function () {
             $('#datatable').DataTable({
                 "displayLength": 50,
-                "searching": true,
+                "searching": false,
                 "responsive": true,
                 "order": [[ 2, "desc" ]],
                 "language": {
