@@ -16,9 +16,9 @@ class IncrementTimeOnline
      */
     public function handle($request, Closure $next)
     {
-        if (!$user = $request->user()) {
-            return $next($request);
-        }
+//        if (!$user = $request->user()) {
+//            return $next($request);
+//        }
 
 //        $last_login = $user->logins->last();
 //
@@ -31,6 +31,6 @@ class IncrementTimeOnline
 //        $user->time_online += $new_time;
 //        $user->save();
 
-        return $next($request);
+        //return $next($request);
     }
 }
