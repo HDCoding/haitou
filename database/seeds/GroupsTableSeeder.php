@@ -47,7 +47,7 @@ class GroupsTableSeeder extends Seeder
                 'name' => 'V.I.P',
                 'color' => '#612F74',
                 'icon' => 'fas fa-credit-card',
-                'hnr' => 52 * 3600
+                'hnr' => 1 * 3600
             ],
             [
                 'name' => 'Fansub',
