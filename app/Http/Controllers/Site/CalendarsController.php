@@ -47,7 +47,7 @@ class CalendarsController extends Controller
         $this->achievement($user);
 
         //give points to user
-        $points = setting('points_rating');
+        $points = setting('points_calendar');
         $user->updatePoints($points);
 
         toastr()->info('Evento Criado com Sucesso!', 'Sucesso');
