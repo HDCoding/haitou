@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\Settings\AnalyticsRequest;
-use App\Http\Requests\Staff\Settings\FaviconRequest;
+use App\Http\Requests\Staff\Settings\FaviconImageRequest;
 use App\Http\Requests\Staff\Settings\ImagesRequest;
+use App\Http\Requests\Staff\Settings\IndexImageRequest;
+use App\Http\Requests\Staff\Settings\LoginImageRequest;
 use App\Http\Requests\Staff\Settings\MailRequest;
 use App\Http\Requests\Staff\Settings\OthersRequest;
 use App\Http\Requests\Staff\Settings\PointsRequest;
@@ -13,6 +15,8 @@ use App\Http\Requests\Staff\Settings\PolicyRequest;
 use App\Http\Requests\Staff\Settings\SeoRequest;
 use App\Http\Requests\Staff\Settings\SocialRequest;
 use App\Models\Setting;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class SettingsController extends Controller
 {
@@ -43,26 +47,9 @@ class SettingsController extends Controller
         toastr()->info('Configuração atualizada.', 'Sucesso');
     }
 
-    public function favicon(FaviconRequest $request)
-    {
-        if ($request->isMethod('POST')) {
-            $data = $request->except('_token');
-
-        }
-        if ($request->isMethod('GET')) {
-            return view('staff.settings.favicon');
-        }
-    }
-
     public function images(ImagesRequest $request)
     {
-        if ($request->isMethod('POST')) {
-            $data = $request->except('_token');
-
-        }
-        if ($request->isMethod('GET')) {
-            return view('staff.settings.images');
-        }
+        return view('staff.settings.images');
     }
 
     public function mail(MailRequest $request)
@@ -135,6 +122,52 @@ class SettingsController extends Controller
         if ($request->isMethod('GET')) {
             return view('staff.settings.social');
         }
+    }
+
+    public function imageIndex(IndexImageRequest $request)
+    {
+        if ($request->hasFile('index') && $request->file('index')->isValid()) {
+            File::delete('images/index-site.png');
+
+            // Faz o upload
+            $upload = $request->file('index');
+
+            $imageMake = Image::make($upload);
+            $imageMake->save('images/index-site.png');
+            // Se tiver funcionado o arquivo foi armazenado em public/images/index.extensao
+
+            sleep(5);
+            return redirect()->route('setting.images');
+        } else {
+            return redirect()->route('setting.images')
+                ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.');
+        }
+    }
+
+    public function imageLogin(LoginImageRequest $request)
+    {
+        if ($request->hasFile('login') && $request->file('login')->isValid()) {
+            File::delete('images/login-register.jpg');
+
+            // Faz o upload
+            $upload = $request->file('login');
+
+            $imageMake = Image::make($upload);
+
+            $imageMake->save('images/login-register.jpg');
+            // Se tiver funcionado o arquivo foi armazenado em public/images/login-register.jpg
+
+            sleep(5);
+            return redirect()->route('setting.images');
+        } else {
+            toastr()->error('Erro', 'Erro no arquivo de imagem, check o arquivo e tente novamente.');;
+            return redirect()->route('setting.images');
+        }
+    }
+
+    public function imageFavicon(FaviconImageRequest $request)
+    {
+        //TODO
     }
 
 }
