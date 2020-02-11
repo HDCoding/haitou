@@ -63,7 +63,7 @@
                                 @endif
 
                                 @if($calendar->user_id !== auth()->user()->id)
-                                    <a class="btn btn-xs btn-warning" href="{{ route('calendar.report', [$calendar->id]) }}" data-toggle="tooltip" title="Reportar Evento">
+                                    <a class="btn btn-xs btn-dark" href="{{ route('calendar.report', [$calendar->id]) }}" data-toggle="tooltip" title="Reportar Evento">
                                         <i class="fas fa-flag"></i> Reportar
                                     </a>
                                 @endif
