@@ -36,6 +36,7 @@ class PointsRequest extends FormRequest
             'points_delete' => 'integer|min:1|max:250',
             'points_thanks' => 'integer|min:1|max:250',
             'points_report' => 'integer|min:1|max:250',
+            'points_calendar' => 'integer|min:1|max:250',
         ];
     }
 }
