@@ -82,7 +82,7 @@ class InvitationController extends Controller
             //update the invitation
             $invitation->accepted_by = $user->id;
             $invitation->code = now();
-            $invitation->is_accepted = true;
+            $invitation->accepted = true;
             $invitation->expires_on = null;
             $invitation->accepted_at = now();
             $invitation->save();
