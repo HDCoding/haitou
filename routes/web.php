@@ -257,8 +257,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //Subscription
         Route::prefix('subscription')->group(function () {
+            //Email Notification
             Route::get('{topic_id}/email-notify-on', 'SubscriptionsController@emailNotifyOn')->name('topic.email.notify.on');
             Route::get('{topic_id}/email-notify-off', 'SubscriptionsController@emailNotifyOff')->name('topic.email.notify.off');
+            //Normal Notification
             Route::get('{topic_id}/notify-on', 'SubscriptionsController@notifyOn')->name('topic.notify.on');
             Route::get('{topic_id}/notify-off', 'SubscriptionsController@notifyOff')->name('topic.notify.off');
         });
