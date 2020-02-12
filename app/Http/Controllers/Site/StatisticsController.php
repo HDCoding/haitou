@@ -115,7 +115,7 @@ class StatisticsController extends Controller
         });
 
         $invitations = cache()->remember('invitations', $this->expire_at, function () {
-            return Invitation::where('is_accepted', '=', true)->count();
+            return Invitation::where('accepted', '=', true)->count();
         });
 
         $total_reports = cache()->remember('total_reports', $this->expire_at, function () {
