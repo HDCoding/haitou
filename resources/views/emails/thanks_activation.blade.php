@@ -1,7 +1,7 @@
 @component('mail::message')
     Olá!
 
-    Obrigado por criar uma conta do {{ config('app.name') }}. Você está pronta(o) para prosseguir!
+    Agradeçemos por criar uma conta do {{ config('app.name') }}. Você está pronta(o) para prosseguir!
 
     {{ config('app.name') }} torna mais fácil para o torrent/fórum e usuários.
     Acompanhe as conversas em tempo real com as quais eles se importam. Traz mais flexibilidade
