@@ -441,7 +441,7 @@ class User extends Authenticatable
         return $this->group()->select('name')->pluck('name')->first();
     }
 
-    public function isSubscribed(int $topic_id)
+    public function isSubscribed($topic_id)
     {
         return (bool)$this->subscriptions()->where('topic_id', '=', $topic_id)->first('id');
     }
@@ -494,6 +494,22 @@ class User extends Authenticatable
     public function signature()
     {
         return (new BBCode())->parse($this->signature, true);
+    }
+
+    public function topicEmailNotification($topic_id)
+    {
+        return (bool)$this->subscriptions()
+            ->where('topic_id', '=', $topic_id)
+            ->where('email', '=', true)
+            ->first();
+    }
+
+    public function topicNotification($topic_id)
+    {
+        return (bool)$this->subscriptions()
+            ->where('topic_id', '=', $topic_id)
+            ->where('notify', '=', true)
+            ->first();
     }
 
 }
