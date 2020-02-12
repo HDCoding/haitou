@@ -24,6 +24,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                @include('site.forums.buttons')
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Meus Tópicos</h4>

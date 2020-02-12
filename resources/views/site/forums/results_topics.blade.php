@@ -24,13 +24,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                @include('site.forums.buttons')
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Pesquisa no fórum</h4>
 
                         @includeIf('errors.errors', [$errors])
-
-                        @include('site.forums.buttons')
 
                         <form class="form-horizontal mt-4" role="form" method="GET" action="{{ route('forum.search') }}">
                             @csrf
