@@ -19,8 +19,9 @@ class CreateInvitationsTable extends Migration
             $table->unsignedBigInteger('accepted_by')->index()->nullable();
             $table->string('email', 70)->unique();
             $table->string('code', 100)->unique()->nullable();
-            $table->boolean('is_accepted')->default(0);
+            $table->boolean('accepted')->default(0);
             $table->timestamp('expires_on')->nullable();
+            $table->timestamp('resend_at')->nullable();
             $table->timestamp('accepted_at')->nullable();
             $table->timestamps();
 
