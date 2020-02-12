@@ -23,7 +23,7 @@ class InvitationsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $invites = $user->invitations()->where('is_accepted', '=', false)->get();
+        $invites = $user->invitations()->where('accepted', '=', false)->get();
         return view('site.invites.index', compact('invites'));
     }
 
@@ -57,28 +57,7 @@ class InvitationsController extends Controller
         $this->log::record("Membro {$user->name} enviou um convite para {$email}");
 
         toastr()->success('Convite enviado com sucesso.', 'Sucesso');
-        return redirect()->to('invites');
+        return redirect()->route('invites.index');
     }
 
-    public function resend(Request $request, $invite_id)
-    {
-        $user = $request->user();
-        $invite = Invitation::findOrFail($invite_id);
-
-        abort_unless($invite->user_id === $user->id, 403);
-
-        if ($invite->accepted_by !== null) {
-            toastr()->error('O convite que você está tentando re-enviar já foi usado.', 'Aviso');
-            return redirect()->route('invites');
-        }
-
-        //resend email
-        $this->dispatch(new SendInvitationMail($invite));
-
-        // Log
-        $this->log::record("Membro {$user->name} re-enviou o convite para {$invite->email} .");
-
-        toastr()->success('O convite foi reenviado com sucesso!', 'Aviso');
-        return redirect()->route('invites');
-    }
 }
