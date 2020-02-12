@@ -1,8 +1,10 @@
 <div class="card">
     <div class="card-header bg-primary">
-        <h5 class="text-white"><i class="fa fa-book"></i> Tópicos recentes</h5>
+        <h5 class="text-white"><i class="fa fa-book"></i> Tópicos recentes
+            <a class="text-white float-right" data-action="collapse"><i class="ti-minus"></i></a>
+        </h5>
     </div>
-    <div class="card-body">
+    <div class="card-body collapse show">
         <table class="table table-striped">
             <thead>
             <tr>
