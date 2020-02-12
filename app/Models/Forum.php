@@ -79,7 +79,7 @@ class Forum extends Model
             $id = $this->id;
             $subscriptions = auth()->user()->subscriptions->where('topic_id', '>', 0)->pluck('topic_id')->toArray();
             return $this->hasMany(Topic::class)->where(function ($query) use ($id, $subscriptions) {
-                $query->whereIn('topics.id', [$id])->orWhereIn('topics.id', $subscriptions);
+                $query->whereIn('topics.id', [$id])->orWhereIn('topics.id', [$subscriptions]);
             });
         }
         return $this->hasMany(Topic::class, 'id', 'topic_id');
