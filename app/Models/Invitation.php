@@ -12,11 +12,12 @@ class Invitation extends Model
     protected $casts = [
         'user_id' => 'int',
         'accepted_by' => 'int',
-        'is_accepted' => 'bool'
+        'accepted' => 'bool'
     ];
 
     protected $dates = [
         'expires_on',
+        'resend_at',
         'accepted_at'
     ];
 
@@ -25,8 +26,9 @@ class Invitation extends Model
         'accepted_by',
         'email',
         'code',
-        'is_accepted',
+        'accepted',
         'expires_on',
+        'resend_at',
         'accepted_at'
     ];
 
