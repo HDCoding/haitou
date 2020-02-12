@@ -150,6 +150,7 @@ class ForumsController extends Controller
 
     public function subscriptions(Request $request)
     {
+        //TODO fix this
         $user = $request->user();
 
         $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
@@ -162,21 +163,15 @@ class ForumsController extends Controller
             $topic_neos = [];
         }
 
-        $forum_neos = $user->subscriptions->where('forum_id', '>', 0)->pluck('forum_id')->toArray();
-        if (!is_array($forum_neos)) {
-            $forum_neos = [];
-        }
-
         $result = Forum::with('subscription_topics')
             ->selectRaw('forums.id, max(forums.position) as position, max(forums.name) as name, max(forums.slug) as slug, max(forums.description) as description, max(forums.created_at), max(forums.updated_at), max(topics.id) as topic_id, max(topics.created_at) as topic_created_at')
             ->leftJoin('topics', 'forums.id', '=', 'topics.forum_id')
             ->whereNotIn('topics.forum_id', $posts)
-            ->where(function ($query) use ($topic_neos, $forum_neos) {
-                $query->whereIn('topics.id', $topic_neos)->orWhereIn('forums.id', $forum_neos);
+            ->where(function ($query) use ($topic_neos) {
+                $query->whereIn('topics.id', [$topic_neos]);
             })->groupBy('forums.id');
 
         $results = $result->orderBy('id', 'DESC')->paginate(30);
-        $results->setPath('?name=' . $request->input('name'));
 
         // Total Forums Count
         $num_forums = Forum::count();
@@ -189,15 +184,9 @@ class ForumsController extends Controller
 
         return view('site.forums.subscriptions', [
             'results' => $results,
-            'user' => $user,
-            'name' => $request->input('name'),
-            'body' => $request->input('body'),
             'num_posts' => $num_posts,
             'num_forums' => $num_forums,
-            'num_topics' => $num_topics,
-            'params' => $params,
-            'forum_neos' => $forum_neos,
-            'topic_neos' => $topic_neos,
+            'num_topics' => $num_topics
         ]);
     }
 
