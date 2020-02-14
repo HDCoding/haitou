@@ -43,10 +43,10 @@
                                     @if ($topic->viewable())
                                     <tr>
                                         <th>
-                                             <a href="{{ route('forum.topics', [$topic->forum->id, $topic->forum->slug]) }}">{{ $topic->forum->name }}</a>
+                                            {{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}
                                         </th>
                                         <td>
-                                            <a href="{{ route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]) }}">{{ $topic->name }}</a>
+                                            <a href="{{ route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]) }}">{{ $topic->name }}</a>
                                             @if ($topic->is_locked)
                                                 <span class="badge badge-dark">Fechado</span>
                                             @endif
