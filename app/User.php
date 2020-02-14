@@ -39,6 +39,7 @@ use App\Models\Vip;
 use App\Models\Vote;
 use App\Traits\HasPermissions;
 use App\Traits\UsersOnline;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Gstt\Achievements\Achiever;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -438,7 +439,13 @@ class User extends Authenticatable
 
     public function groupName()
     {
-        return $this->group()->select('name')->pluck('name')->first();
+        $expire_at = Carbon::now()->addMinutes(20);
+
+        // User group
+        $user_group = cache()->remember('user_group_'.$this->id, $expire_at, function () {
+            return $this->group()->select('name')->pluck('name')->first();
+        });
+        return $user_group;
     }
 
     public function isSubscribed($topic_id)
