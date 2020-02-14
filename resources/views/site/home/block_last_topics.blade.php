@@ -19,12 +19,10 @@
                 @if($topic->viewable())
                     <tr>
                         <td>
-                            <a href="{{ route('forum.topics', ['id' => $topic->forum->id, 'slug' => $topic->slug]) }}">
-                                {{ $topic->forum->name }}
-                            </a>
+                            {{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}
                         </td>
                         <td>
-                            <a href="{{ route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]) }}">
+                            <a href="{{ route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]) }}">
                                 {{ $topic->name }}
                             </a>
                         </td>
