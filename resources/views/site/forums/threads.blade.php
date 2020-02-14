@@ -30,9 +30,14 @@
                         <h3 class="card-title">{{ $forum->name }}</h3>
                         @if($forum->getPermission()->start_topic)
                             <div class="mb-4">
-                                <a href="{{ route('new.topic', [$forum->id, $forum->slug]) }}">
+                                <a href="{{ route('new.topic', ['forum_id' => $forum->id]) }}">
                                     <button type="button" class="btn btn-primary btn-rounded">
                                         <i class="ion ion-md-add"></i>&nbsp; Novo Tópico
+                                    </button>
+                                </a>
+                                <a href="{{ route('new.poll', ['forum_id' => $forum->id]) }}">
+                                    <button type="button" class="btn btn-info btn-rounded">
+                                        <i class="fas fa-poll"></i>&nbsp; Nova Pesquisa
                                     </button>
                                 </a>
                             </div>
