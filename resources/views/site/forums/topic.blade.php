@@ -18,7 +18,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('forum') }}">Fórum</a></li>
-                            <li class="breadcrumb-item">{{ link_to_route('forum.topics', $topic->forum->name, ['id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}</li>
+                            <li class="breadcrumb-item">{{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}</li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $topic->name }}</li>
                         </ol>
                     </nav>
@@ -41,45 +41,61 @@
                 <div class="float-left">
                     @if(auth()->user()->can('forum-mod'))
                         @if ($topic->is_locked)
-                        <a href="{{ route('forum.openclose.topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-success btn-rounded">
-                            <i class="fa fa-lock-open"></i> Abrir Tópico
+                        <a href="{{ route('topic.open', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-success btn-rounded">
+                            <i class="fas fa-lock-open"></i> Abrir Tópico
                         </a>
                         @else
-                        <a href="{{ route('forum.openclose.topic', [$topic->id, $topic->slug])}}" class="btn btn-sm btn-primary btn-rounded">
+                        <a href="{{ route('topic.close', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-primary btn-rounded">
                             <i class="ion ion-ios-lock"></i> Fechar Tópico
                         </a>
                         @endif
 
                         @if (!$topic->is_pinned)
                         <a href="{{ route('forum.pinunpin.topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
-                            <i class="fa fa-file"></i> Pin Tópico
+                            <i class="fas fa-file"></i> Pin Tópico
                         </a>
                         @else
                         <a href="{{ route('forum.pinunpin.topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
-                            <i class="fa fa-file"></i> Unpin Tópico
+                            <i class="fas fa-file"></i> Unpin Tópico
                         </a>
                         @endif
                     @endif
                     @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
                         <a href="{{ route('topic.form.edit', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-orange btn-rounded">
-                            <i class="fa fa-pencil-alt"></i> Editar Tópico
+                            <i class="fas fa-pencil-alt"></i> Editar Tópico
                         </a>
                     @endif
-
                 </div>
                 <div class="float-right">
                     @if (auth()->user()->isSubscribed($topic->id))
-                        <a href="{{ route('unsubscribe.topic', ['topic' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
-                            <i class="fa fa-bell-slash"></i> Cancelar Inscrição
+                        <a href="{{ route('unsubscribe.topic', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
+                            <i class="fas fa-bell-slash"></i> Cancelar Inscrição
                         </a>
                     @else
-                        <a href="{{ route('subscribe.topic', ['topic' => $topic->id]) }}" class="btn btn-sm btn-success btn-rounded">
-                            <i class="fa fa-bell"></i> Se Inscrever
+                        <a href="{{ route('subscribe.topic', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-success btn-rounded">
+                            <i class="fas fa-bell"></i> Se Inscrever
                         </a>
                     @endif
                 </div>
             </div>
         </div>
+        @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
+        <div class="row">
+            <div class="col-md-12 mt-3 mb-4">
+                <h4>Polls</h4>
+                <div class="float-left">
+                    @if(!empty($topic->poll_id))
+                        <a href="{{ url('staff/poll/' . $topic->id . '/options/add') }}" data-toggle="tooltip" title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
+                        <a class="m-l-15" href="{{ url('staff/poll/' . $topic->id . '/options/remove') }}" data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
+                        <a class="m-l-15" href="{{ route('topic.poll.edit', ['topic_id' => $topic->id]) }}" data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
+                        <a class="m-l-15" href="javascript:;" onclick="document.getElementById('poll-del-{{ $topic->id }}').submit();" data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
+                        {!! Form::open(['url' => 'topic/polls/' . $topic->id, 'method' => 'DELETE', 'id' => 'poll-del-' . $topic->id, 'style' => 'display: none']) !!}
+                        {!! Form::close() !!}
+                    @endif
+                </div>
+            </div>
+        </div>
+        @endif
 
         @foreach($posts as $post)
             <div class="row">
@@ -90,7 +106,7 @@
                                 <i class="fas fa-flag"></i>
                             </a>
                             @if($post->user_id == auth()->user()->id OR auth()->user()->can('forum-mod'))
-                                <a href="{{ route('post.edit.form', ['id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id]) }}" data-toggle="tooltip" title="Editar Post">
+                                <a href="{{ route('post.edit.form', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}" data-toggle="tooltip" title="Editar Post">
                                     <i class="fas fa-pencil-alt text-dark mr-3"></i>
                                 </a>
                             @endif
@@ -114,8 +130,8 @@
                                     <div class="col-lg-2">
                                         <div class="d-flex no-block align-items-center">
                                             <div class="ml-auto">
-                                                <a href="{{ route('post.reply', ['topicId' => $topic->id, 'postId' => $post->id]) }}">
-                                                    <button class="btn btn-danger"><i class="fa fa fa-reply"></i> Reply</button>
+                                                <a href="{{ route('post.reply', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}">
+                                                    <button class="btn btn-danger"><i class="fas fa-reply"></i> Reply</button>
                                                 </a>
                                             </div>
                                         </div>
