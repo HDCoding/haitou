@@ -54,7 +54,7 @@
                                                             </div>
                                                             <div class="media-body">
                                                                 <h5 class="media-heading">
-                                                                    <a class="h5 text-info" href="{{ route('forum.topics', [$forum->id, $forum->slug]) }}">{{ $forum->name }}</a>
+                                                                    {{ link_to_route('forum.threads', $forum->name, ['forum_id' => $forum->id, 'slug' => $forum->slug], ['class' => 'h5 text-info']) }}
                                                                 </h5>
                                                                 <div class="text-dark">{{ $forum->description }}</div>
                                                             </div>
