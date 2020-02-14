@@ -34,7 +34,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar Post</h4>
                         @includeIf('errors.errors', [$errors])
-                        {!! Form::model($post, ['route' => ['post.edit', 'id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($post, ['route' => ['post.edit', 'post_id' => $post->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                             {!! Form::textarea('content', $post->content, ['class' => 'form-control', 'rows' => 10]) !!}
