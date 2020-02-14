@@ -109,62 +109,62 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('/', 'ForumsController@index')->name('forum');
 
             //Topics
-            Route::get('{id}.{slug}', 'ForumsController@topics')->name('forum.topics');
+            Route::get('{forum_id}.{slug}', 'ForumsController@topics')->name('forum.threads');
 
             //Topic
-            Route::get('topic/{id}.{slug}', 'ForumsController@topic')->name('forum.topic');
+            Route::get('topic/{topic_id}.{slug}', 'ForumsController@topic')->name('forum.topic');
 
             //New topic
-            Route::get('{id}.{slug}/new-topic', 'ForumsController@newTopicForm')->name('new.topic');
-            Route::post('{id}.{slug}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
+            Route::get('{forum_id}/new-topic', 'ForumsController@newTopicForm')->name('new.topic');
+            Route::post('{forum_id}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
 
             //Edit Topic
-            Route::get('topic/{id}.{slug}/edit', 'ForumsController@formTopicEdit')->name('topic.form.edit');
-            Route::put('topic/{id}.{slug}/edit', 'ForumsController@topicEdit')->name('topic.edit');
+            Route::get('topic/{id}/edit', 'ForumsController@formTopicEdit')->name('topic.form.edit');
+            Route::put('topic/{id}/edit', 'ForumsController@topicEdit')->name('topic.edit');
 
             //Delete Topic
-            Route::delete('topic/{id}.{slug}', 'ForumsController@topicDelete')->name('topic.delete');
+            Route::delete('topic/{id}', 'ForumsController@topicDelete')->name('topic.delete');
 
             //Fast post
-            Route::post('topic/{id}.{slug}/post', 'ForumsController@post')->name('forum.post');
+            Route::post('topic/{id}/post', 'ForumsController@post')->name('forum.post');
 
             //Edit Post
-            Route::get('topic/{id}.{slug}/post-{postId}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
-            Route::put('post/{postId}/edit', 'ForumsController@postEdit')->name('post.edit');
+            Route::get('t.{topic_id}/p.{post_id}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
+            Route::put('post/{post_id}/edit', 'ForumsController@postEdit')->name('post.edit');
 
             //Delete Post
-            Route::delete('post/{postId}', 'ForumsController@postDelete')->name('post.delete');
+            Route::delete('post/{post_id}', 'ForumsController@postDelete')->name('post.delete');
 
             //Reply Post
-            Route::get('t.{topicId}-p.{postId}/reply', 'ForumsController@formReply')->name('post.reply');
-            Route::post('t.{topicId}/reply', 'ForumsController@reply')->name('reply');
+            Route::get('t.{topic_id}/p.{post_id}/reply', 'ForumsController@formReply')->name('post.reply');
+            Route::post('t.{topic_id}/reply', 'ForumsController@reply')->name('reply');
 
             // Open/Close Topic
-            Route::get('topic/{id}.{slug}/openclose', 'ForumsController@openCloseTopic')->name('forum.openclose.topic');
+            Route::get('topic/{topic_id}/open', 'ForumsController@topicOpen')->name('topic.open');
+            Route::get('topic/{topic_id}/close', 'ForumsController@topicClose')->name('topic.close');
 
             // Pin/Unpin Topic
             Route::get('topic/{id}.{slug}/pinunpin', 'ForumsController@pinUnpinTopic')->name('forum.pinunpin.topic');
 
             // Like - Dislike
-            Route::get('like/post/{postId}', 'LikesController@likePost')->name('like.post');
-            Route::get('dislike/post/{postId}', 'LikesController@dislikePost')->name('dislike.post');
+            Route::get('like/post/{post_id}', 'LikesController@likePost')->name('like.post');
+            Route::get('dislike/post/{post_id}', 'LikesController@dislikePost')->name('dislike.post');
 
             //Search
             Route::get('search', 'ForumsController@search')->name('forum.search');
 
             //Other
             Route::get('subscriptions', 'ForumsController@subscriptions')->name('forum.subscriptions');
+
             //Last Topics
             Route::get('latest/topics', 'ForumsController@latestTopics')->name('forum.latest.topics');
+
             //Last Posts
             Route::get('latest/posts', 'ForumsController@latestPosts')->name('forum.latest.posts');
-            //Subscription
-            Route::get('topic/{topic}/subscribe', 'SubscriptionsController@subscribeTopic')->name('subscribe.topic');
-            Route::get('topic/{topic}/unsubscribe', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe.topic');
 
-            //Poll Add TODO
-//        Route::get('topico/{id}.{slug}/add-poll', 'ForumsController@topicAddPoll')->name('topic.add.poll');
-//        Route::post('topico/{id}.{slug}/add-poll', 'ForumsController@topicSavePoll')->name('topic.save.poll');
+            //Subscription
+            Route::get('topic/{topic_id}/subscribe', 'SubscriptionsController@subscribeTopic')->name('subscribe.topic');
+            Route::get('topic/{topic_id}/unsubscribe', 'SubscriptionsController@unsubscribeTopic')->name('unsubscribe.topic');
 
             //My Topics
             Route::get('topics', 'UsersController@topics')->name('my.topics');
@@ -172,6 +172,11 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //My Posts
             Route::get('posts', 'UsersController@posts')->name('my.posts');
 
+            //Poll
+            Route::prefix('poll')->group(function () {
+                Route::get('{forum_id}/add', 'PollsController@AddPoll')->name('new.poll');
+                Route::post('t.{topic_id}/add', 'PollsController@topicSavePoll')->name('topic.poll.save');
+            });
         });
 
         //Freeslots
