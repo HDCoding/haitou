@@ -19,12 +19,12 @@
                 @if ($post->topic->viewable())
                     <tr>
                         <td>
-                            <a href="{{ route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{ $post->pageNumber() }}#post-{{ $post->id }}">
+                            <a href="{{ route('forum.topic', ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{ $post->pageNumber() }}#post-{{ $post->id }}">
                                 {{ preg_replace('#\[[^\]]+\]#', '', str_limit(htmlspecialchars_decode($post->content), 65)) }}
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]) }}">
+                            <a href="{{ route('forum.topic', ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}">
                                 {{ $post->topic->name }}
                             </a>
                         </td>
