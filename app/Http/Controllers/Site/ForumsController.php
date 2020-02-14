@@ -40,8 +40,6 @@ use Illuminate\Http\Request;
 
 class ForumsController extends Controller
 {
-    protected $log;
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -150,7 +148,6 @@ class ForumsController extends Controller
 
     public function subscriptions(Request $request)
     {
-        //TODO fix this
         $user = $request->user();
 
         $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
@@ -180,8 +177,6 @@ class ForumsController extends Controller
         // Total Topics Count
         $num_topics = Topic::count();
 
-        $params = $request->all();
-
         return view('site.forums.subscriptions', [
             'results' => $results,
             'num_posts' => $num_posts,
@@ -200,8 +195,8 @@ class ForumsController extends Controller
             'topics:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug',
             'posts:id,forum_id,user_id,post_username,created_at'
         ])
-            ->select('id', 'category_id', 'name', 'slug', 'description', 'icon')
-            ->get();
+        ->select('id', 'category_id', 'name', 'slug', 'description', 'icon')
+        ->get();
 
         // Total Forums Count
         $num_forums = Forum::count();
@@ -215,7 +210,7 @@ class ForumsController extends Controller
 
     public function topics($forum_id, $slug)
     {
-        $forum = Forum::findOrFail($forum_id);
+        $forum = Forum::whereSlug($slug)->findOrFail($forum_id);
         $moderators = Moderator::with('user:id,username,slug')->get();
         $forum->increment('views');
 
@@ -227,7 +222,7 @@ class ForumsController extends Controller
     public function topic($topic_id, $slug)
     {
         //Find the topic
-        $topic = Topic::findOrFail($topic_id);
+        $topic = Topic::whereSlug($slug)->findOrFail($topic_id);
 
         //Get Permission
         $permission = $topic->forum;
@@ -303,7 +298,7 @@ class ForumsController extends Controller
         $this->unlockAchievementTopics($user);
 
         toastr()->success('Tópico criado com sucesso!', 'Tópico');
-        return redirect()->route('forum.topic', [$topic->id, $topic->slug]);
+        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
 
     private function unlockAchievementTopics(User $user)
@@ -323,19 +318,19 @@ class ForumsController extends Controller
         $user->addProgress(new UserMade1000Topics(), 1);
     }
 
-    public function postEditForm($topic_id, $slug, $postId)
+    public function postEditForm($topic_id, $post_id)
     {
         $topic = Topic::findOrFail($topic_id);
-        $post = Post::findOrFail($postId);
+        $post = Post::findOrFail($post_id);
 
         return view('site.forums.edit_post', compact('topic', 'post'));
     }
 
-    public function postEdit(EditTopicRequest $request, $postId)
+    public function postEdit(EditTopicRequest $request, $post_id)
     {
         $user = $request->user();
-        $post = Post::findOrFail($postId);
-        $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$postId}";
+        $post = Post::findOrFail($post_id);
+        $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post_id}";
 
         abort_unless($user->can('forum-mod') || $user->id === $post->user_id, 403);
 
@@ -346,12 +341,12 @@ class ForumsController extends Controller
         return redirect()->to($appurl);
     }
 
-    public function postDelete(Request $request, $postId)
+    public function postDelete(Request $request, $post_id)
     {
         $user = $request->user();
         $points = setting('points_delete');
 
-        $post = Post::with('topic')->findOrFail($postId);
+        $post = Post::with('topic')->findOrFail($post_id);
 
         abort_unless($user->can('forum-mod') || $user->id === $post->user_id, 403);
 
@@ -363,7 +358,7 @@ class ForumsController extends Controller
         return redirect()->to($appurl);
     }
 
-    public function topicDelete(Request $request, $topic_id, $slug)
+    public function topicDelete(Request $request, $topic_id)
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
@@ -374,13 +369,13 @@ class ForumsController extends Controller
         $topic->delete();
 
         toastr()->info('Este tópico foi excluído!', 'Tópico');
-        return redirect()->route('forum.topics', ['id' => $topic->forum->id, 'slug' => $topic->forum->slug]);
+        return redirect()->route('forum.threads', ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]);
     }
 
     /**
      * Add a Fast Post to a Topic
      */
-    public function post(FastPostRequest $request, $topic_id, $slug)
+    public function post(FastPostRequest $request, $topic_id)
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
@@ -436,7 +431,7 @@ class ForumsController extends Controller
         $user->addProgress(new UserMade1000Posts(), 1);
     }
 
-    public function openCloseTopic(Request $request, $topic_id, $slug)
+    public function topicOpen(Request $request, $topic_id)
     {
         $user = $request->user();
 
@@ -445,14 +440,14 @@ class ForumsController extends Controller
 
         abort_unless($user->can('forum-mod'), 403);
 
-        $topic->is_locked = !$topic->is_locked;
+        $topic->is_locked = true;
         $topic->save();
 
-        toastr()->success('Tópico Trancado/Aberto com sucesso', 'Tópico');
-        return redirect()->route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]);
+        toastr()->success('Tópico Aberto com sucesso', 'Tópico');
+        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
 
-    public function pinUnpinTopic(Request $request, $topic_id, $slug)
+    public function topicClose(Request $request, $topic_id)
     {
         $user = $request->user();
 
@@ -461,11 +456,43 @@ class ForumsController extends Controller
 
         abort_unless($user->can('forum-mod'), 403);
 
-        $topic->is_pinned = !$topic->is_pinned;
+        $topic->is_locked = false;
         $topic->save();
 
-        toastr()->info('Tópico Pin/Unpin com sucesso', 'Tópico');
+        toastr()->success('Tópico Trancado com sucesso', 'Tópico');
+        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
+    }
+
+    public function topicPin(Request $request, $topic_id)
+    {
+        $user = $request->user();
+
+        //Open or Close the topic
+        $topic = Topic::findOrFail($topic_id);
+
+        abort_unless($user->can('forum-mod'), 403);
+
+        $topic->is_pinned = true;
+        $topic->save();
+
+        toastr()->info('Tópico Pin com sucesso', 'Tópico');
         return redirect()->route('forum.topic', [$topic->id, $topic->slug]);
+    }
+
+    public function topicUnpin(Request $request, $topic_id)
+    {
+        $user = $request->user();
+
+        //Open or Close the topic
+        $topic = Topic::findOrFail($topic_id);
+
+        abort_unless($user->can('forum-mod'), 403);
+
+        $topic->is_pinned = false;
+        $topic->save();
+
+        toastr()->info('Tópico Unpin com sucesso', 'Tópico');
+        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
 
     public function latestTopics(Request $request)
@@ -555,7 +582,7 @@ class ForumsController extends Controller
         $topic->update();
 
         toastr()->success('Título do Tópico Alterado', 'Tópico');
-        return redirect()->route('forum.topic', ['id' => $topic->id, 'slug' => $topic->slug]);
+        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
 
     public function formReply($topic_id, $post_id)
@@ -604,6 +631,5 @@ class ForumsController extends Controller
 
         toastr()->success('Reply Postado com sucesso', 'Postagem');
         return redirect()->to($appurl);
-
     }
 }
