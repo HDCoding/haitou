@@ -57,7 +57,7 @@
                                         @foreach($result->subscription_topics as $topic)
                                             <tr>
                                                 <th>
-                                                    <a href="{{ route('forum.topics', [$topic->forum->id, $topic->forum->slug]) }}">{{ $topic->forum->name }}</a>
+                                                    {{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}
                                                 </th>
                                                 <td>
                                                     <a href="{{ route('forum.topic', [$topic->id, $topic->slug]) }}">{{ $topic->name }}</a>
@@ -90,11 +90,11 @@
                                                 </td>
                                                 <td>
                                                     @if (auth()->user()->isSubscribed($topic->id))
-                                                        <a href="{{ route('unsubscribe.topic', ['topic' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar Inscrição">
+                                                        <a href="{{ route('unsubscribe.topic', ['topic_id' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar Inscrição">
                                                             <i class="fas fa-bell-slash"></i>
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('subscribe.topic', ['topic' => $topic->id]) }}" class="badge badge-success" data-toggle="tooltip" title="Se Inscrever">
+                                                        <a href="{{ route('subscribe.topic', ['topic_id' => $topic->id]) }}" class="badge badge-success" data-toggle="tooltip" title="Se Inscrever">
                                                             <i class="fas fa-bell"></i>
                                                         </a>
                                                     @endif
