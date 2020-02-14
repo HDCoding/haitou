@@ -164,10 +164,10 @@
                                 @foreach ($results as $result)
                                     <tr>
                                         <th>
-                                            <a href="{{ route('forum.topics', [$result->forum->id, $result->forum->slug]) }}">{{ $result->forum->name }}</a>
+                                            {{ link_to_route('forum.threads', $result->forum->name, ['forum_id' => $result->forum->id, 'slug' => $result->forum->slug]) }}
                                         </th>
                                         <td>
-                                            <a href="{{ route('forum.topic', ['id' => $result->id, 'slug' => $result->slug]) }}">
+                                            <a href="{{ route('forum.topic', ['topic_id' => $result->id, 'slug' => $result->slug]) }}">
                                                 {{ $result->name }}
                                             </a>
                                             @if ($result->is_locked)
