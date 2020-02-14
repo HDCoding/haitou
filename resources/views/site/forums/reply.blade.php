@@ -18,7 +18,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('forum') }}">Fórum</a></li>
-                            <li class="breadcrumb-item">{{ link_to_route('forum.topics', $topic->forum->name, ['id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}</li>
+                            <li class="breadcrumb-item">{{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}</li>
                             <li class="breadcrumb-item"><a href="{{ route('forum.topic', [$topic->id, $topic->slug]) }}">{{ $topic->name }}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Reply</li>
                         </ol>
