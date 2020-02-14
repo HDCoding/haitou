@@ -44,13 +44,13 @@
                                     @if ($post->topic->viewable())
                                     <tr>
                                         <th>
-                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{ $post->pageNumber() }}#post-{{ $post->id }}">#{{ $post->id }}</a>
+                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{ $post->pageNumber() }}#post-{{ $post->id }}">#{{ $post->id }}</a>
                                         </th>
                                         <td>
-                                            <a href="{{ route('forum.topics', [$post->forum->id, $post->forum->slug]) }}">{{ $post->forum->name }}</a>
+                                            {{ link_to_route('forum.threads', $post->forum->name, ['forum_id' => $post->forum->id, 'slug' => $post->forum->slug]) }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('forum.topic', ['id' => $post->topic->id, 'slug' => $post->topic->slug]) }}">{{ $post->topic->name }}</a>
+                                            <a href="{{ route('forum.topic', ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}">{{ $post->topic->name }}</a>
                                             @if ($post->topic->is_locked)
                                                 <span class="badge badge-dark">Fechado</span>
                                             @endif
