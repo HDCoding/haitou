@@ -53,15 +53,13 @@
                                 @foreach ($results as $result)
                                     <tr>
                                         <th>
-                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
+                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['topic_id' => $result->topic->id, 'slug' => $result->topic->slug]) }}?page={{ $result->pageNumber() }}#post-{{ $result->id }}">#{{ $result->id }}</a>
                                         </th>
                                         <td>
-                                            <a href="{{ route('forum.topics', [$result->topic->forum->id, $result->topic->forum->slug]) }}">
-                                                {{ $result->topic->forum->name }}
-                                            </a>
+                                            {{ link_to_route('forum.threads', $result->topic->forum->name, ['forum_id' => $result->topic->forum->id, 'slug' => $result->topic->forum->slug]) }}
                                         </td>
                                         <td>
-                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['id' => $result->topic->id, 'slug' => $result->topic->slug]) }}">
+                                            <a class="font-weight-bold" href="{{ route('forum.topic', ['topic_id' => $result->topic->id, 'slug' => $result->topic->slug]) }}">
                                                 {{ $result->topic->name }}
                                             </a>
                                             @if ($result->topic->is_locked)
