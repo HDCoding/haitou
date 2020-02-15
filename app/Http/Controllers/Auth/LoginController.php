@@ -42,17 +42,17 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->status == 0) {
+        if ($user->status == 1) {
             auth()->logout();
             $request->session()->flush();
             return view('auth.login')->with('warning', 'Conta pendente ativação!');
         }
-        if ($user->status == 2) {
+        if ($user->status == 3) {
             auth()->logout();
             $request->session()->flush();
             return view('auth.login')->with('info', 'Conta suspensa, tente novamente em outro dia!');
         }
-        if ($user->status == 3) {
+        if ($user->status == 4) {
             auth()->logout();
             $request->session()->flush();
             return view('auth.login')->with('danger', 'Conta banida!');
