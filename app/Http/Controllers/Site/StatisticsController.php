@@ -37,22 +37,22 @@ class StatisticsController extends Controller
 
         // Total pending Members Count
         $pending_user = cache()->remember('pending_users', $this->expire_at, function () {
-            return User::where('status', '=', 0)->count();
+            return User::where('status', '=', 1)->count();
         });
 
         // Total activated Members Count
         $activated_user = cache()->remember('activated_users', $this->expire_at, function () {
-            return User::where('status', '=', 1)->count();
+            return User::where('status', '=', 2)->count();
         });
 
         // Total suspended Members Count
         $suspended_user = cache()->remember('suspended_users', $this->expire_at, function () {
-            return User::where('status', '=', 2)->count();
+            return User::where('status', '=', 3)->count();
         });
 
         // Total banned Members Count
         $banned_user = cache()->remember('banned_users', $this->expire_at, function () {
-            return User::where('status', '=', 3)->count();
+            return User::where('status', '=', 4)->count();
         });
 
         // Total Torrents Count
@@ -167,7 +167,7 @@ class StatisticsController extends Controller
         $uploaders = cache()->remember('uploaders', $this->expire_at, function () {
             return User::latest('uploaded')
                 ->select('id', 'username', 'slug', 'uploaded', 'downloaded', 'show_profile')
-                ->whereNotIn('status', [0, 2, 3])->take(100)->get();
+                ->whereNotIn('status', [1, 3, 4])->take(100)->get();
         });
 
         return view('site.stats.users.uploaded', compact('uploaders'));
@@ -179,7 +179,7 @@ class StatisticsController extends Controller
         $downloaders = cache()->remember('downloaders', $this->expire_at, function () {
             return User::latest('downloaded')
                 ->select('id', 'username', 'slug', 'uploaded', 'downloaded', 'show_profile')
-                ->whereNotIn('status', [0, 2, 3])->take(100)->get();
+                ->whereNotIn('status', [1, 3, 4])->take(100)->get();
         });
 
         return view('site.stats.users.downloaded', compact('downloaders'));
@@ -229,7 +229,7 @@ class StatisticsController extends Controller
     public function points()
     {
         // Fetch Top Points
-        $points = User::latest('points')->whereNotIn('status', [0, 2, 3])->take(100)->get();
+        $points = User::latest('points')->whereNotIn('status', [1, 3, 4])->take(100)->get();
 
         return view('site.stats.users.points', compact('points'));
     }
@@ -237,7 +237,7 @@ class StatisticsController extends Controller
     public function levels()
     {
         // Fetch Top Levels
-        $levels = User::latest('experience')->whereNotIn('status', [0, 2, 3])->take(100)->get();
+        $levels = User::latest('experience')->whereNotIn('status', [1, 3, 4])->take(100)->get();
 
         return view('site.stats.users.levels', compact('levels'));
     }
