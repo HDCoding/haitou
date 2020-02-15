@@ -21,7 +21,7 @@ class CreateMediasTable extends Migration
             $table->string('slug');
             $table->string('title_english')->nullable();
             $table->string('title_japanese')->nullable();
-            $table->tinyInteger('media_type'); //0 = anime, 1 = manga, 2 = dorama, 3 = movie
+            $table->tinyInteger('media_type'); // 1 = Anime, 2 = Manga, 3 = Dorama, 4 = Filme
             $table->date('released_at');
             $table->date('finished_at')->nullable();
             $table->text('description');
