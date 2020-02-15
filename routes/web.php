@@ -507,6 +507,9 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //Studios
             Route::resource('studios', 'StudiosController')->except(['show']);
 
+            //Tags
+            Route::resource('tags', 'TagsController')->except(['create', 'show', 'edit']);
+
             //Torrents
             Route::prefix('torrents')->group(function () {
                 Route::get('/', 'TorrentsController@index');

@@ -24,4 +24,9 @@ class Tag extends Model
             ]
         ];
     }
+
+    public function torrents()
+    {
+        return $this->hasMany(TorrentTag::class, 'torrent_id');
+    }
 }

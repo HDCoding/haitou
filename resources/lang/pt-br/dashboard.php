@@ -37,6 +37,7 @@ return [
     'rules' => 'Regras',
     'settings' => 'Configurações',
     'studios' => 'Estúdios',
+    'tags' => 'Tags',
     'torrents' => 'Torrents',
     'traffics' => 'Tráficos',
     'users' => 'Usuários',
