@@ -35,10 +35,10 @@ class UsersController extends Controller
 
     public function index()
     {
-        $pendent = $this->pendent->where('status', '=', 0)->count();
-        $activated = $this->activated->where('status', '=', 1)->count();
-        $suspended = $this->suspended->where('status', '=', 2)->count();
-        $banned = $this->banned->where('status', '=', 3)->count();
+        $pendent = $this->pendent->where('status', '=', 1)->count();
+        $activated = $this->activated->where('status', '=', 2)->count();
+        $suspended = $this->suspended->where('status', '=', 3)->count();
+        $banned = $this->banned->where('status', '=', 4)->count();
 
         $users = User::select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();
         $groups = Group::select('id', 'name')->get();
@@ -89,7 +89,7 @@ class UsersController extends Controller
         $modUser->is_banned = true;
         $modUser->save();
 
-        DB::table('users')->where('id', '=', $user_id)->update(['status' => 3, 'disabled_at' => now()]);
+        DB::table('users')->where('id', '=', $user_id)->update(['status' => 4, 'disabled_at' => now()]);
 
         $this->log::record('Staff baniu um membro', true);
 
@@ -115,7 +115,7 @@ class UsersController extends Controller
         $modUser->expires_on = Carbon::now()->addDays($request->input('days'));
         $modUser->save();
 
-        DB::table('users')->where('id', '=', $user_id)->update(['status' => 2]);
+        DB::table('users')->where('id', '=', $user_id)->update(['status' => 3]);
 
         $this->log::record('Staff suspendeu conta de membro', true);
 
@@ -173,10 +173,10 @@ class UsersController extends Controller
     {
         if ($request->isMethod('POST')) {
 
-            $pendent = $this->pendent->where('status', '=', 0)->count();
-            $activated = $this->activated->where('status', '=', 1)->count();
-            $suspended = $this->suspended->where('status', '=', 2)->count();
-            $banned = $this->banned->where('status', '=', 3)->count();
+            $pendent = $this->pendent->where('status', '=', 1)->count();
+            $activated = $this->activated->where('status', '=', 2)->count();
+            $suspended = $this->suspended->where('status', '=', 3)->count();
+            $banned = $this->banned->where('status', '=', 4)->count();
 
             $groups = Group::select('id', 'name')->get();
 
@@ -196,7 +196,7 @@ class UsersController extends Controller
                     ->get(); // Returns only users with the status
             }
             if (empty($group) && empty($status)) {
-                $users = User::select('id', 'group_id', 'username', 'avatar', 'status')->orderBy('username', 'ASC')->get();
+                return redirect()->to('staff/users');
             }
             return view('staff.users.index', compact('users', 'groups', 'pendent', 'activated', 'suspended', 'banned'));
         } else {
