@@ -67,12 +67,12 @@ class StatisticsController extends Controller
 
         // Total Seeders
         $num_seeders = cache()->remember('num_seeders', $this->expire_at, function () {
-            return Peer::where('is_seeder', '=', 1)->count();
+            return Peer::where('is_seeder', '=', true)->count();
         });
 
         // Total Leechers
         $num_leechers = cache()->remember('num_leechers', $this->expire_at, function () {
-            return Peer::where('is_leecher', '=', 1)->count();
+            return Peer::where('is_leecher', '=', true)->count();
         });
 
         // Total Peers
@@ -190,7 +190,7 @@ class StatisticsController extends Controller
         // Fetch Top Seeders
         $seeders = Peer::with('user')
             ->select(DB::raw('user_id, count(*) as value'))
-            ->where('is_seeder', '=', 1)
+            ->where('is_seeder', '=', true)
             ->groupBy('user_id')
             ->latest('value')
             ->take(100)
@@ -204,7 +204,7 @@ class StatisticsController extends Controller
         // Fetch Top Leechers
         $leechers = Peer::with('user')
             ->select(DB::raw('user_id, count(*) as value'))
-            ->where('is_leecher', '=', 1)
+            ->where('is_leecher', '=', true)
             ->groupBy('user_id')
             ->latest('value')
             ->take(100)
