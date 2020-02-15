@@ -51,11 +51,11 @@
                         @endif
 
                         @if (!$topic->is_pinned)
-                        <a href="{{ route('forum.pinunpin.topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-secondary btn-rounded">
+                        <a href="{{ route('topic.pin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-secondary btn-rounded">
                             <i class="fas fa-file"></i> Pin Tópico
                         </a>
                         @else
-                        <a href="{{ route('forum.pinunpin.topic', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-danger btn-rounded">
+                        <a href="{{ route('topic.unpin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
                             <i class="fas fa-file"></i> Unpin Tópico
                         </a>
                         @endif
@@ -130,9 +130,11 @@
                                     <div class="col-lg-2">
                                         <div class="d-flex no-block align-items-center">
                                             <div class="ml-auto">
+                                                @if(!$topic->is_locked && $post->user_id !== auth()->user()->id)
                                                 <a href="{{ route('post.reply', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}">
                                                     <button class="btn btn-danger"><i class="fas fa-reply"></i> Reply</button>
                                                 </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -198,7 +200,7 @@
                     <span class="card-header-title mr-2">Resposta rápida:</span>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['url' => route('forum.post', ['id' => $topic->id, 'slug' => $topic->slug]), 'class' => 'form-horizontal']) !!}
+                    {!! Form::open(['url' => route('forum.post', ['topic_id' => $topic->id]), 'class' => 'form-horizontal']) !!}
                     <div class="form-group">
                         {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                         {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 8, 'required']) !!}
