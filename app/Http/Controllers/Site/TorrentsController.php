@@ -306,14 +306,14 @@ class TorrentsController extends Controller
         return $this->torrentTool->send($torrent_id, $torrent->name);
     }
 
-    public function reSeed(Request $request, $torrent_id)
+    public function reseed(Request $request, $torrent_id)
     {
         $user = $request->user();
         $torrent = Torrent::findOrFail($torrent_id);
 
         $completed = Complete::select('user_id')->where('torrent_id', '=', $torrent->id)->get();
 
-        if ($torrent->seeders < 2) {
+        if ($torrent->seeders <= 2) {
             // Send Notification
             foreach ($completed as $complete) {
                 User::find($complete->user_id)->notify(new NewReseedRequestNotification($torrent));
