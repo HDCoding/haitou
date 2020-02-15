@@ -22,9 +22,7 @@
                             {{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}
                         </td>
                         <td>
-                            <a href="{{ route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]) }}">
-                                {{ $topic->name }}
-                            </a>
+                            {{ link_to_route('forum.topic', $topic->name, ['topic_id' => $topic->id, 'slug' => $topic->slug]) }}
                         </td>
                         <td>{{ $topic->first_post_username }}</td>
                         <td>{{ $topic->created_at->diffForHumans() }}</td>
