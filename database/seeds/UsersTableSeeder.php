@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'System',
                 'email' => 'system@haitou.net',
                 'password' => bcrypt(sha1_gen()),
-                'status' => 1,
+                'status' => 2,
                 'passkey' => md5_gen(),
                 'birthday' => Carbon::today(),
                 'activated_at' => Carbon::now()
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'Bot',
                 'email' => 'bot@haitou.net',
                 'password' => bcrypt(sha1_gen()),
-                'status' => 1,
+                'status' => 2,
                 'passkey' => md5_gen(),
                 'birthday' => Carbon::today(),
                 'activated_at' => Carbon::now()
@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'monil',
                 'email' => 'monil@me.com',
                 'password' => bcrypt('123123'),
-                'status' => 1,
+                'status' => 2,
                 'passkey' => md5_gen(),
                 'birthday' => Carbon::today(),
                 'activated_at' => Carbon::now()
