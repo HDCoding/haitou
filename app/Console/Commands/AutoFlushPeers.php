@@ -21,7 +21,7 @@ class AutoFlushPeers extends Command
      *
      * @var string
      */
-    protected $description = 'Flushes Ghost Peers';
+    protected $description = 'Flush All Old Peers From Database.';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,7 @@ class AutoFlushPeers extends Command
      * Execute the console command.
      *
      * @return void
+     * @throws \Exception
      */
     public function handle()
     {
