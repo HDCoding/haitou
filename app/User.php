@@ -386,13 +386,13 @@ class User extends Authenticatable
     {
         $status = $this->status;
 
-        if ($status == 0) {
+        if ($status == 1) {
             return '<span class="badge badge-pill badge-warning">Pendente</span>';
-        } elseif ($status == 1) {
-            return '<span class="badge badge-pill badge-success">Confirmada(o)</span>';
         } elseif ($status == 2) {
-            return '<span class="badge badge-pill badge-info">Suspensa(o)</span>';
+            return '<span class="badge badge-pill badge-success">Confirmada(o)</span>';
         } elseif ($status == 3) {
+            return '<span class="badge badge-pill badge-info">Suspensa(o)</span>';
+        } elseif ($status == 4) {
             return '<span class="badge badge-pill badge-danger">Banida(o)</span>';
         } else {
             return "Bugou";
