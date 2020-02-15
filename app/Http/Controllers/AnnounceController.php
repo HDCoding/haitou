@@ -6,6 +6,7 @@ use App\Models\Cheater;
 use App\Models\Historic;
 use App\Models\Peer;
 use App\Models\Torrent;
+use App\Models\Vip;
 use App\Torrent\Encoder;
 use App\User;
 use Carbon\Carbon;
@@ -70,8 +71,7 @@ class AnnounceController extends Controller
         }
 
         //select the current in the database
-        $user = User::with('vips')
-            ->select('id', 'downloaded', 'max_slots', 'passkey', 'status', 'uploaded')
+        $user = User::select('id', 'group_id', 'downloaded', 'max_slots', 'passkey', 'status', 'uploaded')
             ->where('passkey', '=', $passkey)->first();
 
         //caso usuario nao exista
@@ -189,28 +189,30 @@ class AnnounceController extends Controller
         //update seed_time
         $old_update = $client->updated_at ? $client->updated_at->timestamp : Carbon::now()->timestamp;
 
-        //checa se o usuario tem direitos de VIP
-        $is_vip = $user->vips()->where('user_id', '=', $user->id)->where('is_active', '=', true)->first();
+        //checks if the user has VIP rights
+        $vip = Vip::with('user:id,group_id')->where('user_id', '=', $user->id)
+            ->where('is_active', '=', true)->first();
 
-        //modifica o upload ou download
-        if (!$is_vip) {
-            //Freeleech
-            $mod_down = $torrent->is_freeleech == true ? 0 : $downloaded;
-            //Silver
-            $mod_downloaded = $torrent->is_silver == true ? ($downloaded / 2) : $downloaded;
-            //DoubleUP
-            $mod_upload = $torrent->is_doubleup == true ? ($uploaded * 2) : $uploaded;
-            //Modded Download
-            $mod_download = $mod_down ?: $mod_downloaded;
+        //TODO
+        //set freeleeches table here in the future
+
+        //Freeleech
+        if ($torrent->is_freeleech == true || $vip->is_freeleech == true || $user->group_id == 6) {
+            $mod_download = 0;
         } else {
-            //Freeleech
-            $mod_down = $is_vip->is_freeleech == true ? 0 : $downloaded;
-            //Silver
-            $mod_downloaded = $is_vip->is_silver == true ? ($downloaded / 2) : $downloaded;
-            //DoubleUP
-            $mod_upload = $is_vip->is_doubleup == true ? ($uploaded * 2) : $uploaded;
-            //Modded Download
-            $mod_download = $mod_down ?: $mod_downloaded;
+            $mod_download = $downloaded;
+        }
+        //Silver
+        if ($torrent->is_silver == true || $vip->is_silver == true) {
+            $mod_download = ($downloaded / 2);
+        } else {
+            $mod_download = $downloaded;
+        }
+        //DoubleUP
+        if ($torrent->is_doubleup == true || $vip->is_doubleup == true) {
+            $mod_upload = ($uploaded * 2);
+        } else {
+            $mod_upload = $uploaded;
         }
 
         if ($event == 'started') {
@@ -225,7 +227,7 @@ class AnnounceController extends Controller
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
             $historic->is_active = true;
-            $historic->is_released = ($is_vip) ? true : false;
+            $historic->is_released = ($vip) ? true : false;
             $historic->save();
 
             //Peer data
@@ -255,7 +257,7 @@ class AnnounceController extends Controller
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
             $historic->is_active = true;
-            $historic->is_released = ($is_vip) ? true : false;
+            $historic->is_released = ($vip) ? true : false;
             $historic->completed_at = now();
             $historic->update();
 
@@ -285,10 +287,12 @@ class AnnounceController extends Controller
             //salva no banco como download completo
             $torrent->completes()->create(['user_id' => $user->id]);
 
-            //Seedtime
-            $new_update = $client->updated_at->timestamp;
-            $diff = $new_update - $old_update;
-            $historic->seed_time += $diff;
+            // Seedtime
+            if ($left == 0) {
+                $new_update = $client->updated_at->timestamp;
+                $diff = $new_update - $old_update;
+                $historic->seed_time += $diff;
+            }
             $historic->update();
 
         } elseif ($event == 'stopped') {
@@ -303,7 +307,7 @@ class AnnounceController extends Controller
             $historic->is_seeder = ($left == 0) ? true : false;
             $historic->is_leecher = ($left > 0) ? true : false;
             $historic->is_active = false;
-            $historic->is_released = ($is_vip) ? true : false;
+            $historic->is_released = ($vip) ? true : false;
             $historic->update();
 
             //Peer data
@@ -331,8 +335,8 @@ class AnnounceController extends Controller
                 $new_update = $client->updated_at->timestamp;
                 $diff = $new_update - $old_update;
                 $historic->seed_time += $diff;
-                $historic->update();
             }
+            $historic->update();
 
             $client->delete();
         } else {
@@ -374,8 +378,8 @@ class AnnounceController extends Controller
                 $new_update = $client->updated_at->timestamp;
                 $diff = $new_update - $old_update;
                 $historic->seed_time += $diff;
-                $historic->update();
             }
+            $historic->update();
         }
 
         $torrent->seeders = $torrent->peers()->where('torrent_id', '=', $torrent->id)->where('remaining', '=', 0)->count();
@@ -389,8 +393,8 @@ class AnnounceController extends Controller
             'private' => 1,
             'complete' => (int)$torrent->seeders,
             'incomplete' => (int)$torrent->leechers,
-            'peers' => $this->givePeersIPV4($peers, $compact, $no_peer_id),
-            'peers6' => $this->givePeersIPV6($peers, $compact, $no_peer_id),
+            'peers' => $this->givePeers($peers, $compact, $no_peer_id, FILTER_FLAG_IPV4),
+            'peers6' => $this->givePeers($peers, $compact, $no_peer_id, FILTER_FLAG_IPV6),
         ];
 
         return response(Encoder::encode($response), 200)->withHeaders(['Content-Type' => 'text/plain']);
@@ -459,45 +463,20 @@ class AnnounceController extends Controller
         $blocked = config('announce.ports');
 
         if (in_array($port, $blocked)) {
-            //info('Tentativa de conectar-se usando porta bloqueada: ' . request()->ip());
+            info('Tentativa de conectar-se usando porta bloqueada: ' . request()->ip());
             return $this->encodeMessage('Porta na lista negra. Troque de porta', 200);
         }
     }
 
-    /**
-     * @param $peers
-     * @param $compact
-     * @param $no_peer_id
-     * @return string
-     */
-    private function givePeersIPV4($peers, $compact, $no_peer_id)
-    {
-        return $this->giver($peers, $compact, $no_peer_id, true);
-    }
-
-    /**
-     * @param $peers
-     * @param $compact
-     * @param $no_peer_id
-     * @param bool $ipv4
-     * @return string
-     */
-    private function giver($peers, $compact, $no_peer_id, bool $ipv4 = true): string
+    private function givePeers($peers, $compact, $no_peer_id, $filter_flag = FILTER_FLAG_IPV4)
     {
         if ($compact) {
             $pcomp = '';
             foreach ($peers as &$peer) {
                 if (isset($peer['ip']) && isset($peer['port'])) {
-                    if ($ipv4 == true) {
-                        if (filter_var($peer['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-                            $pcomp .= inet_pton($peer['ip']);
-                            $pcomp .= pack('n', (int)$peer['port']);
-                        }
-                    } else {
-                        if (filter_var($peer['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-                            $pcomp .= inet_pton($peer['ip']);
-                            $pcomp .= pack('n', (int)$peer['port']);
-                        }
+                    if (isset($peer['ip']) && isset($peer['port']) && filter_var($peer['ip'], FILTER_VALIDATE_IP, $filter_flag)) {
+                        $pcomp .= inet_pton($peer['ip']);
+                        $pcomp .= pack('n', (int)$peer['port']);
                     }
                 }
             }
@@ -512,14 +491,4 @@ class AnnounceController extends Controller
         }
     }
 
-    /**
-     * @param $peers
-     * @param $compact
-     * @param $no_peer_id
-     * @return string
-     */
-    private function givePeersIPV6($peers, $compact, $no_peer_id)
-    {
-        return $this->giver($peers, $compact, $no_peer_id, false);
-    }
 }
