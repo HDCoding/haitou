@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Adicionar Opções</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['url' => 'staff/poll/options/add', 'class' => 'form-horizontal push-5-t']) !!}
                         {!! Form::hidden('poll_id', $poll->id) !!}
 

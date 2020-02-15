@@ -34,6 +34,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Novo Tópico</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['route' => ['post.topic', 'id' => $forum->id, 'slug' => $forum->slug], 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Título do tópico: *', ['class' => 'form-label']) !!}

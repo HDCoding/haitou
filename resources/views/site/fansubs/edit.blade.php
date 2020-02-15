@@ -29,6 +29,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar Fansub</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($fansub, ['url' => 'fansub/'.$fansub->id.'/edit', 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         @include('staff.fansubs.form', ['submitButton' => 'Editar'])
                         {!! Form::close() !!}

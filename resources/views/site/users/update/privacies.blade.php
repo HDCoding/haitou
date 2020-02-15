@@ -31,6 +31,7 @@
                         <div class="card-body">
                             <h6 class="mb-4">Privacidade</h6>
                             @includeIf('errors.errors', [$errors])
+                            @include('includes.messages')
                             {!! Form::open(['url' => 'user/edit/privacy', 'class' => 'form-horizontal', 'autocomplete' => 'off', 'id' => 'privacy', 'name' => 'privacy']) !!}
                             <div class="form-group">
                                 <label class="custom-control custom-checkbox form-check-inline" for="show_achievements">

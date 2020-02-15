@@ -34,6 +34,7 @@
                                 </div>
                                 <div class="card-body">
                                     @includeIf('errors.errors', [$errors])
+                                    @include('includes.messages')
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div id="calendar-events" class="">

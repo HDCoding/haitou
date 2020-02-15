@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Informação do evento</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6">
                                 <h4 class="box-title m-t-40">Evento</h4>

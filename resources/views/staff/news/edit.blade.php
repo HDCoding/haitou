@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($new, ['url' => 'staff/news/' . $new->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         @include('staff.news.form', ['submitButton' => 'Editar'])
                         {!! Form::close() !!}

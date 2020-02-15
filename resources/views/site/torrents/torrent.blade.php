@@ -38,6 +38,7 @@
             @endif
             <div class="col-12">
                 @includeIf('errors.errors', [$errors])
+                @include('includes.messages')
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title m-b-30">{{ $torrent->name }}</h3>

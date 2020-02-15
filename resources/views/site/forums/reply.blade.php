@@ -35,6 +35,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Reply</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['route' => ['reply', 'topic_id' => $topic->id], 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}

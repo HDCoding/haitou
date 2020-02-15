@@ -30,6 +30,7 @@
                         <h4 class="card-title">Pesquisa no fórum</h4>
 
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
 
                         <form class="form-horizontal mt-4" role="form" method="GET" action="{{ route('forum.search') }}">
                             @csrf

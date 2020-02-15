@@ -34,6 +34,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar Post</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($post, ['route' => ['post.edit', 'post_id' => $post->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}

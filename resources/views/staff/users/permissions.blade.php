@@ -34,6 +34,7 @@
                     <div class="card-body">
                         <h4 class="card-title m-b-30">Permissões: {{ $user->username }}</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['url' => 'staff/user/' . $user->id . '/updatepermission']) !!}
                         <div class="form-group">
                             {!! Form::select('allow_id[]', $permissions, $allowed, ['class' => 'duallistbox', 'multiple' => 'multiple', 'size' => '10']) !!}

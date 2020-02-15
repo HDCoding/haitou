@@ -27,6 +27,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar comentário</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($comment, ['url' => 'comments/' . $comment->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group">

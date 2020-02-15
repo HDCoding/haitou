@@ -28,10 +28,10 @@
                         <h4 class="card-title">@lang('dashboard.settings')</h4>
                         <h6 class="card-subtitle">Use default tab with class <code>nav-tabs &amp; tabcontent-border </code></h6>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <div class="row">
                             @include('staff.settings.nav')
                             <div class="col-lg-8 col-xl-9">
-                                @includeIf('errors.errors', [$errors])
                                 {!! Form::open(['url' => 'staff/settings/analytics', 'class' => 'form-horizontal']) !!}
                                 <div class="form-group">
                                     {!! Form::label('analytics', 'Analytics') !!}

@@ -26,6 +26,7 @@
                 <i class="fas fa-plus"></i> Adicionar Pergunta
             </a>
             @includeIf('errors.errors', [$errors])
+            @include('includes.messages')
             @forelse($categories as $category)
             <div class="col-12">
                 <div class="card">

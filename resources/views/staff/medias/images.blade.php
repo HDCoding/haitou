@@ -36,6 +36,7 @@
                         </h4>
 
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <br>
                         <img src="{{ $media->cover() }}" class="img-fluid mx-auto d-block mt-2" alt="Cover" />
                         {!! Form::open(['route' => ['staff.media.cover', $media->id], 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-cover']) !!}

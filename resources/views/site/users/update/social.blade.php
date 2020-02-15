@@ -31,6 +31,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Social e Info</h4>
                             @includeIf('errors.errors', [$errors])
+                            @include('includes.messages')
                             {!! Form::open(['url' => 'user/edit/social', 'class' => 'form-horizontal', 'autocomplete' => 'off']) !!}
                             <div class="form-group">
                                 {!! Form::label('facebook', 'Facebook', ['class' => 'form-label']) !!}

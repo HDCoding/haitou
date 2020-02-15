@@ -31,6 +31,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Passkey</h4>
                             @includeIf('errors.errors', [$errors])
+                            @include('includes.messages')
                             {!! Form::open(['url' => 'user/edit/passkey', 'class' => 'form-horizontal', 'autocomplete' => 'off']) !!}
                             <h5 class="mt-4">
                                 <i class="fas fa-key text-info"></i>

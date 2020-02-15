@@ -30,6 +30,7 @@
                         <h4 class="card-title">Remover Opções - Pergunta: </b> {{ $poll->name }}</h4>
                         <p>Selecione apenas o que deseja deletar.</p>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
 
                         {!! Form::open(['url' => 'staff/poll/options/remove', 'class' => 'form-horizontal push-5-t']) !!}
                         <table class="table table-hover">

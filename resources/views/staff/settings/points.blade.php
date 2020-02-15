@@ -31,6 +31,7 @@
                             <strong>Min:</strong> 1 Ponto - <strong>Max:</strong> 250 Pontos
                         </h6>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <div class="row">
                             @include('staff.settings.nav')
                             <div class="col-lg-8 col-xl-9">

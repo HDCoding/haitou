@@ -38,6 +38,7 @@
                             </button>
                         </a>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>

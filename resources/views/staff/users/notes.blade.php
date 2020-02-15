@@ -34,6 +34,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Anotações</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['url' => 'staff/user/notes', 'class' => 'form-horizontal']) !!}
                         {!! Form::hidden('user_id', $user->id) !!}
                         <div class="form-group">

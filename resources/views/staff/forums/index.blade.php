@@ -45,6 +45,7 @@
                 </div>
             </div>
             @includeIf('errors.errors', [$errors])
+            @include('includes.messages')
             @forelse($categories as $category)
             <div class="col-12">
                 <div class="card">

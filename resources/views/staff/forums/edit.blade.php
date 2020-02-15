@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar - Fórum: {{ $forum->name }}</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($forum, ['url' => 'staff/forums/' . $forum->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             <div class="col-sm-5">

@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar Tópico</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($topic, ['route' => ['topic.edit', 'id' => $topic->id, 'slug' => $topic->slug], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group ">
                             {!! Form::label('name', 'Título do tópico: *', ['class' => 'form-label']) !!}

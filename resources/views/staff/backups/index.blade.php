@@ -43,6 +43,7 @@
                             <span class="ladda-label"><i class="fa fa-plus"></i> Banco do DB</span>
                         </button>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>

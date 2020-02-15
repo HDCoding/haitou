@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Adicionar</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['url' => 'staff/forums', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             <div class="col-sm-5">

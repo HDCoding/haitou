@@ -32,6 +32,7 @@
             <small><span class="badge badge-default align-text-bottom ml-1">Trancado</span></small>
         @endif
         @includeIf('errors.errors', [$errors])
+        @include('includes.messages')
 
         <div class="row">
             <div class="col-md-12 mt-3 mb-4">

@@ -35,6 +35,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($torrent, ['url' => 'staff/torrents/' . $torrent->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group">

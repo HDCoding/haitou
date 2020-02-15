@@ -35,6 +35,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Conquistas</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($rule, ['url' => 'staff/rules/' . $rule->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nome: *') !!}

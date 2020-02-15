@@ -39,6 +39,7 @@
                                 </div>
 
                                 @includeIf('errors.errors', [$errors])
+                                @include('includes.messages')
                                 {!! Form::open(['url' => 'staff/user/warning', 'class' => 'form-horizontal']) !!}
                                 {!! Form::hidden('user_id', $user->id) !!}
                                 <div class="form-group">

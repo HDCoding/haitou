@@ -23,6 +23,7 @@
             </div>
             <div class="col-12">
             @includeIf('errors.errors', [$errors])
+            @include('includes.messages')
 
             @if(setting('forum_on'))
 

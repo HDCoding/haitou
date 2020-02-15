@@ -26,6 +26,7 @@
                 <div class="card">
                     <div class="card-body">
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <center class="m-t-30"> <img src="{{ $studio->logo }}" class="img-thumbnail" width="450" alt="Poster" />
                             <h4 class="card-title m-t-10 m-b-20">{{ $studio->name }}</h4>
                         </center>

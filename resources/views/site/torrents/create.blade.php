@@ -35,6 +35,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Upload</h3>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['route' => 'torrents.store', 'files' => true, 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group">

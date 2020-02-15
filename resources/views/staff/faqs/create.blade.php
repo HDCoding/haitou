@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Adicionar</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['url' => 'staff/faqs', 'class' => 'form-horizontal']) !!}
                         @include('staff.faqs.form', ['submitButton' => 'Adicionar'])
                         {!! Form::close() !!}

@@ -31,6 +31,7 @@
                         <div class="card-body">
                             <h4 class="card-title">E-mail</h4>
                             @includeIf('errors.errors', [$errors])
+                            @include('includes.messages')
                             {!! Form::model(['url' => 'user/edit/email', 'class' => 'form-horizontal', 'autocomplete' => 'off']) !!}
                             <div class="form-group mt-4">
                                 {!! Form::label('email', 'E-mail') !!}

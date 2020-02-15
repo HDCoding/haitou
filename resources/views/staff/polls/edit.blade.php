@@ -33,6 +33,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar {{ $poll->name }}</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($poll, ['url' => 'staff/polls/' . $poll->id, 'method' => 'PUT', 'class' => 'form-horizontal push-5-t']) !!}
 
                         <div class="form-group">

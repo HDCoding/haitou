@@ -104,6 +104,7 @@
                         <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="pills-setting-tab">
                             <div class="card-body">
                                 @includeIf('errors.errors', [$errors])
+                                @include('includes.messages')
                                 {!! Form::model($user, ['url' => 'staff/users/' . $user->id, 'method' => 'PUT', 'class' => 'form-horizontal form-material']) !!}
                                     <div class="form-group">
                                         {!! Form::label('title', 'Título para o Fórum', ['class' => 'form-label']) !!}

@@ -37,8 +37,8 @@
                     <div class="card-body">
                         <h4 class="card-title">Editar</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::model($media, ['url' => 'staff/medias/' . $media->id, 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
-
                         <div class="form-group">
                             {!! Form::label('media_type', 'Tipo: *') !!}
                             {!! Form::select('media_type', [

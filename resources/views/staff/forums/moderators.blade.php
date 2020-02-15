@@ -35,6 +35,7 @@
                         <p><b>Descrição: </b>{{ $forum->description }}</p>
                         <p>Adicionar/Remover membros como Moderador(a)s neste fórum.</p>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         {!! Form::open(['url' => 'staff/forum/' . $forum->id . '/moderators']) !!}
                         <div class="form-group">
                             {!! Form::label('user_id', 'Membro: *') !!}

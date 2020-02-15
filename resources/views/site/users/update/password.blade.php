@@ -31,6 +31,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Senha</h4>
                             @includeIf('errors.errors', [$errors])
+                            @include('includes.messages')
                             {!! Form::open(['url' => 'user/edit/password', 'class' => 'form-horizontal', 'autocomplete' => 'off']) !!}
                             <div class="form-group">
                                 {!! Form::label('senha', 'Senha Atual', ['class' => 'form-label']) !!}

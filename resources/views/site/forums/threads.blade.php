@@ -43,6 +43,7 @@
                             </div>
                         @endif
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
 
                         <b>Moderadores: &nbsp;</b>
                         @foreach($moderators as $moderator)

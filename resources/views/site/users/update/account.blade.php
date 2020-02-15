@@ -57,6 +57,7 @@
                         <div class="card-body">
                             <h4 class="card-title">Editar Conta</h4>
                             @includeIf('errors.errors', [$errors])
+                            @include('includes.messages')
                             {!! Form::open(['route' => 'post.profile', 'class' => 'form-horizontal']) !!}
                             <div class="form-group">
                                 {!! Form::label('state_id', 'Estado:', ['class' => 'form-label']) !!}

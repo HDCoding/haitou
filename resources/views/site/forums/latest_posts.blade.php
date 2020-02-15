@@ -37,6 +37,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Últimas Postagens</h4>
                         @includeIf('errors.errors', [$errors])
+                        @include('includes.messages')
                         <div class="table-responsive m-t-15">
                             <table class="table">
                                 <thead>
