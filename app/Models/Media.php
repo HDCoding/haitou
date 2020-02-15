@@ -109,16 +109,18 @@ class Media extends Model
         return empty($this->cover) ? asset('images/no-cover.jpg') : asset('storage/medias/' . $this->cover);
     }
 
-    public function genre()
+    public function type()
     {
         $type = $this->media_type;
 
-        if ($type == 0) {
+        if ($type == 1) {
             return '<span class="label label-success">Anime</span>';
-        } elseif ($type == 1) {
-            return '<span class="label label-danger">Manga</span>';
         } elseif ($type == 2) {
+            return '<span class="label label-danger">Manga</span>';
+        } elseif ($type == 3) {
             return '<span class="label label-warning">Dorama</span>';
+        } elseif ($type == 4) {
+            return '<span class="label label-info">Filme</span>';
         }
     }
 
