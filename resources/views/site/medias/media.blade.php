@@ -119,7 +119,7 @@
                                         @endif
                                         <tr>
                                             <td>Tipo:</td>
-                                            <td>{!! $media->genre() !!}</td>
+                                            <td>{!! $media->type() !!}</td>
                                         </tr>
                                         <tr>
                                             <td>Lançamento:</td>
