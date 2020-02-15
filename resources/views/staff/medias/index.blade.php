@@ -55,7 +55,7 @@
                                         <td class="align-middle"><img class="img-fluid" src="{{ $media->poster() }}" alt="{{ $media->name }}" width="70px"></td>
                                         <td class="align-middle">{{ $media->category->name }}</td>
                                         <td class="align-middle">{{ $media->name }}</td>
-                                        <td class="align-middle">{!! $media->genre() !!}</td>
+                                        <td class="align-middle">{!! $media->type() !!}</td>
                                         <td class="align-middle"><span class="badge badge-info">{{ $media->views }}</span></td>
                                         <td class="align-middle">{{ $media->studio->name }}</td>
                                         <td class="text-center align-middle">
