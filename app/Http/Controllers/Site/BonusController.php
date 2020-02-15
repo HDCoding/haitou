@@ -19,6 +19,7 @@ use App\Http\Requests\Site\BonusDonateRequest;
 use App\Models\Bonus;
 use App\Models\UserBonus;
 use App\Models\Vip;
+use App\Notifications\BonusReceivedNotification;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -202,14 +203,17 @@ class BonusController extends Controller
             $exchange->description = 'Doou seu pontos';
             $exchange->save();
 
-            //subtrai os pontos do usuario logado
+            //Subtrai os pontos do usuario logado
             $user->points -= $quantity;
             $user->update();
 
-            //adiciona o pontos ao membro
+            //Adiciona o pontos ao membro
             $member = User::where('id', '=', $member_id)->first();
             $member->points += $quantity;
             $member->update();
+
+            //Notify receiver
+            $member->notify(new BonusReceivedNotification());
 
             // Achievements
             $this->achievement($user);
