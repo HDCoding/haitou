@@ -50,7 +50,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::get('actor/{id}.{slug}', 'ActorsController@show')->name('actor.show');
 
         //Bonus
-        //Bookmark
         Route::prefix('bonus')->group(function () {
             Route::get('/', 'BonusController@index')->name('bonus');
             Route::get('stats', 'BonusController@stats')->name('bonus.stats');
@@ -109,7 +108,7 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('/', 'ForumsController@index')->name('forum');
 
             //Topics
-            Route::get('{forum_id}.{slug}', 'ForumsController@topics')->name('forum.threads');
+            Route::get('{forum_id}.{slug}', 'ForumsController@threads')->name('forum.threads');
 
             //Topic
             Route::get('topic/{topic_id}.{slug}', 'ForumsController@topic')->name('forum.topic');
@@ -119,14 +118,14 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::post('{forum_id}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
 
             //Edit Topic
-            Route::get('topic/{id}/edit', 'ForumsController@formTopicEdit')->name('topic.form.edit');
-            Route::put('topic/{id}/edit', 'ForumsController@topicEdit')->name('topic.edit');
+            Route::get('topic/{topic_id}/edit', 'ForumsController@formTopicEdit')->name('topic.form.edit');
+            Route::put('topic/{topic_id}/edit', 'ForumsController@topicEdit')->name('topic.edit');
 
             //Delete Topic
-            Route::delete('topic/{id}', 'ForumsController@topicDelete')->name('topic.delete');
+            Route::delete('topic/{topic_id}', 'ForumsController@topicDelete')->name('topic.delete');
 
             //Fast post
-            Route::post('topic/{id}/post', 'ForumsController@post')->name('forum.post');
+            Route::post('topic/{topic_id}/post', 'ForumsController@post')->name('forum.post');
 
             //Edit Post
             Route::get('t.{topic_id}/p.{post_id}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
@@ -144,7 +143,8 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('topic/{topic_id}/close', 'ForumsController@topicClose')->name('topic.close');
 
             // Pin/Unpin Topic
-            Route::get('topic/{id}.{slug}/pinunpin', 'ForumsController@pinUnpinTopic')->name('forum.pinunpin.topic');
+            Route::get('topic/{topic_id}/pin', 'ForumsController@topicPin')->name('topic.pin');
+            Route::get('topic/{topic_id}/unpin', 'ForumsController@topicUnpin')->name('topic.unpin');
 
             // Like - Dislike
             Route::get('like/post/{post_id}', 'LikesController@likePost')->name('like.post');
@@ -187,7 +187,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //Invites
         Route::resource('invites', 'InvitationsController')->only(['index', 'store']);
-        Route::get('invites/{id}/resend', 'InvitationsController@resend')->name('invite.resend');
 
         //Lotteries TODO
         //Route::get('lotteries', 'LotteriesController@index')->name('site.lotteries');
@@ -206,9 +205,9 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
         Route::prefix('notifications')->group(function () {
             Route::get('/', 'NotificationsController@index')->name('notifications.index');
             Route::get('{id}', 'NotificationsController@show')->name('notifications.show');
-            Route::get('update/{id}', 'NotificationsController@update')->name('notifications.update');
+            Route::get('{id}/update', 'NotificationsController@update')->name('notifications.update');
             Route::get('updateall', 'NotificationsController@updateAll')->name('notifications.updateall');
-            Route::get('destroy/{id}', 'NotificationsController@destroy')->name('notifications.destroy');
+            Route::get('{id}/destroy', 'NotificationsController@destroy')->name('notifications.destroy');
             Route::get('destroyall', 'NotificationsController@destroyAll')->name('notifications.destroyall');
         });
 
@@ -231,6 +230,9 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
 
         //Rules
         Route::get('rules', 'RulesController@index')->name('site.rules');
+
+        //Search in all sites
+        Route::post('search', 'SearchesController@search')->name('search');
 
         //Statistics
         Route::prefix('statistics')->group(function () {
@@ -330,9 +332,6 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('edit/email', 'UsersController@formEmail')->name('edit.email');
             Route::post('edit/email', 'UsersController@postEmail')->name('post.email');
         });
-
-        //Search in all sites
-        Route::post('search', 'SearchesController@search')->name('search');
     });
 
     //Staff Folder
