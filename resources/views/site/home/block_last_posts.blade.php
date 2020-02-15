@@ -20,7 +20,7 @@
                     <tr>
                         <td>
                             <a href="{{ route('forum.topic', ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}?page={{ $post->pageNumber() }}#post-{{ $post->id }}">
-                                {{ preg_replace('#\[[^\]]+\]#', '', str_limit(htmlspecialchars_decode($post->content), 65)) }}
+                                {{ preg_replace('#\[[^\]]+\]#', '', str_limit(htmlspecialchars_decode($post->content), 100)) }}
                             </a>
                         </td>
                         <td>
