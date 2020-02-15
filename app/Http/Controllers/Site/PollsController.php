@@ -9,20 +9,17 @@ use Illuminate\Http\Request;
 
 class PollsController extends Controller
 {
-    protected $request;
-
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->request = $request;
     }
 
-    public function show($poll_id, $slug)
+    public function show(Request $request, $poll_id, $slug)
     {
-        $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->firstOrFail();
+        $poll = Poll::whereSlug($slug)->firstOrFail($poll_id);
 
         //logged user
-        $user = $this->request->user();
+        $user = $request->user();
 
         if ($poll->hasVoted($user->id)) {
             toastr()->info('Você já votou nesta enquete. Aqui estão os resultados.', 'Enquete');
@@ -35,7 +32,7 @@ class PollsController extends Controller
         return view('site.polls.poll', compact('poll'));
     }
 
-    public function vote($poll_id, $slug, Request $request)
+    public function vote(Request $request, $poll_id, $slug)
     {
         $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->findOrFail($poll_id);
 
