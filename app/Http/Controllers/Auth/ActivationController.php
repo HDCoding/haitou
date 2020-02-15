@@ -20,7 +20,7 @@ class ActivationController extends Controller
         if ($user) {
             //Confirm and activate account
             //Update User status
-            $user->status = 1;
+            $user->status = 2;
             $user->activated_at = now();
             $user->code = null;
             //update user account
@@ -45,7 +45,7 @@ class ActivationController extends Controller
 
         if ($user) {
             //Confirm and re-activate account
-            $user->status = 1;
+            $user->status = 2;
             //update user account
             $user->save();
 
