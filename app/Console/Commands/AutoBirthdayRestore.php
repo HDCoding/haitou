@@ -38,10 +38,10 @@ class AutoBirthdayRestore extends Command
      */
     public function handle()
     {
-        $users = User::select('birth_gifted')->get();
+        $users = User::all();
 
         foreach ($users as $user) {
-            $user->birth_gifted = 0;
+            $user->birth_gifted = false;
             $user->update();
         }
     }
