@@ -79,15 +79,15 @@ class AnnounceController extends Controller
             return $this->encodeMessage('Identificacao do usuario invalida', 200);
         }
         //checa se o usuario esta banido
-        if ($user->status == 3) {
+        if ($user->status == 4) {
             return $this->encodeMessage('Conta Banida', 200);
         }
         //checa se o usuario esta suspenso
-        if ($user->status == 2) {
+        if ($user->status == 3) {
             return $this->encodeMessage('Conta Suspensa', 200);
         }
         //checa se o usuario esta banido
-        if ($user->status == 0) {
+        if ($user->status == 1) {
             return $this->encodeMessage('Conta Pendente Ativacao', 200);
         }
 
