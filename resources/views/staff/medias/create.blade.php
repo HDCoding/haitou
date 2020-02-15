@@ -41,7 +41,12 @@
 
                         <div class="form-group">
                             {!! Form::label('media_type', 'Tipo: *') !!}
-                            {!! Form::select('media_type', [0 => 'Anime', 1 => 'Manga', 2 => 'Dorama'], null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('media_type', [
+                                1 => 'Anime',
+                                2 => 'Manga',
+                                3 => 'Dorama',
+                                4 => 'Filme'
+                            ], null, ['class' => 'form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">
