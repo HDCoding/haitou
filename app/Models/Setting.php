@@ -98,14 +98,6 @@ class Setting extends Model
         Cache::forget('settings.all');
     }
 
-    public function contentHtml($key)
-    {
-        if (self::has($key)) {
-            $value = self::get($key);
-            return (new BBCode())->parse($value, true);
-        }
-    }
-
     /**
      * Check if setting exists
      *
