@@ -54,6 +54,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -82,6 +85,40 @@
                                     <tr>
                                         <td colspan="3">
                                             <p class="text-center">Nenhum convite enviado no momento!</p>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Convites Aceitos</h4>
+                        <div class="table-responsive m-t-15">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Membro</th>
+                                    <th>Aceito em</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($acceptances as $accept)
+                                    <tr>
+                                        <th>{{ link_to_route('user.profile', $accept->member->username, ['slug' => $accept->member->slug]) }}</th>
+                                        <td>{{ format_date($accept->accepted_at) }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="2">
+                                            <p class="text-center">Nenhum convite aceito no momento!</p>
                                         </td>
                                     </tr>
                                 @endforelse
