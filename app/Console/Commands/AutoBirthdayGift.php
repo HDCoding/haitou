@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Notifications\BirthdayGiftNotification;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -41,8 +42,8 @@ class AutoBirthdayGift extends Command
     {
         //select users from DB
         $users = User::with('logs')
-            ->select(['id', 'points', 'birthday', 'birth_gifted'])
-            ->where('birth_gifted', '=', 0)
+            ->select(['id', 'points', 'experience', 'birthday', 'birth_gifted'])
+            ->where('birth_gifted', '=', false)
             ->get();
 
         foreach ($users as $user) {
@@ -59,6 +60,9 @@ class AutoBirthdayGift extends Command
                     'content' => 'Recebeu presente de aniversario',
                     'ip' => '127.0.0.1'
                 ]);
+
+                //Notifica do presente
+                $user->notify(new BirthdayGiftNotification());
             }
         }
     }
