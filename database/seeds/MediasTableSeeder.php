@@ -14,7 +14,7 @@ class MediasTableSeeder extends Seeder
     public function run()
     {
         $medias = [
-            ['category_id' => 10, 'studio_id' => 736, 'name' => 'N/A', 'media_type' => 0, 'released_at' => Carbon::today(), 'poster' => null, 'status' => 0, 'description' => 'Usado para upar conteúdo de medias que não existem ou não estão cadastrados.'],
+            ['category_id' => 10, 'studio_id' => 736, 'name' => 'N/A', 'media_type' => 1, 'released_at' => Carbon::today(), 'poster' => null, 'status' => 0, 'description' => 'Usado para upar conteúdo de medias que não existem ou não estão cadastrados.'],
         ];
 
         foreach ($medias as $media) {
