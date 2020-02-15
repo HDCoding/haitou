@@ -9,7 +9,9 @@ class UserAllow extends Model
 {
     public $incrementing = false;
     public $timestamps = false;
+
     protected $table = 'user_allows';
+
     protected $casts = [
         'user_id' => 'int',
         'allow_id' => 'int'
