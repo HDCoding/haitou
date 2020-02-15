@@ -247,7 +247,7 @@ class UsersController extends Controller
         $email = $request->input('email');
         //atualiza no banco
         $user->email = $email;
-        $user->status = 0;
+        $user->status = 1;
         $user->code = $token;
         $user->update();
 
