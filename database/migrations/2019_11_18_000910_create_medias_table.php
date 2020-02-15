@@ -28,7 +28,7 @@ class CreateMediasTable extends Migration
             $table->boolean('is_adult')->default(0);
             $table->string('poster')->nullable();
             $table->string('cover')->nullable();
-            $table->tinyInteger('status'); // 0 = Finalizado, 1 = Exibindo, 2 = Cancelado
+            $table->tinyInteger('status'); // 1 = Finalizado, 2 = Exibindo, 3 = Cancelado
             $table->string('yt_video', 45)->nullable();
             $table->integer('views')->default(0);
             $table->unsignedSmallInteger('total_episodes')->nullable();
