@@ -57,7 +57,7 @@ class FansubsController extends Controller
     {
         $fansub = Fansub::findOrFail($fansub_id);
         $members = FansubUser::with('user:id,username')->where('fansub_id', '=', $fansub_id)->get();
-        $users = User::select(['id', 'username'])->where('status', '=', 1)->pluck('username', 'id');
+        $users = User::select(['id', 'username'])->where('status', '=', 2)->pluck('username', 'id');
         return view('site.fansubs.members', compact('fansub', 'members', 'users'));
     }
 
