@@ -139,7 +139,7 @@ class ForumsController extends Controller
     public function formModerators($forum_id)
     {
         $forum = Forum::find($forum_id);
-        $members = User::where('status', '=', 1)->select('id', 'username')->pluck('username', 'id');
+        $members = User::where('status', '=', 2)->select('id', 'username')->pluck('username', 'id');
 
         $member = DB::table('moderators')
             ->where('forum_id', '=', $forum_id)
