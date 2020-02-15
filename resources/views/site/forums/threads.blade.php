@@ -68,8 +68,8 @@
                                                 @if($topic->is_locked)
                                                     <i class="fas fa-lock fa-2x mr-4"></i>
                                                 @endif
-                                                <a class="h5 text-info" href="{{ route('forum.topic', [$topic->id, $topic->slug]) }}">{{ $topic->name }}</a>
-                                                <div class="text-muted small mt-1">
+                                                {{ link_to_route('forum.topic', $topic->name, ['topic_id' => $topic->id, 'slug' => $topic->slug], ['class' => 'h5 text-info']) }}
+                                                <div class="text-dark small mt-1">
                                                     Iniciado em {{ format_date_time($topic->created_at) }}&nbsp;·&nbsp;
                                                     Por <a class="text-info" href="{{ route('user.profile', [$forum->topics->last()->first_user->slug]) }}">
                                                         {{ $forum->topics->last()->first_post_username }}
