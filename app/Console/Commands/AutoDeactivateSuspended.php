@@ -40,15 +40,15 @@ class AutoDeactivateSuspended extends Command
     {
         $current = now();
         $warnings = Moderate::with('user:status')
-            ->where('is_suspended', '=', 1)
-            ->where('is_enabled', '=', 1)
+            ->where('is_suspended', '=', true)
+            ->where('is_enabled', '=', true)
             ->where('expires_on', '<', $current)
             ->get();
 
         foreach ($warnings as $warning) {
             // Set Records Active To 0 in warnings table
             $warning->is_enabled = false;
-            $warning->user->status = 1;
+            $warning->user->status = 2;
             $warning->save();
         }
     }
