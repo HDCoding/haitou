@@ -22,7 +22,7 @@ class SearchesController extends Controller
             $users = User::with('group:id,name')
                 ->where('username', 'like', '%' . $search . '%')
                 ->select('id', 'username', 'slug', 'avatar')
-                ->where('status', '!=', 0)
+                ->where('status', '!=', 1)
                 ->paginate(30);
 
             return view('site.searches.search', compact('users'));
