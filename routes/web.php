@@ -454,6 +454,10 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             //News
             Route::resource('news', 'NewsController')->except(['show']);
 
+            //Permissions
+            Route::get('permissions', 'PermissionsController@index')->name('staff.permissions');
+            Route::get('permission/{permission_id}', 'PermissionsController@users')->name('staff.permission');
+
             //Polls
             Route::resource('polls', 'PollsController');
             //Poll Options
