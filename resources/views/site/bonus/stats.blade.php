@@ -84,6 +84,10 @@
                                     <td><b>Reportar (post, perfil, comentário, etc)</b></td>
                                     <td><b class="text-info">{{ setting('points_report') }}</b></td>
                                 </tr>
+                                <tr>
+                                    <td><b>Cadastrar novos eventos no calendário</b></td>
+                                    <td><b class="text-info">{{ setting('points_calendar') }}</b></td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
