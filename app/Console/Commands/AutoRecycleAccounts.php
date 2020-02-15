@@ -40,7 +40,7 @@ class AutoRecycleAccounts extends Command
     public function handle()
     {
         $current = Carbon::now();
-        $users = User::where('status', '=', 0)
+        $users = User::where('status', '=', 1)
             ->where('created_at', '<', $current->copy()->subDays(30)->toDateTimeString())
             ->get();
 
