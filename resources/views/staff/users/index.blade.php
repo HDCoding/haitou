@@ -62,17 +62,17 @@
                                                     Opções
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    @if($user->status != 3)
+                                                    @if($user->status != 4)
                                                         <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/ban') }}">
                                                             <i class="fa fa-ban text-danger m-r-10"></i> Banir Usuário
                                                         </a>
                                                     @endif
-                                                    @if($user->status != 2)
+                                                    @if($user->status != 3)
                                                         <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/suspend') }}">
                                                             <i class="fa fa-pause text-success m-r-10"></i> Suspender Usuário
                                                         </a>
                                                     @endif
-                                                    @if($user->status != 2 || $user->status != 3)
+                                                    @if($user->status != 3 || $user->status != 4)
                                                         <a class="dropdown-item" href="{{ url('staff/user/' . $user->id . '/warn') }}">
                                                             <i class="fas fa-hand-point-right text-warning m-r-10"></i> Advertir Usuário
                                                         </a>
@@ -124,10 +124,10 @@
                                 <label class="form-label" for="status">Status da conta</label>
                                 <select class="custom-select" name="status" id="status" data-style="form-control">
                                     <option value="" disabled selected>Status</option>
-                                    <option value="0">Pendente</option>
-                                    <option value="1">Confirmada</option>
-                                    <option value="2">Suspensa</option>
-                                    <option value="3">Banida</option>
+                                    <option value="1">Pendente</option>
+                                    <option value="2">Confirmada</option>
+                                    <option value="3">Suspensa</option>
+                                    <option value="4">Banida</option>
                                 </select>
                             </div>
                             <div class="col-md m-b-4 m-t-10">
