@@ -8,12 +8,9 @@ use Illuminate\Http\Request;
 
 class BookmarksController extends Controller
 {
-    protected $request;
-
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->request = $request;
     }
 
     public function store(Request $request)
@@ -30,9 +27,9 @@ class BookmarksController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($bookmark_id)
+    public function destroy(Request $request, $bookmark_id)
     {
-        $user = $this->request->user();
+        $user = $request->user();
 
         $bookmark = $user->bookmarks()->findOrFail($bookmark_id);
 
@@ -43,10 +40,10 @@ class BookmarksController extends Controller
         return redirect()->back();
     }
 
-    public function actors()
+    public function actors(Request $request)
     {
         //return all logged user bookmarks
-        $user = $this->request->user();
+        $user = $request->user();
 
         $bookmarks = $user->bookmarks()->with('actor:id,name,slug,image')
             ->where('actor_id', '!=', null)->paginate(30);
@@ -57,7 +54,7 @@ class BookmarksController extends Controller
     public function characters(Request $request)
     {
         //return all logged user bookmarks
-        $user = $this->request->user();
+        $user = $request->user();
 
         $bookmarks = $user->bookmarks()->with('character:id,name,slug,image')
             ->where('character_id', '!=', null)->paginate(30);
@@ -68,7 +65,7 @@ class BookmarksController extends Controller
     public function medias(Request $request)
     {
         //return all logged user bookmarks
-        $user = $this->request->user();
+        $user = $request->user();
 
         $bookmarks = $user->bookmarks()->with('media:id,name,slug,poster')
             ->where('media_id', '!=', null)->paginate(30);
