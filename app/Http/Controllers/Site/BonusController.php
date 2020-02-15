@@ -60,7 +60,7 @@ class BonusController extends Controller
     {
         $members = User::select('id', 'username')
             ->where('id', '!=', auth()->user()->id)
-            ->whereNotIn('status', [0, 2, 3])
+            ->whereNotIn('status', [1, 3, 4])
             ->get()
             ->pluck('username', 'id');
 
