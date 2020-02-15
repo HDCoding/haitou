@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 70)->unique();
             $table->string('password', 100);
 
-            $table->tinyInteger('status')->default(0); //0 = pendent, 1 = confirmed, 2 = suspension, 3 = banned
+            $table->tinyInteger('status')->default(1); //1 = pendent, 2 = confirmed, 3 = suspension, 4 = banned
 
             $table->unsignedBigInteger('uploaded')->default(0);
             $table->unsignedBigInteger('downloaded')->default(0);
