@@ -19,6 +19,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+                @includeIf('errors.errors', [$errors])
+                @include('includes.messages')
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Site Points</h4>
@@ -36,8 +38,7 @@
                             </div>
 
                             <hr class="border-light container-m--x my-0">
-                            @includeIf('errors.errors', [$errors])
-                            @include('includes.messages')
+
                             {!! Form::open(['url' => 'freeslots', 'class' => 'mt-4 container col-md-5 col-md-offset-4']) !!}
                             {!! Form::hidden('freeslot_id', $freeslot->id) !!}
                             <div class="form-group row ml-5">
@@ -59,18 +60,19 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Quem mais contribuiu</h4>
-                        <h6 class="card-title m-t-20"><i class="m-r-5 font-18 fa fa-heart text-danger"></i></h6>
+                        <h4 class="card-title">Quem mais contribuiu <i class="m-l-5 fa fa-heart text-danger"></i></h4>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th scope="col">Nick</th>
-                                    <th scope="col">Valor</th>
+                                    <th scope="col">Pontos</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -119,7 +121,7 @@
                     color: {
                         pattern: ['#FF0000', '#F97600', '#F6C600', '#60B044'],
                         threshold: {
-                            values: [30, 60, 90, 100]
+                            values: [25, 50, 75, 100]
                         }
                     },
                     size: {
