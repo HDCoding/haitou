@@ -358,28 +358,48 @@ class User extends Authenticatable
 
     public function flag()
     {
-        return asset('images/states/' . $this->state->flag);
+        $expire_at = Carbon::now()->addMinutes(20);
+
+        $flag = cache()->remember('user_flag_'.$this->id, $expire_at, function () {
+            return asset('images/states/' . $this->state->flag);
+        });
+        return $flag;
     }
 
     public function downloaded()
     {
-        return make_size($this->downloaded);
+        $expire_at = Carbon::now()->addMinutes(20);
+
+        $down = cache()->remember('user_down_'.$this->id, $expire_at, function () {
+            return make_size($this->downloaded);
+        });
+        return $down;
     }
 
     public function uploaded()
     {
-        return make_size($this->uploaded);
+        $expire_at = Carbon::now()->addMinutes(20);
+
+        $up = cache()->remember('user_up_'.$this->id, $expire_at, function () {
+            return make_size($this->uploaded);
+        });
+        return $up;
     }
 
     public function ratio()
     {
-        if ($this->uploaded == 0 && $this->downloaded == 0) {
-            return number_format(1, 2);
-        } elseif ($this->uploaded > 0 && $this->downloaded > 0) {
-            return (float)number_format($this->uploaded / $this->downloaded, 2);
-        } else {
-            return '<i class="fas fa-infinity"></i>';
-        }
+        $expire_at = Carbon::now()->addMinutes(5);
+
+        $ratio = cache()->remember('user_ratio_'.$this->id, $expire_at, function () {
+            if ($this->uploaded == 0 && $this->downloaded == 0) {
+                return number_format(1, 2);
+            } elseif ($this->uploaded > 0 && $this->downloaded > 0) {
+                return (float)number_format($this->uploaded / $this->downloaded, 2);
+            } else {
+                return '<i class="fas fa-infinity"></i>';
+            }
+        });
+        return $ratio;
     }
 
     public function status()
@@ -387,15 +407,15 @@ class User extends Authenticatable
         $status = $this->status;
 
         if ($status == 1) {
-            return '<span class="badge badge-pill badge-warning">Pendente</span>';
+            return '<span class="badge badge-pill badge-info">Pendente</span>';
         } elseif ($status == 2) {
             return '<span class="badge badge-pill badge-success">Confirmada(o)</span>';
         } elseif ($status == 3) {
-            return '<span class="badge badge-pill badge-info">Suspensa(o)</span>';
+            return '<span class="badge badge-pill badge-warning">Suspensa(o)</span>';
         } elseif ($status == 4) {
             return '<span class="badge badge-pill badge-danger">Banida(o)</span>';
         } else {
-            return "Bugou";
+            return 'Bugou';
         }
     }
 
@@ -411,20 +431,35 @@ class User extends Authenticatable
 
     public function points()
     {
-        return $this->points > 0 ? number_format($this->points, 0, ',', '.') : 0;
+        $expire_at = Carbon::now()->addMinutes(5);
+
+        $points = cache()->remember('usr_pts_'.$this->id, $expire_at, function () {
+            return $this->points > 0 ? number_format($this->points, 0, ',', '.') : 0;
+        });
+        return $points;
     }
 
     public function levelImage()
     {
-        $level = $this->level();
-        return asset("images/ranks/{$level}.png");
+        $expire_at = Carbon::now()->addMinutes(20);
+
+        $lvl = cache()->remember('img_lvl_'.$this->id, $expire_at, function () {
+            $level = $this->level();
+            return asset("images/ranks/{$level}.png");
+        });
+        return $lvl;
     }
 
     public function level()
     {
+        $expire_at = Carbon::now()->addMinutes(20);
+
         //only works until level 999 = equal 999000 in integer
-        $experience = $this->experience;
-        return $experience < 1000 ? 0 : floor(number_format($experience));
+        $exp = cache()->remember('user_exp_'.$this->id, $expire_at, function () {
+            $experience = $this->experience;
+            return $experience < 1000 ? 0 : floor(number_format($experience));
+        });
+        return $exp;
     }
 
     public function updatePoints($points)
