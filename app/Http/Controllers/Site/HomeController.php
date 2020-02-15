@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Topic;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -57,13 +58,17 @@ class HomeController extends Controller
             return Group::select(['name', 'color', 'icon'])->oldest('id')->get();
         });
 
+        $covers = Storage::files('public/homecovers');
+        $covers = str_replace(['public/homecovers/', '.gitignore'], '', $covers);
+
         return view('site.home.index', [
             'news' => $news,
             'topics' => $topics,
             'posts' => $posts,
             'polls' => $polls,
             'users' => $users,
-            'groups' => $groups
+            'groups' => $groups,
+            'covers' => $covers
         ]);
     }
 

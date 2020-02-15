@@ -21,7 +21,7 @@
             <div class="col-sm-12 col-lg-12">
                 <div class="card vegas-fixed-background" id="home-cover">
                     <div class="card-body py-home">
-                        <h2 class="text-center text-primary">Okaeri {{ auth()->user()->username }}-chan</h2>
+                        <h1 class="text-center text-info">Okaeri {{ auth()->user()->username }}-chan</h1>
                     </div>
                 </div>
             </div>
@@ -61,13 +61,13 @@
             $('#home-cover').vegas({
                 delay: 25000,
                 shuffle: true,
-                timer: false,
+                timer: true,
                 slides: [
-                    @for($i = 1; $i <= 21; $i++)
-                    { src: "{{ asset("images/covers/{$i}.jpg") }}" },
-                    @endfor
+                    @foreach($covers as $cover)
+                        { src: "{{ asset("storage/homecovers/{$cover}") }}" },
+                    @endforeach
                 ],
-                overlay: '{{ asset('vendor/vegas/overlays/07.png') }}',
+                //overlay: '{{ asset('vendor/vegas/overlays/07.png') }}',
                 transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
                 animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
             });
