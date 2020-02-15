@@ -60,7 +60,7 @@
                                                     {{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}
                                                 </th>
                                                 <td>
-                                                    <a href="{{ route('forum.topic', [$topic->id, $topic->slug]) }}">{{ $topic->name }}</a>
+                                                    {{ link_to_route('forum.topic', $topic->name, ['topic_id' => $topic->id, 'slug' => $topic->slug]) }}
                                                     @if ($topic->is_locked)
                                                         <span class="badge badge-dark">Fechado</span>
                                                     @endif
