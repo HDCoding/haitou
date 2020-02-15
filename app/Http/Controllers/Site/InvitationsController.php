@@ -23,8 +23,18 @@ class InvitationsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $invites = $user->invitations()->where('accepted', '=', false)->get();
-        return view('site.invites.index', compact('invites'));
+
+        $invites = Invitation::with('user:id')
+            ->where('user_id', '=', $user->id)
+            ->where('accepted', '=', false)
+            ->get();
+
+        $acceptances = Invitation::with('member:id,username,slug')
+            ->where('user_id', '=', $user->id)
+            ->where('accepted', '=', true)
+            ->get();
+
+        return view('site.invites.index', compact('invites', 'acceptances'));
     }
 
     public function store(InvitationRequest $request)
