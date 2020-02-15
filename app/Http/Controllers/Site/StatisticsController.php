@@ -298,7 +298,9 @@ class StatisticsController extends Controller
     public function groups()
     {
         // Fetch Groups User Counts
-        $groups = Group::oldest('id')->get();
+        $groups = cache()->remember('groups', $this->expire_at, function () {
+            return Group::oldest('id')->get();
+        });
 
         return view('site.stats.groups.groups', compact('groups'));
     }
@@ -316,7 +318,9 @@ class StatisticsController extends Controller
     public function states()
     {
         // Fetch States User Counts
-        $states = State::all();
+        $states = cache()->remember('states', $this->expire_at, function () {
+            return State::all();
+        });
 
         return view('site.stats.states.states', compact('states'));
     }
