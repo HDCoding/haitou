@@ -50,11 +50,11 @@
                                 @foreach($users as $user)
                                     <tr>
                                         <td><img class="img-rounded" src="{{ $user->avatar() }}" alt="Avatar" width="70px"></td>
-                                        <td>{{ $user->username }}</td>
-                                        <td>{{ $user->groupName() }}</td>
-                                        <td>{!! $user->status() !!}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td class="align-middle">{{ $user->username }}</td>
+                                        <td class="align-middle">{{ $user->groupName() }}</td>
+                                        <td class="align-middle">{!! $user->status() !!}</td>
+                                        <td class="align-middle"></td>
+                                        <td class="align-middle"></td>
                                         <td>
                                             @if(auth()->user()->id !== $user->id)
                                             <div class="btn-group">
