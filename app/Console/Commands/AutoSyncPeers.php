@@ -43,8 +43,8 @@ class AutoSyncPeers extends Command
             ->get();
 
         foreach ($torrents as $torrent) {
-            $torrent->seeders = $torrent->peers()->where('remaining', '=', '0')->count();
-            $torrent->leechers = $torrent->peers()->where('remaining', '>', '0')->count();
+            $torrent->seeders = $torrent->peers()->where('remaining', '=', 0)->count();
+            $torrent->leechers = $torrent->peers()->where('remaining', '>', 0)->count();
             $torrent->save();
         }
     }
