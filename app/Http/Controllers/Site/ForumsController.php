@@ -61,11 +61,6 @@ class ForumsController extends Controller
             $topic_neos = [];
         }
 
-        $forum_neos = $user->subscriptions->where('forum_id', '>', 0)->pluck('forum_id')->toArray();
-        if (!is_array($forum_neos)) {
-            $forum_neos = [];
-        }
-
         if ($request->has('body') && $request->input('body') != '') {
             $logger = 'site.forums.results_posts';
             $result = Post::with(['topic', 'user'])
@@ -88,11 +83,11 @@ class ForumsController extends Controller
         }
 
         if ($request->has('subscribed') && $request->input('subscribed') == 1) {
-            $result->where(function ($query) use ($topic_neos, $forum_neos) {
-                $query->whereIn('topics.id', $topic_neos)->orWhereIn('topics.forum_id', $forum_neos);
+            $result->where(function ($query) use ($topic_neos) {
+                $query->whereIn('topics.id', [$topic_neos]);
             });
         } elseif ($request->has('notsubscribed') && $request->input('notsubscribed') == 1) {
-            $result->whereNotIn('topics.id', $topic_neos)->whereNotIn('topics.forum_id', $forum_neos);
+            $result->whereNotIn('topics.id', $topic_neos);
         }
 
         if ($request->has('is_locked') && $request->input('is_locked') == 1) {
@@ -208,7 +203,7 @@ class ForumsController extends Controller
         return view('site.forums.index', compact('categories', 'forums', 'num_forums', 'num_posts', 'num_topics'));
     }
 
-    public function topics($forum_id, $slug)
+    public function threads($forum_id, $slug)
     {
         $forum = Forum::whereSlug($slug)->findOrFail($forum_id);
         $moderators = Moderator::with('user:id,username,slug')->get();
@@ -252,7 +247,7 @@ class ForumsController extends Controller
      */
     public function newTopicForm($forum_id, $slug)
     {
-        $forum = Forum::findOrFail($forum_id);
+        $forum = Forum::whereSlug($slug)->findOrFail($forum_id);
 
         // The user has the right to create a topic here?
         if ($forum->getPermission()->start_topic != true) {
@@ -329,13 +324,14 @@ class ForumsController extends Controller
     public function postEdit(EditTopicRequest $request, $post_id)
     {
         $user = $request->user();
-        $post = Post::findOrFail($post_id);
-        $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post_id}";
+        $post = Post::with('topic:id,slug')->findOrFail($post_id);
 
         abort_unless($user->can('forum-mod') || $user->id === $post->user_id, 403);
 
         $post->content = $request->input('content');
         $post->update();
+
+        $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post_id}";
 
         toastr()->success('Postagem alterada com sucesso!!', 'Postagem');
         return redirect()->to($appurl);
@@ -344,13 +340,13 @@ class ForumsController extends Controller
     public function postDelete(Request $request, $post_id)
     {
         $user = $request->user();
-        $points = setting('points_delete');
-
-        $post = Post::with('topic')->findOrFail($post_id);
+        $post = Post::with('topic:id,slug')->findOrFail($post_id);
 
         abort_unless($user->can('forum-mod') || $user->id === $post->user_id, 403);
 
         $post->delete();
+
+        $points = setting('points_delete');
         $user->updatePoints($points);
 
         $appurl = "/forum/topic/{$post->topic->id}.{$post->topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
@@ -358,12 +354,15 @@ class ForumsController extends Controller
         return redirect()->to($appurl);
     }
 
+    //todo
+    //funcao nao em uso
     public function topicDelete(Request $request, $topic_id)
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
 
         abort_unless($user->can('forum-mod'), 403);
+
         $posts = $topic->posts();
         $posts->delete();
         $topic->delete();
@@ -374,6 +373,9 @@ class ForumsController extends Controller
 
     /**
      * Add a Fast Post to a Topic
+     * @param FastPostRequest $request
+     * @param $topic_id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function post(FastPostRequest $request, $topic_id)
     {
@@ -435,7 +437,7 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        //Open or Close the topic
+        //Open the topic
         $topic = Topic::findOrFail($topic_id);
 
         abort_unless($user->can('forum-mod'), 403);
@@ -451,7 +453,7 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        //Open or Close the topic
+        //Close the topic
         $topic = Topic::findOrFail($topic_id);
 
         abort_unless($user->can('forum-mod'), 403);
@@ -476,7 +478,7 @@ class ForumsController extends Controller
         $topic->save();
 
         toastr()->info('Tópico Pin com sucesso', 'Tópico');
-        return redirect()->route('forum.topic', [$topic->id, $topic->slug]);
+        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
 
     public function topicUnpin(Request $request, $topic_id)
