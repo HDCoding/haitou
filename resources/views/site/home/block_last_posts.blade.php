@@ -24,9 +24,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('forum.topic', ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}">
-                                {{ $post->topic->name }}
-                            </a>
+                            {{ link_to_route('forum.topic', $post->topic->name, ['topic_id' => $post->topic->id, 'slug' => $post->topic->slug]) }}
                         </td>
                         <td>{{ $post->post_username }}</td>
                         <td>{{ $post->updated_at->diffForHumans() }}</td>
