@@ -62,7 +62,7 @@ class InvitationController extends Controller
             $user->username = $request->input('username');
             $user->email = $invitation->email;
             $user->password = Hash::make($request->input('password'));
-            $user->status = 1;
+            $user->status = 2;
             $user->mood_id = 1;
             $user->state_id = 25;
             $user->invites = 10;
