@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,11 @@ class Allow extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function user()
+    {
+        return $this->hasMany(UserAllow::class);
     }
 
 }
