@@ -29,7 +29,7 @@ class MediasRequest extends FormRequest
             'name' => 'required|string|max:255',
             'title_english' => 'nullable|string|max:255',
             'title_japanese' => 'required|string|max:255',
-            'media_type' => 'required|in:0,1,2',
+            'media_type' => 'required|in:1,2,3,4',
             'released_at' => 'required|date',
             'finished_on' => 'nullable|date',
             'description' => 'required|string|max:65530',
