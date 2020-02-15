@@ -359,6 +359,14 @@
                                     <h5 class="mt-2">@lang('dashboard.news')</h5>
                                 </div>
                             @endif
+                            @if(auth()->user()->can('acesso-total'))
+                                <div class="col-md-3 col-lg-3">
+                                    <a href="{{ url('staff/permissions') }}">
+                                        <img src="{{ asset('images/staff/permissions.png') }}" alt="@lang('dashboard.permissions')">
+                                    </a>
+                                    <h5 class="mt-2">@lang('dashboard.permissions')</h5>
+                                </div>
+                            @endif
                             @if(auth()->user()->can('pesquisas-mod'))
                                 <div class="col-md-3 col-lg-3">
                                     <a href="{{ url('staff/polls') }}">
