@@ -51,8 +51,6 @@ class ReportsController extends Controller
 
     public function comment($report_id)
     {
-        //TODO
-        //look to a better way to show the comment and where was made
         $report = Report::with('comment:id')
             ->with('user:id,username,slug')
             ->with('staff:id,username,slug,avatar')
