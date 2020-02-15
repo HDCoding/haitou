@@ -111,40 +111,40 @@ Route::middleware(['auth', 'lockscreen'])->group(function () {
             Route::get('{forum_id}.{slug}', 'ForumsController@threads')->name('forum.threads');
 
             //Topic
-            Route::get('topic/{topic_id}.{slug}', 'ForumsController@topic')->name('forum.topic');
+            Route::get('topic/{topic_id}.{slug}', 'TopicsController@topic')->name('forum.topic');
 
             //New topic
-            Route::get('{forum_id}/new-topic', 'ForumsController@newTopicForm')->name('new.topic');
-            Route::post('{forum_id}/new-topic', 'ForumsController@newTopicPost')->name('post.topic');
+            Route::get('{forum_id}/new-topic', 'TopicsController@newTopicForm')->name('new.topic');
+            Route::post('{forum_id}/new-topic', 'TopicsController@newTopicPost')->name('post.topic');
 
             //Edit Topic
-            Route::get('topic/{topic_id}/edit', 'ForumsController@formTopicEdit')->name('topic.form.edit');
-            Route::put('topic/{topic_id}/edit', 'ForumsController@topicEdit')->name('topic.edit');
+            Route::get('topic/{topic_id}/edit', 'TopicsController@formTopicEdit')->name('topic.form.edit');
+            Route::put('topic/{topic_id}/edit', 'TopicsController@topicEdit')->name('topic.edit');
 
             //Delete Topic
-            Route::delete('topic/{topic_id}', 'ForumsController@topicDelete')->name('topic.delete');
+            Route::delete('topic/{topic_id}', 'TopicsController@topicDelete')->name('topic.delete');
 
             //Fast post
-            Route::post('topic/{topic_id}/post', 'ForumsController@post')->name('forum.post');
+            Route::post('topic/{topic_id}/post', 'PostsController@post')->name('forum.post');
 
             //Edit Post
-            Route::get('t.{topic_id}/p.{post_id}/edit', 'ForumsController@postEditForm')->name('post.edit.form');
-            Route::put('post/{post_id}/edit', 'ForumsController@postEdit')->name('post.edit');
+            Route::get('t.{topic_id}/p.{post_id}/edit', 'PostsController@postEditForm')->name('post.edit.form');
+            Route::put('post/{post_id}/edit', 'PostsController@postEdit')->name('post.edit');
 
             //Delete Post
-            Route::delete('post/{post_id}', 'ForumsController@postDelete')->name('post.delete');
+            Route::delete('post/{post_id}', 'PostsController@postDelete')->name('post.delete');
 
             //Reply Post
-            Route::get('t.{topic_id}/p.{post_id}/reply', 'ForumsController@formReply')->name('post.reply');
-            Route::post('t.{topic_id}/reply', 'ForumsController@reply')->name('reply');
+            Route::get('t.{topic_id}/p.{post_id}/reply', 'PostsController@formReply')->name('post.reply');
+            Route::post('t.{topic_id}/reply', 'PostsController@reply')->name('reply');
 
             // Open/Close Topic
-            Route::get('topic/{topic_id}/open', 'ForumsController@topicOpen')->name('topic.open');
-            Route::get('topic/{topic_id}/close', 'ForumsController@topicClose')->name('topic.close');
+            Route::get('topic/{topic_id}/open', 'TopicsController@openTopic')->name('topic.open');
+            Route::get('topic/{topic_id}/close', 'TopicsController@closeTopic')->name('topic.close');
 
             // Pin/Unpin Topic
-            Route::get('topic/{topic_id}/pin', 'ForumsController@topicPin')->name('topic.pin');
-            Route::get('topic/{topic_id}/unpin', 'ForumsController@topicUnpin')->name('topic.unpin');
+            Route::get('topic/{topic_id}/pin', 'TopicsController@pinTopic')->name('topic.pin');
+            Route::get('topic/{topic_id}/unpin', 'TopicsController@unpinTopic')->name('topic.unpin');
 
             // Like - Dislike
             Route::get('like/post/{post_id}', 'LikesController@likePost')->name('like.post');
