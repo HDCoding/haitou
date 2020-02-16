@@ -42,7 +42,7 @@ class AutoBirthdayGift extends Command
     {
         //select users from DB
         $users = User::with('logs')
-            ->select(['id', 'points', 'experience', 'birthday', 'birth_gifted'])
+            ->select('id', 'points', 'experience', 'birthday', 'birth_gifted')
             ->where('birth_gifted', '=', false)
             ->get();
 
