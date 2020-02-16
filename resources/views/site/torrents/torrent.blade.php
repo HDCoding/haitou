@@ -2,10 +2,6 @@
 
 @section('title', $torrent->name)
 
-@section('css')
-    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 
     <div class="page-breadcrumb">
@@ -27,15 +23,6 @@
 
     <div class="container-fluid">
         <div class="row">
-            @if(!empty($torrent->media->cover()))
-                <div class="col-sm-12 col-lg-12">
-                    <div class="card vegas-fixed-background" id="media-cover">
-                        <div class="card-body py-5 my-5">
-                            <h4 class="text-center text-dark">{{ $torrent->media->name }}</h4>
-                        </div>
-                    </div>
-                </div>
-            @endif
             <div class="col-12">
                 @includeIf('errors.errors', [$errors])
                 @include('includes.messages')
@@ -45,7 +32,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6">
                                 <div class="white-box text-center">
-                                    <img class="img-fluid img-responsive thumbnail" src="{{ $torrent->media->poster }}" alt="Poster" width="300px">
+                                    <img class="img-fluid img-responsive thumbnail" src="{{ $torrent->media->poster() }}" alt="Poster" width="300px">
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
@@ -230,9 +217,6 @@
 @endsection
 
 @section('scripts')
-    <!-- VegasJS -->
-    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
-
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(window).on('hashchange', function () {
             if (window.location.hash) {
@@ -269,23 +253,4 @@
             });
         }
     </script>
-
-    @if(!empty($torrent->media->cover()))
-    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $(function() {
-            // Fixed bg
-            $('#media-cover').vegas({
-                overlay: false,
-                timer: false,
-                shuffle: true,
-                slides: [
-                    { src: "{{ $torrent->media->cover() }}" },
-                ],
-                transition: [ 'fade', 'zoomOut', 'zoomIn', 'blur' ],
-                animation: [ 'kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight' ]
-            });
-        });
-    </script>
-    @endif
-
 @endsection
