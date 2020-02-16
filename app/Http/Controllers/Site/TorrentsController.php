@@ -218,7 +218,13 @@ class TorrentsController extends Controller
 
     public function show($torrent_id, $slug)
     {
-        $torrent = Torrent::where('id', '=', $torrent_id)->whereSlug($slug)->firstOrFail();
+        $torrent = Torrent::with('category:id,name')
+            ->with('fansub:id,name,slug')
+            ->with('media:id,name,slug,poster,description')
+            ->where('id', '=', $torrent_id)
+            ->where('slug', '=', $slug)
+            ->firstOrFail();
+
         $torrent->increment('views');
 
         $comments = $torrent->comments()->latest()->paginate(5);
