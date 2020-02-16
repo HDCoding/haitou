@@ -33,7 +33,7 @@
                         {!! Form::open(['url' => route('site.poll.vote', [$poll->id, $poll->slug]), 'class' => 'form-horizontal mt-4']) !!}
                             @foreach ($poll->options as $option)
                                 <div class="form-group">
-                                @if($poll->multivote)
+                                @if($poll->multi_choice)
                                     <label for="option-checkbox-{{ $option->id }}"></label>
                                     <input type="checkbox" id="option-checkbox-{{ $option->id }}" name="option[]" value="{{ $option->id }}"> {{ $option->name }}
                                 @else
