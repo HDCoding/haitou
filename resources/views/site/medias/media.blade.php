@@ -29,8 +29,8 @@
             @if(!empty($media->cover()))
             <div class="col-sm-12 col-lg-12">
                 <div class="card vegas-fixed-background" id="media-cover">
-                    <div class="card-body py-5 my-5">
-                        <h4 class="text-center text-dark">{{ $media->name }}</h4>
+                    <div class="card-body py-home">
+                        <h2 class="text-center text-info">{{ $media->name }}</h2>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6">
                                 <div class="white-box text-center">
-                                    <img class="img-fluid img-responsive" src="{{ $media->poster }}" alt="Poster" width="300px">
+                                    <img class="img-fluid img-responsive" src="{{ $media->poster() }}" alt="Poster" width="300px">
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
@@ -198,7 +198,6 @@
                             <div class="card-body">
                                 <table class="table">
                                     <thead>
-
                                     </thead>
                                     <tbody>
                                     @foreach($media->media_casts as $cast)
