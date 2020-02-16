@@ -16,6 +16,9 @@ class UpdateLastAction
      */
     public function handle($request, Closure $next)
     {
+        //TODO
+        //lock to a better way to update this
+        //THE RETURN = select `slug`, `users`.`id` from `users` where (`slug` = 'monil' or `slug` LIKE 'monil-%')
         if (!$user = $request->user()) {
             return $next($request);
         }
