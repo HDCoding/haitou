@@ -16,7 +16,9 @@ class PollsController extends Controller
 
     public function show(Request $request, $poll_id, $slug)
     {
-        $poll = Poll::whereSlug($slug)->firstOrFail($poll_id);
+        $poll = Poll::where('id', '=', $poll_id)
+            ->whereSlug($slug)
+            ->firstOrFail();
 
         //logged user
         $user = $request->user();
@@ -34,7 +36,7 @@ class PollsController extends Controller
 
     public function vote(Request $request, $poll_id, $slug)
     {
-        $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->findOrFail($poll_id);
+        $poll = Poll::whereSlug($slug)->findOrFail($poll_id);
 
         $user = $request->user();
 
@@ -44,6 +46,7 @@ class PollsController extends Controller
         }
 
         $options = $request->input('option');
+
         if (is_array($options)) {
             foreach ($options as $key => $option) {
                 Vote::create([
@@ -60,14 +63,18 @@ class PollsController extends Controller
             ]);
         }
 
-        toastr()->info('O seu voto foi contado.', 'Enquete');
+        toastr()->info('O seu voto foi computado.', 'Enquete');
         return redirect()->route('site.poll.results', [$poll->id, $poll->slug]);
     }
 
     public function result($poll_id, $slug)
     {
-        $poll = Poll::where('id', '=', $poll_id)->whereSlug($slug)->firstOrFail();
+        $poll = Poll::where('id', '=', $poll_id)
+            ->whereSlug($slug)
+            ->firstOrFail();
+
         $totalVotes = $poll->totalVotes();
+
         return view('site.polls.result', compact('poll', 'totalVotes'));
     }
 }
