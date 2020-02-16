@@ -51,11 +51,13 @@ class BirthdayGiftNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        $appurl = config('app.url');
+
         return [
             'title' => 'Happy Birthday',
             'icon' => '',
             'body' => ' Nessa data especial, segue um presente especial da nossa equipe',
-            'url' => '',
+            'url' => "{$appurl}/bonus",
         ];
     }
 }
