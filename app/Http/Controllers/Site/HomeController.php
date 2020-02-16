@@ -21,6 +21,8 @@ class HomeController extends Controller
 
     public function index()
     {
+		//TODO
+		//update select * from, select only necessary
         // For Cache
         $expire_at = Carbon::now()->addMinutes(5);
 
