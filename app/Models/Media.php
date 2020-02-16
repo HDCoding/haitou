@@ -121,6 +121,8 @@ class Media extends Model
             return '<span class="label label-warning">Dorama</span>';
         } elseif ($type == 4) {
             return '<span class="label label-info">Filme</span>';
+        } else {
+            return 'Bugou';
         }
     }
 
