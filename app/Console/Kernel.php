@@ -31,15 +31,19 @@ class Kernel extends ConsoleKernel
         $schedule->command('haitou:auto-deactivate-warning')->daily(); //Automatically Deactivates User Warnings If Expired.
         $schedule->command('haitou:auto-flush-peers')->hourly();
         $schedule->command('haitou:auto-group')->daily();
+        // $schedule->command('haitou:auto-hit-and-run')->daily();
+        // $schedule->command('haitou:auto-pre-hit-and-run')->daily();
         $schedule->command('haitou:auto-recycle-accounts')->monthly(); //Recycle Non-Activated Account With More 30 Days Old.
+        $schedule->command('haitou:auto-recycle-calendars')->daily(); //Disable Old Calendar Events After End of the Date.
         $schedule->command('haitou:auto-recycle-cheaters')->monthly(); //Recycle Cheaters Table Once 30 Days Old.
         $schedule->command('haitou:auto-recycle-failed-logins')->daily(); //Recycle Failed Logins Once 30 Days Old.
         $schedule->command('haitou:auto-recycle-invites')->daily(); //Recycle Invites That Are Expired.
-        $schedule->command('haitou:auto-sync-peers')->daily();
         $schedule->command('haitou:auto-recycle-vips')->daily(); //Automatically Removes A Users Vips If It Has Expired.
-        $schedule->command('haitou:email-blacklist-update')->monthly(); //Update cache for email domains blacklist.
-        $schedule->command('haitou:auto-recycle-calendars')->daily(); //Disable Old Calendar Events After End of the Date.
         $schedule->command('haitou:auto-resend-invites')->daily(); //Resend not accepted invitation after X days created_at.
+        $schedule->command('haitou:auto-sync-peers')->daily();
+        //$schedule->command('haitou:clear-all-cache')->daily();
+        $schedule->command('haitou:email-blacklist-update')->monthly(); //Update cache for email domains blacklist.
+        //$schedule->command('haitou:set-all-cache')->daily();
     }
 
     /**
