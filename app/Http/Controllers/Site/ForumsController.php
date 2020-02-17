@@ -156,14 +156,13 @@ class ForumsController extends Controller
     {
         $categories = Category::where('is_forum', '=', true)
             ->select('id', 'name')
-            ->orderBy('position', 'ASC')->get();
+            ->orderBy('position', 'ASC')
+            ->get();
 
-        $forums = Forum::with([
-            'topics:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug',
-            'posts:id,forum_id,user_id,post_username,created_at'
-        ])
-        ->select('id', 'category_id', 'name', 'slug', 'description', 'icon')
-        ->get();
+        $forums = Forum::with('posts:id,forum_id,topic_id,created_at')
+            ->with('topics:id,forum_id,name,slug,first_post_username,last_post_username')
+            ->select('id', 'category_id', 'name', 'slug', 'description', 'icon', 'num_topic', 'num_post')
+            ->get();
 
         // Total Forums Count
         $num_forums = Forum::count();
@@ -178,12 +177,20 @@ class ForumsController extends Controller
     public function threads($forum_id, $slug)
     {
         $forum = Forum::whereSlug($slug)->findOrFail($forum_id);
-        $moderators = Moderator::with('user:id,username,slug')->get();
+
+        $moderators = Moderator::with('user:id,username,slug')
+            ->where('forum_id', '=', $forum->id)
+            ->get();
+
         $forum->increment('views');
 
-        $topics = $forum->topics()->latest('is_pinned')->latest('id')->paginate(30);
+        $threads = Topic::with('forum:id')
+            ->where('forum_id', '=', $forum->id)
+            ->latest('is_pinned')
+            ->latest('id')
+            ->paginate(30);
 
-        return view('site.forums.threads', compact('forum', 'topics', 'moderators'));
+        return view('site.forums.threads', compact('forum', 'threads', 'moderators'));
     }
 
     public function latestTopics(Request $request)
@@ -195,7 +202,10 @@ class ForumsController extends Controller
             $topics = [];
         }
 
-        $results = Topic::whereNotIn('topics.forum_id', $topics)->latest('id')->paginate(30);
+        $results = Topic::with('forum:id,name,slug')
+            ->whereNotIn('forum_id', $topics)
+            ->latest('id')
+            ->paginate(30);
 
         // Total Forums Count
         $num_forums = Forum::count();
@@ -206,7 +216,6 @@ class ForumsController extends Controller
 
         return view('site.forums.latest_topics', [
             'results' => $results,
-            'user' => $user,
             'num_posts' => $num_posts,
             'num_forums' => $num_forums,
             'num_topics' => $num_topics,
@@ -222,14 +231,13 @@ class ForumsController extends Controller
             $posts = [];
         }
 
-        $results = Post::selectRaw('posts.id as id,posts.*, views')
-            ->with([
-                'topic:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug,is_locked,is_pinned',
-                'user:id,username,slug,group_id'
-            ])
+        $results = Post::with('user:id,username,slug,group_id')
+            ->with('topic:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug,is_locked,is_pinned')
+            ->selectRaw('posts.id as id,posts.*, views')
             ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
             ->whereNotIn('topics.forum_id', $posts)
-            ->orderBy('posts.created_at', 'desc')->paginate(30);
+            ->orderBy('posts.created_at', 'desc')
+            ->paginate(30);
 
         // Total Forums Count
         $num_forums = Forum::count();
