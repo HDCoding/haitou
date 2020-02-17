@@ -21,6 +21,8 @@ class CreateForumsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->string('icon', 45)->nullable();
+            $table->integer('num_topic')->default(0);
+            $table->integer('num_post')->default(0);
             $table->integer('views')->default(0);
             $table->softDeletes();
             $table->timestamps();
