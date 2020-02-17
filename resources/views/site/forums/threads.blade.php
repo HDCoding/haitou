@@ -76,7 +76,7 @@
                                                     Por {{ link_to_route('user.profile', $thread->first_post_username, [strtolower($thread->first_post_username)], ['class' => 'text-info']) }}
                                                 </div>
                                             </th>
-                                            <td>{{ $thread->num_post - 1 }}</td>
+                                            <td>{{ $thread->num_post }}</td>
                                             <td>{{ $thread->views }}</td>
                                             <td>
                                                 @if(empty($thread->last_post_username))
