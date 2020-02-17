@@ -117,7 +117,7 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        $posts = $user->group->permissions->where('view_forum', '=', false)->pluck('forum_id')->toArray();
         if (!is_array($posts)) {
             $posts = [];
         }
@@ -128,11 +128,11 @@ class ForumsController extends Controller
         }
 
         $result = Forum::with('subscription_topics')
-            ->selectRaw('forums.id, max(forums.position) as position, max(forums.name) as name, max(forums.slug) as slug, max(forums.description) as description, max(forums.created_at), max(forums.updated_at), max(topics.id) as topic_id, max(topics.created_at) as topic_created_at')
+            ->selectRaw('forums.id,max(forums.position) as position, max(forums.num_topic) as num_topic, max(forums.num_post) as num_post, max(forums.name) as name, max(forums.slug) as slug, max(forums.description) as description, max(forums.created_at), max(forums.updated_at), max(topics.id) as topic_id, max(topics.created_at) as topic_created_at')
             ->leftJoin('topics', 'forums.id', '=', 'topics.forum_id')
             ->whereNotIn('topics.forum_id', $posts)
             ->where(function ($query) use ($topic_neos) {
-                $query->whereIn('topics.id', [$topic_neos]);
+                $query->whereIn('topics.id', $topic_neos);
             })->groupBy('forums.id');
 
         $results = $result->orderBy('id', 'DESC')->paginate(30);
