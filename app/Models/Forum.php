@@ -16,6 +16,8 @@ class Forum extends Model
     protected $casts = [
         'category_id' => 'int',
         'position' => 'int',
+        'num_topic' => 'int',
+        'num_post' => 'int',
         'views' => 'int'
     ];
 
@@ -26,6 +28,8 @@ class Forum extends Model
         'slug',
         'description',
         'icon',
+        'num_topic',
+        'num_post',
         'views'
     ];
 
@@ -92,5 +96,33 @@ class Forum extends Model
         }
 
         return $group->permissions->where('forum_id', $this->id)->first();
+    }
+
+    /**
+     * Count The Number Of Posts In The Forum
+     * @param $forum_id
+     * @return int
+     */
+    public function postCount($forum_id)
+    {
+        $forum = self::find($forum_id);
+        $topics = $forum->topics;
+        $count = 0;
+        foreach ($topics as $t) {
+            $count += $t->posts()->count();
+        }
+        return $count;
+    }
+
+    /**
+     * Count The Number Of Topics In The Forum
+     * @param $forum_id
+     * @return int
+     */
+    public function topicCount($forum_id)
+    {
+        $forum = self::find($forum_id);
+
+        return Topic::where('forum_id', '=', $forum->id)->count();
     }
 }
