@@ -87,6 +87,7 @@ class TopicsController extends Controller
         $topic->first_post_user_id = $topic->last_post_user_id = $user->id;
         $topic->first_post_username = $topic->last_post_username = $user->username;
         $topic->name = $request->input('name');
+        $topic->num_post = 1;
         $topic->save();
 
         $topic->posts()->create([
@@ -95,6 +96,12 @@ class TopicsController extends Controller
             'post_username' => $user->username,
             'content' => $request->input('content')
         ]);
+
+        // Count topics
+        $forum->num_topic = $forum->getTopicCount($forum->id);
+
+        // Count posts
+        $forum->num_post = $forum->getPostCount($forum->id);
 
         //give points to user
         $points = setting('points_topic');
