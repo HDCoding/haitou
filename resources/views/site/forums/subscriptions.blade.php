@@ -70,17 +70,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('user.profile', ['slug' => Str::slug($topic->first_post_username)]) }}">
-                                                        {{ $topic->first_post_username }}
-                                                    </a>
+                                                    {{ link_to_route('user.profile', $topic->first_post_username, [strtolower($topic->first_post_username)], ['class' => 'text-info']) }}
                                                 </td>
                                                 <td>
-                                                    {{ $topic->posts->count() - 1 }} Respostas / {{ $topic->views }} Views
+                                                    {{ $topic->num_post }} Respostas / {{ $topic->views }} Views
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('user.profile', ['slug' => Str::slug($topic->last_post_username)]) }}">
-                                                        {{ $topic->last_post_username }}
-                                                    </a>,
+                                                    {{ link_to_route('user.profile', $topic->last_post_username, [strtolower($topic->last_post_username)], ['class' => 'text-info']) }}
+                                                    -
                                                     @if($topic->updated_at && $topic->updated_at != null)
                                                         <time datetime="{{ format_date_time($topic->updated_at) }}">
                                                             {{ format_date_time($topic->updated_at) }}
