@@ -31,12 +31,12 @@
                         @if($forum->getPermission()->start_topic)
                             <div class="mb-4">
                                 <a href="{{ route('new.topic', ['forum_id' => $forum->id]) }}">
-                                    <button type="button" class="btn btn-primary btn-rounded">
+                                    <button type="button" class="btn btn-sm btn-primary btn-rounded">
                                         <i class="ion ion-md-add"></i>&nbsp; Novo Tópico
                                     </button>
                                 </a>
                                 <a href="{{ route('new.poll', ['forum_id' => $forum->id]) }}">
-                                    <button type="button" class="btn btn-info btn-rounded">
+                                    <button type="button" class="btn btn-sm btn-info btn-rounded">
                                         <i class="fas fa-poll"></i>&nbsp; Nova Pesquisa
                                     </button>
                                 </a>
@@ -60,50 +60,39 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($topics as $topic)
+                                @forelse($threads as $thread)
                                     @if ($forum->getPermission()->read_topic)
                                         <tr>
                                             <th scope="row">
-                                                @if($topic->is_locked)
-                                                    <i class="fas fa-lock fa-2x mr-4"></i>
-                                                @endif
-                                                {{ link_to_route('forum.topic', $topic->name, ['topic_id' => $topic->id, 'slug' => $topic->slug], ['class' => 'h5 text-info']) }}
-                                                @if ($topic->is_locked)
+                                                {{ link_to_route('forum.topic', $thread->name, ['topic_id' => $thread->id, 'slug' => $thread->slug], ['class' => 'h5 text-info']) }}
+                                                @if ($thread->is_locked)
                                                     <span class='badge badge-purple'>Fechado</span>
                                                 @endif
-                                                @if($topic->is_pinned)
+                                                @if($thread->is_pinned)
                                                     <span class='badge badge-success'>Pin</span>
                                                 @endif
                                                 <div class="text-dark small mt-1">
-                                                    Iniciado em {{ format_date_time($topic->created_at) }}&nbsp;·&nbsp;
-                                                    Por <a class="text-info" href="{{ route('user.profile', [$forum->topics->last()->first_user->slug]) }}">
-                                                        {{ $forum->topics->last()->first_post_username }}
-                                                    </a>
+                                                    Iniciado em {{ format_date_time($thread->created_at) }}&nbsp;·&nbsp;
+                                                    Por {{ link_to_route('user.profile', $thread->first_post_username, [strtolower($thread->first_post_username)], ['class' => 'text-info']) }}
                                                 </div>
                                             </th>
-                                            <td>{{ $topic->posts->count() - 1 }}</td>
-                                            <td>{{ $topic->views }}</td>
+                                            <td>{{ $thread->num_post - 1 }}</td>
+                                            <td>{{ $thread->views }}</td>
                                             <td>
-                                                @if($forum->posts->count() > 0)
-                                                    @if(empty($forum->topics->last()->last_post_username))
-                                                        <div class="ml-2">
-                                                            <div class="text-truncate">
-                                                                {{ format_date_time($forum->topics->last()->updated_at) }}
-                                                            </div>
-                                                            Por <a class="text-info text-truncate" href="{{ route('user.profile', [strtolower($forum->topics->last()->first_post_username)]) }}">
-                                                                {{ $forum->topics->last()->first_post_username }}
-                                                            </a>
+                                                @if(empty($thread->last_post_username))
+                                                    <div class="ml-2">
+                                                        <div class="text-truncate">
+                                                            {{ format_date_time($thread->updated_at) }}
                                                         </div>
-                                                    @else
-                                                        <div class="ml-2">
-                                                            <div class="text-truncate">
-                                                                {{ format_date_time($forum->topics->last()->updated_at) }}
-                                                            </div>
-                                                            Por <a class="text-info text-truncate" href="{{ route('user.profile', [strtolower($forum->topics->last()->last_post_username)]) }}">
-                                                                {{ $forum->topics->last()->last_post_username }}
-                                                            </a>
+                                                        Por {{ link_to_route('user.profile', $thread->first_post_username, [strtolower($thread->first_post_username)], ['class' => 'text-info text-truncate']) }}
+                                                    </div>
+                                                @else
+                                                    <div class="ml-2">
+                                                        <div class="text-truncate">
+                                                            {{ format_date_time($thread->updated_at) }}
                                                         </div>
-                                                    @endif
+                                                        Por {{ link_to_route('user.profile', $thread->last_post_username, [strtolower($thread->last_post_username)], ['class' => 'text-info text-truncate']) }}
+                                                    </div>
                                                 @endif
                                             </td>
                                         </tr>
