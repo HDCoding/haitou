@@ -47,9 +47,7 @@
 
                         <b>Moderadores: &nbsp;</b>
                         @foreach($moderators as $moderator)
-                            @if($moderator->forum_id == $forum->id)
-                                {{ link_to_route('user.profile', $moderator->user->username, $moderator->user->slug, ['target' => '_blank']) }}&nbsp;
-                            @endif
+                            {{ link_to_route('user.profile', $moderator->user->username, $moderator->user->slug, ['target' => '_blank']) }}&nbsp;
                         @endforeach
                         <div class="table-responsive m-t-20">
                             <table class="table">
@@ -70,6 +68,12 @@
                                                     <i class="fas fa-lock fa-2x mr-4"></i>
                                                 @endif
                                                 {{ link_to_route('forum.topic', $topic->name, ['topic_id' => $topic->id, 'slug' => $topic->slug], ['class' => 'h5 text-info']) }}
+                                                @if ($topic->is_locked)
+                                                    <span class='badge badge-purple'>Fechado</span>
+                                                @endif
+                                                @if($topic->is_pinned)
+                                                    <span class='badge badge-success'>Pin</span>
+                                                @endif
                                                 <div class="text-dark small mt-1">
                                                     Iniciado em {{ format_date_time($topic->created_at) }}&nbsp;·&nbsp;
                                                     Por <a class="text-info" href="{{ route('user.profile', [$forum->topics->last()->first_user->slug]) }}">
