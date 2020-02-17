@@ -21,6 +21,7 @@ class Topic extends Model
         'last_post_user_id' => 'int',
         'is_locked' => 'bool',
         'is_pinned' => 'bool',
+        'num_post' => 'int',
         'views' => 'int'
     ];
 
@@ -35,6 +36,7 @@ class Topic extends Model
         'slug',
         'is_locked',
         'is_pinned',
+        'num_post',
         'views'
     ];
 
