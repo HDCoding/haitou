@@ -17,6 +17,7 @@ use App\Achievements\UserMadeFirstTopic;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Forum\NewTopicRequest;
 use App\Models\Forum;
+use App\Models\Post;
 use App\Models\Topic;
 use App\User;
 use Illuminate\Http\Request;
@@ -42,13 +43,13 @@ class TopicsController extends Controller
             return redirect()->route('forum');
         }
 
-        //Get all posts
-        $posts = $topic->posts()
-            ->with('user:id,group_id,mood_id,slug,username,title,signature,avatar')
-            ->paginate(30);
-
         //Increment view
         $topic->increment('views');
+
+        //Get all posts
+        $posts = Post::with('user:id,group_id,mood_id,slug,username,title,signature,avatar')
+            ->where('topic_id', '=', $topic->id)
+            ->paginate(30);
 
         return view('site.forums.topic', compact('topic', 'posts'));
     }
@@ -56,9 +57,9 @@ class TopicsController extends Controller
     /*
      * Add new Topic
      */
-    public function newTopicForm($forum_id, $slug)
+    public function newTopicForm($forum_id)
     {
-        $forum = Forum::whereSlug($slug)->findOrFail($forum_id);
+        $forum = Forum::findOrFail($forum_id);
 
         // The user has the right to create a topic here?
         if ($forum->getPermission()->start_topic != true) {
@@ -90,6 +91,10 @@ class TopicsController extends Controller
         $topic->num_post = 1;
         $topic->save();
 
+        $forum->num_topic = $forum->topicCount($forum->id);
+        $forum->num_post = $forum->postCount($forum->id);
+        $forum->update();
+
         $topic->posts()->create([
             'forum_id' => $forum_id,
             'user_id' => $user->id,
@@ -98,10 +103,10 @@ class TopicsController extends Controller
         ]);
 
         // Count topics
-        $forum->num_topic = $forum->getTopicCount($forum->id);
+        $forum->num_topic = $forum->topicCount($forum->id);
 
         // Count posts
-        $forum->num_post = $forum->getPostCount($forum->id);
+        $forum->num_post = $forum->postCount($forum->id);
 
         //give points to user
         $points = setting('points_topic');
