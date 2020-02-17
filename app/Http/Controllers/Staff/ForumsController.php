@@ -23,9 +23,17 @@ class ForumsController extends Controller
 
     public function index()
     {
-        $categories = Category::orderBy('position', 'ASC')->where('is_forum', '=', true)->get();
-        $forums = Forum::with('topics:id,forum_id')->orderBy('position', 'ASC')->get();
-        $moderators = Moderator::with('user:id,username')->get();
+        $categories = Category::orderBy('position', 'ASC')
+            ->where('is_forum', '=', true)
+            ->get();
+
+        $forums = Forum::with('topics:id,forum_id')
+            ->orderBy('position', 'ASC')
+            ->get();
+
+        $moderators = Moderator::with('user:id,username')
+            ->whereIn('forum_id', [$forums])
+            ->get();
 
         return view('staff.forums.index', compact('categories', 'forums', 'moderators'));
     }
@@ -139,11 +147,14 @@ class ForumsController extends Controller
     public function formModerators($forum_id)
     {
         $forum = Forum::find($forum_id);
-        $members = User::where('status', '=', 2)->select('id', 'username')->pluck('username', 'id');
+        $members = User::where('status', '=', 2)
+            ->select('id', 'username')
+            ->pluck('username', 'id');
 
         $member = DB::table('moderators')
             ->where('forum_id', '=', $forum_id)
-            ->pluck('user_id', 'user_id')->all();
+            ->pluck('user_id', 'user_id')
+            ->all();
 
         return view('staff.forums.moderators', compact('members', 'forum', 'member'));
     }
