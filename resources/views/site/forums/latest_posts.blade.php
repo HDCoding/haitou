@@ -69,18 +69,21 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->topic->first_post_username)]) }}">
-                                                {{ $result->topic->first_post_username }}
-                                            </a>
+                                            {{ link_to_route('user.profile', $result->topic->first_post_username, [strtolower($result->topic->first_post_username)], ['class' => 'text-info']) }}
                                         </td>
                                         <td>
-                                            {{ $result->count() - 1 }} Respostas / {{ $result->views }} Views
+                                            {{ $result->topic->num_post }} Respostas / {{ $result->topic->views }} Views
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->topic->last_post_username)]) }}">{{ $result->topic->last_post_username }}</a>,
-                                            <time datetime="{{ format_date($result->topic->updated_at) }}">
-                                                {{ format_date_time($result->updated_at) }}
-                                            </time>
+                                            {{ link_to_route('user.profile', $result->topic->last_post_username, [strtolower($result->topic->last_post_username)], ['class' => 'text-info']) }}
+                                            -
+                                            @if($result->updated_at && $result->updated_at != null)
+                                                <time datetime="{{ format_date_time($result->updated_at) }}">
+                                                    {{ format_date_time($result->updated_at) }}
+                                                </time>
+                                            @else
+                                                <time datetime="N/A">N/A</time>
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
