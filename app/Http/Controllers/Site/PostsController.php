@@ -36,6 +36,7 @@ class PostsController extends Controller
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
+        $forum = $topic->forum;
 
         //Get Permission
         $permission = $topic->forum;
@@ -57,8 +58,17 @@ class PostsController extends Controller
         // Save last post user data to topic table
         $topic->last_post_user_id = $user->id;
         $topic->last_post_username = $user->username;
-        $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();;
+        $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();
         $topic->update();
+
+        // Count posts
+        $forum->num_post = $forum->postCount($forum->id);
+
+        // Count topics
+        $forum->num_topic = $forum->topicCount($forum->id);
+
+        //Save
+        $forum->update();
 
         //give points to user
         $points = setting('points_post');
@@ -126,6 +136,7 @@ class PostsController extends Controller
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
+        $forum = $topic->forum;
 
         //Get Permission
         $permission = $topic->forum;
@@ -151,10 +162,13 @@ class PostsController extends Controller
         $topic->update();
 
         // Count posts
-//        $forum->num_post = $topic->forum->getPostCount($forum->id);
+        $forum->num_post = $forum->postCount($forum->id);
 
         // Count topics
-//        $forum->num_topic = $topic->forum->getTopicCount($forum->id);
+        $forum->num_topic = $forum->topicCount($forum->id);
+
+        //Save
+        $forum->update();
 
         //give points to user
         $points = setting('points_post');
