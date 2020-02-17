@@ -40,7 +40,7 @@ Route::namespace('Auth')->group(function () {
 });
 
 //Middleware
-Route::middleware(['auth', 'lockscreen'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     //Site Folder
     Route::namespace('Site')->group(function () {
         // Achievements
