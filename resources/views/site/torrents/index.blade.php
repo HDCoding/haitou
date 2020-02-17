@@ -110,7 +110,7 @@
                                         <td class="col-md-4">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <img class="img-fluid img-responsive" src="{{ $torrent->media->poster }}" width="92px" height="130px" alt="Poster">
+                                                    <img class="img-fluid img-responsive" src="{{ $torrent->media->poster() }}" width="92px" height="130px" alt="Poster">
                                                 </div>
                                                 <div class="media-body">
                                                     <h5 class="media-heading ml-3">
@@ -139,7 +139,7 @@
                                         </td>
                                         <td class="col-md-1 text-center text-success">{{ $torrent->seeders }}</td>
                                         <td class="col-md-1 text-center text-danger">{{ $torrent->leechers }}</td>
-                                        <td class="col-md-1 text-center">{{ $torrent->times_completed }}</td>
+                                        <td class="col-md-1 text-center text-info">{{ $torrent->times_completed }}</td>
                                         <td class="col-md-1 text-center">{{ $torrent->size() }}</td>
                                         <td class="col-md-1 text-center">{{ format_date($torrent->created_at) }}</td>
                                     </tr>
