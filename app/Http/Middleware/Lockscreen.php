@@ -16,13 +16,16 @@ class Lockscreen
      */
     public function handle($request, Closure $next)
     {
-        $lock = $this->getLock();
+        //TODO
+        //make this really works
 
-        if ($lock['status'] == true) {
-            //Erro ta aqui
-        }
-
-        return $next($request);
+//        $lock = $this->getLock();
+//
+//        if ($lock['status'] == true) {
+//            //Erro ta aqui
+//        }
+//
+//        return $next($request);
     }
 
     private function getLock()
