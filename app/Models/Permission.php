@@ -8,6 +8,7 @@ class Permission extends Model
 {
     public $timestamps = false;
     protected $table = 'permissions';
+
     protected $casts = [
         'forum_id' => 'int',
         'group_id' => 'int',
