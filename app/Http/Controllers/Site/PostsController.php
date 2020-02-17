@@ -57,7 +57,8 @@ class PostsController extends Controller
         // Save last post user data to topic table
         $topic->last_post_user_id = $user->id;
         $topic->last_post_username = $user->username;
-        $topic->save();
+        $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();;
+        $topic->update();
 
         //give points to user
         $points = setting('points_post');
@@ -146,7 +147,14 @@ class PostsController extends Controller
         // Save last post user data to topic table
         $topic->last_post_user_id = $user->id;
         $topic->last_post_username = $user->username;
-        $topic->save();
+        $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();;
+        $topic->update();
+
+        // Count posts
+//        $forum->num_post = $topic->forum->getPostCount($forum->id);
+
+        // Count topics
+//        $forum->num_topic = $topic->forum->getTopicCount($forum->id);
 
         //give points to user
         $points = setting('points_post');
