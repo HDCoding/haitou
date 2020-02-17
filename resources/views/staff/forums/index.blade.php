@@ -28,19 +28,27 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="button-group">
-                            <a href="{{ url('staff/forums/create') }}" class="btn btn-primary btn-rounded waves-effect">Adicionar Fórum</a>
-                            <a href="{{ url('staff/categories/create') }}" target="_blank" class="btn btn-secondary btn-rounded waves-effect">Adicionar Categoria</a>
+                <div class="row">
+                    <div class="col-md-12 mt-3 mb-3">
+                        <div class="float-left">
+                            <a href="{{ url('staff/forums/create') }}">
+                                <button type="button" class="btn btn-sm btn-primary btn-rounded waves-effect">
+                                    <i class="fas fa-plus"></i>&nbsp; Adicionar Fórum
+                                </button>
+                            </a>
+                            <a href="{{ url('staff/categories/create') }}" target="_blank">
+                                <button type="button" class="btn btn-sm btn-secondary btn-rounded waves-effect">
+                                    <i class="fas fa-plus"></i>&nbsp; Adicionar Categoria
+                                </button>
+                            </a>
                         </div>
+                        <div class="float-right">
 
-                        <div class="tab-content">
-                            <p class="text-center">
-                                <b class="text-danger">OBS:</b>
-                                <b>Excluindo a categoria todos os Fórums daquela categoria seram deletados.</b>
-                            </p>
                         </div>
+                    </div>
+                    <div class="col-md-12 mt-3 mb-3 text-center h4">
+                        <b class="text-danger">OBS:</b>
+                        <p>Excluindo a categoria todos os Fórums daquela categoria seram deletados.</p>
                     </div>
                 </div>
             </div>
@@ -86,16 +94,18 @@
                                         <p class="text-muted remove-margin-b">{{ $forum->description }}</p>
                                         <b>Moderadores: &nbsp;</b>
                                         @foreach($moderators as $moderator)
-                                            @if($moderator->forum_id == $forum->id)
-                                                {{ $moderator->user->username }}&nbsp;
-                                            @endif
+                                            {{ $moderator->user->username }}&nbsp;
                                         @endforeach
                                     </td>
                                     <td>{{ $forum->topics->count() }}</td>
                                     <td>
-                                        <a href="#" class="OrderEdit" id="position" data-type="number"
-                                           data-column="position" data-title="Editar Ordem" data-name="position"
-                                           data-value="{{ $forum->position }}" data-pk="{{ $forum->id }}"
+                                        <a href="#" class="OrderEdit" id="position"
+                                           data-type="number"
+                                           data-column="position"
+                                           data-title="Editar Ordem"
+                                           data-name="position"
+                                           data-value="{{ $forum->position }}"
+                                           data-pk="{{ $forum->id }}"
                                            data-url="{{ route('forum.order', ['id' => $forum->id]) }}">{{ $forum->position }}</a>
                                     </td>
                                     <td>
