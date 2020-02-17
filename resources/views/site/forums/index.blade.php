@@ -61,34 +61,32 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                                    <td>{{ $forum->topics->count() }}</td>
-                                                    <td>{{ $forum->posts->count() }}</td>
+                                                    <td>{{ $forum->num_topic }}</td>
+                                                    <td>{{ $forum->num_post }}</td>
                                                     <td>
-                                                        @if($forum->posts->count() > 0)
-                                                            @if(empty($forum->topics->last()->last_post_username))
+                                                        @if($forum->num_post > 0)
+                                                            @if(empty($forum->topics->last_post_username))
                                                                 <div class="ml-2">
-                                                                    <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->last()->id, $forum->topics->last()->slug]) }}">
-                                                                        {{ $forum->topics->last()->name }}
-                                                                    </a>
+{{--                                                                    {{ link_to_route('forum.topic', $forum->topics->name, ['topic_id' => $forum->topics->id, 'slug' => $forum->topics->slug], ['class' => 'd-block text-truncate']) }}--}}
+{{--                                                                    <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->id, $forum->topics->slug]) }}">--}}
+{{--                                                                        {{ $forum->topics->name }}--}}
+{{--                                                                    </a>--}}
                                                                     <div class="text-dark small text-truncate">
-                                                                        {{ format_date_time($forum->posts->last()->created_at) }}
+{{--                                                                        {{ format_date_time($forum->posts->created_at) }}--}}
                                                                         <span class="ml-1 mr-1">·</span>
-                                                                        <a class="text-info" href="{{ route('user.profile', [strtolower($forum->topics->last()->first_post_username)]) }}">
-                                                                            {{ $forum->topics->last()->first_post_username }}
-                                                                        </a>
+{{--                                                                        {{ link_to_route('user.profile', $forum->topics->first_post_username, [strtolower($forum->topics->first_post_username)], ['class' => 'text-info']) }}--}}
                                                                     </div>
                                                                 </div>
                                                             @else
                                                                 <div class="ml-2">
-                                                                    <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->last()->id, $forum->topics->last()->slug]) }}">
-                                                                        {{ $forum->topics->last()->name }}
-                                                                    </a>
+{{--                                                                    {{ link_to_route('forum.topic', $forum->topics->name, ['topic_id' => $forum->topics->id, 'slug' => $forum->topics->slug], ['class' => 'd-block text-truncate']) }}--}}
+{{--                                                                    <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->id, $forum->topics->slug]) }}">--}}
+{{--                                                                        {{ $forum->topics->name }}--}}
+{{--                                                                    </a>--}}
                                                                     <div class="text-dark small text-truncate">
-                                                                        {{ format_date_time($forum->posts->last()->created_at) }}
+{{--                                                                        {{ format_date_time($forum->posts->created_at) }}--}}
                                                                         <span class="ml-1 mr-1">·</span>
-                                                                        <a class="text-info" href="{{ route('user.profile', [strtolower($forum->topics->last()->last_post_username)]) }}">
-                                                                            {{ $forum->topics->last()->last_post_username }}
-                                                                        </a>
+{{--                                                                        {{ link_to_route('user.profile', $forum->topics->last_post_username, [strtolower($forum->topics->last_post_username)], ['class' => 'text-info']) }}--}}
                                                                     </div>
                                                                 </div>
                                                             @endif
