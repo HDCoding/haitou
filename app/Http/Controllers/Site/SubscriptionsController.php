@@ -14,14 +14,18 @@ class SubscriptionsController extends Controller
         $this->middleware('auth');
     }
 
-    public function subscribeTopic(Request $request, Topic $topic)
+    public function subscribeTopic(Request $request, $topic_id)
     {
+        $topic = Topic::findOrFail($topic_id);
+
         $logger = 'forum.topic';
-        $params = ['id' => $topic->id, 'slug' => $topic->slug,];
+        $params = ['topic_id' => $topic->id, 'slug' => $topic->slug,];
+
+        $forum = $topic->forum;
 
         if (!$request->user()->isSubscribed($topic->id)) {
             $subscription = new Subscription();
-            $subscription->forum_id = $topic->forum->id;
+            $subscription->forum_id = $forum->id;
             $subscription->topic_id = $topic->id;
             $subscription->user_id = $request->user()->id;
             $subscription->save();
@@ -34,10 +38,12 @@ class SubscriptionsController extends Controller
         }
     }
 
-    public function unsubscribeTopic(Request $request, Topic $topic)
+    public function unsubscribeTopic(Request $request, $topic_id)
     {
+        $topic = Topic::findOrFail($topic_id);
+
         $logger = 'forum.topic';
-        $params = ['id' => $topic->id, 'slug' => $topic->slug];
+        $params = ['topic_id' => $topic->id, 'slug' => $topic->slug];
 
         if ($request->user()->isSubscribed($topic->id)) {
             $request->user()->subscriptions()->where('topic_id', '=', $topic->id)->first()->delete();
