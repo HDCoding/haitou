@@ -80,8 +80,7 @@ class Post extends Model
     public function pageNumber()
     {
         $result = ($this->postNumber() - 1) / 30 + 1;
-        $result = floor($result);
-        return $result;
+        return floor($result);
     }
 
     public function postNumber()
