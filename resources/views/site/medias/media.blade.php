@@ -4,6 +4,7 @@
 
 @section('css')
     <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/raty/jquery.raty.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -65,26 +66,17 @@
                                     </button>
                                     {!! Form::close() !!}
                                 @endif
-                                <h5 class="m-t-40">Votos</h5>
-                                <i class="fa fa-fw fa-2x fa-star push-10-r text-warning"></i> Total de votos: {{ $media->totalRating() }}
-                                @if($voted != null)
-                                    <i class="fa fa-fw fa-2x fa-star push-10-r text-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Seu Voto"></i>Seu Voto: {{ $voted->vote }}
-                                @endif
-                                <div class="col-sm-2">
-                                    <!-- Resultado -->
-                                    <h3 class="font-w700">{{ $media->avgRating() }}</h3>
-                                </div>
-                                <div class="col-sm-2">
-                                    {!! Form::open(['route' => ['media.vote', $media->id], 'class' => 'form-horizontal']) !!}
-                                    <label for="vote"></label>
-                                    <select name="vote" id="vote">
-                                        <option value="">--</option>
-                                        @for($i = 0; $i <= 10; $i++)
-                                            <option value="{{ $i }}">{{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                    {!! Form::close() !!}
-                                </div>
+                                <h5 class="m-t-40">Classificação</h5>
+                                <!-- Resultado -->
+                                <h3 class="font-weight-bold h3">
+                                    {{ $media->avgRating() }}
+                                    <span class="small text-muted">/10</span><br>
+                                </h3>
+                                <span class="small text-muted font-14" data-toggle="tooltip" title="Críticos">{{ $media->totalRating() }}</span>
+
+                                {!! Form::open(['route' => ['media.vote', $media->id], 'class' => 'form-horizontal']) !!}
+                                <div id="no-of-stars"></div>
+                                {!! Form::close() !!}
 
                             </div>
                         </div>
@@ -286,6 +278,7 @@
 @section('scripts')
     <!-- VegasJS -->
     <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <script src="{{ asset('vendor/raty/jquery.raty.js') }}"></script>
 
     @if(!empty($media->cover()))
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
@@ -304,6 +297,19 @@
         });
     </script>
     @endif
+
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(function() {
+            //Raty
+            $.fn.raty.defaults.path = '/images/rating/';
+            $('#no-of-stars').raty({
+                number: 10,
+                @if($voted != null)
+                score: '{{ $voted->vote }}'
+                @endif
+            });
+        });
+    </script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(window).on('hashchange', function () {
