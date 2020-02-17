@@ -43,8 +43,8 @@ class HomeController extends Controller
 
         // Latest Posts
         $posts = cache()->remember('latest_posts', $expire_at, function () {
-            return Post::with('topic:id,name,slug')
-                ->select('id', 'topic_id', 'post_username', 'content', 'updated_at')
+            return Post::with('topic:id,forum_id,name,slug')
+                ->select('id', 'forum_id', 'topic_id', 'post_username', 'content', 'updated_at')
                 ->latest()
                 ->take(5)
                 ->get();
@@ -61,10 +61,12 @@ class HomeController extends Controller
         });
 
         // Users Online
-        $users = User::with('group:id,name,color,icon')
-            ->select('id', 'group_id', 'username', 'slug', 'is_warned', 'show_profile')
-            ->where('last_action', '>', now()->subMinutes(5))
-            ->get();
+        $users = cache()->remember('latest_online', $expire_at, function () {
+            return User::with('group:id,name,color,icon')
+                ->select('id', 'group_id', 'username', 'slug', 'is_warned', 'show_profile')
+                ->where('last_action', '>', now()->subMinutes(5))
+                ->get();
+        });
 
         // Groups
         $groups = cache()->remember('user_groups', $expire_at, function () {
