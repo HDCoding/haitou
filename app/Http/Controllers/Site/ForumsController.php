@@ -23,7 +23,7 @@ class ForumsController extends Controller
 
         $user = $request->user();
 
-        $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        $posts = $user->group->permissions->where('view_forum', '=', false)->pluck('forum_id')->toArray();
         if (!is_array($posts)) {
             $posts = [];
         }
@@ -197,7 +197,7 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        $topics = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        $topics = $user->group->permissions->where('view_forum', '=', false)->pluck('forum_id')->toArray();
         if (!is_array($topics)) {
             $topics = [];
         }
@@ -226,13 +226,13 @@ class ForumsController extends Controller
     {
         $user = $request->user();
 
-        $posts = $user->group->permissions->where('view_forum', '=', 0)->pluck('forum_id')->toArray();
+        $posts = $user->group->permissions->where('view_forum', '=', false)->pluck('forum_id')->toArray();
         if (!is_array($posts)) {
             $posts = [];
         }
 
         $results = Post::with('user:id,username,slug,group_id')
-            ->with('topic:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug,is_locked,is_pinned')
+            ->with('topic:id,forum_id,first_post_user_id,last_post_user_id,first_post_username,last_post_username,name,slug,is_locked,is_pinned,num_post,views,updated_at')
             ->selectRaw('posts.id as id,posts.*, views')
             ->leftJoin('topics', 'posts.topic_id', '=', 'topics.id')
             ->whereNotIn('topics.forum_id', $posts)
