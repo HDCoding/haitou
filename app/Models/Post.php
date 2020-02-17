@@ -46,35 +46,9 @@ class Post extends Model
         return $this->hasMany(Attachment::class, 'post_id');
     }
 
-    public function setContentAttribute($value)
-    {
-        $this->attributes['content'] = htmlspecialchars($value);
-    }
-
     public function contentHtml()
     {
         return (new BBCode())->parse($this->content, true);
-    }
-
-    public function brief($length = 100, $ellipses = true, $strip_html = false)
-    {
-        $input = $this->content;
-        //strip tags, if desired
-        if ($strip_html) {
-            $input = strip_tags($input);
-        }
-        //no need to trim, already shorter than trim length
-        if (strlen($input) <= $length) {
-            return $input;
-        }
-        //find last space within length
-        $last_space = strrpos(substr($input, 0, $length), ' ');
-        $trimmed_text = substr($input, 0, $last_space);
-        //add ellipses (...)
-        if ($ellipses) {
-            $trimmed_text .= '...';
-        }
-        return $trimmed_text;
     }
 
     public function pageNumber()
@@ -90,8 +64,8 @@ class Post extends Model
 
     public function likis($post_id)
     {
-        //Count likes and dislike
-        return $this->likes()->where('post_id', '=', $post_id)->where('is_like', '=', 1)->count();
+        //Count likes
+        return $this->likes()->where('post_id', '=', $post_id)->where('is_like', '=', true)->count();
     }
 
     public function likes()
@@ -101,8 +75,8 @@ class Post extends Model
 
     public function dislikes($post_id)
     {
-        //Count likes and dislike
-        return $this->likes()->where('post_id', '=', $post_id)->where('is_dislike', '=', 1)->count();
+        //Count dislike
+        return $this->likes()->where('post_id', '=', $post_id)->where('is_dislike', '=', true)->count();
     }
 
 }
