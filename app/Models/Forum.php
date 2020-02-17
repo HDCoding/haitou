@@ -88,8 +88,12 @@ class Forum extends Model
     public function getPermission()
     {
         if (auth()->check()) {
-            $group = auth()->user()->group;
+            $user = auth()->user();
+
+            return Permission::with('group:id')
+                ->where('forum_id', '=', $this->id)
+                ->where('group_id', '=', $user->group_id)
+                ->first();
         }
-        return $group->permissions->where('forum_id', '=', $this->id)->first();
     }
 }
