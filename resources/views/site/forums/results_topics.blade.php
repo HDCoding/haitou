@@ -177,20 +177,21 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->first_post_username)]) }}">
-                                                {{ $result->first_post_username }}
-                                            </a>
+                                            {{ link_to_route('user.profile', $topic->first_post_username, [strtolower($topic->first_post_username)], ['class' => 'text-info']) }}
                                         </td>
                                         <td>
-                                            {{ $result->posts->count() - 1 }} Respostas / {{ $result->views }} Views
+                                            {{ $result->num_post }} Respostas / {{ $result->views }} Views
                                         </td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => Str::slug($result->last_post_username)]) }}">
-                                                {{ $result->last_post_username }}
-                                            </a>,
-                                            <time datetime="{{ format_date_time($result->updated_at) }}">
-                                                {{ format_date_time($result->updated_at) }}
-                                            </time>
+                                            {{ link_to_route('user.profile', $result->last_post_username, [strtolower($result->last_post_username)], ['class' => 'text-info']) }}
+                                            -
+                                            @if($result->updated_at && $result->updated_at != null)
+                                                <time datetime="{{ format_date_time($result->updated_at) }}">
+                                                    {{ format_date_time($result->updated_at) }}
+                                                </time>
+                                            @else
+                                                <time datetime="N/A">N/A</time>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
