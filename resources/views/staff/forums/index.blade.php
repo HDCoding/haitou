@@ -78,7 +78,7 @@
                         @forelse($forums as $forum)
                             @if($category->id == $forum->category_id)
                                 <tr>
-                                    <th>
+                                    <th class="align-middle">
                                         <i class="{{ $forum->icon }} fa-2x"></i>
                                     </th>
                                     <td>
