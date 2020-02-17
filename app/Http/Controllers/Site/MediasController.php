@@ -41,22 +41,22 @@ class MediasController extends Controller
 
         $vote = $request->input('vote');
 
-        $voted = $media->ratings()->where('user_id', '=', $user->id)->first();
+        $voted = Rating::with('user:id')
+            ->where('user_id', '=', $user->id)
+            ->where('media_id', '=', $media->id)
+            ->first();
 
         if ($voted) {
             $voted->vote = $vote;
             $voted->update();
         } else {
-            $newRating = new Rating();
-            $newRating->media_id = $media->id;
-            $newRating->user_id = $user->id;
-            $newRating->vote = $vote;
-            $newRating->save();
-        }
-        if ($vote == 0 && !$voted) {
-            return redirect()->route('media.show', [$media->id, $media->slug]);
+            $rating = new Rating();
+            $rating->media_id = $media->id;
+            $rating->user_id = $user->id;
+            $rating->vote = $vote;
+            $rating->save();
         }
 
-        return redirect()->route('media.show', [$media->id, $media->slug]);
+        return redirect()->route('media.show', ['id' => $media->id, 'slug' => $media->slug]);
     }
 }
