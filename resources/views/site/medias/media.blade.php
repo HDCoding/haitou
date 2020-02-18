@@ -72,9 +72,10 @@
                                 </h3>
                                 <span class="small text-muted font-14" data-toggle="tooltip" title="Críticos">{{ $media->totalRating() }}</span>
 
-                                {!! Form::open(['route' => ['media.vote', $media->id], 'class' => 'form-horizontal']) !!}
-                                <div id="no-of-stars"></div>
+                                {!! Form::open(['route' => ['media.vote', $media->id], 'class' => 'form-horizontal', 'id' => 'form-rate']) !!}
+                                    <div id="rating"></div>
                                 {!! Form::close() !!}
+
 
                             </div>
                         </div>
@@ -298,11 +299,16 @@
         $(function() {
             //Raty
             $.fn.raty.defaults.path = '/images/rating/';
-            $('#no-of-stars').raty({
+            $('#rating').raty({
                 number: 10,
                 @if($voted != null)
-                score: '{{ $voted->vote }}'
+                score: '{{ $voted->vote }}',
                 @endif
+                click: function(score, evt) {
+                    setTimeout(function () {
+                        $('#form-rate').submit();
+                    }, 500);
+                }
             });
         });
     </script>
