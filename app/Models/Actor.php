@@ -46,6 +46,6 @@ class Actor extends Model
 
     public function image()
     {
-        return asset('images/' . self::uploaderFolder . '/' . $this->image);
+        return asset('storage/actors/' . $this->image);
     }
 }
