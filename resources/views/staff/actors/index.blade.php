@@ -49,17 +49,17 @@
                                 @foreach($actors as $actor)
                                     <tr>
                                         <th>
-                                            <img class="" src="{{ asset('actors/'.$actor->image) }}" alt="{{ $actor->name }}" width="70px">
+                                            <img src="{{ $actor->image() }}" alt="{{ $actor->name }}" width="70px">
                                         </th>
                                         <td>{{ $actor->name }}</td>
                                         <td><span class="badge badge-info">{{ $actor->views }}</span></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ url('staff/actors/' . $actor->id . '/edit') }}" data-toggle="tooltip" title="Editar Atriz/Ator">
-                                                    <i class="fas fa-pencil-alt"></i> Editar
+                                                    <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a href="javascript:;" class="m-l-10" onclick="document.getElementById('actor-del-{{ $actor->id }}').submit();" data-toggle="tooltip" title="Remover Atriz/Ator">
-                                                    <i class="fas fa-times"></i> Deletar
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('actor-del-{{ $actor->id }}').submit();" data-toggle="tooltip" title="Remover Atriz/Ator">
+                                                    <i class="fas fa-times text-danger"></i>
                                                 </a>
                                                 {!! Form::open(['url' => 'staff/actors/' . $actor->id, 'method' => 'DELETE', 'id' => 'actor-del-' . $actor->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
