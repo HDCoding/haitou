@@ -7,36 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-    public $timestamps = false;
-    protected $table = 'likes';
-    protected $casts = [
-        'user_id' => 'int',
-        'torrent_id' => 'int',
-        'post_id' => 'int',
-        'is_like' => 'bool',
-        'is_dislike' => 'bool'
-    ];
+	protected $table = 'likes';
 
-    protected $fillable = [
-        'user_id',
-        'torrent_id',
-        'post_id',
-        'is_like',
-        'is_dislike'
-    ];
+	public $incrementing = false;
 
-    public function post()
-    {
-        return $this->belongsTo(Post::class, 'post_id');
-    }
+	public $timestamps = false;
 
-    public function torrent()
-    {
-        return $this->belongsTo(Torrent::class, 'torrent_id');
-    }
+	protected $casts = [
+		'user_id' => 'int',
+		'post_id' => 'int'
+	];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+	public function post()
+	{
+		return $this->belongsTo(Post::class);
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }
