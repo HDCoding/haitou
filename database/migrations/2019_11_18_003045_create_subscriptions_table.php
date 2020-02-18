@@ -16,8 +16,8 @@ class CreateSubscriptionsTable extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('forum_id')->index();
-            $table->unsignedBigInteger('topic_id')->index()->unique();
-            $table->unsignedBigInteger('user_id')->index()->unique();
+            $table->unsignedBigInteger('topic_id')->index();
+            $table->unsignedBigInteger('user_id')->index();
             $table->boolean('email')->default(0);
             $table->boolean('notify')->default(0);
 
