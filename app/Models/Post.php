@@ -62,21 +62,15 @@ class Post extends Model
         return $this->topic->postNumberFromId($this->id);
     }
 
-    public function likis($post_id)
-    {
-        //Count likes
-        return $this->likes()->where('post_id', '=', $post_id)->where('is_like', '=', true)->count();
-    }
-
     public function likes()
     {
         return $this->hasMany(Like::class, 'post_id');
     }
 
-    public function dislikes($post_id)
+    public function likesCount($post_id)
     {
-        //Count dislike
-        return $this->likes()->where('post_id', '=', $post_id)->where('is_dislike', '=', true)->count();
+        //Count likes
+        return $this->likes()->where('post_id', '=', $post_id)->count();
     }
 
 }
