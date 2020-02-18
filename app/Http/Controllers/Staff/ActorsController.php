@@ -53,7 +53,7 @@ class ActorsController extends Controller
                 $actor->image = $name_file;
             }
         } else {
-            return redirect()->route('edit.profile')
+            return redirect()->back()
                 ->with('error', 'Erro no arquivo de imagem, check o arquivo e tente novamente.')
                 ->withInput();
         }
