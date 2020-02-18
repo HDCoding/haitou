@@ -156,12 +156,12 @@ class ForumsController extends Controller
     {
         $categories = Category::where('is_forum', '=', true)
             ->select('id', 'name')
-            ->orderBy('position', 'ASC')
+            ->orderBy('position')
             ->get();
 
         $forums = Forum::with('posts:id,forum_id,topic_id,created_at')
-            ->with('topics:id,forum_id,name,slug,first_post_username,last_post_username')
-            ->select('id', 'category_id', 'name', 'slug', 'description', 'icon', 'num_topic', 'num_post')
+            ->with('topics:id,forum_id')
+            ->orderBy('name')
             ->get();
 
         // Total Forums Count
@@ -187,7 +187,8 @@ class ForumsController extends Controller
         $threads = Topic::with('forum:id')
             ->where('forum_id', '=', $forum->id)
             ->latest('is_pinned')
-            ->latest('id')
+            ->latest('last_reply_at')
+            ->latest()
             ->paginate(30);
 
         return view('site.forums.threads', compact('forum', 'threads', 'moderators'));
