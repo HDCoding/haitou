@@ -177,7 +177,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{ link_to_route('user.profile', $topic->first_post_username, [strtolower($topic->first_post_username)], ['class' => 'text-info']) }}
+                                            {{ link_to_route('user.profile', $result->first_post_username, [strtolower($result->first_post_username)], ['class' => 'text-info']) }}
                                         </td>
                                         <td>
                                             {{ $result->num_post }} Respostas / {{ $result->views }} Views
