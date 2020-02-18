@@ -14,17 +14,11 @@ class CreateLikesTable extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
-            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('torrent_id')->index()->nullable();
             $table->unsignedBigInteger('post_id')->index()->nullable();
-            $table->boolean('is_like')->default(0);
-            $table->boolean('is_dislike')->default(0);
+            $table->primary(['user_id','post_id']);
 
             $table->foreign('user_id')->references('id')->on('users');
-
-            $table->foreign('torrent_id')->references('id')->on('torrents')
-                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->foreign('post_id')->references('id')->on('posts')
                 ->onUpdate('cascade')->onDelete('cascade');
