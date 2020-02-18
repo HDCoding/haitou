@@ -15,6 +15,8 @@ class Forum extends Model
 
     protected $casts = [
         'category_id' => 'int',
+        'last_topic_id' => 'int',
+        'last_post_user_id' => 'int',
         'position' => 'int',
         'num_topic' => 'int',
         'num_post' => 'int',
@@ -23,6 +25,8 @@ class Forum extends Model
 
     protected $fillable = [
         'category_id',
+        'last_topic_id',
+        'last_post_user_id',
         'position',
         'name',
         'slug',
@@ -30,7 +34,10 @@ class Forum extends Model
         'icon',
         'num_topic',
         'num_post',
-        'views'
+        'views',
+        'last_topic_name',
+        'last_topic_slug',
+        'last_post_username'
     ];
 
     public function sluggable()
