@@ -14,18 +14,17 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-3 mb-3">
-                {!! Form::open(['route' => 'forum.search', 'method' => 'GET']) !!}
-                {!! Form::hidden('sorting', 'created_at') !!}
-                {!! Form::hidden('direction', 'desc') !!}
-                {!! Form::text('name', (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : ''), ['class' => 'form-control', 'placeholder' => 'Pesquisa rápida...', 'required', 'minlength' => 3, 'maxlengt' => 30]) !!}
-                {!! Form::close() !!}
-            </div>
-            <div class="col-12">
-            @includeIf('errors.errors', [$errors])
-            @include('includes.messages')
-
             @if(setting('forum_on'))
+                <div class="col-12 col-md-3 mb-3">
+                    {!! Form::open(['route' => 'forum.search', 'method' => 'GET']) !!}
+                    {!! Form::hidden('sorting', 'created_at') !!}
+                    {!! Form::hidden('direction', 'desc') !!}
+                    {!! Form::text('name', (isset($params) && is_array($params) && array_key_exists('name', $params) ? $params['name'] : ''), ['class' => 'form-control', 'placeholder' => 'Pesquisa rápida...', 'required', 'minlength' => 3, 'maxlengt' => 30]) !!}
+                    {!! Form::close() !!}
+                </div>
+                <div class="col-12">
+                @includeIf('errors.errors', [$errors])
+                @include('includes.messages')
 
                 @include('site.forums.buttons')
 
@@ -48,10 +47,10 @@
                                         @if($category->id === $forum->category_id)
                                             @if($forum->getPermission() != null && $forum->getPermission()->view_forum)
                                                 <tr>
-                                                    <th scope="row">
+                                                    <th>
                                                         <div class="media">
                                                             <div class="mt-1">
-                                                                <i class="fas fa-file-alt fa-2x mr-4"></i>
+                                                                <i class="{{ $forum->icon }} fa-2x mr-4"></i>
                                                             </div>
                                                             <div class="media-body">
                                                                 <h5 class="media-heading">
@@ -65,28 +64,13 @@
                                                     <td>{{ $forum->num_post }}</td>
                                                     <td>
                                                         @if($forum->num_post > 0)
-                                                            @if(empty($forum->topics->last_post_username))
+                                                            @if(!empty($forum->last_post_username))
                                                                 <div class="ml-2">
-{{--                                                                    {{ link_to_route('forum.topic', $forum->topics->name, ['topic_id' => $forum->topics->id, 'slug' => $forum->topics->slug], ['class' => 'd-block text-truncate']) }}--}}
-{{--                                                                    <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->id, $forum->topics->slug]) }}">--}}
-{{--                                                                        {{ $forum->topics->name }}--}}
-{{--                                                                    </a>--}}
+                                                                    {{ link_to_route('forum.topic', $forum->last_topic_name, ['topic_id' => $forum->last_topic_id, 'slug' => $forum->last_topic_slug]) }}
                                                                     <div class="text-dark small text-truncate">
-{{--                                                                        {{ format_date_time($forum->posts->created_at) }}--}}
+                                                                        {{ $forum->updated_at->diffForHumans() }}
                                                                         <span class="ml-1 mr-1">·</span>
-{{--                                                                        {{ link_to_route('user.profile', $forum->topics->first_post_username, [strtolower($forum->topics->first_post_username)], ['class' => 'text-info']) }}--}}
-                                                                    </div>
-                                                                </div>
-                                                            @else
-                                                                <div class="ml-2">
-{{--                                                                    {{ link_to_route('forum.topic', $forum->topics->name, ['topic_id' => $forum->topics->id, 'slug' => $forum->topics->slug], ['class' => 'd-block text-truncate']) }}--}}
-{{--                                                                    <a class="d-block text-truncate" href="{{ route('forum.topic', [$forum->topics->id, $forum->topics->slug]) }}">--}}
-{{--                                                                        {{ $forum->topics->name }}--}}
-{{--                                                                    </a>--}}
-                                                                    <div class="text-dark small text-truncate">
-{{--                                                                        {{ format_date_time($forum->posts->created_at) }}--}}
-                                                                        <span class="ml-1 mr-1">·</span>
-{{--                                                                        {{ link_to_route('user.profile', $forum->topics->last_post_username, [strtolower($forum->topics->last_post_username)], ['class' => 'text-info']) }}--}}
+                                                                        {{ link_to_route('user.profile', $forum->last_post_username, [strtolower($forum->last_post_username)], ['class' => 'text-info']) }}
                                                                     </div>
                                                                 </div>
                                                             @endif
@@ -99,7 +83,7 @@
                                         @endif
                                     @empty
                                         <tr class="card-body py-3">
-                                            <td class="text-center" colspan="3">Nenhum forum no momento.</td>
+                                            <td class="text-center" colspan="4">Nenhum forum no momento.</td>
                                         </tr>
                                     @endforelse
                                     </tbody>
@@ -110,7 +94,7 @@
                     </div>
                 @endforeach
             @else
-                <p class="text-center"><b>Fórum fechado para manutenção no momento.</b></p>
+                <p class="text-center h4 font-weight-bold">Fórum fechado para manutenção no momento.</p>
             @endif
             </div>
         </div>
