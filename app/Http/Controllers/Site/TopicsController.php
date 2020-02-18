@@ -126,31 +126,41 @@ class TopicsController extends Controller
         return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
 
-    public function formTopicEdit(Request $request, $topic_id, $slug)
+    public function formTopicEdit(Request $request, $topic_id)
     {
         //Logged user
         $user = $request->user();
 
         //Edit topic title
-        $topic = Topic::whereSlug($slug)->findOrFail($topic_id);
+        $topic = Topic::findOrFail($topic_id);
 
         abort_unless($user->can('forum-mod') || $user->id !== $topic->first_post_user_id, 403);
 
         return view('site.forums.edit_topic', compact('topic'));
     }
 
-    public function topicEdit(Request $request, $topic_id, $slug)
+    public function topicEdit(Request $request, $topic_id)
     {
         //Logged user
         $user = $request->user();
 
         //Edit topic title
-        $topic = Topic::whereSlug($slug)->findOrFail($topic_id);
+        $topic = Topic::findOrFail($topic_id);
+
+        $forum = $topic->forum;
 
         abort_unless($user->can('forum-mod') || $user->id !== $topic->first_post_user_id, 403);
 
         $topic->name = $request->input('name');
         $topic->update();
+
+
+        // Save last topic data to the forum table
+        $forum->last_topic_id = $topic->id;
+        $forum->last_topic_name = $topic->name;
+        $forum->last_topic_slug = $topic->slug;
+
+        $forum->update();
 
         toastr()->success('Título do Tópico Alterado', 'Tópico');
         return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
@@ -182,7 +192,7 @@ class TopicsController extends Controller
 
         abort_unless($user->can('forum-mod'), 403);
 
-        $topic->is_locked = true;
+        $topic->is_locked = false;
         $topic->save();
 
         toastr()->success('Tópico Aberto com sucesso', 'Tópico');
@@ -198,7 +208,7 @@ class TopicsController extends Controller
 
         abort_unless($user->can('forum-mod'), 403);
 
-        $topic->is_locked = false;
+        $topic->is_locked = true;
         $topic->save();
 
         toastr()->success('Tópico Trancado com sucesso', 'Tópico');
