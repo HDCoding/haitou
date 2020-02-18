@@ -61,13 +61,13 @@
                                 <h4 class="box-title mr-2 m-t-40">Descrição Torrent</h4>
                                 <p>{!! $torrent->descriptionHtml() !!}</p>
 
-                                @if(!$thanks)
-                                    @if (auth()->user()->id !== $torrent->user_id)
+                                @if(!$thanks || auth()->user()->id !== $torrent->user_id)
                                     <h4 class="box-title m-t-40">Agradecer</h4>
                                     {!! Form::open(['route' => ['torrent.thanks', $torrent->id], 'class' => 'form-horizontal']) !!}
-                                        <button type="submit" class="btn btn-danger btn-rounded" data-toggle="tooltip" title="" data-original-title="Obrigada(o)"><i class="ti-heart"></i> </button>
+                                        <button type="submit" class="btn btn-danger btn-rounded" data-toggle="tooltip" title="" data-original-title="Obrigada(o)">
+                                            <i class="ti-heart"></i>
+                                        </button>
                                     {!! Form::close() !!}
-                                    @endif
                                 @endif
                             </div>
                         </div>
