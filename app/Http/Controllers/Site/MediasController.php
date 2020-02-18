@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\RatingRequest;
 use App\Models\Media;
+use App\Models\MediaCast;
 use App\Models\Rating;
 
 class MediasController extends Controller
@@ -30,7 +31,12 @@ class MediasController extends Controller
         $voted = $media->ratings()->where('user_id', '=', $user->id)->first();
         $bookmarked = $media->bookmarks()->where('user_id', '=', $user->id)->first();
 
-        return view('site.medias.media', compact('media', 'comments', 'voted', 'bookmarked'));
+        $casts = MediaCast::with('actor:id,name,slug,image')
+            ->with('character:id,name,slug,image')
+            ->where('media_id', '=', $media->id)
+            ->get();
+
+        return view('site.medias.media', compact('media', 'comments', 'voted', 'bookmarked', 'casts'));
     }
 
     public function vote(RatingRequest $request, $media_id)
