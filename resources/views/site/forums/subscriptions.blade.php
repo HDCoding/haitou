@@ -78,9 +78,9 @@
                                                 <td>
                                                     {{ link_to_route('user.profile', $topic->last_post_username, [strtolower($topic->last_post_username)], ['class' => 'text-info']) }}
                                                     -
-                                                    @if($topic->updated_at && $topic->updated_at != null)
-                                                        <time datetime="{{ format_date_time($topic->updated_at) }}">
-                                                            {{ format_date_time($topic->updated_at) }}
+                                                    @if($topic->last_reply_at && $topic->last_reply_at != null)
+                                                        <time datetime="{{ format_date_time($topic->last_reply_at) }}">
+                                                            {{ format_date_time($topic->last_reply_at) }}
                                                         </time>
                                                     @else
                                                         <time datetime="N/A">N/A</time>
