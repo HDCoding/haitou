@@ -50,14 +50,14 @@
                                 @foreach($characters as $character)
                                     <tr>
                                         <th>
-                                            <img class="" src="{{ asset('characters/'.$character->image) }}" alt="{{ $character->name }}" width="70px">
+                                            <img src="{{ $character->image() }}" alt="{{ $character->name }}" width="70px">
                                         </th>
                                         <td>{{ $character->name }}</td>
                                         <td><span class="badge badge-info">{{ $character->views }}</span></td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/characters/' . $character->id . '/edit') }}" data-toggle="tooltip" title="Editar Personagem"><i class="fas fa-pencil-alt text-info"></i> Editar</a>
-                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('character-del-{{ $character->id }}').submit();" data-toggle="tooltip" title="Remover Personagem"><i class="fa fa-times text-danger"></i> Deletar</a>
+                                                <a href="{{ url('staff/characters/' . $character->id . '/edit') }}" data-toggle="tooltip" title="Editar Personagem"><i class="fas fa-pencil-alt text-info"></i></a>
+                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('character-del-{{ $character->id }}').submit();" data-toggle="tooltip" title="Remover Personagem"><i class="fa fa-times text-danger"></i></a>
                                                 {!! Form::open(['url' => 'staff/characters/' . $character->id, 'method' => 'DELETE', 'id' => 'character-del-' . $character->id , 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
                                             </div>
