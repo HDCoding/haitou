@@ -39,11 +39,12 @@
                                 @foreach($bookmarks as $bookmark)
                                     <tr>
                                         <td>
-                                            <img class="" src="{{ $bookmark->actor->image }}" alt="{{ $bookmark->actor->name }}" width="70px">
+                                            <img src="{{ $bookmark->actor->image() }}" alt="{{ $bookmark->actor->name }}" width="70px">
                                         </td>
                                         <td>
-                                            <a href="{{ route('actor.show', [$bookmark->actor->id, $bookmark->actor->slug]) }}"
-                                               target="_blank">{{ $bookmark->actor->name }}</a>
+                                            <a href="{{ route('actor.show', [$bookmark->actor->id, $bookmark->actor->slug]) }}" target="_blank">
+                                                {{ $bookmark->actor->name }}
+                                            </a>
                                         </td>
                                         <td class="text-center">
                                             {!! Form::open(['route' => ['delete.bookmark', $bookmark->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
