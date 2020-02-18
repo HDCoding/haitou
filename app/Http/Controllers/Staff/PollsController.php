@@ -72,13 +72,25 @@ class PollsController extends Controller
         return redirect()->to('staff/polls');
     }
 
-    public function openClose($poll_id)
+    public function openPoll($poll_id)
     {
         $poll = Poll::findOrFail($poll_id);
-        $poll->is_closed = !$poll->is_closed;
-        $poll->closed_at = !empty($poll->closed_at) ? null : now();
+        $poll->is_closed = false;
+        $poll->closed_at = null;
         $poll->update();
-        toastr()->info('Pesquisa Aberta/Fechada.', 'Aviso');
+
+        toastr()->info('Pesquisa Aberta.', 'Aviso');
+        return redirect()->to('staff/polls');
+    }
+
+    public function closePoll($poll_id)
+    {
+        $poll = Poll::findOrFail($poll_id);
+        $poll->is_closed = true;
+        $poll->closed_at = now();
+        $poll->update();
+
+        toastr()->info('Pesquisa Fechada.', 'Aviso');
         return redirect()->to('staff/polls');
     }
 
