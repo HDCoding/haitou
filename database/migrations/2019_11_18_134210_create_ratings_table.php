@@ -17,15 +17,11 @@ class CreateRatingsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('media_id')->index()->nullable();
-            $table->unsignedBigInteger('torrent_id')->index()->nullable();
             $table->unsignedTinyInteger('vote'); //1 to 10
 
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->foreign('media_id')->references('id')->on('medias')
-                ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->foreign('torrent_id')->references('id')->on('torrents')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
     }
