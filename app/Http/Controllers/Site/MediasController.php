@@ -45,7 +45,7 @@ class MediasController extends Controller
 
         $user = $request->user();
 
-        $vote = $request->input('vote');
+        $vote = $request->input('score');
 
         $voted = Rating::with('user:id')
             ->where('user_id', '=', $user->id)
