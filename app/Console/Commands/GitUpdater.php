@@ -13,11 +13,6 @@ class GitUpdater extends Command
     use ConsoleTools;
 
     /**
-     * The copy command.
-     */
-    protected $copy_command = 'cp -Rfp';
-
-    /**
      * The name and signature of the console command.
      *
      * @var string
