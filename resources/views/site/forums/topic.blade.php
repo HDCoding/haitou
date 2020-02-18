@@ -29,7 +29,7 @@
 
     <div class="container-fluid">
         @if($topic->is_locked)
-            <small><span class="badge badge-default align-text-bottom ml-1">Trancado</span></small>
+            <span class="badge badge-default small align-text-bottom ml-1">Trancado</span>
         @endif
         @includeIf('errors.errors', [$errors])
         @include('includes.messages')
@@ -62,7 +62,7 @@
                         @endif
                     @endif
                     @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
-                        <a href="{{ route('topic.form.edit', [$topic->id, $topic->slug]) }}" class="btn btn-sm btn-orange btn-rounded">
+                        <a href="{{ route('topic.form.edit', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-dark btn-rounded">
                             <i class="fas fa-pencil-alt"></i> Editar Tópico
                         </a>
                     @endif
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
+        @if(auth()->user()->id == $topic->first_post_user_id || auth()->user()->can('forum-mod'))
         <div class="row">
             <div class="col-md-12 mt-3 mb-4">
                 <h4>Polls</h4>
@@ -118,6 +118,17 @@
                                 {!! Form::open(['route' => ['post.delete', $post->id], 'method' => 'DELETE', 'id' => 'post-del-' . $post->id , 'style' => 'display: none']) !!}
                                 {!! Form::close() !!}
                             @endif
+                            @if (auth()->user()->likes()->where('post_id', '=', $post->id)->first())
+                                <a href="{{ route('like.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Like Post">
+                                    <i class="fas fa-thumbs-up text-info"></i>
+                                </a>
+                                ({{ $post->likesCount($post->id) }})
+                            @else
+                                <a href="{{ route('like.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Like Post">
+                                    <i class="fas fa-thumbs-up text-dark"></i>
+                                </a>
+                                ({{ $post->likesCount($post->id) }})
+                            @endif
                             <b class="float-right">{{ format_date_time($post->created_at) }}</b>
                         </div>
                         <div class="card-body">
@@ -125,9 +136,11 @@
                                 {!! $post->contentHtml() !!}
                                 <hr>
                                 <div class="row col">
+                                    @if(auth()->user()->show_forum_signatures)
                                     <div class="col-lg-10">
                                         {!! $post->user->signature() !!}
                                     </div>
+                                    @endif
                                     <div class="col-lg-2">
                                         <div class="d-flex no-block align-items-center">
                                             <div class="ml-auto">
@@ -165,28 +178,6 @@
                             <p>{{ $post->user->title }}</p>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            @if (auth()->user()->likes()->where('post_id', '=', $post->id)->where('is_like', '=', 1)->first())
-                                <a class="text-success ml-3" href="{{ route('like.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Like Post">
-                                    <i class="ion ion-ios-thumbs-up"></i> {{ $post->likis($post->id) }}
-                                </a>
-                            @else
-                                <a class="text-dark ml-3" href="{{ route('like.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Like Post">
-                                    <i class="ion ion-ios-thumbs-up"></i> {{ $post->likis($post->id) }}
-                                </a>
-                            @endif
-                            @if (auth()->user()->likes()->where('post_id', '=', $post->id)->where('is_dislike', '=', 1)->first())
-                                <a class="text-danger ml-3" href="{{ route('dislike.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Dislike Post">
-                                    <i class="ion ion-ios-thumbs-down"></i> {{ $post->dislikes($post->id) }}
-                                </a>
-                            @else
-                                <a class="text-dark ml-3" href="{{ route('dislike.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Dislike Post">
-                                    <i class="ion ion-ios-thumbs-down"></i> {{ $post->dislikes($post->id) }}
-                                </a>
-                            @endif
-                        </div>
-                    </div>
                 </div>
             </div>
         @endforeach
@@ -195,7 +186,7 @@
     {{ $posts->links() }}
 
     <div class="col-12">
-        @if(!$topic->is_locked)
+        @if(!$topic->is_locked || auth()->user()->can('forum-mod'))
             <div class="card mb-4">
                 <div class="card-header with-elements">
                     <span class="card-header-title mr-2">Resposta rápida:</span>
