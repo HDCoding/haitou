@@ -58,15 +58,19 @@
                                         <td>{{ $poll->multi_choice ? 'Sim' : 'Não' }}</td>
                                         <td>{{ $poll->name() }}</td>
                                         <td>
-                                            <a href="javascript:;" onclick="document.getElementById('poll-upd-{{ $poll->id }}').submit();">
-                                                @if($poll->is_closed)
-                                                    <i class="fa fa-stop text-danger" data-toggle="tooltip" title="Fechado"></i>
-                                                @else
-                                                    <i class="fa fa-play text-success" data-toggle="tooltip" title="Em Aberto"></i>
-                                                @endif
-                                            </a>
-                                            {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/update', 'method' => 'PUT', 'id' => 'poll-upd-' . $poll->id, 'style' => 'display: none']) !!}
+                                            @if($poll->is_closed)
+                                            {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/open']) !!}
+                                                <button type="submit" class="btn btn-sm" data-toggle="tooltip" title="Abrir Pesquisa">
+                                                    <i class="fa fa-play text-success"></i>
+                                                </button>
                                             {!! Form::close() !!}
+                                            @else
+                                            {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/close']) !!}
+                                                <button type="submit" class="btn btn-sm" data-toggle="tooltip" title="Fechar Pesquisa">
+                                                    <i class="fa fa-stop text-danger"></i>
+                                                </button>
+                                            {!! Form::close() !!}
+                                            @endif
                                         </td>
                                         <td>{{ $poll->votes()->count() }}</td>
                                         <td>{{ format_date($poll->created_at) }}</td>
@@ -101,7 +105,7 @@
                 "displayLength": 50,
                 "searching": true,
                 "responsive": true,
-                "order": [[ 1, "asc" ]],
+                "order": [[ 0, "asc" ]],
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
                 }
