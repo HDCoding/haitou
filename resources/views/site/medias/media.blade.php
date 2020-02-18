@@ -27,7 +27,6 @@
 
     <div class="container-fluid">
         <div class="row">
-            @if(!empty($media->cover()))
             <div class="col-sm-12 col-lg-12">
                 <div class="card vegas-fixed-background" id="media-cover">
                     <div class="card-body py-home">
@@ -35,7 +34,6 @@
                     </div>
                 </div>
             </div>
-            @endif
             <div class="col-12">
                 @includeIf('errors.errors', [$errors])
                 @include('includes.messages')
@@ -192,11 +190,11 @@
                                     <thead>
                                     </thead>
                                     <tbody>
-                                    @foreach($media->media_casts as $cast)
+                                    @foreach($casts as $cast)
                                         <tr>
                                             @if($cast->actor != null)
                                                 <th>
-                                                    <img class="img rounded" src="{{ $cast->actor->image }}" alt="{{ $cast->actor->name }}" style="width:60px; height:60px;">
+                                                    <img src="{{ $cast->actor->image() }}" alt="{{ $cast->actor->name }}" style="width:60px; height:60px;">
                                                 </th>
                                                 <td class="align-middle text-left">
                                                     <a href="{{ route('actor.show', [$cast->actor->id, $cast->actor->slug]) }}">
@@ -211,7 +209,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="text-right">
-                                                    <img class="img-avatar rounded" src="{{ $cast->character->image }}" alt="{{ $cast->character->name }}" style="width:60px; height:60px;">
+                                                    <img src="{{ $cast->character->image() }}" alt="{{ $cast->character->name }}" style="width:60px; height:60px;">
                                                 </td>
                                             @endif
                                         </tr>
@@ -280,7 +278,6 @@
     <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
     <script src="{{ asset('vendor/raty/jquery.raty.js') }}"></script>
 
-    @if(!empty($media->cover()))
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(function() {
             // Fixed bg
@@ -296,7 +293,6 @@
             });
         });
     </script>
-    @endif
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(function() {
