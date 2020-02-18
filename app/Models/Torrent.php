@@ -90,11 +90,6 @@ class Torrent extends Model
         return $this->hasMany(Historic::class, 'torrent_id');
     }
 
-    public function likes()
-    {
-        return $this->hasMany(Like::class, 'torrent_id');
-    }
-
     public function peers()
     {
         return $this->hasMany(Peer::class, 'torrent_id');
