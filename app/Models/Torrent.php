@@ -95,11 +95,6 @@ class Torrent extends Model
         return $this->hasMany(Peer::class, 'torrent_id');
     }
 
-    public function ratings()
-    {
-        return $this->hasMany(Rating::class, 'torrent_id');
-    }
-
     public function thanks()
     {
         return $this->hasMany(Thank::class, 'torrent_id');
