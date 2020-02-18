@@ -29,12 +29,13 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6">
                                 <div class="white-box text-center">
-                                    <img src="{{ $actor->image() }}" class="img-responsive" alt="actors">
+                                    <img class="img-fluid img-responsive" src="{{ $actor->image() }}" alt="Poster" width="300px">
                                 </div>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-6">
                                 <h4 class="box-title m-t-40">Info</h4>
                                 <p>{!! $actor->descriptionHtml() !!}</p>
+                                <h5 class="m-t-40">Favoritos</h5>
                                 @if($bookmarked)
                                     {!! Form::open(['route' => ['delete.bookmark', $bookmarked->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
                                     <button type="submit" class="btn icon-btn btn-dark" data-toggle="tooltip" data-placement="top" title="Remover dos favoritos">
