@@ -59,6 +59,7 @@ class PostsController extends Controller
         $topic->last_post_user_id = $user->id;
         $topic->last_post_username = $user->username;
         $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();
+        $topic->last_reply_at = now(); // Update time
         $topic->update();
 
         // Count posts
@@ -66,6 +67,15 @@ class PostsController extends Controller
 
         // Count topics
         $forum->num_topic = $forum->topicCount($forum->id);
+
+        // Save last post user data to the forum table
+        $forum->last_post_user_id = $user->id;
+        $forum->last_post_username = $user->username;
+
+        // Save last topic data to the forum table
+        $forum->last_topic_id = $topic->id;
+        $forum->last_topic_name = $topic->name;
+        $forum->last_topic_slug = $topic->slug;
 
         //Save
         $forum->update();
@@ -158,7 +168,8 @@ class PostsController extends Controller
         // Save last post user data to topic table
         $topic->last_post_user_id = $user->id;
         $topic->last_post_username = $user->username;
-        $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();;
+        $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();
+        $topic->last_reply_at = now(); // Update time
         $topic->update();
 
         // Count posts
@@ -166,6 +177,15 @@ class PostsController extends Controller
 
         // Count topics
         $forum->num_topic = $forum->topicCount($forum->id);
+
+        // Save last post user data to the forum table
+        $forum->last_post_user_id = $user->id;
+        $forum->last_post_username = $user->username;
+
+        // Save last topic data to the forum table
+        $forum->last_topic_id = $topic->id;
+        $forum->last_topic_name = $topic->name;
+        $forum->last_topic_slug = $topic->slug;
 
         //Save
         $forum->update();
