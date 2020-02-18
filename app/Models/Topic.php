@@ -14,6 +14,10 @@ class Topic extends Model
 
     protected $table = 'topics';
 
+    protected $dates = [
+        'last_reply_at'
+    ];
+
     protected $casts = [
         'forum_id' => 'int',
         'poll_id' => 'int',
@@ -37,7 +41,8 @@ class Topic extends Model
         'is_locked',
         'is_pinned',
         'num_post',
-        'views'
+        'views',
+        'last_reply_at'
     ];
 
     public function first_user()
