@@ -35,7 +35,6 @@ class CreateForumsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('last_topic_id')->references('id')->on('topics');
             $table->foreign('last_post_user_id')->references('id')->on('users');
         });
     }
