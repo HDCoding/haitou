@@ -421,12 +421,12 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return empty($this->avatar) ? asset('images/avatar.jpg') : url('storage/avatars/' . $this->avatar);
+        return empty($this->avatar) ? asset('images/no-avatar.jpg') : url('storage/avatars/' . $this->avatar);
     }
 
     public function cover()
     {
-        return empty($this->cover) ? asset('images/user-cover.png') : url('storage/covers/' . $this->cover);
+        return empty($this->cover) ? asset('images/no-cover.jpg') : url('storage/covers/' . $this->cover);
     }
 
     public function points()
