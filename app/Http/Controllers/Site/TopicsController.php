@@ -91,10 +91,6 @@ class TopicsController extends Controller
         $topic->num_post = 1;
         $topic->save();
 
-        $forum->num_topic = $forum->topicCount($forum->id);
-        $forum->num_post = $forum->postCount($forum->id);
-        $forum->update();
-
         $topic->posts()->create([
             'forum_id' => $forum_id,
             'user_id' => $user->id,
@@ -102,11 +98,22 @@ class TopicsController extends Controller
             'content' => $request->input('content')
         ]);
 
+        // Count posts
+        $forum->num_post = $forum->postCount($forum->id);
+
         // Count topics
         $forum->num_topic = $forum->topicCount($forum->id);
 
-        // Count posts
-        $forum->num_post = $forum->postCount($forum->id);
+        // Save last post user data to the forum table
+        $forum->last_post_user_id = $user->id;
+        $forum->last_post_username = $user->username;
+
+        // Save last topic data to the forum table
+        $forum->last_topic_id = $topic->id;
+        $forum->last_topic_name = $topic->name;
+        $forum->last_topic_slug = $topic->slug;
+
+        $forum->update();
 
         //give points to user
         $points = setting('points_topic');
