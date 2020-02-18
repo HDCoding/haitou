@@ -41,6 +41,6 @@ class Character extends Model
 
     public function image()
     {
-        return asset('images/' . self::uploaderFolder . '/' . $this->image);
+        return asset('storage/characters/' . $this->image);
     }
 }
