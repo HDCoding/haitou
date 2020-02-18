@@ -463,7 +463,8 @@ Route::middleware(['auth'])->group(function () {
             //Poll Options
             Route::prefix('poll')->group(function () {
                 //Enable/Disable
-                Route::put('{id}/update', 'PollsController@openClose');
+                Route::post('{id}/open', 'PollsController@openPoll');
+                Route::post('{id}/close', 'PollsController@closePoll');
                 //Add
                 Route::get('{id}/options/add', 'PollsController@formAddOptions');
                 Route::post('options/add', 'PollsController@postAddOptions');
