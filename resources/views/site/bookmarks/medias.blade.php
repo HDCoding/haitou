@@ -39,7 +39,7 @@
                                 @foreach($bookmarks as $bookmark)
                                     <tr>
                                         <td>
-                                            <img class="" src="{{ $bookmark->media->poster }}" alt="{{ $bookmark->media->name }}" width="70px">
+                                            <img src="{{ $bookmark->media->poster() }}" alt="{{ $bookmark->media->name }}" width="70px">
                                         </td>
                                         <td>
                                             <a href="{{ route('media.show', [$bookmark->media->id, $bookmark->media->slug]) }}" target="_blank">{{ $bookmark->media->name }}</a>
