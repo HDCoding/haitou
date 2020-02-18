@@ -26,6 +26,7 @@ class CreateTopicsTable extends Migration
             $table->boolean('is_pinned')->default(0);
             $table->integer('num_post')->default(0);
             $table->integer('views')->default(0);
+            $table->timestamp('last_reply_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
