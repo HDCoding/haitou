@@ -8,7 +8,7 @@
     <!-- Vegas -->
     <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
     <!-- sceditor -->
-    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
+    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
