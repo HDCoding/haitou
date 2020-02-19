@@ -67,54 +67,6 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row m-t-10">
-                            <!-- Column -->
-                            <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="m-r-20">
-                                        <div data-label="{{ $system->disk()['percentage'] }}%" class="css-bar m-b-0 css-bar-primary css-bar-50"></div>
-                                    </div>
-                                    <div class="media-body small">
-                                        <div class="m-b-1">Total: {{ $system->disk()['total'] }}</div>
-                                        <div class="m-b-1">Usando: {{ $system->disk()['used'] }}</div>
-                                        <div>Livre: {{ $system->disk()['free'] }}</div>
-                                    </div>
-                                    <div>
-                                        <h3 class="m-b-0">{{ $system->disk()['percentage'] }}%</h3>
-                                        <span>DISCO</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Column -->
-                            <!-- Column -->
-                            <div class="col-sm-12 col-md-6 col-lg-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="m-r-20">
-                                        <div data-label="{{ $system->memory()['percentage'] }}%" class="css-bar m-b-0 css-bar-danger css-bar-30"></div>
-                                    </div>
-                                    <div class="media-body small">
-                                        <div class="font-weight-semibold m-b-3"></div>
-                                        <div class="m-b-1">Total: {{ $system->memory()['total'] }}</div>
-                                        <div class="m-b-1">Usando: {{ $system->memory()['used'] }}</div>
-                                        <div>Livre: {{ $system->memory()['free'] }}</div>
-                                    </div>
-                                    <div>
-                                        <h3 class="m-b-0">{{ $system->memory()['percentage'] }}%</h3>
-                                        <span>Memória</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Column -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
             <!-- Information -->
             <div class="col-sm-6 col-xl-3">
                 <div class="card bg-info border-0 text-white m-b-4">
@@ -478,6 +430,85 @@
             </div>
         </div>
 
+        <div class="row">
+            <!-- column -->
+            <div class="col-sm-12 col-lg-4">
+                <div class="card card-hover">
+                    <div class="card-body">
+                        <h4 class="card-title">Disco (% Uso)</h4>
+                        <div class="text-center">
+                            <input data-plugin="knob" data-width="230" data-height="230" data-linecap=round data-fgColor="#01c0c8" value="{{ round($system->disk()['percentage']) }}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".1" />
+                        </div>
+                        <!-- row -->
+                        <div class="row m-t-30 m-b-15">
+                            <!-- column -->
+                            <div class="col-4 birder-right text-center">
+                                <h4 class="m-b-0">
+                                    {{ $system->disk()['total'] }}
+                                </h4>Total
+                            </div>
+                            <!-- column -->
+                            <div class="col-4 birder-right text-center">
+                                <h4 class="m-b-0">
+                                    {{ $system->disk()['used'] }}
+                                </h4>Usando
+                            </div>
+                            <!-- column -->
+                            <div class="col-4 text-center">
+                                <h4 class="m-b-0">
+                                    {{ $system->disk()['free'] }}
+                                </h4>Livre
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- column -->
+            <div class="col-sm-12 col-lg-4">
+                <div class="card card-hover">
+                    <div class="card-body">
+                        <h4 class="card-title">Memória (% Uso)</h4>
+                        <div class="text-center">
+                            <input data-plugin="knob" data-width="230" data-height="230" data-linecap=round data-fgColor="#01c0c8" value="{{ round($system->memory()['percentage']) }}" data-skin="tron" data-angleOffset="180" data-readOnly=true data-thickness=".1" />
+                        </div>
+                        <!-- row -->
+                        <div class="row m-t-30 m-b-15">
+                            <!-- column -->
+                            <div class="col-4 birder-right text-center">
+                                <h4 class="m-b-0">
+                                    {{ $system->memory()['total'] }}
+                                </h4>Total
+                            </div>
+                            <!-- column -->
+                            <div class="col-4 birder-right text-center">
+                                <h4 class="m-b-0">
+                                    {{ $system->memory()['used'] }}
+                                </h4>Usando
+                            </div>
+                            <!-- column -->
+                            <div class="col-4 text-center">
+                                <h4 class="m-b-0">
+                                    {{ $system->memory()['free'] }}
+                                </h4>Livre
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- column -->
+        </div>
+
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/knob/jquery.knob.min.js') }}"></script>
+
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $(document).ready(function() {
+            //disco
+            $('[data-plugin="knob"]').knob();
+        });
+    </script>
 @endsection
