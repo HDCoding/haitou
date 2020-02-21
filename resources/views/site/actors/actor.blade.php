@@ -50,6 +50,10 @@
                                     </button>
                                     {!! Form::close() !!}
                                 @endif
+                                <h5 class="m-t-40">Website</h5>
+                                <a href="{{ hideref($actor->website) }}" target="_blank">Website</a>
+                                <h5 class="m-t-40">Nascimento</h5>
+                                {{ format_date($actor->birthday) }}
                             </div>
                         </div>
                     </div>
