@@ -16,12 +16,12 @@ class PollsController extends Controller
 
     public function show(Request $request, $poll_id, $slug)
     {
+        //logged user
+        $user = $request->user();
+
         $poll = Poll::where('id', '=', $poll_id)
             ->whereSlug($slug)
             ->firstOrFail();
-
-        //logged user
-        $user = $request->user();
 
         if ($poll->hasVoted($user->id)) {
             toastr()->info('Você já votou nesta enquete. Aqui estão os resultados.', 'Enquete');
