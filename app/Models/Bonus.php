@@ -72,15 +72,6 @@ class Bonus extends Model
         }
     }
 
-    public function enabled()
-    {
-        if ($this->is_enabled) {
-            return '<span class="badge badge-outline-success">Ativado</span>';
-        } else {
-            return '<span class="badge badge-outline-danger">Desativado</span>';
-        }
-    }
-
     public function value($decimals = 2)
     {
         $bytes = $this->quantity;
