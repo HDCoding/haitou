@@ -7,8 +7,6 @@
     <link href="{{ asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
     <!-- DataTables -->
     <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    <!-- Sweet-Alert  -->
-    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -46,9 +44,6 @@
                                     <th>Imagem</th>
                                     <th>Nome</th>
                                     <th>Pontos</th>
-                                    @if(auth()->user()->can('acesso-total'))
-                                        <th class="text-center">Opções</th>
-                                    @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -69,17 +64,6 @@
                                                data-value="{{ $mood->points }}" data-pk="{{ $mood->id }}"
                                                data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->points }}</a>
                                         </td>
-                                        @if(auth()->user()->can('acesso-total'))
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    <a class="m-l-15" href="#" data-toggle="tooltip"
-                                                       data-original-title="Remover Bônus"
-                                                       onclick="deleteData({{ $mood->id }})" type="submit">
-                                                        <i class="fa fa-times text-danger"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -165,54 +149,4 @@
         });
     </script>
 
-    <!-- Sweet-Alert  -->
-    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
-
-    <!-- Sweet-Alert -->
-    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        function deleteData(dataId) {
-            swal({
-                title: "Confirmar exclusão",
-                text: "Tem certeza de que deseja excluir?",
-                type: "warning",
-                showCancelButton: true,
-                cancelButtonText: "Cancelar",
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Sim, apague!",
-            }, function (isConfirm) {
-                if (!isConfirm) {
-                    return;
-                }
-                $.ajax({
-                    url: "{{ url('staff/moods') }}" + '/' + dataId,
-                    type: "POST",
-                    data: {'_method': 'DELETE'},
-                    success: function () {
-                        swal({
-                                title: "Sucesso!",
-                                text: "OK, excluído! \nClique em 'Ok' para atualizar a página.",
-                                type: "success",
-                            },
-                            function () {
-                                location.reload();
-                            });
-                    },
-                    error: function () {
-                        swal({
-                            title: 'Opps...',
-                            text: data.message,
-                            type: 'error',
-                            timer: '1500'
-                        })
-                    }
-                })
-            });
-        }
-    </script>
 @endsection
