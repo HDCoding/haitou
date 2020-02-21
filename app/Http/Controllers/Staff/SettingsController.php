@@ -47,7 +47,7 @@ class SettingsController extends Controller
         toastr()->info('Configuração atualizada.', 'Sucesso');
     }
 
-    public function images(ImagesRequest $request)
+    public function images()
     {
         return view('staff.settings.images');
     }
