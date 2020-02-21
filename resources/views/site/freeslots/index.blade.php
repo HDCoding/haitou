@@ -39,8 +39,7 @@
 
                             <hr class="border-light container-m--x my-0">
 
-                            {!! Form::open(['url' => 'freeslots', 'class' => 'mt-4 container col-md-5 col-md-offset-4']) !!}
-                            {!! Form::hidden('freeslot_id', $freeslot->id) !!}
+                            {!! Form::open(['url' => 'freeslots/'. $freeslot->id, 'class' => 'mt-4 container col-md-5 col-md-offset-4']) !!}
                             <div class="form-group row ml-5">
                                 {!! Form::label('point', 'Quantia:', ['class' => 'col-form-label col-sm-2 text-sm-right']) !!}
                                 <div class="col-sm-4">
@@ -70,15 +69,25 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                <tr>
-                                    <th scope="col">Nick</th>
-                                    <th scope="col">Pontos</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">Nick</th>
+                                        <th scope="col">Pontos</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <th scope="row">Mark</th>
-                                    <td>100</td>
+                                    @if(!empty($helpers))
+                                        @forelse($helpers as $helper)
+                                            <th scope="row">
+                                                {{ link_to_route('user.profile', $helper->username, [strtolower($helper->username)], ['target' => '_blank']) }}
+                                            </th>
+                                            <td>{{ $helper->total }}</td>
+                                        @empty
+                                            <th scope="row" colspan="2" class="text-center font-weight-bold">
+                                                Ninguém contribuiu até no momento. Seja a(o) primeira(o).
+                                            </th>
+                                        @endforelse
+                                    @endif
                                 </tr>
                                 </tbody>
                             </table>
