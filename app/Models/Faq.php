@@ -27,15 +27,6 @@ class Faq extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function enabled()
-    {
-        if ($this->is_enable) {
-            return '<span class="label label-success">Ativado</span>';
-        } else {
-            return '<span class="label label-danger">Desativado</span>';
-        }
-    }
-
     public function answerHtml()
     {
         return (new BBCode())->parse($this->answer, true);
