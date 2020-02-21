@@ -84,6 +84,10 @@ class CommentsController extends Controller
         $points = setting('points_comment');
         $user->updatePoints($points);
 
+        //increment number of comments
+        $user->num_comment += 1;
+        $user->update();
+
         toastr()->info('Comentário Criado com Sucesso!', 'Sucesso');
         return redirect()->back();
     }
