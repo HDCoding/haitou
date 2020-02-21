@@ -17,6 +17,7 @@ class CreateFreeslotLogsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('freeslot_id')->index();
             $table->unsignedBigInteger('user_id')->index();
+            $table->string('username', 25);
             $table->integer('donated');
             $table->timestamps();
 
