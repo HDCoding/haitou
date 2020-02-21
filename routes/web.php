@@ -402,7 +402,8 @@ Route::middleware(['auth'])->group(function () {
 
             //Faqs
             Route::resource('faqs', 'FaqsController');
-            Route::put('faq/{id}/update', 'FaqsController@enableDisable');
+            Route::get('faq/{id}/enable', 'FaqsController@enableFaq');
+            Route::get('faq/{id}/disable', 'FaqsController@disableFaq');
 
             //Forums
             Route::resource('forums', 'ForumsController');
@@ -519,9 +520,9 @@ Route::middleware(['auth'])->group(function () {
                 Route::delete('{torrent_id}', 'TorrentsController@destroy');
 
                 //Torrent Options
-                Route::put('{id}/freeleech', 'TorrentsController@freeleech');
-                Route::put('{id}/silver', 'TorrentsController@silver');
-                Route::put('{id}/doubleup', 'TorrentsController@doubleup');
+                Route::get('{id}/freeleech', 'TorrentsController@freeleech');
+                Route::get('{id}/silver', 'TorrentsController@silver');
+                Route::get('{id}/doubleup', 'TorrentsController@doubleup');
             });
 
             //Traffics
