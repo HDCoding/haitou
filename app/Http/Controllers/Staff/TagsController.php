@@ -17,7 +17,9 @@ class TagsController extends Controller
 
     public function index()
     {
-        $tags = Tag::with('torrents')->select('id', 'name')->get();
+        $tags = Tag::with('torrents:id')
+            ->select('id', 'name')
+            ->get();
         return view('staff.tags.index', compact('tags'));
     }
 
