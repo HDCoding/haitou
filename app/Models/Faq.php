@@ -11,12 +11,12 @@ class Faq extends Model
 
     protected $casts = [
         'category_id' => 'int',
-        'is_enable' => 'bool'
+        'is_enabled' => 'bool'
     ];
 
     protected $fillable = [
         'category_id',
-        'is_enable',
+        'is_enabled',
         'question',
         'answer',
         'groups'
