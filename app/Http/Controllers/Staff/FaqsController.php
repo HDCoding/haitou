@@ -59,15 +59,24 @@ class FaqsController extends Controller
     {
         Faq::findOrFail($faq_id)->delete();
         toastr()->warning('FAQ deletada.', 'Aviso');
-        return redirect()->to('faqs');
+        return redirect()->to('staff/faqs');
     }
 
-    public function enableDisable($faq_id)
+    public function enableFaq($faq_id)
     {
         $faq = Faq::findOrFail($faq_id);
-        $faq->is_enabled = !$faq->is_enabled;
+        $faq->is_enable = true;
         $faq->update();
-        toastr()->info('FAQ Ativada/Desativada.', 'Aviso');
+        toastr()->info('FAQ Ativada.', 'Aviso');
+        return redirect()->to('staff/faqs');
+    }
+
+    public function disableFaq($faq_id)
+    {
+        $faq = Faq::findOrFail($faq_id);
+        $faq->is_enable = false;
+        $faq->update();
+        toastr()->info('FAQ Desativada.', 'Aviso');
         return redirect()->to('staff/faqs');
     }
 }
