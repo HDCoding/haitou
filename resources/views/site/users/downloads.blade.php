@@ -90,7 +90,7 @@
                 "responsive": true,
                 "order": [[ 0, "desc" ]],
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
 
