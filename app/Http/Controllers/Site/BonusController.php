@@ -219,7 +219,7 @@ class BonusController extends Controller
             $this->achievement($user);
 
         } else {
-            toastr()->warning('Voce nao possui pontos suficientes', 'Aviso');
+            toastr()->warning('Voce nao possui, pontos Insuficientes ', 'Aviso');
             return redirect()->to('bonus');
         }
 
