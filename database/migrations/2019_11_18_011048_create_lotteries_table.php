@@ -23,7 +23,7 @@ class CreateLotteriesTable extends Migration
             $table->string('numbers'); // [] numeros gerados aleatoriamente
 
             // tipo de premio
-            $table->boolean('is_enable')->default(0);
+            $table->boolean('is_enabled')->default(0);
             $table->boolean('is_vip')->default(0);
             $table->boolean('is_upload')->default(0);
             $table->boolean('is_points')->default(0);
