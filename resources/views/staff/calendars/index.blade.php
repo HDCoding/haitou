@@ -5,6 +5,8 @@
 @section('css')
     <!-- DataTables -->
     <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <!-- Sweet-Alert  -->
+    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -57,28 +59,29 @@
                                         <td>{{ format_date_time($calendar->created_at) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('calendar-upd-{{ $calendar->id }}').submit();">
+                                                <a href="javascript:;"
+                                                   onclick="document.getElementById('calendar-upd-{{ $calendar->id }}').submit();">
                                                     @if($calendar->is_enabled)
                                                         <button type="button" class="btn btn-xs btn-info">
-                                                            <i class="fas fa-pause" data-toggle="tooltip" title="Desativar Evento"></i>
+                                                            <i class="fas fa-pause" data-toggle="tooltip"
+                                                               title="Desativar Evento"></i>
                                                             Desativar Evento
                                                         </button>
                                                     @else
                                                         <button type="button" class="btn btn-xs btn-success">
-                                                            <i class="fas fa-play" data-toggle="tooltip" title="Ativar Evento"></i>
+                                                            <i class="fas fa-play" data-toggle="tooltip"
+                                                               title="Ativar Evento"></i>
                                                             Ativar Evento
                                                         </button>
                                                     @endif
                                                 </a>
                                                 {!! Form::open(['url' => 'staff/calendars/' . $calendar->id, 'method' => 'PUT', 'id' => 'calendar-upd-' . $calendar->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
-                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('calendar-del-{{ $calendar->id }}').submit();" data-toggle="tooltip" title="Remover Evento">
-                                                    <button type="button" class="btn btn-xs btn-danger">
-                                                        <span class="fas fa-times"></span> Deletar
-                                                    </button>
+                                                <a class="m-l-15" href="#" data-toggle="tooltip"
+                                                   data-original-title="Remover Evento"
+                                                   onclick="deleteData({{ $calendar->id }})" type="submit">
+                                                    <i class="fa fa-times text-danger"></i>
                                                 </a>
-                                                {!! Form::open(['url' => 'staff/calendars/' . $calendar->id, 'method' => 'DELETE', 'id' => 'calendar-del-' . $calendar->id , 'style' => 'display: none']) !!}
-                                                {!! Form::close() !!}
                                             </div>
                                         </td>
                                     </tr>
@@ -95,18 +98,71 @@
 @endsection
 
 @section('scripts')
+    <!-- dataTables  -->
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <!-- dataTables  -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
             $('#datatable').DataTable({
                 "displayLength": 50,
                 "searching": true,
                 "responsive": true,
-                "order": [[ 1, "asc" ]],
+                "order": [[1, "asc"]],
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
         });
+    </script>
+
+    <!-- Sweet-Alert  -->
+    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Sweet-Alert -->
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function deleteData(dataId) {
+            swal({
+                title: "Confirmar exclusão",
+                text: "Tem certeza de que deseja excluir?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Sim, apague!",
+            }, function (isConfirm) {
+                if (!isConfirm) {
+                    return;
+                }
+                $.ajax({
+                    url: "{{ url('staff/calendars') }}" + '/' + dataId,
+                    type: "POST",
+                    data: {'_method': 'DELETE'},
+                    success: function () {
+                        swal({
+                                title: "Sucesso!",
+                                text: "OK, excluído! \nClique em 'Ok' para atualizar a página.",
+                                type: "success",
+                            },
+                            function () {
+                                location.reload();
+                            });
+                    },
+                    error: function () {
+                        swal({
+                            title: 'Opps...',
+                            text: data.message,
+                            type: 'error',
+                            timer: '1500'
+                        })
+                    }
+                })
+            });
+        }
     </script>
 @endsection
