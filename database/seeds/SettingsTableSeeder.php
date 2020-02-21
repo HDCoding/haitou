@@ -36,18 +36,18 @@ class SettingsTableSeeder extends Seeder
             ['key' => 'low_ratio', 'value' => '0.550'],
             ['key' => 'invite_days', 'value' => '7'],
             //Points
-            ['key' => 'points_signup', 'value' => '200'],
-            ['key' => 'points_invite', 'value' => '100'],
-            ['key' => 'points_download', 'value' => '20'],
-            ['key' => 'points_comment', 'value' => '4'],
-            ['key' => 'points_upload', 'value' => '30'],
-            ['key' => 'points_rating', 'value' => '5'],
-            ['key' => 'points_topic', 'value' => '8'],
-            ['key' => 'points_post', 'value' => '5'],
-            ['key' => 'points_delete', 'value' => '15'],
-            ['key' => 'points_thanks', 'value' => '5'],
-            ['key' => 'points_report', 'value' => '5'],
-            ['key' => 'points_calendar', 'value' => '50'],
+            ['key' => 'points_signup', 'value' => '250'],
+            ['key' => 'points_invite', 'value' => '250'],
+            ['key' => 'points_download', 'value' => '250'],
+            ['key' => 'points_comment', 'value' => '250'],
+            ['key' => 'points_upload', 'value' => '250'],
+            ['key' => 'points_rating', 'value' => '250'],
+            ['key' => 'points_topic', 'value' => '250'],
+            ['key' => 'points_post', 'value' => '250'],
+            ['key' => 'points_delete', 'value' => '250'],
+            ['key' => 'points_thanks', 'value' => '250'],
+            ['key' => 'points_report', 'value' => '250'],
+            ['key' => 'points_calendar', 'value' => '250'],
             //Policy
             ['key' => 'privacy', 'value' => ''],
             ['key' => 'disclaimer', 'value' => 'Nenhum dos arquivos mostrados aqui está realmente hospedado neste servidor. Os links são fornecidos
@@ -55,15 +55,7 @@ class SettingsTableSeeder extends Seeder
                 o que seus usuários postam ou qualquer outra ação de seus usuários. Você não pode usar este site para
                 distribuir ou baixar qualquer material quando você não tem os direitos legais para fazê-lo. Isto é sua
                 própria responsabilidade de aderir a estes termos.'],
-            ['key' => 'terms', 'value' => ''],
-            //Mail
-            ['key' => 'mail_driver', 'value' => ''],
-            ['key' => 'mail_host', 'value' => ''],
-            ['key' => 'mail_port', 'value' => ''],
-            ['key' => 'mail_username', 'value' => ''],
-            ['key' => 'mail_password', 'value' => ''],
-            ['key' => 'mail_encryption', 'value' => ''],
-
+            ['key' => 'terms', 'value' => '']
         ];
         foreach ($settings as $setting) {
             Setting::create($setting);
