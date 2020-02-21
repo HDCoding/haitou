@@ -18,6 +18,7 @@ class FreeslotLog extends Model
     protected $fillable = [
         'freeslot_id',
         'user_id',
+        'username',
         'donated'
     ];
 
