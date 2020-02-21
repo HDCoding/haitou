@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\FansubsRequest;
+use App\Models\Comment;
 use App\Models\Fansub;
 use App\Models\FansubUser;
 use App\User;
@@ -24,19 +25,31 @@ class FansubsController extends Controller
 
     public function show($fansub_id, $slug)
     {
-        //search or fail-404
-        $fansub = Fansub::where('id', '=', $fansub_id)->whereSlug($slug)->firstOrFail();
+        //show or 404
+        $fansub = Fansub::where('id', '=', $fansub_id)
+            ->whereSlug($slug)
+            ->firstOrFail();
+
         //increment views
         $fansub->increment('views');
+
         //get all members
-        $members = FansubUser::with('user:id,username,slug,avatar')->where('fansub_id', '=', $fansub_id)->get();
+        $members = FansubUser::with('user:id,avatar')
+            ->select('username', 'job', 'is_admin')
+            ->where('fansub_id', '=', $fansub->id)
+            ->get();
+
         //get all comments
-        $comments = $fansub->comments()->latest('id')->paginate(5);
+        $comments = Comment::with('fansub:fansub_id')
+            ->where('fansub_id', '=', $fansub->id)
+            ->latest('id')
+            ->paginate(5);
+
         //paginate the comments
         if (request()->ajax()) {
             return view('includes.comments', compact('comments'));
         }
-        //return view
+
         return view('site.fansubs.fansub', compact('fansub', 'comments', 'members'));
     }
 
