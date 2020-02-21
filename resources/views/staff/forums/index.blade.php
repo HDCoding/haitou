@@ -141,7 +141,7 @@
                                                     <a class="dropdown-item" href="#" data-toggle="tooltip"
                                                        data-original-title="Remover Fórum"
                                                        onclick="deleteData({{ $forum->id }})" type="submit">
-                                                        <i class="fa fa-times text-danger"></i>
+                                                        <i class="fa fa-times text-danger"></i> Deletar
                                                     </a>
                                                 </div>
                                             </div>
