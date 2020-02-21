@@ -38,6 +38,7 @@ class CalendarsController extends Controller
     public function store(CalendarRequest $request)
     {
         $user = $request->user();
+
         $data = $request->except('_token');
         $data['username'] = $user->username;
 
