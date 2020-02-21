@@ -53,25 +53,32 @@
                                         <td>{{ $b->name }}</td>
                                         <td><span class="badge badge-primary">{{ $b->type() }}</span></td>
                                         <td><span class="badge badge-info">{{ $b->cost }}</span></td>
-                                        <td>{!! $b->enabled() !!}</td>
+                                        <td>
+                                            @if($b->is_enabled)
+                                                <span class="badge badge-outline-success">Ativado</span>
+                                            @else
+                                                <span class="badge badge-outline-danger">Desativado</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;"
-                                                   onclick="document.getElementById('bonus-upd-{{ $b->id }}').submit();">
-                                                    @if($b->is_enabled)
-                                                        <i class="fas fa-pause text-warning" data-toggle="tooltip"
-                                                           title="Desativar Bônus"></i>
-                                                    @else
-                                                        <i class="fas fa-play text-success" data-toggle="tooltip"
-                                                           title="Ativar Bônus"></i>
-                                                    @endif
-                                                </a>
-                                                {!! Form::open(['url' => 'staff/bonus/' . $b->id . '/update', 'method' => 'PUT', 'id' => 'bonus-upd-' . $b->id, 'style' => 'display: none']) !!}
-                                                {!! Form::close() !!}
+                                                @if($b->is_enable)
+                                                    <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/disable') }}"
+                                                       data-toggle="tooltip" title="Desativar Bônus">
+                                                        <i class="fa fa-pause text-warning"></i>
+                                                    </a>
+                                                @else
+                                                    <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/enable') }}"
+                                                       data-toggle="tooltip" title="Ativar Bônus">
+                                                        <i class="fa fa-play text-success"></i>
+                                                    </a>
+                                                @endif
+
                                                 <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/edit') }}"
                                                    data-toggle="tooltip" title="Editar Bônus">
                                                     <i class="fas fa-pencil-alt text-info"></i>
                                                 </a>
+
                                                 <a class="m-l-15" href="#" data-toggle="tooltip"
                                                    data-original-title="Remover Bônus"
                                                    onclick="deleteData({{ $b->id }})" type="submit">
