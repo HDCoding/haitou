@@ -92,6 +92,7 @@ class InvitationController extends Controller
             $friend->invites += 3;
             $friend->points += $points;
             $friend->experience += $points;
+            $friend->num_invite += 1; //increment number of invites
             $friend->save();
 
             // Achievements
