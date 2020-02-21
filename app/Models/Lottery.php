@@ -15,7 +15,7 @@ class Lottery extends Model
 
     protected $casts = [
         'user_id' => 'int',
-        'is_enable' => 'bool',
+        'is_enabled' => 'bool',
         'is_vip' => 'bool',
         'is_upload' => 'bool',
         'is_points' => 'bool',
@@ -43,7 +43,7 @@ class Lottery extends Model
         'slug',
         'groups',
         'numbers',
-        'is_enable',
+        'is_enabled',
         'is_vip',
         'is_upload',
         'is_points',
