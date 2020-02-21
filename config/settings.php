@@ -107,84 +107,84 @@ return [
                 'data' => 'int',
                 'name' => 'Pontos Signup',
                 'label' => 'points_signup',
-                'value' => '200'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Convite',
                 'label' => 'points_invite',
-                'value' => '100'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Download',
                 'label' => 'points_download',
-                'value' => '20'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Comentar',
                 'label' => 'points_comment',
-                'value' => '4'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Upload',
                 'label' => 'points_upload',
-                'value' => '30'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Classificação',
                 'label' => 'points_rating',
-                'value' => '5'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Tópico',
                 'label' => 'points_topic',
-                'value' => '8'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Postagem',
                 'label' => 'points_post',
-                'value' => '5'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Deletar',
                 'label' => 'points_delete',
-                'value' => '15'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Agradecer',
                 'label' => 'points_thanks',
-                'value' => '5'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Reportar',
                 'label' => 'points_report',
-                'value' => '5'
+                'value' => '250'
             ],
             [
                 'type' => 'number',
                 'data' => 'int',
                 'name' => 'Pontos Calendário',
                 'label' => 'points_calendar',
-                'value' => '50'
+                'value' => '250'
             ],
 
         ]
