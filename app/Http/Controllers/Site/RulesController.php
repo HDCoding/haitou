@@ -16,8 +16,6 @@ class RulesController extends Controller
 
     public function index(Request $request)
     {
-        $rules = Rule::select('id', 'name', 'description')->get();
-
         $user = $request->user();
 
         if ($user->readed_rules == false) {
@@ -25,6 +23,9 @@ class RulesController extends Controller
             $user->readed_rules = true;
             $user->update();
         }
+
+        $rules = Rule::select('id', 'name', 'description')->get();
+
         return view('site.rules.index', compact('rules'));
     }
 }
