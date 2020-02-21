@@ -16,7 +16,7 @@ class CreateFaqsTable extends Migration
         Schema::create('faqs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('category_id')->index();
-            $table->boolean('is_enable')->default(1);
+            $table->boolean('is_enabled')->default(1);
             $table->string('question');
             $table->text('answer');
             $table->text('groups')->nullable();
