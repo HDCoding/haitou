@@ -2,6 +2,11 @@
 
 @section('title', trans('dashboard.bonus'))
 
+@section('css')
+    <!-- Sweet-Alert  -->
+    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
+@endsection
+
 @section('content')
 
     <div class="page-breadcrumb">
@@ -26,10 +31,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.bonus')</h4>
-                        <a href="{{ url('staff/bonus/create') }}">
-                            <button type="button" class="btn btn-xs btn-primary">
-                                <span class="ion ion-md-add"></span> Adicionar
-                            </button>
+                        <a href="{{ url('staff/bonus/create') }}" class="btn btn-xs btn-primary">
+                            <i class="ion ion-md-add"></i> Adicionar
                         </a>
                         <div class="table-responsive m-t-15">
                             <table class="table">
@@ -53,19 +56,27 @@
                                         <td>{!! $b->enabled() !!}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('bonus-upd-{{ $b->id }}').submit();">
+                                                <a href="javascript:;"
+                                                   onclick="document.getElementById('bonus-upd-{{ $b->id }}').submit();">
                                                     @if($b->is_enabled)
-                                                        <i class="fas fa-pause text-warning" data-toggle="tooltip" title="Desativar Bônus"></i>
+                                                        <i class="fas fa-pause text-warning" data-toggle="tooltip"
+                                                           title="Desativar Bônus"></i>
                                                     @else
-                                                        <i class="fas fa-play text-success" data-toggle="tooltip" title="Ativar Bônus"></i>
+                                                        <i class="fas fa-play text-success" data-toggle="tooltip"
+                                                           title="Ativar Bônus"></i>
                                                     @endif
                                                 </a>
                                                 {!! Form::open(['url' => 'staff/bonus/' . $b->id . '/update', 'method' => 'PUT', 'id' => 'bonus-upd-' . $b->id, 'style' => 'display: none']) !!}
                                                 {!! Form::close() !!}
-                                                <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/edit') }}" data-toggle="tooltip" title="Editar Bônus"><i class="fas fa-pencil-alt text-info"></i></a>
-                                                <a class="m-l-15" href="javascript:;" onclick="document.getElementById('bonus-del-{{ $b->id }}').submit();" data-toggle="tooltip" title="Remover Bônus"><i class="fa fa-times text-danger"></i></a>
-                                                {!! Form::open(['url' => 'staff/bonus/' . $b->id, 'method' => 'DELETE', 'id' => 'bonus-del-' . $b->id , 'style' => 'display: none']) !!}
-                                                {!! Form::close() !!}
+                                                <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/edit') }}"
+                                                   data-toggle="tooltip" title="Editar Bônus">
+                                                    <i class="fas fa-pencil-alt text-info"></i>
+                                                </a>
+                                                <a class="m-l-15" href="#" data-toggle="tooltip"
+                                                   data-original-title="Remover Bônus"
+                                                   onclick="deleteData({{ $b->id }})" type="submit">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -83,4 +94,57 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <!-- Sweet-Alert  -->
+    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Sweet-Alert -->
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function deleteData(dataId) {
+            swal({
+                title: "Confirmar exclusão",
+                text: "Tem certeza de que deseja excluir?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Sim, apague!",
+            }, function (isConfirm) {
+                if (!isConfirm) {
+                    return;
+                }
+                $.ajax({
+                    url: "{{ url('staff/bonus') }}" + '/' + dataId,
+                    type: "POST",
+                    data: {'_method': 'DELETE'},
+                    success: function () {
+                        swal({
+                                title: "Sucesso!",
+                                text: "OK, excluído! \nClique em 'Ok' para atualizar a página.",
+                                type: "success",
+                            },
+                            function () {
+                                location.reload();
+                            });
+                    },
+                    error: function () {
+                        swal({
+                            title: 'Opps...',
+                            text: data.message,
+                            type: 'error',
+                            timer: '1500'
+                        })
+                    }
+                })
+            });
+        }
+    </script>
 @endsection
