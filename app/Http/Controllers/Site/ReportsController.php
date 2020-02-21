@@ -72,6 +72,10 @@ class ReportsController extends Controller
         $points = setting('points_report');
         $user->updatePoints($points);
 
+        //increment number of reports
+        $user->num_report += 1;
+        $user->update();
+
         $this->log::record('Registrou um novo report.');
 
         toastr()->success('Report recebido com sucesso. Iremos analizar o mais breve possível.', 'Report');
