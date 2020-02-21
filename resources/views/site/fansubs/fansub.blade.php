@@ -158,19 +158,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($members->chunk(4) as $member)
+                                        @foreach($members->chunk(4) as $members)
                                         <tr>
-                                            @foreach($member as $user)
+                                            @foreach($members as $member)
                                             <td>
                                                 <div class="d-flex no-block align-items-center">
                                                     <div class="m-r-10">
-                                                        <img src="{{ $user->user->avatar() }}" alt="user" class="img-rounded" width="45" />
+                                                        <img src="{{ $member->user->avatar() }}" alt="user" class="img-rounded" width="45" />
                                                     </div>
                                                     <div class="">
                                                         <h5 class="m-b-0 font-16 font-medium">
-                                                            <a href="{{ route('user.profile', ['slug' => $user->user->slug]) }}">{{ $user->username }}</a>
+                                                            {{ link_to_route('user.profile', $member->username, [strtolower($member->username)]) }}
                                                         </h5>
-                                                        <span>{{ $user->job }}</span>
+                                                        <span>{{ $member->job }}</span>
                                                     </div>
                                                 </div>
                                             </td>
