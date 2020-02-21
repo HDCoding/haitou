@@ -87,6 +87,10 @@ class PostsController extends Controller
         // Achievements
         $this->unlockAchievementPosts($user);
 
+        //increment number of posts
+        $user->num_post += 1;
+        $user->update();
+
         $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
 
         toastr()->success('Postado com sucesso', 'Post');
@@ -196,6 +200,10 @@ class PostsController extends Controller
 
         // Achievements
         $this->unlockAchievementPosts($user);
+
+        //increment number of posts
+        $user->num_post += 1;
+        $user->update();
 
         $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
 
