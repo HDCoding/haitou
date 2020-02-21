@@ -18,7 +18,7 @@ class FaqsController extends Controller
     public function index()
     {
         $categories = Category::select('id', 'name')->where('is_faq', '=', true)->get();
-        $faqs = Faq::select('id', 'category_id', 'is_enable', 'question')->get();
+        $faqs = Faq::select('id', 'category_id', 'is_enabled', 'question')->get();
         return view('staff.faqs.index', compact('categories', 'faqs'));
     }
 
@@ -65,7 +65,7 @@ class FaqsController extends Controller
     public function enableFaq($faq_id)
     {
         $faq = Faq::findOrFail($faq_id);
-        $faq->is_enable = true;
+        $faq->is_enabled = true;
         $faq->update();
         toastr()->info('FAQ Ativada.', 'Aviso');
         return redirect()->to('staff/faqs');
@@ -74,7 +74,7 @@ class FaqsController extends Controller
     public function disableFaq($faq_id)
     {
         $faq = Faq::findOrFail($faq_id);
-        $faq->is_enable = false;
+        $faq->is_enabled = false;
         $faq->update();
         toastr()->info('FAQ Desativada.', 'Aviso');
         return redirect()->to('staff/faqs');
