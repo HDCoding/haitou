@@ -99,7 +99,7 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('{member_id}/delmembers', 'FansubsController@delMembers');
         });
 
-        //Faqs
+        //Faq
         Route::get('faq', 'FaqsController@index')->name('site.faq');
 
         //Forum
