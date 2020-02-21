@@ -51,6 +51,10 @@ class ThanksController extends Controller
         //uploader
         $poster->updateOfflinePoints($calendar->user_id, $points);
 
+        //increment number of comment
+        $user->num_thank += 1;
+        $user->update();
+
         return redirect()->route('calendars.show', [$calendar->id]);
     }
 
@@ -87,6 +91,11 @@ class ThanksController extends Controller
         //uploader
         $uploader->updateOfflinePoints($torrent->user_id, $points);
 
+        //increment number of comment
+        $user->num_thank += 1;
+        $user->update();
+
         return redirect()->route('torrent.show', [$torrent->id, $torrent->slug]);
     }
+
 }
