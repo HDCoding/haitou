@@ -50,6 +50,10 @@ class CalendarsController extends Controller
         $points = setting('points_calendar');
         $user->updatePoints($points);
 
+        //increment number of events
+        $user->num_event += 1;
+        $user->update();
+
         toastr()->info('Evento Criado com Sucesso!', 'Sucesso');
         return redirect()->to('calendars');
     }
