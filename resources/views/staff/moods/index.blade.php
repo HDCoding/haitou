@@ -7,6 +7,8 @@
     <link href="{{ asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
     <!-- DataTables -->
     <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <!-- Sweet-Alert  -->
+    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -45,7 +47,7 @@
                                     <th>Nome</th>
                                     <th>Pontos</th>
                                     @if(auth()->user()->can('acesso-total'))
-                                    <th class="text-center">Opções</th>
+                                        <th class="text-center">Opções</th>
                                     @endif
                                 </tr>
                                 </thead>
@@ -53,18 +55,30 @@
                                 @foreach($moods as $mood)
                                     <tr>
                                         <th>
-                                            <img class="img-avatar img-avatar48" src="{{ $mood->image() }}" alt="">
+                                            <img class="img-avatar img-avatar48" src="{{ $mood->image() }}" alt="Mood">
                                         </th>
-                                        <td><a href="#" class="MoodText" id="name" data-type="text" data-column="name" data-title="Editar Mood" data-name="name" data-value="{{ $mood->name }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->name }}</a></td>
-                                        <td><a href="#" class="MoodNumber" id="points" data-type="number" data-column="points" data-title="Editar Ponto" data-name="points" data-value="{{ $mood->points }}" data-pk="{{ $mood->id }}" data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->points }}</a></td>
-                                        @if(auth()->user()->can('acesso-total'))
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="javascript:;" onclick="document.getElementById('mood-del-{{ $mood->id }}').submit();" data-toggle="tooltip" title="Remover"><i class="fa fa-times text-danger"></i></a>
-                                                {!! Form::open(['url' => 'moods/' . $mood->id, 'method' => 'DELETE', 'id' => 'mood-del-' . $mood->id , 'style' => 'display: none']) !!}
-                                                {!! Form::close() !!}
-                                            </div>
+                                        <td>
+                                            <a href="#" class="MoodText" id="name" data-type="text" data-column="name"
+                                               data-title="Editar Mood" data-name="name" data-value="{{ $mood->name }}"
+                                               data-pk="{{ $mood->id }}"
+                                               data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->name }}</a>
                                         </td>
+                                        <td>
+                                            <a href="#" class="MoodNumber" id="points" data-type="number"
+                                               data-column="points" data-title="Editar Ponto" data-name="points"
+                                               data-value="{{ $mood->points }}" data-pk="{{ $mood->id }}"
+                                               data-url="{{ route('moods.update', $mood->id) }}">{{ $mood->points }}</a>
+                                        </td>
+                                        @if(auth()->user()->can('acesso-total'))
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a class="m-l-15" href="#" data-toggle="tooltip"
+                                                       data-original-title="Remover Bônus"
+                                                       onclick="deleteData({{ $mood->id }})" type="submit">
+                                                        <i class="fa fa-times text-danger"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
                                         @endif
                                     </tr>
                                 @endforeach
@@ -86,14 +100,14 @@
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#datatable').DataTable({
                 "displayLength": 50,
                 "searching": true,
                 "responsive": true,
-                "order": [[ 1, "asc" ]],
+                "order": [[1, "asc"]],
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
 
@@ -111,7 +125,7 @@
                     type: 'put',
                     dataType: 'json'
                 },
-                validate:function(string){
+                validate: function (string) {
                     if ($.trim(string) === '') {
                         return "Campo é obrigatório";
                     }
@@ -120,10 +134,10 @@
                         return "Minimo 1 e Máximo de 45 caracteres.";
                     }
                 },
-                success:function(data){
+                success: function (data) {
                     console.log(data);
-                } ,
-                error:function(data) {
+                },
+                error: function (data) {
                     console.log(data);
                 }
             });
@@ -136,18 +150,69 @@
                     type: 'put',
                     dataType: 'json'
                 },
-                validate:function(number){
+                validate: function (number) {
                     if ($.trim(number) === '') {
                         return "Campo é obrigatório";
                     }
                 },
-                success:function(data){
+                success: function (data) {
                     console.log(data);
-                } ,
-                error:function(data) {
+                },
+                error: function (data) {
                     console.log(data);
                 }
             });
         });
+    </script>
+
+    <!-- Sweet-Alert  -->
+    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Sweet-Alert -->
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function deleteData(dataId) {
+            swal({
+                title: "Confirmar exclusão",
+                text: "Tem certeza de que deseja excluir?",
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Sim, apague!",
+            }, function (isConfirm) {
+                if (!isConfirm) {
+                    return;
+                }
+                $.ajax({
+                    url: "{{ url('staff/moods') }}" + '/' + dataId,
+                    type: "POST",
+                    data: {'_method': 'DELETE'},
+                    success: function () {
+                        swal({
+                                title: "Sucesso!",
+                                text: "OK, excluído! \nClique em 'Ok' para atualizar a página.",
+                                type: "success",
+                            },
+                            function () {
+                                location.reload();
+                            });
+                    },
+                    error: function () {
+                        swal({
+                            title: 'Opps...',
+                            text: data.message,
+                            type: 'error',
+                            timer: '1500'
+                        })
+                    }
+                })
+            });
+        }
     </script>
 @endsection
