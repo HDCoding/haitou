@@ -15,8 +15,14 @@ class FaqsController extends Controller
 
     public function index()
     {
-        $categories = Category::where('is_faq', '=', true)->select('id', 'name')->get();
-        $faqs = Faq::where('is_enabled', '=', true)->select('id', 'category_id', 'question', 'answer')->get();
+        $categories = Category::where('is_faq', '=', true)
+            ->select('id', 'name')
+            ->get();
+
+        $faqs = Faq::where('is_enabled', '=', true)
+            ->select('id', 'category_id', 'question', 'answer')
+            ->get();
+
         return view('site.faqs.index', compact('categories', 'faqs'));
     }
 }
