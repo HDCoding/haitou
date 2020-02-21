@@ -53,25 +53,32 @@
                                     <tr>
                                         <th>{{ $faq->id }}</th>
                                         <td>{{ $faq->question }}</td>
-                                        <td>{!! $faq->enabled() !!}</td>
+                                        <td>
+                                            @if ($faq->is_enable)
+                                                <span class="label label-success">Ativado</span>
+                                            @else
+                                                <span class="label label-danger">Desativado</span>
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="javascript:;"
-                                                   onclick="document.getElementById('faq-disable-{{ $faq->id }}').submit();">
-                                                    @if($faq->is_enable)
-                                                        <i class="fa fa-pause text-warning" data-toggle="tooltip"
-                                                           title="Desativar Pergunta"></i>
-                                                    @else
-                                                        <i class="fa fa-play text-success" data-toggle="tooltip"
-                                                           title="Ativar Pergunta"></i>
-                                                    @endif
-                                                </a>
-                                                {!! Form::open(['url' => 'faq/'.$faq->id.'/update/', 'method' => 'PUT', 'id' => 'faq-disable-' . $faq->id, 'style' => 'display: none']) !!}
-                                                {!! Form::close() !!}
+                                                @if($faq->is_enable)
+                                                    <a class="m-l-15" href="{{ url('staff/faq/' . $faq->id . '/disable') }}"
+                                                       data-toggle="tooltip" title="Desativar Pergunta">
+                                                        <i class="fa fa-pause text-warning"></i>
+                                                    </a>
+                                                @else
+                                                    <a class="m-l-15" href="{{ url('staff/faq/' . $faq->id . '/enable') }}"
+                                                       data-toggle="tooltip" title="Ativar Pergunta">
+                                                        <i class="fa fa-play text-success"></i>
+                                                    </a>
+                                                @endif
+
                                                 <a class="m-l-15" href="{{ url('staff/faqs/' . $faq->id . '/edit') }}"
                                                    data-toggle="tooltip" title="Editar Pergunta">
                                                     <i class="fa fa-pencil-alt text-info"></i>
                                                 </a>
+
                                                 <a class="m-l-15" href="#" data-toggle="tooltip"
                                                    data-original-title="Remover Pergunta"
                                                    onclick="deleteData({{ $faq->id }})" type="submit">
