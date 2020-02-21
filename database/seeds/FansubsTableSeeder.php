@@ -16,7 +16,10 @@ class FansubsTableSeeder extends Seeder
             'name' => 'N/A',
             'slug' => 'n-a',
             'logo' => asset('images/404.png'),
-            'description' => 'Usado para upar conteúdo de fansubs que não existem ou não estão cadastrados.'
+            'description' => 'Usado para upar conteúdo de fansubs que não existem ou não estão cadastrados.',
+            'is_active' => true,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
