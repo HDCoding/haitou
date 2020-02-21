@@ -34,6 +34,14 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('experience')->default(0);
             $table->unsignedInteger('reputation')->default(0);
 
+            $table->integer('num_event')->default(0);
+            $table->integer('num_comment')->default(0);
+            $table->integer('num_invite')->default(0); //only the accepted
+            $table->integer('num_post')->default(0);
+            $table->integer('num_report')->default(0);
+            $table->integer('num_thank')->default(0);
+            $table->integer('num_topic')->default(0);
+
             $table->unsignedSmallInteger('invites')->default(5);
             $table->unsignedTinyInteger('max_slots')->default(3); //max torrents downloading same time
 
