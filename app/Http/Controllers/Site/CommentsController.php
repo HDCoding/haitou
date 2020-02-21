@@ -21,12 +21,9 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    protected $request;
-
-    public function __construct(Request $request)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->request = $request;
     }
 
     public function store(Request $request)
@@ -109,31 +106,29 @@ class CommentsController extends Controller
         $user->addProgress(new UserMade1000Comments(), 1);
     }
 
-    public function show($comment_id)
+    public function show(Request $request, $comment_id)
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->can('painel-staff'), 403);
+        abort_unless($this->request->user()->id == $comment->user_id || $request->user()->can('painel-staff'), 403);
 
         return view('site.comments.comment', compact('comment'));
     }
 
-    public function edit($comment_id)
+    public function edit(Request $request, $comment_id)
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->can('painel-staff'), 403);
+        abort_unless($request->user()->id == $comment->user_id || $request->user()->can('painel-staff'), 403);
 
         return view('site.comments.edit', compact('comment'));
     }
 
     public function update(Request $request, $comment_id)
     {
-        $user = $request->user();
-
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($user->id == $comment->user_id || $user->can('painel-staff'), 403);
+        abort_unless($request->user()->id == $comment->user_id || $request->user()->can('painel-staff'), 403);
 
         $comment->update($request->except('_token'));
 
@@ -141,11 +136,11 @@ class CommentsController extends Controller
         return redirect()->to('home');
     }
 
-    public function destroy($comment_id)
+    public function destroy(Request $request, $comment_id)
     {
         $comment = Comment::findOrFail($comment_id);
 
-        abort_unless($this->request->user()->id == $comment->user_id || $this->request->user()->can('painel-staff'), 403);
+        abort_unless($request->user()->id == $comment->user_id || $request->user()->can('painel-staff'), 403);
 
         $comment->delete();
 
