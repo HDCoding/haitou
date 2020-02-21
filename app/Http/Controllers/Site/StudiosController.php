@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Studio;
 
 class StudiosController extends Controller
@@ -17,7 +18,11 @@ class StudiosController extends Controller
         $studio = Studio::where('id', '=', $studio_id)->whereSlug($slug)->firstOrFail();
         $studio->increment('views');
 
-        $comments = $studio->comments()->latest()->paginate(5);
+        //get all comments
+        $comments = Comment::with('studio:studio_id')
+            ->where('fansub_id', '=', $studio->id)
+            ->latest('id')
+            ->paginate(5);
 
         if (request()->ajax()) {
             return view('includes.comments', compact('comments'));
