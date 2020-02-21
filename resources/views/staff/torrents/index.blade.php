@@ -68,35 +68,26 @@
                                                         <i class="fas fa-pencil-alt text-info"></i> Editar
                                                     </a>
 
-                                                    <a class="dropdown-item" class="m-l-15" href="javascript:;"
-                                                       onclick="document.getElementById('file-freeleech-{{ $torrent->id }}').submit();">
+                                                    <a class="dropdown-item" class="m-l-15" href="{{ url('staff/torrents/' . $torrent->id . '/freeleech')}}">
                                                         <i class="fa fa-download text-info"></i> Freeleech
                                                         @if($torrent->is_freeleech)
                                                             <i class="fa fa-check text-success"></i>
                                                         @endif
                                                     </a>
-                                                    {!! Form::open(['url' => 'staff/torrents/' . $torrent->id . '/freeleech', 'method' => 'PUT', 'id' => 'file-freeleech-' . $torrent->id , 'style' => 'display: none']) !!}
-                                                    {!! Form::close() !!}
 
-                                                    <a class="dropdown-item" class="m-l-15" href="javascript:;"
-                                                       onclick="document.getElementById('file-silver-{{ $torrent->id }}').submit();">
+                                                    <a class="dropdown-item" class="m-l-15" href="{{ url('staff/torrents/' . $torrent->id . '/silver') }}">
                                                         <i class="fas fa-star-half-alt text-cyan"></i> Silver
                                                         @if($torrent->is_silver)
                                                             <i class="fa fa-check text-success"></i>
                                                         @endif
                                                     </a>
-                                                    {!! Form::open(['url' => 'staff/torrents/' . $torrent->id . '/silver', 'method' => 'PUT', 'id' => 'file-silver-' . $torrent->id , 'style' => 'display: none']) !!}
-                                                    {!! Form::close() !!}
 
-                                                    <a class="dropdown-item" class="m-l-15" href="javascript:;"
-                                                       onclick="document.getElementById('file-doubleup-{{ $torrent->id }}').submit();">
+                                                    <a class="dropdown-item" class="m-l-15" href="{{ url('staff/torrents/' . $torrent->id . '/doubleup') }}">
                                                         <i class="fa fa-forward text-warning"></i> Double UP
                                                         @if($torrent->is_doubleup)
                                                             <i class="fa fa-check text-success"></i>
                                                         @endif
                                                     </a>
-                                                    {!! Form::open(['url' => 'staff/torrents/' . $torrent->id . '/doubleup', 'method' => 'PUT', 'id' => 'file-doubleup-' . $torrent->id , 'style' => 'display: none']) !!}
-                                                    {!! Form::close() !!}
 
                                                     <div class="dropdown-divider"></div>
 
