@@ -122,6 +122,10 @@ class TopicsController extends Controller
         // Achievements
         $this->unlockAchievementTopics($user);
 
+        //increment number of comment
+        $user->num_topic += 1;
+        $user->update();
+
         toastr()->success('Tópico criado com sucesso!', 'Tópico');
         return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
     }
