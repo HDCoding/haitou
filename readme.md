@@ -53,7 +53,7 @@
 ## Manual Install
 Using [Laragon](https://laragon.org/download/) (Windows). Already have all the necessary packages, with Composer, MySQL or MariaDB, PHP 7.3, among others.
 
-MacOS or Linux: Follow Laravel [Documentation](https://laravel.com/docs/5.8/installation)
+MacOS or Linux: Follow Laravel [Documentation](https://laravel.com/docs/6.x/installation)
 
 ## Packages
 
