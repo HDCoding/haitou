@@ -33,10 +33,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.actors')</h4>
-                        <a href="{{ url('staff/actors/create') }}">
-                            <button type="button" class="btn btn-xs btn-primary">
-                                <span class="ion ion-md-add"></span> Adicionar
-                            </button>
+                        <a href="{{ url('staff/actors/create') }}" class="btn btn-xs btn-primary">
+                            <i class="ion ion-md-add"></i> Adicionar
                         </a>
                         <div class="table-responsive m-t-15">
                             <table class="table" id="datatable">
