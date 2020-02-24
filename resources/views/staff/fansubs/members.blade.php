@@ -32,10 +32,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Adicionar Membro</h4>
-                        <a href="#" data-toggle="modal" data-target="#modal-add-member">
-                            <button type="button" class="btn btn-xs btn-primary">
-                                <span class="ion ion-md-add"></span> Adicionar
-                            </button>
+                        <a href="#" data-toggle="modal" data-target="#modal-add-member" class="btn btn-xs btn-primary">
+                            <i class="ion ion-md-add"></i> Adicionar
                         </a>
                         <div class="table-responsive m-t-15">
                             <table class="table">
