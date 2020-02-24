@@ -48,7 +48,12 @@
 	 - Traffic: Unlimited
 
 ## Automated Installer
-	TODO
+	```sh
+	git clone https://github.com/HDCoding/haitou.git installer
+    cd installer
+    chmod +x install.sh 
+    sudo ./install.sh
+	````
 
 ## Manual Install
 Using [Laragon](https://laragon.org/download/) (Windows). Already have all the necessary packages, with Composer, MySQL or MariaDB, PHP 7.3, among others.
@@ -81,17 +86,5 @@ Tracker is open-sourced software licensed under the [GNU GPL-3.0](/LICENSE).
 This project exists thanks to all the people who contribute.
 [Contributors](../../graphs/contributors)
 
-## TODO
-Almost finished
-
-## Site
-- [ ] Chat
-- [ ] Donates
-- [ ] Forum Polls
-- [ ] Sistema de reputacao
-- [ ] Sistema contar tempo online - session time
-- [ ] Cache settings
-
-## Staff
-- [ ] Lotteries
-- [ ] Visitors - API
+## Help Wanted
+Check the [TODO](/TODO.md) file.
