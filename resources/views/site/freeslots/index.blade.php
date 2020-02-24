@@ -46,7 +46,7 @@
                                     {!! Form::number('point', null, ['class' => 'form-control', 'placeholder' => 'Pontos', 'min' => 1, 'max' => 1000, 'required']) !!}
                                 </div>
                                 <div class="col-sm-1">
-                                    {!! Form::submit('Doar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
+                                    {!! Form::submit('Doar', ['class' => 'btn btn-primary btn-rounded mt-4']) !!}
                                 </div>
                             </div>
                             {!! Form::close() !!}
