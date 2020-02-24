@@ -55,14 +55,14 @@
                                         <td><span class="badge badge-info">{{ $b->cost }}</span></td>
                                         <td>
                                             @if($b->is_enabled)
-                                                <span class="badge badge-outline-success">Ativado</span>
+                                                <span class="label label-success">Ativado</span>
                                             @else
-                                                <span class="badge badge-outline-danger">Desativado</span>
+                                                <span class="label label-danger">Desativado</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                @if($b->is_enable)
+                                                @if($b->is_enabled)
                                                     <a class="m-l-15" href="{{ url('staff/bonus/' . $b->id . '/disable') }}"
                                                        data-toggle="tooltip" title="Desativar Bônus">
                                                         <i class="fa fa-pause text-warning"></i>
