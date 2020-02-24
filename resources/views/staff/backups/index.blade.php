@@ -70,14 +70,14 @@
                                                     <a href="{{ url('staff/backups/download') }}?disk={{ $backup['disk'] }}&path={{ urlencode($backup['file_size']) }}&file_name={{ urlencode($backup['file_name']) }}"
                                                        data-toggle="tooltip" title="Download">
                                                         <button type="button" class="btn btn-xs btn-primary">
-                                                            <span class="fas fa-cloud-download-alt"></span> Download
+                                                            <i class="fas fa-cloud-download-alt"></i> Download
                                                         </button>
                                                     </a>
                                                 @endif
                                                 <a class="m-l-10" data-disk="{{ $backup['disk'] }}" data-file="{{ $backup['file_name'] }}" data-button-type="delete"
                                                    href="{{ url('staff/backups/delete') }}" data-toggle="tooltip" title="Delete">
                                                     <button type="button" class="btn btn-xs btn-danger">
-                                                        <span class="fas fa-trash"></span> Deletar
+                                                        <i class="fas fa-trash"></i> Deletar
                                                     </button>
                                                 </a>
                                             </div>
