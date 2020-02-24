@@ -61,6 +61,11 @@ class MediasController extends Controller
             $rating->user_id = $user->id;
             $rating->vote = $vote;
             $rating->save();
+
+            // Give points to both users
+            $points = setting('points_rating');
+            //logged user
+            $user->updatePoints($points);
         }
 
         return redirect()->route('media.show', ['id' => $media->id, 'slug' => $media->slug]);
