@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Cover
                             <button type="button" class="btn btn-xs btn-primary" onclick="chooseCover()">
-                                <span class="ion ion-md-add"></span> Cover
+                                <i class="ion ion-md-add"></i> Cover
                             </button>
                         </h4>
 
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Poster
                             <button type="button" class="btn btn-xs btn-primary" onclick="choosePoster()">
-                                <span class="ion ion-md-add"></span> Poster
+                                <i class="ion ion-md-add"></i> Poster
                             </button>
                         </h4>
 
