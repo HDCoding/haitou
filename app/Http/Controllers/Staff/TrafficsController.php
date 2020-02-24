@@ -7,42 +7,39 @@ use App\Http\Controllers\Controller;
 
 class TrafficsController extends Controller
 {
-    private $vnstat;
-
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('allow:acesso-total');
-        $this->vnstat = new NetworkInformation();
     }
 
-    public function index()
+    public function index(NetworkInformation $information)
     {
-        $data = $this->vnstat->data();
+        $data = $information->data();
         return view('staff.traffics.index', compact('data'));
     }
 
-    public function hourly()
+    public function hourly(NetworkInformation $information)
     {
-        $hourly = $this->vnstat->hourly('eth1');
+        $hourly = $information->hourly('eth1');
         return view('staff.traffics.hourly', compact('hourly'));
     }
 
-    public function daily()
+    public function daily(NetworkInformation $information)
     {
-        $daily = $this->vnstat->daily('eth1');
+        $daily = $information->daily('eth1');
         return view('staff.traffics.daily', compact('daily'));
     }
 
-    public function monthly()
+    public function monthly(NetworkInformation $information)
     {
-        $monthly = $this->vnstat->monthly('eth1');
+        $monthly = $information->monthly('eth1');
         return view('staff.traffics.monthly', compact('monthly'));
     }
 
-    public function topten()
+    public function topten(NetworkInformation $information)
     {
-        $topten = $this->vnstat->topten('eth1');
+        $topten = $information->topten('eth1');
         return view('staff.traffics.top10', compact('topten'));
     }
 }
