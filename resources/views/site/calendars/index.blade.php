@@ -139,7 +139,7 @@
                         <button type="button" class="btn btn-default md-btn-flat btn-rounded" data-dismiss="modal">
                             Fechar
                         </button>
-                        {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
+                        {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-rounded mt-4']) !!}
                     </div>
                 </div>
             </div>
