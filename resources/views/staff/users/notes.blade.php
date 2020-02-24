@@ -41,7 +41,7 @@
                             {!! Form::label('description', 'Anotação: *') !!}
                             {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8]) !!}
                         </div>
-                        {!! Form::submit('Salvar', ['class' => 'btn btn-success btn-rounded btn-outline']) !!}
+                        {!! Form::submit('Salvar', ['class' => 'btn btn-success btn-rounded mt-4']) !!}
                         <br>
                         {!! Form::close() !!}
                     </div>
