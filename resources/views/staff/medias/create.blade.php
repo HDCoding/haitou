@@ -138,7 +138,7 @@
                             {!! Form::number('total_volumes', null, ['class' => 'form-control']) !!}
                         </div>
 
-                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
+                        {!! Form::submit('Adicionar', ['class' => 'btn btn-primary btn-rounded']) !!}
                         <br />
                         {!! Form::close() !!}
                     </div>
