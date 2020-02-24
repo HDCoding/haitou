@@ -83,22 +83,22 @@
                                 <tr>
                                     <th>Torrent info</th>
                                     <th class="text-center">
-                                        <span class="fa fa-arrow-up text-success"></span>
+                                        <i class="fa fa-arrow-up text-success"></i>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Seeders">Seeders</a>
                                     </th>
                                     <th class="text-center">
-                                        <span class="fa fa-arrow-down text-danger"></span>
+                                        <i class="fa fa-arrow-down text-danger"></i>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Leechers">Leechers</a>
                                     </th>
                                     <th class="text-center">
-                                        <span class="fa fa-check text-info"></span>
+                                        <i class="fa fa-check text-info"></i>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Completado">Completado</a>
                                     </th>
                                     <th class="text-center">
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Tamanho">Tamanho</a>
                                     </th>
                                     <th class="text-center">
-                                        <span class="fa fa-calendar-alt text-dark"></span>
+                                        <i class="fa fa-calendar-alt text-dark"></i>
                                         <a href="#" data-toggle="tooltip" title="Ordenar por Data Upload">Data Upload</a>
                                     </th>
                                     <th class="text-center">Uploader</th>
