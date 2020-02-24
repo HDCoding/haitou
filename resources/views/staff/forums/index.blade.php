@@ -33,11 +33,11 @@
                 <div class="row">
                     <div class="col-md-12 mt-3 mb-3">
                         <div class="float-left">
-                            <a href="{{ url('staff/forums/create') }}" class="btn btn-sm btn-primary btn-rounded">
-                                <i class="fas fa-plus"></i>&nbsp; Adicionar Fórum
+                            <a href="{{ url('staff/forums/create') }}" class="btn btn-xs btn-primary">
+                                <i class="ion ion-md-add"></i> Adicionar Fórum
                             </a>
-                            <a href="{{ url('staff/categories/create') }}" target="_blank" class="btn btn-sm btn-secondary btn-rounded">
-                                <i class="fas fa-plus"></i>&nbsp; Adicionar Categoria
+                            <a href="{{ url('staff/categories/create') }}" target="_blank" class="btn btn-xs btn-secondary">
+                                <i class="ion ion-md-add"></i> Adicionar Categoria
                             </a>
                         </div>
                         <div class="float-right">
