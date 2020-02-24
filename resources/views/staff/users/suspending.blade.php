@@ -56,7 +56,7 @@
                                     {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 8, 'required']) !!}
                                 </div>
                                 <br>
-                                {!! Form::submit('Suspender', ['class' => 'btn btn-success btn-rounded btn-outline']) !!}
+                                {!! Form::submit('Suspender', ['class' => 'btn btn-success btn-rounded ']) !!}
                                 {!! Form::close() !!}
 
                             </div>
