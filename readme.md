@@ -48,13 +48,11 @@
 	 - Traffic: Unlimited
 
 ## Automated Installer
-	```sh
 	git clone https://github.com/HDCoding/haitou.git installer
     cd installer
     chmod +x install.sh 
     sudo ./install.sh
-	````
-
+	
 ## Manual Install
 Using [Laragon](https://laragon.org/download/) (Windows). Already have all the necessary packages, with Composer, MySQL or MariaDB, PHP 7.3, among others.
 
