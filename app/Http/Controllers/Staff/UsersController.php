@@ -20,25 +20,23 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    private $pendent, $activated, $suspended, $banned, $log;
+    private $log;
+    protected $expire_at;
 
     public function __construct(User $user)
     {
         $this->middleware('auth');
         $this->middleware('allow:usuarios-mod');
-        $this->pendent = $user;
-        $this->activated = $user;
-        $this->suspended = $user;
-        $this->banned = $user;
         $this->log = new Log();
+        $this->expire_at = Carbon::now()->addMinutes(20);
     }
 
     public function index()
     {
-        $pendent = $this->pendent->where('status', '=', 1)->count();
-        $activated = $this->activated->where('status', '=', 2)->count();
-        $suspended = $this->suspended->where('status', '=', 3)->count();
-        $banned = $this->banned->where('status', '=', 4)->count();
+        $pendent = cache('pending_users');
+        $activated = cache('activated_users');
+        $suspended = cache('suspended_users');
+        $banned = cache('banned_users');
 
         $users = User::select('id', 'group_id', 'username', 'status', 'avatar')->orderBy('username', 'ASC')->get();
         $groups = Group::select('id', 'name')->get();
@@ -58,8 +56,11 @@ class UsersController extends Controller
     {
         $user = User::find($user_id);
         $user->update($request->except('_token'));
+
         abort_unless($user->id !== auth()->user()->id, 403);
+
         $group = $request->input('group_id');
+
         if ($user->group_id !== $group) {
             $user->group_id = $group;
             $user->save();
@@ -74,14 +75,19 @@ class UsersController extends Controller
 
     public function formBan($user_id)
     {
-        $user = DB::table('users')->select('id', 'username')->where('id', '=', $user_id)->first();
+        $user = DB::table('users')
+            ->select('id', 'username')
+            ->where('id', '=', $user_id)
+            ->first();
+
         return view('staff.users.banning', compact('user'));
     }
 
     public function postBan(UserBannedRequest $request)
     {
-        $modUser = new Moderate();
         $user_id = $request->input('user_id');
+
+        $modUser = new Moderate();
         $modUser->user_id = $user_id;
         $modUser->staff_id = $request->user()->id;
         $modUser->title = $request->input('title');
@@ -89,7 +95,9 @@ class UsersController extends Controller
         $modUser->is_banned = true;
         $modUser->save();
 
-        DB::table('users')->where('id', '=', $user_id)->update(['status' => 4, 'disabled_at' => now()]);
+        DB::table('users')
+            ->where('id', '=', $user_id)
+            ->update(['status' => 4, 'disabled_at' => now()]);
 
         $this->log::record('Staff baniu um membro', true);
 
@@ -99,14 +107,19 @@ class UsersController extends Controller
 
     public function formSuspend($user_id)
     {
-        $user = DB::table('users')->select('id', 'username')->where('id', '=', $user_id)->first();
+        $user = DB::table('users')
+            ->select('id', 'username')
+            ->where('id', '=', $user_id)
+            ->first();
+
         return view('staff.users.suspending', compact('user'));
     }
 
     public function postSuspend(UserSuspendedRequest $request)
     {
-        $modUser = new Moderate();
         $user_id = $request->input('user_id');
+
+        $modUser = new Moderate();
         $modUser->user_id = $user_id;
         $modUser->staff_id = $request->user()->id;
         $modUser->title = $request->input('title');
@@ -115,7 +128,9 @@ class UsersController extends Controller
         $modUser->expires_on = Carbon::now()->addDays($request->input('days'));
         $modUser->save();
 
-        DB::table('users')->where('id', '=', $user_id)->update(['status' => 3]);
+        DB::table('users')
+            ->where('id', '=', $user_id)
+            ->update(['status' => 3]);
 
         $this->log::record('Staff suspendeu conta de membro', true);
 
@@ -125,14 +140,19 @@ class UsersController extends Controller
 
     public function formWarn($user_id)
     {
-        $user = DB::table('users')->select('id', 'username')->where('id', '=', $user_id)->first();
+        $user = DB::table('users')
+            ->select('id', 'username')
+            ->where('id', '=', $user_id)
+            ->first();
+
         return view('staff.users.warning', compact('user'));
     }
 
     public function postWarn(UserWarnedRequest $request)
     {
-        $modUser = new Moderate();
         $user_id = $request->input('user_id');
+
+        $modUser = new Moderate();
         $modUser->user_id = $user_id;
         $modUser->staff_id = $request->user()->id;
         $modUser->title = $request->input('title');
@@ -141,7 +161,9 @@ class UsersController extends Controller
         $modUser->expires_on = Carbon::now()->addDays($request->input('days'));
         $modUser->save();
 
-        DB::table('users')->where('id', '=', $user_id)->update(['is_warned' => true]);
+        DB::table('users')
+            ->where('id', '=', $user_id)
+            ->update(['is_warned' => true]);
 
         $this->log::record('Staff advertiu membro', true);
 
@@ -158,8 +180,9 @@ class UsersController extends Controller
 
     public function postNote(UserNotesRequest $request)
     {
-        $note = new Note();
         $user_id = $request->input('user_id');
+
+        $note = new Note();
         $note->user_id = $user_id;
         $note->staff_id = $request->user()->id;
         $note->description = $request->input('description');
@@ -173,27 +196,29 @@ class UsersController extends Controller
     {
         if ($request->isMethod('POST')) {
 
-            $pendent = $this->pendent->where('status', '=', 1)->count();
-            $activated = $this->activated->where('status', '=', 2)->count();
-            $suspended = $this->suspended->where('status', '=', 3)->count();
-            $banned = $this->banned->where('status', '=', 4)->count();
+            $pendent = cache('pending_users');
+            $activated = cache('activated_users');
+            $suspended = cache('suspended_users');
+            $banned = cache('banned_users');
 
             $groups = Group::select('id', 'name')->get();
 
             $group = $request->input('group');
             $status = $request->input('status');
 
+            // Returns only users with the group
             if ($request->has('group') && !empty($group) && $group != null && $group != '') {
                 $users = User::with('group:id,name')
                     ->select('id', 'group_id', 'username', 'avatar', 'status')
                     ->where('group_id', '=', $group)
-                    ->get(); // Returns only users with the group
+                    ->get();
             }
+            // Returns only users with the status
             if ($request->has('status') && !empty($status) && $status != null && $status != '') {
                 $users = User::with('group:id,name')
                     ->select('id', 'group_id', 'username', 'avatar', 'status')
                     ->where('status', '=', $status)
-                    ->get(); // Returns only users with the status
+                    ->get();
             }
             if (empty($group) && empty($status)) {
                 return redirect()->to('staff/users');
@@ -204,7 +229,7 @@ class UsersController extends Controller
         }
     }
 
-    public function formPermission(int $user_id)
+    public function formPermission($user_id)
     {
         $user = User::where('id', '=', $user_id)->select('id', 'username')->first();
         abort_unless($user->id !== auth()->user()->id, 403);
@@ -212,12 +237,13 @@ class UsersController extends Controller
 
         $allowed = DB::table('user_allows')
             ->where('user_id', '=', $user_id)
-            ->pluck('allow_id', 'allow_id')->all();
+            ->pluck('allow_id', 'allow_id')
+            ->all();
 
         return view('staff.users.permissions', compact('user', 'permissions', 'allowed'));
     }
 
-    public function updatePermission(Request $request, int $user_id)
+    public function updatePermission(Request $request, $user_id)
     {
         $user = User::where('id', '=', $user_id)->first();
         abort_unless($user->id !== auth()->user()->id, 403);
@@ -228,13 +254,20 @@ class UsersController extends Controller
 
     public function avatarDelete($user_id)
     {
-        DB::table('users')->where('id', '=', $user_id)->update(['avatar' => null]);
+        DB::table('users')
+            ->where('id', '=', $user_id)
+            ->update(['avatar' => null]);
+
         return redirect()->back();
     }
 
     public function coverDelete($user_id)
     {
-        DB::table('users')->where('id', '=', $user_id)->update(['cover' => null]);
+        DB::table('users')
+            ->where('id', '=', $user_id)
+            ->update(['cover' => null]);
+
         return redirect()->back();
     }
+
 }
