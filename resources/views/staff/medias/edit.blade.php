@@ -135,7 +135,7 @@
                             {!! Form::number('total_volumes', $media->total_volumes, ['class' => 'form-control']) !!}
                         </div>
 
-                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
+                        {!! Form::submit('Editar', ['class' => 'btn btn-primary btn-rounded btn']) !!}
                         <br />
                         {!! Form::close() !!}
                     </div>
