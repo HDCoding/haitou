@@ -54,7 +54,7 @@
                                 </div>
 
                                 <br>
-                                {!! Form::submit('Banir', ['class' => 'btn btn-success btn-rounded btn-outline']) !!}
+                                {!! Form::submit('Banir', ['class' => 'btn btn-success btn-rounded mt-4']) !!}
                                 {!! Form::close() !!}
 
                             </div>
