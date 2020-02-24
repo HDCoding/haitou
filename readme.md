@@ -86,4 +86,4 @@ This project exists thanks to all the people who contribute.
 [Contributors](../../graphs/contributors)
 
 ## Help Wanted
-Check the [TODO](/TODO.md) file.
+Check the [TODO](/TODO.md). All help is really appreciated!
