@@ -19,6 +19,7 @@
  - [Development](#development)
  - [License](#license)
  - [Contributors](#contributors)
+ - [Help Wanted](#help-wanted)
 
 ## Introduction
 	TODO
