@@ -9,6 +9,7 @@
             <div class="col-5 align-self-center">
                 <h4 class="page-title">Staff Painel</h4>
             </div>
+            <p class="mt-4 text-center">{{ day_month_year() }}</p>
         </div>
     </div>
 
