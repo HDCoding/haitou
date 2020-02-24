@@ -81,7 +81,7 @@
                                 <span class="custom-control-label">Double UP</span>
                             </label>
                         </div>
-                        {!! Form::submit('Cadastrar', ['class' => 'btn btn-success btn-rounded btn-outline mt-4']) !!}
+                        {!! Form::submit('Cadastrar', ['class' => 'btn btn-success btn-rounded mt-4']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
