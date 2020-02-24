@@ -72,7 +72,7 @@ MacOS or Linux: Follow Laravel [Documentation](https://laravel.com/docs/6.x/inst
 
 ## Development
 Want to contribute? Great! All help is really appreciated!
-Please read [CONTRIBUTING.md](/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING](/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## License
 Tracker is open-sourced software licensed under the [GNU GPL-3.0](/LICENSE).
@@ -80,3 +80,18 @@ Tracker is open-sourced software licensed under the [GNU GPL-3.0](/LICENSE).
 ## Contributors
 This project exists thanks to all the people who contribute.
 [Contributors](../../graphs/contributors)
+
+## TODO
+Almost finished
+
+## Site
+- [ ] Chat
+- [ ] Donates
+- [ ] Forum Polls
+- [ ] Sistema de reputacao
+- [ ] Sistema contar tempo online - session time
+- [ ] Cache settings
+
+## Staff
+- [ ] Lotteries
+- [ ] Visitors - API
