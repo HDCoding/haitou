@@ -28,7 +28,7 @@
     <div class="container-fluid">
         <div class="row">
             <a href="{{ url('staff/faqs/create') }}" class="btn btn-primary m-b-4 m-l-15 mb-3">
-                <i class="fas fa-plus"></i> Adicionar Pergunta
+                <i class="ion ion-md-add"></i> Adicionar Pergunta
             </a>
             @includeIf('errors.errors', [$errors])
             @include('includes.messages')
@@ -54,7 +54,7 @@
                                         <th>{{ $faq->id }}</th>
                                         <td>{{ $faq->question }}</td>
                                         <td>
-                                            @if ($faq->is_enable)
+                                            @if ($faq->is_enabled)
                                                 <span class="label label-success">Ativado</span>
                                             @else
                                                 <span class="label label-danger">Desativado</span>
@@ -62,7 +62,7 @@
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                @if($faq->is_enable)
+                                                @if($faq->is_enabled)
                                                     <a class="m-l-15" href="{{ url('staff/faq/' . $faq->id . '/disable') }}"
                                                        data-toggle="tooltip" title="Desativar Pergunta">
                                                         <i class="fa fa-pause text-warning"></i>
