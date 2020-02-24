@@ -32,10 +32,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Casts</h4>
-                        <a href="#" data-toggle="modal" data-target="#modal-add-cast">
-                            <button type="button" class="btn btn-xs btn-primary">
-                                <span class="ion ion-md-add"></span> Adicionar
-                            </button>
+                        <a href="#" data-toggle="modal" data-target="#modal-add-cast" class="btn btn-xs btn-primary">
+                            <i class="ion ion-md-add"></i> Adicionar
                         </a>
                         @includeIf('errors.errors', [$errors])
                         @include('includes.messages')
