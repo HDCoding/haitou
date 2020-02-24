@@ -45,7 +45,7 @@
                                 <tr>
                                     <td class="text-center">
                                         <label class="css-input css-checkbox css-checkbox-primary">
-                                            <input type="checkbox" id="options" name="options[]" value="{{ $option->id }}"><span></span>
+                                            <input type="checkbox" id="options" name="options[]" value="{{ $option->id }}">
                                         </label>
                                     </td>
                                     <td>
