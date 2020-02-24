@@ -36,7 +36,7 @@
                     <div class="card-body py-home">
                         {!! Form::open(['route' => 'post.cover', 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-cover']) !!}
                         <h2 class="text-center text-primary">
-                            <button class="btn btn-outline-light waves-effect waves-light" type="button" onclick="chooseCover()">
+                            <button class="btn btn-light waves-effect waves-light" type="button" onclick="chooseCover()">
                                 <span class="btn-label"><i class="fa fa-pencil-alt"></i></span>
                             </button>
                         </h2>
