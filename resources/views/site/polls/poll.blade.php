@@ -42,7 +42,7 @@
                                 @endif
                                 </div>
                             @endforeach
-                        {!! Form::submit('Votar', ['class' => 'btn  btn-primary btn-rounded btn-outline']) !!}
+                        {!! Form::submit('Votar', ['class' => 'btn  btn-primary btn-rounded mt-4']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
