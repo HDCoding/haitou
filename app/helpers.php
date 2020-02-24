@@ -126,7 +126,7 @@ if (!function_exists('day_month_year')) {
                 break;
         }
 
-        echo "Hoje é {$today}, {$day_number} de {$mes} de {$year}";
+        echo "{$today}, {$day_number} de {$mes} de {$year}";
     }
 }
 
@@ -155,6 +155,8 @@ if (!function_exists('toastr')) {
 
 if (!function_exists('mention')) {
     /**
+     * TODO
+     * delete or continue
      * @return Application|mixed
      */
     function mention(): Mention
