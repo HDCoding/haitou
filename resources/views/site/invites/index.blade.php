@@ -39,7 +39,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-1">
-                                                {!! Form::submit('Convidar', ['class' => 'btn btn-primary btn-rounded btn-outline']) !!}
+                                                {!! Form::submit('Convidar', ['class' => 'btn btn-primary btn-rounded mt-4']) !!}
                                             </div>
                                         </div>
                                         {!! Form::close() !!}
