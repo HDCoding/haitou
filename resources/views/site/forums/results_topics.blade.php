@@ -69,10 +69,10 @@
                                         <label class="inline">
                                             @if(isset($params) && is_array($params) && array_key_exists('is_locked', $params) && $params['is_locked'] == 1)
                                                 <input type="checkbox" value="1" name="is_locked" checked>
-                                                <span class="fa fa-check text-purple"></span> Trancado
+                                                <i class="fa fa-check text-purple"></i> Trancado
                                             @else
                                                 <input type="checkbox" value="1" name="is_locked">
-                                                <span class="fa fa-check text-purple"></span> Trancado
+                                                <i class="fa fa-check text-purple"></i> Trancado
                                             @endif
                                         </label>
                                     </span>
@@ -80,10 +80,10 @@
                                         <label class="inline">
                                             @if(isset($params) && is_array($params) && array_key_exists('is_pinned', $params) && $params['is_pinned'] == 1)
                                                 <input type="checkbox" value="1" name="is_pinned" checked>
-                                                <span class="fa fa-tag text-success"></span> Pin
+                                                <i class="fa fa-tag text-success"></i> Pin
                                             @else
                                                 <input type="checkbox" value="1" name="is_pinned">
-                                                <span class="fa fa-tag text-success"></span> Pin
+                                                <i class="fa fa-tag text-success"></i> Pin
                                             @endif
                                         </label>
                                     </span>
@@ -97,10 +97,10 @@
                                         <label class="inline">
                                             @if(isset($params) && is_array($params) && array_key_exists('subscribed', $params) && $params['subscribed'] == 1)
                                                 <input type="checkbox" value="1" name="subscribed" checked>
-                                                <span class="fa fa-bell text-success"></span> Subscrito
+                                                <i class="fa fa-bell text-success"></i> Subscrito
                                             @else
                                                 <input type="checkbox" value="1" name="subscribed">
-                                                <span class="fa fa-bell text-success"></span> Subscrito
+                                                <i class="fa fa-bell text-success"></i> Subscrito
                                             @endif
                                         </label>
                                     </span>
@@ -108,10 +108,10 @@
                                         <label class="inline">
                                             @if(isset($params) && is_array($params) && array_key_exists('notsubscribed', $params) && $params['notsubscribed'] == 1)
                                                 <input type="checkbox" value="1" name="notsubscribed" checked>
-                                                <span class="fa fa-bell-slash text-danger"></span> Não inscrito
+                                                <i class="fa fa-bell-slash text-danger"></i> Não inscrito
                                             @else
                                                 <input type="checkbox" value="1" name="notsubscribed">
-                                                <span class="fa fa-bell-slash text-danger"></span> Não inscrito
+                                                <i class="fa fa-bell-slash text-danger"></i> Não inscrito
                                             @endif
                                         </label>
                                     </span>
