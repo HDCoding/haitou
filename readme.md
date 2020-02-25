@@ -49,8 +49,8 @@
 	 - Traffic: Unlimited
 
 ## Automated Installer
-	git clone https://github.com/HDCoding/haitou.git installer
-    cd installer
+	git clone https://github.com/HDCoding/hinstaller.git hinstaller
+    cd hinstaller
     chmod +x install.sh 
     sudo ./install.sh
 	
