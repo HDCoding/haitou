@@ -13,7 +13,7 @@ Almost finished
 - [ ] Reputation system
 - [ ] Count time online - session time
 - [ ] Cache settings
-- [ ] Finish the Resend email activation if user dont receive the email confirmation
+- [x] Resend email activation if user dont receive the email confirmation
 - [ ] Searches table
 - [ ] Users permissions cache (5 minutes max)
 - [ ] Lock screen
