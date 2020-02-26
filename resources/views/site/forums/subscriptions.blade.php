@@ -96,24 +96,24 @@
                                                             <i class="fas fa-bell"></i>
                                                         </a>
                                                     @endif
-                                                    @if(auth()->user()->topicNotification($topic->id))
-                                                        <a href="{{ route('topic.notify.off', ['topic_id' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar Notificacao">
-                                                            <i class="fas fa-toggle-on"></i>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('topic.notify.on', ['topic_id' => $topic->id]) }}" class="badge badge-info" data-toggle="tooltip" title="Notificar">
-                                                            <i class="fas fa-toggle-off"></i>
-                                                        </a>
-                                                    @endif
-                                                    @if(auth()->user()->topicEmailNotification($topic->id))
-                                                        <a href="{{ route('topic.email.notify.off', ['topic_id' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar envio por Email">
-                                                            <i class="fas fa-mail-bulk"></i>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('topic.email.notify.on', ['topic_id' => $topic->id]) }}" class="badge badge-purple" data-toggle="tooltip" title="Liberar envio por Email">
-                                                            <i class="fas fa-mail-bulk"></i>
-                                                        </a>
-                                                    @endif
+{{--                                                    @if(auth()->user()->topicNotification($topic->id))--}}
+{{--                                                        <a href="{{ route('topic.notify.off', ['topic_id' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar Notificacao">--}}
+{{--                                                            <i class="fas fa-toggle-on"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    @else--}}
+{{--                                                        <a href="{{ route('topic.notify.on', ['topic_id' => $topic->id]) }}" class="badge badge-info" data-toggle="tooltip" title="Notificar">--}}
+{{--                                                            <i class="fas fa-toggle-off"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    @endif--}}
+{{--                                                    @if(auth()->user()->topicEmailNotification($topic->id))--}}
+{{--                                                        <a href="{{ route('topic.email.notify.off', ['topic_id' => $topic->id]) }}" class="badge badge-danger" data-toggle="tooltip" title="Cancelar envio por Email">--}}
+{{--                                                            <i class="fas fa-mail-bulk"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    @else--}}
+{{--                                                        <a href="{{ route('topic.email.notify.on', ['topic_id' => $topic->id]) }}" class="badge badge-purple" data-toggle="tooltip" title="Liberar envio por Email">--}}
+{{--                                                            <i class="fas fa-mail-bulk"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    @endif--}}
                                                 </td>
                                             </tr>
                                         @endforeach
