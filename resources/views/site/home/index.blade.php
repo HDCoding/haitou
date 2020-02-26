@@ -13,7 +13,16 @@
             <div class="col-5 align-self-center">
                 <h4 class="page-title">Home</h4>
             </div>
-            <p class="mt-4 text-center">{{ day_month_year() }}</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="float-left">
+
+                </div>
+                <div class="float-right">
+                    <p class="text-center">{{ day_month_year() }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -22,7 +31,9 @@
             <div class="col-sm-12 col-lg-12">
                 <div class="card vegas-fixed-background" id="home-cover">
                     <div class="card-body py-home">
-                        <h1 class="text-center text-info">Okaeri {{ auth()->user()->username }}-chan</h1>
+                        <h1 class="text-center text-info">&nbsp;
+                            <i class="fas fa-heart"></i> Okaeri {{ auth()->user()->username }}-chan
+                        </h1>
                     </div>
                 </div>
             </div>
