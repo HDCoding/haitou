@@ -140,7 +140,7 @@ Route::middleware(['auth'])->group(function () {
 
             //Reply Post
             Route::get('t.{topic_id}/p.{post_id}/reply', 'PostsController@formReply')->name('post.reply');
-            Route::post('t.{topic_id}/reply', 'PostsController@reply')->name('reply');
+            Route::post('t.{topic_id}/p.{post_id}/reply', 'PostsController@reply')->name('reply');
 
             // Open/Close Topic
             Route::get('topic/{topic_id}/open', 'TopicsController@openTopic')->name('topic.open');
@@ -210,9 +210,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', 'NotificationsController@index')->name('notifications.index');
             Route::get('{id}', 'NotificationsController@show')->name('notifications.show');
             Route::get('{id}/update', 'NotificationsController@update')->name('notifications.update');
-            Route::get('updateall', 'NotificationsController@updateAll')->name('notifications.updateall');
+            Route::get('read-all', 'NotificationsController@updateAll')->name('notifications.read.all');
             Route::get('{id}/destroy', 'NotificationsController@destroy')->name('notifications.destroy');
-            Route::get('destroyall', 'NotificationsController@destroyAll')->name('notifications.destroyall');
+            Route::get('delete', 'NotificationsController@destroyAll')->name('notifications.destroy.all');
         });
 
         //Polls
