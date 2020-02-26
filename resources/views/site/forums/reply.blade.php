@@ -36,7 +36,7 @@
                         <h4 class="card-title">Reply</h4>
                         @includeIf('errors.errors', [$errors])
                         @include('includes.messages')
-                        {!! Form::open(['route' => ['reply', 'topic_id' => $topic->id], 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['route' => ['reply', 'topic_id' => $topic->id, 'post_id' => $post->id], 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label('content', 'Conteúdo: *', ['class' => 'form-label']) !!}
                             {!! Form::textarea('content', '[quote='.$post->post_username.' escreveu] '. $post->content . '[/quote]', ['class' => 'form-control', 'rows' => 10]) !!}
