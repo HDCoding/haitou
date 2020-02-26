@@ -103,13 +103,13 @@ class BBCode
 
         'quote' => [
             'pattern' => '/\[quote\](.*?)\[\/quote\]/s',
-            'replace' => '<blockquote class="blockquote">$1</blockquote>',
+            'replace' => '<blockquote class="blockquote"><br>$1</blockquote>',
             'content' => '$1',
         ],
 
         'namedquote' => [
             'pattern' => '/\[quote\=(.*?)\](.*)\[\/quote\]/s',
-            'replace' => '<blockquote><small>$1</small>$2</blockquote>',
+            'replace' => '<blockquote><i class="fas fa-quote-left mr-2"></i><b>$1</b><br>$2</blockquote>',
             'content' => '$2',
         ],
 
