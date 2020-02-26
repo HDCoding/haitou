@@ -42,23 +42,23 @@
                 <div class="float-left">
                     @if(auth()->user()->can('forum-mod'))
                         @if ($topic->is_locked)
-                        <a href="{{ route('topic.open', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-success btn-rounded">
-                            <i class="fas fa-lock-open"></i> Abrir Tópico
-                        </a>
+                            <a href="{{ route('topic.open', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-success btn-rounded">
+                                <i class="fas fa-lock-open"></i> Abrir Tópico
+                            </a>
                         @else
-                        <a href="{{ route('topic.close', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-primary btn-rounded">
-                            <i class="ion ion-ios-lock"></i> Fechar Tópico
-                        </a>
+                            <a href="{{ route('topic.close', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-primary btn-rounded">
+                                <i class="ion ion-ios-lock"></i> Fechar Tópico
+                            </a>
                         @endif
 
                         @if (!$topic->is_pinned)
-                        <a href="{{ route('topic.pin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-secondary btn-rounded">
-                            <i class="fas fa-file"></i> Pin Tópico
-                        </a>
+                            <a href="{{ route('topic.pin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-secondary btn-rounded">
+                                <i class="fas fa-file"></i> Pin Tópico
+                            </a>
                         @else
-                        <a href="{{ route('topic.unpin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
-                            <i class="fas fa-file"></i> Unpin Tópico
-                        </a>
+                            <a href="{{ route('topic.unpin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
+                                <i class="fas fa-file"></i> Unpin Tópico
+                            </a>
                         @endif
                     @endif
                     @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
@@ -67,42 +67,31 @@
                         </a>
                     @endif
                 </div>
-                <div class="float-right">
-                    @if (auth()->user()->isSubscribed($topic->id))
-                        <a href="{{ route('unsubscribe.topic', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
-                            <i class="fas fa-bell-slash"></i> Cancelar Inscrição
-                        </a>
-                    @else
-                        <a href="{{ route('subscribe.topic', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-success btn-rounded">
-                            <i class="fas fa-bell"></i> Se Inscrever
-                        </a>
-                    @endif
-                </div>
             </div>
         </div>
         @if(auth()->user()->id == $topic->first_post_user_id || auth()->user()->can('forum-mod'))
-        <div class="row">
-            <div class="col-md-12 mt-3 mb-4">
-                <h4>Polls</h4>
-                <div class="float-left">
-                    @if(!empty($topic->poll_id))
-                        <a href="{{ url('staff/poll/' . $topic->id . '/options/add') }}" data-toggle="tooltip" title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
-                        <a class="m-l-15" href="{{ url('staff/poll/' . $topic->id . '/options/remove') }}" data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
-                        <a class="m-l-15" href="{{ route('topic.poll.edit', ['topic_id' => $topic->id]) }}" data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
-                        <a class="m-l-15" href="javascript:;" onclick="document.getElementById('poll-del-{{ $topic->id }}').submit();" data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
-                        {!! Form::open(['url' => 'topic/polls/' . $topic->id, 'method' => 'DELETE', 'id' => 'poll-del-' . $topic->id, 'style' => 'display: none']) !!}
-                        {!! Form::close() !!}
-                    @endif
+            @if(!empty($topic->poll_id))
+                <div class="row">
+                    <div class="col-md-12 mt-3 mb-4">
+                        <h4>Polls</h4>
+                        <div class="float-left">
+                            <a href="{{ url('staff/poll/' . $topic->id . '/options/add') }}" data-toggle="tooltip" title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
+                            <a class="m-l-15" href="{{ url('staff/poll/' . $topic->id . '/options/remove') }}" data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
+                            <a class="m-l-15" href="{{ route('topic.poll.edit', ['topic_id' => $topic->id]) }}" data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
+                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('poll-del-{{ $topic->id }}').submit();" data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
+                            {!! Form::open(['url' => 'topic/polls/' . $topic->id, 'method' => 'DELETE', 'id' => 'poll-del-' . $topic->id, 'style' => 'display: none']) !!}
+                            {!! Form::close() !!}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            @endif
         @endif
 
         @foreach($posts as $post)
             <div class="row">
                 <div class="col-md-9 col-lg-9">
-                    <div class="card">
-                        <div class="card-header" id="post-{{ $post->id }}">
+                    <div class="card" id="post-{{ $post->id }}">
+                        <div class="card-header">
                             <a class="mr-3" href="{{ route('post.report', [$post->id]) }}" data-toggle="tooltip" title="Reportar Post">
                                 <i class="fas fa-flag"></i>
                             </a>
