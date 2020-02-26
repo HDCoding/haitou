@@ -72,25 +72,21 @@
                                                     <span class='badge badge-success'>Pin</span>
                                                 @endif
                                                 <div class="text-dark small mt-1">
-                                                    Iniciado em {{ format_date_time($thread->created_at) }}&nbsp;·&nbsp;
+                                                    Iniciado em {{ format_date_time($thread->created_at) }}&nbsp;·
                                                     Por {{ link_to_route('user.profile', $thread->first_post_username, [strtolower($thread->first_post_username)], ['class' => 'text-info']) }}
                                                 </div>
                                             </th>
-                                            <td>{{ $thread->num_post }}</td>
-                                            <td>{{ $thread->views }}</td>
+                                            <td class="align-middle">{{ $thread->num_post }}</td>
+                                            <td class="align-middle">{{ $thread->views }}</td>
                                             <td>
                                                 @if(empty($thread->last_post_username))
-                                                    <div class="ml-2">
-                                                        <div class="text-truncate">
-                                                            {{ format_date_time($thread->updated_at) }}
-                                                        </div>
+                                                    <div class="text-dark small mt-1">
+                                                        {{ format_date_time($thread->updated_at) }} <br>
                                                         Por {{ link_to_route('user.profile', $thread->first_post_username, [strtolower($thread->first_post_username)], ['class' => 'text-info text-truncate']) }}
                                                     </div>
                                                 @else
-                                                    <div class="ml-2">
-                                                        <div class="text-truncate">
-                                                            {{ format_date_time($thread->updated_at) }}
-                                                        </div>
+                                                    <div class="text-dark small mt-1">
+                                                        {{ format_date_time($thread->updated_at) }} <br>
                                                         Por {{ link_to_route('user.profile', $thread->last_post_username, [strtolower($thread->last_post_username)], ['class' => 'text-info text-truncate']) }}
                                                     </div>
                                                 @endif
