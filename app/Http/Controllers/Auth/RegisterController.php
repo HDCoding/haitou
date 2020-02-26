@@ -55,11 +55,13 @@ class RegisterController extends Controller
         //Account activation code
         $code = sha1_gen();
 
+        $email = $request->input('email');
+
         //Create new user account
         $user = new User();
         $user->group_id = 1;
         $user->username = $request->input('username');
-        $user->email = $request->input('email');
+        $user->email = $email;
         $user->password = Hash::make($request->input('password'));
         $user->state_id = 25;
         $user->points = $points;
@@ -71,7 +73,7 @@ class RegisterController extends Controller
         $user->save();
 
         //send email activation to new member
-        $this->dispatch(new SendActivationMail($user, $code));
+        $this->dispatch(new SendActivationMail($email, $code));
 
         //informs that the account was created
         return view('auth.activation')
