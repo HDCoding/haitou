@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NotificationsController extends Controller
 {
@@ -14,6 +17,8 @@ class NotificationsController extends Controller
 
     /**
      * Show All Notifications.
+     * @param Request $request
+     * @return Factory|View
      */
     public function index(Request $request)
     {
@@ -23,6 +28,9 @@ class NotificationsController extends Controller
 
     /**
      * Show A Notification And Mark As Read.
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function show(Request $request, $id)
     {
@@ -37,6 +45,9 @@ class NotificationsController extends Controller
 
     /**
      * Set A Notification To Read.
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -59,6 +70,8 @@ class NotificationsController extends Controller
 
     /**
      * Mass Update All Notification's To Read.
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function updateAll(Request $request)
     {
@@ -69,6 +82,9 @@ class NotificationsController extends Controller
 
     /**
      * Delete A Notification.
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
     public function destroy(Request $request, $id)
     {
@@ -79,6 +95,8 @@ class NotificationsController extends Controller
 
     /**
      * Mass Delete All Notification's.
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function destroyAll(Request $request)
     {
