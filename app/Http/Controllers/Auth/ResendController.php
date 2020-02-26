@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\SendActivationMail;
+use App\Jobs\SendActivationJob;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +37,7 @@ class ResendController extends Controller
 
         if ($user->status == 1) {
             //resend email activation to new member
-            $this->dispatch(new SendActivationMail($user->email, $user->code));
+            $this->dispatch(new SendActivationJob($user->email, $user->code));
             return view('auth.resend')->with('warning', 'Um novo e-mail foi enviado para ativação!');
         }
 
