@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Site\InvitationRequest;
-use App\Jobs\SendInvitationMail;
+use App\Jobs\SendInvitationJob;
 use App\Models\Invitation;
 use App\Models\Log;
 use Carbon\Carbon;
@@ -61,7 +61,7 @@ class InvitationsController extends Controller
         $user->save();
 
         //send email
-        $this->dispatch(new SendInvitationMail($invite));
+        $this->dispatch(new SendInvitationJob($invite));
 
         // Log
         $this->log::record("Membro {$user->name} enviou um convite para {$email}");
