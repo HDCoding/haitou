@@ -25,10 +25,10 @@
         <div class="row">
             <div class="col-md-12 mt-3 mb-3">
                 <div class="float-left">
-                    <a href="{{ route('notifications.updateall') }}" class="btn btn-sm btn-success btn-rounded">
+                    <a href="{{ route('notifications.read.all') }}" class="btn btn-sm btn-success btn-rounded">
                         <i class="fa fa-eye"></i> Marcar tudo como lido
                     </a>
-                    <a href="{{ route('notifications.destroyall') }}" class="btn btn-sm btn-danger btn-rounded">
+                    <a href="{{ route('notifications.destroy.all') }}" class="btn btn-sm btn-danger btn-rounded">
                         <i class="fa fa-times"></i> Excluir todas as notificações
                     </a>
                 </div>
