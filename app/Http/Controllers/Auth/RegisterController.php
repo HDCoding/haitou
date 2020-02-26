@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Jobs\SendActivationMail;
+use App\Jobs\SendActivationJob;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $user->save();
 
         //send email activation to new member
-        $this->dispatch(new SendActivationMail($email, $code));
+        $this->dispatch(new SendActivationJob($email, $code));
 
         //informs that the account was created
         return view('auth.activation')
