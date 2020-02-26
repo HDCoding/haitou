@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Allow;
 use App\Models\Group;
+use Carbon\Carbon;
 
 trait HasPermissions
 {
@@ -47,7 +48,14 @@ trait HasPermissions
 
     protected function hasPermission($permission)
     {
-        return (bool)$this->allows()->where('slug', $permission->slug)->count();
+        //TODO
+        //cache this
+        $expire_at = Carbon::now()->addMinutes(10);
+
+        $allow = cache()->remember('user_allow_'.auth()->user()->id, $expire_at, function () use ($permission) {
+            return (bool)$this->allows()->where('slug', $permission->slug)->count();
+        });
+        return $allow;
     }
 
     public function hasPermissionThroughRole($permission)
