@@ -24,8 +24,8 @@ Almost finished
 - [ ] HitAndRunPreNotification Command
 - [ ] UpdateLastAction Class
 - [ ] topicDelete button
-- [ ] Email/Notification when someone posts in the topic
-- [ ] Email/Notification when someone reply the post
+- [x] Email/Notification when someone posts in the topic
+- [x] Email/Notification when someone reply the post
 - [ ] Generate Favicons using a uploaded image
 - [ ] NetworkInformation Class refactor repeated code
 - [ ] Reports, make a chart comparing where the largest number of reports comes from
