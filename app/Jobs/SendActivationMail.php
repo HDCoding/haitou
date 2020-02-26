@@ -18,7 +18,7 @@ class SendActivationMail implements ShouldQueue
     /**
      * @var User
      */
-    public $user;
+    public $email;
 
     /**
      * @var string
@@ -35,12 +35,12 @@ class SendActivationMail implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param User $user
+     * @param $email
      * @param $code
      */
-    public function __construct(User $user, $code)
+    public function __construct($email, $code)
     {
-        $this->user = $user;
+        $this->email = $email;
         $this->code = $code;
     }
 
@@ -55,6 +55,6 @@ class SendActivationMail implements ShouldQueue
             $this->delay(min(30 * $this->attempts(), 300));
         }
 
-        Mail::to($this->user)->send(new AccountActivation($this->user, $this->code));
+        Mail::to($this->email)->send(new AccountActivation($this->code));
     }
 }
