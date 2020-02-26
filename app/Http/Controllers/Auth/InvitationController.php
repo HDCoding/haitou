@@ -16,7 +16,7 @@ use App\Achievements\UserMade900Invites;
 use App\Achievements\UserMadeFirstInvite;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\InvitationRequest;
-use App\Jobs\SendActivationThanksMail;
+use App\Jobs\SendActivationThanksJob;
 use App\Models\Invitation;
 use App\User;
 use Carbon\Carbon;
@@ -77,7 +77,7 @@ class InvitationController extends Controller
             $user->allows()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 11]);
 
             //send thank you email
-            $this->dispatch(new SendActivationThanksMail($user));
+            $this->dispatch(new SendActivationThanksJob($user));
 
             //update the invitation
             $invitation->accepted_by = $user->id;
