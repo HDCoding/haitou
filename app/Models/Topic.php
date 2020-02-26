@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Jobs\NewPostJob;
+use App\Notifications\NewPostNotification;
 use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -112,5 +114,33 @@ class Topic extends Model
             return true;
         }
         return (bool)$this->forum->getPermission()->read_topic;
+    }
+
+    public function notifySubscribers($poster, $topic, $post)
+    {
+        $subscribers = Subscription::with('user:id')
+            ->where('user_id', '!=', $poster->id)
+            ->where('topic_id', '=', $topic->id)
+            ->get();
+
+        foreach ($subscribers as $subscriber) {
+            $user = User::find($subscriber->user_id);
+            if ($user->receive_email == true) {
+                dispatch(new NewPostJob($user, $post));
+            }
+            $user->notify(new NewPostNotification('subscription', $poster, $post));
+        }
+    }
+
+    public function notifyFirstPoster($poster, $topic, $post)
+    {
+        $user = User::find($topic->first_post_user_id);
+        $user->notify(new NewPostNotification('topic', $poster, $post));
+    }
+
+    public function notifyReply($poster, $post)
+    {
+        $user = User::find($post->user_id);
+        $user->notify(new NewPostNotification('reply', $poster, $post));
     }
 }
