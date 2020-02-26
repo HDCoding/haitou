@@ -29,11 +29,13 @@ class Toastr
         foreach ($messages as $message) {
             $config = (array)$this->config->get('toastr.options');
 
+            $script = '';
+
             if (count($message['options'])) {
                 $config = array_merge($config, $message['options']);
             }
             if ($config) {
-                $script = 'toastr.options = ' . json_encode($config) . ';';
+                $script .= 'toastr.options = ' . json_encode($config) . ';';
             }
 
             $title = $message['title'] ?: null;
