@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,11 +9,6 @@ use Illuminate\Queue\SerializesModels;
 class AccountActivation extends Mailable
 {
     use Queueable, SerializesModels;
-
-    /**
-     * @var User
-     */
-    public $user;
 
     /**
      * @var string
@@ -29,12 +23,10 @@ class AccountActivation extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param User $user
      * @param string $code
      */
-    public function __construct(User $user, string $code)
+    public function __construct(string $code)
     {
-        $this->user = $user;
         $this->code = $code;
         $this->site_name = setting('site_title');
     }
