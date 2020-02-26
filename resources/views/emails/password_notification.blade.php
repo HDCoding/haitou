@@ -5,6 +5,6 @@
     rapido possivel
 
     Equipe,
-    {{ config('app.name') }}
+    {{ $site_name }}
 
 @endcomponent
