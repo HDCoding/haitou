@@ -15,7 +15,7 @@ Almost finished
 - [ ] Cache settings
 - [x] Resend email activation if user dont receive the email confirmation
 - [ ] Searches table
-- [ ] Users permissions cache (5 minutes max)
+- [x] Users permissions cache (5 minutes max)
 - [ ] Lock screen
 - [ ] AutoBan Command
 - [ ] AutoHitAndRun Command
