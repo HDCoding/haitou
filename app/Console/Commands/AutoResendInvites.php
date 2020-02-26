@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\SendInvitationMail;
+use App\Jobs\SendInvitationJob;
 use App\Models\Invitation;
 use App\Notifications\ResendInviteNotification;
 use Carbon\Carbon;
@@ -53,7 +53,7 @@ class AutoResendInvites extends Command
             //set resend datetime
             $invite->resend_at = now();
             //resend email
-            dispatch(new SendInvitationMail($invite));
+            dispatch(new SendInvitationJob($invite));
             //save
             $invite->save();
             //send notification
