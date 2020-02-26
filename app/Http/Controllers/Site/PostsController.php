@@ -18,6 +18,7 @@ use App\Http\Requests\Forum\EditTopicRequest;
 use App\Http\Requests\Forum\FastPostRequest;
 use App\Http\Requests\Forum\ReplyTopicRequest;
 use App\Models\Post;
+use App\Models\Subscription;
 use App\Models\Topic;
 use App\User;
 use Illuminate\Http\Request;
@@ -91,6 +92,15 @@ class PostsController extends Controller
         $user->num_post += 1;
         $user->update();
 
+        // Notify All Subscribers Of New Reply
+        if ($topic->first_post_user_id != $user->id) {
+            $topic->notifyFirstPoster($user, $topic, $post);
+        }
+        $topic->notifySubscribers($user, $topic, $post);
+
+        //Automatic Subscribe
+        $this->subscribe($request, $forum, $topic, $user);
+
         $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
 
         toastr()->success('Postado com sucesso', 'Post');
@@ -146,10 +156,11 @@ class PostsController extends Controller
         return view('site.forums.reply', compact('topic', 'post'));
     }
 
-    public function reply(ReplyTopicRequest $request, $topic_id)
+    public function reply(ReplyTopicRequest $request, $topic_id, $post_id)
     {
         $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
+        $post = Post::findOrFail($post_id);
         $forum = $topic->forum;
 
         //Get Permission
@@ -161,13 +172,13 @@ class PostsController extends Controller
             return redirect()->route('forum');
         }
 
-        $post = new Post();
-        $post->forum_id = $topic->forum_id;
-        $post->topic_id = $topic->id;
-        $post->user_id = $user->id;
-        $post->post_username = $user->username;
-        $post->content = $request->input('content');
-        $post->save();
+        $reply = new Post();
+        $reply->forum_id = $topic->forum_id;
+        $reply->topic_id = $topic->id;
+        $reply->user_id = $user->id;
+        $reply->post_username = $user->username;
+        $reply->content = $request->input('content');
+        $reply->save();
 
         // Save last post user data to topic table
         $topic->last_post_user_id = $user->id;
@@ -205,6 +216,17 @@ class PostsController extends Controller
         $user->num_post += 1;
         $user->update();
 
+        // Notify All Subscribers Of New Reply
+        if ($topic->first_post_user_id != $user->id) {
+            $topic->notifyFirstPoster($user, $topic, $post);
+        }
+        $topic->notifySubscribers($user, $topic, $post);
+        // Notify post reply
+        $topic->notifyReply($user, $post);
+
+        //Automatic Subscribe
+        $this->subscribe($request, $forum, $topic, $user);
+
         $appurl = "/forum/topic/{$topic->id}.{$topic->slug}?page={$post->pageNumber()}#post-{$post->id}";
 
         toastr()->success('Reply Postado com sucesso', 'Postagem');
@@ -225,6 +247,17 @@ class PostsController extends Controller
         $user->addProgress(new UserMade700Posts(), 1);
         $user->addProgress(new UserMade800Posts(), 1);
         $user->addProgress(new UserMade1000Posts(), 1);
+    }
+
+    private function subscribe(Request $request, $forum, $topic, $user)
+    {
+        if (!$request->user()->isSubscribed($topic->id)) {
+            return Subscription::create([
+                'forum_id' => $forum->id,
+                'topic_id' => $topic->id,
+                'user_id' => $user->id
+            ]);
+        }
     }
 
 }
