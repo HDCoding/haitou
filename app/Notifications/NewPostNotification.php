@@ -15,19 +15,19 @@ class NewPostNotification extends Notification
 
     public $type;
 
-    public $poster;
+    public $user;
 
     /**
      * Create a new notification instance.
      *
      * @param string $type
-     * @param User $poster
+     * @param User $user
      * @param Post $post
      */
-    public function __construct(string $type, User $poster, Post $post)
+    public function __construct(string $type, User $user, Post $post)
     {
         $this->type = $type;
-        $this->poster = $poster;
+        $this->user = $user;
         $this->post = $post;
     }
 
@@ -62,20 +62,28 @@ class NewPostNotification extends Notification
     public function toArray($notifiable)
     {
         $appurl = config('app.url');
+        $url = "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}";
 
         if ($this->type == 'subscription') {
             return [
-                'title' => $this->poster->name . ' Postou em um Tópico que você é inscrito(a)',
+                'title' => $this->user->username . ' Postou em um Tópico que você se inscreveu',
                 'icon' => '',
-                'body' => $this->poster->name . ' deixou uma nova postagem no Tópico inscrito ' . $this->post->topic->name,
-                'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}"
+                'body' => $this->user->username . ' deixou uma nova postagem no Tópico inscrito ' . $this->post->topic->name,
+                'url' => $url
+            ];
+        } elseif ($this->type == 'reply') {
+            return [
+                'title' => $this->user->username . ' Respondeu sua Postagem',
+                'icon' => '',
+                'body' => $this->user->username . ' Deu Reply na sua postagem ' . $this->post->topic->name,
+                'url' => $url
             ];
         } else {
             return [
-                'title' => $this->poster->name . ' Postou em um tópico que você iniciou',
+                'title' => $this->user->username . ' Postou em um tópico que você iniciou',
                 'icon' => '',
-                'body' => $this->poster->name . ' deixou uma nova postagem em seu tópico ' . $this->post->topic->name,
-                'url' => "{$appurl}/forum/topic/{$this->post->topic->id}.{$this->post->topic->slug}?page={$this->post->pageNumber()}#post-{$this->post->id}"
+                'body' => $this->user->username . ' deixou uma nova postagem em seu tópico ' . $this->post->topic->name,
+                'url' => $url
             ];
         }
     }
