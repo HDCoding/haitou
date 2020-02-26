@@ -37,6 +37,10 @@ Route::namespace('Auth')->group(function () {
     //Lock Screen
     Route::get('lockscreen', 'LockscreenController@lock')->name('lockscreen');
     Route::post('unlockscreen', 'LockscreenController@unlock')->name('unlockscreen');
+
+    //Resend email
+    Route::get('resend', 'ResendController@resend')->name('resend');
+    Route::post('resend', 'ResendController@resendEmail')->name('resend.email');
 });
 
 //Middleware

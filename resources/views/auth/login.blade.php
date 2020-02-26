@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="form-group mb-0 mt-4">
                                     <div class="col-sm-12 text-center">
-                                        Não recebeu o email de ativação? <a class="text-info m-l-5 line" href="#">Reenvie o e-mail</a>
+                                        Não recebeu o email de ativação? <a class="text-info m-l-5 line" href="{{ url('resend') }}">Re-envie o e-mail</a>
                                     </div>
                                 </div>
                             </form>
