@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\SendActivationThanksMail;
+use App\Jobs\SendActivationThanksJob;
 use App\User;
 
 class ActivationController extends Controller
@@ -30,7 +30,7 @@ class ActivationController extends Controller
             $user->allows()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 11]);
 
             //send thank you email
-            $this->dispatch(new SendActivationThanksMail($user));
+            $this->dispatch(new SendActivationThanksJob($user));
 
             //Return to confirmation page
             return view('auth.activation')->with('info', 'Conta ativada com sucesso, agora você pode fazer o login.');
