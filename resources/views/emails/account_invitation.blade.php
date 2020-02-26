@@ -6,5 +6,5 @@
     Este convite expira em: {{ $expire }}.
 
     Equipe,
-    {{ config('app.name') }}
+    {{ $site_name }}
 @endcomponent
