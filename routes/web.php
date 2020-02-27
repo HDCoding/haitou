@@ -209,10 +209,10 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('notifications')->group(function () {
             Route::get('/', 'NotificationsController@index')->name('notifications.index');
             Route::get('{id}', 'NotificationsController@show')->name('notifications.show');
-            Route::get('{id}/update', 'NotificationsController@update')->name('notifications.update');
-            Route::get('read-all', 'NotificationsController@updateAll')->name('notifications.read.all');
-            Route::get('{id}/destroy', 'NotificationsController@destroy')->name('notifications.destroy');
-            Route::get('delete', 'NotificationsController@destroyAll')->name('notifications.destroy.all');
+            Route::post('{id}/update', 'NotificationsController@update')->name('notifications.update');
+            Route::post('readall', 'NotificationsController@readAll')->name('notifications.read.all');
+            Route::delete('{id}/destroy', 'NotificationsController@destroy')->name('notifications.destroy');
+            Route::delete('delete', 'NotificationsController@destroyAll')->name('notifications.destroy.all');
         });
 
         //Polls
