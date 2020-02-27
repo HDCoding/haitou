@@ -119,7 +119,7 @@
                             <img src="{{ asset('images/status/ratio.png') }}" class="img-rounded" alt="Ratio">
                         </div>
                         <div class="sl-right">
-                            <div class="font-medium">{!! auth()->user()->ratio() !!}</div>
+                            <div class="font-medium">{{ auth()->user()->ratio() }}</div>
                             <div class="desc">Ratio</div>
                         </div>
                     </div>
