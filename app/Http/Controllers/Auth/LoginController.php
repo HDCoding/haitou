@@ -21,8 +21,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    // Where to redirect users after login.
-    protected $redirectTo = '/home';
     // Max Attempts Until Lockout
     protected $maxAttempts = 5;
     // Minutes Lockout
@@ -36,6 +34,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        // Get URLs
+        $urlPrevious = url()->previous();
+        $urlBase = url()->to('/');
+
+        // Set the previous url that we came from to redirect to after successful login but only if is internal
+        if (($urlPrevious != $urlBase . '/login') && (substr($urlPrevious, 0, strlen($urlBase)) === $urlBase)) {
+            session()->put('url.intended', $urlPrevious);
+        }
+
+        return view('auth.login');
     }
 
     protected function authenticated(Request $request, $user)
@@ -58,7 +70,5 @@ class LoginController extends Controller
         if ($user->readed_rules == false) {
             toastr()->warning('Não se esqueça de ler as Regras.', 'Lembrete!');
         }
-
-        return redirect()->to($this->redirectTo);
     }
 }
