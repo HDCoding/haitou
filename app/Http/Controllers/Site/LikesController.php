@@ -26,19 +26,19 @@ class LikesController extends Controller
         $like = $user->likes()->where('post_id', '=', $post->id)->first();
 
         if ($like) {
-            toastr()->warning('Você já deu like deste post!', 'Aviso');
-            return redirect()->to($postUrl);
+//            toastr()->warning('Você já deu like deste post!', 'Aviso');
+            return response()->json('voted');
         } elseif ($post->user_id == $user->id) {
-            toastr()->info('Você não pode dar like do seu próprio post!', 'Aviso');
-            return redirect()->to($postUrl);
+//            toastr()->info('Você não pode dar like do seu próprio post!', 'Aviso');
+            return response()->json('owner');
         } else {
             $new = new Like();
             $new->user_id = $user->id;
             $new->post_id = $post->id;
             $new->save();
 
-            toastr()->success('Like aplicado com sucesso!', 'Like');
-            return redirect()->to($postUrl);
+//            toastr()->success('Like aplicado com sucesso!', 'Like');
+            return response()->json('success');
         }
     }
 
