@@ -151,7 +151,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('topic/{topic_id}/unpin', 'TopicsController@unpinTopic')->name('topic.unpin');
 
             // Like Post
-            Route::post('like', 'LikesController@likePost')->name('like.post');
+            Route::post('like/post/{post_id}', 'LikesController@likePost')->name('like.post');
 
             //Search
             Route::get('search', 'ForumsController@search')->name('forum.search');
