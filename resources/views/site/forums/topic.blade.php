@@ -42,27 +42,32 @@
                 <div class="float-left">
                     @if(auth()->user()->can('forum-mod'))
                         @if ($topic->is_locked)
-                            <a href="{{ route('topic.open', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-success btn-rounded">
+                            <a href="{{ route('topic.open', ['topic_id' => $topic->id])}}"
+                               class="btn btn-sm btn-success btn-rounded">
                                 <i class="fas fa-lock-open"></i> Abrir Tópico
                             </a>
                         @else
-                            <a href="{{ route('topic.close', ['topic_id' => $topic->id])}}" class="btn btn-sm btn-primary btn-rounded">
+                            <a href="{{ route('topic.close', ['topic_id' => $topic->id])}}"
+                               class="btn btn-sm btn-primary btn-rounded">
                                 <i class="ion ion-ios-lock"></i> Fechar Tópico
                             </a>
                         @endif
 
                         @if (!$topic->is_pinned)
-                            <a href="{{ route('topic.pin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-secondary btn-rounded">
+                            <a href="{{ route('topic.pin', ['topic_id' => $topic->id]) }}"
+                               class="btn btn-sm btn-secondary btn-rounded">
                                 <i class="fas fa-file"></i> Pin Tópico
                             </a>
                         @else
-                            <a href="{{ route('topic.unpin', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-danger btn-rounded">
+                            <a href="{{ route('topic.unpin', ['topic_id' => $topic->id]) }}"
+                               class="btn btn-sm btn-danger btn-rounded">
                                 <i class="fas fa-file"></i> Unpin Tópico
                             </a>
                         @endif
                     @endif
                     @if(auth()->user()->id == $topic->first_post_user_id OR auth()->user()->can('forum-mod'))
-                        <a href="{{ route('topic.form.edit', ['topic_id' => $topic->id]) }}" class="btn btn-sm btn-dark btn-rounded">
+                        <a href="{{ route('topic.form.edit', ['topic_id' => $topic->id]) }}"
+                           class="btn btn-sm btn-dark btn-rounded">
                             <i class="fas fa-pencil-alt"></i> Editar Tópico
                         </a>
                     @endif
@@ -75,10 +80,15 @@
                     <div class="col-md-12 mt-3 mb-4">
                         <h4>Polls</h4>
                         <div class="float-left">
-                            <a href="{{ url('staff/poll/' . $topic->id . '/options/add') }}" data-toggle="tooltip" title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
-                            <a class="m-l-15" href="{{ url('staff/poll/' . $topic->id . '/options/remove') }}" data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
-                            <a class="m-l-15" href="{{ route('topic.poll.edit', ['topic_id' => $topic->id]) }}" data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
-                            <a class="m-l-15" href="javascript:;" onclick="document.getElementById('poll-del-{{ $topic->id }}').submit();" data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
+                            <a href="{{ url('staff/poll/' . $topic->id . '/options/add') }}" data-toggle="tooltip"
+                               title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
+                            <a class="m-l-15" href="{{ url('staff/poll/' . $topic->id . '/options/remove') }}"
+                               data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
+                            <a class="m-l-15" href="{{ route('topic.poll.edit', ['topic_id' => $topic->id]) }}"
+                               data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
+                            <a class="m-l-15" href="javascript:;"
+                               onclick="document.getElementById('poll-del-{{ $topic->id }}').submit();"
+                               data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
                             {!! Form::open(['url' => 'topic/polls/' . $topic->id, 'method' => 'DELETE', 'id' => 'poll-del-' . $topic->id, 'style' => 'display: none']) !!}
                             {!! Form::close() !!}
                         </div>
@@ -90,34 +100,32 @@
         @foreach($posts as $post)
             <div class="row">
                 <div class="col-md-9 col-lg-9">
-                    <div class="card" id="post-{{ $post->id }}">
+                    <div class="card" id="post-{{ $post->id }}" data-id="{{ $post->id }}">
                         <div class="card-header">
-                            <a class="mr-3" href="{{ route('post.report', [$post->id]) }}" data-toggle="tooltip" title="Reportar Post">
+                            <a class="mr-3" href="{{ route('post.report', [$post->id]) }}" data-toggle="tooltip"
+                               title="Reportar Post">
                                 <i class="fas fa-flag"></i>
                             </a>
                             @if($post->user_id == auth()->user()->id OR auth()->user()->can('forum-mod'))
-                                <a href="{{ route('post.edit.form', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}" data-toggle="tooltip" title="Editar Post">
+                                <a href="{{ route('post.edit.form', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}"
+                                   data-toggle="tooltip" title="Editar Post">
                                     <i class="fas fa-pencil-alt text-dark mr-3"></i>
                                 </a>
                             @endif
                             @if(auth()->user()->can('forum-mod'))
-                                <a href="javascript:;" onclick="document.getElementById('post-del-{{ $post->id }}').submit();" data-toggle="tooltip" title="Deletar Post">
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('post-del-{{ $post->id }}').submit();"
+                                   data-toggle="tooltip" title="Deletar Post">
                                     <i class="fas fa-trash-alt text-danger mr-3"></i>
                                 </a>
                                 {!! Form::open(['route' => ['post.delete', $post->id], 'method' => 'DELETE', 'id' => 'post-del-' . $post->id , 'style' => 'display: none']) !!}
                                 {!! Form::close() !!}
                             @endif
-                            @if (auth()->user()->likes()->where('post_id', '=', $post->id)->first())
-                                <a href="{{ route('like.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Like Post">
-                                    <i class="fas fa-thumbs-up text-info"></i>
-                                </a>
-                                ({{ $post->likesCount($post->id) }})
-                            @else
-                                <a href="{{ route('like.post', [$post->id]) }}" data-toggle="tooltip" data-original-title="Like Post">
-                                    <i class="fas fa-thumbs-up text-dark"></i>
-                                </a>
-                                ({{ $post->likesCount($post->id) }})
-                            @endif
+
+                                <i id="like{{ $post->id }}" data-toggle="tooltip" data-original-title="Like Post" onclick="likePost({{ $post->id }})"
+                                   class="fas fa-thumbs-up {{ auth()->user()->hasLiked($post->id) ? 'text-info' : '' }}"></i>
+
+                            <b id="total-like-{{ $post->id }}">({{ $post->likesCount() }})</b>
                             <b class="float-right">{{ format_date_time($post->created_at) }}</b>
                         </div>
                         <div class="card-body">
@@ -126,17 +134,19 @@
                                 <hr>
                                 <div class="row col">
                                     @if(auth()->user()->show_forum_signatures)
-                                    <div class="col-lg-10">
-                                        {!! $post->user->signature() !!}
-                                    </div>
+                                        <div class="col-lg-10">
+                                            {!! $post->user->signature() !!}
+                                        </div>
                                     @endif
                                     <div class="col-lg-2">
                                         <div class="d-flex no-block align-items-center">
                                             <div class="ml-auto">
                                                 @if(!$topic->is_locked && $post->user_id !== auth()->user()->id)
-                                                <a href="{{ route('post.reply', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}">
-                                                    <button class="btn btn-danger"><i class="fas fa-reply"></i> Reply</button>
-                                                </a>
+                                                    <a href="{{ route('post.reply', ['topic_id' => $topic->id, 'post_id' => $post->id]) }}">
+                                                        <button class="btn btn-danger"><i class="fas fa-reply"></i>
+                                                            Reply
+                                                        </button>
+                                                    </a>
                                                 @endif
                                             </div>
                                         </div>
@@ -152,17 +162,16 @@
                         <div class="card-body">
                             <div class="d-flex no-block align-items-center">
                                 <div class="m-r-10">
-                                    <img class="img-fluid" src="{{ $post->user->avatar() }}" alt="{{ $post->post_username }}" width="50" />
+                                    <img class="img-fluid" src="{{ $post->user->avatar() }}"
+                                         alt="{{ $post->post_username }}" width="50"/>
                                 </div>
                                 <div class="float-left">
                                     <h5 class="m-b-0 font-16 font-medium">
-                                        <a href="{{ route('user.profile', [$post->user->slug]) }}">{{ $post->post_username }}</a>
+                                        {{ link_to_route('user.profile', str_slug($post->post_username), ['slug' => $post->post_username]) }}
                                     </h5>
                                     <span>{{ $post->user->groupName() }}</span>
                                 </div>
                             </div>
-                            <hr>
-                            <img class="img-fluid" src="{{ $post->user->mood->image() }}" title="{{ $post->user->mood->name() }}" alt="{{ $post->user->mood->name() }}">
                             <hr>
                             <p>{{ $post->user->title }}</p>
                         </div>
@@ -215,5 +224,39 @@
                 style: '/vendor/sceditor/minified/themes/content/default.min.css',
             });
         });
+    </script>
+
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function likePost(PostId) {
+            let postID = PostId;
+            let total = document.getElementById("total-like-" + postID).innerHTML;
+
+            $.ajax({
+                url: "{{ url('forum/like/post/') }}" + '/' + PostId,
+                type: "POST",
+                data: {'post_id': PostId},
+                success: function (data) {
+                    console.log(data);
+                    if (data === 'success') {
+                        $('#total-like-' + postID).html(parseInt(total) + 1);
+                        $('#like' + postID).addClass("text-info");
+                        toastr.success('Like aplicado com sucesso!', 'Like', {timeOut: 5000})
+                    } else if (data === 'voted') {
+                        toastr.warning('Você já deu like deste post!', 'Aviso', {timeOut: 5000});
+                    } else if (data === 'owner') {
+                        toastr.info('Você não pode dar like do seu próprio post!', 'Aviso', {timeOut: 5000});
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
     </script>
 @endsection
