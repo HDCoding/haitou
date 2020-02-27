@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\BBCode;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -67,10 +68,15 @@ class Post extends Model
         return $this->hasMany(Like::class, 'post_id');
     }
 
-    public function likesCount($post_id)
+    public function likesCount()
     {
-        //Count likes
-        return $this->likes()->where('post_id', '=', $post_id)->count();
+        // For Cache
+        $expire_at = Carbon::now()->addMinutes(5);
+
+        return cache()->remember('post_likes_'.$this->id, $expire_at, function () {
+            //Count likes
+            return $this->likes->where('post_id', '=', $this->id)->count();
+        });
     }
 
 }
