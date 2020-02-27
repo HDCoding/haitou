@@ -25,12 +25,18 @@
         <div class="row">
             <div class="col-md-12 mt-3 mb-3">
                 <div class="float-left">
-                    <a href="{{ route('notifications.read.all') }}" class="btn btn-sm btn-success btn-rounded">
+                    {!! Form::open(['route' => 'notifications.read.all']) !!}
+                    <button type="submit" class="btn btn-sm btn-success btn-rounded">
                         <i class="fa fa-eye"></i> Marcar tudo como lido
-                    </a>
-                    <a href="{{ route('notifications.destroy.all') }}" class="btn btn-sm btn-danger btn-rounded">
+                    </button>
+                    {!! Form::close() !!}
+                </div>
+                <div class="float-right">
+                    {!! Form::open(['route' => 'notifications.destroy.all', 'method' => 'DELETE']) !!}
+                    <button type="submit" class="btn btn-sm btn-danger btn-rounded">
                         <i class="fa fa-times"></i> Excluir todas as notificações
-                    </a>
+                    </button>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -42,34 +48,54 @@
                     <div class="card-body">
                         @includeIf('errors.errors', [$errors])
                         @include('includes.messages')
-                        @forelse($notifications as $notification)
-                            <div class="media pb-1 mb-4">
-                                <!-- Icone -->
-                                <div class="ui-icon {{ $notification->data['icon'] }} border-0 text-dark"></div>
-                                <!-- End Icone -->
-                                <div class="media-body ml-3">
-                                    <a href="{{ route('notifications.show', ['id' => $notification->id]) }}">
-                                        {{ $notification->data['title'] }}
-                                    </a>
-                                    <p class="my-1 text-dark {{ !empty($notification->read_at) ?: 'bg-light' }}">
-                                        {{ $notification->data['body'] }}
-                                    </p>
-                                    <div class="clearfix">
-                                        <a class="float-right text-danger" href="{{ route('notifications.destroy', ['id' => $notification->id]) }}" data-toggle="tooltip" data-original-title="Excluir notificação">
-                                            <span class="ion ion-md-trash mr-2"></span>
-                                        </a>
-                                        <a class="float-right text-info" href="{{ route('notifications.update', ['id' => $notification->id]) }}" data-toggle="tooltip" data-original-title="Marcar como lido">
-                                            <span class="ion ion-md-archive mr-4"></span>
-                                        </a>
-                                        <span class="float-left text-muted small">
-                                            {{ $notification->created_at->diffForHumans() }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            <p class="d-block text-center p-2 my-1">Sem notificações no momento.</p>
-                        @endforelse
+                        <div class="table-responsive m-t-5">
+                            <table class="table">
+                                <tbody>
+                                @forelse($notifications as $notification)
+                                    <tr class="{{ empty($notification->read_at) ? 'bg-light' : '' }}">
+                                        <th class="align-middle">
+                                            <i class="{{ $notification->data['icon'] }} fa-2x"></i>
+                                        </th>
+                                        <td>
+                                            <a href="{{ route('notifications.show', ['id' => $notification->id]) }}">
+                                                {{ $notification->data['title'] }}
+                                            </a>
+                                            <p class="my-1 text-dark">
+                                                {{ $notification->data['body'] }}
+                                            </p>
+                                            <span class="float-left text-muted small">
+                                                {{ $notification->created_at->diffForHumans() }}
+                                            </span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <div class="btn-group text-center">
+                                                {!! Form::open(['route' => ['notifications.update', 'id' => $notification->id]]) !!}
+                                                <button type="submit" class="btn btn-sm btn-info btn-rounded mr-2"
+                                                        data-toggle="tooltip" data-original-title="Marcar como lido">
+                                                    <i class="ion ion-md-archive"></i> Lido
+                                                </button>
+                                                {!! Form::close() !!}
+
+                                                {!! Form::open(['route' => ['notifications.destroy', 'id' => $notification->id], 'method' => 'DELETE']) !!}
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger btn-rounded float-right"
+                                                        data-toggle="tooltip" data-original-title="Excluir notificação">
+                                                    <i class="ion ion-md-trash"></i> Excluir
+                                                </button>
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <th colspan="3" class="d-block text-center p-2 my-1 m-t-10">
+                                            <p>Sem notificações no momento.</p>
+                                        </th>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
