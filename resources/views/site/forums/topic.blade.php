@@ -125,7 +125,7 @@
                                 <i id="like{{ $post->id }}" data-toggle="tooltip" data-original-title="Like Post" onclick="likePost({{ $post->id }})"
                                    class="fas fa-thumbs-up {{ auth()->user()->hasLiked($post->id) ? 'text-info' : '' }}"></i>
 
-                            <b id="total-like-{{ $post->id }}">({{ $post->likesCount() }})</b>
+                            (<b id="total-like-{{ $post->id }}">{{ $post->likesCount() }}</b>)
                             <b class="float-right">{{ format_date_time($post->created_at) }}</b>
                         </div>
                         <div class="card-body">
@@ -234,8 +234,8 @@
         });
 
         function likePost(PostId) {
-            let postID = PostId;
-            let total = document.getElementById("total-like-" + postID).innerHTML;
+            var postID = PostId;
+            var total = document.getElementById("total-like-" + postID).innerHTML;
 
             $.ajax({
                 url: "{{ url('forum/like/post/') }}" + '/' + PostId,
@@ -244,7 +244,7 @@
                 success: function (data) {
                     console.log(data);
                     if (data === 'success') {
-                        $('#total-like-' + postID).html(parseInt(total) + 1);
+                        $("#total-like-" + postID).html(parseInt(total) + 1);
                         $('#like' + postID).addClass("text-info");
                         toastr.success('Like aplicado com sucesso!', 'Like', {timeOut: 5000})
                     } else if (data === 'voted') {
