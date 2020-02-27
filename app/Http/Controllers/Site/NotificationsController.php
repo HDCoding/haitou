@@ -73,7 +73,7 @@ class NotificationsController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function updateAll(Request $request)
+    public function readAll(Request $request)
     {
         $request->user()->unreadNotifications()->update(['read_at' => now()]);
         toastr()->info('Todas as notificações marcadas como lidas!', 'Aviso!');
