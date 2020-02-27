@@ -37,8 +37,8 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">Fórums</th>
-                                        <th scope="col">Tópicos</th>
-                                        <th scope="col">Posts</th>
+                                        <th class="text-center" scope="col">Tópicos</th>
+                                        <th class="text-center" scope="col">Posts</th>
                                         <th scope="col">Última Mensagem</th>
                                     </tr>
                                     </thead>
@@ -60,24 +60,27 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                                    <td>{{ $forum->num_topic }}</td>
-                                                    <td>{{ $forum->num_post }}</td>
+                                                    <td class="align-middle text-center">{{ $forum->num_topic }}</td>
+                                                    <td class="align-middle text-center">{{ $forum->num_post }}</td>
+
+                                                    @if($forum->num_post > 0)
                                                     <td>
-                                                        @if($forum->num_post > 0)
-                                                            @if(!empty($forum->last_post_username))
-                                                                <div class="ml-2">
-                                                                    {{ link_to_route('forum.topic', $forum->last_topic_name, ['topic_id' => $forum->last_topic_id, 'slug' => $forum->last_topic_slug]) }}
-                                                                    <div class="text-dark small text-truncate">
-                                                                        {{ $forum->updated_at->diffForHumans() }}
-                                                                        <span class="ml-1 mr-1">·</span>
-                                                                        {{ link_to_route('user.profile', $forum->last_post_username, [strtolower($forum->last_post_username)], ['class' => 'text-info']) }}
-                                                                    </div>
+                                                        @if(!empty($forum->last_post_username))
+                                                            <div class="ml-2">
+                                                                {{ link_to_route('forum.topic', $forum->last_topic_name, ['topic_id' => $forum->last_topic_id, 'slug' => $forum->last_topic_slug]) }}
+                                                                <div class="text-dark small text-truncate">
+                                                                    {{ $forum->updated_at->diffForHumans() }}
+                                                                    <span class="ml-1 mr-1">·</span>
+                                                                    {{ link_to_route('user.profile', $forum->last_post_username, [strtolower($forum->last_post_username)], ['class' => 'text-info']) }}
                                                                 </div>
-                                                            @endif
-                                                        @else
-                                                            <span class="last-wrapper text-overflow">Sem posts</span>
+                                                            </div>
                                                         @endif
                                                     </td>
+                                                    @else
+                                                    <td class="align-middle text-center">
+                                                        <span class="last-wrapper text-overflow">Sem posts</span>
+                                                    </td>
+                                                    @endif
                                                 </tr>
                                             @endif
                                         @endif
