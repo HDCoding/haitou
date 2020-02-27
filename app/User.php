@@ -374,46 +374,42 @@ class User extends Authenticatable
     {
         $expire_at = Carbon::now()->addMinutes(20);
 
-        $flag = cache()->remember('user_flag_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_flag_' . $this->id, $expire_at, function () {
             return asset('images/states/' . $this->state->flag);
         });
-        return $flag;
     }
 
     public function downloaded()
     {
         $expire_at = Carbon::now()->addMinutes(20);
 
-        $down = cache()->remember('user_down_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_down_' . $this->id, $expire_at, function () {
             return make_size($this->downloaded);
         });
-        return $down;
     }
 
     public function uploaded()
     {
         $expire_at = Carbon::now()->addMinutes(20);
 
-        $up = cache()->remember('user_up_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_up_' . $this->id, $expire_at, function () {
             return make_size($this->uploaded);
         });
-        return $up;
     }
 
     public function ratio()
     {
         $expire_at = Carbon::now()->addMinutes(5);
 
-        $ratio = cache()->remember('user_ratio_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_ratio_' . $this->id, $expire_at, function () {
             if ($this->uploaded == 0 && $this->downloaded == 0) {
-                return number_format(1, 2);
+                return INF;
             } elseif ($this->uploaded > 0 && $this->downloaded > 0) {
                 return (float)number_format($this->uploaded / $this->downloaded, 2);
             } else {
-                return '<i class="fas fa-infinity"></i>';
+                return INF;
             }
         });
-        return $ratio;
     }
 
     public function status()
@@ -447,21 +443,19 @@ class User extends Authenticatable
     {
         $expire_at = Carbon::now()->addMinutes(5);
 
-        $points = cache()->remember('usr_pts_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_pts_' . $this->id, $expire_at, function () {
             return $this->points > 0 ? number_format($this->points, 0, ',', '.') : 0;
         });
-        return $points;
     }
 
     public function levelImage()
     {
         $expire_at = Carbon::now()->addMinutes(20);
 
-        $lvl = cache()->remember('img_lvl_'.$this->id, $expire_at, function () {
+        return cache()->remember('img_lvl_' . $this->id, $expire_at, function () {
             $level = $this->level();
             return asset("images/ranks/{$level}.png");
         });
-        return $lvl;
     }
 
     public function level()
@@ -469,11 +463,10 @@ class User extends Authenticatable
         $expire_at = Carbon::now()->addMinutes(20);
 
         //only works until level 999 = equal 999000 in integer
-        $exp = cache()->remember('user_exp_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_exp_' . $this->id, $expire_at, function () {
             $experience = $this->experience;
             return $experience < 1000 ? 0 : floor(number_format($experience));
         });
-        return $exp;
     }
 
     public function updatePoints($points)
@@ -491,10 +484,9 @@ class User extends Authenticatable
         $expire_at = Carbon::now()->addMinutes(20);
 
         // User group
-        $user_group = cache()->remember('user_group_'.$this->id, $expire_at, function () {
+        return cache()->remember('user_group_' . $this->id, $expire_at, function () {
             return $this->group()->select('name')->pluck('name')->first();
         });
-        return $user_group;
     }
 
     public function isSubscribed($topic_id)
@@ -566,6 +558,17 @@ class User extends Authenticatable
             ->where('topic_id', '=', $topic_id)
             ->where('notify', '=', true)
             ->first();
+    }
+
+    public function hasLiked($post_id)
+    {
+        // For Cache
+        $expire_at = Carbon::now()->addMinutes(5);
+
+        return cache()->remember('user_likes_' . $post_id, $expire_at, function () use ($post_id) {
+            //Count likes
+            return $this->likes->where('post_id', '=', $post_id)->first();
+        });
     }
 
 }
