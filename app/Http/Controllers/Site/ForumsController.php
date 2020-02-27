@@ -8,6 +8,7 @@ use App\Models\Forum;
 use App\Models\Moderator;
 use App\Models\Post;
 use App\Models\Topic;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ForumsController extends Controller
@@ -92,13 +93,6 @@ class ForumsController extends Controller
 
         $results->setPath('?name=' . $request->input('name'));
 
-        // Total Forums Count
-        $num_forums = Forum::count();
-        // Total Posts Count
-        $num_posts = Post::count();
-        // Total Topics Count
-        $num_topics = Topic::count();
-
         $params = $request->except('_token');
 
         return view($logger, [
@@ -106,10 +100,10 @@ class ForumsController extends Controller
             'results' => $results,
             'name' => $request->input('name'),
             'body' => $request->input('body'),
-            'num_posts' => $num_posts,
-            'num_forums' => $num_forums,
-            'num_topics' => $num_topics,
             'params' => $params,
+            'num_posts' => $this->stats()['num_posts'],
+            'num_forums' => $this->stats()['num_forums'],
+            'num_topics' => $this->stats()['num_topics'],
         ]);
     }
 
@@ -137,18 +131,11 @@ class ForumsController extends Controller
 
         $results = $result->orderBy('id', 'DESC')->paginate(30);
 
-        // Total Forums Count
-        $num_forums = Forum::count();
-        // Total Posts Count
-        $num_posts = Post::count();
-        // Total Topics Count
-        $num_topics = Topic::count();
-
         return view('site.forums.subscriptions', [
             'results' => $results,
-            'num_posts' => $num_posts,
-            'num_forums' => $num_forums,
-            'num_topics' => $num_topics
+            'num_posts' => $this->stats()['num_posts'],
+            'num_forums' => $this->stats()['num_forums'],
+            'num_topics' => $this->stats()['num_topics'],
         ]);
     }
 
@@ -164,14 +151,13 @@ class ForumsController extends Controller
             ->orderBy('name')
             ->get();
 
-        // Total Forums Count
-        $num_forums = Forum::count();
-        // Total Posts Count
-        $num_posts = Post::count();
-        // Total Topics Count
-        $num_topics = Topic::count();
-
-        return view('site.forums.index', compact('categories', 'forums', 'num_forums', 'num_posts', 'num_topics'));
+        return view('site.forums.index', [
+            'categories' => $categories,
+            'forums' => $forums,
+            'num_posts' => $this->stats()['num_posts'],
+            'num_forums' => $this->stats()['num_forums'],
+            'num_topics' => $this->stats()['num_topics'],
+        ]);
     }
 
     public function threads($forum_id, $slug)
@@ -208,18 +194,11 @@ class ForumsController extends Controller
             ->latest('id')
             ->paginate(30);
 
-        // Total Forums Count
-        $num_forums = Forum::count();
-        // Total Posts Count
-        $num_posts = Post::count();
-        // Total Topics Count
-        $num_topics = Topic::count();
-
         return view('site.forums.latest_topics', [
             'results' => $results,
-            'num_posts' => $num_posts,
-            'num_forums' => $num_forums,
-            'num_topics' => $num_topics,
+            'num_posts' => $this->stats()['num_posts'],
+            'num_forums' => $this->stats()['num_forums'],
+            'num_topics' => $this->stats()['num_topics'],
         ]);
     }
 
@@ -240,18 +219,25 @@ class ForumsController extends Controller
             ->orderBy('posts.created_at', 'desc')
             ->paginate(30);
 
-        // Total Forums Count
-        $num_forums = Forum::count();
-        // Total Posts Count
-        $num_posts = Post::count();
-        // Total Topics Count
-        $num_topics = Topic::count();
-
         return view('site.forums.latest_posts', [
             'results' => $results,
-            'num_posts' => $num_posts,
-            'num_forums' => $num_forums,
-            'num_topics' => $num_topics,
+            'num_posts' => $this->stats()['num_posts'],
+            'num_forums' => $this->stats()['num_forums'],
+            'num_topics' => $this->stats()['num_topics'],
         ]);
+    }
+
+    private function stats()
+    {
+        // For Cache
+        $expire_at = Carbon::now()->addMinutes(10);
+
+        return cache()->remember('forum_stats', $expire_at, function () {
+            return [
+                'num_forums' => Forum::count(), // Total Forums Count
+                'num_posts' => Post::count(), // Total Posts Count
+                'num_topics' => Topic::count() // Total Topics Count
+            ];
+        });
     }
 }
