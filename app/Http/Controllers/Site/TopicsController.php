@@ -32,7 +32,7 @@ class TopicsController extends Controller
     public function topic($topic_id, $slug)
     {
         //Find the topic
-        $topic = Topic::whereSlug($slug)->findOrFail($topic_id);
+        $topic = Topic::with('forum:id,name,slug')->whereSlug($slug)->findOrFail($topic_id);
 
         //Get Permission
         $permission = $topic->forum;
@@ -47,7 +47,8 @@ class TopicsController extends Controller
         $topic->increment('views');
 
         //Get all posts
-        $posts = Post::with('user:id,group_id,mood_id,slug,username,title,signature,avatar')
+        $posts = Post::with('user:id,group_id,slug,title,signature,avatar')
+            ->select('id', 'user_id', 'post_username', 'content', 'created_at')
             ->where('topic_id', '=', $topic->id)
             ->paginate(30);
 
@@ -72,9 +73,9 @@ class TopicsController extends Controller
 
     public function newTopicPost(NewTopicRequest $request, $forum_id)
     {
-        $user = $request->user();
-
         $forum = Forum::findOrFail($forum_id);
+
+        $user = $request->user();
 
         // The user has the right to create a topic here
         if ($forum->getPermission()->start_topic != true) {
@@ -132,11 +133,11 @@ class TopicsController extends Controller
 
     public function formTopicEdit(Request $request, $topic_id)
     {
-        //Logged user
-        $user = $request->user();
-
         //Edit topic title
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         abort_unless($user->can('forum-mod') || $user->id !== $topic->first_post_user_id, 403);
 
@@ -145,11 +146,11 @@ class TopicsController extends Controller
 
     public function topicEdit(Request $request, $topic_id)
     {
-        //Logged user
-        $user = $request->user();
-
         //Edit topic title
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         $forum = $topic->forum;
 
@@ -174,8 +175,10 @@ class TopicsController extends Controller
     //funcao nao esta em uso, mas esta pronta/funcionando
     public function topicDelete(Request $request, $topic_id)
     {
-        $user = $request->user();
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         abort_unless($user->can('forum-mod'), 403);
 
@@ -189,10 +192,11 @@ class TopicsController extends Controller
 
     public function openTopic(Request $request, $topic_id)
     {
-        $user = $request->user();
-
         //Open the topic
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         abort_unless($user->can('forum-mod'), 403);
 
@@ -205,10 +209,11 @@ class TopicsController extends Controller
 
     public function closeTopic(Request $request, $topic_id)
     {
-        $user = $request->user();
-
         //Close the topic
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         abort_unless($user->can('forum-mod'), 403);
 
@@ -221,10 +226,11 @@ class TopicsController extends Controller
 
     public function pinTopic(Request $request, $topic_id)
     {
-        $user = $request->user();
-
         //Open or Close the topic
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         abort_unless($user->can('forum-mod'), 403);
 
@@ -237,10 +243,11 @@ class TopicsController extends Controller
 
     public function unpinTopic(Request $request, $topic_id)
     {
-        $user = $request->user();
-
         //Open or Close the topic
         $topic = Topic::findOrFail($topic_id);
+
+        //Logged user
+        $user = $request->user();
 
         abort_unless($user->can('forum-mod'), 403);
 
