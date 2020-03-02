@@ -2,7 +2,7 @@
 Almost finished
 
 ## Site
-- [ ] Chat (this is hard for me :( no experience)
+- [ ] Chat (this is hard for me) :( no experience
     * Single (1 to 1)
     * General Group (Everyone talk to Everybody, System/Bot messages included)
     * Closed Group (Whatsapp/Telegram examples, add/remove people to chat group)
