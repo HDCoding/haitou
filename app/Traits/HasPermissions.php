@@ -50,12 +50,11 @@ trait HasPermissions
     {
         //TODO
         //cache this
-        $expire_at = Carbon::now()->addMinutes(10);
+        $expire_at = Carbon::now()->addMinutes(1);
 
-        $allow = cache()->remember('user_allow_'.auth()->user()->id, $expire_at, function () use ($permission) {
+//        return cache()->remember('user_allow_' . auth()->user()->id, $expire_at, function () use ($permission) {
             return (bool)$this->allows()->where('slug', $permission->slug)->count();
-        });
-        return $allow;
+//        });
     }
 
     public function hasPermissionThroughRole($permission)
