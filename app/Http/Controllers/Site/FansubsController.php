@@ -40,7 +40,7 @@ class FansubsController extends Controller
             ->get();
 
         //get all comments
-        $comments = Comment::with('fansub:fansub_id')
+        $comments = Comment::with('fansub:id')
             ->where('fansub_id', '=', $fansub->id)
             ->latest('id')
             ->paginate(5);
