@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Listeners\AchievementListener;
 use App\Listeners\FailedLoginListener;
 use App\Listeners\LoginListener;
 use App\Listeners\LogoutListener;
 use App\Listeners\PasswordProtectBackup;
+use Gstt\Achievements\Event\Unlocked;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
@@ -36,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         BackupZipWasCreated::class => [
             PasswordProtectBackup::class
+        ],
+        Unlocked::class => [
+            AchievementListener::class
         ]
     ];
 
