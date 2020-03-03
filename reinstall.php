@@ -1,18 +1,18 @@
 <?php
 
-echo "<-------- Migrando Tabelas -------->\r\n";
+echo "<-------- Migrating Tables -------->\r\n";
 exec('php artisan migrate --seed');
 
 //pause
 sleep(5);
 
-echo "<-------- Setando Permissoes Forum -------->\r\n";
+echo "<-------- Set Forum Permissions -------->\r\n";
 exec('php artisan forums:permissions');
 
 //pause
 sleep(5);
 
-echo "<-------- Setando Permissoes User:3 -------->\r\n";
+echo "<-------- Set User:3 Permissions -------->\r\n";
 exec('php artisan user:permissions');
 
 //TODO
