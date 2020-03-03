@@ -146,10 +146,7 @@ class ForumsController extends Controller
             ->orderBy('position')
             ->get();
 
-        $forums = Forum::with('posts:id,forum_id,topic_id,created_at')
-            ->with('topics:id,forum_id')
-            ->orderBy('name')
-            ->get();
+        $forums = Forum::orderBy('name')->get();
 
         return view('site.forums.index', [
             'categories' => $categories,
