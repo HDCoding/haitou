@@ -363,17 +363,6 @@ class User extends Authenticatable
         return $this->hasMany(Vip::class, 'user_id');
     }
 
-    public function chatrooms()
-    {
-        return $this->belongsToMany(Chatroom::class,'chatroom_users');
-
-    }
-
-    public function messages()
-    {
-        return $this->hasMany(Message::class);
-    }
-
     public function sluggable()
     {
         return [
