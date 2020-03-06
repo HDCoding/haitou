@@ -18,7 +18,7 @@ class CreateChatboxTable extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->string('username', 25);
             $table->text('message');
-            $table->text('mentions')->nullable();
+            $table->string('mentions')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
