@@ -52,6 +52,7 @@
     <!-- ============================================================== -->
     <div class="page-wrapper">
 
+        <div id="chatbox"></div>
         @yield('content')
 
         @include('includes.dashboard-footer')
