@@ -16,10 +16,6 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-Vue.component('chat-app', require('./components/chat/ChatApp'));
-Vue.component('chat-rooms', require('./components/chat/Chatrooms'));
-Vue.component('chat-messages', require('./components/chat/ChatMessages'));
-Vue.component('chat-form', require('./components/chat/ChatForm'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
