@@ -45,11 +45,10 @@ class ChatboxController extends Controller
             $messages = $messages->reverse();
             $data = [];
             foreach ($messages as $message) {
-                $class = '';
-                if (in_array($user->id, explode(',', $message->mentions))) {
-                    $class = 'mentioned';
-                }
-                $data[] = '<li class="chat-item ' . $class . '">'
+
+                $class = in_array($user->id, explode(',', $message->mentions)) ? 'mentioned' : 'bg-light-info';
+
+                $data[] = '<li class="chat-item">'
                     . '<div class="chat-img">'
                     . '<img src="' . $message->user->avatar() . '" alt="' . $message->username . '">'
                     . '</div>'
@@ -59,7 +58,7 @@ class ChatboxController extends Controller
                     . ' - '
                     . '<span style="color:' . $message->user->group->color . '">' . $message->user->groupName() . '</span>'
                     . '</h6>'
-                    . '<div class="box bg-light-info">'
+                    . '<div class="box '. $class .'">'
                     . $message->message
                     . '</div>'
                     . '</div>'
@@ -91,9 +90,10 @@ class ChatboxController extends Controller
             $mentionIDs = [];
 
             foreach ($mentions[0] as $mention) {
-                $findUser = User::where('username', 'LIKE', '%' . str_replace('@', '', $mention) . '%')->first();
-                if (!empty($findUser->id)) {
-                    $mentionIDs[] = $findUser->id;
+                $mention = str_replace('@', '', $mention);
+                $find_user = User::where('username', 'LIKE', '%' . $mention . '%')->first();
+                if (!empty($find_user->id)) {
+                    $mentionIDs[] = $find_user->id;
                 }
             }
 
