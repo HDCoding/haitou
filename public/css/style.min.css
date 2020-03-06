@@ -34910,7 +34910,7 @@ html[dir=rtl] #main-wrapper[data-sidebartype=overlay].show-sidebar .left-sidebar
 
 .chat-list .chat-item .chat-img img {
     width: 45px;
-    border-radius: 100%
+    /* border-radius: 100% */
 }
 
 .chat-list .chat-item .chat-content {
@@ -35537,4 +35537,8 @@ html[dir=rtl] #main-wrapper[data-sidebartype=overlay].show-sidebar .left-sidebar
 .py-home {
     padding-top: 7rem !important;
     padding-bottom: 8rem !important;
+}
+
+.mentioned {
+    background: #C6FFFA !important;
 }
