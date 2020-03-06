@@ -85,6 +85,8 @@ Route::middleware(['auth'])->group(function () {
 
         //Chatbox
         Route::get('chatbox', 'ChatboxController@index')->name('site.chatbox');
+        Route::post('messages', 'ChatboxController@fetch')->name('chatbox.fetch');
+        Route::post('send', 'ChatboxController@send')->name('chatbox.send');
 
         //Save Comments
         Route::resource('comments', 'CommentsController')->except(['index', 'create']);
