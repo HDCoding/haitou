@@ -20,9 +20,4 @@ use Illuminate\Http\Request;
 Route::namespace('Api')->group(function () {
     //Calendars
     Route::get('calendars', 'CalendarsController@index');
-    //Chat Rooms
-    Route::get('chatrooms', 'ChatController@rooms');
-    Route::post('change-chatroom', 'ChatController@changeChatroom');
-    Route::get('messages', 'ChatController@messages');
-    Route::post('messages', 'ChatController@sendMessage');
 });
