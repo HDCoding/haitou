@@ -27,8 +27,7 @@ class DatabaseSeeder extends Seeder
              RulesTableSeeder::class,
              TagsTableSeeder::class,
              AllowsTableSeeder::class,
-             ForumTableSeeder::class,
-             ChatRoomTableSeeder::class
+             ForumTableSeeder::class
          ]);
     }
 }
