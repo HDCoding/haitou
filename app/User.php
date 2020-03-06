@@ -6,6 +6,7 @@ use App\Helpers\BBCode;
 use App\Models\Attachment;
 use App\Models\Bookmark;
 use App\Models\Calendar;
+use App\Models\Chatroom;
 use App\Models\Cheater;
 use App\Models\Comment;
 use App\Models\Complete;
@@ -19,6 +20,7 @@ use App\Models\Log;
 use App\Models\Login;
 use App\Models\Lottery;
 use App\Models\LotteryWinner;
+use App\Models\Message;
 use App\Models\Moderate;
 use App\Models\Moderator;
 use App\Models\Mood;
@@ -361,6 +363,17 @@ class User extends Authenticatable
         return $this->hasMany(Vip::class, 'user_id');
     }
 
+    public function chatrooms()
+    {
+        return $this->belongsToMany(Chatroom::class,'chatroom_users');
+
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function sluggable()
     {
         return [
@@ -436,7 +449,7 @@ class User extends Authenticatable
 
     public function cover()
     {
-        return empty($this->cover) ? asset('images/no-cover.jpg') : url('storage/covers/' . $this->cover);
+        return empty($this->cover) ? asset('images/no-cover.jpg') : url('storage/usercovers/' . $this->cover);
     }
 
     public function points()
