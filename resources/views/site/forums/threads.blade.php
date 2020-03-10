@@ -22,6 +22,9 @@
     </div>
 
     <div class="container-fluid">
+        @includeIf('errors.errors', [$errors])
+        @include('includes.messages')
+
         <div class="row">
             <div class="col-12">
                 @include('site.forums.buttons')
@@ -32,18 +35,11 @@
                             <div class="mb-4">
                                 <a href="{{ route('new.topic', ['forum_id' => $forum->id]) }}">
                                     <button type="button" class="btn btn-sm btn-primary btn-rounded">
-                                        <i class="ion ion-md-add"></i>&nbsp; Novo Tópico
-                                    </button>
-                                </a>
-                                <a href="{{ route('new.poll', ['forum_id' => $forum->id]) }}">
-                                    <button type="button" class="btn btn-sm btn-info btn-rounded">
-                                        <i class="fas fa-poll"></i>&nbsp; Nova Pesquisa
+                                        <i class="ion ion-md-add"></i> Novo Tópico
                                     </button>
                                 </a>
                             </div>
                         @endif
-                        @includeIf('errors.errors', [$errors])
-                        @include('includes.messages')
 
                         <b>Moderadores: &nbsp;</b>
                         @foreach($moderators as $moderator)
