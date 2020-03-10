@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use App\Models\Like;
 use App\Models\Post;
-use App\Models\Torrent;
 use Illuminate\Http\Request;
 
 class LikesController extends Controller
