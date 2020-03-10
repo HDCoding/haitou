@@ -15,7 +15,6 @@ class Poll extends Model
 
     protected $casts = [
         'user_id' => 'int',
-        'topic_id' => 'int',
         'multi_choice' => 'bool',
         'is_main' => 'bool',
         'is_closed' => 'bool',
@@ -28,7 +27,6 @@ class Poll extends Model
 
     protected $fillable = [
         'user_id',
-        'topic_id',
         'name',
         'slug',
         'description',
@@ -39,19 +37,9 @@ class Poll extends Model
         'closed_at',
     ];
 
-    public function topic()
-    {
-        return $this->belongsTo(Topic::class, 'topic_id');
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function topics()
-    {
-        return $this->hasMany(Topic::class);
     }
 
     public function sluggable()
@@ -61,11 +49,6 @@ class Poll extends Model
                 'source' => 'name'
             ]
         ];
-    }
-
-    public function name()
-    {
-        return $this->topic_id == null ? 'Não' : $this->topic->name;
     }
 
     public function totalVotes()
