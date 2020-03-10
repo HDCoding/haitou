@@ -26,7 +26,6 @@ use App\Models\Historic;
 use App\Models\Log;
 use App\Models\Media;
 use App\Models\Tag;
-use App\Models\Thank;
 use App\Models\Torrent;
 use App\Notifications\NewReseedRequestNotification;
 use App\User;
