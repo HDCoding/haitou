@@ -16,7 +16,6 @@ class CreatePollsTable extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('topic_id')->index()->nullable();
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
@@ -28,9 +27,6 @@ class CreatePollsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-
-            $table->foreign('topic_id')->references('id')->on('topics')
-                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
