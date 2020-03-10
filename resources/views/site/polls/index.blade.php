@@ -44,13 +44,13 @@
                                             @if($poll->multi_choice)
                                                 <!-- Arrumar layout depois, primeira checar se funciona -->
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" id="option-checkbox-{{ $option->id }}" name="option[]" value="{{ $option->id }}"> {{ $option->name }}
-                                                    <label for="option-checkbox-{{ $option->id }}"></label>
+                                                    <input type="checkbox" id="checkbox-{{ $option->id }}" name="option[]" class="custom-control-input" value="{{ $option->id }}">
+                                                    <label class="custom-control-label" for="checkbox-{{ $option->id }}"> {{ $option->name }}</label>
                                                 </div>
                                             @else
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="option-radio-{{ $option->id }}" name="option" value="{{ $option->id }}"> {{ $option->name }}
-                                                    <label for="option-radio-{{ $option->id }}"></label>
+                                                    <input type="radio" id="radio-{{ $option->id }}" name="option" class="custom-control-input" value="{{ $option->id }}">
+                                                    <label class="custom-control-label" for="radio-{{ $option->id }}"> {{ $option->name }}</label>
                                                 </div>
                                             @endif
                                         </li>
