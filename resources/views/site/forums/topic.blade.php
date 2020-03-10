@@ -19,7 +19,12 @@
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{{ url('forum') }}">Fórum</a></li>
                             <li class="breadcrumb-item">{{ link_to_route('forum.threads', $topic->forum->name, ['forum_id' => $topic->forum->id, 'slug' => $topic->forum->slug]) }}</li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $topic->name }}</li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ $topic->name }}
+                                @if($topic->is_locked)
+                                    <span class="label label-primary small align-text-bottom ml-1">Trancado</span>
+                                @endif
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -28,9 +33,6 @@
     </div>
 
     <div class="container-fluid">
-        @if($topic->is_locked)
-            <span class="badge badge-default small align-text-bottom ml-1">Trancado</span>
-        @endif
         @includeIf('errors.errors', [$errors])
         @include('includes.messages')
 
@@ -74,28 +76,6 @@
                 </div>
             </div>
         </div>
-        @if(auth()->user()->id == $topic->first_post_user_id || auth()->user()->can('forum-mod'))
-            @if(!empty($topic->poll_id))
-                <div class="row">
-                    <div class="col-md-12 mt-3 mb-4">
-                        <h4>Polls</h4>
-                        <div class="float-left">
-                            <a href="{{ url('staff/poll/' . $topic->id . '/options/add') }}" data-toggle="tooltip"
-                               title="Adicionar Opções"><i class="fa fa-plus text-warning"></i></a>
-                            <a class="m-l-15" href="{{ url('staff/poll/' . $topic->id . '/options/remove') }}"
-                               data-toggle="tooltip" title="Remover Opções"><i class="fa fa-minus text-success"></i></a>
-                            <a class="m-l-15" href="{{ route('topic.poll.edit', ['topic_id' => $topic->id]) }}"
-                               data-toggle="tooltip" title="Editar Poll"><i class="fa fa-pencil-alt text-info"></i></a>
-                            <a class="m-l-15" href="javascript:;"
-                               onclick="document.getElementById('poll-del-{{ $topic->id }}').submit();"
-                               data-toggle="tooltip" title="Remover Poll"><i class="fa fa-times text-danger"></i></a>
-                            {!! Form::open(['url' => 'topic/polls/' . $topic->id, 'method' => 'DELETE', 'id' => 'poll-del-' . $topic->id, 'style' => 'display: none']) !!}
-                            {!! Form::close() !!}
-                        </div>
-                    </div>
-                </div>
-            @endif
-        @endif
 
         @foreach($posts as $post)
             <div class="row">
