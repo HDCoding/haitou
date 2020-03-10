@@ -18,8 +18,7 @@ class PollsController extends Controller
 
     public function index()
     {
-        $polls = Poll::with('topic:id,name')
-            ->select('id', 'topic_id', 'name', 'multi_choice', 'is_main', 'is_closed', 'closed_at', 'created_at')->get();
+        $polls = Poll::with('user:id,username,slug')->get();
         return view('staff.polls.index', compact('polls'));
     }
 
@@ -30,8 +29,11 @@ class PollsController extends Controller
 
     public function store(PollsRequest $request)
     {
+        $user = $request->user();
+
         $data = $request->except('_token');
-        $data['user_id'] = $request->user()->id;
+        $data['user_id'] = $user->id;
+        $data['is_main'] = true;
 
         $poll = new Poll($data);
         $poll->save();
