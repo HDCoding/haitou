@@ -1,11 +1,10 @@
-var scollBox = $('.scrollable');
 var height = 0;
 
 $("ul li").each(function () {
     height += $(this).outerHeight(true); // to include margins
 });
 
-$('.chat-box .chat-list').animate({
+$('#chatlist').animate({
     scrollTop: height
 });
 
@@ -42,18 +41,18 @@ $("#submit").click(function () {
         data: {'message': message},
         dataType: 'json',
         success: function (data) {
-            // $(data.data).hide().appendTo('.chat-box .chat-list').fadeIn();
+            $(data.data).hide().appendTo('.chat-box .chat-list').fadeIn();
             $('#chat-error').addClass('hidden');
             $('#message').removeClass('invalid');
             $("#message").val("");
-            $('.chat-box .chat-list').animate({
+            $('#chatlist').animate({
                 scrollTop: height
             });
         },
         error: function (data) {
             $('#message').addClass('invalid');
             $('#chat-error').removeClass('hidden');
-            $('#chat-error').text(error.responseText);
+            //$('#chat-error').text(data.responseText);
         }
     });
 
