@@ -22,7 +22,6 @@ class Topic extends Model
 
     protected $casts = [
         'forum_id' => 'int',
-        'poll_id' => 'int',
         'first_post_user_id' => 'int',
         'last_post_user_id' => 'int',
         'is_locked' => 'bool',
@@ -33,7 +32,6 @@ class Topic extends Model
 
     protected $fillable = [
         'forum_id',
-        'poll_id',
         'first_post_user_id',
         'last_post_user_id',
         'first_post_username',
@@ -62,11 +60,6 @@ class Topic extends Model
         return $this->belongsTo(Forum::class);
     }
 
-    public function poll()
-    {
-        return $this->belongsTo(Poll::class);
-    }
-
     public function permissions()
     {
         return $this->hasMany(Permission::class, 'topic_id');
@@ -75,11 +68,6 @@ class Topic extends Model
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class, 'topic_id');
-    }
-
-    public function polls()
-    {
-        return $this->hasMany(Poll::class, 'topic_id');
     }
 
     public function sluggable()
