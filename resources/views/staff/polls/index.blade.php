@@ -41,22 +41,26 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Membro</th>
                                     <th>Pergunta</th>
                                     <th>Multipla escolha</th>
-                                    <th>Tópico</th>
                                     <th>Status</th>
                                     <th>Votos</th>
                                     <th>Criado em</th>
-                                    <th class="text-center" style="width: 100px;">Opções</th>
+                                    <th class="text-center">Opções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($polls as $poll)
                                     <tr>
                                         <td>{{ $poll->id }}</td>
+                                        <td>
+                                            <a href="{{ route('user.profile', ['slug' => $poll->user->slug]) }}" target="_blank">
+                                                {{ $poll->user->username }}
+                                            </a>
+                                        </td>
                                         <td>{{ link_to_route('polls.show', $poll->name, $poll->id) }}</td>
                                         <td>{{ $poll->multi_choice ? 'Sim' : 'Não' }}</td>
-                                        <td>{{ $poll->name() }}</td>
                                         <td>
                                             @if($poll->is_closed)
                                                 {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/open']) !!}
@@ -74,7 +78,7 @@
                                                 {!! Form::close() !!}
                                             @endif
                                         </td>
-                                        <td>{{ $poll->votes()->count() }}</td>
+                                        <td>{{ $poll->totalVotes() }}</td>
                                         <td>{{ format_date($poll->created_at) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
