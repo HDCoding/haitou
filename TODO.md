@@ -28,7 +28,7 @@ Almost finished
 - [x] Email/Notification when someone reply the post
 - [ ] Generate Favicons using a uploaded image
 - [ ] NetworkInformation Class refactor repeated code
-- [ ] Reports, make a chart comparing where the largest number of reports comes from
+- [x] Reports, make a chart comparing where the largest number of reports comes from
 
 ## Staff
 - [ ] Lotteries panel
