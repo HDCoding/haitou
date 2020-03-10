@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\ReportsRequest;
 use App\Models\Report;
 use Carbon\Carbon;
+use function foo\func;
 
 class ReportsController extends Controller
 {
@@ -35,7 +36,42 @@ class ReportsController extends Controller
             return Report::where('is_solved', '=', false)->count();
         });
 
-        return view('staff.reports.index', compact('reports', 'total', 'resolve', 'pending'));
+        //Total Report Calendars
+        $calendars = cache()->remember('total_report_calendar', $expire_at, function() {
+            return Report::whereNotNull('calendar_id')->count();
+        });
+
+        //Total Report Comments
+        $comments = cache()->remember('total_report_comment', $expire_at, function() {
+            return Report::whereNotNull('comment_id')->count();
+        });
+
+        //Total Report Members
+        $members = cache()->remember('total_report_member', $expire_at, function() {
+            return Report::whereNotNull('member_id')->count();
+        });
+
+        //Total Report Posts
+        $posts = cache()->remember('total_report_post', $expire_at, function() {
+            return Report::whereNotNull('post_id')->count();
+        });
+
+        //Total Report Calendars
+        $torrents = cache()->remember('total_report_torrent', $expire_at, function() {
+            return Report::whereNotNull('torrent_id')->count();
+        });
+
+        return view('staff.reports.index', [
+            'reports' => $reports,
+            'total' => $total,
+            'resolve' => $resolve,
+            'pending' => $pending,
+            'calendars' => $calendars,
+            'comments' => $comments,
+            'members' => $members,
+            'posts' => $posts,
+            'torrents' => $torrents
+        ]);
     }
 
     public function calendar($report_id)
