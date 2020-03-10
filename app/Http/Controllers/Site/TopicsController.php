@@ -204,7 +204,7 @@ class TopicsController extends Controller
         $topic->save();
 
         toastr()->success('Tópico Aberto com sucesso', 'Tópico');
-        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
+        return redirect()->back();
     }
 
     public function closeTopic(Request $request, $topic_id)
@@ -221,7 +221,7 @@ class TopicsController extends Controller
         $topic->save();
 
         toastr()->success('Tópico Trancado com sucesso', 'Tópico');
-        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
+        return redirect()->back();
     }
 
     public function pinTopic(Request $request, $topic_id)
@@ -238,7 +238,7 @@ class TopicsController extends Controller
         $topic->save();
 
         toastr()->info('Tópico Pin com sucesso', 'Tópico');
-        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
+        return redirect()->back();
     }
 
     public function unpinTopic(Request $request, $topic_id)
@@ -255,8 +255,10 @@ class TopicsController extends Controller
         $topic->save();
 
         toastr()->info('Tópico Unpin com sucesso', 'Tópico');
-        return redirect()->route('forum.topic', ['topic_id' => $topic->id, 'slug' => $topic->slug]);
+        return redirect()->back();
     }
+
+
 
     private function unlockAchievementTopics(User $user)
     {
