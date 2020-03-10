@@ -14,6 +14,7 @@
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('chatbox') }}" aria-expanded="false"><i class="fab fa-rocketchat"></i><span class="hide-menu">Chat</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('fansubs') }}" aria-expanded="false"><i class="ion ion-md-people"></i><span class="hide-menu">Fansubs</span></a></li>
                 <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('forum') }}" aria-expanded="false"><i class="far fa-comments"></i><span class="hide-menu">Fórum</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('polls') }}" aria-expanded="false"><i class="fas fa-poll"></i><span class="hide-menu">Pesquisas</span></a></li>
                 <!-- End Menu -->
 				<!-- Profissional -->
                 <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Profissional</span></li>
