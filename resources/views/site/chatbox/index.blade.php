@@ -54,7 +54,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Chat</h4>
-                    <div class="chat-box scrollable" style="height:calc(100vh - 300px);">
+                    <div class="chat-box scrollable" id="chatlist" style="height:calc(100vh - 300px);">
                         <!--chat Row -->
                         <ul class="chat-list chatbox">
                             <!--chat Row -->
