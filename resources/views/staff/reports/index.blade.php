@@ -27,7 +27,13 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-12">
+                <canvas id="chart-report" height="70"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">@lang('dashboard.reports')</h4>
@@ -94,6 +100,7 @@
 @endsection
 
 @section('scripts')
+    <!-- Datatables -->
     <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
@@ -106,6 +113,29 @@
                     "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
+        });
+    </script>
+
+    <!-- Bar Chart -->
+    <script src="{{ asset('vendor/chart.js/dist/Chart.min.js') }}"></script>
+    <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
+        new Chart(document.getElementById('chart-report'), {
+            type: 'bar',
+            data: {
+                labels: ["Calendários", "Comentários", "Membro", "Post", "Torrent"],
+                datasets: [{
+                    label: "Reports",
+                    backgroundColor: ["#263673", "#57355e", "#d2512e", "#df243f", "#6052e2"],
+                    data: [{{ $calendars }}, {{ $comments }}, {{ $members }}, {{ $posts }}, {{ $torrents }}]
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: 'Chart dos Reports'
+                }
+            }
         });
     </script>
 @endsection
