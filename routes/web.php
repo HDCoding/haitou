@@ -176,12 +176,6 @@ Route::middleware(['auth'])->group(function () {
 
             //My Posts
             Route::get('posts', 'UsersController@posts')->name('my.posts');
-
-            //Poll
-            Route::prefix('poll')->group(function () {
-                Route::get('{forum_id}/add', 'PollsController@AddPoll')->name('new.poll');
-                Route::post('t.{topic_id}/add', 'PollsController@topicSavePoll')->name('topic.poll.save');
-            });
         });
 
         //Freeslots
@@ -217,6 +211,13 @@ Route::middleware(['auth'])->group(function () {
         });
 
         //Polls
+        Route::prefix('polls')->group(function () {
+            Route::get('/', 'PollsController@index')->name('site.polls.index');
+            Route::get('create', 'PollsController@create')->name('site.polls.create');
+            Route::post('create', 'PollsController@store')->name('site.save.poll');
+        });
+
+        //Poll
         Route::prefix('poll')->group(function () {
             Route::get('{id}.{slug}', 'PollsController@show')->name('site.poll.show');
             Route::post('{id}.{slug}', 'PollsController@vote')->name('site.poll.vote');
