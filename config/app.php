@@ -174,7 +174,6 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Bepsvpt\SecureHeaders\SecureHeadersServiceProvider::class,
-        HDCoding\Coders\CodersServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
 
