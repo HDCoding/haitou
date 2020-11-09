@@ -307,66 +307,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 wow bounceInLeft">
-                    <div class="social_icons">
-                        <ul>
-                            @if(!empty(setting('facebook')))
-                                <li>
-                                    <a href="{{ hideref(setting('facebook')) }}" target="_blank">
-                                        <i class="fab fa-facebook-square"></i>
-                                    </a>
-                                </li>
-                            @endif
-                            @if(!empty(setting('twitter')))
-                                <li>
-                                    <a href="{{ hideref(setting('twitter')) }}" target="_blank">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                            @endif
-                            @if(!empty(setting('pinterest')))
-                                <li>
-                                    <a href="{{ hideref(setting('pinterest')) }}" target="_blank">
-                                        <i class="fab fa-pinterest"></i>
-                                    </a>
-                                </li>
-                            @endif
-                            @if(!empty(setting('youtube')))
-                                <li>
-                                    <a href="{{ hideref(setting('youtube')) }}" target="_blank">
-                                        <i class="fab fa-youtube"></i>
-                                    </a>
-                                </li>
-                            @endif
-                            @if(!empty(setting('instagram')))
-                                <li>
-                                    <a href="{{ hideref(setting('instagram')) }}" target="_blank">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            @endif
-                            @if(!empty(setting('twitch')))
-                                <li>
-                                    <a href="{{ hideref(setting('twitch')) }}" target="_blank">
-                                        <i class="fab fa-twitch"></i>
-                                    </a>
-                                </li>
-                            @endif
-                            @if(!empty(setting('discord')))
-                                <li>
-                                    <a href="{{ hideref(setting('discord')) }}" target="_blank">
-                                        <i class="fab fa-discord"></i>
-                                    </a>
-                                </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 <!-- END CONTACT -->
