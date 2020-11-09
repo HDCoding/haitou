@@ -12,7 +12,7 @@
                 {{ format_date($new->created_at) }}
             </p>
         @empty
-            <p class="card-text">Nenhum conteúdo informativo no momento.</p>
+            <p class="card-text text-center">Nenhum conteúdo informativo no momento.</p>
         @endforelse
     </div>
 </div>
