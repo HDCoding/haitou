@@ -15,7 +15,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($topics as $topic)
+            @forelse($topics as $topic)
                 @if($topic->viewable())
                     <tr>
                         <td>
@@ -28,7 +28,11 @@
                         <td>{{ $topic->created_at->diffForHumans() }}</td>
                     </tr>
                 @endif
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">Nenhum tópico no momento</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
         <p class="text-right font-weight-bold"><a href="{{ route('forum.latest.topics') }}">Leia mais</a></p>
