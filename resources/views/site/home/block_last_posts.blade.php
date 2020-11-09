@@ -15,7 +15,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($posts as $post)
+            @forelse($posts as $post)
                 @if ($post->topic->viewable())
                     <tr>
                         <td>
@@ -30,7 +30,11 @@
                         <td>{{ $post->updated_at->diffForHumans() }}</td>
                     </tr>
                 @endif
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">Nenhuma postagem no momento</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
         <p class="text-right font-weight-bold"><a href="{{ route('forum.latest.posts') }}">Leia mais</a></p>
