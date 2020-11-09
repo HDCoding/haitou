@@ -13,12 +13,16 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($polls as $poll)
+            @forelse($polls as $poll)
                 <tr>
                     <td>{{ link_to_route('site.poll.show', $poll->name, ['id' => $poll->id, 'slug' => $poll->slug]) }}</td>
                     <td>{{ $poll->totalVotes() }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="2" class="text-center">Nenhuma pesquisa no momento</td>
+                </tr>
+            @endforelse
             </tbody>
         </table>
     </div>
