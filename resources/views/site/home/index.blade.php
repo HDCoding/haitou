@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="float-left">
-
+                    <p class="text-center text-danger font-bold">Encontrou/Aconteceu algum erro, reporte no nosso <a href="https://discord.gg/wK2MTw8" target="_blank">Discord</a></p>
                 </div>
                 <div class="float-right">
                     <p class="text-center">{{ day_month_year() }}</p>
