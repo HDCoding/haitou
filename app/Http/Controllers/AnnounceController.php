@@ -197,19 +197,19 @@ class AnnounceController extends Controller
         //set freeleeches table here in the future
 
         //Freeleech
-        if ($torrent->is_freeleech == true OR $vip->is_freeleech == true OR $user->group_id == 6) {
+        if ($torrent->is_freeleech == true OR $user->group_id == 6) {
             $mod_download = 0;
         } else {
             $mod_download = $downloaded;
         }
         //Silver
-        if ($torrent->is_silver == true OR $vip->is_silver == true) {
+        if ($torrent->is_silver == true) {
             $mod_download = ($downloaded / 2);
         } else {
             $mod_download = $downloaded;
         }
         //DoubleUP
-        if ($torrent->is_doubleup == true OR $vip->is_doubleup == true) {
+        if ($torrent->is_doubleup == true) {
             $mod_upload = ($uploaded * 2);
         } else {
             $mod_upload = $uploaded;
