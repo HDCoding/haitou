@@ -39,7 +39,7 @@
 	 - php-curl
 	 - php-intl
 	 - php-zip
- - MySQL 5.7+ or MariaDB 10.2+
+ - MySQL 5.7+ or MariaDB 10.2+ (IMPORTANT)
  - A decent dedicated server. Do not try to run this on some low quality server!
  - Server config.:
 	 - Processor: Intel Xeon - 4 Cores / 8 Threads
