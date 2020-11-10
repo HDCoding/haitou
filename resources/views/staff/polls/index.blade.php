@@ -41,7 +41,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Membro</th>
+                                    <th>Criado por</th>
                                     <th>Pergunta</th>
                                     <th>Multipla escolha</th>
                                     <th>Status</th>
