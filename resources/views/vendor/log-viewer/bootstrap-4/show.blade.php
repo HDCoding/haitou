@@ -238,15 +238,14 @@
                 return false;
             });
 
-            @unless (empty(log_styler()->toHighlight()))
-            $('.stack-content').each(function() {
-                var $this = $(this);
-                var html = $this.html().trim()
-                    .replace(/({!! join(log_styler()->toHighlight(), '|') !!})/gm, '<strong>$1</strong>');
+{{--            @unless (empty(log_styler()->toHighlight()))--}}
+{{--            $('.stack-content').each(function() {--}}
+{{--                var $this = $(this);--}}
+{{--                var html = $this.html().trim().replace(/({!! join(log_styler()->toHighlight(), '|') !!})/gm, '<strong>$1</strong>');--}}
 
-                $this.html(html);
-            });
-            @endunless
+{{--                $this.html(html);--}}
+{{--            });--}}
+{{--            @endunless--}}
         });
     </script>
 @endsection
