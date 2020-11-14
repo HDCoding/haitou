@@ -13,9 +13,7 @@ Almost finished
 - [ ] Reputation system
 - [ ] Count time online - session time
 - [ ] Cache settings (important)
-- [x] Resend email activation if user dont receive the email confirmation
 - [ ] Searches table
-- [x] Users permissions cache (5 minutes max)
 - [ ] Lock screen
 - [ ] AutoBan Command
 - [ ] AutoHitAndRun Command
@@ -24,11 +22,9 @@ Almost finished
 - [ ] HitAndRunPreNotification Command
 - [ ] UpdateLastAction Class
 - [ ] topicDelete button
-- [x] Email/Notification when someone posts in the topic
-- [x] Email/Notification when someone reply the post
 - [ ] Generate Favicons using a uploaded image
 - [ ] NetworkInformation Class refactor repeated code
-- [x] Reports, make a chart comparing where the largest number of reports comes from
+
 
 ## Staff
 - [ ] Lotteries panel
