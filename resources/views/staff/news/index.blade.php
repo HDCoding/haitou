@@ -52,7 +52,7 @@
                                     <tr class="odd gradeX">
                                         <td>{{ $new->id }}</td>
                                         <td>{{ $new->name }}</td>
-                                        <td>{{ $new->user->username }}</td>
+                                        <td>{{ $new->username }}</td>
                                         <td><span class="badge badge-info">{{ $new->views }}</span></td>
                                         <td class="text-center">
                                             <div class="btn-group">
