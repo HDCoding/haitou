@@ -342,12 +342,12 @@ class TorrentsController extends Controller
         //Show all torrents uploaded by the user
         $user = $request->user();
 
-        $uploads = Torrent::with('category:id,name')
+        $torrents = Torrent::with('category:id,name')
             ->select('id', 'user_id', 'category_id', 'name', 'slug', 'size', 'seeders', 'leechers', 'times_completed', 'created_at')
             ->where('user_id', '=', $user->id)
             ->get();
 
-        return view('site.users.uploads', compact('uploads'));
+        return view('site.users.uploads', compact('torrents'));
     }
 
     public function downloads(Request $request)
