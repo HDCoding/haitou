@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\EnsureQueueListenerIsRunning;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        EnsureQueueListenerIsRunning::class
     ];
 
     /**
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('queue:checkup')->everyFiveMinutes();
         $schedule->command('haitou:auto-ban')->daily(); //Ban User If Has More Than X Active Warnings.
         $schedule->command('haitou:auto-birthday-gift')->daily(); //Automatically gives gift to user on they special day.
         $schedule->command('haitou:auto-birthday-restore')->yearly(); //Automatically restore gifted users to false every new Year.
