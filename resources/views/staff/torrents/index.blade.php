@@ -92,7 +92,7 @@
                                                     <div class="dropdown-divider"></div>
 
                                                     <a class="dropdown-item" class="m-l-15" href="javascript:;"
-                                                       onclick="deleteData({{ $b->id }})" type="submit">
+                                                       onclick="deleteData({{ $torrent->id }})" type="submit">
                                                         <i class="fa fa-times text-danger"></i> Deletar
                                                     </a>
                                                 </div>
