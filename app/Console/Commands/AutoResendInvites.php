@@ -45,8 +45,8 @@ class AutoResendInvites extends Command
         $invites = Invitation::with('user:id,username')
             ->whereNull('accepted_at')
             ->whereNull('accepted_by')
-            ->where('created_at', '<', $current->copy()->subDays(2)->toDateTimeString())
             ->whereNull('resend_at')
+            ->where('created_at', '<', $current->copy()->subDays(2)->toDateTimeString())
             ->get();
 
         foreach ($invites as $invite) {
