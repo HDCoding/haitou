@@ -29,9 +29,15 @@ class NewsController extends Controller
 
     public function store(NewsRequest $request)
     {
-        $new = new News($request->except('_token'));
-        $new->user_id = $request->user()->id;
+        $user = $request->user();
+
+        $data = $request->except('_token');
+        $data['user_id'] = $user->id;
+        $data['username'] = $user->username;
+
+        $new = new News($data);
         $new->save();
+
         toastr()->success('News cadastrada.', 'Sucesso');
         return redirect()->to('staff/news');
     }
