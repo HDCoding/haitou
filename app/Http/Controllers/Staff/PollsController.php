@@ -33,6 +33,7 @@ class PollsController extends Controller
 
         $data = $request->except('_token');
         $data['user_id'] = $user->id;
+        $data['username'] = $user->username;
         $data['is_main'] = true;
 
         $poll = new Poll($data);
