@@ -55,8 +55,8 @@
                                     <tr>
                                         <td>{{ $poll->id }}</td>
                                         <td>
-                                            <a href="{{ route('user.profile', ['slug' => $poll->user->slug]) }}" target="_blank">
-                                                {{ $poll->user->username }}
+                                            <a href="{{ route('user.profile', ['slug' => $poll->username]) }}" target="_blank">
+                                                {{ $poll->username }}
                                             </a>
                                         </td>
                                         <td>{{ link_to_route('polls.show', $poll->name, $poll->id) }}</td>
@@ -64,15 +64,13 @@
                                         <td>
                                             @if($poll->is_closed)
                                                 {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/open']) !!}
-                                                <button type="submit" class="btn btn-sm" data-toggle="tooltip"
-                                                        title="Abrir Pesquisa">
+                                                <button type="submit" class="btn btn-sm" data-toggle="tooltip" title="Abrir Pesquisa">
                                                     <i class="fa fa-play text-success"></i>
                                                 </button>
                                                 {!! Form::close() !!}
                                             @else
                                                 {!! Form::open(['url' => 'staff/poll/' . $poll->id . '/close']) !!}
-                                                <button type="submit" class="btn btn-sm" data-toggle="tooltip"
-                                                        title="Fechar Pesquisa">
+                                                <button type="submit" class="btn btn-sm" data-toggle="tooltip" title="Fechar Pesquisa">
                                                     <i class="fa fa-stop text-danger"></i>
                                                 </button>
                                                 {!! Form::close() !!}
@@ -82,22 +80,16 @@
                                         <td>{{ format_date($poll->created_at) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ url('staff/poll/' . $poll->id . '/options/add') }}"
-                                                   data-toggle="tooltip" title="Adicionar Opções">
+                                                <a href="{{ url('staff/poll/' . $poll->id . '/options/add') }}" data-toggle="tooltip" title="Adicionar Opções">
                                                     <i class="fa fa-plus text-warning"></i>
                                                 </a>
-                                                <a class="m-l-15"
-                                                   href="{{ url('staff/poll/' . $poll->id . '/options/remove') }}"
-                                                   data-toggle="tooltip" title="Remover Opções">
+                                                <a class="m-l-15" href="{{ url('staff/poll/' . $poll->id . '/options/remove') }}" data-toggle="tooltip" title="Remover Opções">
                                                     <i class="fa fa-minus text-success"></i>
                                                 </a>
-                                                <a class="m-l-15" href="{{ url('staff/polls/' . $poll->id . '/edit') }}"
-                                                   data-toggle="tooltip" title="Editar Poll">
+                                                <a class="m-l-15" href="{{ url('staff/polls/' . $poll->id . '/edit') }}" data-toggle="tooltip" title="Editar Poll">
                                                     <i class="fa fa-pencil-alt text-info"></i>
                                                 </a>
-                                                <a class="m-l-15" href="#" data-toggle="tooltip"
-                                                   data-original-title="Remover Poll"
-                                                   onclick="deleteData({{ $poll->id }})" type="submit">
+                                                <a class="m-l-15" href="#" data-toggle="tooltip" data-original-title="Remover Poll" onclick="deleteData({{ $poll->id }})" type="submit">
                                                     <i class="fa fa-times text-danger"></i>
                                                 </a>
                                             </div>
