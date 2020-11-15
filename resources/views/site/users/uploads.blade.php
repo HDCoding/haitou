@@ -45,7 +45,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($uploads as $upload)
+                                @foreach($torrents as $torrent)
                                     <tr>
                                         <th>
                                             <a href="{{ route('torrent.show', ['id' => $torrent->id, 'slug' => $torrent->slug]) }}" target="_blank">
@@ -96,7 +96,6 @@
                     "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
-
         });
     </script>
 @endsection
