@@ -167,7 +167,7 @@
                                 <div class="p-15 text-center">
                                     <h4 class="card-title m-t-10 text-center">Elite</h4>
                                     <h2 class="display-5 position-relative m-t-20 m-b-10">
-                                        <span class="price-sign">R$</span>10
+                                        <span class="price-sign">R$</span>40
                                     </h2>
                                     <p>Por Mês</p>
                                 </div>
