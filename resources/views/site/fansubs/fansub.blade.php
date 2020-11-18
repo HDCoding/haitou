@@ -27,15 +27,32 @@
                     <div class="card-body">
                         @includeIf('errors.errors', [$errors])
                         @include('includes.messages')
-                        <center class="m-t-30"> <img src="{{ $fansub->logo }}" class="img-thumbnail" width="450" alt="Logo" />
+                        <center class="m-t-30">
+                            <img src="{{ $fansub->logo }}" class="img-thumbnail" width="450" alt="Logo">
                             <h4 class="card-title m-t-10 m-b-20">{{ $fansub->name }}</h4>
                             <div class="row text-center justify-content-md-center">
-                                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">{{ $fansub->users->count() }}</font></a></div>
-                                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-folder"></i> <font class="font-medium">{{ $fansub->torrents->count() }}</font></a></div>
+                                <div class="col-4">
+                                    <a href="javascript:void(0)" class="link">
+                                        <i class="icon-people"></i>
+                                        <font class="font-medium">
+                                            {{ $fansub->users->count() }}
+                                        </font>
+                                    </a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="javascript:void(0)" class="link">
+                                        <i class="icon-folder"></i>
+                                        <font class="font-medium">
+                                            {{ $fansub->torrents->count() }}
+                                        </font>
+                                    </a>
+                                </div>
                             </div>
                         </center>
                     </div>
-                    <div><hr></div>
+                    <div>
+                        <hr>
+                    </div>
                     <div class="card-body">
                         <small class="text-muted">Status</small>
                         <h6>{!! $fansub->status() !!}</h6>
@@ -44,14 +61,16 @@
                         @if($fansub->fansub_mod($fansub->id))
                             <div class="col-md-6">
                                 <div class="ml-auto">
-                                    <a href="{{ url('fansub/' . $fansub->id . '/edit') }}" class="btn btn-xs btn-success">
+                                    <a href="{{ url('fansub/' . $fansub->id . '/edit') }}"
+                                       class="btn btn-xs btn-success">
                                         <i class="ion ion-ios-link"></i> Editar
                                     </a>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ml-auto">
-                                    <a href="{{ url('fansub/' . $fansub->id . '/members') }}" class="btn btn-xs btn-primary">
+                                    <a href="{{ url('fansub/' . $fansub->id . '/members') }}"
+                                       class="btn btn-xs btn-primary">
                                         <i class="ion ion-md-add"></i> Adicionar/Editar Membros
                                     </a>
                                 </div>
@@ -67,46 +86,52 @@
                     <!-- Tabs -->
                     <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="pills-timeline-tab" data-toggle="pill" href="#nav-description" role="tab" aria-controls="pills-timeline" aria-selected="true">Descrição</a>
+                            <a class="nav-link active" id="pills-timeline-tab" data-toggle="pill"
+                               href="#nav-description" role="tab" aria-controls="pills-timeline" aria-selected="true">Descrição</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#nav-comments" role="tab" aria-controls="pills-profile" aria-selected="false">Comentários</a>
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#nav-comments"
+                               role="tab" aria-controls="pills-profile" aria-selected="false">Comentários</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#nav-members" role="tab" aria-controls="pills-setting" aria-selected="false">Membros</a>
+                            <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#nav-members" role="tab"
+                               aria-controls="pills-setting" aria-selected="false">Membros</a>
                         </li>
                     </ul>
                     <!-- Tabs -->
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="pills-timeline-tab">
+                        <div class="tab-pane fade show active" id="nav-description" role="tabpanel"
+                             aria-labelledby="pills-timeline-tab">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Website</strong>
                                         <br>
                                         @if(!empty($fansub->website))
-                                        <a class="text-info" href="{{ hideref($fansub->website) }}" target="_blank">{{ $fansub->name }}</a>
+                                            <a class="text-info" href="{{ hideref($fansub->website) }}"
+                                               target="_blank">{{ $fansub->name }}</a>
                                         @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>Discord</strong>
                                         <br>
                                         @if(!empty($fansub->discord))
-                                        <a class="text-info" href="{{ $fansub->discord }}" target="_blank">Discord</a>
+                                            <a class="text-info" href="{{ $fansub->discord }}"
+                                               target="_blank">Discord</a>
                                         @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6 b-r">
                                         <strong>IRC Server</strong>
                                         <br>
                                         @if(!empty($fansub->irc_server))
-                                        <p class="text-muted">{{ $fansub->irc_server }}</p>
+                                            <p class="text-muted">{{ $fansub->irc_server }}</p>
                                         @endif
                                     </div>
                                     <div class="col-md-3 col-xs-6">
                                         <strong>IRC Channel</strong>
                                         <br>
                                         @if(!empty($fansub->irc_channel))
-                                        <p class="text-muted">{{ $fansub->irc_channel }}</p>
+                                            <p class="text-muted">{{ $fansub->irc_channel }}</p>
                                         @endif
                                     </div>
                                 </div>
@@ -116,7 +141,8 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="tab-pane fade" id="nav-comments" role="tabpanel"
+                             aria-labelledby="pills-profile-tab">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Comentários Recentes</h4>
@@ -139,7 +165,9 @@
                                         </div>
                                     </div>
                                 @else
-                                    <p class="text-center font-weight-bold text-danger">Sua permissão de fazer comentários em Fansubs foram revogadas!!</p>
+                                    <p class="text-center font-weight-bold text-danger">
+                                        Sua permissão de fazer comentários em Fansubs foram revogadas!!
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -159,23 +187,24 @@
                                         </thead>
                                         <tbody>
                                         @foreach($members->chunk(4) as $members)
-                                        <tr>
-                                            @foreach($members as $member)
-                                            <td>
-                                                <div class="d-flex no-block align-items-center">
-                                                    <div class="m-r-10">
-                                                        <img src="{{ $member->user->avatar() }}" alt="user" class="img-rounded" width="45" />
-                                                    </div>
-                                                    <div class="">
-                                                        <h5 class="m-b-0 font-16 font-medium">
-                                                            {{ link_to_route('user.profile', $member->username, [strtolower($member->username)]) }}
-                                                        </h5>
-                                                        <span>{{ $member->job }}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            @endforeach
-                                        </tr>
+                                            <tr>
+                                                @foreach($members as $member)
+                                                    <td>
+                                                        <div class="d-flex no-block align-items-center">
+                                                            <div class="m-r-10">
+                                                                <img src="{{ $member->user->avatar() }}" alt="{{ $member->user->username }}"
+                                                                     class="img-rounded" width="45"/>
+                                                            </div>
+                                                            <div class="">
+                                                                <h5 class="m-b-0 font-16 font-medium">
+                                                                    {{ link_to_route('user.profile', $member->username, [strtolower($member->username)]) }}
+                                                                </h5>
+                                                                <span>{{ $member->job }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                @endforeach
+                                            </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
