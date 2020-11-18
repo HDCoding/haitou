@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- Sweet-Alert  -->
-    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -84,7 +84,7 @@
 
 @section('scripts')
     <!-- Sweet-Alert  -->
-    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Sweet-Alert -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

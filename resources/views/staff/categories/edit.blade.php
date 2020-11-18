@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- minicolors -->
-    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -62,7 +62,7 @@
 
 @section('scripts')
     <!-- minicolors -->
-    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
 
     <!-- minicolors -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

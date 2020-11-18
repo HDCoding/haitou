@@ -9,10 +9,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ secure_asset('images/favicons/favicon.ico') }}">
     <title>{{ setting('site_title') }} :: @yield('subtitle')</title>
     <!-- Custom CSS -->
-    <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/style.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -26,10 +26,10 @@
 
 @yield('layout-content')
 
-<script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ secure_asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap tether Core JavaScript -->
-<script src="{{ asset('vendor/popper.js/dist/umd/popper.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ secure_asset('vendor/popper.js/dist/umd/popper.min.js') }}"></script>
+<script src="{{ secure_asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
 @yield('script')
 

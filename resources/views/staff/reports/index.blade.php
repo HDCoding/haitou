@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- DataTables -->
-    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -101,7 +101,7 @@
 
 @section('scripts')
     <!-- Datatables -->
-    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/datatables/datatables.min.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
             $('#datatable').DataTable({
@@ -110,14 +110,14 @@
                 "responsive": true,
                 "order": [[ 2, "desc" ]],
                 "language": {
-                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
+                    "url": '{{ secure_asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
         });
     </script>
 
     <!-- Bar Chart -->
-    <script src="{{ asset('vendor/chart.js/dist/Chart.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/chart.js/dist/Chart.min.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         new Chart(document.getElementById('chart-report'), {
             type: 'bar',

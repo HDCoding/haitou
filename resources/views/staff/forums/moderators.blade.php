@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- select2 -->
-    <link href="{{ asset('vendor/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -55,7 +55,7 @@
 
 @section('scripts')
     <!-- duallistbox -->
-    <script src="{{ asset('vendor/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/bootstrap-duallistbox/dist/jquery.bootstrap-duallistbox.min.js') }}"></script>
     <!-- Script -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {

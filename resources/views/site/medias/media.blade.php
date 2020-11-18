@@ -3,8 +3,8 @@
 @section('title', $media->name)
 
 @section('css')
-    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendor/raty/jquery.raty.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/raty/jquery.raty.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -276,8 +276,8 @@
 
 @section('scripts')
     <!-- VegasJS -->
-    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
-    <script src="{{ asset('vendor/raty/jquery.raty.js') }}"></script>
+    <script src="{{ secure_asset('vendor/vegas/vegas.js') }}"></script>
+    <script src="{{ secure_asset('vendor/raty/jquery.raty.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(function() {

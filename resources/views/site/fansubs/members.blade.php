@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- select2 -->
-    <link href="{{ asset('vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -115,7 +115,7 @@
 
 @section('scripts')
     <!-- Select2 -->
-    <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/select2/dist/js/select2.min.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function() {

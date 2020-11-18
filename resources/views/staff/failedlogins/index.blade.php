@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- DataTables -->
-    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -72,7 +72,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/datatables/datatables.min.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
             $('#datatable').DataTable({
@@ -81,7 +81,7 @@
                 "responsive": true,
                 "order": [[ 0, "desc" ]],
                 "language": {
-                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
+                    "url": '{{ secure_asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
         });

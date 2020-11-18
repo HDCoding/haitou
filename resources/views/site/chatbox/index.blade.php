@@ -33,7 +33,7 @@
                     <div class="message-center chat-scroll">
                         <a href="javascript:void(0)" class="message-item" id='chat_user_1' data-user-id='1'>
                             <span class="user-img">
-                                <img src="{{ asset('images/favicons/android-icon-48x48.png') }}" alt="user" class="img-rounded">
+                                <img src="{{ secure_asset('images/favicons/android-icon-48x48.png') }}" alt="user" class="img-rounded">
                                 <span class="profile-status online pull-right"></span>
                             </span>
                             <div class="mail-contnet">
@@ -104,5 +104,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/pages/chatbox.js') }}"></script>
+    <script src="{{ secure_asset('js/pages/chatbox.js') }}"></script>
 @endsection

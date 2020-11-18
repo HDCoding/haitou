@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- SCEditor -->
-    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- Page JS Plugins CSS -->
-    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -65,11 +65,11 @@
 
 @section('scripts')
     <!-- Minicolors -->
-    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
     <!-- SCEditor -->
-    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
     <!-- JS Code -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

@@ -3,7 +3,7 @@
 @section('title', 'Logs')
 
 @section('css')
-    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -48,7 +48,7 @@
 
 @section('scripts')
     <!-- VegasJS -->
-    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <script src="{{ secure_asset('vendor/vegas/vegas.js') }}"></script>
 
     @if(!empty($member->cover()))
         <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

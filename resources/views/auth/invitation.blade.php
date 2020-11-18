@@ -13,11 +13,11 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ asset('images/login-register.jpg') }}) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ secure_asset('images/login-register.jpg') }}) no-repeat center center;">
             <div class="auth-box">
                 <div>
                     <div class="logo">
-                        <span class="db"><img src="{{ asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
+                        <span class="db"><img src="{{ secure_asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
                         <h5 class="font-medium mt-3 m-b-20">Crie a sua conta</h5>
                     </div>
                     <!-- Form -->
@@ -90,8 +90,8 @@
 @endsection
 
 @section('script')
-{{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
-{{--    <script src="{{ asset('js/pages/invitation.js') }}"></script>--}}
+{{--    <script src="{{ secure_asset('vendor/validate/validate.js') }}"></script>--}}
+{{--    <script src="{{ secure_asset('js/pages/invitation.js') }}"></script>--}}
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();

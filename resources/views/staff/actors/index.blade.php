@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- dataTables  -->
-    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <!-- Sweet-Alert  -->
-    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -82,9 +82,9 @@
 
 @section('scripts')
     <!-- dataTables  -->
-    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/datatables/datatables.min.js') }}"></script>
     <!-- Sweet-Alert  -->
-    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- dataTables  -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
@@ -95,7 +95,7 @@
                 "responsive": true,
                 "order": [[1, "asc"]],
                 "language": {
-                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
+                    "url": '{{ secure_asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
 

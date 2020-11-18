@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- Vegas -->
-    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
     <!-- sceditor -->
-    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendor/sceditor/minified/themes/default.min.css') }}">
 @endsection
 
 @section('content')
@@ -143,11 +143,11 @@
 
 @section('scripts')
     <!-- VegasJS -->
-    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <script src="{{ secure_asset('vendor/vegas/vegas.js') }}"></script>
     <!-- sceditor -->
-    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         // vegasjs

@@ -4,11 +4,11 @@
 
 @section('css')
     <!-- DateTimePicker -->
-    <link href="{{ asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet"/>
     <!-- Vegas -->
-    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
     <!-- sceditor -->
-    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -93,14 +93,14 @@
 
 @section('scripts')
     <!-- DateTimePicker -->
-    <script src="{{ asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.pt-BR.min.js') }}"></script>
     <!-- VegasJS -->
-    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <script src="{{ secure_asset('vendor/vegas/vegas.js') }}"></script>
     <!-- sceditor -->
-    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         // datepicker
         $(document).ready(function () {

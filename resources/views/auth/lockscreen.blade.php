@@ -13,7 +13,7 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ asset('images/login-register.jpg') }}) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ secure_asset('images/login-register.jpg') }}) no-repeat center center;">
             <div class="auth-box">
                 <div>
                     <div class="logo">
@@ -56,8 +56,8 @@
 @endsection
 
 @section('script')
-{{--    <script src="{{ asset('vendor/validate/validate.js') }}"></script>--}}
-{{--    <script src="{{ asset('js/pages/lockscreen.js') }}"></script>--}}
+{{--    <script src="{{ secure_asset('vendor/validate/validate.js') }}"></script>--}}
+{{--    <script src="{{ secure_asset('js/pages/lockscreen.js') }}"></script>--}}
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $('[data-toggle="tooltip"]').tooltip();
         $(".preloader").fadeOut();

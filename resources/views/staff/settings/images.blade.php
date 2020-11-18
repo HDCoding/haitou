@@ -35,21 +35,21 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <p>Index</p>
-                                        <img src="{{ asset('images/index-site.png') }}" class="img-thumbnail" width="300" alt="Index" onclick="chooseIndex()"/>
+                                        <img src="{{ secure_asset('images/index-site.png') }}" class="img-thumbnail" width="300" alt="Index" onclick="chooseIndex()"/>
                                         {!! Form::open(['route' => 'setting.image.index', 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-index']) !!}
                                         <input type="file" id="indexInput" name="index" class="form-control" accept="image/png" style="display: none"/>
                                         {!! Form::close() !!}
                                     </div>
                                     <div class="col-md-4">
                                         <p>Login-Register-Lockscreen</p>
-                                        <img src="{{ asset('images/login-register.jpg') }}" class="img-thumbnail" width="300" alt="LRL" onclick="chooseLogin()"/>
+                                        <img src="{{ secure_asset('images/login-register.jpg') }}" class="img-thumbnail" width="300" alt="LRL" onclick="chooseLogin()"/>
                                         {!! Form::open(['route' => 'setting.image.login', 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-login']) !!}
                                         <input type="file" id="loginInput" name="login" class="form-control" accept="image/jpeg" style="display: none"/>
                                         {!! Form::close() !!}
                                     </div>
                                     <div class="col-md-4">
                                         <p>Favicon</p>
-                                        <img src="{{ asset('images/favicons/favicon-96x96.png') }}" class="img-thumbnail" width="100" alt="Favicon" onclick="chooseFavicon()"/>
+                                        <img src="{{ secure_asset('images/favicons/favicon-96x96.png') }}" class="img-thumbnail" width="100" alt="Favicon" onclick="chooseFavicon()"/>
                                         {!! Form::open(['route' => 'setting.image.favicon', 'files' => true, 'class' => 'form-horizontal', 'id' => 'form-favicon']) !!}
                                         <input type="file" id="faviconInput" name="favicon" class="form-control" accept="image/png" style="display: none"/>
                                         {!! Form::close() !!}

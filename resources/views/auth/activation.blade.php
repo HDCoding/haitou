@@ -13,11 +13,11 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ asset('images/login-register.jpg') }}) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ secure_asset('images/login-register.jpg') }}) no-repeat center center;">
             <div class="auth-box">
                 <div id="loginform">
                     <div class="logo">
-                        <span class="db"><img src="{{ asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
+                        <span class="db"><img src="{{ secure_asset('images/favicons/apple-icon-60x60.png') }}" alt="logo" /></span>
                         <h5 class="font-medium m-t-20 m-b-20">Ativação</h5>
                     </div>
                     <div class="row">

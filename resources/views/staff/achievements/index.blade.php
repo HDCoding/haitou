@@ -41,7 +41,7 @@
                                         <th scope="row">{{ $achievement->id }}</th>
                                         <td>
                                             <img
-                                                src="{{ asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->name) . '.png')) }}"
+                                                src="{{ secure_asset('images/achievements/' . strtolower(str_replace(' ', '', $achievement->name) . '.png')) }}"
                                                 data-toggle="tooltip"
                                                 data-original-title="{{ $achievement->name }}"
                                                 alt="{{ $achievement->name }}" width="40px">

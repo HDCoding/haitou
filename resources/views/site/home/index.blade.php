@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('css')
-    <link href="{{ asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/vegas/vegas.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -65,7 +65,7 @@
 
 @section('scripts')
     <!-- VegasJS -->
-    <script src="{{ asset('vendor/vegas/vegas.js') }}"></script>
+    <script src="{{ secure_asset('vendor/vegas/vegas.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(function() {
@@ -76,10 +76,10 @@
                 timer: true,
                 slides: [
                     @foreach($covers as $cover)
-                        { src: "{{ asset("storage/homecovers/{$cover}") }}" },
+                        { src: "{{ secure_asset("storage/homecovers/{$cover}") }}" },
                     @endforeach
                 ],
-                //overlay: '{{ asset('vendor/vegas/overlays/07.png') }}',
+                //overlay: '{{ secure_asset('vendor/vegas/overlays/07.png') }}',
                 transition: ['fade', 'zoomOut', 'zoomIn', 'blur'],
                 animation: ['kenburnsUp', 'kenburnsDown', 'kenburnsLeft', 'kenburnsRight']
             });

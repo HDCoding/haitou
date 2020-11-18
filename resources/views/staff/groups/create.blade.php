@@ -4,7 +4,7 @@
 
 @section('css')
     <!-- Page JS Plugins CSS -->
-    <link href="{{ asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('vendor/minicolors/jquery.minicolors.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -67,7 +67,7 @@
 
 @section('scripts')
     <!-- Page JS Plugins -->
-    <script src="{{ asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/minicolors/jquery.minicolors.min.js') }}"></script>
 
     <!-- Page JS Code -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

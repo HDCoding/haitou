@@ -3,7 +3,7 @@
 @section('title', 'Free Slots')
 
 @section('css')
-    <link href="{{ asset('vendor/c3/c3.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/c3/c3.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -101,8 +101,8 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('vendor/c3/c3.min.js') }}"></script>
-    <script src="{{ asset('vendor/c3/d3.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/c3/c3.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/c3/d3.min.js') }}"></script>
     @if($freeslot != false)
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function() {

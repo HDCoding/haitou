@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- X-Editable -->
-    <link href="{{ asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
     <!-- DataTables -->
-    <link href="{{ asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -79,9 +79,9 @@
 
 @section('scripts')
     <!-- X-Editable -->
-    <script src="{{ asset('vendor/x-editable/dist/js/bootstrap-editable.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/x-editable/dist/js/bootstrap-editable.min.js') }}"></script>
     <!-- DataTable -->
-    <script src="{{ asset('vendor/datatables/datatables.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/datatables/datatables.min.js') }}"></script>
 
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
@@ -91,7 +91,7 @@
                 "responsive": true,
                 "order": [[1, "asc"]],
                 "language": {
-                    "url": '{{ asset('vendor/datatables/Portuguese-Brasil.json') }}'
+                    "url": '{{ secure_asset('vendor/datatables/Portuguese-Brasil.json') }}'
                 }
             });
 

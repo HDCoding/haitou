@@ -4,12 +4,12 @@
 
 @section('css')
     <!-- sceditor -->
-    <link href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/sceditor/minified/themes/default.min.css') }}" rel="stylesheet">
     <!-- Calendar CSS -->
-    <link href="{{ asset('vendor/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('vendor/fullcalendar/dist/fullcalendar.min.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('css/calendar.css') }}" rel="stylesheet"/>
     <!-- DateTimePicker -->
-    <link href="{{ asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -152,19 +152,19 @@
 
 @section('scripts')
     <!-- FullCalendar -->
-    <script src="{{ asset('vendor/moment/moment.js') }}"></script>
-    <script src="{{ asset('vendor/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('vendor/fullcalendar/dist/locale/pt-br.js') }}"></script>
-    <script src="{{ asset('js/pages/fullcalendar.js') }}"></script>
+    <script src="{{ secure_asset('vendor/moment/moment.js') }}"></script>
+    <script src="{{ secure_asset('vendor/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/fullcalendar/dist/locale/pt-br.js') }}"></script>
+    <script src="{{ secure_asset('js/pages/fullcalendar.js') }}"></script>
 
     <!-- DateTimePicker -->
-    <script src="{{ asset('vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js') }}"></script>
+    <script src="{{ secure_asset('vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js') }}"></script>
 
     <!-- sceditor -->
-    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
     <!-- script -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

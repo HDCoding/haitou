@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- X-Editable -->
-    <link href="{{ asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('vendor/x-editable/dist/css/bootstrap-editable.css') }}" rel="stylesheet">
     <!-- Sweet-Alert  -->
-    <link href="{{ asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
+    <link href="{{ secure_asset('vendor/sweetalert/sweetalert.css') }}" rel="stylesheet"/>
 @endsection
 
 @section('content')
@@ -167,7 +167,7 @@
 
 @section('scripts')
     <!-- X-Editable -->
-    <script src="{{ asset('vendor/x-editable/dist/js/bootstrap-editable.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/x-editable/dist/js/bootstrap-editable.min.js') }}"></script>
     <!-- X-Editable -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
         $(document).ready(function () {
@@ -201,7 +201,7 @@
     </script>
 
     <!-- Sweet-Alert Forum  -->
-    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Sweet-Alert Forum -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
@@ -252,7 +252,7 @@
     </script>
 
     <!-- Sweet-Alert Categoria  -->
-    <script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Sweet-Alert Categoria -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">

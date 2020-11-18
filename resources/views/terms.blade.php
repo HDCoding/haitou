@@ -28,30 +28,30 @@
     <!-- Favicons -->
     <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ asset('images/favicons/ms-icon-144x144.png') }}">
+    <meta name="msapplication-TileImage" content="{{ secure_asset('images/favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicons/favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ secure_asset('images/favicons/favicon.ico') }}">
 
-    <link rel="shortcut icon" href="{{ asset('images/favicons/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ secure_asset('images/favicons/favicon.png') }}">
 
-    <link rel="icon" type="image/png" href="{{ asset('images/favicons/favicon-16x16.png') }}" sizes="16x16">
-    <link rel="icon" type="image/png" href="{{ asset('images/favicons/favicon-32x32.png') }}" sizes="32x32">
-    <link rel="icon" type="image/png" href="{{ asset('images/favicons/favicon-96x96.png') }}" sizes="96x96">
-    <link rel="icon" type="image/png" href="{{ asset('images/favicons/ms-icon-150x150.png') }}" sizes="150x150">
-    <link rel="icon" type="image/png" href="{{ asset('images/favicons/android-icon-192x192.png') }}" sizes="192x192">
+    <link rel="icon" type="image/png" href="{{ secure_asset('images/favicons/favicon-16x16.png') }}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ secure_asset('images/favicons/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ secure_asset('images/favicons/favicon-96x96.png') }}" sizes="96x96">
+    <link rel="icon" type="image/png" href="{{ secure_asset('images/favicons/ms-icon-150x150.png') }}" sizes="150x150">
+    <link rel="icon" type="image/png" href="{{ secure_asset('images/favicons/android-icon-192x192.png') }}" sizes="192x192">
 
-    <link rel="manifest" href="{{ asset('images/favicons/manifest.json') }}">
+    <link rel="manifest" href="{{ secure_asset('images/favicons/manifest.json') }}">
 
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('images/favicons/apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('images/favicons/apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/favicons/apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('images/favicons/apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('images/favicons/apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('images/favicons/apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('images/favicons/apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('images/favicons/apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-icon-180x180.png') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ secure_asset('images/favicons/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ secure_asset('images/favicons/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ secure_asset('images/favicons/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ secure_asset('images/favicons/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ secure_asset('images/favicons/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ secure_asset('images/favicons/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ secure_asset('images/favicons/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ secure_asset('images/favicons/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ secure_asset('images/favicons/apple-icon-180x180.png') }}">
     <!-- END Favicons -->
 
     <!-- Google Font -->
@@ -59,20 +59,20 @@
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900,300italic,400italic' rel='stylesheet' type='text/css'>
     <!-- Bootstrap -->
-    <link href="{{ asset('index/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('index/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Pixeden Icon Font -->
-    <link href="{{ asset('fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="{{ asset('index/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('index/css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Style -->
-    <link href="{{ asset('index/css/style.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('index/css/style.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('index/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('index/css/animate.css') }}" rel="stylesheet">
     <!-- Responsive CSS -->
-    <link href="{{ asset('index/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('index/css/responsive.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -107,7 +107,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('images/favicons/favicon-16x16.png') }}" alt="Logo">
+                        <img src="{{ secure_asset('images/favicons/favicon-16x16.png') }}" alt="Logo">
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -147,7 +147,7 @@
                 <div class="col-md-12">
                     <div class="logo text-center">
                         <!-- LOGO -->
-                        <img width="125" height="55" src="{{ asset('images/favicons/apple-icon-114x114.png') }}" alt="">
+                        <img width="125" height="55" src="{{ secure_asset('images/favicons/apple-icon-114x114.png') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -217,14 +217,14 @@
 <!-- END FOOTER -->
 
 <!-- SCRIPTS -->
-<script src="{{ asset('index/js/jquery.min.js') }}"></script>
-<script src="{{ asset('index/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('index/js/smoothscroll.js') }}"></script>
-<script src="{{ asset('index/js/jquery.parallax-1.1.3.js') }}"></script>
-<script src="{{ asset('index/js/jquery.prettyPhoto.js') }}"></script>
-<script src="{{ asset('index/js/wow.min.js') }}"></script>
-<script src="{{ asset('index/js/waypoints.min') }}.js"></script>
-<script src="{{ asset('index/js/script.js') }}"></script>
+<script src="{{ secure_asset('index/js/jquery.min.js') }}"></script>
+<script src="{{ secure_asset('index/js/bootstrap.min.js') }}"></script>
+<script src="{{ secure_asset('index/js/smoothscroll.js') }}"></script>
+<script src="{{ secure_asset('index/js/jquery.parallax-1.1.3.js') }}"></script>
+<script src="{{ secure_asset('index/js/jquery.prettyPhoto.js') }}"></script>
+<script src="{{ secure_asset('index/js/wow.min.js') }}"></script>
+<script src="{{ secure_asset('index/js/waypoints.min') }}.js"></script>
+<script src="{{ secure_asset('index/js/script.js') }}"></script>
 
 </body>
 </html>

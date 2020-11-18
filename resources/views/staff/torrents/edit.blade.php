@@ -4,9 +4,9 @@
 
 @section('css')
     <!-- sceditor -->
-    <link rel="stylesheet" href="{{ asset('vendor/sceditor/minified/themes/default.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendor/sceditor/minified/themes/default.min.css') }}">
     <!-- select2 -->
-    <link rel="stylesheet" href="{{ asset('vendor/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('vendor/select2/dist/css/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -124,11 +124,11 @@
 
 @section('scripts')
     <!-- Select2 -->
-    <script src="{{ asset('vendor/select2/dist/js/select2.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/select2/dist/js/select2.min.js') }}"></script>
     <!-- sceditor -->
-    <script src="{{ asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
-    <script src="{{ asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/sceditor.min.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/minified/formats/bbcode.js') }}"></script>
+    <script src="{{ secure_asset('vendor/sceditor/languages/pt-BR.js') }}"></script>
 
     <!-- Page JS Code -->
     <script nonce="{{ Bepsvpt\SecureHeaders\SecureHeaders::nonce() }}">
