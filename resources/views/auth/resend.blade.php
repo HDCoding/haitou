@@ -13,7 +13,7 @@
         {{--            </div>--}}
         {{--        </div>--}}
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ secure_asset('images/login-register.jpg') }}) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url({{ secure_asset('images/login-register.jpg') }}); background-repeat: no-repeat; background-size: 100% 100%;">
             <div class="auth-box">
                 <div id="loginform">
                     <div class="logo">
