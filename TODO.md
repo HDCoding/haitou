@@ -15,7 +15,6 @@ Almost finished
 - [ ] Cache settings (important)
 - [ ] Searches table
 - [ ] Lock screen
-- [x] AutoBan Command
 - [ ] AutoHitAndRun Command
 - [ ] HitAndRunNotification Command
 - [ ] AutoPreHitAndRun Command
