@@ -29,7 +29,7 @@ class PasswordNotificationMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Login não autorizado!')
+        return $this->subject('Sua senha foi alterada!')
             ->markdown('emails.password_notification')
             ->with(['site_name' => $this->site_name]);
     }
