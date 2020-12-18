@@ -4,6 +4,7 @@ use App\Helpers\Mention;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('md5_gen')) {
     /**
@@ -233,5 +234,21 @@ if (!function_exists('human_time')) {
         $seconds = $seconds ? $seconds . '' : '';
 
         return $days . $hours . $minutes . $seconds;
+    }
+}
+
+if (!function_exists('user_avatar')) {
+    function user_avatar($user_id)
+    {
+        $expire_at = Carbon::now()->addMinutes(5);
+
+        return cache()->remember('user_avatar_' . $user_id, $expire_at, function () use ($user_id) {
+            $user = DB::table('users')
+                ->select('avatar')
+                ->where('id', '=', $user_id)
+                ->first();
+
+            return empty($user->avatar) ? asset('images/no-avatar.jpg') : url('storage/avatars/' . $user->avatar);
+        });
     }
 }
