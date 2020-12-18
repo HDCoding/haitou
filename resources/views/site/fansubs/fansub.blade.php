@@ -192,7 +192,7 @@
                                                     <td>
                                                         <div class="d-flex no-block align-items-center">
                                                             <div class="m-r-10">
-                                                                <img src="{{ $member->user->avatar() }}" alt="{{ $member->user->username }}"
+                                                                <img src="{{ user_avatar($member->user_id) }}" alt="{{ $member->username }}"
                                                                      class="img-rounded" width="45"/>
                                                             </div>
                                                             <div class="">
