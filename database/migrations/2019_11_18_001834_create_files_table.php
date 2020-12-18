@@ -16,7 +16,7 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('torrent_id')->index();
-            $table->bigInteger('size');
+            $table->unsignedBigInteger('size');
             $table->string('name');
 
             $table->foreign('torrent_id')->references('id')->on('torrents')
