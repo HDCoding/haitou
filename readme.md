@@ -48,10 +48,7 @@
 	 - Traffic: Unlimited
 
 ## Automated Installer
-	git clone https://github.com/HDCoding/hinstaller.git hinstaller
-    cd hinstaller
-    chmod +x install.sh 
-    sudo ./install.sh
+	TODO
 	
 ## Manual Install
 Using [Laragon](https://laragon.org/download/) (Windows). Already have all the necessary packages, with Composer, MySQL or MariaDB, PHP 7.3, among others.
