@@ -35,7 +35,7 @@ class FansubsController extends Controller
 
         //get all members
         $members = FansubUser::with('user:id,avatar')
-            ->select('username', 'job', 'is_admin')
+            ->select('user_id', 'username', 'job', 'is_admin')
             ->where('fansub_id', '=', $fansub->id)
             ->get();
 
