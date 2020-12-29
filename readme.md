@@ -86,6 +86,10 @@ This project exists thanks to all the people who contribute.
 ## Help Wanted
 Check the [TODO](/TODO.md). All help is really appreciated!
 
+## Images Covers
+You can download the image cover [Here](https://mega.nz/folder/lEcGhZgR#Wljb9iKTpa6FYiCcICzlxA)
+Put the all the images in /public/storage/homecovers
+
 ## Sad to continue
 I got discouraged with the project. :(
 
