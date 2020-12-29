@@ -25,6 +25,8 @@
 
 ## Requirements
 
+ - Redis Server
+ - vnStat
  - WebServer: Apache2 or Nginx (Nginx is recommended)
  - PHP 7.3+
  - PHP Dependencies:
@@ -83,3 +85,16 @@ This project exists thanks to all the people who contribute.
 
 ## Help Wanted
 Check the [TODO](/TODO.md). All help is really appreciated!
+
+## Sad to continue
+I got discouraged with the project. :(
+
+After a long time working on this project posting on forums if anyone could help test and no one showing up, I never asked for money to do that and I don't want to.
+
+If you want to continue, make changes and improvements. Feel free to send the merges.
+
+I'm 3 years trying and sending resumes to companies, taking courses and studying on my own, wanting to be a developer and until today I couldn't do it, maybe this area is not for me :(
+
+I am available to answer questions here or on the discord app
+
+Best regards.
