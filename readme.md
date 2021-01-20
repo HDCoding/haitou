@@ -28,7 +28,7 @@
  - Redis Server
  - vnStat
  - WebServer: Apache2 or Nginx (Nginx is recommended)
- - PHP 7.3+
+ - PHP 7.2 (For this Framework Version Only)
  - PHP Dependencies:
 	 - php-openssl
 	 - php-pdo
