@@ -119,9 +119,9 @@
                         <a class="dropdown-item" href="{{ url('user/edit/account') }}">
                             <i class="ion ion-md-settings text-lightest m-r-5 m-l-5"></i> Editar conta
                         </a>
-                        <a class="dropdown-item" href="{{ url('lockscreen') }}">
-                            <i class="ion ion-md-lock text-lightest m-r-5 m-l-5"></i> Bloquear Tela
-                        </a>
+{{--                        <a class="dropdown-item" href="{{ url('lockscreen') }}">--}}
+{{--                            <i class="ion ion-md-lock text-lightest m-r-5 m-l-5"></i> Bloquear Tela--}}
+{{--                        </a>--}}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-top').submit();">
