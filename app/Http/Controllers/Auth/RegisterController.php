@@ -48,7 +48,7 @@ class RegisterController extends Controller
      * @param RegisterRequest $request
      * @return User
      */
-    protected function register(RegisterRequest $request)
+    protected function register(RegisterRequest $request): User
     {
         $points = setting('points_signup');
 
@@ -61,7 +61,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->group_id = 1;
         $user->username = $request->input('username');
-        $user->email = $email;
+        $user->email = strtolower($email);
         $user->password = Hash::make($request->input('password'));
         $user->state_id = 25;
         $user->points = $points;
