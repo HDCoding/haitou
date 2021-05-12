@@ -171,11 +171,9 @@ return [
         Gstt\Achievements\AchievementsServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Bepsvpt\SecureHeaders\SecureHeadersServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Jackiedo\DotenvEditor\DotenvEditorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -246,7 +244,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'BBCode' => App\Helpers\BBCode::class,
         'Toastr'  => App\Facades\ToastrFacade::class,
-        'DotenvEditor' => Jackiedo\DotenvEditor\Facades\DotenvEditor::class,
     ],
 
 ];
