@@ -43,9 +43,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('haitou:auto-recycle-vips')->daily(); //Automatically Removes A Users Vips If It Has Expired.
         $schedule->command('haitou:auto-resend-invites')->daily(); //Resend not accepted invitation after X days created_at.
         $schedule->command('haitou:auto-sync-peers')->daily();
-        //$schedule->command('haitou:clear-all-cache')->daily();
+        $schedule->command('haitou:clear-all-cache')->monthly();
         $schedule->command('haitou:email-blacklist-update')->monthly(); //Update cache for email domains blacklist.
-        //$schedule->command('haitou:set-all-cache')->daily();
+        $schedule->command('haitou:set-all-cache');
     }
 
     /**
