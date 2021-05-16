@@ -259,27 +259,22 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title text-center m-b-30 font-weight-light my-5">Dúvidas.</h3>
+                        <h3 class="card-title text-center m-b-30 font-weight-light my-5">Obrigado por considerar fazer uma doação.</h3>
                         <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="mb-2">Dapibus ac facilisis in?</h5>
-                                <p class="ui-company-text text-muted mb-4">Lorem ipsum dolor sit amet, ius virtute suscipit te. Ius prima euismod consequat eu.</p>
-                                <h5 class="mb-2">Cras justo odio?</h5>
-                                <p class="ui-company-text text-muted mb-4">Etiam vivendo eu sea, purto ponderum mediocritatem at pro.</p>
-                                <h5 class="mb-2">Porta ac consectetur ac?</h5>
-                                <p class="ui-company-text text-muted mb-4">Iuvaret deleniti vulputate nec ne, id vix lucilius legendos deseruisse.</p>
-                                <h5 class="mb-2">Ne ornatus albucius ius?</h5>
-                                <p class="ui-company-text text-muted mb-4">Lorem ipsum dolor sit amet, mea in pertinax hendrerit gloriatur.</p>
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="mb-2">Ne ornatus albucius ius?</h5>
-                                <p class="ui-company-text text-muted mb-4">Lorem ipsum dolor sit amet, mea in pertinax hendrerit gloriatur.</p>
-                                <h5 class="mb-2">Quo insolens intellegam dissentiet at?</h5>
-                                <p class="ui-company-text text-muted mb-4">Ex fugit legimus fuisset per. Ex quidam option diceret ius.</p>
-                                <h5 class="mb-2">Ad his assum delenit blandit?</h5>
-                                <p class="ui-company-text text-muted mb-4">Ne ornatus albucius ius, nostrum dignissim repudiandae an usu.</p>
-                                <h5 class="mb-2">Dapibus ac facilisis in?</h5>
-                                <p class="ui-company-text text-muted mb-4">Lorem ipsum dolor sit amet, ius virtute suscipit te. Ius prima euismod consequat eu.</p>
+                            <div class="col-md-12">
+                                <p class="ui-company-text mb-4">
+                                    Nós criamos o site e organizamos o conteúdo com o intuito de ter o melhor conjunto de informações
+                                     com qualidade e organização de forma de fácil entendimento.
+                                </p>
+                                <p class="ui-company-text mb-4">
+                                    O Site não possui fins lucrativos. Temos um site limpo, livre de propagandas pornográficas ou links
+                                     para malwares e vírus. Somos entusiastas com a intenção de aprender mais e transmitir o conhecimento
+                                      adquirido para todos, prezando sempre pela qualidade do conteúdo que apresentamos.
+                                </p>
+                                <p class="ui-company-text mb-4">
+                                    O site mantém-se no ar através de doações. Com as doações podemos continuar sempre investindo em melhorias
+                                     não só para a infraestrutura do site mas também para a criação de conteúdo.
+                                </p>
                             </div>
                         </div>
                     </div>
