@@ -9,8 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "ext-json": "*",
-        "ext-pdo": "*",
         "arcanedev/log-viewer": "^5.1",
         "bepsvpt/secure-headers": "^5.5",
         "cviebrock/eloquent-sluggable": "^6.0",
