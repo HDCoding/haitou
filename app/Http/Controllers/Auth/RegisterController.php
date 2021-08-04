@@ -43,12 +43,10 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
-     *
      * @param RegisterRequest $request
-     * @return User
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function register(RegisterRequest $request): User
+    protected function register(RegisterRequest $request)
     {
         $points = setting('points_signup');
 
