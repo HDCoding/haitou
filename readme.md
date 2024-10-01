@@ -87,7 +87,7 @@ This project exists thanks to all the people who contribute.
 Check the [TODO](/TODO.md). All help is really appreciated!
 
 ## Images Covers
-You can download the image cover [Here](https://mega.nz/folder/lEcGhZgR#Wljb9iKTpa6FYiCcICzlxA)
+You can download the image cover [Here](#)
 Put the all the images in /public/storage/homecovers
 
 ## Sad to continue
@@ -99,6 +99,6 @@ If you want to continue, make changes and improvements. Feel free to send the me
 
 I'm 3 years trying and sending resumes to companies, taking courses and studying on my own, wanting to be a developer and until today I couldn't do it, maybe this area is not for me :(
 
-I am available to answer questions here or on the discord app
+I am available to answer questions here or on the [Discord](https://discord.gg/wK2MTw8) app
 
 Best regards.
